@@ -224,20 +224,28 @@ body{font-family:'Jost',sans-serif;background:var(--plum);color:#fff;overflow-x:
     <p class="desc-text" style="text-align:left;font-size:17px;line-height:1.75;">Персональный цветовой код для женщин и мужчин — готовая система, которая позволяет безошибочно выбирать оттенки и создавать стильные, дорогие образы на каждый день.<br><br>Основано на многолетней практике.</p>
 
     <!-- Блок покупки -->
-    <div class="buy-block">
-      <p class="buy-block-title">Одна система — бесконечный эффект</p>
-      <ul class="buy-list">
-        <li>Пошаговая методика подбора цветов и сочетаний.</li>
-        <li>Готовые формулы образов для любого сезона и события.</li>
-        <li>Секреты работы с трендами, которые подчеркнут вашу уникальность.</li>
-        <li>Практические примеры и разборы от стилиста VIP-уровня.</li>
-      </ul>
-      <div class="buy-bottom">
-        <p class="buy-price-txt">Гид — <strong style="color:#fff;font-weight:600;">1 990 ₽ / 24 €</strong></p>
-        <button class="btn-buy" onclick="document.getElementById('ym-modal').style.display='flex'">Получить систему</button>
-      </div>
-      <p class="urgency-note" style="color:var(--ochre-light);">⚡ Доступ открывается сразу после оплаты</p><p style="font-size:12px;color:var(--muted);text-align:center;margin-top:8px;letter-spacing:0.06em;">Ваш стиль. Ваше преимущество. Ваш выбор.</p>
+<div class="buy-block">
+  <p class="buy-block-title">Одна система — бесконечный эффект</p>
+  <ul class="buy-list">
+    <li>Пошаговая методика подбора цветов и сочетаний.</li>
+    <li>Готовые формулы образов для любого сезона и события.</li>
+    <li>Секреты работы с трендами, которые подчеркнут вашу уникальность.</li>
+    <li>Практические примеры и разборы от стилиста VIP-уровня.</li>
+  </ul>
+  <div class="buy-bottom">
+    <p class="buy-price-txt">Гид — <strong style="color:#fff;font-weight:600;">1 990 ₽ / 24 €</strong></p>
+    <div class="buy-buttons">
+      <button class="btn-buy" onclick="document.getElementById('ym-modal').style.display='flex'">
+        Получить систему
+      </button>
+      <button class="btn-buy btn-buy--intl" onclick="document.getElementById('intl-modal').style.display='flex'">
+        🌍 Международная оплата
+      </button>
     </div>
+  </div>
+  <p class="urgency-note" style="color:var(--ochre-light);">⚡ Доступ открывается сразу после оплаты</p>
+  <p style="font-size:12px;color:var(--muted);text-align:center;margin-top:8px;letter-spacing:0.06em;">Ваш стиль. Ваше преимущество. Ваш выбор.</p>
+</div>
 
     <!-- Доверие -->
     <div class="trust-grid">
@@ -753,7 +761,37 @@ function goToDoc(action){
       <input name="shopId" type="hidden" value="1360654">
     </form>
     <script src="https://yookassa.ru/integration/simplepay/js/yookassa_construct_form.js?v=1.34.0"></script>
+    <!-- Модальное окно международной оплаты -->
+<div id="intl-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:9999;align-items:center;justify-content:center;">
+  <div style="background:#1a1a1a;border:1px solid var(--ochre-light,#c9a84c);border-radius:12px;padding:32px;max-width:400px;width:90%;text-align:center;position:relative;">
+    <button onclick="document.getElementById('intl-modal').style.display='none'"
+      style="position:absolute;top:12px;right:16px;background:none;border:none;color:#fff;font-size:20px;cursor:pointer;">✕</button>
+    <p style="font-size:18px;font-weight:600;color:#fff;margin-bottom:8px;">Международная оплата</p>
+    <p style="color:var(--muted);font-size:14px;margin-bottom:24px;">Оплата картой Visa / Mastercard — 24 €</p>
+    <!-- Сюда вставь ссылку или iframe платёжной системы (Stripe, PayPal и др.) -->
+    <a href="ВАШ_LINK_НА_ОПЛАТУ" target="_blank" class="btn-buy" style="display:inline-block;text-decoration:none;">
+      Перейти к оплате →
+    </a>
+  </div>
+</div>
 <style>
+  .buy-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.btn-buy--intl {
+  background: transparent;
+  border: 1.5px solid var(--ochre-light, #c9a84c);
+  color: var(--ochre-light, #c9a84c);
+}
+
+.btn-buy--intl:hover {
+  background: var(--ochre-light, #c9a84c);
+  color: #000;
+}
 #ym-modal .ym-btn-pay { background: #c97184 !important; border-color: #c97184 !important; }
 #ym-modal .ym-btn-pay:hover { background: #d19a6a !important; border-color: #d19a6a !important; }
 </style>
