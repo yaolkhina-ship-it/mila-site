@@ -18,7 +18,7 @@ export default async function handler(req, res) {
 
       if (customerEmail) {
         await resend.emails.send({
-          from: 'Мила Ушакова <stylefromila@gmail.com>',
+          from: 'Мила Ушакова <style@milaushakova.com>',
           to: customerEmail,
           subject: '✨ Ваш гайд — Система цветовых сочетаний',
           html: `
