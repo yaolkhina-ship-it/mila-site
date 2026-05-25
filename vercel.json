@@ -4,9 +4,17 @@
     {
       "src": "index 4.html",
       "use": "@vercel/static"
+    },
+    {
+      "src": "api/webhook.js",
+      "use": "@vercel/node"
     }
   ],
   "routes": [
+    {
+      "src": "/api/webhook",
+      "dest": "/api/webhook.js"
+    },
     {
       "src": "/",
       "dest": "/index 4.html"
