@@ -2,6 +2,8 @@ import { Resend } from 'resend';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
+export const config = { api: { bodyParser: { sizeLimit: '1mb' } } };
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ message: 'Method not allowed' });
@@ -17,6 +19,15 @@ export default async function handler(req, res) {
         event.object?.payment_method?.saved_to?.customer?.email;
 
       if (customerEmail) {
+        // Уведомление о покупке
+        await resend.emails.send({
+          from: 'Мила Ушакова <style@milaushakova.com>',
+          to: 'yaolkhina@gmail.com',
+          subject: '💰 Новая покупка — ' + customerEmail,
+          html: '<p><b>Email покупателя:</b> ' + customerEmail + '</p><p><b>ID платежа:</b> ' + (event.object?.id || 'nd') + '</p><p><b>Сумма:</b> ' + (event.object?.amount?.value || '') + ' руб.</p>'
+        });
+
+        // Письмо покупателю
         await resend.emails.send({
           from: 'Мила Ушакова <style@milaushakova.com>',
           to: customerEmail,

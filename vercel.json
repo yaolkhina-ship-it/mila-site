@@ -8,16 +8,63 @@
     {
       "src": "api/webhook.js",
       "use": "@vercel/node"
+    },
+    {
+      "src": "api/create-payment.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "thank-you.html",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "guide/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, no-store, must-revalidate"
+        }
+      ]
     }
   ],
   "routes": [
+    {
+      "src": "/thank-you",
+      "dest": "/thank-you.html"
+    },
     {
       "src": "/api/webhook",
       "dest": "/api/webhook.js"
     },
     {
+      "src": "/api/create-payment",
+      "dest": "/api/create-payment.js"
+    },
+    {
       "src": "/",
       "dest": "/index 4.html"
+    },
+    {
+      "src": "/guide",
+      "dest": "/guide/index.html"
+    },
+    {
+      "src": "/guide/(.*)",
+      "dest": "/guide/$1"
+    },
+    {
+      "src": "/look([0-9]+)\\.png",
+      "dest": "/guide/look$1.png"
+    },
+    {
+      "src": "/men([0-9]+)\\.jpg",
+      "dest": "/guide/men$1.jpg"
     },
     {
       "src": "/(.*)",
