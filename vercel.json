@@ -2,7 +2,7 @@
   "version": 2,
   "builds": [
     {
-      "src": "index 4.html",
+      "src": "*.html",
       "use": "@vercel/static"
     },
     {
@@ -12,10 +12,6 @@
     {
       "src": "api/create-payment.js",
       "use": "@vercel/node"
-    },
-    {
-      "src": "thank-you.html",
-      "use": "@vercel/static"
     },
     {
       "src": "guide/**",
@@ -35,10 +31,6 @@
   ],
   "routes": [
     {
-      "src": "/thank-you",
-      "dest": "/thank-you.html"
-    },
-    {
       "src": "/api/webhook",
       "dest": "/api/webhook.js"
     },
@@ -47,8 +39,12 @@
       "dest": "/api/create-payment.js"
     },
     {
-      "src": "/",
-      "dest": "/index 4.html"
+      "src": "/thank-you",
+      "dest": "/thank-you.html"
+    },
+    {
+      "src": "/color-guide",
+      "dest": "/guide.html"
     },
     {
       "src": "/guide",
@@ -59,16 +55,12 @@
       "dest": "/guide/$1"
     },
     {
-      "src": "/look([0-9]+)\\.png",
-      "dest": "/guide/look$1.png"
-    },
-    {
-      "src": "/men([0-9]+)\\.jpg",
-      "dest": "/guide/men$1.jpg"
+      "src": "/",
+      "dest": "/index.html"
     },
     {
       "src": "/(.*)",
-      "dest": "/index 4.html"
+      "dest": "/$1"
     }
   ]
 }

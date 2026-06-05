@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Мила Ушакова — fashion эксперт. Личные консультации, fashion туры, лекции, съёмки и эксклюзивный гайды по цветовым сочетаниям.">
+<meta property="og:title" content="Мила Ушакова | Fashion Expert · Milan-Paris-Moscow">
+<meta name="theme-color" content="#2a1535">
+<title>Мила Ушакова | Fashion Expert · Milan-Paris-Moscow</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --plum:#2a1535;
+  --plum-deep:#1a0d20;
+  --plum-mid:#3e2049;
+  --rose:#c97184;
+  --rose-light:#dca0af;
+  --ochre:#d4a574;
+  --ochre-light:#e4b98a;
+  --cream:rgba(255,255,255,0.88);
+  --muted:rgba(255,255,255,0.52);
+  --border:rgba(212,165,116,0.18);
+}
+html{scroll-behavior:smooth;}
+body{font-family:'Jost',sans-serif;background:var(--plum);color:#fff;overflow-x:hidden;}
+
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:1.2rem 2.5rem;
+  background:rgba(26,13,32,0.94);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:#fff;text-decoration:none;}
+.nav-links{display:flex;gap:2rem;list-style:none;}
+.nav-links a{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s;}
+.nav-links a:hover{color:var(--ochre);}
+.nav-cta{font-family:'Jost',sans-serif;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;border:1px solid var(--ochre);padding:.6rem 1.4rem;background:transparent;color:var(--ochre);cursor:pointer;transition:all .25s;}
+.nav-cta:hover{background:var(--ochre);color:var(--plum);}
+
+#hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:6rem 2rem 4rem;position:relative;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 25% 50%,#4a1f5e55 0%,transparent 70%),radial-gradient(ellipse 60% 50% at 78% 30%,#3e204988 0%,transparent 65%),var(--plum);}
+.hero-content{position:relative;z-index:1;max-width:820px;}
+.hero-eyebrow{font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:var(--ochre);margin-bottom:1.75rem;}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(3.2rem,8vw,6.5rem);font-weight:300;line-height:1.0;letter-spacing:.02em;text-transform:uppercase;margin-bottom:1.25rem;}
+.hero-title em{font-style:italic;color:var(--ochre-light);}
+.hero-sub{font-size:.95rem;line-height:1.85;color:var(--muted);max-width:480px;margin:0 auto 2.5rem;}
+.hero-btns{display:flex;gap:1rem;justify-content:center;align-items:center;flex-wrap:wrap;}
+.btn-gold{font-family:'Jost',sans-serif;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;background:var(--ochre);color:var(--plum);border:none;padding:.9rem 2rem;cursor:pointer;font-weight:600;transition:opacity .2s;}
+.btn-gold:hover{opacity:.85;}
+.btn-ghost{font-family:'Jost',sans-serif;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);background:none;border:none;cursor:pointer;border-bottom:1px solid var(--border);padding-bottom:2px;transition:color .2s;text-decoration:none;}
+.btn-ghost:hover{color:var(--ochre);}
+
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.stat{padding:1.5rem 2rem;border-right:1px solid var(--border);text-align:center;}
+.stat:last-child{border-right:none;}
+.stat-num{font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:300;color:var(--ochre);display:block;margin-bottom:.25rem;}
+.stat-lbl{font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);}
+
+.sh{padding:3rem 2.5rem 2rem;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1rem;}
+.sh-tag{font-size:.68rem;letter-spacing:.26em;text-transform:uppercase;color:var(--ochre);margin-bottom:.5rem;}
+.sh-title{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:300;color:#fff;}
+
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--border);}
+.grid-4-wrap{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--border);}
+.card{padding:2rem 1.75rem;border-right:1px solid var(--border);cursor:pointer;transition:background .25s;display:flex;flex-direction:column;position:relative;}
+.card:last-child{border-right:none;}
+.card:hover{background:var(--plum-mid);}
+.card-num{font-family:'Cormorant Garamond',serif;font-size:.8rem;color:var(--ochre);margin-bottom:1.25rem;opacity:.8;}
+.card-icon{font-size:1.5rem;color:var(--ochre);margin-bottom:1.1rem;opacity:.9;}
+.card-name{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:300;line-height:1.3;margin-bottom:.6rem;color:#fff;}
+.card-desc{font-size:.78rem;line-height:1.75;color:var(--muted);flex:1;margin-bottom:1.25rem;}
+.card-footer{font-size:.65rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ochre);border-top:1px solid var(--border);padding-top:.85rem;display:flex;justify-content:space-between;align-items:center;}
+.card-featured{background:var(--plum-mid);outline:1px solid var(--ochre);outline-offset:-1px;}
+.card-badge{position:absolute;top:-1px;right:1.25rem;background:var(--ochre);color:var(--plum);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700;padding:4px 10px;}
+.card-price{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:400;color:var(--ochre-light);margin-bottom:1rem;}
+
+.feature{display:grid;grid-template-columns:3fr 2fr;border-bottom:1px solid var(--border);}
+.feature-text{padding:3.5rem 2.5rem;border-right:1px solid var(--border);}
+.feature-visual{background:var(--plum-deep);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.5rem;padding:3rem;min-height:320px;}
+.feature-eyebrow{font-size:.68rem;letter-spacing:.26em;text-transform:uppercase;color:var(--ochre);margin-bottom:.75rem;}
+.feature-title{font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:300;line-height:1.05;margin-bottom:1.25rem;color:#fff;}
+.feature-title em{font-style:italic;color:var(--ochre-light);}
+.feature-desc{font-size:.88rem;line-height:1.85;color:var(--muted);max-width:420px;margin-bottom:2rem;}
+.feature-details{display:flex;gap:2.5rem;margin-bottom:2rem;padding-bottom:2rem;border-bottom:1px solid var(--border);flex-wrap:wrap;}
+.detail-lbl{font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:4px;}
+.detail-val{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:300;color:#fff;}
+
+.dest-grid{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--border);}
+.dest{padding:2.5rem;border-right:1px solid var(--border);cursor:pointer;transition:background .2s;}
+.dest:last-child{border-right:none;}
+.dest:hover{background:var(--plum-mid);}
+.dest-flag{font-size:2rem;margin-bottom:.75rem;line-height:1;}
+.dest-name{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;color:#fff;margin-bottom:.75rem;}
+.dest-info{font-size:.78rem;line-height:1.75;color:var(--muted);margin-bottom:1.25rem;}
+.dest-cta{font-size:.65rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ochre);border-top:1px solid var(--border);padding-top:.85rem;display:block;}
+
+.quote-section{padding:5rem 2.5rem;text-align:center;background:var(--plum-deep);border-bottom:1px solid var(--border);}
+.quote-mark{font-family:'Cormorant Garamond',serif;font-size:5.5rem;font-weight:300;color:var(--ochre);line-height:.5;margin-bottom:1rem;opacity:.5;display:block;}
+.quote-text{font-family:'Cormorant Garamond',serif;font-size:1.9rem;font-weight:300;font-style:italic;line-height:1.45;max-width:580px;margin:0 auto 1.5rem;color:#fff;}
+.quote-author{font-size:.68rem;letter-spacing:.26em;text-transform:uppercase;color:var(--ochre);}
+
+.photo-slot{width:100%;height:100%;min-height:260px;background:repeating-linear-gradient(-45deg,var(--plum-mid) 0,var(--plum-mid) 1px,var(--plum-deep) 1px,var(--plum-deep) 10px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;}
+.photo-slot span{font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);background:var(--plum);padding:.3rem .9rem;border:1px solid var(--border);}
+
+.site-footer{background:var(--plum-deep);padding:2rem 2.5rem;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border);flex-wrap:wrap;gap:1.5rem;}
+.footer-logo{font-family:'Cormorant Garamond',serif;font-size:1.1rem;letter-spacing:.2em;text-transform:uppercase;color:#fff;}
+.footer-links{display:flex;gap:2rem;list-style:none;flex-wrap:wrap;}
+.footer-links a{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s;}
+.footer-links a:hover{color:var(--ochre);}
+.footer-socials{display:flex;gap:.75rem;}
+.social-btn{width:36px;height:36px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--muted);text-decoration:none;transition:all .2s;}
+.social-btn:hover{border-color:var(--ochre);color:var(--ochre);}
+.social-btn svg{width:16px;height:16px;fill:currentColor;}
+
+.guide-wrap{padding:4rem 2.5rem;border-bottom:1px solid var(--border);background:var(--plum-deep);}
+.guide-inner{max-width:960px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;}
+.guide-card{background:var(--plum-mid);border:1px solid var(--border);padding:2rem;}
+.guide-card-title{font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ochre);margin-bottom:1.5rem;}
+.guide-list{list-style:none;display:flex;flex-direction:column;gap:.85rem;}
+.guide-list li{display:flex;align-items:flex-start;gap:.75rem;font-size:.85rem;line-height:1.6;color:var(--cream);}
+.guide-list li::before{content:"✔";color:var(--ochre);flex-shrink:0;}
+.guide-price-row{margin-top:1.75rem;padding-top:1.5rem;border-top:1px solid var(--border);}
+
+@media(max-width:900px){
+  nav{padding:1rem 1.5rem;}
+  .nav-links{display:none;}
+  .stats{grid-template-columns:repeat(2,1fr);}
+  .stat:nth-child(2){border-right:none;}
+  .stat:nth-child(n+3){border-top:1px solid var(--border);}
+  .grid-4,.grid-4-wrap{grid-template-columns:repeat(2,1fr);}
+  .card:nth-child(2n){border-right:none;}
+  .card:nth-child(n+3){border-top:1px solid var(--border);}
+  .feature{grid-template-columns:1fr;}
+  .feature-visual{min-height:180px;}
+  .feature-text{border-right:none;border-bottom:1px solid var(--border);}
+  .dest-grid{grid-template-columns:1fr;}
+  .dest{border-right:none;border-bottom:1px solid var(--border);}
+  .dest:last-child{border-bottom:none;}
+  .guide-inner{grid-template-columns:1fr;}
+}
+@media(max-width:580px){
+  .grid-4,.grid-4-wrap{grid-template-columns:1fr;}
+  .card{border-right:none!important;border-top:1px solid var(--border);}
+  .card:first-child{border-top:none;}
+  .site-footer{flex-direction:column;align-items:flex-start;}
+  .hero-title{font-size:2.6rem;}
+  .feature-title{font-size:2rem;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">Mila Ushakova</a>
+  <ul class="nav-links">
+    <li><a href="/consultation">Консультация</a></li>
+    <li><a href="/switzerland">Тур CH</a></li>
+    <li><a href="/lectures">Лекции</a></li>
+    <li><a href="/production">Съёмки</a></li>
+    <li><a href="/media">Media</a></li>
+    <li><a href="/tours">Туры EU</a></li>
+    <li><a href="/color-guide">Гайд</a></li>
+    <li><a href="/contacts">Контакты</a></li>
+  </ul>
+  <a href="/contacts" class="nav-cta">Записаться</a>
+</nav>
+
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Fashion Expert · Milan-Paris-Moscow</p>
+    <h1 class="hero-title">Fashion<br><em>expertise</em><br>уровня Европы</h1>
+    <p class="hero-sub">Личный стилист, преподаватель, продюсер fashion съёмок и организатор эксклюзивных туров. Работаю по всему миру.</p>
+    <div class="hero-btns">
+      <button class="btn-gold" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">Все услуги</button>
+      <a href="#tours" class="btn-ghost">Смотреть туры</a>
+    </div>
+  </div>
+</section>
+<div class="quote-section">
+  <span class="quote-mark">"</span>
+  <p class="quote-text">Мода — это не одежда. Это язык, которым ты разговариваешь с миром каждый день.</p>
+  <p class="quote-author">— Mila Ushakova</p>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-logo">Mila Ushakova</div>
+  <ul class="footer-links">
+    <li><a href="#services">Услуги</a></li>
+    <li><a href="#tours">Туры</a></li>
+    <li><a href="/color-guide">Гайд</a></li>
+    <li><a href="mailto:hello@milaushakova.com">Контакты</a></li>
+  </ul>
+  <div class="footer-socials">
+    <a class="social-btn" href="https://www.instagram.com/milaushakovva/" target="_blank">
+      <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+    </a>
+    <a class="social-btn" href="mailto:hello@milaushakova.com">
+      <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+    </a>
+  </div>
+</footer>
+
+<script>
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',function(e){
+    const id=this.getAttribute('href');
+    if(id==='#')return;
+    const target=document.querySelector(id);
+    if(target){e.preventDefault();const y=target.getBoundingClientRect().top+window.scrollY-72;window.scrollTo({top:y,behavior:'smooth'});}
+  });
+});
+</script>
+</body>
+</html>

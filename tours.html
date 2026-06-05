@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Иммерсивные fashion туры в Испанию, Италию и Францию."><meta name="theme-color" content="#2a1535">
+<title>Fashion Туры по Европе | Мила Ушакова</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--plum:#2a1535;--plum-deep:#1a0d20;--plum-mid:#3e2049;--ochre:#d4a574;--ochre-light:#e4b98a;--cream:rgba(255,255,255,0.88);--muted:rgba(255,255,255,0.52);--border:rgba(212,165,116,0.18);}
+html{scroll-behavior:smooth;}body{font-family:'Jost',sans-serif;background:var(--plum);color:#fff;overflow-x:hidden;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.1rem 2.5rem;background:rgba(26,13,32,0.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:#fff;text-decoration:none;}
+.nav-links{display:flex;gap:1.4rem;list-style:none;}
+.nav-links a{font-size:.63rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s;white-space:nowrap;}
+.nav-links a:hover,.nav-links a.active{color:var(--ochre);}
+.nav-cta{font-family:'Jost',sans-serif;font-size:.63rem;letter-spacing:.14em;text-transform:uppercase;border:1px solid var(--ochre);padding:.5rem 1.1rem;background:transparent;color:var(--ochre);cursor:pointer;transition:all .25s;text-decoration:none;display:inline-block;}
+.nav-cta:hover{background:var(--ochre);color:var(--plum);}
+.back-link{display:inline-flex;align-items:center;gap:.5rem;font-size:.63rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s;margin-bottom:1.75rem;}
+.back-link:hover{color:var(--ochre);}
+.page-hero{padding:9rem 2.5rem 5rem;border-bottom:1px solid var(--border);position:relative;overflow:hidden;}
+.page-hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 70% at 15% 60%,rgba(74,31,94,.27) 0%,transparent 65%),radial-gradient(ellipse 50% 40% at 80% 20%,rgba(62,32,73,.4) 0%,transparent 60%),var(--plum);}
+.page-hero-inner{position:relative;z-index:1;max-width:780px;}
+.eyebrow{font-size:.63rem;letter-spacing:.26em;text-transform:uppercase;color:var(--ochre);margin-bottom:1.1rem;display:block;}
+.page-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,7vw,5.5rem);font-weight:300;line-height:1.0;text-transform:uppercase;margin-bottom:1.1rem;}
+.page-title em{font-style:italic;color:var(--ochre-light);}
+.page-subtitle{font-size:.9rem;line-height:1.85;color:var(--muted);max-width:540px;}
+.section{padding:4rem 2.5rem;border-bottom:1px solid var(--border);}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;margin-bottom:2rem;}
+.section-title em{font-style:italic;color:var(--ochre-light);}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;}
+.three-col{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+.info-card{background:var(--plum-mid);border:1px solid var(--border);padding:1.75rem;}
+.info-card-icon{font-size:1.4rem;color:var(--ochre);margin-bottom:.9rem;}
+.info-card-title{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:300;margin-bottom:.6rem;}
+.info-card-text{font-size:.8rem;line-height:1.75;color:var(--muted);}
+.price-box{background:var(--plum-mid);border:1px solid var(--ochre);padding:1.75rem;}
+.price-label{font-size:.63rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ochre);margin-bottom:.85rem;display:block;}
+.price-value{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;color:var(--ochre-light);margin-bottom:.4rem;}
+.price-note{font-size:.75rem;color:var(--muted);line-height:1.65;}
+.feature-list{list-style:none;display:flex;flex-direction:column;gap:.8rem;}
+.feature-list li{display:flex;align-items:flex-start;gap:.7rem;font-size:.86rem;line-height:1.65;color:var(--cream);}
+.feature-list li::before{content:"✔";color:var(--ochre);flex-shrink:0;margin-top:.05rem;}
+.detail-row{display:flex;gap:3rem;flex-wrap:wrap;margin-bottom:2rem;padding-bottom:2rem;border-bottom:1px solid var(--border);}
+.detail-lbl{font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:.3rem;}
+.detail-val{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:300;}
+.btn-gold{font-family:'Jost',sans-serif;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;background:var(--ochre);color:var(--plum);border:none;padding:.85rem 1.9rem;cursor:pointer;font-weight:600;transition:opacity .2s;text-decoration:none;display:inline-block;}
+.btn-gold:hover{opacity:.85;}
+.btn-outline{font-family:'Jost',sans-serif;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;border:1px solid var(--ochre);padding:.8rem 1.7rem;background:transparent;color:var(--ochre);cursor:pointer;transition:all .2s;text-decoration:none;display:inline-block;}
+.btn-outline:hover{background:var(--ochre);color:var(--plum);}
+.btn-row{display:flex;gap:1rem;flex-wrap:wrap;margin-top:1.75rem;align-items:center;}
+.photo-slot{width:100%;min-height:280px;background:repeating-linear-gradient(-45deg,var(--plum-mid) 0,var(--plum-mid) 1px,var(--plum-deep) 1px,var(--plum-deep) 10px);display:flex;align-items:center;justify-content:center;}
+.photo-slot span{font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);background:var(--plum);padding:.3rem .9rem;border:1px solid var(--border);}
+.site-footer{background:var(--plum-deep);padding:1.75rem 2.5rem;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border);flex-wrap:wrap;gap:1.5rem;}
+.footer-logo{font-family:'Cormorant Garamond',serif;font-size:1rem;letter-spacing:.2em;text-transform:uppercase;color:#fff;text-decoration:none;}
+.footer-links{display:flex;gap:1.5rem;list-style:none;flex-wrap:wrap;}
+.footer-links a{font-size:.63rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s;}
+.footer-links a:hover{color:var(--ochre);}
+.footer-socials{display:flex;gap:.6rem;}
+.social-btn{width:33px;height:33px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--muted);text-decoration:none;transition:all .2s;font-size:.75rem;}
+.social-btn:hover{border-color:var(--ochre);color:var(--ochre);}
+@media(max-width:860px){nav{padding:1rem 1.4rem;}.nav-links{display:none;}.two-col,.three-col{grid-template-columns:1fr;}.page-hero{padding:8rem 1.5rem 4rem;}.section{padding:3rem 1.5rem;}.site-footer{flex-direction:column;align-items:flex-start;}.detail-row{gap:1.75rem;}}
+</style>
+</head>
+<body>
+<nav><a href="/" class="nav-logo">Mila Ushakova</a><ul class="nav-links"><li><a href="/consultation" class="">Консультация</a></li>
+<li><a href="/switzerland" class="">Тур CH</a></li>
+<li><a href="/lectures" class="">Лекции</a></li>
+<li><a href="/production" class="">Съёмки</a></li>
+<li><a href="/media" class="">Media</a></li>
+<li><a href="/tours" class="active">Туры EU</a></li>
+<li><a href="/color-guide" class="">Гайд</a></li>
+<li><a href="/contacts" class="">Контакты</a></li></ul><a href="/contacts" class="nav-cta">Записаться</a></nav>
+
+<section class="page-hero"><div class="page-hero-bg"></div><div class="page-hero-inner">
+<a href="/" class="back-link">← На главную</a>
+<span class="eyebrow">Услуга 06</span>
+<h1 class="page-title">Fashion туры<br>по <em>Европе</em></h1>
+<p class="page-subtitle">Эксклюзивные программы для тех, кто хочет увидеть европейскую моду изнутри. Шоу-румы, ателье, архивы домов моды.</p>
+</div></section>
+<section class="section">
+<div class="detail-row">
+<div><span class="detail-lbl">Направления</span><span class="detail-val">ES · IT · FR</span></div>
+<div><span class="detail-lbl">Длина</span><span class="detail-val">3–7 дней</span></div>
+<div><span class="detail-lbl">Группа</span><span class="detail-val">До 6 чел.</span></div>
+<div><span class="detail-lbl">Языки</span><span class="detail-val">RU / EN</span></div>
+</div>
+<div style="display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--border);">
+<div style="padding:2rem;border-right:1px solid var(--border);">
+<div style="font-size:2rem;margin-bottom:.7rem;">&#127477;&#127480;</div>
+<div style="font-family:'Cormorant Garamond',serif;font-size:1.75rem;font-weight:300;margin-bottom:.7rem;">Испания</div>
+<div style="font-size:.8rem;line-height:1.75;color:var(--muted);margin-bottom:1.25rem;">Мадрид и Барселона. Ателье дизайнеров, рынки тканей, секретные мультибренды.</div>
+<ul class="feature-list" style="font-size:.76rem;"><li>Barrio de las Letras</li><li>Закрытые испанские шоу-румы</li><li>Mercado de Motores</li></ul>
+</div>
+<div style="padding:2rem;border-right:1px solid var(--border);">
+<div style="font-size:2rem;margin-bottom:.7rem;">&#127470;&#127481;</div>
+<div style="font-family:'Cormorant Garamond',serif;font-size:1.75rem;font-weight:300;margin-bottom:.7rem;">Италия</div>
+<div style="font-size:.8rem;line-height:1.75;color:var(--muted);margin-bottom:1.25rem;">Милан — столица моды. Шоу-румы, производства, архивы домов моды.</div>
+<ul class="feature-list" style="font-size:.76rem;"><li>Quadrilatero della Moda</li><li>Закрытые миланские шоу-румы</li><li>Посещение производств</li></ul>
+</div>
+<div style="padding:2rem;">
+<div style="font-size:2rem;margin-bottom:.7rem;">&#127467;&#127479;</div>
+<div style="font-family:'Cormorant Garamond',serif;font-size:1.75rem;font-weight:300;margin-bottom:.7rem;">Франция</div>
+<div style="font-size:.8rem;line-height:1.75;color:var(--muted);margin-bottom:1.25rem;">Париж — haute couture, Marais, Palais Royal. Встречи со стилистами.</div>
+<ul class="feature-list" style="font-size:.76rem;"><li>Palais Royal бутики</li><li>Galeries Lafayette insider</li><li>Встречи с французскими стилистами</li></ul>
+</div>
+</div>
+</section>
+<section class="section" style="background:var(--plum-deep);">
+<div class="two-col">
+<div><h2 class="section-title">Что входит<br>в <em>программу</em></h2>
+<ul class="feature-list">
+<li>Личное сопровождение стилиста все дни</li>
+<li>Маршрут по эксклюзивным локациям</li>
+<li>Доступ к закрытым шоу-румам</li>
+<li>Встречи с местными дизайнерами</li>
+<li>Помощь в шопинге</li>
+<li>Вечерняя культурная программа</li>
+<li>Разбор образов каждый вечер</li>
+</ul></div>
+<div style="display:flex;flex-direction:column;gap:1.5rem;">
+<div class="photo-slot" style="min-height:240px;"><span>Фото туров</span></div>
+<div class="price-box"><span class="price-label">Стоимость</span><div class="price-note">Зависит от направления и длины.<br>Проживание и перелёт — отдельно.</div></div>
+</div></div>
+<div class="btn-row"><a href="/contacts" class="btn-gold">Забронировать тур</a><a href="mailto:hello@milaushakova.com?subject=Fashion тур Европа" class="btn-outline">Узнать программу</a></div>
+</section>
+
+<footer class="site-footer">
+  <a href="/" class="footer-logo">Mila Ushakova</a>
+  <ul class="footer-links">
+    <li><a href="/">Главная</a></li>
+    <li><a href="/tours">Туры</a></li>
+    <li><a href="/color-guide">Гайд</a></li>
+    <li><a href="/contacts">Контакты</a></li>
+  </ul>
+  <div class="footer-socials">
+    <a class="social-btn" href="https://www.instagram.com/milaushakovva/" target="_blank">IG</a>
+    <a class="social-btn" href="mailto:hello@milaushakova.com">✉</a>
+  </div>
+</footer>
+</body></html>
