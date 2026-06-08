@@ -30,37 +30,21 @@
     }
   ],
   "routes": [
-    {
-      "src": "/api/webhook",
-      "dest": "/api/webhook.js"
-    },
-    {
-      "src": "/api/create-payment",
-      "dest": "/api/create-payment.js"
-    },
-    {
-      "src": "/thank-you",
-      "dest": "/thank-you.html"
-    },
-    {
-      "src": "/color-guide",
-      "dest": "/guide.html"
-    },
-    {
-      "src": "/guide",
-      "dest": "/guide/index.html"
-    },
-    {
-      "src": "/guide/(.*)",
-      "dest": "/guide/$1"
-    },
-    {
-      "src": "/",
-      "dest": "/index.html"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/$1"
-    }
+    { "src": "/api/webhook", "dest": "/api/webhook.js" },
+    { "src": "/api/create-payment", "dest": "/api/create-payment.js" },
+    { "src": "/thank-you", "dest": "/thank-you.html" },
+    { "src": "/color-guide", "dest": "/guide.html" },
+    { "src": "/guide", "dest": "/guide/index.html" },
+    { "src": "/guide/(.*)", "dest": "/guide/$1" },
+    { "src": "/lectures", "dest": "/lectures.html" },
+    { "src": "/consultation", "dest": "/consultation.html" },
+    { "src": "/contacts", "dest": "/contacts.html" },
+    { "src": "/media", "dest": "/media.html" },
+    { "src": "/production", "dest": "/production.html" },
+    { "src": "/switzerland", "dest": "/switzerland.html" },
+    { "src": "/tours", "dest": "/tours.html" },
+    { "src": "/", "dest": "/index.html" },
+    { "src": "/(.*)\\.html", "dest": "/$1.html" },
+    { "src": "/(.*)", "dest": "/$1.html" }
   ]
 }
