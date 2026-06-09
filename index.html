@@ -176,5 +176,64 @@ nav{position:fixed;top:0;left:0;right:0;z-index:9999;display:flex;justify-conten
 </footer>
 
 
+
+<script>
+var DATA=[
+  {label:'Подкасты',url:'/lectures',bg:'#ddd7ce'},
+  {label:'Гайд',url:'/color-guide',bg:'#dedad2'},
+  {label:'Контакты',url:'/contacts',bg:'#e2ddd5'},
+  {label:'Записаться',url:'/booking',bg:'#e8e3dc'}
+];
+var POS=[
+  {x:0,y:-200,rot:180},
+  {x:200,y:0,rot:-90},
+  {x:0,y:200,rot:180},
+  {x:-200,y:0,rot:-90}
+];
+var GRADS=[
+  'linear-gradient(135deg,#ddd5c8 0%,#b89a72 50%,#cec0a8 100%)',
+  'linear-gradient(135deg,#ede7df 0%,#c4a882 50%,#e0d4c0 100%)',
+  'linear-gradient(135deg,#e4ddd5 0%,#a89070 45%,#d6cabb 100%)',
+  'linear-gradient(135deg,#e8dfd4 0%,#c9a96e 50%,#d4b896 100%)'
+];
+var orbitEl=document.getElementById('orbit');
+var cardImgDivs=[];
+DATA.forEach(function(d,i){
+  var p=POS[i];
+  var wrap=document.createElement('div');
+  wrap.className='cw';
+  wrap.style.left=p.x+'px';
+  wrap.style.top=p.y+'px';
+  var card=document.createElement('div');
+  card.className='card';
+  card.style.setProperty('--cr',p.rot+'deg');
+  card.style.transform='rotate('+p.rot+'deg)';
+  var gi=document.createElement('div');
+  gi.className='card-img';
+  gi.style.background=GRADS[i];
+  gi.dataset.base=String(-p.rot);
+  var lbl=document.createElement('div');
+  lbl.className='card-label';
+  lbl.textContent=d.label;
+  card.appendChild(gi);card.appendChild(lbl);
+  wrap.appendChild(card);
+  orbitEl.appendChild(wrap);
+  cardImgDivs.push(gi);
+  wrap.addEventListener('click',function(){location.href=d.url;});
+});
+var angle=0,last=null;
+function tick(ts){
+  if(!last)last=ts;
+  angle+=(ts-last)*(360/120000);
+  last=ts;
+  orbitEl.style.transform='rotate('+angle+'deg)';
+  cardImgDivs.forEach(function(g){
+    var b=parseFloat(g.dataset.base);
+    g.style.transform='rotate('+(b-angle)+'deg)';
+  });
+  requestAnimationFrame(tick);
+}
+requestAnimationFrame(tick);
+</script>
 </body>
 </html>
