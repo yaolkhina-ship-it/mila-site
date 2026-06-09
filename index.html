@@ -180,58 +180,31 @@ nav{position:fixed;top:0;left:0;right:0;z-index:9999;display:flex;justify-conten
 
 <script>
 var DATA=[
-  {label:'Подкасты',url:'/lectures',bg:'#ddd7ce'},
-  {label:'Гайд',url:'/color-guide',bg:'#dedad2'},
-  {label:'Контакты',url:'/contacts',bg:'#e2ddd5'},
-  {label:'Записаться',url:'/booking',bg:'#e8e3dc'}
+  {label:'Подкасты',url:'/lectures',bg:'linear-gradient(135deg,#ddd5c8 0%,#b89a72 50%,#cec0a8 100%)'},
+  {label:'Гайд',url:'/color-guide',bg:'linear-gradient(135deg,#ede7df 0%,#c4a882 50%,#e0d4c0 100%)'},
+  {label:'Контакты',url:'/contacts',bg:'linear-gradient(135deg,#e4ddd5 0%,#a89070 45%,#d6cabb 100%)'},
+  {label:'Записаться',url:'/booking',bg:'linear-gradient(135deg,#e8dfd4 0%,#c9a96e 50%,#d4b896 100%)'}
 ];
-var POS=[
-  {x:0,y:-200,rot:180},
-  {x:200,y:0,rot:-90},
-  {x:0,y:200,rot:180},
-  {x:-200,y:0,rot:-90}
+var POSITIONS=[
+  {left:'15%',top:'18%',w:150,h:190,deg:-8},
+  {left:'58%',top:'12%',w:130,h:170,deg:6},
+  {left:'22%',top:'55%',w:140,h:180,deg:4},
+  {left:'60%',top:'52%',w:155,h:195,deg:-5}
 ];
-var GRADS=[
-  'linear-gradient(135deg,#ddd5c8 0%,#b89a72 50%,#cec0a8 100%)',
-  'linear-gradient(135deg,#ede7df 0%,#c4a882 50%,#e0d4c0 100%)',
-  'linear-gradient(135deg,#e4ddd5 0%,#a89070 45%,#d6cabb 100%)',
-  'linear-gradient(135deg,#e8dfd4 0%,#c9a96e 50%,#d4b896 100%)'
-];
-var orbitEl=document.getElementById('orbit');
-var cardImgDivs=[];
+var hero=document.getElementById('hero');
 DATA.forEach(function(d,i){
-  var p=POS[i];
-  var wrap=document.createElement('div');
-  wrap.className='cw';
-  wrap.style.left=p.x+'px';
-  wrap.style.top=p.y+'px';
+  var p=POSITIONS[i];
   var card=document.createElement('div');
-  card.className='card';
-  card.style.setProperty('--cr',p.rot+'deg');
-  card.style.transform='rotate('+p.rot+'deg)';
-  var gi=document.createElement('div');
-  gi.className='card-img';
-  gi.style.background=GRADS[i];
-  gi.dataset.base=String(-p.rot);
+  card.style.cssText='position:absolute;left:'+p.left+';top:'+p.top+';width:'+p.w+'px;height:'+p.h+'px;border-radius:32px;background:'+d.bg+';cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;transform:translateY(24px) rotate('+p.deg+'deg);transition:opacity .6s ease,transform .6s ease,box-shadow .3s;box-shadow:0 4px 24px rgba(0,0,0,0.07);';
   var lbl=document.createElement('div');
-  lbl.className='card-label';
   lbl.textContent=d.label;
-  card.appendChild(gi);card.appendChild(lbl);
-  wrap.appendChild(card);
-  orbitEl.appendChild(wrap);
-  cardImgDivs.push(gi);
-  wrap.addEventListener('click',function(){location.href=d.url;});
-});
-// Появление карточек одна за другой
-var wraps = orbitEl.querySelectorAll('.cw');
-wraps.forEach(function(w, i){
-  w.style.opacity = '0';
-  w.style.transform = w.style.transform + ' translateY(20px)';
-  w.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-  setTimeout(function(){
-    w.style.opacity = '1';
-    w.style.transform = w.style.transform.replace(' translateY(20px)', '');
-  }, 200 + i * 150);
+  lbl.style.cssText='font-family:"Tenor Sans",sans-serif;font-size:.85rem;letter-spacing:.16em;text-transform:uppercase;color:#fff;text-shadow:0 1px 6px rgba(0,0,0,0.3);text-align:center;';
+  card.appendChild(lbl);
+  card.addEventListener('mouseenter',function(){this.style.boxShadow='0 12px 40px rgba(0,0,0,0.15)';this.style.transform='translateY(-4px) rotate('+p.deg+'deg)';});
+  card.addEventListener('mouseleave',function(){this.style.boxShadow='0 4px 24px rgba(0,0,0,0.07)';this.style.transform='translateY(0) rotate('+p.deg+'deg)';});
+  card.addEventListener('click',function(){location.href=d.url;});
+  hero.appendChild(card);
+  setTimeout(function(){card.style.opacity='1';card.style.transform='translateY(0) rotate('+p.deg+'deg)';},200+i*150);
 });
 </script>
 </body>
