@@ -43,8 +43,16 @@
       "dest": "/gems.png"
     },
     {
-      "src": "/gems.png",
-      "dest": "/gems.png"
+      "src": "/gems.jpg",
+      "dest": "/gems.jpg"
+    },
+    {
+      "src": "/(.*\\.png)",
+      "dest": "/$1"
+    },
+    {
+      "src": "/(.*\\.jpg)",
+      "dest": "/$1"
     },
     {
       "src": "/api/webhook",
