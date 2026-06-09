@@ -35,8 +35,8 @@
   ],
   "routes": [
     {
-      "src": "/gems.jpg",
-      "dest": "/gems.jpg"
+      "src": "/gems.png",
+      "dest": "/gems.png"
     },
     {
       "src": "/api/webhook",
