@@ -20,6 +20,10 @@
     {
       "src": "*.jpg",
       "use": "@vercel/static"
+    },
+    {
+      "src": "*.png",
+      "use": "@vercel/static"
     }
   ],
   "headers": [
@@ -34,6 +38,10 @@
     }
   ],
   "routes": [
+    {
+      "src": "/gems.png",
+      "dest": "/gems.png"
+    },
     {
       "src": "/gems.png",
       "dest": "/gems.png"
