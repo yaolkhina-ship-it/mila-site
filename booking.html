@@ -72,7 +72,7 @@ footer{background:var(--bg2);padding:1.75rem 2.5rem;display:flex;justify-content
       <h2 class="form-title">Отправить<br><em>запрос</em></h2>
       <p class="form-sub">Выберите услугу, расскажите о запросе и оставьте почту — свяжусь в течение 24 часов.</p>
     </div>
-    <form class="form-fields" action="https://formspree.io/f/mrevklaz" method="POST">
+    <form class="form-fields" id="bookingForm">
       <div>
         <label class="field-lbl">Услуга</label>
         <select name="service" class="field-input">
@@ -93,7 +93,7 @@ footer{background:var(--bg2);padding:1.75rem 2.5rem;display:flex;justify-content
         <label class="field-lbl">Ваша почта для ответа</label>
         <input name="email" type="email" placeholder="email@example.com" class="field-input">
       </div>
-      <input type="hidden" name="_next" value="https://milaushakova.com/booking"><button type="submit" class="btn-dark">Отправить →</button>
+      <button type="submit" class="btn-dark">Отправить →</button>
       <div class="success-msg" id="successMsg">✓ Сообщение отправлено — ответим в течение 24 часов</div>
     </form>
   </div>
@@ -111,5 +111,22 @@ footer{background:var(--bg2);padding:1.75rem 2.5rem;display:flex;justify-content
   </div>
 </footer>
 
-</body>
+<script>
+document.getElementById('bookingForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  var btn = this.querySelector('button');
+  btn.textContent = 'Отправляем...';
+  btn.disabled = true;
+  var data = new FormData(this);
+  var res = await fetch('https://formspree.io/f/mrevklaz', {method:'POST', body:data, headers:{Accept:'application/json'}});
+  if(res.ok){
+    document.getElementById('successMsg').style.display = 'block';
+    this.reset();
+    btn.textContent = 'Отправлено ✓';
+  } else {
+    btn.textContent = 'Ошибка — попробуйте снова';
+    btn.disabled = false;
+  }
+});
+</script></body>
 </html>
