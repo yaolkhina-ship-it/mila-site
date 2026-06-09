@@ -148,19 +148,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:9999;display:flex;justify-conten
 <!-- HERO — орбита -->
 <section id="hero">
   <div class="hero-bg"></div>
-  <div class="wm"><span>Mila</span><span>Ushakova</span></div>
+  
   <div class="orbit-scene">
     <div class="orbit" id="orbit"></div>
   </div>
-  <div class="corner corner-bl">
-    <p><strong>Mila Ushakova</strong></p>
-    <p>Fashion Expert · Стилист · Колорист</p>
-    <p>Zürich, Switzerland</p>
-  </div>
-  <div class="corner corner-br">
-    <p>Milan · Paris · Zürich</p>
-    <p>© 2026</p>
-  </div>
+  
+  
 </section>
 
 <footer class="site-footer">
@@ -182,71 +175,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:9999;display:flex;justify-conten
   </div>
 </footer>
 
-<script>
-var GRADS=[
-  'linear-gradient(135deg,#e8dfd4 0%,#c9a96e 50%,#d4b896 100%)',
-  'linear-gradient(135deg,#ddd5c8 0%,#b89a72 50%,#cec0a8 100%)',
-  'linear-gradient(135deg,#e4ddd5 0%,#a89070 45%,#d6cabb 100%)',
-  'linear-gradient(135deg,#ede7df 0%,#c4a882 50%,#e0d4c0 100%)',
-  'linear-gradient(135deg,#e0d8ce 0%,#b89878 50%,#d2c4ae 100%)',
-  'linear-gradient(135deg,#d8d0c6 0%,#a8886a 45%,#ccc0aa 100%)',
-  'linear-gradient(135deg,#e6e0d8 0%,#be9e7a 50%,#dacec0 100%)',
-  'linear-gradient(135deg,#dcd4ca 0%,#b09478 50%,#cec4b2 100%)'
-];
-var DATA=[
-  {label:'Консультация',url:'/consultation'},
-  {label:'Подкасты',url:'/lectures'},
-  {label:'Тур CH',url:'/switzerland'},
-  {label:'Гайд',url:'/color-guide'},
-  {label:'Туры EU',url:'/tours'},
-  {label:'Съёмки',url:'/production'},
-  {label:'Media',url:'/media'},
-  {label:'Контакты',url:'/contacts'}
-];
-var POS=[
-  {x:0,y:-273,rot:180},{x:193,y:-193,rot:-135},
-  {x:273,y:0,rot:-90},{x:193,y:193,rot:-45},
-  {x:0,y:273,rot:180},{x:-193,y:193,rot:-135},
-  {x:-273,y:0,rot:-90},{x:-193,y:-193,rot:-45}
-];
-var orbitEl=document.getElementById('orbit');
-var cardImgDivs=[];
-DATA.forEach(function(d,i){
-  var p=POS[i];
-  var wrap=document.createElement('div');
-  wrap.className='cw';
-  wrap.style.left=p.x+'px';
-  wrap.style.top=p.y+'px';
-  var card=document.createElement('div');
-  card.className='card';
-  card.style.setProperty('--cr',p.rot+'deg');
-  card.style.transform='rotate('+p.rot+'deg)';
-  var gi=document.createElement('div');
-  gi.className='card-img';
-  gi.style.background=GRADS[i];
-  gi.dataset.base=String(-p.rot);
-  var lbl=document.createElement('div');
-  lbl.className='card-label';
-  lbl.textContent=d.label;
-  card.appendChild(gi);card.appendChild(lbl);
-  wrap.appendChild(card);
-  orbitEl.appendChild(wrap);
-  cardImgDivs.push(gi);
-  wrap.addEventListener('click',function(){location.href=d.url;});
-});
-var angle=0,last=null;
-function tick(ts){
-  if(!last)last=ts;
-  angle+=(ts-last)*(360/120000);
-  last=ts;
-  orbitEl.style.transform='rotate('+angle+'deg)';
-  cardImgDivs.forEach(function(g){
-    var b=parseFloat(g.dataset.base);
-    g.style.transform='rotate('+(b-angle)+'deg)';
-  });
-  requestAnimationFrame(tick);
-}
-requestAnimationFrame(tick);
-</script>
+
 </body>
 </html>
