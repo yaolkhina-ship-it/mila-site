@@ -251,11 +251,77 @@ nav{position:fixed;top:0;left:0;right:0;z-index:9999;display:flex;justify-conten
     <a href="/color-guide" style="font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-muted);text-decoration:none;">Гайд</a>
     <a href="/contacts" style="font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-muted);text-decoration:none;">Контакты</a>
     <a href="/contacts" style="font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-muted);text-decoration:none;">записаться </a>
+    <a href="#" onclick="showLecDoc('lec-page3');return false;" style="font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-muted);text-decoration:none;">Договор оферты</a>
+    <a href="#" onclick="showLecDoc('lec-page4');return false;" style="font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-muted);text-decoration:none;">Политика ПД</a>
   </div>
   <div style="display:flex;gap:.6rem;">
     <a href="https://www.instagram.com/milaushakovva/" target="_blank" style="width:33px;height:33px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--ink-muted);text-decoration:none;font-size:.72rem;">IG</a>
     <a href="mailto:hello@milaushakova.com" style="width:33px;height:33px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--ink-muted);text-decoration:none;font-size:.72rem;">✉</a>
   </div>
 </footer>
+
+<div id="lec-page3" class="lec-doc-page" style="display:none;position:fixed;inset:0;z-index:9998;background:var(--bg);overflow-y:auto;padding:6rem 2.5rem 4rem;">
+  <div style="max-width:760px;margin:0 auto;">
+    <button onclick="hideLecDoc()" style="display:inline-flex;align-items:center;gap:.5rem;background:none;border:none;cursor:pointer;font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:2.5rem;font-family:'Jost',sans-serif;">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8L10 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Назад
+    </button>
+    <h1 style="font-family:'Tenor Sans',sans-serif;font-size:2rem;font-weight:300;margin-bottom:2rem;color:var(--ink);">Договор оферты</h1>
+    <div style="font-size:14px;font-weight:300;line-height:1.85;color:var(--ink-muted);">
+      <p style="margin-bottom:16px;"><strong>Публичная оферта</strong></p>
+      <p style="margin-bottom:16px;">ДОГОВОРА НА ОКАЗАНИЕ ИНФОРМАЦИОННО-КОНСУЛЬТАЦИОННЫХ УСЛУГ</p>
+      <p style="margin-bottom:16px;">Настоящая Оферта является предложением ИП Ушакова Людмила Вячеславовна (<strong>ОГРНИП 323774600568023</strong>), далее именуемого «Исполнитель».</p>
+      <p style="margin-bottom:16px;"><strong>1.1. Сайт</strong> – Интернет-сайт https://milaushakova.com</p>
+      <p style="margin-bottom:16px;"><strong>1.2. Инфоматериал</strong> – информационно-обучающий аудио-, видео- или текстовый материал.</p>
+      <p style="margin-bottom:16px;"><strong>2.1.</strong> Исполнитель после полного поступления оплаты обязуется оказать Заказчику Услуги доступа к Инфоматериалам.</p>
+      <p style="margin-bottom:16px;"><strong>6.1.</strong> Заказчик обязуется уплатить стоимость Услуг на условиях полной предварительной оплаты.</p>
+      <p style="margin-bottom:16px;"><strong>6.4.</strong> Стоимость может быть изменена Исполнителем в одностороннем порядке.</p>
+      <p style="margin-bottom:16px;"><strong>6.6.</strong> Все расходы по переводу денежных средств, включая комиссии банков и платёжных систем, несёт Заказчик.</p>
+      <p style="margin-bottom:16px;"><strong>7.2.</strong> Стоимость Услуг не подлежит возврату за исключением случая, когда Курс не был проведён по вине Исполнителя.</p>
+      <p style="margin-bottom:16px;"><strong>8.2.</strong> Распространение и переработка Инфоматериалов не допускаются.</p>
+      <p style="margin-bottom:16px;"><strong>10.4.</strong> Срок для ответа на претензию составляет 30 календарных дней.</p>
+      <p style="margin-bottom:16px;"><strong>13.1.</strong> Во всём остальном Стороны руководствуются законодательством Российской Федерации.</p>
+      <p style="margin-bottom:16px;"><strong>Реквизиты:</strong> ИП Ушакова Людмила Вячеславовна, ОГРНИП 323774600568023, e-mail: mila701@mail.ru</p>
+    </div>
+  </div>
+</div>
+
+<div id="lec-page4" class="lec-doc-page" style="display:none;position:fixed;inset:0;z-index:9998;background:var(--bg);overflow-y:auto;padding:6rem 2.5rem 4rem;">
+  <div style="max-width:760px;margin:0 auto;">
+    <button onclick="hideLecDoc()" style="display:inline-flex;align-items:center;gap:.5rem;background:none;border:none;cursor:pointer;font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:2.5rem;font-family:'Jost',sans-serif;">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3L5 8L10 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Назад
+    </button>
+    <h1 style="font-family:'Tenor Sans',sans-serif;font-size:2rem;font-weight:300;margin-bottom:2rem;color:var(--ink);">Политика обработки персональных данных</h1>
+    <div style="font-size:14px;font-weight:300;line-height:1.85;color:var(--ink-muted);">
+      <p style="margin-bottom:16px;"><strong>ИП Ушакова Людмила Вячеславовна (ОГРНИП 323774600568023)</strong></p>
+      <p style="margin-bottom:16px;">Редакция от 15 мая 2026</p>
+      <p style="margin-bottom:16px;"><strong>1.1.</strong> Политика разработана во исполнение требований Федерального закона от 27.07.2006 N 152-ФЗ "О персональных данных".</p>
+      <p style="margin-bottom:16px;"><strong>1.4.</strong> Политика опубликована на сайте: https://milaushakova.com</p>
+      <p style="margin-bottom:16px;"><strong>2.3.</strong> Цели обработки: соблюдение законодательства РФ; связь с пользователями; заключение и исполнение договоров.</p>
+      <p style="margin-bottom:16px;"><strong>3.1.</strong> Правовое основание: Конституция РФ, Гражданский кодекс РФ, ФЗ-152, Налоговый кодекс РФ.</p>
+      <p style="margin-bottom:16px;"><strong>4.2.</strong> Оператор обрабатывает: ФИО, номер телефона, адрес электронной почты. Для договорных отношений — также ИНН, расчётный счёт, адрес.</p>
+      <p style="margin-bottom:16px;"><strong>4.3.</strong> Биометрические данные не обрабатываются.</p>
+      <p style="margin-bottom:16px;"><strong>5.5.</strong> Данные получаются через формы на сайте https://milaushakova.com и на e-mail mila701@mail.ru.</p>
+      <p style="margin-bottom:16px;"><strong>5.6.</strong> Передача данных третьим лицам без согласия субъекта не допускается.</p>
+      <p style="margin-bottom:16px;"><strong>6.1.</strong> Подтверждение факта обработки предоставляется в течение 10 рабочих дней.</p>
+      <p style="margin-bottom:16px;"><strong>6.5.</strong> Уничтожение данных — при достижении целей обработки или отзыве согласия.</p>
+      <p style="margin-bottom:16px;"><strong>Реквизиты:</strong> ИП Ушакова Людмила Вячеславовна, ОГРНИП 323774600568023, e-mail: mila701@mail.ru</p>
+    </div>
+  </div>
+</div>
+
+<script>
+function showLecDoc(id) {
+  document.getElementById(id).style.display = 'block';
+  document.body.style.overflow = 'hidden';
+  window.scrollTo(0,0);
+}
+function hideLecDoc() {
+  document.querySelectorAll('.lec-doc-page').forEach(el => el.style.display = 'none');
+  document.body.style.overflow = '';
+}
+</script>
+
 </body>
 </html>
