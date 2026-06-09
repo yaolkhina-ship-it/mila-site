@@ -222,19 +222,17 @@ DATA.forEach(function(d,i){
   cardImgDivs.push(gi);
   wrap.addEventListener('click',function(){location.href=d.url;});
 });
-var angle=0,last=null;
-function tick(ts){
-  if(!last)last=ts;
-  angle+=(ts-last)*(360/120000);
-  last=ts;
-  orbitEl.style.transform='rotate('+angle+'deg)';
-  cardImgDivs.forEach(function(g){
-    var b=parseFloat(g.dataset.base);
-    g.style.transform='rotate('+(b-angle)+'deg)';
-  });
-  requestAnimationFrame(tick);
-}
-requestAnimationFrame(tick);
+// Появление карточек одна за другой
+var wraps = orbitEl.querySelectorAll('.cw');
+wraps.forEach(function(w, i){
+  w.style.opacity = '0';
+  w.style.transform = w.style.transform + ' translateY(20px)';
+  w.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+  setTimeout(function(){
+    w.style.opacity = '1';
+    w.style.transform = w.style.transform.replace(' translateY(20px)', '');
+  }, 200 + i * 150);
+});
 </script>
 </body>
 </html>
