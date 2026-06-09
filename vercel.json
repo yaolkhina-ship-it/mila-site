@@ -39,6 +39,10 @@
   ],
   "routes": [
     {
+      "src": "/booking",
+      "dest": "/booking.html"
+    },
+    {
       "src": "/gems.png",
       "dest": "/gems.png"
     },
