@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Бесплатный вебинар — Мила Ушакова, стилист и fashion-редактор</title>
+  <meta name="description" content="Бесплатный вебинар Милы Ушаковой — разбор Мужской Недели Моды Париж и Милан. Силуэты, детали и приёмы для женского гардероба." />
+  <style>
+    @font-face{font-family:'Tenor Sans';font-style:normal;font-weight:400;font-display:swap;src:url(fonts/tenor-sans.woff2) format('woff2')}
+    @font-face{font-family:'Jost';font-style:normal;font-weight:300 600;font-display:swap;src:url(fonts/jost.woff2) format('woff2')}
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ── NAV (site-standard) ── */
+    :root {
+      --gold-nav:#c9a96e;
+      --ink:#111;--ink-mid:#555;
+      --border:rgba(0,0,0,0.08);
+      --bg:#faf9f7;
+    }
+    nav{position:fixed;top:0;left:0;right:0;z-index:9999;display:flex;justify-content:space-between;align-items:center;padding:1.4rem 2.5rem;pointer-events:all;}
+    .nav-logo{font-family:'Tenor Sans',sans-serif;font-size:1.2rem;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:var(--ink);text-decoration:none;}
+    .nav-pill{display:flex;align-items:center;gap:.1rem;background:rgba(255,255,255,0.95);backdrop-filter:blur(16px);border:1px solid var(--border);border-radius:50px;padding:.4rem .5rem;box-shadow:0 2px 20px rgba(0,0,0,0.08);}
+    .nav-pill a{font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-mid);text-decoration:none;padding:.4rem .9rem;border-radius:50px;transition:all .2s;white-space:nowrap;}
+    .nav-pill a:hover,.nav-pill a.active{color:var(--ink);background:rgba(0,0,0,0.04);}
+    .nav-pill .cta{background:var(--ink);color:#fff!important;margin-left:.2rem;}
+    .nav-pill .cta:hover{background:var(--gold-nav)!important;color:var(--ink)!important;}
+    @media(max-width:600px){
+      nav{padding:1rem 1.2rem;}
+      .nav-pill a:not(.cta){display:none;}
+    }
+
+    /* ── WEBINAR PAGE ── */
+    :root {
+      --emerald:    #036834;
+      --forest:     #0D3B34;
+      --ivory:      #FAF1EB;
+      --taupe:      #A4A48C;
+      --gold:       #D4AF57;
+      --anthracite: #1A1A1A;
+      --white:      #FFFFFF;
+      --muted:      #6B6B5A;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: var(--ivory);
+      color: var(--anthracite);
+      font-size: 15px;
+      line-height: 1.7;
+      padding-top: 64px;
+    }
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; }
+
+    /* ── КНОПКИ ── */
+    .btn-primary {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--forest);
+      padding: 17px 52px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      transition: background .3s, color .3s;
+    }
+    .btn-primary:hover { background: var(--ivory); }
+
+    .btn-outline {
+      display: inline-block;
+      background: transparent;
+      color: var(--ivory);
+      padding: 15px 52px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      border: 1px solid rgba(255,255,255,.4);
+      cursor: pointer;
+      transition: background .3s, color .3s;
+    }
+    .btn-outline:hover { background: var(--ivory); color: var(--forest); }
+
+    .btn-emerald {
+      display: inline-block;
+      background: var(--emerald);
+      color: var(--ivory);
+      padding: 17px 52px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      transition: background .3s;
+    }
+    .btn-emerald:hover { background: var(--forest); }
+
+    /* ── УТИЛИТЫ ── */
+    .container { max-width: 1040px; margin: 0 auto; padding: 0 32px; }
+    .gold-line  { width: 48px; height: 2px; background: var(--gold); margin-bottom: 28px; }
+    .section-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
+    }
+
+    /* ══════════════════════════════
+       HERO
+    ══════════════════════════════ */
+    .hero {
+      background: var(--forest);
+      color: var(--ivory);
+      min-height: calc(100vh - 64px);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .hero-body {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .hero-left {
+      padding: 72px 56px 72px 72px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .hero-left .event-tag {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 28px;
+    }
+    .hero-left h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 52px;
+      font-weight: 300;
+      line-height: 1.15;
+      color: var(--ivory);
+      margin-bottom: 12px;
+    }
+    .hero-left h1 em {
+      font-style: italic;
+      color: var(--gold);
+    }
+    .hero-left .hero-cities {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 300;
+      font-style: italic;
+      color: rgba(250,241,235,.6);
+      margin-bottom: 28px;
+      letter-spacing: 1px;
+    }
+    .hero-left .hero-sub {
+      font-size: 15px;
+      color: rgba(250,241,235,.75);
+      margin-bottom: 40px;
+      max-width: 400px;
+      line-height: 1.8;
+    }
+    .hero-left .hero-sub strong {
+      color: var(--ivory);
+      font-weight: 600;
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 36px;
+      margin-bottom: 44px;
+    }
+    .hero-meta-item .mlabel {
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--taupe);
+      margin-bottom: 6px;
+    }
+    .hero-meta-item .mvalue {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      color: var(--ivory);
+    }
+
+    .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+
+    .hero-quote-green {
+      margin-top: 44px;
+      position: relative;
+      padding-left: 4px;
+    }
+    .hero-quote-green .big-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 96px;
+      line-height: 0.6;
+      color: var(--gold);
+      display: block;
+      margin-bottom: 16px;
+      opacity: 0.7;
+    }
+    .hero-quote-green blockquote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--ivory);
+      line-height: 1.65;
+      margin-bottom: 18px;
+    }
+    .hero-quote-green cite {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-style: normal;
+    }
+
+    .hero-right {
+      position: relative;
+      overflow: hidden;
+      min-height: 560px;
+    }
+    .hero-right img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+    .hero-right .photo-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        135deg,
+        rgba(30,44,39,.55) 0%,
+        rgba(30,44,39,.10) 60%,
+        transparent 100%
+      );
+    }
+
+    /* ══════════════════════════════
+       STRIP
+    ══════════════════════════════ */
+    .strip {
+      background: var(--emerald);
+      padding: 22px 32px;
+      text-align: center;
+    }
+    .strip p {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--ivory);
+    }
+    .strip p em { color: var(--gold); font-style: normal; }
+
+    /* ══════════════════════════════
+       ДЛЯ КОГО
+    ══════════════════════════════ */
+    .for-whom {
+      background: var(--ivory);
+      padding: 100px 0;
+    }
+
+    .section-head { margin-bottom: 52px; }
+    .section-head h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 42px;
+      font-weight: 300;
+      color: var(--forest);
+      line-height: 1.2;
+    }
+
+    .whom-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 52px;
+    }
+    .whom-card {
+      background: var(--white);
+      padding: 36px 30px;
+      border-top: 2px solid var(--gold);
+      position: relative;
+    }
+    .whom-card .cnum {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 64px;
+      font-weight: 300;
+      color: var(--gold);
+      opacity: .18;
+      line-height: 1;
+      position: absolute;
+      top: 20px; right: 24px;
+    }
+    .whom-card h3 {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--forest);
+      margin-bottom: 14px;
+    }
+    .whom-card p {
+      font-size: 14px;
+      line-height: 1.8;
+      color: var(--muted);
+    }
+
+    .cta-center { text-align: center; }
+
+    /* ══════════════════════════════
+       ПРОГРАММА
+    ══════════════════════════════ */
+    .program {
+      background: var(--forest);
+      padding: 100px 0;
+    }
+    .program .section-head h2 { color: var(--ivory); }
+
+    .prog-list { list-style: none; }
+    .prog-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 36px;
+      padding: 32px 0;
+      border-bottom: 1px solid rgba(250,241,235,.08);
+    }
+    .prog-item:first-child { border-top: 1px solid rgba(250,241,235,.08); }
+    .prog-item .pn {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 60px;
+      font-weight: 300;
+      color: var(--gold);
+      opacity: .45;
+      line-height: 1;
+      min-width: 64px;
+      text-align: right;
+    }
+    .prog-item .pb h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 26px;
+      font-weight: 400;
+      color: var(--ivory);
+      margin-bottom: 10px;
+      line-height: 1.25;
+    }
+    .prog-item .pb p {
+      font-size: 13px;
+      color: rgba(250,241,235,.5);
+      line-height: 1.8;
+    }
+
+    .prog-item.highlight {
+      background: rgba(212,175,87,.07);
+      padding-left: 24px;
+      padding-right: 24px;
+      margin-left: -24px;
+      margin-right: -24px;
+      border-top: 1px solid rgba(212,175,87,.25) !important;
+      border-bottom: 1px solid rgba(212,175,87,.25) !important;
+    }
+    .prog-item.highlight .pn { opacity: 1; }
+    .prog-item.highlight .pb h3 { color: var(--gold); }
+
+    .program .cta-center { padding-top: 52px; }
+
+    /* ══════════════════════════════
+       ОБ АВТОРЕ
+    ══════════════════════════════ */
+    .about {
+      background: var(--ivory);
+      padding: 100px 0;
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 400px 1fr;
+      gap: 72px;
+      align-items: start;
+    }
+
+    .about-photo-wrap { position: relative; }
+    .about-photo-wrap img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+    }
+    .about-photo-wrap .photo-name {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: linear-gradient(transparent, rgba(30,44,39,.88));
+      padding: 40px 28px 28px;
+    }
+    .about-photo-wrap .photo-name .pname {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 300;
+      color: var(--ivory);
+      line-height: 1.2;
+    }
+    .about-photo-wrap .photo-name .ptitle {
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-top: 8px;
+    }
+
+    .about-content h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 42px;
+      font-weight: 300;
+      color: var(--forest);
+      line-height: 1.2;
+      margin-bottom: 28px;
+    }
+    .about-content .bio {
+      font-size: 14px;
+      line-height: 1.9;
+      color: var(--muted);
+      margin-bottom: 36px;
+    }
+
+    .creds { list-style: none; margin-bottom: 40px; }
+    .cred-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(30,44,39,.08);
+    }
+    .cred-item:first-child { border-top: 1px solid rgba(30,44,39,.08); }
+    .cred-dot {
+      width: 6px; height: 6px;
+      min-width: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+      margin-top: 8px;
+    }
+    .cred-text {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .cred-text strong { color: var(--forest); font-weight: 600; }
+
+    .channel-tag {
+      display: inline-block;
+      background: var(--forest);
+      color: var(--gold);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      padding: 10px 22px;
+      margin-bottom: 36px;
+    }
+
+    /* ══════════════════════════════
+       РЕГИСТРАЦИЯ
+    ══════════════════════════════ */
+    .register {
+      background: var(--forest);
+      padding: 100px 0;
+      text-align: center;
+    }
+    .register h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 44px;
+      font-weight: 300;
+      color: var(--ivory);
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+    .register .reg-sub {
+      font-size: 14px;
+      color: rgba(250,241,235,.55);
+      max-width: 480px;
+      margin: 0 auto 48px;
+      line-height: 1.85;
+    }
+    .reg-box {
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(212,175,87,.2);
+      padding: 52px 40px;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+    .reg-box p {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(250,241,235,.25);
+    }
+
+    /* ══════════════════════════════
+       FOOTER
+    ══════════════════════════════ */
+    .footer {
+      background: var(--anthracite);
+      padding: 48px 0;
+    }
+    .footer .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      text-align: center;
+    }
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      letter-spacing: 4px;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+    .footer-socials { display: flex; gap: 14px; }
+    .footer-socials a {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.4);
+      border: 1px solid rgba(255,255,255,.12);
+      padding: 8px 20px;
+      transition: color .2s, border-color .2s;
+    }
+    .footer-socials a:hover { color: var(--gold); border-color: var(--gold); }
+    .footer-links { display: flex; gap: 28px; flex-wrap: wrap; justify-content: center; }
+    .footer-links a {
+      font-size: 11px;
+      letter-spacing: 1px;
+      color: rgba(255,255,255,.35);
+      transition: color .2s;
+    }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-legal {
+      font-size: 11px;
+      color: rgba(255,255,255,.25);
+      line-height: 1.8;
+      max-width: 600px;
+    }
+
+    /* ── АДАПТИВ ── */
+    @media (max-width: 900px) {
+      .hero-body { grid-template-columns: 1fr; }
+      .hero-right { min-height: 340px; }
+      .hero-left { padding: 60px 32px; }
+      .whom-grid { grid-template-columns: 1fr; }
+      .about-grid { grid-template-columns: 1fr; }
+      .about-photo-wrap img { aspect-ratio: 4/3; }
+    }
+    @media (max-width: 600px) {
+      .hero-left h1 { font-size: 36px; }
+      .hero-left .hero-cities { font-size: 22px; }
+      .hero-meta { flex-direction: column; gap: 20px; }
+      .hero-btns { flex-direction: column; }
+      .container { padding: 0 20px; }
+      .prog-item .pn { font-size: 40px; min-width: 40px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">Mila Ushakova</a>
+  <div class="nav-pill">
+    <a href="/lectures">Подкасты</a>
+    <a href="/webinar" class="active">Вебинар</a>
+    <a href="/color-guide">Гайд</a>
+    <a href="/contacts">Контакты</a>
+    <a href="#register" class="cta">Регистрация</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-body">
+
+    <div class="hero-left">
+      <div class="event-tag">Бесплатный вебинар · Стилист и fashion-редактор</div>
+
+      <h1>Разбор Мужской<br/>Недели Моды</h1>
+      <div class="hero-cities">Париж · Милан</div>
+
+      <p class="hero-sub">
+        Силуэты, детали и приёмы для женского гардероба.<br/>
+        <strong>Пошаговый разбор.</strong>
+      </p>
+
+      <div class="hero-meta">
+        <div class="hero-meta-item">
+          <div class="mlabel">Дата</div>
+          <div class="mvalue">Скоро</div>
+        </div>
+        <div class="hero-meta-item">
+          <div class="mlabel">Время</div>
+          <div class="mvalue">19:00 МСК</div>
+        </div>
+        <div class="hero-meta-item">
+          <div class="mlabel">Формат</div>
+          <div class="mvalue">Онлайн</div>
+        </div>
+      </div>
+
+      <div class="hero-btns">
+        <a href="#register" class="btn-primary">Зарегистрироваться</a>
+        <a href="#program" class="btn-outline">Программа</a>
+      </div>
+
+      <div class="hero-quote-green">
+        <span class="big-quote">&#10077;</span>
+        <blockquote>
+          Я не учу следовать моде. Я учу понимать её язык. Потому что человек, который умеет анализировать, любит свою одежду и себя в ней.
+        </blockquote>
+        <cite>— Мила Ушакова</cite>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <img src="webinar-runway.jpg" alt="Мужская неделя моды — детали с подиума" />
+      <div class="photo-overlay"></div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ПОЛОСКА -->
+<div class="strip">
+  <p>
+    Бесплатный вебинар стилиста и fashion-редактора Милы Ушаковой —
+    <em>регистрация открыта</em>
+  </p>
+</div>
+
+
+<!-- ДЛЯ КОГО -->
+<section class="for-whom" id="for-whom">
+  <div class="container">
+
+    <div class="section-head">
+      <div class="section-label">Для кого</div>
+      <div class="gold-line"></div>
+      <h2>Вебинар для тех, кто…</h2>
+    </div>
+
+    <div class="whom-grid">
+
+      <div class="whom-card">
+        <div class="cnum">01</div>
+        <h3>Интересуется модой для себя</h3>
+        <p>
+          Следите за показами, любите красивые вещи — и хотите понять,
+          что именно из мужской моды SS27 перейдёт в ваш гардероб
+          уже этой осенью.
+        </p>
+      </div>
+
+      <div class="whom-card">
+        <div class="cnum">02</div>
+        <h3>Практикует как стилист</h3>
+        <p>
+          Работаете с клиентами и хотите говорить о трендах профессионально:
+          понимать первоисточники — показы — а не только то, что уже
+          попало в масс-маркет.
+        </p>
+      </div>
+
+      <div class="whom-card">
+        <div class="cnum">03</div>
+        <h3>Хочет новые приёмы стайлинга</h3>
+        <p>
+          Вам интересно увидеть, как привычные вещи можно носить
+          по-новому — через силуэты, пропорции и детали,
+          которые сейчас диктует мужская мода.
+        </p>
+      </div>
+
+    </div>
+
+    <div class="cta-center">
+      <a href="#register" class="btn-emerald">Зарегистрироваться бесплатно</a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ПРОГРАММА -->
+<section class="program" id="program">
+  <div class="container">
+
+    <div class="section-head">
+      <div class="section-label">Программа встречи</div>
+      <div class="gold-line"></div>
+      <h2>Что будет на вебинаре</h2>
+    </div>
+
+    <ul class="prog-list">
+
+      <li class="prog-item">
+        <div class="pn">01</div>
+        <div class="pb">
+          <h3>Разбор ключевых показов</h3>
+          <p>
+            Какие идеи стали главными на Неделе мужской моды SS27
+            и почему именно они будут влиять на женскую моду —
+            разберём с первоисточниками, а не пересказами.
+          </p>
+        </div>
+      </li>
+
+      <li class="prog-item">
+        <div class="pn">02</div>
+        <div class="pb">
+          <h3>Силуэт, цвет, пропорции и детали</h3>
+          <p>
+            Как дизайнеры работают с формой и деталью.
+            Научимся «читать» образ профессионально — видеть
+            не просто «красиво», а понимать, почему это работает.
+          </p>
+        </div>
+      </li>
+
+      <li class="prog-item">
+        <div class="pn">03</div>
+        <div class="pb">
+          <h3>Стайлинг: собираем образы уже сейчас</h3>
+          <p>
+            Стилизуем реальные образы, используя новые приёмы
+            с показов. Покажу, как переложить мужские решения
+            на женский гардероб без потери своего стиля.
+          </p>
+        </div>
+      </li>
+
+      <li class="prog-item highlight">
+        <div class="pn">04</div>
+        <div class="pb">
+          <h3>Закрытый клуб «В МОЁМ СТИЛЕ»</h3>
+          <p>
+            Расскажу о своём закрытом клубе — пространстве, где мы
+            всё лето разбираем бренды, стрит-стайл и тренды изнутри.
+            Участники входят летом и к осени уже одеваются свободно,
+            пока остальные только начинают. Первыми узнаете условия входа.
+          </p>
+        </div>
+      </li>
+
+    </ul>
+
+    <div class="cta-center">
+      <a href="#register" class="btn-primary">Занять место на вебинаре</a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ОБ АВТОРЕ -->
+<section class="about" id="about">
+  <div class="container">
+
+    <div class="about-grid">
+
+      <div class="about-photo-wrap">
+        <img src="webinar-mila.jpg" alt="Мила Ушакова — стилист и fashion-редактор" />
+        <div class="photo-name">
+          <div class="pname">Мила<br/>Ушакова</div>
+          <div class="ptitle">Стилист · Fashion-редактор · Журналист</div>
+        </div>
+      </div>
+
+      <div class="about-content">
+
+        <div class="section-label">Автор программы</div>
+        <div class="gold-line"></div>
+        <h2>Fashion-аналитик,<br/>стилист и журналист</h2>
+
+        <p class="bio">
+          Мила разбирает моду не как набор трендов, а как язык.
+          Она аккредитована на крупнейших неделях моды, пишет
+          аналитику и преподаёт — чтобы вы не просто одевались красиво,
+          а понимали, почему это работает.
+        </p>
+
+        <ul class="creds">
+
+          <li class="cred-item">
+            <div class="cred-dot"></div>
+            <div class="cred-text">
+              Аккредитована на Неделях моды в
+              <strong>Милане, Париже и Копенгагене</strong>
+            </div>
+          </li>
+
+          <li class="cred-item">
+            <div class="cred-dot"></div>
+            <div class="cred-text">
+              Автор аналитических публикаций о моде
+            </div>
+          </li>
+
+          <li class="cred-item">
+            <div class="cred-dot"></div>
+            <div class="cred-text">
+              <strong>Fashion-редактор</strong> No Chaser
+            </div>
+          </li>
+
+          <li class="cred-item">
+            <div class="cred-dot"></div>
+            <div class="cred-text">
+              Публикации в <strong>Vogue, L'Officiel, HELLO!</strong>
+            </div>
+          </li>
+
+          <li class="cred-item">
+            <div class="cred-dot"></div>
+            <div class="cred-text">
+              Основатель закрытого клуба <strong>«В МОЁМ СТИЛЕ»</strong>
+            </div>
+          </li>
+
+        </ul>
+
+        <div class="channel-tag">#УТРЕННИЙСМУЗИ</div>
+
+        <br/>
+        <a href="#register" class="btn-emerald">Зарегистрироваться</a>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- РЕГИСТРАЦИЯ -->
+<section class="register" id="register">
+  <div class="container">
+    <div class="section-label">Регистрация</div>
+    <div class="gold-line" style="margin: 0 auto 28px;"></div>
+    <h2>Займите своё место<br/>на вебинаре</h2>
+    <p class="reg-sub">
+      Вебинар бесплатный. После регистрации вы получите ссылку на эфир
+      в Telegram или на вашу почту.
+    </p>
+    <!-- Вставьте сюда форму (Tilda, GetCourse, Bothelp и т.д.) -->
+    <div class="reg-box">
+      <p>Здесь будет форма регистрации</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+
+    <div class="footer-logo">Мила Ушакова</div>
+
+    <div class="footer-socials">
+      <a href="https://www.instagram.com/milaushakovva/" target="_blank">Instagram</a>
+      <a href="#">Telegram</a>
+    </div>
+
+    <div class="footer-links">
+      <a href="https://milaushakova.com">milaushakova.com</a>
+      <a href="#">Политика конфиденциальности</a>
+      <a href="#">Договор оферты</a>
+    </div>
+
+    <div class="footer-legal">
+      ИП Ушакова Людмила Вячеславовна · ОГРНИП 323774600568023
+    </div>
+
+  </div>
+</footer>
+
+</body>
+</html>
