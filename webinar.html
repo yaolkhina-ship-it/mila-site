@@ -1066,32 +1066,34 @@
 
 <script type="text/javascript" src="//static.bizon365.ru/form/form.min.js"></script>
 <script type="text/javascript">
-  bizon_createForm({div:"#b1qmf5ii", page:"208583:4miyur3m", style:"dark", phone:0});
-  bizon_createFormButton({button:".js-reg", page:"208583:4miyur3m", style:"dark", phone:0});
+  bizon_createForm({div:"#b1qmf5ii", page:"208583:4miyur3m", style:"red", phone:0});
+  bizon_createFormButton({button:".js-reg", page:"208583:4miyur3m", style:"red", phone:0});
 
-  // Скрываем поля выбора даты и времени после загрузки формы
+  // Скрываем строки с выбором даты/времени — только прямой родитель select
   function hideDateTimeFields(root) {
-    root = root || document;
-    root.querySelectorAll('select').forEach(function(el) {
-      var p = el.parentElement;
-      while (p && p !== root) {
-        if (p.tagName === 'DIV' || p.tagName === 'P') { p.style.setProperty('display','none','important'); break; }
-        p = p.parentElement;
-      }
-      el.style.setProperty('display','none','important');
+    (root || document).querySelectorAll('select').forEach(function(el) {
+      // Скрываем только непосредственный контейнер select, не всю форму
+      var wrap = el.closest('p, .field, .row, [class*="select"], [class*="date"], [class*="time"]') || el.parentElement;
+      if (wrap && wrap !== root) wrap.style.setProperty('display','none','important');
     });
   }
 
-  // Наблюдаем за DOM — форма грузится асинхронно
+  // Запускаем после загрузки формы
+  window.addEventListener('load', function() { hideDateTimeFields(); });
+  setTimeout(function() { hideDateTimeFields(); }, 1500);
+  setTimeout(function() { hideDateTimeFields(); }, 3000);
+
+  // Следим только за новыми крупными блоками (попап)
   var observer = new MutationObserver(function(mutations) {
     mutations.forEach(function(m) {
       m.addedNodes.forEach(function(node) {
-        if (node.nodeType === 1) hideDateTimeFields(node);
+        if (node.nodeType === 1 && node.querySelectorAll) {
+          setTimeout(function() { hideDateTimeFields(node); }, 100);
+        }
       });
     });
-    hideDateTimeFields();
   });
-  observer.observe(document.body, {childList: true, subtree: true});
+  observer.observe(document.body, {childList: true});
 </script>
 </body>
 </html>
