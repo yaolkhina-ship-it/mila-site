@@ -52,7 +52,7 @@
       color: var(--anthracite);
       font-size: 15px;
       line-height: 1.7;
-      padding-top: 64px;
+      padding-top: 0;
     }
     img { display: block; max-width: 100%; }
     a { text-decoration: none; }
@@ -607,20 +607,158 @@
       }
       .hero-left .hero-quote-green { display: none; }
     }
+
+    /* ── BIZON FORM OVERRIDE ── */
+    /* Скрываем выбор даты и времени */
+    #b1qmf5ii select,
+    #b1qmf5ii [class*="date"],
+    #b1qmf5ii [class*="time"],
+    #b1qmf5ii [class*="Date"],
+    #b1qmf5ii [class*="Time"],
+    #b1qmf5ii p:has(select),
+    #b1qmf5ii div:has(> select) { display: none !important; }
+
+    /* Обёртка формы */
+    #b1qmf5ii { padding: 0 !important; }
+    #b1qmf5ii > * > *,
+    #b1qmf5ii [class*="bizon"],
+    #b1qmf5ii [class*="widget"],
+    #b1qmf5ii [class*="form"] {
+      background: transparent !important;
+      border-color: rgba(212,175,87,.3) !important;
+      box-shadow: none !important;
+      font-family: 'Montserrat', sans-serif !important;
+      color: var(--ivory) !important;
+    }
+
+    /* Заголовок формы */
+    #b1qmf5ii [class*="title"],
+    #b1qmf5ii h2, #b1qmf5ii h3, #b1qmf5ii h4 {
+      color: var(--ivory) !important;
+      font-family: 'Cormorant Garamond', serif !important;
+      font-size: 28px !important;
+      font-weight: 300 !important;
+      background: transparent !important;
+    }
+
+    /* Счётчик мест */
+    #b1qmf5ii [class*="count"],
+    #b1qmf5ii [class*="limit"],
+    #b1qmf5ii [style*="yellow"],
+    #b1qmf5ii [style*="#ff"],
+    #b1qmf5ii span[style] {
+      background: var(--gold) !important;
+      color: var(--forest) !important;
+      border: none !important;
+      font-family: 'Montserrat', sans-serif !important;
+      letter-spacing: 2px !important;
+    }
+
+    /* Поле email */
+    #b1qmf5ii input[type="email"],
+    #b1qmf5ii input[type="text"],
+    #b1qmf5ii input[type="tel"],
+    #b1qmf5ii input {
+      background: rgba(255,255,255,.06) !important;
+      border: 1px solid rgba(212,175,87,.35) !important;
+      color: var(--ivory) !important;
+      padding: 14px 18px !important;
+      font-family: 'Montserrat', sans-serif !important;
+      font-size: 13px !important;
+      border-radius: 0 !important;
+      outline: none !important;
+    }
+    #b1qmf5ii input::placeholder { color: rgba(250,241,235,.4) !important; }
+    #b1qmf5ii input:focus { border-color: var(--gold) !important; }
+
+    /* Кнопка */
+    #b1qmf5ii button,
+    #b1qmf5ii input[type="submit"],
+    #b1qmf5ii [class*="submit"],
+    #b1qmf5ii [class*="button"],
+    #b1qmf5ii [class*="btn"] {
+      background: var(--gold) !important;
+      color: var(--forest) !important;
+      border: none !important;
+      padding: 16px 48px !important;
+      font-family: 'Montserrat', sans-serif !important;
+      font-size: 11px !important;
+      font-weight: 700 !important;
+      letter-spacing: 3px !important;
+      text-transform: uppercase !important;
+      border-radius: 0 !important;
+      cursor: pointer !important;
+      width: 100% !important;
+    }
+    #b1qmf5ii button:hover,
+    #b1qmf5ii input[type="submit"]:hover {
+      background: var(--ivory) !important;
+      color: var(--forest) !important;
+    }
+
+    /* Текст согласия */
+    #b1qmf5ii [class*="agree"],
+    #b1qmf5ii [class*="policy"],
+    #b1qmf5ii label,
+    #b1qmf5ii small,
+    #b1qmf5ii p {
+      color: rgba(250,241,235,.45) !important;
+      font-size: 11px !important;
+      font-family: 'Montserrat', sans-serif !important;
+    }
+    #b1qmf5ii a { color: rgba(212,175,87,.7) !important; }
+
+    /* То же самое для попапа (когда открывается по кнопке) */
+    .bizon365-popup-overlay { background: rgba(13,59,52,.85) !important; backdrop-filter: blur(8px) !important; }
+    .bizon365-popup-wrap,
+    [class*="bizon365-popup"] > div {
+      background: var(--forest) !important;
+      border: 1px solid rgba(212,175,87,.2) !important;
+      border-radius: 0 !important;
+    }
+    [class*="bizon365-popup"] select,
+    [class*="bizon365-popup"] [class*="date"],
+    [class*="bizon365-popup"] [class*="time"] { display: none !important; }
+    [class*="bizon365-popup"] [class*="title"],
+    [class*="bizon365-popup"] h2, [class*="bizon365-popup"] h3 {
+      color: var(--ivory) !important;
+      font-family: 'Cormorant Garamond', serif !important;
+      font-size: 26px !important;
+      font-weight: 300 !important;
+      background: transparent !important;
+    }
+    [class*="bizon365-popup"] input[type="email"],
+    [class*="bizon365-popup"] input {
+      background: rgba(255,255,255,.06) !important;
+      border: 1px solid rgba(212,175,87,.35) !important;
+      color: var(--ivory) !important;
+      border-radius: 0 !important;
+    }
+    [class*="bizon365-popup"] button,
+    [class*="bizon365-popup"] input[type="submit"] {
+      background: var(--gold) !important;
+      color: var(--forest) !important;
+      border: none !important;
+      border-radius: 0 !important;
+      font-family: 'Montserrat', sans-serif !important;
+      font-weight: 700 !important;
+      letter-spacing: 2px !important;
+      text-transform: uppercase !important;
+    }
+    [class*="bizon365-popup"] p,
+    [class*="bizon365-popup"] label,
+    [class*="bizon365-popup"] small { color: rgba(250,241,235,.45) !important; }
+    [class*="bizon365-popup"] a { color: rgba(212,175,87,.7) !important; }
+    [class*="bizon365-popup"] [style*="yellow"],
+    [class*="bizon365-popup"] [class*="count"],
+    [class*="bizon365-popup"] [class*="limit"] {
+      background: var(--gold) !important;
+      color: var(--forest) !important;
+    }
   </style>
 </head>
 <body>
 
-<nav>
-  <a href="/" class="nav-logo">Mila Ushakova</a>
-  <div class="nav-pill">
-    <a href="/lectures">Подкасты</a>
-    <a href="/webinar" class="active">Вебинар</a>
-    <a href="/color-guide">Гайд</a>
-    <a href="/contacts">Контакты</a>
-    <a href="#register" class="cta">Регистрация</a>
-  </div>
-</nav>
 
 <!-- HERO -->
 <section class="hero" id="top">
@@ -640,7 +778,7 @@
       <div class="hero-meta">
         <div class="hero-meta-item">
           <div class="mlabel">Дата</div>
-          <div class="mvalue">Скоро</div>
+          <div class="mvalue">07.07</div>
         </div>
         <div class="hero-meta-item">
           <div class="mlabel">Время</div>
@@ -928,8 +1066,32 @@
 
 <script type="text/javascript" src="//static.bizon365.ru/form/form.min.js"></script>
 <script type="text/javascript">
-  bizon_createForm({div:"#b1qmf5ii", page:"208583:4miyur3m", style:"red", phone:0});
-  bizon_createFormButton({button:".js-reg", page:"208583:4miyur3m", style:"red", phone:0});
+  bizon_createForm({div:"#b1qmf5ii", page:"208583:4miyur3m", style:"dark", phone:0});
+  bizon_createFormButton({button:".js-reg", page:"208583:4miyur3m", style:"dark", phone:0});
+
+  // Скрываем поля выбора даты и времени после загрузки формы
+  function hideDateTimeFields(root) {
+    root = root || document;
+    root.querySelectorAll('select').forEach(function(el) {
+      var p = el.parentElement;
+      while (p && p !== root) {
+        if (p.tagName === 'DIV' || p.tagName === 'P') { p.style.setProperty('display','none','important'); break; }
+        p = p.parentElement;
+      }
+      el.style.setProperty('display','none','important');
+    });
+  }
+
+  // Наблюдаем за DOM — форма грузится асинхронно
+  var observer = new MutationObserver(function(mutations) {
+    mutations.forEach(function(m) {
+      m.addedNodes.forEach(function(node) {
+        if (node.nodeType === 1) hideDateTimeFields(node);
+      });
+    });
+    hideDateTimeFields();
+  });
+  observer.observe(document.body, {childList: true, subtree: true});
 </script>
 </body>
 </html>
