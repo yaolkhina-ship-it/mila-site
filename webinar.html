@@ -1065,33 +1065,42 @@
 <script type="text/javascript">
   bizon_createForm({div:"#b1qmf5ii", page:"208583:4miyur3m", style:"red", phone:0});
 
-  function fixBizonSelects(root) {
+  function selectAllBizonFields(root) {
     (root || document).querySelectorAll('select').forEach(function(sel) {
-      // Выбираем первую реальную опцию (не пустую)
-      for (var i = 0; i < sel.options.length; i++) {
-        if (sel.options[i].value) { sel.selectedIndex = i; break; }
+      if (!sel.value) {
+        for (var i = 0; i < sel.options.length; i++) {
+          if (sel.options[i].value) { sel.selectedIndex = i; break; }
+        }
       }
-      // Сообщаем Бизону об изменении
-      sel.dispatchEvent(new Event('change', {bubbles: true}));
-      // Скрываем через height, не display — чтобы JS мог читать значение
-      var wrap = sel.parentElement;
-      if (wrap) {
-        wrap.style.height = '0';
-        wrap.style.overflow = 'hidden';
-        wrap.style.margin = '0';
-        wrap.style.padding = '0';
-      }
+      // Триггерим оба события — jQuery и native
+      sel.dispatchEvent(new Event('change', {bubbles:true}));
+      sel.dispatchEvent(new Event('input', {bubbles:true}));
+      if (window.jQuery) { window.jQuery(sel).trigger('change'); }
+      // Визуально скрываем
+      var w = sel.parentElement;
+      if (w) { w.style.cssText += ';height:0!important;overflow:hidden!important;margin:0!important;padding:0!important;'; }
     });
   }
 
-  [500, 1200, 2500].forEach(function(t) {
-    setTimeout(function() { fixBizonSelects(); }, t);
+  // Перехватываем клик по кнопке submit ДО Бизона (capture phase)
+  document.addEventListener('mousedown', function(e) {
+    var container = document.getElementById('b1qmf5ii');
+    if (!container) return;
+    var btn = e.target.closest('button, input[type="submit"], [class*="submit"], [class*="btn"]');
+    if (btn && container.contains(btn)) {
+      selectAllBizonFields(container);
+    }
+  }, true);
+
+  // Также запускаем при загрузке формы
+  [800, 1800, 3500].forEach(function(t) {
+    setTimeout(selectAllBizonFields, t);
   });
 
-  new MutationObserver(function(mutations) {
-    mutations.forEach(function(m) {
-      m.addedNodes.forEach(function(node) {
-        if (node.nodeType === 1) setTimeout(function() { fixBizonSelects(node); }, 300);
+  new MutationObserver(function(m) {
+    m.forEach(function(r) {
+      r.addedNodes.forEach(function(n) {
+        if (n.nodeType === 1) setTimeout(function(){ selectAllBizonFields(n); }, 400);
       });
     });
   }).observe(document.body, {childList: true});
