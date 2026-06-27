@@ -609,14 +609,13 @@
     }
 
     /* ── BIZON FORM OVERRIDE ── */
-    /* Скрываем выбор даты и времени */
-    #b1qmf5ii select,
-    #b1qmf5ii [class*="date"],
-    #b1qmf5ii [class*="time"],
-    #b1qmf5ii [class*="Date"],
-    #b1qmf5ii [class*="Time"],
-    #b1qmf5ii p:has(select),
-    #b1qmf5ii div:has(> select) { display: none !important; }
+    /* Убираем красную рамку Бизона — перебиваем все варианты */
+    #b1qmf5ii, #b1qmf5ii *,
+    #b1qmf5ii > div, #b1qmf5ii > div > div {
+      border-color: rgba(212,175,87,.25) !important;
+      box-shadow: none !important;
+      outline: none !important;
+    }
 
     /* Обёртка формы */
     #b1qmf5ii { padding: 0 !important; }
@@ -625,8 +624,6 @@
     #b1qmf5ii [class*="widget"],
     #b1qmf5ii [class*="form"] {
       background: transparent !important;
-      border-color: rgba(212,175,87,.3) !important;
-      box-shadow: none !important;
       font-family: 'Montserrat', sans-serif !important;
       color: var(--ivory) !important;
     }
@@ -1068,31 +1065,36 @@
 <script type="text/javascript">
   bizon_createForm({div:"#b1qmf5ii", page:"208583:4miyur3m", style:"red", phone:0});
 
-  // Скрываем строки с выбором даты/времени — только прямой родитель select
-  function hideDateTimeFields(root) {
-    (root || document).querySelectorAll('select').forEach(function(el) {
-      // Скрываем только непосредственный контейнер select, не всю форму
-      var wrap = el.closest('p, .field, .row, [class*="select"], [class*="date"], [class*="time"]') || el.parentElement;
-      if (wrap && wrap !== root) wrap.style.setProperty('display','none','important');
+  function fixBizonSelects(root) {
+    (root || document).querySelectorAll('select').forEach(function(sel) {
+      // Выбираем первую реальную опцию (не пустую)
+      for (var i = 0; i < sel.options.length; i++) {
+        if (sel.options[i].value) { sel.selectedIndex = i; break; }
+      }
+      // Сообщаем Бизону об изменении
+      sel.dispatchEvent(new Event('change', {bubbles: true}));
+      // Скрываем через height, не display — чтобы JS мог читать значение
+      var wrap = sel.parentElement;
+      if (wrap) {
+        wrap.style.height = '0';
+        wrap.style.overflow = 'hidden';
+        wrap.style.margin = '0';
+        wrap.style.padding = '0';
+      }
     });
   }
 
-  // Запускаем после загрузки формы
-  window.addEventListener('load', function() { hideDateTimeFields(); });
-  setTimeout(function() { hideDateTimeFields(); }, 1500);
-  setTimeout(function() { hideDateTimeFields(); }, 3000);
+  [500, 1200, 2500].forEach(function(t) {
+    setTimeout(function() { fixBizonSelects(); }, t);
+  });
 
-  // Следим только за новыми крупными блоками (попап)
-  var observer = new MutationObserver(function(mutations) {
+  new MutationObserver(function(mutations) {
     mutations.forEach(function(m) {
       m.addedNodes.forEach(function(node) {
-        if (node.nodeType === 1 && node.querySelectorAll) {
-          setTimeout(function() { hideDateTimeFields(node); }, 100);
-        }
+        if (node.nodeType === 1) setTimeout(function() { fixBizonSelects(node); }, 300);
       });
     });
-  });
-  observer.observe(document.body, {childList: true});
+  }).observe(document.body, {childList: true});
 </script>
 </body>
 </html>
