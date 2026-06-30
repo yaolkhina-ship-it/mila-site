@@ -638,6 +638,17 @@
       background: transparent !important;
     }
 
+    /* "КОЛИЧЕСТВО МЕСТ ОГРАНИЧЕНО" — Bizon рендерит в h1 */
+    #b1qmf5ii h1 {
+      color: var(--gold) !important;
+      font-family: 'Montserrat', sans-serif !important;
+      font-size: 11px !important;
+      font-weight: 700 !important;
+      letter-spacing: 2px !important;
+      text-transform: uppercase !important;
+      background: transparent !important;
+    }
+
     /* Счётчик мест */
     #b1qmf5ii [class*="count"],
     #b1qmf5ii [class*="limit"],
@@ -648,6 +659,7 @@
       color: var(--forest) !important;
       border: none !important;
       font-family: 'Montserrat', sans-serif !important;
+      font-size: 9px !important;
       letter-spacing: 2px !important;
     }
 
@@ -775,7 +787,7 @@
       <div class="hero-meta">
         <div class="hero-meta-item">
           <div class="mlabel">Дата</div>
-          <div class="mvalue">07.07</div>
+          <div class="mvalue">01.07</div>
         </div>
         <div class="hero-meta-item">
           <div class="mlabel">Время</div>
@@ -1029,8 +1041,7 @@
     <div class="gold-line" style="margin: 0 auto 28px;"></div>
     <h2>Займите своё место<br/>на вебинаре</h2>
     <p class="reg-sub">
-      Вебинар бесплатный. После регистрации вы получите ссылку на эфир
-      в Telegram или на вашу почту.
+      Вебинар бесплатный. После регистрации вы получите ссылку на эфир по смс и на вашу почту.
     </p>
     <div align="center" id="b1qmf5ii"></div>
   </div>
@@ -1045,7 +1056,7 @@
 
     <div class="footer-socials">
       <a href="https://www.instagram.com/milaushakovva/" target="_blank">Instagram</a>
-      <a href="#">Telegram</a>
+      <a href="https://t.me/themorningsmothie" target="_blank">Telegram</a>
     </div>
 
     <div class="footer-links">
@@ -1063,7 +1074,7 @@
 
 <script type="text/javascript" src="//static.bizon365.ru/form/form.min.js"></script>
 <script type="text/javascript">
-  bizon_createForm({div:"#b1qmf5ii", page:"208583:4miyur3m", style:"red", phone:0});
+  bizon_createForm({div:"#b1qmf5ii", page:"208583:4miyur3m", style:"red", phone:1, name:1});
 
   function selectAllBizonFields(root) {
     (root || document).querySelectorAll('select').forEach(function(sel) {
@@ -1104,6 +1115,21 @@
       });
     });
   }).observe(document.body, {childList: true});
+
+  function shrinkSeatsBadge() {
+    document.querySelectorAll('#b1qmf5ii *').forEach(function(el) {
+      var t = el.childNodes.length === 1 && el.firstChild.nodeType === 3 ? el.textContent.trim() : '';
+      if (t && (t.indexOf('МЕСТ') !== -1 || t.indexOf('ОГРАНИЧЕНО') !== -1 || t.indexOf('мест') !== -1)) {
+        el.style.setProperty('font-size', '11px', 'important');
+        el.style.setProperty('font-family', 'Montserrat, sans-serif', 'important');
+        el.style.setProperty('font-weight', '700', 'important');
+        el.style.setProperty('letter-spacing', '2px', 'important');
+        el.style.setProperty('color', '#d4af57', 'important');
+        el.style.setProperty('text-transform', 'uppercase', 'important');
+      }
+    });
+  }
+  [600, 1500, 3000].forEach(function(t) { setTimeout(shrinkSeatsBadge, t); });
 </script>
 </body>
 </html>
