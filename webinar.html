@@ -40,6 +40,7 @@
       --taupe:      #A4A48C;
       --gold:       #D4AF57;
       --turquoise:  #5EA39D;
+      --bg-summer:  #8FC4BE;
       --coral:      #C0453A;
       --anthracite: #1A1A1A;
       --white:      #FFFFFF;
@@ -77,14 +78,14 @@
 
     .btn-outline {
       display: inline-block;
-      background: transparent;
+      background: var(--coral);
       color: var(--ivory);
       padding: 15px 52px;
       font-size: 11px;
       font-weight: 600;
       letter-spacing: 3px;
       text-transform: uppercase;
-      border: 1px solid rgba(255,255,255,.4);
+      border: none;
       cursor: pointer;
       transition: background .3s, color .3s;
     }
@@ -92,7 +93,7 @@
 
     .btn-emerald {
       display: inline-block;
-      background: var(--emerald);
+      background: var(--coral);
       color: var(--ivory);
       padding: 17px 52px;
       font-size: 11px;
@@ -121,8 +122,8 @@
        HERO
     ══════════════════════════════ */
     .hero {
-      background: var(--forest);
-      color: var(--ivory);
+      background: var(--bg-summer);
+      color: var(--forest);
       min-height: calc(100vh - 64px);
       display: flex;
       flex-direction: column;
@@ -165,19 +166,19 @@
       font-size: 28px;
       font-weight: 300;
       font-style: italic;
-      color: rgba(250,241,235,.6);
+      color: rgba(27,52,54,.75);
       margin-bottom: 28px;
       letter-spacing: 1px;
     }
     .hero-left .hero-sub {
       font-size: 15px;
-      color: rgba(250,241,235,.75);
+      color: rgba(27,52,54,.8);
       margin-bottom: 40px;
       max-width: 400px;
       line-height: 1.8;
     }
     .hero-left .hero-sub strong {
-      color: var(--ivory);
+      color: var(--forest);
       font-weight: 600;
     }
 
@@ -190,13 +191,13 @@
       font-size: 9px;
       letter-spacing: 3px;
       text-transform: uppercase;
-      color: var(--taupe);
+      color: rgba(27,52,54,.65);
       margin-bottom: 6px;
     }
     .hero-meta-item .mvalue {
       font-family: 'Cormorant Garamond', serif;
       font-size: 22px;
-      color: var(--ivory);
+      color: var(--forest);
     }
 
     .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
@@ -332,10 +333,10 @@
        ПРОГРАММА
     ══════════════════════════════ */
     .program {
-      background: var(--forest);
+      background: var(--bg-summer);
       padding: 100px 0;
     }
-    .program .section-head h2 { color: var(--ivory); }
+    .program .section-head h2 { color: var(--forest); }
 
     .prog-list { list-style: none; }
     .prog-item {
@@ -343,15 +344,15 @@
       align-items: flex-start;
       gap: 36px;
       padding: 32px 0;
-      border-bottom: 1px solid rgba(250,241,235,.08);
+      border-bottom: 1px solid rgba(27,52,54,.12);
     }
-    .prog-item:first-child { border-top: 1px solid rgba(250,241,235,.08); }
+    .prog-item:first-child { border-top: 1px solid rgba(27,52,54,.12); }
     .prog-item .pn {
       font-family: 'Cormorant Garamond', serif;
       font-size: 60px;
       font-weight: 300;
-      color: var(--gold);
-      opacity: .45;
+      color: var(--coral);
+      opacity: .55;
       line-height: 1;
       min-width: 64px;
       text-align: right;
@@ -360,13 +361,13 @@
       font-family: 'Cormorant Garamond', serif;
       font-size: 26px;
       font-weight: 400;
-      color: var(--ivory);
+      color: var(--forest);
       margin-bottom: 10px;
       line-height: 1.25;
     }
     .prog-item .pb p {
       font-size: 13px;
-      color: rgba(250,241,235,.5);
+      color: rgba(27,52,54,.65);
       line-height: 1.8;
     }
 
@@ -380,7 +381,7 @@
       border-bottom: 1px solid rgba(212,175,87,.25) !important;
     }
     .prog-item.highlight .pn { opacity: 1; }
-    .prog-item.highlight .pb h3 { color: var(--gold); }
+    .prog-item.highlight .pb h3 { color: var(--coral); }
 
     .program .cta-center { padding-top: 52px; }
 
@@ -480,7 +481,7 @@
        РЕГИСТРАЦИЯ
     ══════════════════════════════ */
     .register {
-      background: var(--forest);
+      background: var(--bg-summer);
       padding: 100px 0;
       text-align: center;
     }
@@ -488,20 +489,20 @@
       font-family: 'Cormorant Garamond', serif;
       font-size: 44px;
       font-weight: 300;
-      color: var(--ivory);
+      color: var(--forest);
       line-height: 1.2;
       margin-bottom: 20px;
     }
     .register .reg-sub {
       font-size: 14px;
-      color: rgba(250,241,235,.55);
+      color: rgba(27,52,54,.7);
       max-width: 480px;
       margin: 0 auto 48px;
       line-height: 1.85;
     }
     .reg-box {
-      background: rgba(255,255,255,.04);
-      border: 1px solid rgba(212,175,87,.2);
+      background: rgba(27,52,54,.04);
+      border: 1px solid rgba(192,69,58,.3);
       padding: 52px 40px;
       max-width: 480px;
       margin: 0 auto;
@@ -510,7 +511,7 @@
       font-size: 11px;
       letter-spacing: 2px;
       text-transform: uppercase;
-      color: rgba(250,241,235,.25);
+      color: rgba(27,52,54,.35);
     }
 
     /* ══════════════════════════════
@@ -627,13 +628,13 @@
     #b1qmf5ii [class*="form"] {
       background: transparent !important;
       font-family: 'Montserrat', sans-serif !important;
-      color: var(--ivory) !important;
+      color: var(--forest) !important;
     }
 
     /* Заголовок формы */
     #b1qmf5ii [class*="title"],
     #b1qmf5ii h2, #b1qmf5ii h3, #b1qmf5ii h4 {
-      color: var(--ivory) !important;
+      color: var(--forest) !important;
       font-family: 'Cormorant Garamond', serif !important;
       font-size: 28px !important;
       font-weight: 300 !important;
@@ -670,17 +671,17 @@
     #b1qmf5ii input[type="text"],
     #b1qmf5ii input[type="tel"],
     #b1qmf5ii input {
-      background: rgba(255,255,255,.06) !important;
-      border: 1px solid rgba(212,175,87,.35) !important;
-      color: var(--ivory) !important;
+      background: rgba(27,52,54,.05) !important;
+      border: 1px solid rgba(192,69,58,.35) !important;
+      color: var(--forest) !important;
       padding: 14px 18px !important;
       font-family: 'Montserrat', sans-serif !important;
       font-size: 13px !important;
       border-radius: 0 !important;
       outline: none !important;
     }
-    #b1qmf5ii input::placeholder { color: rgba(250,241,235,.4) !important; }
-    #b1qmf5ii input:focus { border-color: var(--gold) !important; }
+    #b1qmf5ii input::placeholder { color: rgba(27,52,54,.4) !important; }
+    #b1qmf5ii input:focus { border-color: var(--coral) !important; }
 
     /* Кнопка */
     #b1qmf5ii button,
@@ -688,8 +689,8 @@
     #b1qmf5ii [class*="submit"],
     #b1qmf5ii [class*="button"],
     #b1qmf5ii [class*="btn"] {
-      background: var(--gold) !important;
-      color: var(--forest) !important;
+      background: var(--coral) !important;
+      color: var(--ivory) !important;
       border: none !important;
       padding: 16px 48px !important;
       font-family: 'Montserrat', sans-serif !important;
@@ -703,8 +704,8 @@
     }
     #b1qmf5ii button:hover,
     #b1qmf5ii input[type="submit"]:hover {
-      background: var(--ivory) !important;
-      color: var(--forest) !important;
+      background: var(--forest) !important;
+      color: var(--ivory) !important;
     }
 
     /* Текст согласия */
@@ -713,11 +714,11 @@
     #b1qmf5ii label,
     #b1qmf5ii small,
     #b1qmf5ii p {
-      color: rgba(250,241,235,.45) !important;
+      color: rgba(27,52,54,.5) !important;
       font-size: 11px !important;
       font-family: 'Montserrat', sans-serif !important;
     }
-    #b1qmf5ii a { color: rgba(212,175,87,.7) !important; }
+    #b1qmf5ii a { color: var(--coral) !important; }
 
     /* То же самое для попапа (когда открывается по кнопке) */
     .bizon365-popup-overlay { background: rgba(13,59,52,.85) !important; backdrop-filter: blur(8px) !important; }
@@ -776,9 +777,6 @@
   <div class="hero-body">
 
     <div class="hero-left">
-      <div class="event-tag">Закрытая онлайн-встреча</div>
-
-      <h1>Искусство летних<br/>акцентов</h1>
       <div class="hero-cities">В гостях — создатель бренда украшений</div>
 
       <p class="hero-sub">
