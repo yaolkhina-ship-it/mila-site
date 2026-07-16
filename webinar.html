@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Искусство летних акцентов — закрытая онлайн-встреча с Милой Ушаковой</title>
-  <meta name="description" content="Закрытая онлайн-встреча Милы Ушаковой «Искусство летних акцентов» — в гостях создатель бренда украшений. Суббота, 18.07, 12:00 МСК." />
+  <title>Закрытый Fashion эфир — встреча стилиста и аналитика моды Милы Ушаковой</title>
+  <meta name="description" content="Закрытый Fashion эфир с Милой Ушаковой — как украшения создают образ, что отличает качественное изделие и как оно рождается. Специальный гость — создатель бренда украшений. Суббота, 18.07, 12:00 МСК." />
   <style>
     @font-face{font-family:'Tenor Sans';font-style:normal;font-weight:400;font-display:swap;src:url(fonts/tenor-sans.woff2) format('woff2')}
     @font-face{font-family:'Jost';font-style:normal;font-weight:300 600;font-display:swap;src:url(fonts/jost.woff2) format('woff2')}
@@ -34,13 +34,11 @@
 
     /* ── WEBINAR PAGE ── */
     :root {
-      --emerald:    #036834;
       --forest:     #1B3436;
       --ivory:      #FAF1EB;
-      --taupe:      #A4A48C;
       --gold:       #D4AF57;
       --turquoise:  #5EA39D;
-      --bg-summer:  #8FC4BE;
+      --bg-summer:  #ABD3CE;
       --coral:      #C0453A;
       --anthracite: #1A1A1A;
       --white:      #FFFFFF;
@@ -65,34 +63,46 @@
        primary = регистрация (коралл), outline = клуб (золото), emerald = гайд (тёмный) */
     .btn-primary, .btn-outline, .btn-emerald {
       display: inline-block;
-      padding: 17px 52px;
-      font-size: 11px;
+      padding: 13px 36px;
+      font-size: 10px;
       font-weight: 700;
-      letter-spacing: 3px;
+      letter-spacing: 2.5px;
       text-transform: uppercase;
-      border: none;
+      border: 1px solid transparent;
       cursor: pointer;
-      transition: background .3s, color .3s;
+      transition: background .3s, color .3s, border-color .3s;
     }
 
+    /* primary = единственное действие с заливкой, ведёт к регистрации */
     .btn-primary {
       background: var(--coral);
+      border-color: var(--coral);
       color: var(--ivory);
     }
     .btn-primary:hover { background: var(--ivory); color: var(--coral); }
 
+    /* outline / emerald = второстепенные предложения (клуб, гайд) —
+       контур вместо заливки, чтобы не спорить с primary за внимание */
     .btn-outline {
-      background: var(--gold);
+      background: transparent;
+      border-color: var(--gold);
       color: var(--forest);
     }
-    .btn-outline:hover { background: var(--ivory); color: var(--forest); }
+    .btn-outline:hover { background: var(--gold); color: var(--forest); }
 
     .btn-emerald {
-      background: var(--forest);
-      color: var(--ivory);
+      background: transparent;
+      border-color: rgba(27,52,54,.4);
+      color: var(--forest);
     }
-    .btn-emerald:hover { background: var(--ivory); color: var(--forest); }
-    .btn-emerald:hover { background: var(--forest); }
+    .btn-emerald:hover { background: var(--forest); border-color: var(--forest); color: var(--ivory); }
+
+    .author-btns a {
+      flex: 1 1 260px;
+      max-width: 280px;
+      text-align: center;
+      border-width: 2px;
+    }
 
     /* ── УТИЛИТЫ ── */
     .container { max-width: 1040px; margin: 0 auto; padding: 0 32px; }
@@ -142,12 +152,12 @@
       font-size: 52px;
       font-weight: 300;
       line-height: 1.15;
-      color: var(--ivory);
+      color: var(--forest);
       margin-bottom: 12px;
     }
     .hero-left h1 em {
       font-style: italic;
-      color: var(--gold);
+      color: var(--coral);
     }
     .hero-left .hero-cities {
       font-family: 'Cormorant Garamond', serif;
@@ -160,7 +170,7 @@
     }
     .hero-left .hero-sub {
       font-size: 15px;
-      color: rgba(27,52,54,.8);
+      color: rgba(27,52,54,.85);
       margin-bottom: 40px;
       max-width: 400px;
       line-height: 1.8;
@@ -172,6 +182,7 @@
 
     .hero-meta {
       display: flex;
+      flex-wrap: wrap;
       gap: 36px;
       margin-bottom: 44px;
     }
@@ -179,7 +190,7 @@
       font-size: 9px;
       letter-spacing: 3px;
       text-transform: uppercase;
-      color: rgba(27,52,54,.65);
+      color: rgba(27,52,54,.85);
       margin-bottom: 6px;
     }
     .hero-meta-item .mvalue {
@@ -190,48 +201,17 @@
 
     .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
 
-    .hero-quote-green {
-      margin-top: 44px;
-      position: relative;
-      padding-left: 4px;
-    }
-    .hero-quote-green .big-quote {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 96px;
-      line-height: 0.6;
-      color: var(--gold);
-      display: block;
-      margin-bottom: 16px;
-      opacity: 0.7;
-    }
-    .hero-quote-green blockquote {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 20px;
-      font-weight: 300;
-      font-style: italic;
-      color: var(--ivory);
-      line-height: 1.65;
-      margin-bottom: 18px;
-    }
-    .hero-quote-green cite {
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--gold);
-      font-style: normal;
-    }
-
     .hero-right {
       position: relative;
       overflow: hidden;
       min-height: 560px;
+      background: var(--forest);
     }
     .hero-right img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
-      object-position: center 25%;
+      object-fit: contain;
+      object-position: center;
       display: block;
     }
     .hero-right .photo-overlay {
@@ -246,28 +226,11 @@
     }
 
     /* ══════════════════════════════
-       STRIP
-    ══════════════════════════════ */
-    .strip {
-      background: var(--emerald);
-      padding: 22px 32px;
-      text-align: center;
-    }
-    .strip p {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--ivory);
-    }
-    .strip p em { color: var(--gold); font-style: normal; }
-
-    /* ══════════════════════════════
        ДЛЯ КОГО
     ══════════════════════════════ */
     .for-whom {
       background: var(--ivory);
-      padding: 100px 0;
+      padding: 100px 0 60px;
     }
 
     .section-head { margin-bottom: 52px; }
@@ -281,103 +244,52 @@
 
     .whom-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 20px;
-      margin-bottom: 52px;
     }
     .whom-card {
       background: var(--white);
-      padding: 36px 30px;
+      padding: 20px 22px;
       border-top: 2px solid var(--gold);
       position: relative;
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .whom-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 32px rgba(27,52,54,.08);
     }
     .whom-card .cnum {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 64px;
+      font-size: 32px;
       font-weight: 300;
       color: var(--gold);
-      opacity: .18;
+      opacity: .22;
       line-height: 1;
       position: absolute;
-      top: 20px; right: 24px;
+      top: 14px; right: 18px;
     }
     .whom-card h3 {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px;
+      font-weight: 400;
+      line-height: 1.3;
       color: var(--forest);
-      margin-bottom: 14px;
+      padding-right: 28px;
     }
     .whom-card p {
       font-size: 14px;
       line-height: 1.8;
       color: var(--muted);
+      margin-top: 12px;
     }
 
     .cta-center { text-align: center; }
 
     /* ══════════════════════════════
-       ПРОГРАММА
-    ══════════════════════════════ */
-    .program {
-      background: var(--bg-summer);
-      padding: 100px 0;
-    }
-    .program .section-head h2 { color: var(--forest); }
-
-    .prog-list { list-style: none; }
-    .prog-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 36px;
-      padding: 32px 0;
-      border-bottom: 1px solid rgba(27,52,54,.12);
-    }
-    .prog-item:first-child { border-top: 1px solid rgba(27,52,54,.12); }
-    .prog-item .pn {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 60px;
-      font-weight: 300;
-      color: var(--coral);
-      opacity: .55;
-      line-height: 1;
-      min-width: 64px;
-      text-align: right;
-    }
-    .prog-item .pb h3 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 26px;
-      font-weight: 400;
-      color: var(--forest);
-      margin-bottom: 10px;
-      line-height: 1.25;
-    }
-    .prog-item .pb p {
-      font-size: 13px;
-      color: rgba(27,52,54,.65);
-      line-height: 1.8;
-    }
-
-    .prog-item.highlight {
-      background: rgba(212,175,87,.07);
-      padding-left: 24px;
-      padding-right: 24px;
-      margin-left: -24px;
-      margin-right: -24px;
-      border-top: 1px solid rgba(212,175,87,.25) !important;
-      border-bottom: 1px solid rgba(212,175,87,.25) !important;
-    }
-    .prog-item.highlight .pn { opacity: 1; }
-    .prog-item.highlight .pb h3 { color: var(--coral); }
-
-    .program .cta-center { padding-top: 52px; }
-
-    /* ══════════════════════════════
        ОБ АВТОРЕ
     ══════════════════════════════ */
     .about {
-      background: var(--ivory);
+      background: var(--bg-summer);
       padding: 100px 0;
     }
     .about-grid {
@@ -454,15 +366,149 @@
     }
     .cred-text strong { color: var(--forest); font-weight: 600; }
 
-    .channel-tag {
-      display: inline-block;
+    /* ══════════════════════════════
+       ОТЗЫВЫ
+    ══════════════════════════════ */
+    .testimonials {
+      background: var(--ivory);
+      padding: 40px 0 72px;
+      overflow: hidden;
+    }
+    .testi-head-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-bottom: 44px;
+    }
+    .testi-nav { display: flex; gap: 12px; }
+    .testi-nav button {
+      width: 44px;
+      height: 44px;
+      background: transparent;
+      border: 1px solid rgba(27,52,54,.25);
+      color: var(--forest);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      cursor: pointer;
+      transition: background .25s, color .25s, border-color .25s;
+    }
+    .testi-nav button:hover {
       background: var(--forest);
+      color: var(--ivory);
+      border-color: var(--forest);
+    }
+
+    .testi-track {
+      display: flex;
+      align-items: flex-start;
+      gap: 24px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      padding-bottom: 8px;
+      margin: 0 -32px;
+      padding-left: 32px;
+      padding-right: 32px;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .testi-track::-webkit-scrollbar { display: none; }
+
+    .testi-card {
+      scroll-snap-align: start;
+      flex: 0 0 340px;
+      background: var(--white);
+      border-top: 2px solid var(--gold);
+      padding: 32px 28px;
+      display: flex;
+      flex-direction: column;
+    }
+    .testi-top {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+    .testi-avatar {
+      width: 48px;
+      height: 48px;
+      min-width: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+      background: var(--forest);
+    }
+    .testi-avatar-fallback {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 16px;
       color: var(--gold);
-      font-size: 11px;
-      font-weight: 600;
+    }
+    .testi-card .tn {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      color: var(--forest);
+      line-height: 1.2;
+    }
+    .testi-card .tr {
+      font-size: 9px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--turquoise);
+      margin-top: 3px;
+    }
+    .testi-card .tq {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 50px;
+      line-height: .5;
+      color: var(--gold);
+      opacity: .6;
+      margin-bottom: 10px;
+      display: block;
+    }
+    .testi-card .tt {
+      font-size: 14px;
+      line-height: 1.8;
+      color: var(--muted);
+      display: -webkit-box;
+      -webkit-line-clamp: 8;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .testi-card.expanded .tt {
+      -webkit-line-clamp: unset;
+      overflow: visible;
+    }
+    .testi-more {
+      display: inline-block;
+      margin-top: 14px;
+      font-size: 10px;
+      font-weight: 700;
       letter-spacing: 2px;
-      padding: 10px 22px;
-      margin-bottom: 36px;
+      text-transform: uppercase;
+      color: var(--coral);
+      cursor: pointer;
+      border: none;
+      background: none;
+      padding: 0;
+      font-family: 'Montserrat', sans-serif;
+    }
+    .testi-more:hover { color: var(--forest); }
+
+    .testi-cta {
+      text-align: center;
+      margin-top: 36px;
+    }
+    .testi-cta p {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 22px;
+      font-weight: 300;
+      color: var(--forest);
+      margin-bottom: 20px;
     }
 
     /* ══════════════════════════════
@@ -483,25 +529,11 @@
     }
     .register .reg-sub {
       font-size: 14px;
-      color: rgba(27,52,54,.7);
+      color: rgba(27,52,54,.85);
       max-width: 480px;
       margin: 0 auto 48px;
       line-height: 1.85;
     }
-    .reg-box {
-      background: rgba(27,52,54,.04);
-      border: 1px solid rgba(192,69,58,.3);
-      padding: 52px 40px;
-      max-width: 480px;
-      margin: 0 auto;
-    }
-    .reg-box p {
-      font-size: 11px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: rgba(27,52,54,.35);
-    }
-
     /* ══════════════════════════════
        FOOTER
     ══════════════════════════════ */
@@ -559,7 +591,8 @@
       }
       .hero-right {
         order: -1;
-        min-height: 56vw;
+        aspect-ratio: 1 / 1;
+        min-height: auto;
         max-height: 480px;
       }
       .hero-left { padding: 48px 28px 56px; }
@@ -580,15 +613,18 @@
     @media (max-width: 600px) {
       .hero-left h1 { font-size: 34px; }
       .hero-left .hero-cities { font-size: 20px; }
-      .hero-meta { flex-direction: column; gap: 16px; }
-      .hero-btns { flex-direction: column; align-items: stretch; }
+      .hero-meta { gap: 18px; }
+      .hero-meta-item .mlabel { font-size: 8px; letter-spacing: 2px; }
+      .hero-meta-item .mvalue { font-size: 18px; }
+      .hero-btns { flex-direction: column; align-items: center; }
       .btn-primary, .btn-outline, .btn-emerald { text-align: center; }
+      .author-btns { flex-direction: column; align-items: center; }
+      .author-btns a { flex: 0 0 auto; width: 100%; max-width: 280px; }
       .container { padding: 0 18px; }
-      .prog-item { gap: 20px; }
-      .prog-item .pn { font-size: 38px; min-width: 38px; }
-      .prog-item .pb h3 { font-size: 20px; }
       .register h2 { font-size: 32px; }
-      .for-whom, .program, .about, .register { padding: 64px 0; }
+      .for-whom, .about, .register, .testimonials { padding: 64px 0; }
+      .testi-card { flex-basis: 82vw; }
+      .testi-nav { display: none; }
       .section-head h2 { font-size: 32px; }
       /* Фото Милы — увеличенное, полное на мобиле */
       .about-photo-wrap img {
@@ -596,7 +632,6 @@
         object-fit: cover;
         object-position: top center;
       }
-      .hero-left .hero-quote-green { display: none; }
     }
 
     /* ── BIZON FORM OVERRIDE ── */
@@ -609,7 +644,12 @@
     }
 
     /* Обёртка формы */
-    #b1qmf5ii { padding: 0 !important; }
+    #b1qmf5ii {
+      background: var(--ivory) !important;
+      max-width: 420px !important;
+      margin: 0 auto !important;
+      padding: 40px !important;
+    }
     #b1qmf5ii > * > *,
     #b1qmf5ii [class*="bizon"],
     #b1qmf5ii [class*="widget"],
@@ -765,13 +805,13 @@
   <div class="hero-body">
 
     <div class="hero-left">
-      <h1>День открытых<br/>дверей клуба</h1>
-      <div class="hero-cities">«В МОЁМ СТИЛЕ» · ровно две недели с запуска</div>
+      <h1>Закрытый<br/><em>Fashion</em> эфир</h1>
+      <div class="hero-cities">Встреча стилиста и аналитика моды<br/>Милы Ушаковой</div>
 
       <p class="hero-sub">
-        В программе — «Искусство летних акцентов»: как выбирать
-        и сочетать летние украшения с образом, слои, материалы, характер.<br/>
-        <strong>В гостях — создатель бренда украшений.</strong>
+        Как украшения создают образ, что отличает качественное изделие
+        и как оно рождается — от идеи и эскиза до готового изделия.<br/>
+        <strong>Специальный гость — создатель бренда летних украшений.</strong>
       </p>
 
       <div class="hero-meta">
@@ -791,13 +831,11 @@
 
       <div class="hero-btns">
         <a href="#register" class="btn-primary">Зарегистрироваться</a>
-        <a href="https://t.me/MilaUshakova_ClubBot" class="btn-outline" target="_blank" rel="noopener">Стать резидентом клуба</a>
-        <a href="https://www.milaushakova.com/color-guide" class="btn-emerald" target="_blank" rel="noopener">Система цветовых сочетаний</a>
       </div>
     </div>
 
     <div class="hero-right">
-      <img src="webinar-jewelry.jpg" alt="Искусство летних акцентов — украшения на образе" />
+      <img src="webinar-jewelry.jpg" alt="Закрытый Fashion эфир — украшения на образе" />
       <div class="photo-overlay"></div>
     </div>
 
@@ -809,120 +847,161 @@
   <div class="container">
 
     <div class="section-head">
-      <div class="section-label">Для кого</div>
+      <div class="section-label">Об эфире</div>
       <div class="gold-line"></div>
-      <h2>Встреча для тех, кто…</h2>
     </div>
 
     <div class="whom-grid">
 
       <div class="whom-card">
         <div class="cnum">01</div>
-        <h3>Любит летние акценты</h3>
-        <p>
-          Украшения, слои, детали — хотите разобраться, как собирать
-          образ вокруг них, а не наоборот.
-        </p>
+        <h3>Как понять качество украшений</h3>
       </div>
 
       <div class="whom-card">
         <div class="cnum">02</div>
-        <h3>Хочет обновить образ без гардероба</h3>
-        <p>
-          Ищете способ освежить летний стиль малым бюджетом —
-          через украшения и детали, а не новые вещи.
-        </p>
+        <h3>Украшение больше, чем на один сезон</h3>
       </div>
 
       <div class="whom-card">
         <div class="cnum">03</div>
-        <h3>Интересуется независимыми брендами</h3>
-        <p>
-          Любопытно, как создаются украшения и что стоит за
-          небольшим авторским брендом изнутри.
-        </p>
+        <h3>Процесс создания украшений от лица мастера и создателя бренда украшений</h3>
+      </div>
+
+      <div class="whom-card">
+        <div class="cnum">04</div>
+        <h3>Как рождается ценность украшения</h3>
+      </div>
+
+      <div class="whom-card">
+        <div class="cnum">05</div>
+        <h3>Как цвет влияет на восприятие изделия</h3>
       </div>
 
     </div>
 
-    <div class="cta-center" style="display:flex; gap:16px; flex-wrap:wrap; justify-content:center;">
-      <a href="#register" class="btn-primary">Зарегистрироваться</a>
-      <a href="https://t.me/MilaUshakova_ClubBot" class="btn-outline" target="_blank" rel="noopener">Стать резидентом клуба</a>
-      <a href="https://www.milaushakova.com/color-guide" class="btn-emerald" target="_blank" rel="noopener">Система цветовых сочетаний</a>
-    </div>
-
-  </div>
-</section>
-
-
-<!-- ПРОГРАММА -->
-<section class="program" id="program">
+<!-- ОТЗЫВЫ -->
+<section class="testimonials" id="testimonials">
   <div class="container">
 
-    <div class="section-head">
-      <div class="section-label">Программа встречи</div>
-      <div class="gold-line"></div>
-      <h2>Что будет на встрече</h2>
+    <div class="testi-head-row">
+      <div class="section-head" style="margin-bottom:0;">
+        <div class="section-label">Отзывы</div>
+        <div class="gold-line"></div>
+        <h2>Такой опыт получают резиденты клуба «В МОЁМ СТИЛЕ»</h2>
+      </div>
+      <div class="testi-nav">
+        <button type="button" aria-label="Назад" onclick="document.getElementById('testiTrack').scrollBy({left:-340,behavior:'smooth'})">←</button>
+        <button type="button" aria-label="Далее" onclick="document.getElementById('testiTrack').scrollBy({left:340,behavior:'smooth'})">→</button>
+      </div>
     </div>
 
-    <ul class="prog-list">
+    <div class="testi-track" id="testiTrack">
 
-      <li class="prog-item">
-        <div class="pn">01</div>
-        <div class="pb">
-          <h3>Как выбирать летние украшения</h3>
-          <p>
-            Материалы, цвет, характер вещи — на что смотреть,
-            чтобы украшение работало на образ, а не спорило с ним.
-          </p>
-        </div>
-      </li>
-
-      <li class="prog-item">
-        <div class="pn">02</div>
-        <div class="pb">
-          <h3>Слои и сочетания</h3>
-          <p>
-            Как носить несколько украшений одновременно —
-            цепочки, подвески, разные фактуры — и не перегрузить образ.
-          </p>
-        </div>
-      </li>
-
-      <li class="prog-item">
-        <div class="pn">03</div>
-        <div class="pb">
-          <h3>Разговор с гостьей вечера</h3>
-          <p>
-            Создатель бренда украшений расскажет о своём деле —
-            от идеи до готового изделия — и ответит на вопросы.
-          </p>
-        </div>
-      </li>
-
-      <li class="prog-item highlight">
-        <div class="pn">04</div>
-        <div class="pb">
-          <h3>День открытых дверей клуба «В МОЁМ СТИЛЕ»</h3>
-          <p>
-            Именно в этот день клубу исполнится ровно две недели с запуска.
-            Покажу, что уже происходит внутри — разборы брендов, стрит-стайл
-            и тренды изнутри — и как присоединиться. Первыми узнаете условия входа.
-          </p>
-          <br/>
-          <div style="display:flex; gap:16px; flex-wrap:wrap;">
-            <a href="#register" class="btn-primary">Зарегистрироваться</a>
-            <a href="https://t.me/MilaUshakova_ClubBot" class="btn-outline" target="_blank" rel="noopener">Стать резидентом клуба</a>
-            <a href="https://www.milaushakova.com/color-guide" class="btn-emerald" target="_blank" rel="noopener">Система цветовых сочетаний</a>
+      <div class="testi-card">
+        <div class="testi-top">
+          <img class="testi-avatar" src="testi/ira.png" alt="Ira S." />
+          <div>
+            <div class="tn">Ira S.</div>
+            <div class="tr">Резидент клуба</div>
           </div>
         </div>
-      </li>
+        <span class="tq">"</span>
+        <p class="tt">Доброе утро! Замечательный канал, очень рада быть частью этого комьюнити. Отличный ритм и очень ценные разборы. Стримы вдохновляют и мотивируют работать над собой. От дополнительных заданий тоже не откажусь!</p>
+      </div>
 
-    </ul>
+      <div class="testi-card">
+        <div class="testi-top">
+          <img class="testi-avatar" src="testi/anna.png" alt="Anna" />
+          <div>
+            <div class="tn">Anna</div>
+            <div class="tr">Резидент клуба</div>
+          </div>
+        </div>
+        <span class="tq">"</span>
+        <p class="tt">Добрый вечер! Замечательный канал, очень рада, что наткнулась на Милу в инстаграм, пересмотрела всё, что было выложено ранее, восторг! Понравились разборы, когда это на примере — ты видишь суть. Благодарю.</p>
+      </div>
 
-  </div>
-</section>
+      <div class="testi-card">
+        <div class="testi-top">
+          <img class="testi-avatar" src="testi/anna.png" alt="Anna" />
+          <div>
+            <div class="tn">Anna</div>
+            <div class="tr">Резидент клуба</div>
+          </div>
+        </div>
+        <span class="tq">"</span>
+        <p class="tt">Мила, спасибо огромное! Очень полезную информацию Вы даёте.</p>
+      </div>
 
+      <div class="testi-card">
+        <div class="testi-top">
+          <img class="testi-avatar" src="testi/daria.png" alt="Daria" />
+          <div>
+            <div class="tn">Daria</div>
+            <div class="tr">Резидент клуба</div>
+          </div>
+        </div>
+        <span class="tq">"</span>
+        <p class="tt">Я в абсолютном восторге, спасибо, Мила! Клуб — концентрация всего, что я люблю: мода, искусство, общение с интересными людьми и новые знания! Ритм абсолютно комфортен — я бы даже не отказалась от дополнительных заданий. В процессе получаю огромное удовольствие и очень искренне безумно рада, что всё-таки решила принять участие! Ещё раз благодарю!</p>
+        <button type="button" class="testi-more" onclick="toggleTesti(this)">Читать полностью</button>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-top">
+          <img class="testi-avatar" src="testi/natalia.png" alt="Natalia Zato" />
+          <div>
+            <div class="tn">Natalia Zato</div>
+            <div class="tr">Резидент клуба</div>
+          </div>
+        </div>
+        <span class="tq">"</span>
+        <p class="tt">Роскошный подкаст, Мила. Ещё раз убедилась, как же здорово моя интуиция направила в какой-то момент меня к вам. Давно изучаю чакры, и очень отозвалось сейчас про камни цвета чакр.</p>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-top">
+          <img class="testi-avatar" src="testi/elena.png" alt="Елена Попова" />
+          <div>
+            <div class="tn">Елена Попова</div>
+            <div class="tr">Резидент клуба</div>
+          </div>
+        </div>
+        <span class="tq">"</span>
+        <p class="tt">Для меня ритм вполне комфортен. Максимально ценны на этой неделе были разбор в пятницу и в среду урок по пропорциям. Искусство, модные дома — как вишенка на торте для расширения кругозора, но не с точки зрения получения очередной порции информации, а для тренировки внимания, видения цвета, деталей, акцентов. Мне очень интересно.</p>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-top">
+          <div class="testi-avatar testi-avatar-fallback">JF</div>
+          <div>
+            <div class="tn">Janna Fey</div>
+            <div class="tr">Резидент клуба</div>
+          </div>
+        </div>
+        <span class="tq">"</span>
+        <p class="tt">Прекрасный подкаст, Мила! Мне давно интересна тема камней в ювелирных украшениях, я очень люблю их красоту и много ношу, часто стилизую.</p>
+      </div>
+
+      <div class="testi-card">
+        <div class="testi-top">
+          <img class="testi-avatar" src="testi/inha.png" alt="Inha Antypova" />
+          <div>
+            <div class="tn">Inha Antypova</div>
+            <div class="tr">Резидент клуба</div>
+          </div>
+        </div>
+        <span class="tq">"</span>
+        <p class="tt">Мила, добрый вечер! Хочу поблагодарить Вас за Ваши знания, за Ваше любопытство, которое привело к этим знаниям, за многогранность и за Ваш стиль подачи. С Вами мир моды — это не просто вещи, названия брендов и имена дизайнеров. Это всё, что нас окружает, всё, что накоплено поколениями, прожито, переосмыслено и в итоге воплощается в каком-то изделии. Для меня мода — один из видов искусства. А одно искусство невозможно без другого: чтобы появился один шедевр, нужны десятки других, из самых разных сфер. Только тогда весь пазл складывается. Искусство, оно же творчество — это и есть жизнь. Творение — сотворение. И огромное Вам спасибо за то, что Вы помогаете разбираться в мире fashion и структурировать знания, подавая материал в связке с разными аспектами творчества. Тогда ты не просто запоминаешь информацию, а действительно начинаешь понимать суть, потому что она становится ясной. Ещё очень люблю Ваш слог и стиль. Мне нравится ритм клуба. Да, из-за работы я часто прохожу материалы с опозданием на день-два, но всегда с нетерпением жду новых занятий. Каждый раз, открывая группу в Telegram, испытываю настоящий трепет: «Так, что же интересного будет сегодня?» Я даже завела отдельную тетрадь и записываю в неё самые важные мысли. Перед покупкой я сомневалась, успею ли заниматься и хватит ли у меня на это сил. В итоге оказалось — и время находится, и силы тоже. И сейчас я понимаю, какая же я молодец, что вступила в клуб! Так что ещё раз огромное Вам спасибо! И как же здорово, что Вы создали клуб «В моём стиле».</p>
+        <button type="button" class="testi-more" onclick="toggleTesti(this)">Читать полностью</button>
+      </div>
+
+    </div>
+
+    <div class="testi-cta">
+      <p>Присоединяйтесь — и это будет ваш опыт уже на следующей неделе.</p>
+      <a href="https://t.me/MilaUshakova_ClubBot" class="btn-outline" target="_blank" rel="noopener">Стать резидентом клуба</a>
+    </div>
 
 <!-- ОБ АВТОРЕ -->
 <section class="about" id="about">
@@ -940,7 +1019,7 @@
 
       <div class="about-content">
 
-        <div class="section-label">Автор программы</div>
+        <div class="section-label">Автор клуба</div>
         <div class="gold-line"></div>
         <h2>Fashion-аналитик,<br/>стилист и журналист</h2>
 
@@ -991,11 +1070,7 @@
 
         </ul>
 
-        <div class="channel-tag">#УТРЕННИЙСМУЗИ</div>
-
-        <br/>
-        <div style="display:flex; gap:16px; flex-wrap:wrap;">
-          <a href="#register" class="btn-primary">Зарегистрироваться</a>
+        <div class="author-btns" style="display:flex; gap:16px; flex-wrap:wrap; justify-content:center;">
           <a href="https://t.me/MilaUshakova_ClubBot" class="btn-outline" target="_blank" rel="noopener">Стать резидентом клуба</a>
           <a href="https://www.milaushakova.com/color-guide" class="btn-emerald" target="_blank" rel="noopener">Система цветовых сочетаний</a>
         </div>
@@ -1013,9 +1088,9 @@
   <div class="container">
     <div class="section-label">Регистрация</div>
     <div class="gold-line" style="margin: 0 auto 28px;"></div>
-    <h2>Займите своё место<br/>на встрече</h2>
+    <h2>Займите своё место<br/>на эфире</h2>
     <p class="reg-sub">
-      Участие бесплатное. После регистрации вы получите ссылку на встречу по смс и на вашу почту.
+      Участие бесплатное. После регистрации вы получите ссылку на эфир по смс и на вашу почту.
     </p>
     <div align="center" id="b1qmf5ii"></div>
   </div>
@@ -1045,6 +1120,14 @@
 
   </div>
 </footer>
+
+<script type="text/javascript">
+  function toggleTesti(btn) {
+    var card = btn.closest('.testi-card');
+    var expanded = card.classList.toggle('expanded');
+    btn.textContent = expanded ? 'Свернуть' : 'Читать полностью';
+  }
+</script>
 
 <script type="text/javascript" src="//static.bizon365.ru/form/form.min.js"></script>
 <script type="text/javascript">

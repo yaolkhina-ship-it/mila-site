@@ -24,6 +24,10 @@
     {
       "src": "fonts/**",
       "use": "@vercel/static"
+    },
+    {
+      "src": "testi/**",
+      "use": "@vercel/static"
     }
   ],
   "headers": [
