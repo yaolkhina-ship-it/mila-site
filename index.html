@@ -6,7 +6,11 @@
 <meta name="description" content="Мила Ушакова — fashion эксперт. Личные консультации, fashion туры, лекции, съёмки и эксклюзивный гайды по цветовым сочетаниям.">
 <meta property="og:title" content="Мила Ушакова | Fashion Expert · Milan-Paris-Moscow">
 <title>Мила Ушакова | Fashion Expert</title>
-<link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  @font-face{font-family:'Tenor Sans';font-style:normal;font-weight:400;font-display:swap;src:url(fonts/tenor-sans.woff2) format('woff2')}
+  @font-face{font-family:'Jost';font-style:normal;font-weight:300 600;font-display:swap;src:url(fonts/jost.woff2) format('woff2')}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 :root{
@@ -18,35 +22,25 @@
 html{scroll-behavior:smooth;}
 body{font-family:'Jost',sans-serif;background:var(--bg);color:var(--ink);overflow-x:hidden;}
 
-/* NAV — всегда поверх всего */
-nav{position:fixed;top:0;left:0;right:0;z-index:9999;display:flex;justify-content:space-between;align-items:center;padding:1.4rem 2.5rem;pointer-events:all;}
-.nav-logo{font-family:'Tenor Sans',sans-serif;font-size:1.2rem;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:var(--ink);text-decoration:none;}
-.nav-pill{display:flex;align-items:center;gap:.1rem;background:rgba(255,255,255,0.95);backdrop-filter:blur(16px);border:1px solid var(--border);border-radius:50px;padding:.4rem .5rem;box-shadow:0 2px 20px rgba(0,0,0,0.08);}
-.nav-pill a{font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-mid);text-decoration:none;padding:.4rem .9rem;border-radius:50px;transition:all .2s;white-space:nowrap;}
-.nav-pill a:hover{color:var(--ink);background:rgba(0,0,0,0.04);}
-.nav-pill .cta{background:var(--ink);color:#fff!important;margin-left:.2rem;}
-.nav-pill .cta:hover{background:var(--gold)!important;color:var(--ink)!important;}
+/* NAV — тонкая, текстовая, как у Тима */
+nav{position:relative;z-index:9999;display:flex;justify-content:space-between;align-items:center;padding:1.6rem 2.5rem;flex-wrap:wrap;gap:.75rem;}
+.nav-logo{font-family:'Tenor Sans',sans-serif;font-size:1.05rem;font-weight:400;letter-spacing:.22em;text-transform:uppercase;color:var(--ink);text-decoration:none;}
+.nav-pill{display:flex;align-items:center;gap:1.8rem;}
+.nav-pill a{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-mid);text-decoration:none;transition:color .2s;white-space:nowrap;}
+.nav-pill a:hover{color:var(--gold);}
+.nav-pill .cta{color:var(--ink);border-bottom:1px solid var(--ink);padding-bottom:2px;}
+.nav-pill .cta:hover{color:var(--gold);border-color:var(--gold);}
 
-/* HERO — орбита */ 
-#hero{height:100vh;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;}
-.hero-bg{position:absolute;inset:0;background:var(--bg);}
-.wm{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);pointer-events:none;user-select:none;text-align:center;z-index:0;}
-.wm span{font-family:'Tenor Sans',sans-serif;font-size:clamp(5rem,16vw,13rem);font-weight:300;line-height:.85;letter-spacing:-.02em;text-transform:uppercase;color:var(--ink);opacity:.025;display:block;}
-.orbit-scene{position:absolute;inset:0;z-index:1;}
-.orbit{position:absolute;left:50%;top:50%;width:0;height:0;}
-.cw{position:absolute;transform:translate(-50%,-50%);cursor:pointer;}
-.cw:hover .card{box-shadow:0 20px 60px rgba(0,0,0,0.15);transform:scale(1.07) rotate(var(--cr))!important;}
-.card{width:120px;height:160px;border-radius:40px;overflow:hidden;position:relative;transition:box-shadow .3s,transform .3s;}
-.card-img{width:168px;height:168px;position:absolute;left:-24px;top:-4px;pointer-events:none;}
-/* Подписи — крупные, всегда читабельные */
-.card-label{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Tenor Sans',sans-serif;font-size:1rem;font-weight:400;letter-spacing:.06em;text-transform:uppercase;color:#fff;text-shadow:0 1px 8px rgba(0,0,0,0.5);text-align:center;line-height:1.2;padding:.5rem;}
-
-/* CORNER */
-.corner{position:absolute;z-index:2;pointer-events:none;}
-.corner-bl{bottom:2rem;left:2.5rem;}
-.corner-br{bottom:2rem;right:2.5rem;text-align:right;}
-.corner p{font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-muted);line-height:2;}
-.corner strong{color:var(--ink);font-weight:500;}
+/* HERO — editorial: заголовок, фото на всю ширину, био */
+.hero-editorial{padding-top:1rem;}
+.hero-title{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(1.8rem,3.4vw,2.6rem);text-align:center;color:var(--ink);letter-spacing:.01em;padding:2.5rem 1.5rem 2.2rem;}
+.hero-title .sep{color:var(--gold);padding:0 .5rem;font-style:italic;}
+.hero-photo{width:100%;max-height:82vh;overflow:hidden;background:var(--bg2);}
+.hero-photo img{width:100%;height:100%;max-height:82vh;object-fit:cover;object-position:50% 20%;display:block;}
+.bio-wrap{max-width:640px;margin:0 auto;padding:3.5rem 2.5rem 4.5rem;text-align:left;}
+.bio-tagline{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:400;font-size:1.35rem;line-height:1.55;color:var(--ink);margin-bottom:1.4rem;}
+.bio-text{font-size:.92rem;line-height:1.9;color:var(--ink-mid);}
+.bio-text+.bio-text{margin-top:1.1rem;}
 
 /* SECTIONS */
 .section{padding:4rem 2.5rem;border-bottom:1px solid var(--border);}
@@ -140,21 +134,25 @@ nav{position:fixed;top:0;left:0;right:0;z-index:9999;display:flex;justify-conten
   <div class="nav-pill">
     <a href="/lectures">Подкасты</a>
     <a href="/color-guide">Гайд</a>
+    <a href="/webinar">Вебинары</a>
     <a href="/contacts">Контакты</a>
-    <a href="/booking" class="cta">записаться </a>
+    <a href="/booking" class="cta">Записаться</a>
   </div>
 </nav>
 
-<!-- HERO — орбита -->
-<section id="hero">
-  <div class="hero-bg"></div>
-  
-<div class="wm"><span>Mila</span><span>Ushakova</span></div>
-  <div class="orbit-scene">
-    <div class="orbit" id="orbit"></div>
+<!-- HERO — editorial -->
+<section class="hero-editorial">
+  <h1 class="hero-title">Мила Ушакова <span class="sep">//</span> Mila Ushakova</h1>
+
+  <div class="hero-photo">
+    <img src="mila-portrait.jpg" alt="Мила Ушакова — стилист и fashion-аналитик">
   </div>
-  
-  
+
+  <div class="bio-wrap">
+    <p class="bio-tagline">Стилист, fashion-аналитик, автор закрытого клуба «В моём стиле».</p>
+    <p class="bio-text">Мила разбирает моду не как набор трендов, а как язык. Аккредитована на крупнейших неделях моды в Милане, Париже и Копенгагене, пишет аналитику о моде и преподаёт — чтобы вы не просто одевались красиво, а понимали, почему это работает.</p>
+    <p class="bio-text">Ведёт закрытый клуб «В моём стиле», проводит персональные консультации и создала систему цветовых сочетаний — практический инструмент для тех, кто хочет собирать образы самостоятельно, без лишних сомнений.</p>
+  </div>
 </section>
 
 <footer class="site-footer">
@@ -170,42 +168,14 @@ nav{position:fixed;top:0;left:0;right:0;z-index:9999;display:flex;justify-conten
     <a class="social-btn" href="https://www.instagram.com/milaushakovva/" target="_blank">
       <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
     </a>
+    <a class="social-btn" href="https://t.me/themorningsmothie" target="_blank">
+      <svg viewBox="0 0 24 24"><path d="M22.05 2.29a1.5 1.5 0 0 0-1.53-.19L1.9 9.72a1.4 1.4 0 0 0 .12 2.63l4.7 1.47 1.8 5.77a1.4 1.4 0 0 0 2.32.56l2.6-2.4 4.6 3.4a1.5 1.5 0 0 0 2.37-.9l3.1-16.6a1.5 1.5 0 0 0-.46-1.36zM8.53 13.6l-.6-.19-4.06-1.27 14.4-6.4-9.74 7.86zm1.55 5.24-1.02-3.27 8.32-7.5-7.3 10.77z"/></svg>
+    </a>
     <a class="social-btn" href="mailto:hello@milaushakova.com">
       <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
     </a>
   </div>
 </footer>
 
-
-
-<script>
-var DATA=[
-  {label:'Подкасты',url:'/lectures',bg:'linear-gradient(135deg,#ddd5c8 0%,#b89a72 50%,#cec0a8 100%)'},
-  {label:'Гайд',url:'/color-guide',bg:'linear-gradient(135deg,#ede7df 0%,#c4a882 50%,#e0d4c0 100%)'},
-  {label:'Контакты',url:'/contacts',bg:'linear-gradient(135deg,#e4ddd5 0%,#a89070 45%,#d6cabb 100%)'},
-  {label:'записаться ',url:'/booking',bg:'linear-gradient(135deg,#e8dfd4 0%,#c9a96e 50%,#d4b896 100%)'}
-];
-var POSITIONS=[
-  {left:'15%',top:'18%',w:150,h:190,deg:-8},
-  {left:'58%',top:'12%',w:130,h:170,deg:6},
-  {left:'22%',top:'55%',w:140,h:180,deg:4},
-  {left:'60%',top:'52%',w:155,h:195,deg:-5}
-];
-var hero=document.getElementById('hero');
-DATA.forEach(function(d,i){
-  var p=POSITIONS[i];
-  var card=document.createElement('div');
-  card.style.cssText='position:absolute;left:'+p.left+';top:'+p.top+';width:'+p.w+'px;height:'+p.h+'px;border-radius:32px;background:'+d.bg+';cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;transform:translateY(24px) rotate('+p.deg+'deg);transition:opacity .6s ease,transform .6s ease,box-shadow .3s;box-shadow:0 4px 24px rgba(0,0,0,0.07);';
-  var lbl=document.createElement('div');
-  lbl.textContent=d.label;
-  lbl.style.cssText='font-family:"Tenor Sans",sans-serif;font-size:.85rem;letter-spacing:.16em;text-transform:uppercase;color:#fff;text-shadow:0 1px 6px rgba(0,0,0,0.3);text-align:center;';
-  card.appendChild(lbl);
-  card.addEventListener('mouseenter',function(){this.style.boxShadow='0 12px 40px rgba(0,0,0,0.15)';this.style.transform='translateY(-4px) rotate('+p.deg+'deg)';});
-  card.addEventListener('mouseleave',function(){this.style.boxShadow='0 4px 24px rgba(0,0,0,0.07)';this.style.transform='translateY(0) rotate('+p.deg+'deg)';});
-  card.addEventListener('click',function(){location.href=d.url;});
-  hero.appendChild(card);
-  setTimeout(function(){card.style.opacity='1';card.style.transform='translateY(0) rotate('+p.deg+'deg)';},200+i*150);
-});
-</script>
 </body>
 </html>
