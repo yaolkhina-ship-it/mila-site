@@ -28,6 +28,10 @@
     {
       "src": "testi/**",
       "use": "@vercel/static"
+    },
+    {
+      "src": "pilot-email/**",
+      "use": "@vercel/static"
     }
   ],
   "headers": [
