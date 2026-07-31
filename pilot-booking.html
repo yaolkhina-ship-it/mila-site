@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Записаться на созвон — Управление впечатлением | Мила Ушакова</title>
+<meta name="description" content="Закрытый пилотный проект «Управление впечатлением». Запишитесь на звонок — выберите удобный слот.">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:Georgia,'Times New Roman',serif;background:#0A0A0A;color:#F2F2F2;}
+
+nav{display:flex;justify-content:center;padding:2.4rem 1.5rem 1.6rem;}
+.nav-logo{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:300;font-size:.7rem;letter-spacing:.35em;text-transform:uppercase;color:#8C8C8C;text-decoration:none;}
+
+.wrap{max-width:760px;margin:0 auto;padding:0 1.4rem 5rem;}
+
+.card{background:#111111;border:1px solid #262626;}
+
+.hero{padding:3rem 2.6rem 2.2rem;}
+.eyebrow{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:300;font-size:.62rem;letter-spacing:.25em;text-transform:uppercase;color:#8C8C8C;margin-bottom:1.5rem;display:block;}
+.hero-title{font-family:Didot,'Bodoni MT',Georgia,'Times New Roman',serif;font-style:italic;font-weight:400;font-size:clamp(1.9rem,5vw,2.5rem);line-height:1.2;color:#F2F2F2;margin-bottom:1.1rem;}
+.hero-sub{font-size:.98rem;line-height:1.75;color:#CFCFCF;margin-bottom:1rem;max-width:520px;}
+.hero-sub:last-child{margin-bottom:0;}
+
+.divider{border-top:1px solid #262626;}
+
+.slots-section{padding:2.4rem 2.6rem;}
+.section-label{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:300;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:#8C8C8C;margin-bottom:1.4rem;}
+
+/* week tabs */
+.week-tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.2rem;}
+.week-btn{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:300;font-size:.68rem;letter-spacing:.05em;padding:.45rem 1rem;border:1px solid #333333;background:transparent;color:#8C8C8C;cursor:pointer;transition:all .15s;}
+.week-btn:hover{border-color:#666;}
+.week-btn.active{background:#F2F2F2;color:#0A0A0A;border-color:#F2F2F2;}
+
+/* filter row */
+.filter-row{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;margin-bottom:1.6rem;}
+.filter-label{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:300;font-size:.68rem;color:#5A5A5A;}
+.filter-btn{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:300;font-size:.66rem;letter-spacing:.04em;padding:.4rem .85rem;border:1px solid #333333;background:transparent;color:#8C8C8C;cursor:pointer;transition:all .15s;}
+.filter-btn:hover{border-color:#666;}
+.filter-btn.active{background:#F2F2F2;color:#0A0A0A;border-color:#F2F2F2;}
+
+.legend{display:flex;gap:1.4rem;align-items:center;margin-bottom:1.6rem;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:.68rem;color:#8C8C8C;flex-wrap:wrap;}
+.leg-item{display:flex;align-items:center;gap:.5rem;}
+.leg-swatch{width:14px;height:14px;border:1px solid #8C8C8C;font-size:.55rem;display:flex;align-items:center;justify-content:center;font-family:'Helvetica Neue',sans-serif;color:#F2F2F2;}
+.leg-swatch.b{background:#F2F2F2;color:#0A0A0A;border-color:#F2F2F2;}
+
+/* slot grid */
+.slot-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.7rem;}
+.day-col{border:1px solid #262626;}
+.day-header{padding:.7rem .9rem;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:400;font-size:.72rem;color:#F2F2F2;border-bottom:1px solid #262626;display:flex;align-items:center;justify-content:space-between;gap:.4rem;}
+.day-badge{font-family:'Helvetica Neue',sans-serif;font-size:.6rem;letter-spacing:.05em;padding:.15rem .45rem;border:1px solid #444;color:#8C8C8C;}
+.day-badge.grpB{background:#F2F2F2;color:#0A0A0A;border-color:#F2F2F2;}
+.slot-btn{width:100%;text-align:left;padding:.6rem .9rem;font-family:Georgia,serif;font-size:.82rem;color:#CFCFCF;background:transparent;border:0;border-bottom:1px solid #262626;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:.5rem;transition:background .15s;}
+.slot-btn:last-child{border-bottom:0;}
+.slot-btn:hover{background:#1a1a1a;}
+.slot-btn.selected{background:#F2F2F2;color:#0A0A0A;}
+.slot-btn.selected .slot-mini{color:#0A0A0A;opacity:.6;}
+.slot-mini{font-family:'Helvetica Neue',sans-serif;font-size:.58rem;color:#5A5A5A;}
+.empty-msg{grid-column:1/-1;padding:1.4rem;font-family:'Helvetica Neue',sans-serif;font-size:.78rem;color:#5A5A5A;text-align:center;border:1px dashed #333;}
+
+.selected-line{margin-top:1.4rem;font-family:Georgia,serif;font-style:italic;font-size:.9rem;color:#F2F2F2;min-height:1.4em;}
+.selected-line .lbl{font-family:'Helvetica Neue',sans-serif;font-style:normal;font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:#8C8C8C;display:block;margin-bottom:.35rem;}
+
+.form-section{padding:0 2.6rem 3rem;}
+.form-fields{display:flex;flex-direction:column;gap:1.1rem;margin-top:1.6rem;}
+.field-lbl{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:300;font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:#8C8C8C;display:block;margin-bottom:.5rem;}
+.field-input{width:100%;background:#0A0A0A;border:1px solid #333333;color:#F2F2F2;padding:.85rem 1rem;font-family:Georgia,serif;font-size:.92rem;outline:none;transition:border-color .2s;}
+.field-input:focus{border-color:#8C8C8C;}
+.field-input::placeholder{color:#5A5A5A;}
+
+.btn-light{width:100%;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:400;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;background:#F2F2F2;color:#0A0A0A;border:none;padding:1.1rem 1.5rem;cursor:pointer;margin-top:.4rem;}
+.btn-light:hover{background:#CFCFCF;}
+.btn-light:disabled{opacity:.5;cursor:default;}
+
+.hint{font-family:Georgia,serif;font-style:italic;font-size:.8rem;color:#8C8C8C;margin-top:.9rem;text-align:center;}
+.success-msg{display:none;font-family:Georgia,serif;font-style:italic;font-size:.85rem;color:#F2F2F2;margin-top:1.2rem;text-align:center;line-height:1.6;}
+
+footer{text-align:center;padding:2.2rem 1.5rem 0;}
+.footer-line{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:300;font-size:.68rem;color:#5A5A5A;line-height:1.8;}
+footer a{color:#8C8C8C;text-decoration:none;}
+
+@media(max-width:600px){.hero{padding:2.4rem 1.6rem 1.8rem;}.slots-section,.form-section{padding-left:1.6rem;padding-right:1.6rem;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">Mila Ushakova</a>
+</nav>
+
+<div class="wrap">
+  <div class="card">
+
+    <div class="hero">
+      <span class="eyebrow">Закрытый пилотный проект</span>
+      <h1 class="hero-title">Управление впечатлением</h1>
+      <p class="hero-sub">Ищу 6 человек, с кем пройду это лично, один на один, до официального запуска программы.</p>
+      <p class="hero-sub">Выберите удобное время для короткого звонка (90 минут) — обсудим, подходит ли вам формат, и отвечу на вопросы.</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <form id="pilotForm">
+      <div class="slots-section">
+        <div class="section-label">Выберите время звонка · мск</div>
+
+        <div class="week-tabs" id="weekTabs"></div>
+
+        <div class="filter-row">
+          <span class="filter-label">Показать:</span>
+          <button type="button" class="filter-btn active" id="btnAll" onclick="setFilter('all')">Все</button>
+          <button type="button" class="filter-btn" id="btnEven" onclick="setFilter('even')">Группа А</button>
+          <button type="button" class="filter-btn" id="btnOdd" onclick="setFilter('odd')">Группа Б</button>
+        </div>
+
+        <div class="legend">
+          <div class="leg-item"><span class="leg-swatch">А</span> чётное число месяца</div>
+          <div class="leg-item"><span class="leg-swatch b">Б</span> нечётное число месяца</div>
+        </div>
+
+        <div class="slot-grid" id="slotGrid"></div>
+
+        <div class="selected-line" id="selectedLine"></div>
+        <input type="hidden" name="slot" id="slotInput" required>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="form-section">
+        <div class="section-label" style="margin-top:1.6rem;">Ваши контакты</div>
+        <div class="form-fields">
+          <div>
+            <label class="field-lbl">Имя</label>
+            <input name="name" type="text" placeholder="Как к вам обращаться" class="field-input" required>
+          </div>
+          <div>
+            <label class="field-lbl">Email</label>
+            <input name="email" type="email" placeholder="email@example.com" class="field-input" required>
+          </div>
+          <div>
+            <label class="field-lbl">Telegram</label>
+            <input name="telegram" type="text" placeholder="@username" class="field-input">
+          </div>
+          <button type="submit" class="btn-light" id="submitBtn">Записаться на звонок</button>
+          <div class="hint">Подтверждение времени пришлём лично в течение суток</div>
+          <div class="success-msg" id="successMsg">✓ Заявка отправлена. Мы свяжемся с вами, чтобы подтвердить звонок.</div>
+        </div>
+      </div>
+    </form>
+
+  </div>
+
+  <footer>
+    <div class="footer-line">Вопросы — пишите лично <a href="https://t.me/milaushakovva">@milaushakovva</a><br>
+    <a href="mailto:yaolkhina@gmail.com">yaolkhina@gmail.com</a></div>
+  </footer>
+</div>
+
+<script>
+const DURATION = 90;
+const DAYS = [
+  { name: 'Вторник', dow: 2, start: '15:00', end: '20:00' },
+  { name: 'Среда',   dow: 3, start: '11:00', end: '17:00' },
+  { name: 'Четверг', dow: 4, start: '14:00', end: '19:00' },
+  { name: 'Пятница', dow: 5, start: '12:00', end: '17:00' },
+];
+
+function toMin(t) { const [h,m] = t.split(':').map(Number); return h*60+m; }
+function toStr(m) { return String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0'); }
+
+function getSlots(start, end) {
+  const s = toMin(start), e = toMin(end);
+  const slots = [];
+  for (let t = s; t + DURATION <= e; t += DURATION) slots.push({from: toStr(t), to: toStr(t+DURATION)});
+  return slots;
+}
+
+function getWeeks(n=4) {
+  const today = new Date();
+  const weeks = [];
+  for (let w = 0; w < n; w++) {
+    const week = [];
+    for (const day of DAYS) {
+      const d = new Date(today);
+      let diff = day.dow - d.getDay();
+      if (diff <= 0) diff += 7;
+      if (w > 0) diff += w * 7;
+      else if (diff === 0 && w === 0) diff = 7;
+      d.setDate(d.getDate() + diff);
+      week.push({ ...day, date: new Date(d) });
+    }
+    weeks.push(week);
+  }
+  return weeks;
+}
+
+const weeks = getWeeks(4);
+let currentWeek = 0;
+let currentFilter = 'all';
+let selectedSlotValue = '';
+
+function isEven(date) { return date.getDate() % 2 === 0; }
+function fmt(d) { return d.getDate() + '.' + String(d.getMonth()+1).padStart(2,'0'); }
+
+function renderWeekTabs() {
+  const el = document.getElementById('weekTabs');
+  el.innerHTML = weeks.map((week, i) => {
+    const first = week[0].date, last = week[week.length-1].date;
+    return `<button type="button" class="week-btn ${i===currentWeek?'active':''}" onclick="selectWeek(${i})">${fmt(first)} – ${fmt(last)}</button>`;
+  }).join('');
+}
+
+function selectSlot(value, btn) {
+  document.querySelectorAll('.slot-btn.selected').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  selectedSlotValue = value;
+  document.getElementById('slotInput').value = value;
+  document.getElementById('selectedLine').innerHTML = '<span class="lbl">Выбрано</span>' + value;
+}
+
+function renderGrid() {
+  const grid = document.getElementById('slotGrid');
+  const week = weeks[currentWeek];
+
+  const cols = week.map(dayData => {
+    const slots = getSlots(dayData.start, dayData.end);
+    const parity = isEven(dayData.date) ? 'even' : 'odd';
+    const grp = isEven(dayData.date) ? 'А' : 'Б';
+
+    if (currentFilter !== 'all' && currentFilter !== parity) return '';
+
+    const dateStr = fmt(dayData.date);
+    const dayLabel = `${dayData.name}, ${dateStr}`;
+
+    return `<div class="day-col">
+      <div class="day-header">
+        <span>${dayLabel}</span>
+        <span class="day-badge ${grp==='Б'?'grpB':''}">${grp}</span>
+      </div>
+      ${slots.map(s => {
+        const value = `${dayLabel}, ${s.from}–${s.to} мск (гр. ${grp})`;
+        return `<button type="button" class="slot-btn" onclick="selectSlot(${JSON.stringify(value)}, this)">
+          <span>${s.from} – ${s.to}</span><span class="slot-mini">гр. ${grp}</span>
+        </button>`;
+      }).join('')}
+    </div>`;
+  }).join('');
+
+  grid.innerHTML = cols || `<div class="empty-msg">Нет слотов для выбранного фильтра</div>`;
+}
+
+function selectWeek(i) { currentWeek = i; renderWeekTabs(); renderGrid(); }
+function setFilter(f) {
+  currentFilter = f;
+  document.getElementById('btnAll').className = 'filter-btn' + (f==='all'?' active':'');
+  document.getElementById('btnEven').className = 'filter-btn' + (f==='even'?' active':'');
+  document.getElementById('btnOdd').className = 'filter-btn' + (f==='odd'?' active':'');
+  renderGrid();
+}
+
+renderWeekTabs();
+renderGrid();
+
+document.getElementById('pilotForm').addEventListener('submit', async function(e){
+  e.preventDefault();
+  if (!selectedSlotValue) {
+    document.getElementById('selectedLine').innerHTML = '<span class="lbl" style="color:#CFCFCF;">Пожалуйста, выберите время звонка выше</span>';
+    return;
+  }
+  var btn = document.getElementById('submitBtn');
+  btn.textContent = 'Отправляем...';
+  btn.disabled = true;
+  var data = new FormData(this);
+  try{
+    var res = await fetch('https://formspree.io/f/mrevklaz', {method:'POST', body:data, headers:{Accept:'application/json'}});
+    if(res.ok){
+      document.getElementById('successMsg').style.display = 'block';
+      this.reset();
+      document.getElementById('selectedLine').innerHTML = '';
+      document.querySelectorAll('.slot-btn.selected').forEach(b => b.classList.remove('selected'));
+      selectedSlotValue = '';
+      btn.textContent = 'Отправлено ✓';
+    } else {
+      btn.textContent = 'Ошибка — попробуйте снова';
+      btn.disabled = false;
+    }
+  } catch(err){
+    btn.textContent = 'Ошибка — попробуйте снова';
+    btn.disabled = false;
+  }
+});
+</script>
+
+</body>
+</html>
