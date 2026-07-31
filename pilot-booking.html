@@ -34,30 +34,14 @@ nav{display:flex;justify-content:center;padding:2.4rem 1.5rem 1.6rem;}
 .week-btn:hover{border-color:#666;}
 .week-btn.active{background:#F2F2F2;color:#0A0A0A;border-color:#F2F2F2;}
 
-/* filter row */
-.filter-row{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;margin-bottom:1.6rem;}
-.filter-label{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:300;font-size:.68rem;color:#5A5A5A;}
-.filter-btn{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:300;font-size:.66rem;letter-spacing:.04em;padding:.4rem .85rem;border:1px solid #333333;background:transparent;color:#8C8C8C;cursor:pointer;transition:all .15s;}
-.filter-btn:hover{border-color:#666;}
-.filter-btn.active{background:#F2F2F2;color:#0A0A0A;border-color:#F2F2F2;}
-
-.legend{display:flex;gap:1.4rem;align-items:center;margin-bottom:1.6rem;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:.68rem;color:#8C8C8C;flex-wrap:wrap;}
-.leg-item{display:flex;align-items:center;gap:.5rem;}
-.leg-swatch{width:14px;height:14px;border:1px solid #8C8C8C;font-size:.55rem;display:flex;align-items:center;justify-content:center;font-family:'Helvetica Neue',sans-serif;color:#F2F2F2;}
-.leg-swatch.b{background:#F2F2F2;color:#0A0A0A;border-color:#F2F2F2;}
-
 /* slot grid */
 .slot-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.7rem;}
 .day-col{border:1px solid #262626;}
-.day-header{padding:.7rem .9rem;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:400;font-size:.72rem;color:#F2F2F2;border-bottom:1px solid #262626;display:flex;align-items:center;justify-content:space-between;gap:.4rem;}
-.day-badge{font-family:'Helvetica Neue',sans-serif;font-size:.6rem;letter-spacing:.05em;padding:.15rem .45rem;border:1px solid #444;color:#8C8C8C;}
-.day-badge.grpB{background:#F2F2F2;color:#0A0A0A;border-color:#F2F2F2;}
+.day-header{padding:.7rem .9rem;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-weight:400;font-size:.72rem;color:#F2F2F2;border-bottom:1px solid #262626;}
 .slot-btn{width:100%;text-align:left;padding:.6rem .9rem;font-family:Georgia,serif;font-size:.82rem;color:#CFCFCF;background:transparent;border:0;border-bottom:1px solid #262626;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:.5rem;transition:background .15s;}
 .slot-btn:last-child{border-bottom:0;}
 .slot-btn:hover{background:#1a1a1a;}
 .slot-btn.selected{background:#F2F2F2;color:#0A0A0A;}
-.slot-btn.selected .slot-mini{color:#0A0A0A;opacity:.6;}
-.slot-mini{font-family:'Helvetica Neue',sans-serif;font-size:.58rem;color:#5A5A5A;}
 .empty-msg{grid-column:1/-1;padding:1.4rem;font-family:'Helvetica Neue',sans-serif;font-size:.78rem;color:#5A5A5A;text-align:center;border:1px dashed #333;}
 
 .selected-line{margin-top:1.4rem;font-family:Georgia,serif;font-style:italic;font-size:.9rem;color:#F2F2F2;min-height:1.4em;}
@@ -107,18 +91,6 @@ footer a{color:#8C8C8C;text-decoration:none;}
         <div class="section-label">Выберите время звонка · мск</div>
 
         <div class="week-tabs" id="weekTabs"></div>
-
-        <div class="filter-row">
-          <span class="filter-label">Показать:</span>
-          <button type="button" class="filter-btn active" id="btnAll" onclick="setFilter('all')">Все</button>
-          <button type="button" class="filter-btn" id="btnEven" onclick="setFilter('even')">Группа А</button>
-          <button type="button" class="filter-btn" id="btnOdd" onclick="setFilter('odd')">Группа Б</button>
-        </div>
-
-        <div class="legend">
-          <div class="leg-item"><span class="leg-swatch">А</span> чётное число месяца</div>
-          <div class="leg-item"><span class="leg-swatch b">Б</span> нечётное число месяца</div>
-        </div>
 
         <div class="slot-grid" id="slotGrid"></div>
 
@@ -198,10 +170,8 @@ function getWeeks(n=4) {
 
 const weeks = getWeeks(4);
 let currentWeek = 0;
-let currentFilter = 'all';
 let selectedSlotValue = '';
 
-function isEven(date) { return date.getDate() % 2 === 0; }
 function fmt(d) { return d.getDate() + '.' + String(d.getMonth()+1).padStart(2,'0'); }
 
 function renderWeekTabs() {
@@ -226,10 +196,6 @@ function renderGrid() {
 
   const cols = week.map(dayData => {
     const slots = getSlots(dayData.start, dayData.end);
-    const parity = isEven(dayData.date) ? 'even' : 'odd';
-    const grp = isEven(dayData.date) ? 'А' : 'Б';
-
-    if (currentFilter !== 'all' && currentFilter !== parity) return '';
 
     const dateStr = fmt(dayData.date);
     const dayLabel = `${dayData.name}, ${dateStr}`;
@@ -237,28 +203,20 @@ function renderGrid() {
     return `<div class="day-col">
       <div class="day-header">
         <span>${dayLabel}</span>
-        <span class="day-badge ${grp==='Б'?'grpB':''}">${grp}</span>
       </div>
       ${slots.map(s => {
-        const value = `${dayLabel}, ${s.from}–${s.to} мск (гр. ${grp})`;
+        const value = `${dayLabel}, ${s.from}–${s.to} мск`;
         return `<button type="button" class="slot-btn" onclick="selectSlot(${JSON.stringify(value)}, this)">
-          <span>${s.from} – ${s.to}</span><span class="slot-mini">гр. ${grp}</span>
+          <span>${s.from} – ${s.to}</span>
         </button>`;
       }).join('')}
     </div>`;
   }).join('');
 
-  grid.innerHTML = cols || `<div class="empty-msg">Нет слотов для выбранного фильтра</div>`;
+  grid.innerHTML = cols || `<div class="empty-msg">Нет доступных слотов</div>`;
 }
 
 function selectWeek(i) { currentWeek = i; renderWeekTabs(); renderGrid(); }
-function setFilter(f) {
-  currentFilter = f;
-  document.getElementById('btnAll').className = 'filter-btn' + (f==='all'?' active':'');
-  document.getElementById('btnEven').className = 'filter-btn' + (f==='even'?' active':'');
-  document.getElementById('btnOdd').className = 'filter-btn' + (f==='odd'?' active':'');
-  renderGrid();
-}
 
 renderWeekTabs();
 renderGrid();
@@ -274,7 +232,7 @@ document.getElementById('pilotForm').addEventListener('submit', async function(e
   btn.disabled = true;
   var data = new FormData(this);
   try{
-    var res = await fetch('https://formspree.io/f/mrevklaz', {method:'POST', body:data, headers:{Accept:'application/json'}});
+    var res = await fetch('https://formspree.io/yaolkhina@gmail.com', {method:'POST', body:data, headers:{Accept:'application/json'}});
     if(res.ok){
       document.getElementById('successMsg').style.display = 'block';
       this.reset();
