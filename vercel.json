@@ -32,6 +32,10 @@
     {
       "src": "pilot-email/**",
       "use": "@vercel/static"
+    },
+    {
+      "src": "club-email/**",
+      "use": "@vercel/static"
     }
   ],
   "headers": [
