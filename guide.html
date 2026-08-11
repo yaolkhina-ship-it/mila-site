@@ -45,7 +45,7 @@ body{font-family:'Jost',sans-serif;background:var(--plum);color:#fff;overflow-x:
 
 /* ══ PAGE 1 ══ */
 #page1{position:relative;overflow:hidden;}
-.hero-bg{position:absolute;inset:0;background-color:#4a2c1a;background-image:url('/guide/hero-bg-texture.jpg');background-size:cover;background-position:center 17%;z-index:0;}
+.hero-bg{position:absolute;inset:0;background-color:#4a2c1a;z-index:0;}
 .hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(42,24,12,0.12) 0%,rgba(42,24,12,0.18) 45%,rgba(42,24,12,0.55) 78%,rgba(42,24,12,0.8) 100%);}
 .hero-content{position:relative;z-index:2;flex:1;display:flex;flex-direction:column;justify-content:space-between;align-items:center;text-align:center;padding:56px 32px 52px;width:100%;}
 .hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(56px,11vw,110px);font-weight:300;line-height:0.92;text-transform:uppercase;color:#fff;letter-spacing:0.02em;text-shadow:0 2px 20px rgba(20,10,5,0.55),0 1px 4px rgba(20,10,5,0.6);}
