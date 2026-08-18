@@ -173,41 +173,59 @@ body{background:#0D1A1E;height:100%;}
 .ct{font-size:10px;letter-spacing:.1em;color:var(--deep);text-transform:uppercase;margin-bottom:8px;font-family:var(--f);}
 .cd{font-size:12px;color:var(--mut);line-height:1.6;font-style:italic;font-family:var(--f);}
 
-/* PALETTE FULL PAGES */
+/* PALETTE FULL PAGES — full-bleed image, no frame, no footer */
 .pal-pg {
   min-height: 100svh;
-  background: #ffffff;
+  position: relative;
+  overflow: hidden;
+  background: #000;
 }
-.pal-pg .ft{background:#ffffff;border-top-color:rgba(201,169,110,0.15);}
+.pal-pg .ft{display:none;}
 .pal-pg .in {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  min-height: 0;
+  position: absolute;
+  inset: 0;
+  display: block;
+  padding: 0;
 }
 .pal-full-wrap {
-  flex: 1;
-  min-height: 0;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  position: absolute;
+  inset: 0;
 }
 .pal-full-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
   display: block;
 }
 .pal-pg-nav {
-  padding: 8px 0 2px;
+  position: absolute;
+  bottom: 18px;
+  left: 0;
+  right: 0;
   text-align: center;
-  flex-shrink: 0;
+  z-index: 2;
 }
 .pal-pg-counter {
   font-size: 10px;
-  color: var(--mut);
+  color: #fff;
   letter-spacing: 0.12em;
+  font-family: var(--f);
+  background: rgba(0,0,0,0.35);
+  padding: 5px 14px;
+  border-radius: 20px;
+}
+.pal-pg-label {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  right: 18px;
+  z-index: 2;
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #fff;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.6);
   font-family: var(--f);
 }
 
@@ -453,10 +471,7 @@ body{background:#0D1A1E;height:100%;}
 
   <!-- ПАЛИТРА 1 -->
   <div class="pg pal-pg" id="p_pal_0">
-    <div class="in" style="padding-top:24px;padding-bottom:14px;display:flex;flex-direction:column;">
-      <div class="lbl">раздел 04</div>
-      <div class="h1" style="margin-bottom:12px;">Цветовые сочетания</div>
-      <p style="font-size:11px;color:var(--mut);margin-bottom:14px;line-height:1.6;font-family:var(--f);">37 палитр — листайте вниз</p>
+    <div class="in">
       <div class="pal-full-wrap">
         <img class="pal-full-img" src="/guide/palitry/01.jpg">
       </div>
@@ -484,7 +499,7 @@ body{background:#0D1A1E;height:100%;}
 
   <!-- ПАЛИТРА 2 -->
   <div class="pg pal-pg" id="p_pal_1">
-    <div class="in" style="padding-top:16px;padding-bottom:14px;display:flex;flex-direction:column;">
+    <div class="in">
 
       <div class="pal-full-wrap">
         <img class="pal-full-img" src="/guide/palitry/02.jpg">
@@ -513,7 +528,7 @@ body{background:#0D1A1E;height:100%;}
 
   <!-- ПАЛИТРА 3 -->
   <div class="pg pal-pg" id="p_pal_2">
-    <div class="in" style="padding-top:16px;padding-bottom:14px;display:flex;flex-direction:column;">
+    <div class="in">
 
       <div class="pal-full-wrap">
         <img class="pal-full-img" src="/guide/palitry/03.jpg">
@@ -542,7 +557,7 @@ body{background:#0D1A1E;height:100%;}
 
   <!-- ПАЛИТРА 4 -->
   <div class="pg pal-pg" id="p_pal_3">
-    <div class="in" style="padding-top:16px;padding-bottom:14px;display:flex;flex-direction:column;">
+    <div class="in">
 
       <div class="pal-full-wrap">
         <img class="pal-full-img" src="/guide/palitry/04.jpg">
@@ -571,7 +586,7 @@ body{background:#0D1A1E;height:100%;}
 
   <!-- ПАЛИТРА 5 -->
   <div class="pg pal-pg" id="p_pal_4">
-    <div class="in" style="padding-top:16px;padding-bottom:14px;display:flex;flex-direction:column;">
+    <div class="in">
 
       <div class="pal-full-wrap">
         <img class="pal-full-img" src="/guide/palitry/05.jpg">
@@ -600,7 +615,7 @@ body{background:#0D1A1E;height:100%;}
 
   <!-- ПАЛИТРА 6 -->
   <div class="pg pal-pg" id="p_pal_5">
-    <div class="in" style="padding-top:16px;padding-bottom:14px;display:flex;flex-direction:column;">
+    <div class="in">
 
       <div class="pal-full-wrap">
         <img class="pal-full-img" src="/guide/palitry/06.jpg">
@@ -629,7 +644,7 @@ body{background:#0D1A1E;height:100%;}
 
   <!-- ПАЛИТРА 7 -->
   <div class="pg pal-pg" id="p_pal_6">
-    <div class="in" style="padding-top:16px;padding-bottom:14px;display:flex;flex-direction:column;">
+    <div class="in">
 
       <div class="pal-full-wrap">
         <img class="pal-full-img" src="/guide/palitry/07.jpg">
@@ -658,7 +673,7 @@ body{background:#0D1A1E;height:100%;}
 
   <!-- ПАЛИТРА 8 -->
   <div class="pg pal-pg" id="p_pal_7">
-    <div class="in" style="padding-top:16px;padding-bottom:14px;display:flex;flex-direction:column;">
+    <div class="in">
 
       <div class="pal-full-wrap">
         <img class="pal-full-img" src="/guide/palitry/08.jpg">
@@ -687,7 +702,7 @@ body{background:#0D1A1E;height:100%;}
 
   <!-- ПАЛИТРА 9 -->
   <div class="pg pal-pg" id="p_pal_8">
-    <div class="in" style="padding-top:16px;padding-bottom:14px;display:flex;flex-direction:column;">
+    <div class="in">
 
       <div class="pal-full-wrap">
         <img class="pal-full-img" src="/guide/palitry/09.jpg">
@@ -716,7 +731,7 @@ body{background:#0D1A1E;height:100%;}
 
   <!-- ПАЛИТРА 10 -->
   <div class="pg pal-pg" id="p_pal_9">
-    <div class="in" style="padding-top:16px;padding-bottom:14px;display:flex;flex-direction:column;">
+    <div class="in">
 
       <div class="pal-full-wrap">
         <img class="pal-full-img" src="/guide/palitry/10.jpg">
@@ -745,7 +760,7 @@ body{background:#0D1A1E;height:100%;}
 
   <!-- ПАЛИТРА 11 -->
   <div class="pg pal-pg" id="p_pal_10">
-    <div class="in" style="padding-top:16px;padding-bottom:14px;display:flex;flex-direction:column;">
+    <div class="in">
 
       <div class="pal-full-wrap">
         <img class="pal-full-img" src="/guide/palitry/11.jpg">
@@ -774,7 +789,7 @@ body{background:#0D1A1E;height:100%;}
 
   <!-- ПАЛИТРА 12 -->
   <div class="pg pal-pg" id="p_pal_11">
-    <div class="in" style="padding-top:16px;padding-bottom:14px;display:flex;flex-direction:column;">
+    <div class="in">
 
       <div class="pal-full-wrap">
         <img class="pal-full-img" src="/guide/palitry/12.jpg">
@@ -815,7 +830,7 @@ body{background:#0D1A1E;height:100%;}
 
   <!-- ПАЛИТРА 17 -->
   <div class="pg pal-pg" id="p_pal_16">
-    <div class="in" style="padding-top:16px;padding-bottom:14px;display:flex;flex-direction:column;">
+    <div class="in">
 
       <div class="pal-full-wrap">
         <img class="pal-full-img" src="/guide/palitry/13.jpg">
@@ -844,7 +859,7 @@ body{background:#0D1A1E;height:100%;}
 
   <!-- ПАЛИТРА 18 -->
   <div class="pg pal-pg" id="p_pal_17">
-    <div class="in" style="padding-top:16px;padding-bottom:14px;display:flex;flex-direction:column;">
+    <div class="in">
 
       <div class="pal-full-wrap">
         <img class="pal-full-img" src="/guide/palitry/14.jpg">
@@ -873,7 +888,7 @@ body{background:#0D1A1E;height:100%;}
 
   <!-- ПАЛИТРА 19 -->
   <div class="pg pal-pg" id="p_pal_18">
-    <div class="in" style="padding-top:16px;padding-bottom:14px;display:flex;flex-direction:column;">
+    <div class="in">
 
       <div class="pal-full-wrap">
         <img class="pal-full-img" src="/guide/palitry/15.jpg">
@@ -902,7 +917,7 @@ body{background:#0D1A1E;height:100%;}
 
   <!-- ПАЛИТРА 20 -->
   <div class="pg pal-pg" id="p_pal_19">
-    <div class="in" style="padding-top:16px;padding-bottom:14px;display:flex;flex-direction:column;">
+    <div class="in">
 
       <div class="pal-full-wrap">
         <img class="pal-full-img" src="/guide/palitry/16.jpg">
@@ -931,7 +946,7 @@ body{background:#0D1A1E;height:100%;}
 
   <!-- ПАЛИТРА 21 -->
   <div class="pg pal-pg" id="p_pal_20">
-    <div class="in" style="padding-top:16px;padding-bottom:14px;display:flex;flex-direction:column;">
+    <div class="in">
 
       <div class="pal-full-wrap">
         <img class="pal-full-img" src="/guide/palitry/17.jpg">
@@ -960,7 +975,7 @@ body{background:#0D1A1E;height:100%;}
 
   <!-- ПАЛИТРА 22 -->
   <div class="pg pal-pg" id="p_pal_21">
-    <div class="in" style="padding-top:16px;padding-bottom:14px;display:flex;flex-direction:column;">
+    <div class="in">
 
       <div class="pal-full-wrap">
         <img class="pal-full-img" src="/guide/palitry/18.jpg">
@@ -995,7 +1010,7 @@ body{background:#0D1A1E;height:100%;}
 
   <!-- ПАЛИТРА 25 -->
   <div class="pg pal-pg" id="p_pal_24">
-    <div class="in" style="padding-top:16px;padding-bottom:14px;display:flex;flex-direction:column;">
+    <div class="in">
 
       <div class="pal-full-wrap">
         <img class="pal-full-img" src="/guide/palitry/19.jpg">
@@ -1024,7 +1039,7 @@ body{background:#0D1A1E;height:100%;}
 
   <!-- ПАЛИТРА 26 -->
   <div class="pg pal-pg" id="p_pal_25">
-    <div class="in" style="padding-top:16px;padding-bottom:14px;display:flex;flex-direction:column;">
+    <div class="in">
 
       <div class="pal-full-wrap">
         <img class="pal-full-img" src="/guide/palitry/20.jpg">
@@ -1053,7 +1068,7 @@ body{background:#0D1A1E;height:100%;}
 
   <!-- ПАЛИТРА 27 -->
   <div class="pg pal-pg" id="p_pal_26">
-    <div class="in" style="padding-top:16px;padding-bottom:14px;display:flex;flex-direction:column;">
+    <div class="in">
 
       <div class="pal-full-wrap">
         <img class="pal-full-img" src="/guide/palitry/21.jpg">
@@ -1088,7 +1103,7 @@ body{background:#0D1A1E;height:100%;}
 
   <!-- ПАЛИТРА 30 -->
   <div class="pg pal-pg" id="p_pal_29">
-    <div class="in" style="padding-top:16px;padding-bottom:14px;display:flex;flex-direction:column;">
+    <div class="in">
 
       <div class="pal-full-wrap">
         <img class="pal-full-img" src="/guide/palitry/22.jpg">
@@ -1123,7 +1138,7 @@ body{background:#0D1A1E;height:100%;}
 
   <!-- ПАЛИТРА 31 -->
   <div class="pg pal-pg" id="p_pal_30">
-    <div class="in" style="padding-top:16px;padding-bottom:14px;display:flex;flex-direction:column;">
+    <div class="in">
 
       <div class="pal-full-wrap">
         <img class="pal-full-img" src="/guide/palitry/23.jpg">
@@ -1153,7 +1168,7 @@ body{background:#0D1A1E;height:100%;}
 
   <!-- ПАЛИТРА 32 -->
   <div class="pg pal-pg" id="p_pal_31">
-    <div class="in" style="padding-top:16px;padding-bottom:14px;display:flex;flex-direction:column;">
+    <div class="in">
 
       <div class="pal-full-wrap">
         <img class="pal-full-img" src="/guide/palitry/24.jpg">
@@ -1183,7 +1198,7 @@ body{background:#0D1A1E;height:100%;}
 
   <!-- ПАЛИТРА 33 -->
   <div class="pg pal-pg" id="p_pal_32">
-    <div class="in" style="padding-top:16px;padding-bottom:14px;display:flex;flex-direction:column;">
+    <div class="in">
 
       <div class="pal-full-wrap">
         <img class="pal-full-img" src="/guide/palitry/25.jpg">
@@ -1213,7 +1228,7 @@ body{background:#0D1A1E;height:100%;}
 
   <!-- ПАЛИТРА 34 -->
   <div class="pg pal-pg" id="p_pal_33">
-    <div class="in" style="padding-top:16px;padding-bottom:14px;display:flex;flex-direction:column;">
+    <div class="in">
 
       <div class="pal-full-wrap">
         <img class="pal-full-img" src="/guide/palitry/26.jpg">
@@ -1243,7 +1258,7 @@ body{background:#0D1A1E;height:100%;}
 
   <!-- ПАЛИТРА 35 -->
   <div class="pg pal-pg" id="p_pal_34">
-    <div class="in" style="padding-top:16px;padding-bottom:14px;display:flex;flex-direction:column;">
+    <div class="in">
 
       <div class="pal-full-wrap">
         <img class="pal-full-img" src="/guide/palitry/27.jpg">
@@ -1273,7 +1288,7 @@ body{background:#0D1A1E;height:100%;}
 
   <!-- ПАЛИТРА 36 -->
   <div class="pg pal-pg" id="p_pal_35">
-    <div class="in" style="padding-top:16px;padding-bottom:14px;display:flex;flex-direction:column;">
+    <div class="in">
 
       <div class="pal-full-wrap">
         <img class="pal-full-img" src="/guide/palitry/28.jpg">
@@ -1303,7 +1318,7 @@ body{background:#0D1A1E;height:100%;}
 
   <!-- ПАЛИТРА 37 -->
   <div class="pg pal-pg" id="p_pal_36">
-    <div class="in" style="padding-top:16px;padding-bottom:14px;display:flex;flex-direction:column;">
+    <div class="in">
 
       <div class="pal-full-wrap">
         <img class="pal-full-img" src="/guide/palitry/29.jpg">
@@ -1333,7 +1348,7 @@ body{background:#0D1A1E;height:100%;}
 
   <!-- ПАЛИТРА 38 -->
   <div class="pg pal-pg" id="p_pal_37">
-    <div class="in" style="padding-top:16px;padding-bottom:14px;display:flex;flex-direction:column;">
+    <div class="in">
 
       <div class="pal-full-wrap">
         <img class="pal-full-img" src="/guide/palitry/30.jpg">
@@ -1363,7 +1378,7 @@ body{background:#0D1A1E;height:100%;}
 
   <!-- ПАЛИТРА 39 -->
   <div class="pg pal-pg" id="p_pal_38">
-    <div class="in" style="padding-top:16px;padding-bottom:14px;display:flex;flex-direction:column;">
+    <div class="in">
 
       <div class="pal-full-wrap">
         <img class="pal-full-img" src="/guide/palitry/31.jpg">
@@ -1393,7 +1408,7 @@ body{background:#0D1A1E;height:100%;}
 
   <!-- ПАЛИТРА 40 -->
   <div class="pg pal-pg" id="p_pal_39">
-    <div class="in" style="padding-top:16px;padding-bottom:14px;display:flex;flex-direction:column;">
+    <div class="in">
 
       <div class="pal-full-wrap">
         <img class="pal-full-img" src="/guide/palitry/32.jpg">
@@ -1423,7 +1438,7 @@ body{background:#0D1A1E;height:100%;}
 
   <!-- ПАЛИТРА 41 -->
   <div class="pg pal-pg" id="p_pal_40">
-    <div class="in" style="padding-top:16px;padding-bottom:14px;display:flex;flex-direction:column;">
+    <div class="in">
 
       <div class="pal-full-wrap">
         <img class="pal-full-img" src="/guide/palitry/33.jpg">
@@ -1453,7 +1468,7 @@ body{background:#0D1A1E;height:100%;}
 
   <!-- ПАЛИТРА 42 -->
   <div class="pg pal-pg" id="p_pal_41">
-    <div class="in" style="padding-top:16px;padding-bottom:14px;display:flex;flex-direction:column;">
+    <div class="in">
 
       <div class="pal-full-wrap">
         <img class="pal-full-img" src="/guide/palitry/34.jpg">
@@ -1483,7 +1498,7 @@ body{background:#0D1A1E;height:100%;}
 
   <!-- ПАЛИТРА 43 -->
   <div class="pg pal-pg" id="p_pal_42">
-    <div class="in" style="padding-top:16px;padding-bottom:14px;display:flex;flex-direction:column;">
+    <div class="in">
 
       <div class="pal-full-wrap">
         <img class="pal-full-img" src="/guide/palitry/35.jpg">
@@ -1513,7 +1528,7 @@ body{background:#0D1A1E;height:100%;}
 
   <!-- ПАЛИТРА 44 -->
   <div class="pg pal-pg" id="p_pal_43">
-    <div class="in" style="padding-top:16px;padding-bottom:14px;display:flex;flex-direction:column;">
+    <div class="in">
 
       <div class="pal-full-wrap">
         <img class="pal-full-img" src="/guide/palitry/36.jpg">
@@ -1542,7 +1557,7 @@ body{background:#0D1A1E;height:100%;}
 
   <!-- ПАЛИТРА 37 -->
   <div class="pg pal-pg" id="p_pal_44">
-    <div class="in" style="padding-top:16px;padding-bottom:14px;display:flex;flex-direction:column;">
+    <div class="in">
       <div class="pal-full-wrap">
         <img class="pal-full-img" src="/guide/palitry/37.jpg">
       </div>
