@@ -35,14 +35,6 @@ body{background:#0D1A1E;height:100%;}
   scroll-snap-stop:always;
   display:flex;flex-direction:column;
 }
-/* На высоких экранах (десктоп) страница не растягивается бесконечно вверх — верхний предел */
-@media (min-height: 860px){
-  .pg{
-    min-height:0;
-    height:860px;
-  }
-  .pg .in{overflow-y:auto;}
-}
 
 /* COVER */
 .cov{
