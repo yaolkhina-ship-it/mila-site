@@ -123,6 +123,9 @@ body{background:#0D1A1E;height:100%;}
 .ni-t{font-size:15px;color:rgba(242,237,240,0.85);line-height:1.2;margin-bottom:3px;font-family:var(--f);}
 .ni-sub{font-size:11px;color:rgba(201,169,110,0.6);line-height:1.5;font-style:italic;font-family:var(--f);}
 .ni-badge{display:inline-block;font-size:8px;letter-spacing:0.1em;color:rgba(201,169,110,0.75);border:0.5px solid rgba(201,169,110,0.3);padding:2px 7px;margin-top:4px;text-transform:uppercase;font-family:var(--f);}
+.cat-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px;padding-top:18px;border-top:0.5px solid rgba(201,169,110,0.25);}
+.cat-chip{font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(242,237,240,0.85);border:0.5px solid rgba(201,169,110,0.5);padding:6px 11px;cursor:pointer;font-family:var(--f);transition:all .2s;}
+.cat-chip:hover{background:rgba(201,169,110,0.5);color:#0D1A1E;}
 
 /* BONUS */
 .bonus-block{background:var(--wh);border:0.5px solid rgba(201,169,110,0.3);padding:17px;margin-bottom:11px;}
@@ -314,7 +317,7 @@ body{background:#0D1A1E;height:100%;}
       <div class="lbl">обо мне</div>
       <div class="h1">Обо мне</div>
       <div class="per">
-        <!-- образ: оставить пустым -->
+        <img class="about-photo" src="/guide/about-photo.jpg" alt="Mila Ushakova">
         <div class="per-info">
           <h3>Mila Ushakova</h3>
           <div class="per-role">Персональный стилист</div>
@@ -329,9 +332,11 @@ body{background:#0D1A1E;height:100%;}
       <hr class="grule" style="margin-top:16px;">
       <div class="proj-block">
         <div class="proj-title">Ближайшие проекты</div>
-        <div class="proj-item"><div class="proj-date">Июнь 2026</div><div class="proj-text">Старт закрытого клуба «В моём стиле»</div></div>
-        <div class="proj-item"><div class="proj-date">Лето 2026</div><div class="proj-text">Программа «Профессия стилист: развитие и монетизация»</div></div>
-        <div class="proj-item"><div class="proj-date">Осень 2026</div><div class="proj-text">Fashion-тур: Tuscany, Spain, France</div></div>
+        <div class="proj-item"><div class="proj-date">Сейчас</div><div class="proj-text">Fashion-клуб «В моём стиле» — доступ в любой момент, весь предыдущий материал клуба сохраняется</div></div>
+        <div class="proj-item"><div class="proj-date">Сентябрь</div><div class="proj-text">Живая встреча в винтажном бутике, Москва</div></div>
+        <div class="proj-item"><div class="proj-date">Осень 2026</div><div class="proj-text">Недели моды</div></div>
+        <div class="proj-item"><div class="proj-date">Осень 2026</div><div class="proj-text">Fashion-тур: Париж — Милан — Барселона</div></div>
+        <div class="proj-item"><div class="proj-date">2026</div><div class="proj-text">Интенсив «Стилист в 2026 году»</div></div>
       </div>
     </div>
     <div class="ft" style="background:#f5f0ea;border-top-color:rgba(201,169,110,0.18);">Система цветовых сочетаний</div>
@@ -340,15 +345,14 @@ body{background:#0D1A1E;height:100%;}
   <!-- 2 ДОБРО ПОЖАЛОВАТЬ -->
   <div class="pg dk" id="p2">
     <div class="in">
-      <div class="h1 h1d" style="margin-bottom:18px;">Добро пожаловать</div>
+      <div class="h1 h1d" style="margin-bottom:18px;">Добро пожаловать!</div>
       <hr class="grule" style="margin-top:0;margin-bottom:18px;border-top-color:rgba(201,169,110,0.3);">
       <p class="itp">Этот материал появился после глубокого изучения цвета и его влияния на восприятие внешности и выбор одежды.</p>
-      <p class="itp">Перед вами цветовые палитры и примеры образов, которые помогут понять, какие оттенки поддерживают ваше настроение, задачи и образ жизни. Рекомендации как для женщин, так и для мужчин.</p>
+      <p class="itp">Перед вами цветовые палитры и примеры образов, которые помогут понять, какие оттенки поддерживают ваше настроение, задачи и образ жизни.</p>
+      <p class="itp">Рекомендации как для женщин, так и для мужчин.</p>
       <p class="itp">Для меня важно, чтобы гардероб был живым, отражал вашу энергию, характер и внутреннее состояние.</p>
-      <p class="itp">Если вы захотите приобрести отдельные позиции, моя команда предоставляет услуги персонального байера — заказ из любой точки мира.</p>
-      <div class="email-gold">stylefromila@gmail.com</div>
       <p class="itp">Надеюсь, этот материал вдохновит вас, а выбранные образы органично станут частью вашего гардероба.</p>
-      <div class="sig">Мила</div>
+      <div class="sig">Мила &amp; Команда</div>
     </div>
     <div class="ft dk">Система цветовых сочетаний</div>
   </div>
@@ -373,8 +377,22 @@ body{background:#0D1A1E;height:100%;}
   <div class="ni" onclick="scrollToEl('p_bonus')"><span class="ni-n">01</span><div class="ni-body"><div class="ni-t">Бонус</div></div></div>
   <div class="ni" onclick="scrollToEl('p6')"><span class="ni-n">02</span><div class="ni-body"><div class="ni-t">Фавориты Милы</div></div></div>
   <div class="ni" onclick="scrollToEl('p7')"><span class="ni-n">03</span><div class="ni-body"><div class="ni-t">Рекомендации на сезон</div></div></div>
-  <div class="ni" onclick="scrollToEl('p_look_female')"><span class="ni-n">04</span><div class="ni-body"><div class="ni-t">Цветовые сочетания женский раздел</div></div></div>
-  <div class="ni" onclick="scrollToEl('p_look_45')"><span class="ni-n">05</span><div class="ni-body"><div class="ni-t">Цветовые сочетания мужской раздел</div></div></div>  </div>
+  <div class="ni" onclick="scrollToEl('p_pal_0')"><span class="ni-n">04</span><div class="ni-body"><div class="ni-t">Цветовые сочетания женский раздел</div></div></div>
+  <div class="ni" onclick="scrollToEl('p_look_45')"><span class="ni-n">05</span><div class="ni-body"><div class="ni-t">Цветовые сочетания мужской раздел</div></div></div>
+  <div class="ni" onclick="scrollToEl('p_cat_accessories')"><span class="ni-n">06</span><div class="ni-body"><div class="ni-t">Категории</div></div></div>
+  <div class="cat-chips">
+    <span class="cat-chip" onclick="scrollToEl('p_cat_accessories')">Аксессуары</span>
+    <span class="cat-chip" onclick="scrollToEl('p_cat_shoes')">Обувь</span>
+    <span class="cat-chip" onclick="scrollToEl('p_cat_vintage')">Винтаж</span>
+    <span class="cat-chip" onclick="scrollToEl('p_cat_resale')">Ресейл</span>
+    <span class="cat-chip" onclick="scrollToEl('p_cat_craft')">Craft &amp; Atelier</span>
+    <span class="cat-chip" onclick="scrollToEl('p_cat_ru_brands')">Российские бренды</span>
+    <span class="cat-chip" onclick="scrollToEl('p_cat_middle')">Middle</span>
+    <span class="cat-chip" onclick="scrollToEl('p_cat_mass')">Mass market</span>
+    <span class="cat-chip" onclick="scrollToEl('p_cat_luxury')">Luxury</span>
+  </div>
+    </div>
+  </div>
   <!-- БОНУС -->
   <div class="pg" id="p_bonus">
     <div class="in" style="background:#f0ebe3;">
@@ -417,6 +435,10 @@ body{background:#0D1A1E;height:100%;}
           </div>
         </div>
       </div>
+    </div>
+    <div class="ft" style="background:#f0ebe3;border-top-color:rgba(201,169,110,0.18);">Система цветовых сочетаний</div>
+  </div>
+
   <!-- 7 РЕКОМЕНДАЦИИ НА СЕЗОН -->
   <div class="pg" id="p7">
     <div class="in" style="background:#eae3d8;">
@@ -428,12 +450,14 @@ body{background:#0D1A1E;height:100%;}
           <div class="ccap">Аромат сезона</div>
           <div class="irow"><div><div class="in2">Парфюм</div><div class="ib">Le Labo · Another 13</div></div>
         </div>
+        </div>
       </div>
       <div class="card">
         <div class="cimg"><!-- образ: оставить пустым --></div>
         <div class="cbod">
           <div class="ccap">Уход за кожей</div>
           <div class="irow"><div><div class="in2">Крем для лица</div><div class="ib">Linda Kristel · Crème Integral</div></div>
+        </div>
         </div>
       </div>
       <div class="card">
@@ -442,12 +466,14 @@ body{background:#0D1A1E;height:100%;}
           <div class="ccap">Журнал</div>
           <div class="irow"><div><div class="in2">Издание</div><div class="ib">Harper's Bazaar France</div></div>
         </div>
+        </div>
       </div>
       <div class="card">
         <div class="cimg"><!-- образ: оставить пустым --></div>
         <div class="cbod">
           <div class="ccap">Аксессуары</div>
           <div class="irow"><div><div class="in2">Украшения</div><div class="ib">Nastya Buryan</div></div>
+        </div>
         </div>
       </div>
       <div class="card">
@@ -456,12 +482,14 @@ body{background:#0D1A1E;height:100%;}
           <div class="ccap">Декор для дома</div>
           <div class="irow"><div><div class="in2">Интерьер</div><div class="ib">Zara Home</div></div>
         </div>
+        </div>
       </div>
       <div class="card">
         <div class="cimg"><!-- образ: оставить пустым --></div>
         <div class="cbod">
           <div class="ccap">Книга</div>
           <div class="irow"><div><div class="in2">Издание</div><div class="ib">Dior by Raf Simons</div></div>
+        </div>
         </div>
       </div>
     </div>
@@ -1568,20 +1596,118 @@ body{background:#0D1A1E;height:100%;}
     <div class="ft">Система цветовых сочетаний</div>
   </div>
 
-  <!-- ОБРАЗ 37 -->
-  <div class="pg look-pg" id="p_look_37">
+  <!-- ОБРАЗ 45 (последний) -->
+  <div class="pg look-pg" id="p_look_last">
     <div class="in">
-      <div class="look-num">раздел 04 · образ 37</div>
+      <div class="look-num">раздел 04 · образ 45</div>
       <div class="look-title"></div>
       <div class="look-collage-wrap">
         <!-- образ: оставить пустым -->
-      
+
       <div class="look-links"></div>
 </div>
       <div class="look-hint">нажмите на продукт → откроется айтем</div>
     </div>
     <div class="ft" style="background:#f5f0ea;">Система цветовых сочетаний</div>
   </div>
+
+  <!-- КАТЕГОРИИ -->
+  <!-- КАТЕГОРИЯ: АКСЕССУАРЫ -->
+  <div class="pg look-pg" id="p_cat_accessories">
+    <div class="in">
+      <div class="look-num">категория</div>
+      <div class="look-title">Аксессуары</div>
+      <div class="look-box"><span>раздел в разработке</span><div class="look-plus">+</div></div>
+    </div>
+    <div class="ft" style="background:#f5f0ea;">Система цветовых сочетаний</div>
+  </div>
+
+  <!-- КАТЕГОРИЯ: ОБУВЬ -->
+  <div class="pg look-pg" id="p_cat_shoes">
+    <div class="in">
+      <div class="look-num">категория</div>
+      <div class="look-title">Обувь</div>
+      <div class="look-box"><span>раздел в разработке</span><div class="look-plus">+</div></div>
+    </div>
+    <div class="ft" style="background:#f5f0ea;">Система цветовых сочетаний</div>
+  </div>
+
+  <!-- КАТЕГОРИЯ: ВИНТАЖ -->
+  <div class="pg look-pg" id="p_cat_vintage">
+    <div class="in">
+      <div class="look-num">категория</div>
+      <div class="look-title">Винтаж</div>
+      <div class="look-box"><span>раздел в разработке</span><div class="look-plus">+</div></div>
+    </div>
+    <div class="ft" style="background:#f5f0ea;">Система цветовых сочетаний</div>
+  </div>
+
+  <!-- КАТЕГОРИЯ: РЕСЕЙЛ -->
+  <div class="pg look-pg" id="p_cat_resale">
+    <div class="in">
+      <div class="look-num">категория</div>
+      <div class="look-title">Ресейл</div>
+      <div class="look-box"><span>раздел в разработке</span><div class="look-plus">+</div></div>
+    </div>
+    <div class="ft" style="background:#f5f0ea;">Система цветовых сочетаний</div>
+  </div>
+
+  <!-- КАТЕГОРИЯ: CRAFT & ATELIER -->
+  <div class="pg look-pg" id="p_cat_craft">
+    <div class="in">
+      <div class="look-num">категория</div>
+      <div class="look-title">Craft &amp; Atelier</div>
+      <div class="look-box"><span>раздел в разработке</span><div class="look-plus">+</div></div>
+    </div>
+    <div class="ft" style="background:#f5f0ea;">Система цветовых сочетаний</div>
+  </div>
+
+  <!-- КАТЕГОРИЯ: РОССИЙСКИЕ БРЕНДЫ -->
+  <div class="pg look-pg" id="p_cat_ru_brands">
+    <div class="in">
+      <div class="look-num">категория</div>
+      <div class="look-title">Российские бренды</div>
+      <div class="look-box"><span>раздел в разработке</span><div class="look-plus">+</div></div>
+    </div>
+    <div class="ft" style="background:#f5f0ea;">Система цветовых сочетаний</div>
+  </div>
+
+  <!-- КАТЕГОРИЯ: MIDDLE -->
+  <div class="pg look-pg" id="p_cat_middle">
+    <div class="in">
+      <div class="look-num">категория</div>
+      <div class="look-title">Middle</div>
+      <div class="look-box"><span>раздел в разработке</span><div class="look-plus">+</div></div>
+    </div>
+    <div class="ft" style="background:#f5f0ea;">Система цветовых сочетаний</div>
+  </div>
+
+  <!-- КАТЕГОРИЯ: MASS MARKET -->
+  <div class="pg look-pg" id="p_cat_mass">
+    <div class="in">
+      <div class="look-num">категория</div>
+      <div class="look-title">Mass market</div>
+      <div class="look-box"><span>раздел в разработке</span><div class="look-plus">+</div></div>
+    </div>
+    <div class="ft" style="background:#f5f0ea;">Система цветовых сочетаний</div>
+  </div>
+
+  <!-- КАТЕГОРИЯ: LUXURY -->
+  <div class="pg look-pg" id="p_cat_luxury">
+    <div class="in">
+      <div class="look-num">категория</div>
+      <div class="look-title">Luxury</div>
+      <div class="look-box"><span>раздел в разработке</span><div class="look-plus">+</div></div>
+    </div>
+    <div class="ft" style="background:#f5f0ea;">Система цветовых сочетаний</div>
+  </div>
+
+<script>
+function scrollToEl(id){
+  var el = document.getElementById(id);
+  if(el){ el.scrollIntoView({behavior:'smooth', block:'start'}); }
+}
+</script>
 <div style="position:fixed;bottom:30px;right:30px;z-index:9999;">
   <button onclick="window.print()" style="background:#c97184;color:#fff;border:none;border-radius:8px;padding:14px 24px;font-size:14px;cursor:pointer;font-family:Georgia,serif;letter-spacing:0.05em;box-shadow:0 4px 20px rgba(0,0,0,0.3);">Скачать PDF</button>
 </div>
