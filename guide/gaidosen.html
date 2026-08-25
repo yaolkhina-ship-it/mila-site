@@ -44,7 +44,7 @@ body{background:#0D1A1E;height:100%;}
 }
 .cov-bg{
   position:absolute;inset:0;
-  background:url('/guide/chalk-cover.jpg') center top/cover no-repeat;
+  background:url('chalk-cover.jpg') center top/cover no-repeat;
   z-index:0;
 }
 .cov-overlay{
@@ -317,7 +317,7 @@ body{background:#0D1A1E;height:100%;}
       <div class="lbl">обо мне</div>
       <div class="h1">Обо мне</div>
       <div class="per">
-        <img class="about-photo" src="/guide/about-photo.jpg" alt="Mila Ushakova">
+        <img class="about-photo" src="about-photo.jpg" alt="Mila Ushakova">
         <div class="per-info">
           <h3>Mila Ushakova</h3>
           <div class="per-role">Персональный стилист</div>
@@ -398,16 +398,39 @@ body{background:#0D1A1E;height:100%;}
     <div class="in" style="background:#f0ebe3;">
       <div class="lbl">раздел 01</div>
       <div class="h1" style="margin-bottom:16px;">Бонус</div>
-      <div style="background:#fff;border:0.5px solid rgba(0,0,0,0.1);border-radius:12px;padding:20px;margin-top:16px;">
-        <div style="font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ochre);margin-bottom:8px;">Услуга байера</div>
-        <div style="font-size:16px;font-weight:600;margin-bottom:12px;color:var(--deep);">Персональный байер — заказ из любой точки мира</div>
-        <p style="font-size:12px;color:var(--mut);line-height:1.6;margin-bottom:12px;">Моя команда поможет приобрести любой понравившийся айтем. Работаем с брендами по всему миру.</p>
-        <p style="font-size:12px;color:var(--mut);margin-bottom:8px;">По всем вопросам:</p>
-        stylefromila@gmail.com
-        <div style="margin-top:16px;padding:12px;background:#f5f0ea;border-radius:8px;border-left:3px solid var(--ochre);">
-          <div style="font-size:11px;font-weight:600;color:var(--deep);margin-bottom:4px;">🎁 Скидка 10% на последующие услуги</div>
-          <div style="font-size:11px;color:var(--mut);">Действует до 1 июля</div>
-        </div>      </div>
+      <div class="bonus-block">
+        <div class="bonus-tag">Услуга байера</div>
+        <div class="bonus-title">Персональный байер — заказ из любой точки мира</div>
+        <p class="bonus-text">Моя команда поможет приобрести любой понравившийся айтем. Работаем с брендами по всему миру.</p>
+        <p class="bonus-text">По всем вопросам: stylefromila@gmail.com</p>
+      </div>
+
+      <div class="bonus-block">
+        <div class="bonus-tag">Промокоды партнёров</div>
+        <div class="bonus-title">Скидки для участников проекта</div>
+        <div class="irow"><div><div class="in2">MANKOVA</div><div class="ib">Промокод по запросу</div></div></div>
+        <div class="irow"><div><div class="in2">DAISYKNIT</div><div class="ib">Промокод по запросу</div></div></div>
+        <div class="irow"><div><div class="in2">HOROSH</div><div class="ib">Промокод MILA07</div></div></div>
+        <div class="irow"><div><div class="in2">GARIN</div><div class="ib">Промокод по запросу</div></div></div>
+        <div class="irow"><div><div class="in2">DARIA_SHI</div><div class="ib">Промокод MILA</div></div></div>
+        <div class="irow"><div><div class="in2">Mario Portolano</div><div class="ib">Промокод по запросу</div></div></div>
+      </div>
+
+      <div class="bonus-block">
+        <div class="bonus-tag">Farfetch · Mytheresa</div>
+        <div class="bonus-title">Промо от байеров проекта</div>
+        <p class="bonus-text">Свяжитесь напрямую с личным байером — оформит заказ на выгодных условиях.</p>
+        <hr class="bonus-div">
+        <div class="irow"><div><div class="in2">Оксана</div><div class="ib">Farfetch · Mytheresa</div></div><a class="bl" href="https://t.me/+a2j7xIoZdLcyMWJk" target="_blank" rel="noopener">Написать</a></div>
+        <div class="irow"><div><div class="in2">Яна</div><div class="ib">Farfetch · Mytheresa</div></div><a class="bl" href="https://t.me/HedonistBuyer" target="_blank" rel="noopener">Написать</a></div>
+        <div class="irow"><div><div class="in2">Владислава</div><div class="ib">@vladyslava_buyer</div></div><a class="bl" href="https://t.me/vladyslava_buyer" target="_blank" rel="noopener">Написать</a></div>
+      </div>
+
+      <div class="bonus-block">
+        <div class="bonus-tag">Fashion-клуб «В моём стиле»</div>
+        <div class="bonus-title">Промокод на вступление</div>
+        <span class="bonus-date">MILA7121</span>
+      </div>
     </div>
     <div class="ft">Система цветовых сочетаний</div>
   </div>
@@ -417,23 +440,35 @@ body{background:#0D1A1E;height:100%;}
     <div class="in" style="background:#f0ebe3;">
       <div class="lbl">раздел 02</div>
       <div class="h1" style="margin-bottom:16px;">Фавориты Милы</div>
-      <div style="display:grid;gap:12px;">
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-          <div style="background:var(--wh);border:0.5px solid var(--brd);overflow:hidden;border-radius:8px;">
-            
-          </div>
-          <div style="background:var(--wh);border:0.5px solid var(--brd);overflow:hidden;border-radius:8px;">
-            
-          </div>
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-          <div style="background:var(--wh);border:0.5px solid var(--brd);overflow:hidden;border-radius:8px;">
-            
-          </div>
-          <div style="background:var(--wh);border:0.5px solid var(--brd);overflow:hidden;border-radius:8px;">
-            
-          </div>
-        </div>
+      <div class="g2">
+        <a class="gc" href="https://www.ushatava.ru/store/w/aksessuary/dvukhstoronniy-platok-ss26-81532/" target="_blank" rel="noopener" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="favorite-1.jpg"></div>
+          <div class="gb"><div class="in2">Платок</div><div class="ib">Ushatava</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="https://fondazionedriesvannoten.org/en/shop/the-only-true-protest-is-beauty" target="_blank" rel="noopener" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="favorite-2.jpg"></div>
+          <div class="gb"><div class="in2">Книга</div><div class="ib">Dries Van Noten</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="https://www.mexicana.fr/en/women-s-cowboy-boots/4632-candela-11-black.html" target="_blank" rel="noopener" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="favorite-3.jpg"></div>
+          <div class="gb"><div class="in2">Обувь</div><div class="ib">Mexicana</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="https://www.charlottetilbury.com/us/product/hollywood-flawless-filter-shade-4-medium" target="_blank" rel="noopener" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="favorite-4.jpg"></div>
+          <div class="gb"><div class="in2">Косметика</div><div class="ib">Charlotte Tilbury</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="https://tibi.com/products/long-fringe-leather-glove-red" target="_blank" rel="noopener" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="favorite-5.jpg"></div>
+          <div class="gb"><div class="in2">Перчатки</div><div class="ib">Tibi</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="https://www.zara.com/us/en/washed-logo-cap-p04988413.html?v1=555080356&v2=2620119" target="_blank" rel="noopener" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="favorite-6.jpg"></div>
+          <div class="gb"><div class="in2">Кепка</div><div class="ib">Zara</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="https://www.prada-beauty.com/makeup/lipstick/prada-monochrome-soft-matte-lipstick-brown-series/MPL01743.html?dwvar_MPL01743_color=B109_Amaranto" target="_blank" rel="noopener" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="favorite-7.jpg"></div>
+          <div class="gb"><div class="in2">Помада</div><div class="ib">Prada Beauty · Amaranto</div><span class="bl">Смотреть</span></div>
+        </a>
       </div>
     </div>
     <div class="ft" style="background:#f0ebe3;border-top-color:rgba(201,169,110,0.18);">Система цветовых сочетаний</div>
@@ -501,7 +536,7 @@ body{background:#0D1A1E;height:100%;}
   <div class="pg pal-pg" id="p_pal_0">
     <div class="in">
       <div class="pal-full-wrap">
-        <img class="pal-full-img" src="/guide/palitry/01.jpg">
+        <img class="pal-full-img" src="palitry/01.jpg">
       </div>
       <div class="pal-pg-nav">
         <span class="pal-pg-counter">1 / 37</span>
@@ -530,7 +565,7 @@ body{background:#0D1A1E;height:100%;}
     <div class="in">
 
       <div class="pal-full-wrap">
-        <img class="pal-full-img" src="/guide/palitry/02.jpg">
+        <img class="pal-full-img" src="palitry/02.jpg">
       </div>
       <div class="pal-pg-nav">
         <span class="pal-pg-counter">2 / 37</span>
@@ -559,7 +594,7 @@ body{background:#0D1A1E;height:100%;}
     <div class="in">
 
       <div class="pal-full-wrap">
-        <img class="pal-full-img" src="/guide/palitry/03.jpg">
+        <img class="pal-full-img" src="palitry/03.jpg">
       </div>
       <div class="pal-pg-nav">
         <span class="pal-pg-counter">3 / 37</span>
@@ -588,7 +623,7 @@ body{background:#0D1A1E;height:100%;}
     <div class="in">
 
       <div class="pal-full-wrap">
-        <img class="pal-full-img" src="/guide/palitry/04.jpg">
+        <img class="pal-full-img" src="palitry/04.jpg">
       </div>
       <div class="pal-pg-nav">
         <span class="pal-pg-counter">4 / 37</span>
@@ -617,7 +652,7 @@ body{background:#0D1A1E;height:100%;}
     <div class="in">
 
       <div class="pal-full-wrap">
-        <img class="pal-full-img" src="/guide/palitry/05.jpg">
+        <img class="pal-full-img" src="palitry/05.jpg">
       </div>
       <div class="pal-pg-nav">
         <span class="pal-pg-counter">5 / 37</span>
@@ -646,7 +681,7 @@ body{background:#0D1A1E;height:100%;}
     <div class="in">
 
       <div class="pal-full-wrap">
-        <img class="pal-full-img" src="/guide/palitry/06.jpg">
+        <img class="pal-full-img" src="palitry/06.jpg">
       </div>
       <div class="pal-pg-nav">
         <span class="pal-pg-counter">6 / 37</span>
@@ -675,7 +710,7 @@ body{background:#0D1A1E;height:100%;}
     <div class="in">
 
       <div class="pal-full-wrap">
-        <img class="pal-full-img" src="/guide/palitry/07.jpg">
+        <img class="pal-full-img" src="palitry/07.jpg">
       </div>
       <div class="pal-pg-nav">
         <span class="pal-pg-counter">7 / 37</span>
@@ -704,7 +739,7 @@ body{background:#0D1A1E;height:100%;}
     <div class="in">
 
       <div class="pal-full-wrap">
-        <img class="pal-full-img" src="/guide/palitry/08.jpg">
+        <img class="pal-full-img" src="palitry/08.jpg">
       </div>
       <div class="pal-pg-nav">
         <span class="pal-pg-counter">8 / 37</span>
@@ -733,7 +768,7 @@ body{background:#0D1A1E;height:100%;}
     <div class="in">
 
       <div class="pal-full-wrap">
-        <img class="pal-full-img" src="/guide/palitry/09.jpg">
+        <img class="pal-full-img" src="palitry/09.jpg">
       </div>
       <div class="pal-pg-nav">
         <span class="pal-pg-counter">9 / 37</span>
@@ -762,7 +797,7 @@ body{background:#0D1A1E;height:100%;}
     <div class="in">
 
       <div class="pal-full-wrap">
-        <img class="pal-full-img" src="/guide/palitry/10.jpg">
+        <img class="pal-full-img" src="palitry/10.jpg">
       </div>
       <div class="pal-pg-nav">
         <span class="pal-pg-counter">10 / 37</span>
@@ -791,7 +826,7 @@ body{background:#0D1A1E;height:100%;}
     <div class="in">
 
       <div class="pal-full-wrap">
-        <img class="pal-full-img" src="/guide/palitry/11.jpg">
+        <img class="pal-full-img" src="palitry/11.jpg">
       </div>
       <div class="pal-pg-nav">
         <span class="pal-pg-counter">11 / 37</span>
@@ -820,7 +855,7 @@ body{background:#0D1A1E;height:100%;}
     <div class="in">
 
       <div class="pal-full-wrap">
-        <img class="pal-full-img" src="/guide/palitry/12.jpg">
+        <img class="pal-full-img" src="palitry/12.jpg">
       </div>
       <div class="pal-pg-nav">
         <span class="pal-pg-counter">12 / 37</span>
@@ -861,7 +896,7 @@ body{background:#0D1A1E;height:100%;}
     <div class="in">
 
       <div class="pal-full-wrap">
-        <img class="pal-full-img" src="/guide/palitry/13.jpg">
+        <img class="pal-full-img" src="palitry/13.jpg">
       </div>
       <div class="pal-pg-nav">
         <span class="pal-pg-counter">13 / 37</span>
@@ -890,7 +925,7 @@ body{background:#0D1A1E;height:100%;}
     <div class="in">
 
       <div class="pal-full-wrap">
-        <img class="pal-full-img" src="/guide/palitry/14.jpg">
+        <img class="pal-full-img" src="palitry/14.jpg">
       </div>
       <div class="pal-pg-nav">
         <span class="pal-pg-counter">14 / 37</span>
@@ -919,7 +954,7 @@ body{background:#0D1A1E;height:100%;}
     <div class="in">
 
       <div class="pal-full-wrap">
-        <img class="pal-full-img" src="/guide/palitry/15.jpg">
+        <img class="pal-full-img" src="palitry/15.jpg">
       </div>
       <div class="pal-pg-nav">
         <span class="pal-pg-counter">15 / 37</span>
@@ -948,7 +983,7 @@ body{background:#0D1A1E;height:100%;}
     <div class="in">
 
       <div class="pal-full-wrap">
-        <img class="pal-full-img" src="/guide/palitry/16.jpg">
+        <img class="pal-full-img" src="palitry/16.jpg">
       </div>
       <div class="pal-pg-nav">
         <span class="pal-pg-counter">16 / 37</span>
@@ -977,7 +1012,7 @@ body{background:#0D1A1E;height:100%;}
     <div class="in">
 
       <div class="pal-full-wrap">
-        <img class="pal-full-img" src="/guide/palitry/17.jpg">
+        <img class="pal-full-img" src="palitry/17.jpg">
       </div>
       <div class="pal-pg-nav">
         <span class="pal-pg-counter">17 / 37</span>
@@ -1006,7 +1041,7 @@ body{background:#0D1A1E;height:100%;}
     <div class="in">
 
       <div class="pal-full-wrap">
-        <img class="pal-full-img" src="/guide/palitry/18.jpg">
+        <img class="pal-full-img" src="palitry/18.jpg">
       </div>
       <div class="pal-pg-nav">
         <span class="pal-pg-counter">18 / 37</span>
@@ -1041,7 +1076,7 @@ body{background:#0D1A1E;height:100%;}
     <div class="in">
 
       <div class="pal-full-wrap">
-        <img class="pal-full-img" src="/guide/palitry/19.jpg">
+        <img class="pal-full-img" src="palitry/19.jpg">
       </div>
       <div class="pal-pg-nav">
         <span class="pal-pg-counter">19 / 37</span>
@@ -1070,7 +1105,7 @@ body{background:#0D1A1E;height:100%;}
     <div class="in">
 
       <div class="pal-full-wrap">
-        <img class="pal-full-img" src="/guide/palitry/20.jpg">
+        <img class="pal-full-img" src="palitry/20.jpg">
       </div>
       <div class="pal-pg-nav">
         <span class="pal-pg-counter">20 / 37</span>
@@ -1099,7 +1134,7 @@ body{background:#0D1A1E;height:100%;}
     <div class="in">
 
       <div class="pal-full-wrap">
-        <img class="pal-full-img" src="/guide/palitry/21.jpg">
+        <img class="pal-full-img" src="palitry/21.jpg">
       </div>
       <div class="pal-pg-nav">
         <span class="pal-pg-counter">21 / 37</span>
@@ -1134,7 +1169,7 @@ body{background:#0D1A1E;height:100%;}
     <div class="in">
 
       <div class="pal-full-wrap">
-        <img class="pal-full-img" src="/guide/palitry/22.jpg">
+        <img class="pal-full-img" src="palitry/22.jpg">
       </div>
       <div class="pal-pg-nav">
         <span class="pal-pg-counter">22 / 37</span>
@@ -1169,7 +1204,7 @@ body{background:#0D1A1E;height:100%;}
     <div class="in">
 
       <div class="pal-full-wrap">
-        <img class="pal-full-img" src="/guide/palitry/23.jpg">
+        <img class="pal-full-img" src="palitry/23.jpg">
       </div>
       <div class="pal-pg-nav">
         <span class="pal-pg-counter">23 / 37</span>
@@ -1199,7 +1234,7 @@ body{background:#0D1A1E;height:100%;}
     <div class="in">
 
       <div class="pal-full-wrap">
-        <img class="pal-full-img" src="/guide/palitry/24.jpg">
+        <img class="pal-full-img" src="palitry/24.jpg">
       </div>
       <div class="pal-pg-nav">
         <span class="pal-pg-counter">24 / 37</span>
@@ -1229,7 +1264,7 @@ body{background:#0D1A1E;height:100%;}
     <div class="in">
 
       <div class="pal-full-wrap">
-        <img class="pal-full-img" src="/guide/palitry/25.jpg">
+        <img class="pal-full-img" src="palitry/25.jpg">
       </div>
       <div class="pal-pg-nav">
         <span class="pal-pg-counter">25 / 37</span>
@@ -1259,7 +1294,7 @@ body{background:#0D1A1E;height:100%;}
     <div class="in">
 
       <div class="pal-full-wrap">
-        <img class="pal-full-img" src="/guide/palitry/26.jpg">
+        <img class="pal-full-img" src="palitry/26.jpg">
       </div>
       <div class="pal-pg-nav">
         <span class="pal-pg-counter">26 / 37</span>
@@ -1289,7 +1324,7 @@ body{background:#0D1A1E;height:100%;}
     <div class="in">
 
       <div class="pal-full-wrap">
-        <img class="pal-full-img" src="/guide/palitry/27.jpg">
+        <img class="pal-full-img" src="palitry/27.jpg">
       </div>
       <div class="pal-pg-nav">
         <span class="pal-pg-counter">27 / 37</span>
@@ -1319,7 +1354,7 @@ body{background:#0D1A1E;height:100%;}
     <div class="in">
 
       <div class="pal-full-wrap">
-        <img class="pal-full-img" src="/guide/palitry/28.jpg">
+        <img class="pal-full-img" src="palitry/28.jpg">
       </div>
       <div class="pal-pg-nav">
         <span class="pal-pg-counter">28 / 37</span>
@@ -1349,7 +1384,7 @@ body{background:#0D1A1E;height:100%;}
     <div class="in">
 
       <div class="pal-full-wrap">
-        <img class="pal-full-img" src="/guide/palitry/29.jpg">
+        <img class="pal-full-img" src="palitry/29.jpg">
       </div>
       <div class="pal-pg-nav">
         <span class="pal-pg-counter">29 / 37</span>
@@ -1379,7 +1414,7 @@ body{background:#0D1A1E;height:100%;}
     <div class="in">
 
       <div class="pal-full-wrap">
-        <img class="pal-full-img" src="/guide/palitry/30.jpg">
+        <img class="pal-full-img" src="palitry/30.jpg">
       </div>
       <div class="pal-pg-nav">
         <span class="pal-pg-counter">30 / 37</span>
@@ -1409,7 +1444,7 @@ body{background:#0D1A1E;height:100%;}
     <div class="in">
 
       <div class="pal-full-wrap">
-        <img class="pal-full-img" src="/guide/palitry/31.jpg">
+        <img class="pal-full-img" src="palitry/31.jpg">
       </div>
       <div class="pal-pg-nav">
         <span class="pal-pg-counter">31 / 37</span>
@@ -1439,7 +1474,7 @@ body{background:#0D1A1E;height:100%;}
     <div class="in">
 
       <div class="pal-full-wrap">
-        <img class="pal-full-img" src="/guide/palitry/32.jpg">
+        <img class="pal-full-img" src="palitry/32.jpg">
       </div>
       <div class="pal-pg-nav">
         <span class="pal-pg-counter">32 / 37</span>
@@ -1469,7 +1504,7 @@ body{background:#0D1A1E;height:100%;}
     <div class="in">
 
       <div class="pal-full-wrap">
-        <img class="pal-full-img" src="/guide/palitry/33.jpg">
+        <img class="pal-full-img" src="palitry/33.jpg">
       </div>
       <div class="pal-pg-nav">
         <span class="pal-pg-counter">33 / 37</span>
@@ -1499,7 +1534,7 @@ body{background:#0D1A1E;height:100%;}
     <div class="in">
 
       <div class="pal-full-wrap">
-        <img class="pal-full-img" src="/guide/palitry/34.jpg">
+        <img class="pal-full-img" src="palitry/34.jpg">
       </div>
       <div class="pal-pg-nav">
         <span class="pal-pg-counter">34 / 37</span>
@@ -1529,7 +1564,7 @@ body{background:#0D1A1E;height:100%;}
     <div class="in">
 
       <div class="pal-full-wrap">
-        <img class="pal-full-img" src="/guide/palitry/35.jpg">
+        <img class="pal-full-img" src="palitry/35.jpg">
       </div>
       <div class="pal-pg-nav">
         <span class="pal-pg-counter">35 / 37</span>
@@ -1559,7 +1594,7 @@ body{background:#0D1A1E;height:100%;}
     <div class="in">
 
       <div class="pal-full-wrap">
-        <img class="pal-full-img" src="/guide/palitry/36.jpg">
+        <img class="pal-full-img" src="palitry/36.jpg">
       </div>
       <div class="pal-pg-nav">
         <span class="pal-pg-counter">36 / 37</span>
@@ -1587,7 +1622,7 @@ body{background:#0D1A1E;height:100%;}
   <div class="pg pal-pg" id="p_pal_44">
     <div class="in">
       <div class="pal-full-wrap">
-        <img class="pal-full-img" src="/guide/palitry/37.jpg">
+        <img class="pal-full-img" src="palitry/37.jpg">
       </div>
       <div class="pal-pg-nav">
         <span class="pal-pg-counter">37 / 37</span>
@@ -1710,5 +1745,6 @@ function scrollToEl(id){
 </script>
 <div style="position:fixed;bottom:30px;right:30px;z-index:9999;">
   <button onclick="window.print()" style="background:#c97184;color:#fff;border:none;border-radius:8px;padding:14px 24px;font-size:14px;cursor:pointer;font-family:Georgia,serif;letter-spacing:0.05em;box-shadow:0 4px 20px rgba(0,0,0,0.3);">Скачать PDF</button>
+</div>
 </div>
 </body></html>
