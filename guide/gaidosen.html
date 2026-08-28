@@ -130,6 +130,10 @@ body{background:#0D1A1E;height:100%;}
 .tone-item span{color:var(--gold2);font-size:10px;}
 .tone-item:hover{color:var(--gold);}
 .tone-item:hover span{color:var(--gold);}
+.back-nav{position:fixed;bottom:22px;right:22px;z-index:9999;display:flex;align-items:center;gap:6px;background:rgba(13,26,30,0.92);border:0.5px solid rgba(201,169,110,0.5);border-radius:20px;padding:9px 16px;font-family:var(--f);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(242,237,240,0.85);cursor:pointer;backdrop-filter:blur(4px);box-shadow:0 4px 16px rgba(0,0,0,0.25);transition:all .2s;}
+.back-nav:hover{border-color:var(--gold);color:var(--gold);}
+.back-nav span:first-child{font-size:11px;color:var(--gold2);transition:color .2s;}
+.back-nav:hover span:first-child{color:var(--gold);}
 
 /* BONUS */
 .bonus-block{background:var(--wh);border:0.5px solid rgba(201,169,110,0.3);padding:17px;margin-bottom:11px;}
@@ -2201,7 +2205,148 @@ body{background:#0D1A1E;height:100%;}
     <div class="in">
       <div class="look-num">категория</div>
       <div class="look-title">Аксессуары</div>
-      <div class="look-box"><span>раздел в разработке</span><div class="look-plus">+</div></div>
+      <div class="g2">
+        <a class="gc" href="#p_look_1" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/01_coffee.jpg"></div>
+          <div class="gb"><div class="in2">Образ «скамейка»</div><div class="ib">Tory Burch via Farfetch</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_2" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/02_tennisballs.jpg"></div>
+          <div class="gb"><div class="in2">Образ «мячи»</div><div class="ib">Zara, Dragon Diffusion</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_5_retro" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/retro.jpg"></div>
+          <div class="gb"><div class="in2">Образ «ретро»</div><div class="ib">Tom Ford via Farfetch, Prada via Vestiaire, MM6 Maison Margiela via Farfetch</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_25" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/19.jpg"></div>
+          <div class="gb"><div class="in2">Образ «помидоры»</div><div class="ib">JW Anderson, Bimba y Lola</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_34" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/26_coat.jpg"></div>
+          <div class="gb"><div class="in2">Образ «плащ»</div><div class="ib">Bottega Veneta via Vestiaire, Mario Portolano</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_42" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/34_feathers.jpg"></div>
+          <div class="gb"><div class="in2">Образ «перья»</div><div class="ib">Parfois, COS</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_43" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/35_raspberry.jpg"></div>
+          <div class="gb"><div class="in2">Образ «малина»</div><div class="ib">Ushatava</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_4" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/04_fan.jpg"></div>
+          <div class="gb"><div class="in2">Образ «веер»</div><div class="ib">Essentiel Antwerp, COS</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_18" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/14_bluepants.jpg"></div>
+          <div class="gb"><div class="in2">Образ «сандалии»</div><div class="ib">Zara, Daisyknit</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_30" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/22_beads.jpg"></div>
+          <div class="gb"><div class="in2">Образ «бусины»</div><div class="ib">Parfois, Essentiel Antwerp, CAHU</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_7" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/07_camel.jpg"></div>
+          <div class="gb"><div class="in2">Образ «кресла»</div><div class="ib">Horosh, Povod</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_6_tennis" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/tennis.jpg"></div>
+          <div class="gb"><div class="in2">Образ «теннис»</div><div class="ib">CAHU, Zara</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_21" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/17_orange.jpg"></div>
+          <div class="gb"><div class="in2">Образ «помада»</div><div class="ib">COS, Longchamp via Farfetch, Ushatava</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_0_chalk" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/pink_scarf.jpg"></div>
+          <div class="gb"><div class="in2">Образ «мел»</div><div class="ib">Prada, Mario Portolano, Farfetch</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_27" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/21_sails.jpg"></div>
+          <div class="gb"><div class="in2">Образ «закат»</div><div class="ib">Zara</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_32" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/24_lemons.jpg"></div>
+          <div class="gb"><div class="in2">Образ «лимоны»</div><div class="ib">Dragon Diffusion</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_tennis_court" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/tennis_court.jpg"></div>
+          <div class="gb"><div class="in2">Образ «корт»</div><div class="ib">Daria_Shi, LIME</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_33" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/25_pinstripe.jpg"></div>
+          <div class="gb"><div class="in2">Образ «плетёнка»</div><div class="ib">CAHU, Mario Portolano</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_17" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/17.jpg"></div>
+          <div class="gb"><div class="in2">Образ «кисть»</div><div class="ib">Prada, Zara, Dragon Diffusion, COS</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_35" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/35_podium.jpg"></div>
+          <div class="gb"><div class="in2">Образ «подиум»</div><div class="ib">Zara, Daisyknit</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_38" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/38.jpg"></div>
+          <div class="gb"><div class="in2">Образ «лодки»</div><div class="ib">CAHU</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_37_city" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/city.jpg"></div>
+          <div class="gb"><div class="in2">Образ «город»</div><div class="ib">COS, Farfetch</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_city_denim" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/denim.jpg"></div>
+          <div class="gb"><div class="in2">Образ «деним»</div><div class="ib">CAHU, Prada via Farfetch</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_40" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/32_bluesweater.jpg"></div>
+          <div class="gb"><div class="in2">Образ «меланж»</div><div class="ib">Povod, Zara</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_35_felt" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/felt.jpg"></div>
+          <div class="gb"><div class="in2">Образ «фетр»</div><div class="ib">Zara, Ushatava</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_8" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/08_pillows.jpg"></div>
+          <div class="gb"><div class="in2">Образ «подушки»</div><div class="ib">Essentiel Antwerp, Calzedonia</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_9" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/09_trench.jpg"></div>
+          <div class="gb"><div class="in2">Образ «тренч»</div><div class="ib">COS, Essentiel Antwerp</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_9_safari" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/safari.jpg"></div>
+          <div class="gb"><div class="in2">Образ «сафари»</div><div class="ib">Toteme via Farfetch, Zara, Sézane</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_12" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/12_sand.jpg"></div>
+          <div class="gb"><div class="in2">Образ «песок»</div><div class="ib">Poison Drop, Zara</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_19" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/15.jpg"></div>
+          <div class="gb"><div class="in2">Образ «пробки»</div><div class="ib">Prada, YSL, Zara, Sezane, Povod</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_44" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/44_coffee.jpg"></div>
+          <div class="gb"><div class="in2">Образ «кофе»</div><div class="ib">Walk of Shame, COS</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_5" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/06.jpg"></div>
+          <div class="gb"><div class="in2">Образ «авто»</div><div class="ib">Farfetch, Prada, Zara, Ushatava</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_22" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/18.jpg"></div>
+          <div class="gb"><div class="in2">Образ «стулья»</div><div class="ib">Gucci, JW Anderson</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_1_sails" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/sails2.jpg"></div>
+          <div class="gb"><div class="in2">Образ «паруса»</div><div class="ib">CAHU, Poison Drop</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_41" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/33_dustyblue.jpg"></div>
+          <div class="gb"><div class="in2">Образ «овчина»</div><div class="ib">Zara, Horosh</div><span class="bl">Смотреть</span></div>
+        </a>
+      </div>
     </div>
     <div class="ft" style="background:#f5f0ea;">Mila Ushakova</div>
   </div>
@@ -2211,7 +2356,144 @@ body{background:#0D1A1E;height:100%;}
     <div class="in">
       <div class="look-num">категория</div>
       <div class="look-title">Обувь</div>
-      <div class="look-box"><span>раздел в разработке</span><div class="look-plus">+</div></div>
+      <div class="g2">
+        <a class="gc" href="#p_look_1" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/01_coffee.jpg"></div>
+          <div class="gb"><div class="in2">Образ «скамейка»</div><div class="ib">Bimba y Lola</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_2" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/02_tennisballs.jpg"></div>
+          <div class="gb"><div class="in2">Образ «мячи»</div><div class="ib">Sézane</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_5_retro" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/retro.jpg"></div>
+          <div class="gb"><div class="in2">Образ «ретро»</div><div class="ib">The Frankie Shop</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_25" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/19.jpg"></div>
+          <div class="gb"><div class="in2">Образ «помидоры»</div><div class="ib">LIME</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_34" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/26_coat.jpg"></div>
+          <div class="gb"><div class="in2">Образ «плащ»</div><div class="ib">Durazzi Milano via Farfetch</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_42" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/34_feathers.jpg"></div>
+          <div class="gb"><div class="in2">Образ «перья»</div><div class="ib">Here U Studio</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_43" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/35_raspberry.jpg"></div>
+          <div class="gb"><div class="in2">Образ «малина»</div><div class="ib">Sezane, Here U Studio</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_4" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/04_fan.jpg"></div>
+          <div class="gb"><div class="in2">Образ «веер»</div><div class="ib">Zara</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_18" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/14_bluepants.jpg"></div>
+          <div class="gb"><div class="in2">Образ «сандалии»</div><div class="ib">Birkenstock</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_30" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/22_beads.jpg"></div>
+          <div class="gb"><div class="in2">Образ «бусины»</div><div class="ib">Here U Studio</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_7" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/07_camel.jpg"></div>
+          <div class="gb"><div class="in2">Образ «кресла»</div><div class="ib">Mexicana</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_6_tennis" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/tennis.jpg"></div>
+          <div class="gb"><div class="in2">Образ «теннис»</div><div class="ib">Povod</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_21" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/17_orange.jpg"></div>
+          <div class="gb"><div class="in2">Образ «помада»</div><div class="ib">Ushatava</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_0_chalk" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/pink_scarf.jpg"></div>
+          <div class="gb"><div class="in2">Образ «мел»</div><div class="ib">Ushatava</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_27" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/21_sails.jpg"></div>
+          <div class="gb"><div class="in2">Образ «закат»</div><div class="ib">Massimo Dutti</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_32" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/24_lemons.jpg"></div>
+          <div class="gb"><div class="in2">Образ «лимоны»</div><div class="ib">Ushatava</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_tennis_court" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/tennis_court.jpg"></div>
+          <div class="gb"><div class="in2">Образ «корт»</div><div class="ib">Sézane</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_33" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/25_pinstripe.jpg"></div>
+          <div class="gb"><div class="in2">Образ «плетёнка»</div><div class="ib">Here U Studio</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_17" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/17.jpg"></div>
+          <div class="gb"><div class="in2">Образ «кисть»</div><div class="ib">Here U Studio</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_35" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/35_podium.jpg"></div>
+          <div class="gb"><div class="in2">Образ «подиум»</div><div class="ib">Here U Studio</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_37_city" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/city.jpg"></div>
+          <div class="gb"><div class="in2">Образ «город»</div><div class="ib">COS</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_city_denim" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/denim.jpg"></div>
+          <div class="gb"><div class="in2">Образ «деним»</div><div class="ib">Mexicana via Farfetch</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_40" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/32_bluesweater.jpg"></div>
+          <div class="gb"><div class="in2">Образ «меланж»</div><div class="ib">Zara</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_35_felt" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/felt.jpg"></div>
+          <div class="gb"><div class="in2">Образ «фетр»</div><div class="ib">Bimba y Lola via Farfetch</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_8" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/08_pillows.jpg"></div>
+          <div class="gb"><div class="in2">Образ «подушки»</div><div class="ib">Sézane</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_9" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/09_trench.jpg"></div>
+          <div class="gb"><div class="in2">Образ «тренч»</div><div class="ib">COS</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_9_safari" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/safari.jpg"></div>
+          <div class="gb"><div class="in2">Образ «сафари»</div><div class="ib">Here U Studio</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_12" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/12_sand.jpg"></div>
+          <div class="gb"><div class="in2">Образ «песок»</div><div class="ib">Mexicana</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_19" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/15.jpg"></div>
+          <div class="gb"><div class="in2">Образ «пробки»</div><div class="ib">JW Anderson</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_44" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/44_coffee.jpg"></div>
+          <div class="gb"><div class="in2">Образ «кофе»</div><div class="ib">Sézane</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_5" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/06.jpg"></div>
+          <div class="gb"><div class="in2">Образ «авто»</div><div class="ib">Sezane</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_22" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/18.jpg"></div>
+          <div class="gb"><div class="in2">Образ «стулья»</div><div class="ib">Mexicana</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_1_sails" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/sails2.jpg"></div>
+          <div class="gb"><div class="in2">Образ «паруса»</div><div class="ib">Mexicana</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_41" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/33_dustyblue.jpg"></div>
+          <div class="gb"><div class="in2">Образ «овчина»</div><div class="ib">Bimba y Lola</div><span class="bl">Смотреть</span></div>
+        </a>
+      </div>
     </div>
     <div class="ft" style="background:#f5f0ea;">Mila Ushakova</div>
   </div>
@@ -2236,7 +2518,28 @@ body{background:#0D1A1E;height:100%;}
     <div class="in">
       <div class="look-num">категория</div>
       <div class="look-title">Ресейл</div>
-      <div class="look-box"><span>раздел в разработке</span><div class="look-plus">+</div></div>
+      <div class="g2">
+        <a class="gc" href="#p_look_5_retro" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/retro.jpg"></div>
+          <div class="gb"><div class="in2">Образ «ретро»</div><div class="ib">Prada via Vestiaire</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_34" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/26_coat.jpg"></div>
+          <div class="gb"><div class="in2">Образ «плащ»</div><div class="ib">Bottega Veneta via Vestiaire</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_0_chalk" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/pink_scarf.jpg"></div>
+          <div class="gb"><div class="in2">Образ «мел»</div><div class="ib">Prada</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_17" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/17.jpg"></div>
+          <div class="gb"><div class="in2">Образ «кисть»</div><div class="ib">Legacy</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_22" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/18.jpg"></div>
+          <div class="gb"><div class="in2">Образ «стулья»</div><div class="ib">Gucci</div><span class="bl">Смотреть</span></div>
+        </a>
+      </div>
     </div>
     <div class="ft" style="background:#f5f0ea;">Mila Ushakova</div>
   </div>
@@ -2246,7 +2549,88 @@ body{background:#0D1A1E;height:100%;}
     <div class="in">
       <div class="look-num">категория</div>
       <div class="look-title">Craft &amp; Atelier</div>
-      <div class="look-box"><span>раздел в разработке</span><div class="look-plus">+</div></div>
+      <div class="g2">
+        <a class="gc" href="#p_look_1" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/01_coffee.jpg"></div>
+          <div class="gb"><div class="in2">Образ «скамейка»</div><div class="ib">Bimba y Lola</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_2" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/02_tennisballs.jpg"></div>
+          <div class="gb"><div class="in2">Образ «мячи»</div><div class="ib">Dragon Diffusion</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_25" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/19.jpg"></div>
+          <div class="gb"><div class="in2">Образ «помидоры»</div><div class="ib">Sanchy, Bimba y Lola</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_34" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/26_coat.jpg"></div>
+          <div class="gb"><div class="in2">Образ «плащ»</div><div class="ib">Mario Portolano</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_42" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/34_feathers.jpg"></div>
+          <div class="gb"><div class="in2">Образ «перья»</div><div class="ib">Here U Studio</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_43" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/35_raspberry.jpg"></div>
+          <div class="gb"><div class="in2">Образ «малина»</div><div class="ib">Here U Studio</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_18" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/14_bluepants.jpg"></div>
+          <div class="gb"><div class="in2">Образ «сандалии»</div><div class="ib">Birkenstock</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_30" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/22_beads.jpg"></div>
+          <div class="gb"><div class="in2">Образ «бусины»</div><div class="ib">Here U Studio, CAHU</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_6_tennis" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/tennis.jpg"></div>
+          <div class="gb"><div class="in2">Образ «теннис»</div><div class="ib">CAHU</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_0_chalk" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/pink_scarf.jpg"></div>
+          <div class="gb"><div class="in2">Образ «мел»</div><div class="ib">Mario Portolano</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_32" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/24_lemons.jpg"></div>
+          <div class="gb"><div class="in2">Образ «лимоны»</div><div class="ib">Dragon Diffusion</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_33" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/25_pinstripe.jpg"></div>
+          <div class="gb"><div class="in2">Образ «плетёнка»</div><div class="ib">CAHU, Mario Portolano, Here U Studio</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_17" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/17.jpg"></div>
+          <div class="gb"><div class="in2">Образ «кисть»</div><div class="ib">Here U Studio, Dragon Diffusion</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_35" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/35_podium.jpg"></div>
+          <div class="gb"><div class="in2">Образ «подиум»</div><div class="ib">Here U Studio</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_38" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/38.jpg"></div>
+          <div class="gb"><div class="in2">Образ «лодки»</div><div class="ib">CAHU</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_city_denim" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/denim.jpg"></div>
+          <div class="gb"><div class="in2">Образ «деним»</div><div class="ib">CAHU</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_9_safari" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/safari.jpg"></div>
+          <div class="gb"><div class="in2">Образ «сафари»</div><div class="ib">Here U Studio</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_12" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/12_sand.jpg"></div>
+          <div class="gb"><div class="in2">Образ «песок»</div><div class="ib">Poison Drop</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_1_sails" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/sails2.jpg"></div>
+          <div class="gb"><div class="in2">Образ «паруса»</div><div class="ib">CAHU, Poison Drop</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_41" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/33_dustyblue.jpg"></div>
+          <div class="gb"><div class="in2">Образ «овчина»</div><div class="ib">Bimba y Lola</div><span class="bl">Смотреть</span></div>
+        </a>
+      </div>
     </div>
     <div class="ft" style="background:#f5f0ea;">Mila Ushakova</div>
   </div>
@@ -2379,7 +2763,144 @@ body{background:#0D1A1E;height:100%;}
     <div class="in">
       <div class="look-num">категория</div>
       <div class="look-title">Middle</div>
-      <div class="look-box"><span>раздел в разработке</span><div class="look-plus">+</div></div>
+      <div class="g2">
+        <a class="gc" href="#p_look_1" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/01_coffee.jpg"></div>
+          <div class="gb"><div class="in2">Образ «скамейка»</div><div class="ib">LIME</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_2" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/02_tennisballs.jpg"></div>
+          <div class="gb"><div class="in2">Образ «мячи»</div><div class="ib">Ushatava, Sézane</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_5_retro" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/retro.jpg"></div>
+          <div class="gb"><div class="in2">Образ «ретро»</div><div class="ib">Essentiel Antwerp, The Frankie Shop</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_25" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/19.jpg"></div>
+          <div class="gb"><div class="in2">Образ «помидоры»</div><div class="ib">COS, LIME</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_34" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/26_coat.jpg"></div>
+          <div class="gb"><div class="in2">Образ «плащ»</div><div class="ib">Essentiel Antwerp, The Frankie Shop</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_42" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/34_feathers.jpg"></div>
+          <div class="gb"><div class="in2">Образ «перья»</div><div class="ib">Parfois, COS</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_43" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/35_raspberry.jpg"></div>
+          <div class="gb"><div class="in2">Образ «малина»</div><div class="ib">Essentiel Antwerp, Sezane, Ushatava</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_4" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/04_fan.jpg"></div>
+          <div class="gb"><div class="in2">Образ «веер»</div><div class="ib">Rogov, Ivolga, Essentiel Antwerp, COS</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_18" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/14_bluepants.jpg"></div>
+          <div class="gb"><div class="in2">Образ «сандалии»</div><div class="ib">Ushatava, Essentiel Antwerp, Daisyknit</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_30" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/22_beads.jpg"></div>
+          <div class="gb"><div class="in2">Образ «бусины»</div><div class="ib">Horosh, Parfois, Essentiel Antwerp</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_7" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/07_camel.jpg"></div>
+          <div class="gb"><div class="in2">Образ «кресла»</div><div class="ib">Ushatava, Mexicana, Horosh, Povod</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_6_tennis" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/tennis.jpg"></div>
+          <div class="gb"><div class="in2">Образ «теннис»</div><div class="ib">COS, Horosh, LIMÉ, Povod</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_21" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/17_orange.jpg"></div>
+          <div class="gb"><div class="in2">Образ «помада»</div><div class="ib">COS, Essentiel Antwerp, Ushatava</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_0_chalk" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/pink_scarf.jpg"></div>
+          <div class="gb"><div class="in2">Образ «мел»</div><div class="ib">Ushatava</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_32" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/24_lemons.jpg"></div>
+          <div class="gb"><div class="in2">Образ «лимоны»</div><div class="ib">Ivolga, LIME, Horosh, Arket, Ushatava</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_tennis_court" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/tennis_court.jpg"></div>
+          <div class="gb"><div class="in2">Образ «корт»</div><div class="ib">Essentiel Antwerp, Daria_Shi, Daisyknit, Sézane, LIME</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_33" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/25_pinstripe.jpg"></div>
+          <div class="gb"><div class="in2">Образ «плетёнка»</div><div class="ib">Ivolga, COS</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_17" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/17.jpg"></div>
+          <div class="gb"><div class="in2">Образ «кисть»</div><div class="ib">COS</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_35" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/35_podium.jpg"></div>
+          <div class="gb"><div class="in2">Образ «подиум»</div><div class="ib">The Frankie Shop, Daisyknit</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_38" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/38.jpg"></div>
+          <div class="gb"><div class="in2">Образ «лодки»</div><div class="ib"></div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_37_city" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/city.jpg"></div>
+          <div class="gb"><div class="in2">Образ «город»</div><div class="ib">Daisyknit, COS</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_city_denim" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/denim.jpg"></div>
+          <div class="gb"><div class="in2">Образ «деним»</div><div class="ib">Ushatava</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_40" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/32_bluesweater.jpg"></div>
+          <div class="gb"><div class="in2">Образ «меланж»</div><div class="ib">Povod</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_35_felt" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/felt.jpg"></div>
+          <div class="gb"><div class="in2">Образ «фетр»</div><div class="ib">The Frankie Shop, Ushatava</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_8" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/08_pillows.jpg"></div>
+          <div class="gb"><div class="in2">Образ «подушки»</div><div class="ib">LIME, Essentiel Antwerp, Sézane</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_9" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/09_trench.jpg"></div>
+          <div class="gb"><div class="in2">Образ «тренч»</div><div class="ib">COS, Ushatava, Essentiel Antwerp</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_9_safari" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/safari.jpg"></div>
+          <div class="gb"><div class="in2">Образ «сафари»</div><div class="ib">The Frankie Shop, Sézane</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_12" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/12_sand.jpg"></div>
+          <div class="gb"><div class="in2">Образ «песок»</div><div class="ib">LIME, The Frankie Shop, Mexicana</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_19" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/15.jpg"></div>
+          <div class="gb"><div class="in2">Образ «пробки»</div><div class="ib">Arket, Horosh, Sezane, Povod</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_44" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/44_coffee.jpg"></div>
+          <div class="gb"><div class="in2">Образ «кофе»</div><div class="ib">Ushatava, The Frankie Shop, Walk of Shame, COS, Sézane</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_5" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/06.jpg"></div>
+          <div class="gb"><div class="in2">Образ «авто»</div><div class="ib">Ushatava, Sezane</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_22" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/18.jpg"></div>
+          <div class="gb"><div class="in2">Образ «стулья»</div><div class="ib">COS, Sezane, Mexicana</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_1_sails" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/sails2.jpg"></div>
+          <div class="gb"><div class="in2">Образ «паруса»</div><div class="ib">The Frankie Shop, Mexicana</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_41" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/33_dustyblue.jpg"></div>
+          <div class="gb"><div class="in2">Образ «овчина»</div><div class="ib">Horosh</div><span class="bl">Смотреть</span></div>
+        </a>
+      </div>
     </div>
     <div class="ft" style="background:#f5f0ea;">Mila Ushakova</div>
   </div>
@@ -2389,7 +2910,120 @@ body{background:#0D1A1E;height:100%;}
     <div class="in">
       <div class="look-num">категория</div>
       <div class="look-title">Mass market</div>
-      <div class="look-box"><span>раздел в разработке</span><div class="look-plus">+</div></div>
+      <div class="g2">
+        <a class="gc" href="#p_look_1" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/01_coffee.jpg"></div>
+          <div class="gb"><div class="in2">Образ «скамейка»</div><div class="ib">Zara, Massimo Dutti</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_2" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/02_tennisballs.jpg"></div>
+          <div class="gb"><div class="in2">Образ «мячи»</div><div class="ib">Zara</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_25" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/19.jpg"></div>
+          <div class="gb"><div class="in2">Образ «помидоры»</div><div class="ib">Massimo Dutti, H&M</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_42" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/34_feathers.jpg"></div>
+          <div class="gb"><div class="in2">Образ «перья»</div><div class="ib">Zara</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_43" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/35_raspberry.jpg"></div>
+          <div class="gb"><div class="in2">Образ «малина»</div><div class="ib">Zara</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_4" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/04_fan.jpg"></div>
+          <div class="gb"><div class="in2">Образ «веер»</div><div class="ib">Zara</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_18" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/14_bluepants.jpg"></div>
+          <div class="gb"><div class="in2">Образ «сандалии»</div><div class="ib">Zara</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_30" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/22_beads.jpg"></div>
+          <div class="gb"><div class="in2">Образ «бусины»</div><div class="ib">Zara</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_7" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/07_camel.jpg"></div>
+          <div class="gb"><div class="in2">Образ «кресла»</div><div class="ib">Zara</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_6_tennis" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/tennis.jpg"></div>
+          <div class="gb"><div class="in2">Образ «теннис»</div><div class="ib">H&M, Zara</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_0_chalk" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/pink_scarf.jpg"></div>
+          <div class="gb"><div class="in2">Образ «мел»</div><div class="ib">Zara</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_27" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/21_sails.jpg"></div>
+          <div class="gb"><div class="in2">Образ «закат»</div><div class="ib">Zara, Massimo Dutti</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_tennis_court" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/tennis_court.jpg"></div>
+          <div class="gb"><div class="in2">Образ «корт»</div><div class="ib">Zara</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_33" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/25_pinstripe.jpg"></div>
+          <div class="gb"><div class="in2">Образ «плетёнка»</div><div class="ib">Zara</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_17" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/17.jpg"></div>
+          <div class="gb"><div class="in2">Образ «кисть»</div><div class="ib">Zara, H&M</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_35" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/35_podium.jpg"></div>
+          <div class="gb"><div class="in2">Образ «подиум»</div><div class="ib">Massimo Dutti, Zara</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_38" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/38.jpg"></div>
+          <div class="gb"><div class="in2">Образ «лодки»</div><div class="ib"></div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_37_city" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/city.jpg"></div>
+          <div class="gb"><div class="in2">Образ «город»</div><div class="ib">H&M</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_40" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/32_bluesweater.jpg"></div>
+          <div class="gb"><div class="in2">Образ «меланж»</div><div class="ib">Zara</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_35_felt" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/felt.jpg"></div>
+          <div class="gb"><div class="in2">Образ «фетр»</div><div class="ib">Zara</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_8" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/08_pillows.jpg"></div>
+          <div class="gb"><div class="in2">Образ «подушки»</div><div class="ib">Zara, Calzedonia</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_9" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/09_trench.jpg"></div>
+          <div class="gb"><div class="in2">Образ «тренч»</div><div class="ib">Zara</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_9_safari" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/safari.jpg"></div>
+          <div class="gb"><div class="in2">Образ «сафари»</div><div class="ib">Zara</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_12" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/12_sand.jpg"></div>
+          <div class="gb"><div class="in2">Образ «песок»</div><div class="ib">Zara</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_19" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/15.jpg"></div>
+          <div class="gb"><div class="in2">Образ «пробки»</div><div class="ib">Zara</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_5" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/06.jpg"></div>
+          <div class="gb"><div class="in2">Образ «авто»</div><div class="ib">Zara</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_22" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/18.jpg"></div>
+          <div class="gb"><div class="in2">Образ «стулья»</div><div class="ib">H&M</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_41" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/33_dustyblue.jpg"></div>
+          <div class="gb"><div class="in2">Образ «овчина»</div><div class="ib">Zara</div><span class="bl">Смотреть</span></div>
+        </a>
+      </div>
     </div>
     <div class="ft" style="background:#f5f0ea;">Mila Ushakova</div>
   </div>
@@ -2399,7 +3033,100 @@ body{background:#0D1A1E;height:100%;}
     <div class="in">
       <div class="look-num">категория</div>
       <div class="look-title">Luxury</div>
-      <div class="look-box"><span>раздел в разработке</span><div class="look-plus">+</div></div>
+      <div class="g2">
+        <a class="gc" href="#p_look_1" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/01_coffee.jpg"></div>
+          <div class="gb"><div class="in2">Образ «скамейка»</div><div class="ib">Tory Burch via Farfetch</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_2" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/02_tennisballs.jpg"></div>
+          <div class="gb"><div class="in2">Образ «мячи»</div><div class="ib">Farfetch</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_5_retro" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/retro.jpg"></div>
+          <div class="gb"><div class="in2">Образ «ретро»</div><div class="ib">Tom Ford via Farfetch, MM6 Maison Margiela via Farfetch</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_25" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/19.jpg"></div>
+          <div class="gb"><div class="in2">Образ «помидоры»</div><div class="ib">JW Anderson</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_34" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/26_coat.jpg"></div>
+          <div class="gb"><div class="in2">Образ «плащ»</div><div class="ib">Durazzi Milano via Farfetch</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_43" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/35_raspberry.jpg"></div>
+          <div class="gb"><div class="in2">Образ «малина»</div><div class="ib">Anine Bing via Farfetch</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_4" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/04_fan.jpg"></div>
+          <div class="gb"><div class="in2">Образ «веер»</div><div class="ib">Nanushka via Farfetch</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_30" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/22_beads.jpg"></div>
+          <div class="gb"><div class="in2">Образ «бусины»</div><div class="ib">Simkhai via Farfetch</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_21" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/17_orange.jpg"></div>
+          <div class="gb"><div class="in2">Образ «помада»</div><div class="ib">Maliparmi via Farfetch, Longchamp via Farfetch</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_0_chalk" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/pink_scarf.jpg"></div>
+          <div class="gb"><div class="in2">Образ «мел»</div><div class="ib">Farfetch</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_17" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/17.jpg"></div>
+          <div class="gb"><div class="in2">Образ «кисть»</div><div class="ib">Prada</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_35" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/35_podium.jpg"></div>
+          <div class="gb"><div class="in2">Образ «подиум»</div><div class="ib">Anine Bing via Farfetch</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_37_city" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/city.jpg"></div>
+          <div class="gb"><div class="in2">Образ «город»</div><div class="ib">Farfetch</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_city_denim" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/denim.jpg"></div>
+          <div class="gb"><div class="in2">Образ «деним»</div><div class="ib">The Frankie Shop via Mytheresa, JNBY via Farfetch, Prada via Farfetch, Agolde via Farfetch, Mexicana via Farfetch</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_40" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/32_bluesweater.jpg"></div>
+          <div class="gb"><div class="in2">Образ «меланж»</div><div class="ib">Farfetch</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_35_felt" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/felt.jpg"></div>
+          <div class="gb"><div class="in2">Образ «фетр»</div><div class="ib">Maniere De Voir via Farfetch, Lanvin via Farfetch, Bimba y Lola via Farfetch</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_9_safari" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/safari.jpg"></div>
+          <div class="gb"><div class="in2">Образ «сафари»</div><div class="ib">Toteme via Farfetch, Agolde via Farfetch</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_12" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/12_sand.jpg"></div>
+          <div class="gb"><div class="in2">Образ «песок»</div><div class="ib">Rebecca Vallance via Farfetch</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_19" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/15.jpg"></div>
+          <div class="gb"><div class="in2">Образ «пробки»</div><div class="ib">Prada, JW Anderson, YSL</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_44" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/44_coffee.jpg"></div>
+          <div class="gb"><div class="in2">Образ «кофе»</div><div class="ib">Lemaire via Farfetch</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_5" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/06.jpg"></div>
+          <div class="gb"><div class="in2">Образ «авто»</div><div class="ib">Farfetch, Prada</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_22" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/18.jpg"></div>
+          <div class="gb"><div class="in2">Образ «стулья»</div><div class="ib">JW Anderson</div><span class="bl">Смотреть</span></div>
+        </a>
+        <a class="gc" href="#p_look_41" style="display:block;text-decoration:none;color:inherit;">
+          <div class="gi"><img src="looks/33_dustyblue.jpg"></div>
+          <div class="gb"><div class="in2">Образ «овчина»</div><div class="ib">Farfetch</div><span class="bl">Смотреть</span></div>
+        </a>
+      </div>
     </div>
     <div class="ft" style="background:#f5f0ea;">Mila Ushakova</div>
   </div>
@@ -2410,5 +3137,6 @@ function scrollToEl(id){
   if(el){ el.scrollIntoView({behavior:'smooth', block:'start'}); }
 }
 </script>
+<div class="back-nav" onclick="scrollToEl('p4')"><span>&uarr;</span><span>Меню</span></div>
 </div>
 </body></html>
