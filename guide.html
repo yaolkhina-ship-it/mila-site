@@ -91,6 +91,28 @@ html{background:#0D1A1E;}
 @keyframes twinkle{0%,100%{opacity:0.12;}50%{opacity:0.7;}}
 @keyframes slowspin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
 
+/* REVIEWS CAROUSEL */
+.rev-arrow{flex:0 0 auto;width:42px;height:42px;border-radius:50%;border:0.5px solid rgba(201,169,110,0.32);background:#0C1519;color:#B8903A;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s ease,transform .15s ease,border-color .2s ease;-webkit-tap-highlight-color:transparent;}
+.rev-arrow:hover{background:rgba(201,169,110,0.12);border-color:#C9A96E;}
+.rev-arrow:active{transform:scale(0.92);}
+.rev-card{position:relative;flex:1 1 auto;min-height:280px;background:#0C1519;border:0.5px solid rgba(201,169,110,0.2);box-shadow:0 18px 40px -22px rgba(0,0,0,0.5);border-radius:4px;padding:44px 36px 28px;display:flex;flex-direction:column;justify-content:center;overflow:hidden;}
+.rev-mark{position:absolute;top:-14px;left:20px;font-family:'Cormorant Garamond',serif;font-size:130px;line-height:1;color:rgba(201,169,110,0.14);pointer-events:none;user-select:none;}
+.rev-quote{position:relative;font-style:italic;font-size:clamp(16px,2.4vw,19px);line-height:1.6;color:#F2EDF0;transition:opacity .3s ease,transform .3s ease;}
+.rev-quote p{margin:0 0 14px;}
+.rev-quote p:last-child{margin-bottom:0;}
+.rev-gap{color:#B8903A;font-style:normal;}
+.rev-attr{position:relative;margin-top:20px;padding-top:14px;border-top:0.5px solid rgba(201,169,110,0.2);display:flex;flex-direction:column;gap:4px;transition:opacity .3s ease;}
+.rev-fade{opacity:0;transform:translateY(4px);}
+.rev-dot{width:5px;height:5px;border-radius:50%;background:rgba(242,237,240,0.22);border:none;padding:0;cursor:pointer;transition:background .2s ease,transform .2s ease;}
+.rev-dot:hover{background:rgba(201,169,110,0.55);}
+.rev-dot.active{background:#C9A96E;transform:scale(1.5);}
+
+@media(max-width:520px){
+  .rev-card{padding:36px 22px 24px;min-height:320px;}
+  .rev-mark{font-size:100px;top:-8px;left:10px;}
+  .rev-arrow{width:36px;height:36px;}
+}
+
 @media(max-width:720px){
   #page2 .topbar{padding:20px 24px !important;}
   #page2 .topbar-nav,#page2 .topbar-date{display:none !important;}
@@ -155,8 +177,13 @@ html{background:#0D1A1E;}
 </style>
 </head>
 <meta name="p:domain_verify" content="b98a6486d3573266f279ae8f09653c20"/>
-<script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="1c973242-faa1-40fb-a0a1-6ad2d482973a";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
 <body>
+
+
+<!-- Плавающая кнопка поддержки — напрямую в Telegram -->
+<a href="https://t.me/YanaOlkhina" target="_blank" rel="noopener" style="position:fixed; right:20px; bottom:20px; z-index:9998; width:56px; height:56px; border-radius:50%; background:#c97184; display:flex; align-items:center; justify-content:center; box-shadow:0 6px 20px rgba(0,0,0,0.35); color:#fff;">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 4L3 11.5l6 2.2M21 4l-3.4 16L9.5 15M21 4L9.5 15m0 0v5l3-3.4"/></svg>
+</a>
 
 
 <!-- ══ PAGE 1 ══ -->
@@ -172,33 +199,60 @@ html{background:#0D1A1E;}
     
     <button class="btn-white" onclick="goToPage2()">Хочу</button>
 
-    <div class="hero-features">
-      <div class="hero-feat">
-        <svg width="20" height="20" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M16 4C16 4 8 10 8 18a8 8 0 0016 0C24 10 16 4 16 4z"/><path d="M16 18v-6"/></svg>
-        <p>Цветовой паспорт</p>
-      </div>
-      <div class="hero-feat-div"></div>
-      <div class="hero-feat">
-        <svg width="20" height="20" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="12" r="7"/><circle cx="20" cy="20" r="7"/></svg>
-        <p>Бесконечные сочетания</p>
-      </div>
-      <div class="hero-feat-div"></div>
-      <div class="hero-feat">
-        <svg width="20" height="20" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M16 4l3 9h9l-7 5 3 9-8-6-8 6 3-9-7-5h9z"/></svg>
-        <p>Статус в деталях</p>
-      </div>
-      <div class="hero-feat-div"></div>
-      <div class="hero-feat">
-        <svg width="20" height="20" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M6 14c0-5.5 4-10 10-10s10 4.5 10 10"/><path d="M4 14h24"/><path d="M10 14v12M16 14v12M22 14v12M7 26h18"/></svg>
-        <p>Стиль на любой сезон</p>
-      </div>
-      <div class="hero-feat-div"></div>
-      <div class="hero-feat">
-        <a href="https://www.instagram.com/milaushakovva/" target="_blank" style="color:#fff;opacity:0.9;display:block;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
-        <a href="https://t.me/themorningsmothie" target="_blank" style="color:#fff;opacity:0.7;display:block;margin-top:6px;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 5L2 12.5l7 1M21 5l-2.5 15L9 13.5M21 5L9 13.5m0 0v5l3.5-3"/></svg></a>
+    <div id="promo-timer-hero" style="display:flex;flex-direction:column;align-items:center;gap:12px;margin-top:8px;">
+      <p style="font-size:10.5px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.75);">🔥 Осеннее промо заканчивается через</p>
+      <div id="promo-timer" style="display:flex;align-items:center;gap:8px;">
+        <div class="promo-chip" style="background:transparent;border:none;border-radius:0;padding:0 6px;min-width:44px;text-align:center;"><div class="promo-num" id="promo-d" style="font-family:'Jost',sans-serif;font-size:32px;font-weight:700;line-height:1;color:#fff;font-variant-numeric:tabular-nums;">—</div><div style="font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-top:2px;">дней</div></div>
+        <div class="promo-chip" style="background:transparent;border:none;border-radius:0;padding:0 6px;min-width:44px;text-align:center;"><div class="promo-num" id="promo-h" style="font-family:'Jost',sans-serif;font-size:32px;font-weight:700;line-height:1;color:#fff;font-variant-numeric:tabular-nums;">—</div><div style="font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-top:2px;">час</div></div>
+        <div class="promo-chip" style="background:transparent;border:none;border-radius:0;padding:0 6px;min-width:44px;text-align:center;"><div class="promo-num" id="promo-m" style="font-family:'Jost',sans-serif;font-size:32px;font-weight:700;line-height:1;color:#fff;font-variant-numeric:tabular-nums;">—</div><div style="font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-top:2px;">мин</div></div>
+        <div class="promo-chip" style="background:transparent;border:none;border-radius:0;padding:0 6px;min-width:44px;text-align:center;"><div class="promo-num" id="promo-s" style="font-family:'Jost',sans-serif;font-size:32px;font-weight:700;line-height:1;color:#fff;font-variant-numeric:tabular-nums;">—</div><div style="font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-top:2px;">сек</div></div>
       </div>
     </div>
   </div>
+  <style>
+  @keyframes promoPulse{
+    0%,100%{box-shadow:0 0 0 0 rgba(201,169,110,0.5);}
+    50%{box-shadow:0 0 0 6px rgba(201,169,110,0);}
+  }
+  #promo-timer-hero .promo-chip{animation:promoPulse 2.2s ease-in-out infinite;}
+  @media (prefers-reduced-motion: reduce){
+    #promo-timer-hero .promo-chip{animation:none;}
+  }
+  @media (max-width:480px){
+    #promo-timer-hero .promo-num{font-size:22px !important;}
+    #promo-timer-hero .promo-chip{padding:6px 9px !important;min-width:46px !important;}
+  }
+  </style>
+  <script>
+  (function(){
+    var deadline = new Date('2026-10-05T23:59:00+03:00').getTime();
+    var el = document.getElementById('promo-timer');
+    var elD = document.getElementById('promo-d');
+    var elH = document.getElementById('promo-h');
+    var elM = document.getElementById('promo-m');
+    var elS = document.getElementById('promo-s');
+    if (!elD) return;
+    function p(n){ return n < 10 ? '0'+n : String(n); }
+    function tick(){
+      var diff = deadline - Date.now();
+      if (diff <= 0) {
+        el.innerHTML = '<span style="color:#fff;font-weight:700;font-family:\'Cormorant Garamond\',serif;font-size:18px;">Акция завершена</span>';
+        clearInterval(timerInterval);
+        return;
+      }
+      var d = Math.floor(diff / 86400000);
+      var h = Math.floor((diff % 86400000) / 3600000);
+      var m = Math.floor((diff % 3600000) / 60000);
+      var s = Math.floor((diff % 60000) / 1000);
+      elD.textContent = p(d);
+      elH.textContent = p(h);
+      elM.textContent = p(m);
+      elS.textContent = p(s);
+    }
+    tick();
+    var timerInterval = setInterval(tick, 1000);
+  })();
+  </script>
   <footer class="site-footer">
     <a href="#" onclick="showDoc('page3');return false;">Договор оферты</a>
     <a href="#" onclick="showDoc('page4');return false;">Согласие на обработку ПД</a>
@@ -249,7 +303,7 @@ html{background:#0D1A1E;}
       <div style="position:absolute; top:10%; left:40%; width:3px; height:3px; border-radius:50%; background:#F2EDF0; animation:twinkle 4.6s ease-in-out infinite 1.6s;"></div>
     </div>
 
-    <div class="hero-grid" style="display:grid; grid-template-columns:1.05fr 0.95fr; gap:80px; align-items:center; position:relative;">
+    <div class="hero-grid" style="display:grid; grid-template-columns:1.05fr 0.95fr; gap:80px; align-items:center; position:relative; max-width:1300px; margin:0 auto;">
       <div>
         <div class="tracked" style="font-size:12px; color:#C9A96E; margin-bottom:24px;">В моём стиле</div>
         <div class="serif" style="font-weight:600; line-height:1.04; font-size:clamp(48px,5.2vw,78px); color:#F2EDF0;">
@@ -321,7 +375,7 @@ html{background:#0D1A1E;}
     <div class="tracked" style="font-size:12px; color:#B8903A; margin-bottom:20px; text-align:center;">Внутри системы</div>
     <div class="serif" style="font-size:clamp(32px,3vw,46px); font-weight:600; text-align:center; margin-bottom:72px;">Что внутри</div>
 
-    <div class="cards-grid" style="display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:24px; margin-bottom:56px;">
+    <div class="cards-grid" style="display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:24px; max-width:1300px; margin:0 auto 56px;">
 
       <div class="card2" style="background:#F2EDF0; border-radius:5px; padding:24px; display:flex; flex-direction:column; gap:16px;">
         <div style="height:88px; border-radius:4px; background-image:url('/guide/palitry/03.jpg'); background-size:cover; background-position:center;"></div>
@@ -389,7 +443,7 @@ html{background:#0D1A1E;}
   </div>
 
   <!-- БЛОК 4 · КАК ЭТО РАБОТАЕТ -->
-  <div class="sec-pad-xl" style="padding:130px 64px;">
+  <div class="sec-pad-xl" style="padding:130px 64px; max-width:1300px; margin:0 auto;">
     <div class="tracked" style="font-size:12px; color:#B8903A; margin-bottom:20px;">Как это работает</div>
     <div class="serif" style="font-size:clamp(32px,3vw,46px); font-weight:600; margin-bottom:44px; max-width:560px;">Формула системы</div>
     <div style="font-size:16px; line-height:1.8; color:#332C24; max-width:640px; margin-bottom:56px;">
@@ -510,33 +564,118 @@ html{background:#0D1A1E;}
   </div>
 
   <!-- БЛОК 6 · ОТЗЫВЫ -->
-  <div class="sec-pad-xl" style="background:#070D10; color:#F2EDF0; padding:130px 64px;">
-    <div class="serif" style="font-size:clamp(28px,2.8vw,38px); font-weight:600; text-align:center; margin-bottom:72px; max-width:640px; margin-left:auto; margin-right:auto;">
-      200 девушек прошли систему в прошлом сезоне.
+  <div id="otzyvy" class="sec-pad-xl" style="background:#070D10; color:#F2EDF0; padding:130px 64px;">
+    <div class="serif" style="font-size:clamp(28px,2.8vw,38px); font-weight:600; text-align:center; margin-bottom:12px; max-width:640px; margin-left:auto; margin-right:auto;">
+      300 девушек прошли систему в прошлом сезоне.
+    </div>
+    <div class="tracked" style="font-size:12px; color:#B8903A; text-align:center; margin-bottom:56px;">Книга отзывов</div>
+
+    <div style="max-width:640px; margin:0 auto; display:flex; align-items:center; justify-content:center; gap:14px;">
+      <button id="revPrev" aria-label="Предыдущий отзыв" class="rev-arrow">
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+
+      <div class="rev-card">
+        <div aria-hidden="true" class="rev-mark">"</div>
+        <div id="revQuote" class="serif rev-quote"></div>
+      </div>
+
+      <button id="revNext" aria-label="Следующий отзыв" class="rev-arrow">
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
     </div>
 
-    <div class="testi-grid" style="display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:28px; max-width:1150px; margin:0 auto;">
-
-      <div style="background:#0C1519; border-radius:16px 16px 16px 4px; padding:26px 24px;">
-        <div class="serif" style="font-style:italic; font-size:16px; line-height:1.6; color:#F2EDF0; margin-bottom:16px;">«Собрала 7 новых образов из того, что уже было в шкафу»</div>
-        <div class="tracked" style="font-size:10px; color:rgba(242,237,240,0.4);">Из переписки с клиенткой</div>
-      </div>
-
-      <div style="background:#0C1519; border-radius:16px 16px 16px 4px; padding:26px 24px;">
-        <div class="serif" style="font-style:italic; font-size:16px; line-height:1.6; color:#F2EDF0; margin-bottom:16px;">«Наконец поняла, почему мои вещи не складывались вместе»</div>
-        <div class="tracked" style="font-size:10px; color:rgba(242,237,240,0.4);">Из переписки с клиенткой</div>
-      </div>
-
-      <div style="background:#0C1519; border-radius:16px 16px 16px 4px; padding:26px 24px;">
-        <div class="serif" style="font-style:italic; font-size:16px; line-height:1.6; color:#F2EDF0; margin-bottom:16px;">«Купила одну вещь — и она заработала сразу с тремя другими»</div>
-        <div class="tracked" style="font-size:10px; color:rgba(242,237,240,0.4);">Из переписки с клиенткой</div>
-      </div>
-
+    <div style="display:flex; align-items:center; justify-content:center; gap:16px; margin-top:24px;">
+      <span id="revCount" class="tracked" style="font-size:10px; color:rgba(242,237,240,0.5);"></span>
+      <div id="revDots" style="display:flex; gap:7px;"></div>
     </div>
   </div>
 
+  <script>
+  (function(){
+    var reviews = [
+      {
+        html: "<p>И если честно, сейчас я расслабляюсь, отдыхаю и наполняю себя красотой, изучая новую осеннюю систему цветовых сочетаний. Так в воздухе уже пахнет осенью, и я очень люблю это время года за цвет, краски, за возможность чуть больше на себя надеть, укутаться, за многослойность.</p><p>Я уже приобрела несколько вещей из гайда. Складываю из имеющихся в моём гардеробе вещей. Как же получается красиво! Услада для глаз, честное слово!</p>",
+        name: "Марина Мелентьева",
+        role: "участница клуба «В моём стиле»"
+      },
+      {
+        html: "<p>Мила, добрый вечер. Спасибо за такой шикарный гайд, расширяющий перспективу восприятия цвета и вдохновляющий своей эстетикой 🥰</p>",
+        name: "@signorin…",
+        role: "из переписки в Instagram"
+      },
+      {
+        html: "<p>Мила, спасибо! Купила не раздумывая. Вот это сочетания 🔥😍 Поняла, что нужно больше акцентных аксессуаров! Отличный гид!</p>",
+        name: "Клиентка",
+        role: "отклик на сторис-репост «Отзыв»"
+      },
+      {
+        html: "<p>Хочу поделиться своими впечатлениями от презентации. Это была отличная инвестиция! Мила, огромное спасибо и благодарность за такую проделанную работу! 🙏</p><p>Женские образы — просто восторг. Сразу чувствуется стиль Милы. Это тот самый «интеллектуальный» подход, который выделяется на фоне типичных Instagram-лент. Сразу считывается глубокая работа с цветом, фактурами, винтажом, деталями. <span class=\"rev-gap\">[…]</span></p><p>Отдельного упоминания заслуживают мужские образы. Это настоящий глоток свежего воздуха — среди привычных узких джинс и «квадратиш, практиш, гут». Работа с оверсайзом, укороченными свободными брюками, интересными силуэтами и аксессуарами — глотка свободы, статуса и характера.</p>",
+        name: "Dana Stylist",
+        role: "приглашённый стилист"
+      },
+      {
+        html: "<p>Мила, дорогая!!! Это Вам спасибо за вашу уникальность. Никаких шоппинг-листов на все сезоны для всех подряд, никаких причёсываний всех под одну гребёнку — только поиск личного стиля и подчёркивание достоинств и харизмы каждого отдельного человека.</p><p>Спасибо за то, что делитесь опытом, знаниями и своим вкусом — не просто в одежде, а вкусом к жизни.</p>",
+        name: "Из переписки",
+        role: "участница клуба «В моём стиле»"
+      }
+    ];
+
+    var idx = 0;
+    var quoteEl = document.getElementById('revQuote');
+    var countEl = document.getElementById('revCount');
+    var dotsEl = document.getElementById('revDots');
+    var prevBtn = document.getElementById('revPrev');
+    var nextBtn = document.getElementById('revNext');
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    reviews.forEach(function(_, i){
+      var b = document.createElement('button');
+      b.className = 'rev-dot' + (i === 0 ? ' active' : '');
+      b.setAttribute('aria-label', 'Отзыв ' + (i + 1));
+      b.addEventListener('click', function(){ go(i); });
+      dotsEl.appendChild(b);
+    });
+
+    function pad(n){ return String(n).padStart(2, '0'); }
+
+    function render(){
+      var r = reviews[idx];
+      quoteEl.innerHTML = r.html;
+      countEl.textContent = pad(idx + 1) + ' — ' + pad(reviews.length);
+      Array.prototype.forEach.call(dotsEl.children, function(d, i){ d.classList.toggle('active', i === idx); });
+    }
+
+    function go(next){
+      if (next === idx) return;
+      if (reduceMotion){ idx = next; render(); return; }
+      quoteEl.classList.add('rev-fade');
+      setTimeout(function(){
+        idx = next;
+        render();
+        quoteEl.classList.remove('rev-fade');
+      }, 220);
+    }
+
+    prevBtn.addEventListener('click', function(){ go((idx - 1 + reviews.length) % reviews.length); });
+    nextBtn.addEventListener('click', function(){ go((idx + 1) % reviews.length); });
+
+    var touchX = null;
+    var revSection = quoteEl.closest('.sec-pad-xl');
+    revSection.addEventListener('touchstart', function(e){ touchX = e.touches[0].clientX; }, {passive:true});
+    revSection.addEventListener('touchend', function(e){
+      if (touchX === null) return;
+      var dx = e.changedTouches[0].clientX - touchX;
+      if (Math.abs(dx) > 40){ dx > 0 ? go((idx - 1 + reviews.length) % reviews.length) : go((idx + 1) % reviews.length); }
+      touchX = null;
+    }, {passive:true});
+
+    render();
+  })();
+  </script>
+
   <!-- БЛОК 7 · ЦЕНА -->
-  <div class="sec-pad-xl price-grid" style="padding:130px 64px; display:grid; grid-template-columns:1fr 0.85fr; gap:80px;">
+  <div class="sec-pad-xl price-grid" style="padding:130px 64px; display:grid; grid-template-columns:1fr 0.85fr; gap:80px; max-width:1300px; margin:0 auto;">
     <div>
       <div class="tracked" style="font-size:12px; color:#B8903A; margin-bottom:24px;">Присоединиться</div>
       <div class="serif" style="font-size:clamp(30px,3vw,42px); font-weight:600; line-height:1.15; margin-bottom:6px;">Система цветовых сочетаний</div>
@@ -756,6 +895,14 @@ function goToDoc(action){
   document.querySelectorAll('.page,.doc-page').forEach(p=>p.classList.remove('active'));
   document.getElementById(docFrom).classList.add('active');
   window.scrollTo(0,0);
+}
+
+if (window.location.hash === '#otzyvy') {
+  goToPage2();
+  window.addEventListener('load', function(){
+    var el = document.getElementById('otzyvy');
+    if (el) el.scrollIntoView({block:'start'});
+  });
 }
 </script>
 
