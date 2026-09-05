@@ -210,14 +210,15 @@ html{background:#0D1A1E;}
     </div>
   </div>
   <style>
+  @-webkit-keyframes promoPulse{
+    0%,100%{box-shadow:0 0 0 0 rgba(201,169,110,0.5);}
+    50%{box-shadow:0 0 0 6px rgba(201,169,110,0);}
+  }
   @keyframes promoPulse{
     0%,100%{box-shadow:0 0 0 0 rgba(201,169,110,0.5);}
     50%{box-shadow:0 0 0 6px rgba(201,169,110,0);}
   }
-  #promo-timer-hero .promo-chip{animation:promoPulse 2.2s ease-in-out infinite;}
-  @media (prefers-reduced-motion: reduce){
-    #promo-timer-hero .promo-chip{animation:none;}
-  }
+  #promo-timer-hero .promo-chip{animation:promoPulse 2.2s ease-in-out infinite;-webkit-animation:promoPulse 2.2s ease-in-out infinite;}
   @media (max-width:480px){
     #promo-timer-hero .promo-num{font-size:22px !important;}
     #promo-timer-hero .promo-chip{padding:6px 9px !important;min-width:46px !important;}
