@@ -32,14 +32,12 @@ nav{position:relative;z-index:9999;display:flex;justify-content:space-between;al
 .nav-pill .cta:hover{color:var(--gold);border-color:var(--gold);}
 
 /* HERO — editorial: заголовок, фото на всю ширину, био */
-.hero-editorial{padding-top:1rem;}
-.hero-title{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(1.8rem,3.4vw,2.6rem);text-align:center;color:var(--ink);letter-spacing:.01em;padding:2.5rem 1.5rem 2.2rem;}
-.hero-title .sep{color:var(--gold);padding:0 .5rem;font-style:italic;}
-.hero-photo{width:100%;max-height:82vh;overflow:hidden;background:var(--bg2);}
-.hero-photo img{width:100%;height:100%;max-height:82vh;object-fit:cover;object-position:50% 20%;display:block;}
-.bio-wrap{max-width:640px;margin:0 auto;padding:3.5rem 2.5rem 4.5rem;text-align:left;}
-.bio-tagline{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:400;font-size:1.35rem;line-height:1.55;color:var(--ink);margin-bottom:1.4rem;}
-.bio-text{font-size:.92rem;line-height:1.9;color:var(--ink-mid);}
+.hero-editorial{padding-top:2.5rem;}
+.hero-photo{width:100%;aspect-ratio:21/9;overflow:hidden;background:var(--bg2);}
+.hero-photo img{width:100%;height:100%;object-fit:cover;object-position:62% 12%;display:block;}
+.bio-wrap{max-width:720px;margin:0 auto;padding:4.5rem 2.5rem 5.5rem;text-align:left;}
+.bio-tagline{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:400;font-size:1.55rem;line-height:1.55;color:var(--ink);margin-bottom:1.6rem;}
+.bio-text{font-size:1.02rem;line-height:1.95;color:var(--ink-mid);}
 .bio-text+.bio-text{margin-top:1.1rem;}
 
 /* SECTIONS */
@@ -142,16 +140,15 @@ nav{position:relative;z-index:9999;display:flex;justify-content:space-between;al
 
 <!-- HERO — editorial -->
 <section class="hero-editorial">
-  <h1 class="hero-title">Мила Ушакова <span class="sep">//</span> Mila Ushakova</h1>
-
   <div class="hero-photo">
-    <img src="mila-portrait.jpg" alt="Мила Ушакова — стилист и fashion-аналитик">
+    <img src="mila-portrait-2.jpg" alt="Мила Ушакова — стилист и fashion-аналитик">
   </div>
 
   <div class="bio-wrap">
     <p class="bio-tagline">Стилист, fashion-аналитик, автор закрытого клуба «В моём стиле».</p>
-    <p class="bio-text">Мила разбирает моду не как набор трендов, а как язык. Аккредитована на крупнейших неделях моды в Милане, Париже и Копенгагене, пишет аналитику о моде и преподаёт — чтобы вы не просто одевались красиво, а понимали, почему это работает.</p>
-    <p class="bio-text">Ведёт закрытый клуб «В моём стиле», проводит персональные консультации и создала систему цветовых сочетаний — практический инструмент для тех, кто хочет собирать образы самостоятельно, без лишних сомнений.</p>
+    <p class="bio-text">Мила разбирает моду не как набор трендов, а как язык. Аккредитована на крупнейших неделях моды в Милане, Париже и Копенгагене, пишет аналитику о моде и преподаёт, чтобы вы не просто одевались красиво, а понимали, почему это работает.</p>
+    <p class="bio-text">Ведёт закрытый клуб «В моём стиле», проводит персональные консультации и создала систему цветовых сочетаний, практический инструмент для тех, кто хочет собирать образы самостоятельно, без лишних сомнений.</p>
+
   </div>
 </section>
 
