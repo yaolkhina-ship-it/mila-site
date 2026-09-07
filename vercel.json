@@ -65,6 +65,7 @@
     { "src": "/switzerland", "dest": "/switzerland.html" },
     { "src": "/tours", "dest": "/tours.html" },
     { "src": "/pilot", "dest": "/pilot-booking.html" },
+    { "src": "/mnogosloynost", "dest": "/mnogosloynost.html" },
     { "src": "/", "dest": "/index.html" },
     { "src": "/(.*)\\.html", "dest": "/$1.html" },
     { "src": "/(.*)", "dest": "/$1.html" }
