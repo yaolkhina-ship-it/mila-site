@@ -968,6 +968,10 @@ if (window.location.hash === '#otzyvy') {
     if (el) el.scrollIntoView({block:'start'});
   });
 }
+if (window.location.hash === '#privacy') {
+  goToPage2();
+  window.addEventListener('load', function(){ showDoc('page4'); });
+}
 </script>
 
 <!-- ЮКасса модальное окно -->
