@@ -67,6 +67,37 @@ html{background:#0D1A1E;}
 .btn-white{background:rgba(255,255,255,0.15);color:#fff;font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;padding:18px 64px;border-radius:8px;border:1px solid rgba(255,255,255,0.4);cursor:pointer;transition:all 0.2s;margin-top:16px;backdrop-filter:blur(8px);}
 .btn-white:hover{background:rgba(255,255,255,0.25);transform:scale(1.02);}
 
+.update-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.15); /* как кнопка "Хочу" */
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: #fff;
+  backdrop-filter: blur(8px);
+  font-family: 'Jost', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  padding: 12px 26px;
+  border-radius: 100px;
+  margin-bottom: 24px;
+}
+
+.update-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #fff;
+  animation: pulse 2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
 /* ══ PAGE 2 ══ */
 /* Back btn (используется на page2 и в доках) */
 .btn-back{display:inline-flex;align-items:center;gap:8px;background:none;border:none;color:var(--muted);font-family:'Jost',sans-serif;font-size:12px;font-weight:400;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;padding:0;transition:color 0.2s;}
@@ -191,6 +222,13 @@ html{background:#0D1A1E;}
   <div class="hero-bg"></div>
   <div class="hero-content">
     <div class="logo-mark" style="position:absolute;top:24px;left:0;right:0;">Mila Ushakova</div>
+
+    <!-- Уведомление об обновлении -->
+    <div class="update-badge" style="margin-top:56px; animation:pulse 2s ease-in-out infinite;">
+      <span class="update-dot"></span>
+      ЗАВТРА 19.09 Новый Дроп
+    </div>
+
     <h1 class="hero-title">Система<br>цветовых<br>сочетаний</h1>
     <div class="hero-mid">
       <p class="hero-eyebrow">Эксклюзивная система</p>
@@ -282,6 +320,34 @@ html{background:#0D1A1E;}
     </div>
     <div class="tracked topbar-date" style="font-size:11px; color:#4A4038;">Осень 2026</div>
   </div>
+
+  <!-- УВЕДОМЛЕНИЕ ОБ ОБНОВЛЕНИИ СИСТЕМЫ (праздничная золотая плашка)
+       Чтобы объявить новое обновление: поменяйте UPDATE_ID (любая новая строка,
+       например дата) и текст внутри .update-notice-text ниже — баннер снова
+       покажется всем, кто уже видел предыдущее обновление. -->
+  <div class="update-notice-wrap" style="display:none; align-items:center; justify-content:center; gap:10px; padding:16px 56px 16px 24px; text-align:center; position:relative; border-bottom:1px solid rgba(184,144,58,0.2);">
+    <span class="update-notice-text tracked" style="font-size:11px; letter-spacing:0.14em; text-transform:uppercase; font-weight:600; line-height:1.6; color:#B8903A;">✦&nbsp; Новый разбор: клетчатая рубашка и её цветовые сценарии</span>
+    <button class="update-notice-close" aria-label="Закрыть" style="position:absolute; right:20px; top:50%; transform:translateY(-50%); background:none; border:none; color:rgba(184,144,58,0.6); font-size:16px; line-height:1; cursor:pointer; padding:4px;">×</button>
+  </div>
+
+  <script>
+  (function(){
+    var UPDATE_ID = '2026-09-19-cletka';
+    var notices = document.querySelectorAll('.update-notice-wrap');
+    var seen = null;
+    try { seen = localStorage.getItem('mila_seen_update'); } catch(e){}
+    if (seen !== UPDATE_ID) {
+      notices.forEach(function(n){ n.style.display = 'flex'; });
+    }
+    notices.forEach(function(n){
+      var btn = n.querySelector('.update-notice-close');
+      if (btn) btn.addEventListener('click', function(){
+        notices.forEach(function(n2){ n2.style.display = 'none'; });
+        try { localStorage.setItem('mila_seen_update', UPDATE_ID); } catch(e){}
+      });
+    });
+  })();
+  </script>
 
   <!-- БЛОК 1 · ПЕРВЫЙ ЭКРАН -->
   <div class="hero-sec" style="position:relative; padding:96px 64px 100px; overflow:hidden; background:radial-gradient(ellipse at 72% 38%, #0C1519 0%, #070D10 62%);">
