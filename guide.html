@@ -71,9 +71,9 @@ html{background:#0D1A1E;}
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  background: rgba(255, 255, 255, 0.15); /* как кнопка "Хочу" */
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  color: #fff;
+  background: rgba(220, 160, 175, 0.18); /* пыльно-розовый */
+  border: 1px solid rgba(220, 160, 175, 0.5);
+  color: #DCA0AF;
   backdrop-filter: blur(8px);
   font-family: 'Jost', sans-serif;
   font-size: 16px;
@@ -88,7 +88,7 @@ html{background:#0D1A1E;}
   width: 9px;
   height: 9px;
   border-radius: 50%;
-  background: #fff;
+  background: #DCA0AF;
   animation: pulse 2s ease-in-out infinite;
   flex-shrink: 0;
 }
@@ -226,7 +226,7 @@ html{background:#0D1A1E;}
     <!-- Уведомление об обновлении -->
     <div class="update-badge" style="margin-top:56px; animation:pulse 2s ease-in-out infinite;">
       <span class="update-dot"></span>
-      ЗАВТРА 19.09 Новый Дроп
+      ЗАВТРА Новый Дроп
     </div>
 
     <h1 class="hero-title">Система<br>цветовых<br>сочетаний</h1>
@@ -237,7 +237,7 @@ html{background:#0D1A1E;}
     
     <button class="btn-white" onclick="goToPage2()">Хочу</button>
 
-    <div id="promo-timer-hero" style="display:flex;flex-direction:column;align-items:center;gap:12px;margin-top:8px;">
+    <div id="promo-timer-hero" style="display:none;flex-direction:column;align-items:center;gap:12px;margin-top:8px;">
       <p style="font-size:10.5px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.75);">Осеннее промо заканчивается через</p>
       <div id="promo-timer" style="display:flex;align-items:center;gap:8px;">
         <div class="promo-chip" style="background:transparent;border:none;border-radius:0;padding:0 6px;min-width:44px;text-align:center;"><div class="promo-num" id="promo-d" style="font-family:'Jost',sans-serif;font-size:32px;font-weight:700;line-height:1;color:#fff;font-variant-numeric:tabular-nums;">—</div><div style="font-size:8.5px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-top:2px;">дней</div></div>
