@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#171412">
+<title>Janna Feiguinova — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --deep:#171412; --pale:#F7F4EF; --sand:#EDE6DC;
+  --gold:#C1502E; --gold2:#8B3A22;
+  --f:'Cormorant Garamond',Georgia,serif; --fs:'Jost',sans-serif;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--pale); color:var(--deep); font-family:var(--fs); overflow-x:hidden;}
+img{max-width:100%; display:block;}
+.tracked{letter-spacing:0.2em; text-transform:uppercase;}
+.wrap{max-width:1200px; margin:0 auto; padding:0 32px;}
+
+/* HERO — magazine cover */
+.p-hero{min-height:100svh; background:#000 url('portfolio/janna/janna-01.jpg') center 4% / cover no-repeat; color:var(--pale); display:flex; flex-direction:column; position:relative; overflow:hidden; padding:44px 32px;}
+.p-hero::before{content:''; position:absolute; inset:0; background:linear-gradient(180deg, rgba(10,8,7,0.55) 0%, rgba(10,8,7,0.05) 30%, rgba(10,8,7,0.1) 60%, rgba(10,8,7,0.85) 100%); pointer-events:none;}
+.p-hero-top{display:flex; justify-content:space-between; align-items:flex-start; position:relative;}
+.p-hero-masthead{font-family:var(--f); font-weight:700; font-size:clamp(40px,7vw,84px); line-height:0.9; text-transform:uppercase; letter-spacing:0.01em;}
+.p-hero-issue{text-align:right; font-size:10.5px; letter-spacing:0.18em; text-transform:uppercase; color:rgba(247,244,239,0.75); line-height:1.8; margin-top:8px;}
+.p-hero-bottom{margin-top:auto; position:relative; display:flex; justify-content:space-between; align-items:flex-end; gap:24px;}
+.p-hero-eyebrow{font-size:12px; letter-spacing:0.3em; color:var(--gold); margin-bottom:10px;}
+.p-hero-sub{font-family:var(--f); font-style:italic; font-weight:600; font-size:clamp(30px,5vw,56px); color:var(--pale);}
+.p-hero-scroll{font-size:10px; letter-spacing:0.25em; color:rgba(247,244,239,0.6); writing-mode:vertical-rl;}
+@media (max-width:640px){
+  .p-hero{padding:28px 20px;}
+  .p-hero-bottom{flex-direction:column; align-items:flex-start; gap:16px;}
+  .p-hero-scroll{writing-mode:horizontal-tb;}
+}
+
+/* SECTION LABEL */
+.sec-lbl{font-size:12px; color:var(--gold2); margin-bottom:14px;}
+.sec-title{font-family:var(--f); font-weight:600; font-size:clamp(30px,4vw,52px); margin-bottom:8px;}
+
+/* ABOUT */
+.about{padding:120px 0; background:var(--pale);}
+.about-grid{display:grid; grid-template-columns:0.85fr 1.15fr; gap:64px; align-items:center;}
+.about-photo{position:relative;}
+.about-photo img{border-radius:2px; width:100%; height:620px; object-fit:cover; object-position:top center;}
+.about-photo-tag{position:absolute; bottom:-18px; left:-18px; background:var(--deep); color:var(--gold); padding:14px 22px; font-family:var(--f); font-style:italic; font-size:16px; border:1px solid rgba(193,80,46,0.4);}
+.about-name{font-family:var(--f); font-weight:600; font-size:clamp(30px,3.2vw,42px); margin-bottom:6px;}
+.about-role{font-size:13px; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold2); margin-bottom:28px;}
+.about-text p{font-size:16.5px; line-height:1.85; color:#4A4038; margin-bottom:20px;}
+.about-stats{display:flex; gap:40px; margin-top:36px; padding-top:32px; border-top:1px solid rgba(193,80,46,0.35);}
+.about-stat-n{font-family:var(--f); font-weight:600; font-size:32px; color:var(--gold2);}
+.about-stat-l{font-size:10.5px; letter-spacing:0.1em; text-transform:uppercase; color:#8a7d68; margin-top:4px;}
+
+/* CASE STUDY */
+.case{padding:110px 0 130px; background:var(--deep); color:var(--pale);}
+.case .sec-lbl{color:var(--gold);}
+.case-credit-line{font-size:14px; color:rgba(247,244,239,0.55); margin-bottom:56px; max-width:640px;}
+.case-credit-line b{color:var(--pale); font-weight:500;}
+.case-hero{margin-bottom:20px; position:relative; overflow:hidden; border-radius:2px; background:rgba(0,0,0,0.2); text-align:center;}
+.case-hero img{width:auto; max-width:100%; max-height:82vh; object-fit:contain; margin:0 auto;}
+.case-hero-cap{position:absolute; left:24px; bottom:24px; background:rgba(23,20,18,0.72); backdrop-filter:blur(6px); padding:10px 18px; font-size:11px; letter-spacing:0.15em; text-transform:uppercase; color:var(--gold);}
+.case-grid{display:grid; grid-template-columns:repeat(4,1fr); grid-auto-rows:210px; gap:14px; margin-bottom:64px;}
+.case-grid a{display:block; overflow:hidden; border-radius:2px; position:relative;}
+.case-grid img{width:100%; height:100%; object-fit:cover; transition:transform .5s ease;}
+.case-grid a:hover img{transform:scale(1.05);}
+.case-grid a:first-child{grid-column:span 2; grid-row:span 2;}
+.case-grid a:nth-child(6){grid-row:span 2;}
+@media (max-width:860px){
+  .case-grid{grid-template-columns:repeat(2,1fr); grid-auto-rows:170px;}
+  .case-grid a:first-child{grid-column:span 2; grid-row:span 2;}
+  .case-grid a:nth-child(6){grid-row:span 1;}
+}
+.case-desc{display:grid; grid-template-columns:1fr 1fr; gap:64px; padding-top:56px; border-top:1px solid rgba(193,80,46,0.22);}
+.case-desc h3{font-family:var(--f); font-weight:600; font-style:italic; font-size:24px; color:var(--gold); margin-bottom:18px;}
+.case-desc p{font-size:15.5px; line-height:1.85; color:rgba(247,244,239,0.72);}
+.credits dl{display:grid; grid-template-columns:auto 1fr; gap:10px 20px; font-size:14px;}
+.credits dt{color:rgba(247,244,239,0.45); letter-spacing:0.04em;}
+.credits dd{color:var(--pale);}
+
+.case.alt{background:var(--sand); color:var(--deep);}
+.case.alt .sec-lbl{color:var(--gold2);}
+.case.alt .case-credit-line{color:#8a7d68;}
+.case.alt .case-credit-line b{color:var(--deep);}
+.case.alt .case-hero-cap{background:rgba(255,255,255,0.85); color:var(--gold2);}
+.case.alt .case-desc{border-top-color:rgba(184,144,58,0.28);}
+.case.alt .case-desc h3{color:var(--gold2);}
+.case.alt .case-desc p{color:#5c5346;}
+.case.alt .credits dt{color:#a5977f;}
+.case.alt .credits dd{color:var(--deep);}
+
+/* FOOTER */
+.p-foot{padding:64px 24px; text-align:center; background:var(--sand);}
+.p-foot p{font-size:11px; letter-spacing:0.15em; text-transform:uppercase; color:#8a7d68;}
+
+@media (max-width:860px){
+  .about-grid{grid-template-columns:1fr; gap:40px;}
+  .about-photo img{height:440px;}
+  .case-grid{grid-template-columns:repeat(2,1fr);}
+  .case-desc{grid-template-columns:1fr; gap:36px;}
+  .about-stats{flex-wrap:wrap; row-gap:20px;}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO — magazine cover -->
+<div class="p-hero">
+  <div class="p-hero-top">
+    <div class="p-hero-masthead">Portfolio</div>
+    <div class="p-hero-issue">Stylist &amp; Production<br>New York</div>
+  </div>
+  <div class="p-hero-bottom">
+    <div>
+      <div class="p-hero-eyebrow tracked">On the cover</div>
+      <div class="p-hero-sub">Janna Feiguinova</div>
+    </div>
+    <div class="p-hero-scroll tracked">Scroll</div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div class="about">
+  <div class="wrap">
+    <div class="sec-lbl tracked">About</div>
+    <div class="sec-title" style="margin-bottom:56px;">The Stylist</div>
+    <div class="about-grid">
+      <div class="about-photo">
+        <img src="portfolio/janna/janna-03.jpg" alt="Janna Feiguinova">
+        <div class="about-photo-tag">15+ years in fashion</div>
+      </div>
+      <div>
+        <div class="about-name">Janna Feiguinova</div>
+        <div class="about-role">Stylist &middot; Production Manager</div>
+        <div class="about-text">
+          <p>Janna Feiguinova is a seasoned stylist with over 15 years of experience in the fashion industry. Her journey began in marketing, where she honed her skills in understanding consumer trends and aesthetics. Eventually, her passion for style led her to the world of jewelry, where she developed a keen eye for detail and craftsmanship.</p>
+          <p>Educated in three renowned European styling schools, Janna blends her global influences with a deep understanding of personal expression. Over her career, she has styled more than 400 looks, working with everyone from CEOs and entrepreneurs to fashion icons and everyday individuals.</p>
+          <p>Janna's expertise extends beyond personal styling — she has worked as a production manager backstage at fashion shows, overseeing models, makeup artists, and designers. She's also styled her own runway shows at Brooklyn Fashion Week in 2023 and 2024, bringing her unique vision to life.</p>
+        </div>
+        <div class="about-stats">
+          <div><div class="about-stat-n">15+</div><div class="about-stat-l">Years of experience</div></div>
+          <div><div class="about-stat-n">400+</div><div class="about-stat-l">Looks styled</div></div>
+          <div><div class="about-stat-n">2</div><div class="about-stat-l">Brooklyn Fashion Week shows</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CASE: GRAZIA SLOVENIA -->
+<div class="case">
+  <div class="wrap">
+    <div class="sec-lbl tracked">Case 01</div>
+    <div class="sec-title">Grazia Slovenia</div>
+    <p class="case-credit-line"><b>Digital cover</b> &middot; "Zapisano v usodo" &middot; Olga Kostina &times; Goizane Jayo</p>
+
+    <div class="case-hero">
+      <img src="portfolio/grazia-slovenia/08-gloves-hero.jpg" alt="Grazia Slovenia digital cover">
+      <div class="case-hero-cap">Cover &middot; Grazia Slovenia</div>
+    </div>
+
+    <div class="case-grid">
+      <a href="portfolio/grazia-slovenia/03-green-oculus.jpg" target="_blank" rel="noopener"><img src="portfolio/grazia-slovenia/03-green-oculus.jpg" alt=""></a>
+      <a href="portfolio/grazia-slovenia/04-green-crouch.jpg" target="_blank" rel="noopener"><img src="portfolio/grazia-slovenia/04-green-crouch.jpg" alt=""></a>
+      <a href="portfolio/grazia-slovenia/05-white-roses.jpg" target="_blank" rel="noopener"><img src="portfolio/grazia-slovenia/05-white-roses.jpg" alt=""></a>
+      <a href="portfolio/grazia-slovenia/06-black-taxi.jpg" target="_blank" rel="noopener"><img src="portfolio/grazia-slovenia/06-black-taxi.jpg" alt=""></a>
+      <a href="portfolio/grazia-slovenia/07-burgundy-street.jpg" target="_blank" rel="noopener"><img src="portfolio/grazia-slovenia/07-burgundy-street.jpg" alt=""></a>
+    </div>
+
+    <div class="case-desc">
+      <div>
+        <h3>About the project</h3>
+        <p>A digital cover story for Grazia Slovenia, shot on the streets of New York — from the Oculus in the Financial District to Fifth Avenue. The styling plays on the contrast between the city's architecture and near-theatrical silhouettes: a corset printed with classical painting, a dress built from white roses, a black lace look against a yellow cab, and burgundy feathers over liquid satin.</p>
+      </div>
+      <div class="credits">
+        <dl>
+          <dt>Photography &amp; Creative</dt><dd>Goizane Jayo</dd>
+          <dt>Model</dt><dd>Olga Kostina</dd>
+          <dt>Styling</dt><dd>Maria Cunier, Janna Fey</dd>
+          <dt>Hair &amp; Makeup</dt><dd>Malaz Albaal</dd>
+          <dt>Special thanks</dt><dd>The Confessional Showroom NYC, Padina Bondar, Janet Mandell Showroom NYC</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CASE 2: HARMONY OF LUXURY -->
+<div class="case alt">
+  <div class="wrap">
+    <div class="sec-lbl tracked">Case 02</div>
+    <div class="sec-title">Harmony of Luxury</div>
+    <p class="case-credit-line"><b>Editorial styling</b> &middot; dress &amp; jewelry brands &times; restaurant collaboration</p>
+
+    <div class="case-hero">
+      <img src="portfolio/harmony-of-luxury/01-hero.jpg" alt="Harmony of Luxury">
+      <div class="case-hero-cap">Harmony of Luxury</div>
+    </div>
+
+    <div class="case-grid">
+      <a href="portfolio/harmony-of-luxury/02-bar.jpg" target="_blank" rel="noopener"><img src="portfolio/harmony-of-luxury/02-bar.jpg" alt=""></a>
+      <a href="portfolio/harmony-of-luxury/03-portrait.jpg" target="_blank" rel="noopener"><img src="portfolio/harmony-of-luxury/03-portrait.jpg" alt=""></a>
+      <a href="portfolio/harmony-of-luxury/04-staircase.jpg" target="_blank" rel="noopener"><img src="portfolio/harmony-of-luxury/04-staircase.jpg" alt=""></a>
+      <a href="portfolio/harmony-of-luxury/05-white-dress.jpg" target="_blank" rel="noopener"><img src="portfolio/harmony-of-luxury/05-white-dress.jpg" alt=""></a>
+      <a href="portfolio/harmony-of-luxury/06-bts.jpg" target="_blank" rel="noopener"><img src="portfolio/harmony-of-luxury/06-bts.jpg" alt=""></a>
+    </div>
+
+    <div class="case-desc">
+      <div>
+        <h3>About the project</h3>
+        <p>A multi-brand collaboration styled simultaneously for dress and jewelry labels and a restaurant venue — built around one evening, one location, and a wardrobe of statement black and white looks: sequined feathers at the bar, sheer lace on a century-old staircase, and a clean-lined white dress catching the last window light. The last frame is Janna on set, fitting the final look by hand.</p>
+      </div>
+      <div class="credits">
+        <dl>
+          <dt>Photography</dt><dd>Barbara Raw</dd>
+          <dt>Styling</dt><dd>Janna Feiguinova</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CASE 3: JEMMA NYC CAMPAIGN -->
+<div class="case">
+  <div class="wrap">
+    <div class="sec-lbl tracked">Case 03</div>
+    <div class="sec-title">Jemma &mdash; NYC Campaign</div>
+    <p class="case-credit-line"><b>Street style campaign</b> &middot; handbag brand Jemma, shot across New York City</p>
+
+    <div class="case-hero">
+      <img src="portfolio/jemma-nyc/07-velvet-park.jpg" alt="Jemma NYC campaign">
+      <div class="case-hero-cap">Jemma &middot; NYC</div>
+    </div>
+
+    <div class="case-grid">
+      <a href="portfolio/jemma-nyc/02-trench.jpg" target="_blank" rel="noopener"><img src="portfolio/jemma-nyc/02-trench.jpg" alt=""></a>
+      <a href="portfolio/jemma-nyc/03-met-steps.jpg" target="_blank" rel="noopener"><img src="portfolio/jemma-nyc/03-met-steps.jpg" alt=""></a>
+      <a href="portfolio/jemma-nyc/04-blazer-stairs.jpg" target="_blank" rel="noopener"><img src="portfolio/jemma-nyc/04-blazer-stairs.jpg" alt=""></a>
+      <a href="portfolio/jemma-nyc/05-holiday.jpg" target="_blank" rel="noopener"><img src="portfolio/jemma-nyc/05-holiday.jpg" alt=""></a>
+      <a href="portfolio/jemma-nyc/06-velvet-bridge.jpg" target="_blank" rel="noopener"><img src="portfolio/jemma-nyc/06-velvet-bridge.jpg" alt=""></a>
+      <a href="portfolio/jemma-nyc/08-fountain.jpg" target="_blank" rel="noopener"><img src="portfolio/jemma-nyc/08-fountain.jpg" alt=""></a>
+      <a href="portfolio/jemma-nyc/09-clutch.jpg" target="_blank" rel="noopener"><img src="portfolio/jemma-nyc/09-clutch.jpg" alt=""></a>
+    </div>
+
+    <div class="case-desc">
+      <div>
+        <h3>About the project</h3>
+        <p>A street-style campaign for handbag label Jemma, styled across New York's most recognizable corners — the Met steps, Central Park's Bow Bridge and Bethesda Fountain, a Fifth Avenue storefront dressed for the holidays. Each look builds a full outfit around one bag: tailored neutrals and denim by day, jewel-toned velvet by night.</p>
+      </div>
+      <div class="credits">
+        <dl>
+          <dt>Brand</dt><dd>Jemma</dd>
+          <dt>Styling</dt><dd>Janna Feiguinova</dd>
+          <dt>Location</dt><dd>New York City</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CASE 4: BESPOKE ATELIER -->
+<div class="case alt">
+  <div class="wrap">
+    <div class="sec-lbl tracked">Case 04</div>
+    <div class="sec-title">Bespoke Atelier</div>
+    <p class="case-credit-line"><b>Editorial styling</b> &middot; bespoke high-end tailoring &times; fine jewelry brand</p>
+
+    <div class="case-hero">
+      <img src="portfolio/bespoke-atelier/03-bts-jewelry.jpg" alt="Bespoke Atelier">
+      <div class="case-hero-cap">Bespoke Atelier &middot; New York</div>
+    </div>
+
+    <div class="case-grid">
+      <a href="portfolio/bespoke-atelier/01-hero.jpg" target="_blank" rel="noopener"><img src="portfolio/bespoke-atelier/01-hero.jpg" alt=""></a>
+      <a href="portfolio/bespoke-atelier/02-ivory-sofa.jpg" target="_blank" rel="noopener"><img src="portfolio/bespoke-atelier/02-ivory-sofa.jpg" alt=""></a>
+      <a href="portfolio/bespoke-atelier/04-olive-portrait.jpg" target="_blank" rel="noopener"><img src="portfolio/bespoke-atelier/04-olive-portrait.jpg" alt=""></a>
+      <a href="portfolio/bespoke-atelier/05-olive-clock.jpg" target="_blank" rel="noopener"><img src="portfolio/bespoke-atelier/05-olive-clock.jpg" alt=""></a>
+      <a href="portfolio/bespoke-atelier/06-bts-clock.jpg" target="_blank" rel="noopener"><img src="portfolio/bespoke-atelier/06-bts-clock.jpg" alt=""></a>
+      <a href="portfolio/bespoke-atelier/07-bts-close.jpg" target="_blank" rel="noopener"><img src="portfolio/bespoke-atelier/07-bts-close.jpg" alt=""></a>
+      <a href="portfolio/bespoke-atelier/08-bts-lobby.jpg" target="_blank" rel="noopener"><img src="portfolio/bespoke-atelier/08-bts-lobby.jpg" alt=""></a>
+      <a href="portfolio/bespoke-atelier/09-grey-suit.jpg" target="_blank" rel="noopener"><img src="portfolio/bespoke-atelier/09-grey-suit.jpg" alt=""></a>
+    </div>
+
+    <div class="case-desc">
+      <div>
+        <h3>About the project</h3>
+        <p>Styled simultaneously for a bespoke atelier and a fine jewelry house, both high-end — three tailored looks across New York's hotel lobbies and landmark streets: an ivory double-breasted suit by the fireplace, an olive herringbone jacket at the Rockefeller clock, and a pinstripe power suit at dusk. The fittings themselves became part of the story — Janna adjusting each earring and clasp between frames.</p>
+      </div>
+      <div class="credits">
+        <dl>
+          <dt>Styling</dt><dd>Janna Feiguinova</dd>
+          <dt>Clothing</dt><dd>Bespoke atelier</dd>
+          <dt>Jewelry</dt><dd>Fine jewelry house</dd>
+          <dt>Location</dt><dd>New York City</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CASE 5: VINTAGE AFFAIR -->
+<div class="case">
+  <div class="wrap">
+    <div class="sec-lbl tracked">Case 05</div>
+    <div class="sec-title">Vintage Affair</div>
+    <p class="case-credit-line"><b>Multi-brand collaboration</b> &middot; vintage &amp; exotic cars &times; fine jewelry &times; high-end bridal</p>
+
+    <div class="case-hero">
+      <img src="portfolio/vintage-affair/01-hero.jpg" alt="Vintage Affair">
+      <div class="case-hero-cap">Vintage Affair</div>
+    </div>
+
+    <div class="case-grid">
+      <a href="portfolio/vintage-affair/02-red-dress-car.jpg" target="_blank" rel="noopener"><img src="portfolio/vintage-affair/02-red-dress-car.jpg" alt=""></a>
+      <a href="portfolio/vintage-affair/03-red-dress-stairs.jpg" target="_blank" rel="noopener"><img src="portfolio/vintage-affair/03-red-dress-stairs.jpg" alt=""></a>
+      <a href="portfolio/vintage-affair/04-groom-car.jpg" target="_blank" rel="noopener"><img src="portfolio/vintage-affair/04-groom-car.jpg" alt=""></a>
+      <a href="portfolio/vintage-affair/05-groom-close.jpg" target="_blank" rel="noopener"><img src="portfolio/vintage-affair/05-groom-close.jpg" alt=""></a>
+      <a href="portfolio/vintage-affair/06-bridal-car.jpg" target="_blank" rel="noopener"><img src="portfolio/vintage-affair/06-bridal-car.jpg" alt=""></a>
+      <a href="portfolio/vintage-affair/07-jumpsuit-car.jpg" target="_blank" rel="noopener"><img src="portfolio/vintage-affair/07-jumpsuit-car.jpg" alt=""></a>
+      <a href="portfolio/vintage-affair/08-glam-close.jpg" target="_blank" rel="noopener"><img src="portfolio/vintage-affair/08-glam-close.jpg" alt=""></a>
+      <a href="portfolio/vintage-affair/09-glam-full.jpg" target="_blank" rel="noopener"><img src="portfolio/vintage-affair/09-glam-full.jpg" alt=""></a>
+    </div>
+
+    <div class="case-desc">
+      <div>
+        <h3>About the project</h3>
+        <p>A four-way collaboration built around a fleet of vintage and exotic convertibles, styled for a fine jewelry house and a high-end bridal atelier at once. Two couples, two eras: a scarlet gown and a tailored three-piece against a matte-black roadster, and a lace-veiled bride stepping from a cream-and-red convertible outside a Fifth Avenue landmark — with a Hollywood-glamour detour in a polka-dot headscarf and cat-eye sunglasses.</p>
+      </div>
+      <div class="credits">
+        <dl>
+          <dt>Styling</dt><dd>Janna Feiguinova</dd>
+          <dt>Cars</dt><dd>Vintage &amp; exotic collection</dd>
+          <dt>Jewelry</dt><dd>Fine jewelry house</dd>
+          <dt>Bridal</dt><dd>High-end atelier</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CASE 6: ARTIST & MUSE -->
+<div class="case alt">
+  <div class="wrap">
+    <div class="sec-lbl tracked">Case 06</div>
+    <div class="sec-title">Artist &amp; Muse</div>
+    <p class="case-credit-line"><b>Lifestyle editorial</b> &middot; styled around the model's own paintings</p>
+
+    <div class="case-hero">
+      <img src="portfolio/artist-muse/01-hero.jpg" alt="Artist and Muse">
+      <div class="case-hero-cap">Artist &amp; Muse</div>
+    </div>
+
+    <div class="case-grid">
+      <a href="portfolio/artist-muse/02-hat.jpg" target="_blank" rel="noopener"><img src="portfolio/artist-muse/02-hat.jpg" alt=""></a>
+      <a href="portfolio/artist-muse/03-leopard.jpg" target="_blank" rel="noopener"><img src="portfolio/artist-muse/03-leopard.jpg" alt=""></a>
+      <a href="portfolio/artist-muse/04-beret.jpg" target="_blank" rel="noopener"><img src="portfolio/artist-muse/04-beret.jpg" alt=""></a>
+      <a href="portfolio/artist-muse/05-blue-dress.jpg" target="_blank" rel="noopener"><img src="portfolio/artist-muse/05-blue-dress.jpg" alt=""></a>
+      <a href="portfolio/artist-muse/06-piano.jpg" target="_blank" rel="noopener"><img src="portfolio/artist-muse/06-piano.jpg" alt=""></a>
+      <a href="portfolio/artist-muse/07-white-blazer.jpg" target="_blank" rel="noopener"><img src="portfolio/artist-muse/07-white-blazer.jpg" alt=""></a>
+      <a href="portfolio/artist-muse/08-white-dress.jpg" target="_blank" rel="noopener"><img src="portfolio/artist-muse/08-white-dress.jpg" alt=""></a>
+      <a href="portfolio/artist-muse/09-black-silk.jpg" target="_blank" rel="noopener"><img src="portfolio/artist-muse/09-black-silk.jpg" alt=""></a>
+    </div>
+
+    <div class="case-desc">
+      <div>
+        <h3>About the project</h3>
+        <p>The model behind this editorial is also a painter, so her own canvases became part of the set — an abstract bird study, a magenta gesture painting on the piano, a third resting against gilded frames. Eight looks move from animal print and a French beret to a bar-worthy white tuxedo dress, each staged alongside her work rather than in front of a plain backdrop.</p>
+      </div>
+      <div class="credits">
+        <dl>
+          <dt>Styling</dt><dd>Janna Feiguinova</dd>
+          <dt>Artwork</dt><dd>Original paintings by the model</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CASE 7: REFRACTION -->
+<div class="case">
+  <div class="wrap">
+    <div class="sec-lbl tracked">Case 07</div>
+    <div class="sec-title">Refraction</div>
+    <p class="case-credit-line"><b>Part 1 of 3 &middot; Motion</b> &middot; a study in motion, where stillness, blur, and water collide</p>
+
+    <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin-bottom:56px;">
+      <a href="portfolio/refraction/01-hero.jpg" target="_blank" rel="noopener" style="display:block;"><img src="portfolio/refraction/01-hero.jpg" alt="Refraction" style="width:100%; height:auto; object-fit:contain;"></a>
+      <a href="portfolio/refraction/02-alt.jpg" target="_blank" rel="noopener" style="display:block;"><img src="portfolio/refraction/02-alt.jpg" alt="Refraction" style="width:100%; height:auto; object-fit:contain;"></a>
+    </div>
+
+    <div class="case-desc">
+      <div>
+        <h3>About the project</h3>
+        <p>The beginning of a series exploring how movement can sculpt an image in-camera instead of stopping time &mdash; long exposures, water, and beaded fringe dissolving into light trails. First in a planned trilogy.</p>
+      </div>
+      <div class="credits">
+        <dl>
+          <dt>Creative Direction / Photo</dt><dd>@karlatomanelli</dd>
+          <dt>Model</dt><dd>@kostina.olga008</dd>
+          <dt>Stylist</dt><dd>@janna.fey</dd>
+          <dt>Makeup</dt><dd>@zarastylerofficial</dd>
+          <dt>Studio</dt><dd>@fdphotostudio_ny</dd>
+          <dt>Camera</dt><dd>@nikonusa Z6III + 70&ndash;200</dd>
+          <dt>Lighting</dt><dd>@godox_global</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="p-foot">
+  <p>&copy; Janna Feiguinova</p>
+</div>
+
+</body>
+</html>

@@ -22,6 +22,10 @@
       "use": "@vercel/static"
     },
     {
+      "src": "portfolio/**",
+      "use": "@vercel/static"
+    },
+    {
       "src": "fonts/**",
       "use": "@vercel/static"
     },
@@ -66,6 +70,8 @@
     { "src": "/tours", "dest": "/tours.html" },
     { "src": "/pilot", "dest": "/pilot-booking.html" },
     { "src": "/mnogosloynost", "dest": "/mnogosloynost.html" },
+    { "src": "/portfolio", "dest": "/portfolio.html" },
+    { "src": "/portfolio/(.*)", "dest": "/portfolio/$1" },
     { "src": "/", "dest": "/index.html" },
     { "src": "/(.*)\\.html", "dest": "/$1.html" },
     { "src": "/(.*)", "dest": "/$1.html" }
