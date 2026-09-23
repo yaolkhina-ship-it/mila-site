@@ -59,7 +59,7 @@
     { "src": "/webinar", "dest": "/webinar.html" },
     { "src": "/thank-you", "dest": "/thank-you.html" },
     { "src": "/color-guide", "dest": "/guide.html" },
-    { "src": "/guide", "dest": "/guide/index.html" },
+    { "src": "/guide", "dest": "/guide/gaidosen.html" },
     { "src": "/guide/(.*)", "dest": "/guide/$1" },
     { "src": "/lectures", "dest": "/lectures.html" },
     { "src": "/consultation", "dest": "/consultation.html" },
