@@ -947,16 +947,29 @@ html{background:#0D1A1E;}
 
 <script>
 var docFrom='page1';
-function goToPage2(){
+// The system description has its own address: milaushakova.com/color-guide#system
+function showPage2(){
   document.getElementById('page1').classList.remove('active');
   document.getElementById('page2').classList.add('active');
   window.scrollTo(0,0);
 }
-function goBack(){
+function showPage1(){
   document.getElementById('page2').classList.remove('active');
   document.getElementById('page1').classList.add('active');
   window.scrollTo(0,0);
 }
+function goToPage2(){
+  showPage2();
+  if (window.location.hash !== '#system') history.pushState(null, '', '#system');
+}
+function goBack(){
+  showPage1();
+  if (window.location.hash) history.pushState(null, '', window.location.pathname + window.location.search);
+}
+window.addEventListener('popstate', function(){
+  if (window.location.hash === '#system' || window.location.hash === '#otzyvy') showPage2(); else showPage1();
+});
+if (window.location.hash === '#system') showPage2();
 function showDoc(pageId){
   docFrom=document.querySelector('.page.active,.doc-page.active').id;
   document.querySelectorAll('.page,.doc-page').forEach(p=>p.classList.remove('active'));
