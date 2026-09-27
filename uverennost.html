@@ -210,6 +210,23 @@
     .fact-v{font-size:17px;}
   }
 
+  /* ===== v3: registration block separated from the quote ===== */
+  :root{--cta-bg:#13223F;--cta-ink:#FFFFFF;}
+  @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--cta-bg:#EEF0F4;--cta-ink:#13223F;}}
+  :root[data-theme="dark"]{--cta-bg:#EEF0F4;--cta-ink:#13223F;}
+  :root[data-theme="light"]{--cta-bg:#13223F;--cta-ink:#FFFFFF;}
+  #register{background:var(--surface);color:var(--ink);}
+  #register .price-grid{grid-template-columns:1.15fr .85fr;align-items:center;padding-top:clamp(56px,8vw,112px);padding-bottom:clamp(56px,8vw,112px);}
+  #register .kicker-sm{color:var(--ink-faint);opacity:1;}
+  #register .price-head{font-size:clamp(28px,3.4vw,42px);line-height:1.1;margin-bottom:22px;color:var(--accent);}
+  #register .price-line{font-size:clamp(16px,1.6vw,18px);opacity:1;color:var(--ink);margin-bottom:6px;}
+  #register .btn-fill{background:var(--cta-bg);color:var(--cta-ink);}
+  #register .price-note{color:var(--ink-dim);opacity:1;font-size:14px;max-width:46ch;}
+  #register .price-photo{max-width:320px;border-color:#FFFFFF;box-shadow:0 30px 60px -24px rgba(16,24,40,.45);}
+  footer{background:var(--bg);}
+  @media (max-width:860px){#register .price-grid{grid-template-columns:1fr;}}
+  @media (max-width:700px){#register .price-photo{max-width:230px;}}
+
 .ph-mark{background:none;outline:none;padding:0;}
 </style>
 </head>
