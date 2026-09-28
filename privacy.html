@@ -67,5 +67,18 @@
   <a href="/privacy">Согласие на обработку ПД</a>
   <span>© 2026 · ИП Ушакова Л.В.</span>
 </footer>
+<!-- support-btn: плавающая кнопка поддержки — Telegram -->
+<style>
+.support-btn{position:fixed;right:20px;bottom:20px;z-index:9998;display:flex;align-items:center;gap:8px;padding:0 20px 0 16px;height:52px;border-radius:26px;background:#c97184;color:#fff !important;text-decoration:none !important;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;font-size:15px;font-weight:500;letter-spacing:0.02em;line-height:1;box-shadow:0 6px 20px rgba(0,0,0,0.35);transition:transform .2s,background .2s;}
+.support-btn:hover{background:#b85f73;transform:translateY(-2px);}
+.support-btn svg{flex:none;}
+@media (max-width:480px){.support-btn{right:14px;bottom:14px;height:46px;padding:0 16px 0 13px;font-size:14px;}}
+@media print{.support-btn{display:none !important;}}
+</style>
+<a class="support-btn" href="https://t.me/MilaUshakova_ClubBot" target="_blank" rel="noopener" aria-label="Поддержка в Telegram">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 4L3 11.5l6 2.2M21 4l-3.4 16L9.5 15M21 4L9.5 15m0 0v5l3-3.4"/></svg>
+  <span>Поддержка</span>
+</a>
+<!-- /support-btn -->
 </body>
 </html>
