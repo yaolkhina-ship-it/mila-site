@@ -4160,12 +4160,11 @@ function spread(p, i) {
   </div>`;
 }
 
-// Страница уровня открывается только после разбора, и только своя
+// Страница уровня открывается только сразу после разбора, и только своя; после перезагрузки снова скрыта
 function unlock(level) {
   document.querySelectorAll('.ct-level').forEach(el => { el.hidden = el.id !== LEVEL[level].page; });
-  try { localStorage.setItem('ctLevel', level); } catch {}
 }
-try { const saved = localStorage.getItem('ctLevel'); if (LEVEL[saved]) unlock(saved); } catch {}
+try { localStorage.removeItem('ctLevel'); } catch {} // убрать уровень, запомненный прежней версией
 
 function render(r) {
   const L = LEVEL[r.level], pal = palettesFor(r.level);
