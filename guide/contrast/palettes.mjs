@@ -1,0 +1,56 @@
+// Палитры Системы, размеченные по уровню контраста внешности (level: low / mid / high).
+// Высокому контрасту подходит вся Система: для него показываем все, сначала отмеченные high.
+// Разметку проверяет Мила: правьте level здесь. swatches сняты с изображения палитры, lookImg это образ к ней.
+export const PALETTES = [
+  { id: "p_drop_new", label: "лодка", level: 'high', colors: "чёрный, насыщенный красный, песочный", look: "p_look_drop_new", lookImg: "looks/58_boat.jpg", swatches: ["#bf9a71", "#8c5742", "#5d231f", "#131414"] },
+  { id: "p_drop_new2", label: "книга", level: 'high', colors: "чёрный, белое кружево, глубокий синий", look: "p_look_drop_new2", lookImg: "looks/59_book.jpg", swatches: ["#cbb48c", "#323832", "#090a0e", "#6c5d43"] },
+  { id: "p_drop_new3", label: "жёлтый", level: 'mid', colors: "горчично-жёлтый монохром, охра", look: "p_look_drop_new3", lookImg: "looks/60_yellow.jpg", swatches: ["#9f8649", "#c5ad43", "#7e6231", "#e1d075"] },
+  { id: "p_drop_new4", label: "веер", level: 'high', colors: "чёрный, кобальт, соломенный", look: "p_look_drop_new4", lookImg: "looks/61_fan.jpg", swatches: ["#020202", "#066ba9", "#b98e70", "#2d5676"] },
+  { id: "p_drop_new5", label: "книги", level: 'mid', colors: "кожаные коричневые, пергамент, жёлтый акцент", look: "p_look_drop_new5", lookImg: "looks/62_books.jpg", swatches: ["#917a5f", "#604c34", "#432c1a", "#040304"] },
+  { id: "p_drop_1", label: "здание", level: 'high', colors: "графит, чёрный, ярко-жёлтый", look: "p_look_drop_1", lookImg: "looks/48_building.jpg", swatches: ["#c1b183", "#060608", "#787878", "#4f5256"] },
+  { id: "p_drop_2", label: "кресло", level: 'mid', colors: "оливковый, орех, белый", look: "p_look_drop_2", lookImg: "looks/49_armchair.jpg", swatches: ["#6d6c44", "#c5c5c3", "#404229", "#0c0c08"] },
+  { id: "p_drop_3", label: "перчатки", level: 'mid', colors: "тёмный орех, бледно-голубой, латунь", look: "p_look_drop_3", lookImg: "looks/50_gloves.jpg", swatches: ["#412b17", "#1f1207", "#a2b0b4", "#5f5c56"] },
+  { id: "p_drop_4", label: "кофе", level: 'mid', colors: "глубокий изумрудный, карамель", look: "p_look_drop_4", lookImg: "looks/51_coffee.jpg", swatches: ["#325652", "#a67d4d", "#142b26"] },
+  { id: "p_drop_5", label: "инжир", level: 'mid', colors: "баклажан, малиновый, бордо", look: "p_look_drop_5", lookImg: "looks/52_figs.jpg", swatches: ["#8a2528", "#190710", "#a44c4c", "#ad746d"] },
+  { id: "p_drop_10", label: "яблоки", level: 'mid', colors: "красное яблоко, выбеленный деним, коричневый", look: "p_look_drop_10", lookImg: "looks/57_apples.jpg", swatches: ["#b93321", "#801216", "#535556", "#6f6f6e"] },
+  { id: "p_pal_0", label: "скамейка", level: 'high', colors: "чёрный, алый, белый", look: "p_look_1", lookImg: "looks/01_coffee.jpg", swatches: ["#000000", "#b34b4a", "#711918", "#51342f"] },
+  { id: "p_pal_1", label: "мячи", level: 'high', colors: "насыщенный красный, золото", look: "p_look_2", lookImg: "looks/02_tennisballs.jpg", swatches: ["#ab2523", "#741316", "#360506", "#c47f55"] },
+  { id: "p_pal_5_retro", label: "ретро", level: 'mid', colors: "бордо, крем, хром", look: "p_look_5_retro", lookImg: "looks/retro.jpg", swatches: ["#320106", "#f4e2cb", "#614434", "#c3a07f"] },
+  { id: "p_pal_24", label: "помидоры", level: 'mid', colors: "томатный, зелёный, тёмный графит", look: "p_look_25", lookImg: "looks/19.jpg", swatches: ["#1e2119", "#4b402c", "#635942", "#89845e"] },
+  { id: "p_pal_33", label: "плащ", level: 'low', colors: "мятно-шалфейный, небольшой красный акцент", look: "p_look_34", lookImg: "looks/26_coat.jpg", swatches: ["#accca5", "#8bae83", "#333f32", "#4b211b"] },
+  { id: "p_pal_41", label: "перья", level: 'high', colors: "красный и белый с голубым", look: "p_look_42", lookImg: "looks/34_feathers.jpg", swatches: ["#5c0c0e", "#89433b", "#84aac6", "#967c7e"] },
+  { id: "p_pal_42", label: "малина", level: 'mid', colors: "малиновый, розовый иней, бордо", look: "p_look_43", lookImg: "looks/35_raspberry.jpg", swatches: ["#3e0c10", "#af2c3d", "#b74e61", "#52252e"] },
+  { id: "p_pal_3", label: "веер", level: 'low', colors: "пыльно-розовый, лиловый, серебро", look: "p_look_4", lookImg: "looks/04_fan.jpg", swatches: ["#461e1c", "#1b0c0c", "#6a5853", "#cdb6a6"] },
+  { id: "p_pal_17", label: "сандалии", level: 'low', colors: "серый замш, коричневый, мелкие цветные акценты", look: "p_look_18", lookImg: "looks/14_bluepants.jpg", swatches: ["#683f2b", "#8b6347", "#a7927b", "#211914"] },
+  { id: "p_pal_29", label: "бусины", level: 'low', colors: "беж, светлый замш, голубой и красный в мелочах", look: "p_look_30", lookImg: "looks/22_beads.jpg", swatches: ["#522416", "#9f7145", "#dadad3", "#b0af9c"] },
+  { id: "p_pal_6", label: "кресла", level: 'low', colors: "ржавый, терракота, тон в тон", look: "p_look_7", lookImg: "looks/07_camel.jpg", swatches: ["#58230d", "#864c2a", "#17120d"] },
+  { id: "p_pal_6_tennis", label: "теннис", level: 'low', colors: "шоколад, кирпич, монохром", look: "p_look_6_tennis", lookImg: "looks/tennis.jpg", swatches: ["#4e2e17"] },
+  { id: "p_pal_20", label: "помада", level: 'high', colors: "ярко-оранжевый, фиолетовый", look: "p_look_21", lookImg: "looks/17_orange.jpg", swatches: ["#ff7c00", "#d85a0e", "#3f0a52", "#8b2f31"] },
+  { id: "p_pal_0_chalk", label: "мел", level: 'high', colors: "чёрный, пудровый розовый, бирюза", look: "p_look_0_chalk", lookImg: "looks/pink_scarf.jpg", swatches: ["#010101", "#27373d", "#94766d"] },
+  { id: "p_pal_26", label: "закат", level: 'mid', colors: "янтарный, оранжевый монохром", look: "p_look_27", lookImg: "looks/21_sails.jpg", swatches: ["#cd8235", "#5f3c19", "#9f642b", "#dbc894"] },
+  { id: "p_pal_31", label: "лимоны", level: 'mid', colors: "лимонный, солома, зелень", look: "p_look_32", lookImg: "looks/24_lemons.jpg", swatches: ["#a47307", "#71552c", "#c29517", "#3e270c"] },
+  { id: "p_pal_tennis_court", label: "корт", level: 'mid', colors: "терракота, глубокий зелёный", look: "p_look_tennis_court", lookImg: "looks/tennis_court.jpg", swatches: ["#a2390c", "#4e482d", "#8c6d3e", "#2a1d12"] },
+  { id: "p_pal_32", label: "плетёнка", level: 'mid', colors: "мятный, шоколад, белый", look: "p_look_33", lookImg: "looks/25_pinstripe.jpg", swatches: ["#462b27", "#b1bfb2", "#cdd4c9", "#63584e"] },
+  { id: "p_pal_16", label: "кисть", level: 'mid', colors: "пыльный синий бархат, охра", look: "p_look_17", lookImg: "looks/17.jpg", swatches: ["#905635", "#a57e52", "#61311c", "#bd9a6a"] },
+  { id: "p_pal_34", label: "подиум", level: 'high', colors: "бирюза, чёрный, серый", look: "p_look_35", lookImg: "looks/35_podium.jpg", swatches: ["#637c71", "#6cb1a8", "#3c2f29", "#030302"] },
+  { id: "p_pal_37", label: "лодки", level: 'high', colors: "кобальт, оранжевый, лазурь", look: "p_look_38", lookImg: "looks/38.jpg", swatches: ["#06717c", "#012d3f", "#124966", "#918370"] },
+  { id: "p_pal_37_city", label: "город", level: 'high', colors: "глубокий синий, тёплый свет", look: "p_look_37_city", lookImg: "looks/city.jpg", swatches: ["#017cb6", "#013361", "#001834", "#165a86"] },
+  { id: "p_pal_city_denim", label: "деним", level: 'low', colors: "серо-голубой, серебристый, мягкий", look: "p_look_city_denim", lookImg: "looks/denim.jpg", swatches: ["#678187", "#3e5055", "#d0ccbf", "#282e2f"] },
+  { id: "p_pal_39", label: "меланж", level: 'mid', colors: "голубой меланж с рыжими нитями", look: "p_look_40", lookImg: "looks/32_bluesweater.jpg", swatches: ["#147096", "#114a68", "#2a9fc4", "#111f2c"] },
+  { id: "p_pal_35_felt", label: "фетр", level: 'high', colors: "фуксия, фиолетовый, оранжевый", look: "p_look_35_felt", lookImg: "looks/felt.jpg", swatches: ["#5e1b2b", "#c97b6e", "#843449", "#734e6d"] },
+  { id: "p_pal_7", label: "подушки", level: 'mid', colors: "ржавый бархат, горчица, тёмно-зелёный", look: "p_look_8", lookImg: "looks/08_pillows.jpg", swatches: ["#cc8b21", "#4a2b1b", "#855e37", "#2c0806"] },
+  { id: "p_pal_8", label: "тренч", level: 'mid', colors: "бежевый, бордо, коньячный", look: "p_look_9", lookImg: "looks/09_trench.jpg", swatches: ["#ac846a", "#a7513c", "#ccb39a", "#2a0d0a"] },
+  { id: "p_pal_9_safari", label: "сафари", level: 'low', colors: "песочный, сливочный, коньячный, немного тёмно-синего", look: "p_look_9_safari", lookImg: "looks/safari.jpg", swatches: ["#af987f", "#e4d3c1", "#382b1f", "#a67750"] },
+  { id: "p_pal_11", label: "песок", level: 'low', colors: "тёплый песочный, бронза", look: "p_look_12", lookImg: "looks/12_sand.jpg", swatches: ["#8d6449", "#4d3429", "#b48763", "#cab79c"] },
+  { id: "p_pal_18", label: "пробки", level: 'low', colors: "пробковый, винный, оттенки коричневого", look: "p_look_19", lookImg: "looks/15.jpg", swatches: ["#915e35", "#b4814d", "#d4a167", "#6b4629"] },
+  { id: "p_pal_43", label: "кофе", level: 'high', colors: "белый, чёрный орнамент, золото", look: "p_look_44", lookImg: "looks/44_coffee.jpg", swatches: ["#6d635c", "#422f28", "#ffffff", "#c6c8cd"] },
+  { id: "p_pal_4", label: "авто", level: 'high', colors: "чёрный лак, хром, красный", look: "p_look_5", lookImg: "looks/06.jpg", swatches: ["#857f79", "#0a0a09", "#423f40", "#5f5b5a"] },
+  { id: "p_pal_21", label: "стулья", level: 'high', colors: "оранжевый и зелёный узор", look: "p_look_22", lookImg: "looks/18.jpg", swatches: ["#e27d41", "#a82b0e", "#c15527", "#7b8158"] },
+  { id: "p_pal_1_sails", label: "паруса", level: 'low', colors: "туманный серый, белый, красный в деталях", look: "p_look_1_sails", lookImg: "looks/sails2.jpg", swatches: ["#84878c", "#f6f2e7", "#bcbdb7", "#665a5f"] },
+  { id: "p_pal_40", label: "овчина", level: 'low', colors: "серебристо-серый, голубоватый", look: "p_look_41", lookImg: "looks/33_dustyblue.jpg", swatches: ["#434c58", "#727f8e", "#2c343c", "#acbccf"] },
+];
+
+export function palettesFor(level) {
+  if (level === 'high') return [...PALETTES.filter(p => p.level === 'high'), ...PALETTES.filter(p => p.level !== 'high')];
+  return PALETTES.filter(p => p.level === level);
+}

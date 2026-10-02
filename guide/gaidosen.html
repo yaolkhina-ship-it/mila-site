@@ -293,6 +293,72 @@ body{background:#0D1A1E;height:100%;}
 .look-link-chip{display:inline-flex;align-items:center;gap:4px;background:#fff;border:0.5px solid rgba(42,21,53,0.18);border-radius:20px;padding:4px 10px 4px 8px;font-family:var(--f);font-size:10px;color:var(--deep);text-decoration:none;letter-spacing:0.04em;transition:background .18s,border-color .18s;white-space:nowrap;}
 .look-link-chip:hover{background:rgba(201,169,110,0.12);border-color:var(--gold);}
 .look-link-chip::before{content:'→';font-size:9px;color:var(--gold2);flex-shrink:0;}
+/* CONTRAST */
+.ct-ai{background:var(--wh);border:0.5px solid rgba(201,169,110,0.4);padding:18px 16px;margin:6px 0 4px;}
+.ct-ai-rules{display:flex;flex-direction:column;gap:7px;margin-bottom:16px;}
+.ct-ai-rules div{font-size:12px;color:var(--deep);font-family:var(--f);display:flex;gap:10px;align-items:center;}
+.ct-ai-rules span{width:20px;height:20px;border-radius:50%;border:0.5px solid var(--gold);color:var(--gold2);font-size:10px;display:inline-flex;align-items:center;justify-content:center;flex:none;}
+.ct-upload{display:block;text-align:center;background:var(--deep);color:#f2edf0;font-family:var(--f);font-size:11px;letter-spacing:.22em;text-transform:uppercase;padding:15px;cursor:pointer;}
+.ct-upload.busy{opacity:.5;pointer-events:none;}
+.ct-consent{font-size:10px;line-height:1.5;color:var(--deep);opacity:.55;font-family:var(--f);margin-top:10px;text-align:center;}
+.ct-consent a{color:inherit;}
+.ct-work{margin-top:16px;}
+.ct-pair{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
+.ct-pair img{width:100%;aspect-ratio:3/4;object-fit:cover;display:block;}
+.ct-status{font-size:12px;font-style:italic;color:var(--deep);opacity:.75;font-family:var(--f);text-align:center;margin-top:12px;animation:updatePulse 1.6s ease-in-out infinite;}
+.ct-status.done{animation:none;}
+.ct-result{margin-top:18px;border-top:0.4px solid var(--goldm);padding-top:16px;}
+.ct-res-k{font-size:9px;letter-spacing:.28em;color:var(--gold2);text-transform:uppercase;font-family:var(--f);}
+.ct-res-h{font-size:24px;color:var(--deep);font-family:var(--f);margin:6px 0 12px;}
+.ct-res-more{display:inline-block;margin-top:8px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold2);cursor:pointer;font-family:var(--f);}
+.ct-pair canvas{width:100%;aspect-ratio:3/4;object-fit:cover;display:block;}
+.ct-meter{margin:4px 0 16px;}
+.ct-meter-bar{position:relative;height:8px;background:linear-gradient(90deg,#e8e2da,#8f8a84 50%,#121212);}
+.ct-meter-bar span{position:absolute;top:-5px;width:3px;height:18px;background:var(--gold2);transform:translateX(-50%);}
+.ct-meter-z{display:flex;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--deep);opacity:.6;font-family:var(--f);margin-top:6px;}
+.ct-meter-z b{font-weight:normal;}
+.ct-books{display:flex;flex-direction:column;gap:12px;margin-top:6px;}
+.ct-book{display:grid;grid-template-columns:1fr 1fr;background:#f7f4ef;box-shadow:0 10px 24px -14px rgba(0,0,0,.45),inset 0 0 0 1px rgba(0,0,0,.05);cursor:pointer;position:relative;}
+.ct-book::after{content:"";position:absolute;left:50%;top:0;bottom:0;width:14px;transform:translateX(-50%);background:linear-gradient(90deg,rgba(0,0,0,0),rgba(0,0,0,.09),rgba(0,0,0,0));pointer-events:none;}
+.ct-page{padding:12px 10px 12px;min-height:220px;display:flex;flex-direction:column;}
+.ct-left{border-right:0.5px solid rgba(0,0,0,.08);}
+.ct-pno{font-size:10px;color:var(--deep);opacity:.55;font-family:var(--f);margin-bottom:8px;}
+.ct-blocks{display:flex;flex-direction:column;flex:1;min-height:120px;}
+.ct-blocks i{flex:1;display:block;}
+.ct-bname{font-size:15px;color:var(--deep);font-family:var(--f);text-align:center;margin-top:10px;}
+.ct-bcol{font-size:9.5px;line-height:1.4;color:var(--deep);opacity:.6;font-family:var(--f);text-align:center;font-style:italic;margin-top:3px;}
+.ct-brand{font-size:10px;letter-spacing:.22em;color:var(--deep);font-family:var(--f);margin-bottom:8px;}
+.ct-right img{width:100%;flex:1;object-fit:cover;min-height:0;}
+.ct-more{text-align:center;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold2);font-family:var(--f);padding:12px;cursor:pointer;border:0.5px solid rgba(201,169,110,.5);margin-top:12px;}
+.ct-err{font-size:13px;color:#8a2f2b;font-family:var(--f);line-height:1.6;}
+
+.ct-scale{width:100%;height:34px;object-fit:cover;display:block;margin:16px 0 18px;border:0.5px solid rgba(201,169,110,0.3);}
+.ct-choose{font-size:13px;color:var(--deep);font-family:var(--f);margin-bottom:12px;letter-spacing:.02em;}
+.ct-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+.ct-card{background:var(--wh);border:0.5px solid rgba(201,169,110,0.35);cursor:pointer;transition:transform .15s;}
+.ct-card:hover{transform:translateY(-2px);}
+.ct-card img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:center 20%;display:block;transition:filter .3s;}
+.ct-card:hover img{filter:grayscale(1);}
+.ct-card-t{font-size:12px;color:var(--deep);font-family:var(--f);padding:8px 8px 2px;text-transform:uppercase;letter-spacing:.14em;}
+.ct-card-d{font-size:10.5px;color:var(--deep);opacity:.6;font-style:italic;font-family:var(--f);padding:0 8px 10px;line-height:1.4;}
+.ct-hint{text-align:center;font-size:9px;letter-spacing:.16em;color:var(--mut);font-family:var(--f);margin-top:12px;text-transform:uppercase;}
+.ct-photo{position:relative;margin:4px 0 18px;cursor:pointer;}
+.ct-photo img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center 20%;display:block;transition:filter .35s;}
+.ct-photo.bw img{filter:grayscale(1);}
+.ct-photo figcaption{position:absolute;right:10px;bottom:10px;background:rgba(13,26,30,0.75);color:#f2edf0;font-size:9px;letter-spacing:.14em;text-transform:uppercase;padding:5px 10px;border-radius:20px;font-family:var(--f);}
+.ct-lead{font-size:18px;line-height:1.4;color:var(--deep);font-style:italic;font-family:var(--f);margin-bottom:14px;}
+.ct-p{font-size:13px;color:var(--deep);opacity:.78;line-height:1.8;font-family:var(--f);margin-bottom:11px;}
+.ct-p b{opacity:1;font-weight:bold;}
+.ct-sub{font-size:9px;letter-spacing:.28em;color:var(--gold2);text-transform:uppercase;font-family:var(--f);margin:20px 0 10px;padding-top:16px;border-top:0.4px solid var(--goldm);}
+.ct-quote{font-size:16px;line-height:1.5;font-style:italic;color:var(--deep);font-family:var(--f);border-left:1.5px solid var(--gold);padding:2px 0 2px 14px;margin:16px 0 4px;}
+.ct-note{font-style:italic;}
+.ct-links{display:flex;flex-wrap:wrap;gap:7px;margin:4px 0 6px;}
+.ct-chip{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--deep);background:var(--wh);border:0.5px solid rgba(201,169,110,0.5);padding:7px 12px;cursor:pointer;font-family:var(--f);border-radius:20px;}
+.ct-chip:hover{background:var(--deep);color:var(--wh);}
+.ct-todo{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#b0413e;border:1px dashed #b0413e;padding:8px 12px;font-family:var(--f);}
+.ct-level[hidden]{display:none !important;}
+.ct-next{display:flex;justify-content:flex-start;margin-top:22px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-family:var(--f);color:var(--gold2);}
+.ct-next span{cursor:pointer;}
 @media print {
   @page {
     margin: 0;
@@ -424,6 +490,138 @@ body{background:#0D1A1E;height:100%;}
     <div class="ft" style="background:var(--sand);">Mila Ushakova</div>
   </div>
 
+  <!-- 3.6 КОНТРАСТ ВНЕШНОСТИ -->
+  <div class="pg snd" id="p_contrast">
+    <div class="in" style="background:var(--sand);">
+      <div class="lbl">Техника</div>
+      <div class="ins-h">Определите контраст своей внешности</div>
+      <hr class="grule">
+      <p class="ct-p">Загрузите своё фото, и я определю контраст вашей внешности по своей методике, а затем подберу палитры Системы, которые поддержат его в портретной зоне.</p>
+      <div class="ct-ai">
+        <div class="ct-ai-rules">
+          <div><span>1</span>Фото при дневном свете</div>
+          <div><span>2</span>Без макияжа и фильтров</div>
+          <div><span>3</span>Лицо и линия роста волос хорошо видны</div>
+        </div>
+        <label class="ct-upload" id="ctUploadBtn">
+          <input type="file" accept="image/*" id="ctFile" hidden>
+          Загрузить фото
+        </label>
+        <div class="ct-consent">Фото не покидает ваш телефон: разбор происходит прямо на этой странице, никуда не отправляется и не сохраняется.</div>
+        <div class="ct-work" id="ctWork" hidden>
+          <div class="ct-pair"><img id="ctPrevC" alt=""><canvas id="ctPrevBW"></canvas></div>
+          <div class="ct-status" id="ctStatus">Смотрю на светлоту кожи, волос и бровей…</div>
+        </div>
+        <div class="ct-result" id="ctResult" hidden></div>
+      </div>
+      <img class="ct-scale" src="contrast/scale.jpg" alt="Шкала от белого к чёрному">
+    </div>
+    <div class="ft" style="background:var(--sand);">Mila Ushakova</div>
+  </div>
+
+  <div class="pg snd ct-level" id="p_contrast_low" hidden>
+    <div class="in" style="background:var(--sand);">
+      <div class="lbl">Ваш контраст внешности</div>
+      <div class="ins-h">Низкий контраст</div>
+      <figure class="ct-photo" onclick="this.classList.toggle('bw')"><img src="contrast/portrait-low.jpg" alt="Низкий контраст"><figcaption>цвет / ч/б</figcaption></figure>
+      <p class="ct-lead">Ваша внешность словно написана акварелью.</p>
+      <p class="ct-p">Светлая, иногда визуально полупрозрачная кожа. Светлые или достаточно мягкие волосы. Голубые, серые, серо-зелёные, светло-карие глаза могут казаться почти стеклянными. Брови не создают жёсткой графики.</p>
+      <p class="ct-p"><b>Главный признак:</b> между цветом кожи, линией роста волос, глазами и бровями нет большой разницы по светлоте. На чёрно-белой фотографии лицо выглядит мягким, без резких тёмных и светлых пятен. Очень светлая кожа может быстро краснеть на солнце.</p>
+      <div class="ct-sub">Как работать с цветом</div>
+      <p class="ct-p">Вашей внешности особенно идут оттенки приглушённые, разбелённые, сложные, немного припылённые. Не обязательно пастельные: цвет может быть достаточно глубоким, но лучше, когда в нём нет чрезмерной жёсткости.</p>
+      <p class="ct-p">Украшения работают по тому же принципу. Полупрозрачные камни, матовые и сатинированные поверхности, деликатный блеск часто красиво продолжают природную мягкость вашей внешности.</p>
+      <p class="ct-p">Я категорически не предлагаю отказываться от яркого цвета. Любите красный, носите красный. Просто попробуйте увести очень активный оттенок от портретной зоны: в брюки, юбку, обувь, сумку. Либо уменьшите его площадь и соедините с оттенком, который поддерживает вашу внешность.</p>
+      <p class="ct-quote">Низкий контраст не отсутствие цвета. Это более тонкая работа с его интенсивностью.</p>
+      <div class="ct-sub">Ваши палитры и образы</div>
+      <p class="ct-p ct-note">Эти оттенки поддерживают ваш природный уровень контраста и особенно хорошо работают в портретной зоне.</p>
+      <div class="ct-links">
+        <span class="ct-chip" onclick="scrollToEl('p_pal_33')">плащ</span>
+        <span class="ct-chip" onclick="scrollToEl('p_pal_3')">веер</span>
+        <span class="ct-chip" onclick="scrollToEl('p_pal_17')">сандалии</span>
+        <span class="ct-chip" onclick="scrollToEl('p_pal_29')">бусины</span>
+        <span class="ct-chip" onclick="scrollToEl('p_pal_6')">кресла</span>
+        <span class="ct-chip" onclick="scrollToEl('p_pal_6_tennis')">теннис</span>
+        <span class="ct-chip" onclick="scrollToEl('p_pal_city_denim')">деним</span>
+        <span class="ct-chip" onclick="scrollToEl('p_pal_9_safari')">сафари</span>
+        <span class="ct-chip" onclick="scrollToEl('p_pal_11')">песок</span>
+        <span class="ct-chip" onclick="scrollToEl('p_pal_18')">пробки</span>
+        <span class="ct-chip" onclick="scrollToEl('p_pal_1_sails')">паруса</span>
+        <span class="ct-chip" onclick="scrollToEl('p_pal_40')">овчина</span>
+      </div>
+      <div class="ct-next"><span onclick="scrollToEl('p_contrast')">← к разбору фото</span></div>
+    </div>
+    <div class="ft" style="background:var(--sand);">Mila Ushakova</div>
+  </div>
+
+  <div class="pg snd ct-level" id="p_contrast_mid" hidden>
+    <div class="in" style="background:var(--sand);">
+      <div class="lbl">Ваш контраст внешности</div>
+      <div class="ins-h">Средний контраст</div>
+      <figure class="ct-photo" onclick="this.classList.toggle('bw')"><img src="contrast/portrait-mid.jpg" alt="Средний контраст"><figcaption>цвет / ч/б</figcaption></figure>
+      <p class="ct-lead">Ваша внешность обладает собственной графикой.</p>
+      <p class="ct-p">Разница между кожей, волосами, глазами и бровями хорошо читается, но ни одна из этих характеристик не создаёт резкого контраста.</p>
+      <p class="ct-p">Волосы могут быть заметно темнее кожи, глаза достаточно выразительными, брови обозначенными. Если перевести фотографию в чёрно-белый режим, вы не увидите резкого перехода от белого к почти чёрному. Между ними множество полутонов. Ваша внешность очень пластичная с точки зрения цвета.</p>
+      <div class="ct-sub">Как работать с цветом</div>
+      <p class="ct-p">Средний контраст прекрасно допускает цвет и особенно хорошо работает со сложными, слегка приглушёнными оттенками. Не обязательно делать весь образ спокойным, достаточно сохранить баланс между интенсивностью цвета и природной интенсивностью внешности.</p>
+      <p class="ct-p">Яркий цвет великолепно работает через акцент: сумку, обувь, шарф, оправу очков, перчатки, украшение. Его можно носить и возле лица.</p>
+      <p class="ct-p">В украшениях я бы смотрела на степень блеска. Серебро, золото, смешанные металлы возможны. Особенно органично могут работать матовые, сатинированные, состаренные поверхности, винтаж, металл без зеркального блеска.</p>
+      <p class="ct-quote">Средний контраст позволяет носить многое. Сегодня сделать образ почти монохромным, завтра оставить спокойную базу и добавить один сильный цвет, послезавтра увеличить его площадь.</p>
+      <div class="ct-sub">Ваши палитры и образы</div>
+      <p class="ct-p ct-note">Эти оттенки поддерживают ваш природный уровень контраста и особенно хорошо работают в портретной зоне.</p>
+      <div class="ct-links">
+        <span class="ct-chip" onclick="scrollToEl('p_drop_new3')">жёлтый</span>
+        <span class="ct-chip" onclick="scrollToEl('p_drop_new5')">книги</span>
+        <span class="ct-chip" onclick="scrollToEl('p_drop_2')">кресло</span>
+        <span class="ct-chip" onclick="scrollToEl('p_drop_3')">перчатки</span>
+        <span class="ct-chip" onclick="scrollToEl('p_drop_4')">кофе</span>
+        <span class="ct-chip" onclick="scrollToEl('p_drop_5')">инжир</span>
+        <span class="ct-chip" onclick="scrollToEl('p_drop_10')">яблоки</span>
+        <span class="ct-chip" onclick="scrollToEl('p_pal_5_retro')">ретро</span>
+        <span class="ct-chip" onclick="scrollToEl('p_pal_24')">помидоры</span>
+        <span class="ct-chip" onclick="scrollToEl('p_pal_42')">малина</span>
+        <span class="ct-chip" onclick="scrollToEl('p_pal_26')">закат</span>
+        <span class="ct-chip" onclick="scrollToEl('p_pal_31')">лимоны</span>
+        <span class="ct-chip" onclick="scrollToEl('p_pal_tennis_court')">корт</span>
+        <span class="ct-chip" onclick="scrollToEl('p_pal_32')">плетёнка</span>
+        <span class="ct-chip" onclick="scrollToEl('p_pal_16')">кисть</span>
+        <span class="ct-chip" onclick="scrollToEl('p_pal_39')">меланж</span>
+        <span class="ct-chip" onclick="scrollToEl('p_pal_7')">подушки</span>
+        <span class="ct-chip" onclick="scrollToEl('p_pal_8')">тренч</span>
+      </div>
+      <div class="ct-next"><span onclick="scrollToEl('p_contrast')">← к разбору фото</span></div>
+    </div>
+    <div class="ft" style="background:var(--sand);">Mila Ushakova</div>
+  </div>
+
+  <div class="pg snd ct-level" id="p_contrast_high" hidden>
+    <div class="in" style="background:var(--sand);">
+      <div class="lbl">Ваш контраст внешности</div>
+      <div class="ins-h">Высокий контраст</div>
+      <figure class="ct-photo" onclick="this.classList.toggle('bw')"><img src="contrast/portrait-high.jpg" alt="Высокий контраст"><figcaption>цвет / ч/б</figcaption></figure>
+      <p class="ct-lead">Самый понятный визуальный признак: резкая разница между цветом кожи и линией роста волос.</p>
+      <p class="ct-p">Тёмные волосы при значительно более светлой коже, выразительные брови, глубокий цвет глаз, чёткая графика лица. Переведите фотографию в чёрно-белый режим, и разница между светлыми и тёмными участками останется очень заметной.</p>
+      <p class="ct-p">Условный визуальный образ: та самая выразительная «итальянская» внешность. Тёмные волосы, сильные брови, выразительные глаза, кожа, на фоне которой эта графика хорошо читается. Но это только образ для понимания: высокий контраст встречается при самых разных оттенках кожи, волос и глаз. Люди с более пигментированной кожей нередко легче загорают.</p>
+      <div class="ct-sub">Как работать с цветом</div>
+      <p class="ct-p">Поздравляю, ваша внешность способна выдержать очень многое. Сильную разницу светлого и тёмного. Насыщенный цвет. Крупные цветовые блоки. Активную бижутерию. Блеск. Контрастные принты. Яркую губную помаду. Сочетание нескольких достаточно самостоятельных цветов.</p>
+      <p class="ct-p">Но «можно всё» не означает «нужно всё одновременно». Преимущество высокой контрастности в другом: цвету сложнее перекрыть такую внешность. Поэтому вам особенно идут насыщенный красный, кобальт, фуксия, глубокий зелёный, жёлтый, фиолетовый.</p>
+      <p class="ct-p">Спокойные оттенки тоже прекрасно работают. Просто добавьте глубокий цвет, контрастную деталь, выразительное украшение или разницу светлого и тёмного.</p>
+      <p class="ct-quote">Высокий контраст это большая свобода в обращении с цветом.</p>
+      <div class="ct-sub">Ваши палитры и образы</div>
+      <p class="ct-p ct-note">Вам подходят все цветовые сочетания из Системы.</p>
+      <div class="ct-links">
+        <span class="ct-chip" onclick="scrollToEl('p_pal_0')">Красный</span>
+        <span class="ct-chip" onclick="scrollToEl('p_pal_16')">Синий</span>
+        <span class="ct-chip" onclick="scrollToEl('p_pal_3')">Розовый</span>
+        <span class="ct-chip" onclick="scrollToEl('p_pal_tennis_court')">Зелёный</span>
+        <span class="ct-chip" onclick="scrollToEl('p_pal_26')">Жёлтый</span>
+        <span class="ct-chip" onclick="scrollToEl('p_pal_35_felt')">Фиолетовый</span>
+        <span class="ct-chip" onclick="scrollToEl('p_pal_0')">Все сочетания →</span>
+      </div>
+      <div class="ct-next"><span onclick="scrollToEl('p_contrast')">← к разбору фото</span></div>
+    </div>
+    <div class="ft" style="background:var(--sand);">Mila Ushakova</div>
+  </div>
+
   <!-- 4 НАВИГАЦИЯ -->
   <div class="pg dk" id="p4">
     <div class="in">
@@ -438,6 +636,12 @@ body{background:#0D1A1E;height:100%;}
     <span class="ni-n" style="color:var(--gold);">✦</span>
     <div class="ni-body">
       <div class="ni-t">Правило пропорций<span style="margin-left:8px;background:var(--gold);color:var(--deep);font-size:9px;font-weight:700;letter-spacing:0.06em;padding:2px 7px;border-radius:20px;vertical-align:middle;">NEW</span></div>
+    </div>
+  </div>
+  <div class="ni" onclick="scrollToEl('p_contrast')" style="background:rgba(201,169,110,0.1);border-radius:6px;">
+    <span class="ni-n" style="color:var(--gold);">✦</span>
+    <div class="ni-body">
+      <div class="ni-t">Контраст внешности<span style="margin-left:8px;background:var(--gold);color:var(--deep);font-size:9px;font-weight:700;letter-spacing:0.06em;padding:2px 7px;border-radius:20px;vertical-align:middle;">NEW</span></div>
     </div>
   </div>
   <div class="ni" onclick="scrollToEl('p_bonus')"><span class="ni-n">01</span><div class="ni-body"><div class="ni-t">Бонус</div></div></div>
@@ -3916,4 +4120,95 @@ function scrollToEl(id){
   <a href="https://t.me/MilaUshakova_ClubBot?start=support" target="_blank" style="color:inherit;text-decoration:underline;margin:0 9px;white-space:nowrap;">Поддержка</a>
   <div style="margin-top:6px;">© 2026 · ИП Ольхина Я.Ф., ИНН 222411003828, ОГРНИП 326220200112474</div>
 </div>
+
+<script type="module">
+/* Контраст внешности: фото разбирается прямо в браузере (guide/contrast/contrast.mjs), никуда не отправляется */
+import { analyze, LOW_MAX, MID_MAX } from './contrast/contrast.mjs';
+import { palettesFor } from './contrast/palettes.mjs';
+const $ = id => document.getElementById(id);
+const input = $('ctFile'), btn = $('ctUploadBtn'), work = $('ctWork'), status = $('ctStatus'), result = $('ctResult'),
+      prevC = $('ctPrevC'), prevBW = $('ctPrevBW');
+const LEVEL = {
+  low:  { name: 'Низкий контраст', page: 'p_contrast_low', lead: 'Ваша внешность словно написана акварелью.',
+          tip: 'Вам особенно идут оттенки приглушённые, разбелённые, сложные, немного припылённые. Яркий цвет не исключается: уведите его от портретной зоны в брюки, юбку, обувь, сумку или уменьшите его площадь.' },
+  mid:  { name: 'Средний контраст', page: 'p_contrast_mid', lead: 'Ваша внешность обладает собственной графикой.',
+          tip: 'Средний контраст прекрасно допускает цвет и особенно хорошо работает со сложными, слегка приглушёнными оттенками. Яркий цвет великолепно работает через акцент, и его можно носить возле лица.' },
+  high: { name: 'Высокий контраст', page: 'p_contrast_high', lead: 'Цвету сложно перекрыть вашу внешность.',
+          tip: 'Вам подходят насыщенный цвет, крупные цветовые блоки, блеск, контрастные принты и все сочетания Системы. Но «можно всё» не означает «нужно всё одновременно».' },
+};
+const RETAKE = {
+  noface: 'Я не нашла на фото лицо. Загрузите портрет, где лицо видно целиком.',
+  many: 'На фото несколько человек. Загрузите портрет, где вы одна или один.',
+  small: 'Лицо на фото слишком маленькое. Подойдите ближе к камере или обрежьте фото по плечи.',
+  hair: 'Не видно линию роста волос. Сделайте фото так, чтобы лоб и волосы над ним были в кадре.',
+  dark: 'Фото слишком тёмное. Сфотографируйтесь у окна при дневном свете.',
+  bright: 'Фото пересвечено: лицо почти белое. Встаньте так, чтобы свет был мягким, без прямого солнца и вспышки.',
+};
+const esc = t => { const d = document.createElement('div'); d.textContent = t; return d.innerHTML; };
+
+function drawBW(img, marks) {
+  const { w, h } = marks ? marks.size : { w: img.naturalWidth, h: img.naturalHeight };
+  prevBW.width = w; prevBW.height = h;
+  const x = prevBW.getContext('2d'); x.filter = 'grayscale(1)'; x.drawImage(img, 0, 0, w, h); x.filter = 'none';
+  if (!marks) return;
+  const dot = (p, c) => { x.beginPath(); x.arc(p.x, p.y, Math.max(3, w / 160), 0, 7); x.lineWidth = Math.max(2, w / 300); x.strokeStyle = c; x.stroke(); };
+  marks.hair.forEach(p => dot(p, '#c9a96e')); marks.brow.forEach(p => dot(p, '#ffffff')); marks.skin.forEach(p => dot(p, '#7fd1c1'));
+}
+
+function spread(p, i) {
+  const blocks = p.swatches.map(c => `<i style="background:${c}"></i>`).join('');
+  return `<div class="ct-book" data-go="${p.id}">
+    <div class="ct-page ct-left"><span class="ct-pno">${String(i + 1).padStart(2, '0')}</span><div class="ct-blocks">${blocks}</div>
+      <div class="ct-bname">${esc(p.label)}</div><div class="ct-bcol">${esc(p.colors)}</div></div>
+    <div class="ct-page ct-right"><div class="ct-brand">MILA USHAKOVA</div>${p.lookImg ? `<img loading="lazy" src="${p.lookImg}" alt="">` : ''}</div>
+  </div>`;
+}
+
+// Страница уровня открывается только после разбора, и только своя
+function unlock(level) {
+  document.querySelectorAll('.ct-level').forEach(el => { el.hidden = el.id !== LEVEL[level].page; });
+  try { localStorage.setItem('ctLevel', level); } catch {}
+}
+try { const saved = localStorage.getItem('ctLevel'); if (LEVEL[saved]) unlock(saved); } catch {}
+
+function render(r) {
+  const L = LEVEL[r.level], pal = palettesFor(r.level);
+  const pct = v => Math.round(100 * v / r.values.skin);
+  const pos = Math.min(100, Math.round(r.score * 100 / 90));
+  result.innerHTML = `<div class="ct-res-k">Ваш контраст</div><div class="ct-res-h">${L.name}</div>
+    <div class="ct-meter"><div class="ct-meter-bar"><span style="left:${pos}%"></span></div>
+      <div class="ct-meter-z"><b style="width:${LOW_MAX * 100 / 90}%">низкий</b><b style="width:${(MID_MAX - LOW_MAX) * 100 / 90}%">средний</b><b>высокий</b></div></div>
+    <p class="ct-lead">${L.lead}</p>
+    <p class="ct-p">На чёрно-белой версии вашего фото линия роста волос темнее кожи на ${pct(r.diffs.hair)}%, брови на ${pct(r.diffs.brow)}%. ${L.tip}</p>
+    <div class="ct-sub">Ваши палитры и образы</div>
+    <p class="ct-p ct-note">Эти оттенки поддерживают ваш природный уровень контраста и особенно хорошо работают в портретной зоне. Нажмите на разворот, чтобы открыть палитру и образ.</p>
+    <div class="ct-books">${pal.slice(0, 6).map(spread).join('')}</div>
+    ${pal.length > 6 ? `<div class="ct-more" id="ctMore">ещё ${pal.length - 6} палитр</div><div class="ct-books" id="ctRest" hidden>${pal.slice(6).map((p, i) => spread(p, i + 6)).join('')}</div>` : ''}
+    <span class="ct-res-more" data-go="${L.page}">подробнее о вашем контрасте →</span>`;
+  result.hidden = false;
+}
+
+input.addEventListener('change', async () => {
+  const f = input.files && input.files[0]; if (!f) return;
+  const img = new Image(), url = URL.createObjectURL(f);
+  img.src = url;
+  try { await img.decode(); } catch { status.textContent = 'Это фото не открылось. Попробуйте другое, в формате JPG или PNG.'; work.hidden = false; return; }
+  prevC.src = url; drawBW(img); work.hidden = false; result.hidden = true; result.innerHTML = '';
+  status.classList.remove('done'); status.textContent = 'Смотрю на светлоту кожи, волос и бровей…'; btn.classList.add('busy');
+  try {
+    const r = await analyze(img);
+    status.classList.add('done');
+    if (r.status !== 'ok') { status.textContent = ''; result.hidden = false; result.innerHTML = `<div class="ct-err">${RETAKE[r.reason]}</div>`; return; }
+    drawBW(img, r.marks); status.textContent = 'Точки на ч/б фото: кожа, брови, линия роста волос';
+    render(r); unlock(r.level);
+  } catch (e) {
+    status.classList.add('done'); status.textContent = '';
+    result.hidden = false; result.innerHTML = '<div class="ct-err">Не получилось разобрать фото на этом устройстве. Обновите страницу и попробуйте ещё раз.</div>';
+  } finally { btn.classList.remove('busy'); input.value = ''; }
+});
+result.addEventListener('click', e => {
+  if (e.target.id === 'ctMore') { $('ctRest').hidden = false; e.target.remove(); return; }
+  const t = e.target.closest('[data-go]'); if (t) window.scrollToEl(t.getAttribute('data-go'));
+});
+</script>
 </body></html>
