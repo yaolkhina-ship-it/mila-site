@@ -122,6 +122,14 @@ body{background:#0D1A1E;height:100%;}
 .ni-t{font-size:15px;color:rgba(242,237,240,0.85);line-height:1.2;margin-bottom:3px;font-family:var(--f);}
 .ni-sub{font-size:11px;color:rgba(201,169,110,0.6);line-height:1.5;font-style:italic;font-family:var(--f);}
 .ni-badge{display:inline-block;font-size:8px;letter-spacing:0.1em;color:rgba(201,169,110,0.75);border:0.5px solid rgba(201,169,110,0.3);padding:2px 7px;margin-top:4px;text-transform:uppercase;font-family:var(--f);}
+.ni-row{display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:22px;margin:0 -22px 14px;padding:0 22px 6px;scrollbar-width:none;}
+.ni-row::-webkit-scrollbar{display:none;}
+.ni-new{flex:0 0 46%;scroll-snap-align:start;background:rgba(201,169,110,0.1);border:0.5px solid rgba(201,169,110,0.35);border-radius:6px;padding:12px 12px 14px;cursor:pointer;display:flex;flex-direction:column;gap:4px;}
+.ni-new:hover{opacity:.75;}
+.ni-new-star{color:var(--gold);font-size:12px;}
+.ni-new-t{font-size:15px;line-height:1.2;color:rgba(242,237,240,0.9);font-family:var(--f);}
+.ni-new-s{font-size:11px;color:rgba(201,169,110,0.7);font-style:italic;font-family:var(--f);flex:1;}
+.ni-new-b{align-self:flex-start;background:var(--gold);color:var(--deep);font-size:9px;font-weight:700;letter-spacing:0.06em;padding:2px 7px;border-radius:20px;margin-top:6px;font-family:var(--f);}
 .cat-chips{display:flex;flex-wrap:wrap;gap:8px;margin:-4px 0 8px;padding:14px 0 0 24px;}
 .cat-chip{font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(242,237,240,0.85);border:0.5px solid rgba(201,169,110,0.5);padding:6px 11px;cursor:pointer;font-family:var(--f);transition:all .2s;}
 .cat-chip:hover{background:rgba(201,169,110,0.5);color:#0D1A1E;}
@@ -387,9 +395,9 @@ body{background:#0D1A1E;height:100%;}
 <!-- /support-btn -->
 
 <!-- Уведомление об обновлении — видно на любом слайде -->
-<div onclick="scrollToEl('p_drop_new')" style="position:fixed; top:16px; left:50%; transform:translateX(-50%); z-index:9990; display:inline-flex; align-items:center; gap:12px; background:rgba(13,26,30,0.92); border:0.5px solid rgba(201,169,110,0.5); color:rgba(242,237,240,0.9); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); font-family:var(--f); font-size:17px; font-weight:500; letter-spacing:0.02em; padding:13px 28px; border-radius:100px; box-shadow:0 6px 20px rgba(0,0,0,0.25); animation:updatePulse 2s ease-in-out infinite; white-space:nowrap; cursor:pointer;">
+<div onclick="scrollToEl('p_contrast')" style="position:fixed; top:16px; left:50%; transform:translateX(-50%); z-index:9990; display:inline-flex; align-items:center; gap:12px; background:rgba(13,26,30,0.92); border:0.5px solid rgba(201,169,110,0.5); color:rgba(242,237,240,0.9); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); font-family:var(--f); font-size:17px; font-weight:500; letter-spacing:0.02em; padding:13px 28px; border-radius:100px; box-shadow:0 6px 20px rgba(0,0,0,0.25); animation:updatePulse 2s ease-in-out infinite; white-space:nowrap; cursor:pointer;">
   <span style="width:10px; height:10px; border-radius:50%; background:#c9a96e; flex-shrink:0;"></span>
-  +5 новых образов
+  Новый инструмент
 </div>
 <style>@keyframes updatePulse{0%,100%{opacity:1;}50%{opacity:0.55;}}</style>
 
@@ -471,6 +479,53 @@ body{background:#0D1A1E;height:100%;}
       <div class="ins-item"><p><span class="ins-n">7.</span>&nbsp; Этот материал предназначен для личного использования. Передача третьим лицам и перепродажа запрещены.</p></div>
     </div>
     <div class="ft" style="background:var(--sand);">Mila Ushakova</div>
+  </div>
+
+  <!-- 4 НАВИГАЦИЯ -->
+  <div class="pg dk" id="p4">
+    <div class="in">
+  <div class="nav-h">Навигация</div>
+  <div class="ni-row">
+    <div class="ni-new" onclick="scrollToEl('p_contrast')"><span class="ni-new-star">✦</span><div class="ni-new-t">Контраст внешности</div><div class="ni-new-s">разбор по фото</div><span class="ni-new-b">NEW</span></div>
+    <div class="ni-new" onclick="scrollToEl('p_drop_new')"><span class="ni-new-star">✦</span><div class="ni-new-t">Новый дроп</div><div class="ni-new-s">5 новых образов</div><span class="ni-new-b">NEW</span></div>
+    <div class="ni-new" onclick="scrollToEl('p_rule_proportions')"><span class="ni-new-star">✦</span><div class="ni-new-t">Правило пропорций</div><div class="ni-new-s">проверка образа</div><span class="ni-new-b">NEW</span></div>
+  </div>
+  <div class="ni" onclick="scrollToEl('p_bonus')"><span class="ni-n">01</span><div class="ni-body"><div class="ni-t">Бонус</div></div></div>
+  <div class="ni" onclick="scrollToEl('p6')"><span class="ni-n">02</span><div class="ni-body"><div class="ni-t">Рекомендации на сезон</div></div></div>
+  <div class="ni" onclick="scrollToEl('p_pal_0')"><span class="ni-n">03</span><div class="ni-body"><div class="ni-t">Цветовые сочетания</div></div></div>
+  <div class="tone-index">
+    <div class="tone-item" onclick="scrollToEl('p_pal_0')"><span>&rarr;</span>Красный</div>
+    <div class="tone-item" onclick="scrollToEl('p_pal_3')"><span>&rarr;</span>Розовый</div>
+    <div class="tone-item" onclick="scrollToEl('p_pal_6')"><span>&rarr;</span>Оранжевый</div>
+    <div class="tone-item" onclick="scrollToEl('p_pal_26')"><span>&rarr;</span>Жёлтый</div>
+    <div class="tone-item" onclick="scrollToEl('p_pal_tennis_court')"><span>&rarr;</span>Зелёный</div>
+    <div class="tone-item" onclick="scrollToEl('p_pal_16')"><span>&rarr;</span>Синий</div>
+    <div class="tone-item" onclick="scrollToEl('p_pal_35_felt')"><span>&rarr;</span>Фиолетовый</div>
+    <div class="tone-item" onclick="scrollToEl('p_pal_7')"><span>&rarr;</span>Бежевый и коричневый</div>
+    <div class="tone-item" onclick="scrollToEl('p_pal_4')"><span>&rarr;</span>Серый и чёрный</div>
+  </div>
+  <div class="ni" onclick="scrollToEl('p_promo_povod')"><span class="ni-n">04</span><div class="ni-body"><div class="ni-t">Промо от брендов<svg width="14" height="14" viewBox="0 0 24 24" style="margin-left:8px;vertical-align:-2px;" fill="#DC2626" stroke="#DC2626" stroke-width="0.5"><path d="M20.59 13.41L13.42 20.58a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><circle cx="7" cy="7" r="1.6" fill="#fff" stroke="none"/></svg></div></div></div>
+  <div class="tone-index">
+    <div class="tone-item" onclick="scrollToEl('p_promo_povod')"><span>&rarr;</span>Povod</div>
+    <div class="tone-item" onclick="scrollToEl('p_promo_daisyknit')"><span>&rarr;</span>Daisyknit</div>
+    <div class="tone-item" onclick="scrollToEl('p_promo_ivolga')"><span>&rarr;</span>Ivolga</div>
+    <div class="tone-item" onclick="scrollToEl('p_promo_horosh')"><span>&rarr;</span>Horosh</div>
+    <div class="tone-item" onclick="scrollToEl('p_promo_daria_shi')"><span>&rarr;</span>Daria_Shi</div>
+    <div class="tone-item" onclick="scrollToEl('p_promo_mario')"><span>&rarr;</span>Mario Portolano</div>
+  </div>
+  <div class="ni" onclick="scrollToEl('p_cat_accessories')"><span class="ni-n">05</span><div class="ni-body"><div class="ni-t">Категории</div></div></div>
+  <div class="cat-chips">
+    <span class="cat-chip" onclick="scrollToEl('p_cat_accessories')">Аксессуары</span>
+    <span class="cat-chip" onclick="scrollToEl('p_cat_shoes')">Обувь</span>
+    <span class="cat-chip" onclick="scrollToEl('p_cat_vintage')">Винтаж</span>
+    <span class="cat-chip" onclick="scrollToEl('p_cat_resale')">Ресейл</span>
+    <span class="cat-chip" onclick="scrollToEl('p_cat_craft')">Craft &amp; Atelier</span>
+    <span class="cat-chip" onclick="scrollToEl('p_cat_ru_brands')">Российские бренды</span>
+    <span class="cat-chip" onclick="scrollToEl('p_cat_middle')">Middle</span>
+    <span class="cat-chip" onclick="scrollToEl('p_cat_mass')">Mass market</span>
+    <span class="cat-chip" onclick="scrollToEl('p_cat_luxury')">Luxury</span>
+  </div>
+    </div>
   </div>
 
   <!-- 3.5 ПРАВИЛО ПРОПОРЦИЙ -->
@@ -622,65 +677,6 @@ body{background:#0D1A1E;height:100%;}
     <div class="ft" style="background:var(--sand);">Mila Ushakova</div>
   </div>
 
-  <!-- 4 НАВИГАЦИЯ -->
-  <div class="pg dk" id="p4">
-    <div class="in">
-  <div class="nav-h">Навигация</div>
-  <div class="ni" onclick="scrollToEl('p_drop_new')" style="background:rgba(201,169,110,0.1);border-radius:6px;">
-    <span class="ni-n" style="color:var(--gold);">✦</span>
-    <div class="ni-body">
-      <div class="ni-t">Новый дроп<span style="margin-left:8px;background:var(--gold);color:var(--deep);font-size:9px;font-weight:700;letter-spacing:0.06em;padding:2px 7px;border-radius:20px;vertical-align:middle;">NEW</span></div>
-    </div>
-  </div>
-  <div class="ni" onclick="scrollToEl('p_rule_proportions')" style="background:rgba(201,169,110,0.1);border-radius:6px;">
-    <span class="ni-n" style="color:var(--gold);">✦</span>
-    <div class="ni-body">
-      <div class="ni-t">Правило пропорций<span style="margin-left:8px;background:var(--gold);color:var(--deep);font-size:9px;font-weight:700;letter-spacing:0.06em;padding:2px 7px;border-radius:20px;vertical-align:middle;">NEW</span></div>
-    </div>
-  </div>
-  <div class="ni" onclick="scrollToEl('p_contrast')" style="background:rgba(201,169,110,0.1);border-radius:6px;">
-    <span class="ni-n" style="color:var(--gold);">✦</span>
-    <div class="ni-body">
-      <div class="ni-t">Контраст внешности<span style="margin-left:8px;background:var(--gold);color:var(--deep);font-size:9px;font-weight:700;letter-spacing:0.06em;padding:2px 7px;border-radius:20px;vertical-align:middle;">NEW</span></div>
-    </div>
-  </div>
-  <div class="ni" onclick="scrollToEl('p_bonus')"><span class="ni-n">01</span><div class="ni-body"><div class="ni-t">Бонус</div></div></div>
-  <div class="ni" onclick="scrollToEl('p6')"><span class="ni-n">02</span><div class="ni-body"><div class="ni-t">Рекомендации на сезон</div></div></div>
-  <div class="ni" onclick="scrollToEl('p_pal_0')"><span class="ni-n">03</span><div class="ni-body"><div class="ni-t">Цветовые сочетания</div></div></div>
-  <div class="tone-index">
-    <div class="tone-item" onclick="scrollToEl('p_pal_0')"><span>&rarr;</span>Красный</div>
-    <div class="tone-item" onclick="scrollToEl('p_pal_3')"><span>&rarr;</span>Розовый</div>
-    <div class="tone-item" onclick="scrollToEl('p_pal_6')"><span>&rarr;</span>Оранжевый</div>
-    <div class="tone-item" onclick="scrollToEl('p_pal_26')"><span>&rarr;</span>Жёлтый</div>
-    <div class="tone-item" onclick="scrollToEl('p_pal_tennis_court')"><span>&rarr;</span>Зелёный</div>
-    <div class="tone-item" onclick="scrollToEl('p_pal_16')"><span>&rarr;</span>Синий</div>
-    <div class="tone-item" onclick="scrollToEl('p_pal_35_felt')"><span>&rarr;</span>Фиолетовый</div>
-    <div class="tone-item" onclick="scrollToEl('p_pal_7')"><span>&rarr;</span>Бежевый и коричневый</div>
-    <div class="tone-item" onclick="scrollToEl('p_pal_4')"><span>&rarr;</span>Серый и чёрный</div>
-  </div>
-  <div class="ni" onclick="scrollToEl('p_promo_povod')"><span class="ni-n">04</span><div class="ni-body"><div class="ni-t">Промо от брендов<svg width="14" height="14" viewBox="0 0 24 24" style="margin-left:8px;vertical-align:-2px;" fill="#DC2626" stroke="#DC2626" stroke-width="0.5"><path d="M20.59 13.41L13.42 20.58a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><circle cx="7" cy="7" r="1.6" fill="#fff" stroke="none"/></svg></div></div></div>
-  <div class="tone-index">
-    <div class="tone-item" onclick="scrollToEl('p_promo_povod')"><span>&rarr;</span>Povod</div>
-    <div class="tone-item" onclick="scrollToEl('p_promo_daisyknit')"><span>&rarr;</span>Daisyknit</div>
-    <div class="tone-item" onclick="scrollToEl('p_promo_ivolga')"><span>&rarr;</span>Ivolga</div>
-    <div class="tone-item" onclick="scrollToEl('p_promo_horosh')"><span>&rarr;</span>Horosh</div>
-    <div class="tone-item" onclick="scrollToEl('p_promo_daria_shi')"><span>&rarr;</span>Daria_Shi</div>
-    <div class="tone-item" onclick="scrollToEl('p_promo_mario')"><span>&rarr;</span>Mario Portolano</div>
-  </div>
-  <div class="ni" onclick="scrollToEl('p_cat_accessories')"><span class="ni-n">05</span><div class="ni-body"><div class="ni-t">Категории</div></div></div>
-  <div class="cat-chips">
-    <span class="cat-chip" onclick="scrollToEl('p_cat_accessories')">Аксессуары</span>
-    <span class="cat-chip" onclick="scrollToEl('p_cat_shoes')">Обувь</span>
-    <span class="cat-chip" onclick="scrollToEl('p_cat_vintage')">Винтаж</span>
-    <span class="cat-chip" onclick="scrollToEl('p_cat_resale')">Ресейл</span>
-    <span class="cat-chip" onclick="scrollToEl('p_cat_craft')">Craft &amp; Atelier</span>
-    <span class="cat-chip" onclick="scrollToEl('p_cat_ru_brands')">Российские бренды</span>
-    <span class="cat-chip" onclick="scrollToEl('p_cat_middle')">Middle</span>
-    <span class="cat-chip" onclick="scrollToEl('p_cat_mass')">Mass market</span>
-    <span class="cat-chip" onclick="scrollToEl('p_cat_luxury')">Luxury</span>
-  </div>
-    </div>
-  </div>
   <!-- БОНУС -->
   <div class="pg" id="p_bonus">
     <div class="in" style="background:#f0ebe3;">
