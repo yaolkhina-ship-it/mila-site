@@ -4145,7 +4145,11 @@ const esc = t => { const d = document.createElement('div'); d.textContent = t; r
 function drawBW(img, marks) {
   const { w, h } = marks ? marks.size : { w: img.naturalWidth, h: img.naturalHeight };
   prevBW.width = w; prevBW.height = h;
-  const x = prevBW.getContext('2d'); x.filter = 'grayscale(1)'; x.drawImage(img, 0, 0, w, h); x.filter = 'none';
+  const x = prevBW.getContext('2d'); x.drawImage(img, 0, 0, w, h);
+  // ч/б вручную: ctx.filter не работает в Safari
+  const d = x.getImageData(0, 0, w, h), px = d.data;
+  for (let i = 0; i < px.length; i += 4) { const y = 0.2126 * px[i] + 0.7152 * px[i + 1] + 0.0722 * px[i + 2]; px[i] = px[i + 1] = px[i + 2] = y; }
+  x.putImageData(d, 0, 0);
   if (!marks) return;
   const dot = (p, c) => { x.beginPath(); x.arc(p.x, p.y, Math.max(3, w / 160), 0, 7); x.lineWidth = Math.max(2, w / 300); x.strokeStyle = c; x.stroke(); };
   marks.hair.forEach(p => dot(p, '#c9a96e')); marks.brow.forEach(p => dot(p, '#ffffff')); marks.skin.forEach(p => dot(p, '#7fd1c1'));
@@ -4169,12 +4173,13 @@ try { localStorage.removeItem('ctLevel'); } catch {} // убрать урове�
 function render(r) {
   const L = LEVEL[r.level], pal = palettesFor(r.level);
   const pct = v => Math.round(100 * v / r.values.skin);
-  const pos = Math.min(100, Math.round(r.score * 100 / 90));
+  const SC0 = 25, SC1 = 90, sc = v => Math.max(0, Math.min(100, (v - SC0) * 100 / (SC1 - SC0)));
+  const pos = Math.round(sc(r.score));
   result.innerHTML = `<div class="ct-res-k">Ваш контраст</div><div class="ct-res-h">${L.name}</div>
     <div class="ct-meter"><div class="ct-meter-bar"><span style="left:${pos}%"></span></div>
-      <div class="ct-meter-z"><b style="width:${LOW_MAX * 100 / 90}%">низкий</b><b style="width:${(MID_MAX - LOW_MAX) * 100 / 90}%">средний</b><b>высокий</b></div></div>
+      <div class="ct-meter-z"><b style="width:${sc(LOW_MAX)}%">низкий</b><b style="width:${sc(MID_MAX) - sc(LOW_MAX)}%">средний</b><b>высокий</b></div></div>
     <p class="ct-lead">${L.lead}</p>
-    <p class="ct-p">На чёрно-белой версии вашего фото линия роста волос темнее кожи на ${pct(r.diffs.hair)}%, брови на ${pct(r.diffs.brow)}%. ${L.tip}</p>
+    <p class="ct-p">На чёрно-белой версии вашего фото волосы темнее кожи на ${pct(r.diffs.hair)}%, брови на ${pct(r.diffs.brow)}%, глаза на ${pct(r.diffs.eye)}%. ${L.tip}</p>
     <div class="ct-sub">Ваши палитры и образы</div>
     <p class="ct-p ct-note">Эти оттенки поддерживают ваш природный уровень контраста и особенно хорошо работают в портретной зоне. Нажмите на разворот, чтобы открыть палитру и образ.</p>
     <div class="ct-books">${pal.slice(0, 6).map(spread).join('')}</div>
@@ -4194,7 +4199,7 @@ input.addEventListener('change', async () => {
     const r = await analyze(img);
     status.classList.add('done');
     if (r.status !== 'ok') { status.textContent = ''; result.hidden = false; result.innerHTML = `<div class="ct-err">${RETAKE[r.reason]}</div>`; return; }
-    drawBW(img, r.marks); status.textContent = 'Точки на ч/б фото: кожа, брови, линия роста волос';
+    drawBW(img, r.marks); status.textContent = 'Точки на ч/б фото: кожа, брови, волосы';
     render(r); unlock(r.level);
   } catch (e) {
     status.classList.add('done'); status.textContent = '';
