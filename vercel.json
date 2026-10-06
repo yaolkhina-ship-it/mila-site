@@ -18,6 +18,10 @@
       "use": "@vercel/node"
     },
     {
+      "src": "api/lava-webhook.js",
+      "use": "@vercel/node"
+    },
+    {
       "src": "guide/**",
       "use": "@vercel/static"
     },
@@ -56,6 +60,7 @@
   "routes": [
     { "src": "/api/webhook", "dest": "/api/webhook.js" },
     { "src": "/api/create-payment", "dest": "/api/create-payment.js" },
+    { "src": "/api/lava-webhook", "dest": "/api/lava-webhook.js" },
     { "src": "/webinar", "dest": "/webinar.html" },
     { "src": "/thank-you", "dest": "/thank-you.html" },
     { "src": "/color-guide", "dest": "/guide.html" },
