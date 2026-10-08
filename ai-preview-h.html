@@ -88,7 +88,7 @@ footer{padding:28px 16px 40px;text-align:center;font-size:12px;opacity:.75}foote
   footer{display:none}
   .hnav{display:flex;position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:30;gap:10px;align-items:center;background:var(--ink);color:var(--paper);border-radius:40px;padding:6px 8px;font-size:13px}
   .hnav button{background:var(--acid);color:var(--ink);border:0;border-radius:50%;width:38px;height:38px;font-size:17px;cursor:pointer}
-  .hnav span{min-width:46px;text-align:center;letter-spacing:.08em}
+  .hnav span{min-width:76px;text-align:center;letter-spacing:.12em;text-transform:uppercase;font-size:12px}
   .hbar{display:block;position:fixed;left:0;right:0;bottom:0;height:4px;z-index:30;background:rgba(0,0,0,.08)}
   .hbar i{display:block;height:100%;width:20%;background:var(--acid);transition:width .3s}
 }
@@ -128,7 +128,7 @@ footer{padding:28px 16px 40px;text-align:center;font-size:12px;opacity:.75}foote
 </section>
 <section class="end panel"><h2>Без<br>правил.<br>Со вкусом.</h2><a href="https://t.me/MilaUshakova_ClubBot?start=ai">Зарегистрироваться →</a><small>Ссылка на эфир придёт в Telegram-бот клуба в день встречи</small></section>
 </main>
-<div class="hnav"><button id="prev" aria-label="Назад">←</button><span id="count">1 / 5</span><button id="next" aria-label="Дальше">→</button></div>
+<div class="hnav"><button id="prev" aria-label="Назад">←</button><span id="count">листать</span><button id="next" aria-label="Дальше">→</button></div>
 <div class="hbar"><i id="bar"></i></div>
 <footer><a href="/oferta">Договор оферты</a><a href="/privacy">Политика конфиденциальности</a><a href="https://t.me/MilaUshakova_ClubBot?start=support">Поддержка</a><br>© 2026 · ИП Ольхина Я.Ф., ИНН 222411003828, ОГРНИП 326220200112474</footer>
 <script>
@@ -139,7 +139,7 @@ footer{padding:28px 16px 40px;text-align:center;font-size:12px;opacity:.75}foote
   var cnt=document.getElementById('count'), bar=document.getElementById('bar');
   function idx(){return Math.round(t.scrollLeft/t.clientWidth)}
   function go(i){i=Math.max(0,Math.min(n-1,i)); t.scrollTo({left:i*t.clientWidth,behavior:'smooth'})}
-  function upd(){var i=idx(); cnt.textContent=(i+1)+' / '+n; bar.style.width=((i+1)/n*100)+'%'}
+  function upd(){var i=idx(); bar.style.width=((i+1)/n*100)+'%'}
   t.addEventListener('scroll',upd,{passive:true});
   var lock=false;
   window.addEventListener('wheel',function(e){
