@@ -65,12 +65,12 @@ footer{padding:28px 16px 40px;text-align:center;font-size:12px;opacity:.75}foote
 
 /* ===== горизонтальная прокрутка на широких экранах ===== */
 .hnav,.hbar{display:none}
-@media (min-width:900px) and (min-height:560px){
+@media all{
   html,body{height:100%;overflow:hidden}
   .top{position:fixed;top:0;left:0;right:0;z-index:20;background:var(--paper)}
-  .track{position:fixed;top:57px;left:0;right:0;bottom:0;display:flex;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none}
+  .track{position:fixed;top:var(--toph,57px);left:0;right:0;bottom:0;display:flex;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none}
   .track::-webkit-scrollbar{display:none}
-  .panel{flex:0 0 100vw;height:100%;scroll-snap-align:start;overflow:hidden;margin:0 !important;display:flex;flex-direction:column;justify-content:center;border-right:1px solid var(--ink)}
+  .panel{flex:0 0 100vw;height:100%;scroll-snap-align:start;scroll-snap-stop:always;overflow:hidden;margin:0 !important;display:flex;flex-direction:column;justify-content:center;border-right:1px solid var(--ink)}
   .hero h1{font-size:min(13vw,19vh);margin-top:3vh}
   .hero .tag{align-self:flex-start}
   .hero .row{padding-bottom:9vh}
@@ -92,6 +92,27 @@ footer{padding:28px 16px 40px;text-align:center;font-size:12px;opacity:.75}foote
   .hnav span{min-width:76px;text-align:center;letter-spacing:.12em;text-transform:uppercase;font-size:12px}
   .hbar{display:block;position:fixed;left:0;right:0;bottom:0;height:4px;z-index:30;background:rgba(0,0,0,.08)}
   .hbar i{display:block;height:100%;width:20%;background:var(--acid);transition:width .3s}
+}
+
+@media (max-width:899px), (max-height:559px){
+  .top{padding:10px 14px}
+  .top span{display:none}
+  .panel{overflow-y:auto;-webkit-overflow-scrolling:touch;justify-content:flex-start;padding-bottom:80px !important}
+  .hero h1{font-size:min(15vw,12vh);margin-top:2vh}
+  .hero .photo{position:relative;right:auto;bottom:auto;top:auto;width:46%;margin:14px 0 0 auto}
+  .hero .row{padding-bottom:0}
+  .p-idea .broken{align-content:start;padding-top:28px}
+  .big{font-size:11vw}
+  .prog{padding-top:28px}
+  .prog h2,.who h2{font-size:10.5vw}
+  .cards{grid-template-columns:1fr;gap:10px}
+  .card{transform:none !important;min-height:0}
+  .who{padding-top:28px}
+  .who img{max-height:none;width:70%}
+  .end{justify-content:center}
+  .end h2{font-size:15vw}
+  .hnav{display:none !important}
+  .panel{padding-bottom:36px !important}
 }
 </style></head><body>
 <div class="top"><span>Эфир · осень 2026</span><b>MILA USHAKOVA</b><a class="reg" href="https://t.me/MilaUshakova_ClubBot?start=ai">Регистрация →</a></div>
@@ -136,6 +157,7 @@ footer{padding:28px 16px 40px;text-align:center;font-size:12px;opacity:.75}foote
 (function(){
   var t=document.getElementById('track'); if(!t) return;
   var wide=function(){return matchMedia('(min-width:900px) and (min-height:560px)').matches};
+  var top=document.querySelector('.top'); function setTop(){document.documentElement.style.setProperty('--toph',top.offsetHeight+'px')} setTop(); addEventListener('resize',setTop);
   var panels=[].slice.call(t.querySelectorAll('.panel')), n=panels.length;
   var bar=document.getElementById('bar');
   function idx(){return Math.round(t.scrollLeft/t.clientWidth)}
@@ -150,7 +172,6 @@ footer{padding:28px 16px 40px;text-align:center;font-size:12px;opacity:.75}foote
     go(idx()+(e.deltaY>0?1:-1)); setTimeout(function(){lock=false},700);
   },{passive:false});
   document.addEventListener('keydown',function(e){
-    if(!wide()) return;
     if(['ArrowRight','PageDown',' '].indexOf(e.key)>-1){e.preventDefault();go(idx()+1)}
     if(['ArrowLeft','PageUp'].indexOf(e.key)>-1){e.preventDefault();go(idx()-1)}
   });
