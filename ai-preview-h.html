@@ -26,9 +26,10 @@ a{color:inherit}img{display:block;max-width:100%}
 @media(max-width:760px){.hero .photo{position:relative;right:auto;top:auto;width:62%;margin:22px 0 0 auto}.hero .row{grid-template-columns:1fr}.facts{justify-content:flex-start}}
 /* бегущая строка */
 .ticker{background:var(--acid);overflow:hidden;white-space:nowrap;border-block:1px solid var(--ink);font-family:"Unbounded";font-weight:700;font-size:clamp(18px,2.4vw,30px);padding:12px 0}
-.ticker span{display:inline-block;animation:run 28s linear infinite}
-@keyframes run{to{transform:translateX(-50%)}}
-@media(prefers-reduced-motion:reduce){.ticker span{animation:none}}
+.ticker span{display:inline-block;width:max-content;will-change:transform;-webkit-animation:run 28s linear infinite;animation:run 28s linear infinite}
+@-webkit-keyframes run{from{-webkit-transform:translate3d(0,0,0)}to{-webkit-transform:translate3d(-50%,0,0)}}
+@keyframes run{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
+@media(prefers-reduced-motion:reduce){.ticker span{-webkit-animation-duration:60s;animation-duration:60s}}
 /* разбитая сетка */
 .broken{display:grid;grid-template-columns:repeat(12,1fr);gap:16px;padding:clamp(48px,8vw,110px) clamp(16px,3vw,36px)}
 .big{grid-column:1/9;font-family:"Unbounded";font-weight:900;font-size:clamp(40px,7.5vw,128px);line-height:.9;letter-spacing:-.04em;text-transform:uppercase;margin:0}
