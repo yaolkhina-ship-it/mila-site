@@ -40,16 +40,17 @@ a{color:inherit}img{display:block;max-width:100%}
 /* программа как стопка карточек */
 .prog{padding:0 clamp(16px,3vw,36px) clamp(48px,8vw,110px)}
 .prog h2,.who h2{font-family:"Unbounded";font-weight:900;font-size:clamp(34px,6vw,96px);letter-spacing:-.04em;text-transform:uppercase;margin:0 0 24px;line-height:.9}
-.cards{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
-.card{border:1px solid var(--ink);padding:20px;min-height:260px;display:flex;flex-direction:column;justify-content:space-between;background:#fff}
-.card:nth-child(2){transform:translateY(40px);background:var(--blue);color:#fff}
-.card:nth-child(3){transform:translateY(-14px) rotate(-1deg)}
-.card:nth-child(4){transform:translateY(26px);background:var(--acid)}
-.card:nth-child(5){transform:translateY(-6px);background:var(--ink);color:#fff}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:34px 18px}
+.card{border:1px solid var(--ink);padding:18px 20px;min-height:0;display:flex;flex-direction:column;justify-content:space-between;background:#fff}
+.card:nth-child(2){transform:translateY(12px);background:var(--blue);color:#fff}
+.card:nth-child(3){transform:translateY(-8px) rotate(-1deg)}
+.card:nth-child(4){transform:rotate(.8deg);background:var(--ink);color:#fff}
+.card:nth-child(5){transform:translateY(16px);background:var(--acid)}
+.card:nth-child(6){transform:translateY(4px) rotate(-.6deg);background:var(--blue);color:#fff}
 .card b{font-family:"Unbounded";font-size:44px;line-height:1}
 .card h3{font-family:"Playfair Display";font-weight:400;font-size:25px;line-height:1.08;margin:14px 0 8px}
 .card p{font-size:14.5px;line-height:1.55;margin:0;opacity:.85}
-@media(max-width:1100px){.cards{grid-template-columns:repeat(3,1fr)}}@media(max-width:900px){.cards{grid-template-columns:1fr 1fr}}@media(max-width:520px){.cards{grid-template-columns:1fr}.card{transform:none!important;min-height:0}}
+@media(max-width:900px){.cards{grid-template-columns:1fr 1fr}}@media(max-width:520px){.cards{grid-template-columns:1fr}.card{transform:none!important;min-height:0}}
 /* спикеры */
 .who{background:var(--ink);color:var(--paper);padding:clamp(48px,8vw,110px) clamp(16px,3vw,36px);margin-top:40px}
 .who-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,56px);align-items:center}
@@ -84,7 +85,7 @@ footer{padding:28px 16px 40px;text-align:center;font-size:12px;opacity:.75}foote
 </section>
 <section class="prog">
   <h2>Программа</h2>
-  <div class="cards"><div class="card"><b>01</b><div><h3>Страхи</h3><p>Заменит ли AI стилиста? Сделает всех одинаковыми? Что будет с моими фото? Честно разбираем, какие страхи обоснованы, а какие мешают начать.</p></div></div><div class="card"><b>02</b><div><h3>Усилитель, а не замена</h3><p>Вкус, насмотренность, эмпатия и ответственность за решение остаются за человеком. AI ускоряет то, что вы уже умеете. Без базы он умножает ошибки.</p></div></div><div class="card"><b>03</b><div><h3>Что AI умеет в стиле сегодня</h3><p>Где он действительно экономит время, а где только создаёт ощущение помощи. Разбор внешности, сочетания, поиск вещей.</p></div></div><div class="card"><b>04</b><div><h3>AI и ваше дело</h3><p>Как с помощью AI команда Милы создала бот клуба, сайт и инструменты Системы без отдела разработки. Что так же можете сделать вы: контент, презентации, сервис, свой продукт.</p></div></div><div class="card"><b>05</b><div><h3>Практика</h3><p>Живые запросы на экране. Готовые формулировки, которые можно повторить сразу после эфира.</p></div></div></div>
+  <div class="cards"><div class="card"><b>01</b><div><h3>Страхи</h3><p>Заменит ли AI стилиста? Сделает всех одинаковыми? Что будет с моими фото? Честно разбираем, какие страхи обоснованы, а какие мешают начать.</p></div></div><div class="card"><b>02</b><div><h3>Усилитель, а не замена</h3><p>Вкус, насмотренность, эмпатия и ответственность за решение остаются за человеком. AI ускоряет то, что вы уже умеете. Без базы он умножает ошибки.</p></div></div><div class="card"><b>03</b><div><h3>Что AI умеет в стиле сегодня</h3><p>Где он действительно экономит время, а где только создаёт ощущение помощи. Разбор внешности, сочетания, поиск вещей.</p></div></div><div class="card"><b>04</b><div><h3>Насмотренность и креатив</h3><p>AI отвечает на уровне вашего вопроса. Чем шире ваш взгляд, тем точнее задача и смелее результат. Развивайтесь сами и обучайте своего AI-агента под ваш стиль, а не под усреднённый вкус.</p></div></div><div class="card"><b>05</b><div><h3>AI и ваше дело</h3><p>Как с помощью AI команда Милы создала бот клуба, сайт и инструменты Системы без отдела разработки. Что так же можете сделать вы: контент, презентации, сервис, свой продукт.</p></div></div><div class="card"><b>06</b><div><h3>Практика</h3><p>Живые запросы на экране. Готовые формулировки, которые можно повторить сразу после эфира.</p></div></div></div>
 </section>
 <section class="who">
   <h2>Мила <em style="font-family:'Playfair Display';font-weight:400;text-transform:none;color:var(--acid)">и команда</em></h2>
