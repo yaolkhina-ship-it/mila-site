@@ -111,7 +111,7 @@ var IMG = {
   weekend:['art_renoir','art_degas'],
   events:['mila-portrait','mila-portrait-2']
 };
-var ORDER = ['vybor','dna','nasmotr','art','garderob','weekend','events'];
+var ORDER = ['vybor','dna','nasmotr','art','weekend','events'];
 var ABOUT = {
   vybor:'Что купить и почему: бренды, вещи, украшения, аксессуары.',
   dna:'История и визуальный язык модных домов.',
@@ -121,7 +121,7 @@ var ABOUT = {
   weekend:'Фильмы, книги, журналы и наблюдения на выходные.',
   events:'Встречи, эфиры и лекции гостей.'
 };
-var TYPES = ['лекция','подкаст','разбор','подборка','пост','анонс','видео'];
+var TYPES = ['лекция','подкаст','подборка','пост','анонс','видео'];
 var PLURAL = {'лекция':'Лекции','подкаст':'Подкасты','разбор':'Разборы','подборка':'Подборки','пост':'Посты','анонс':'Анонсы','видео':'Видео'};
 var DAYS = ['воскресенье','понедельник','вторник','среда','четверг','пятница','суббота'];
 
@@ -318,6 +318,8 @@ function load(){
       D = d; RUB = d.rubrics || {};
       D.items.sort(function(a, b){ return b.t - a.t; });
       adopt(D.items);
+      // Разборы (и рубрика «Ваш гардероб») в материалы не выводим
+      D.items = D.items.filter(function(i){ return i.k !== 'разбор' && i.r !== 'garderob'; });
       render();
     });
   }).catch(function(){
