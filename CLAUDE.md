@@ -25,6 +25,14 @@ A paid product: a mobile page of full-screen snap slides (`.pg`). `scrollToEl(id
 - The b/w preview is drawn manually because canvas `ctx.filter` does not work in Safari.
 - To re-calibrate, run the photos through `analyze()` in headless Chrome (CDP) with a local static server that serves `.mjs`/`.wasm` with the right MIME types.
 
+### Mobile UX layer (10.2026)
+- `guide/gaidosen.html` has `<base href="/guide/">`: the page is also served at `/guide` without a slash, and relative images broke there.
+- Inline block at the end of the page: soft snap (`proximity`, tall pages `.pg-tall` scroll freely), the bottom dock (`#dock`: Назад / Меню / ✦+N / support), an instant jump with a veil for far targets, and a «Назад» stack. `window.scrollToEl` is overridden there.
+- `guide/ux.js` + `guide/ux.css` (bump `?v=` when changing them): the menu bottom sheet (a clone of the p4 nav) with search over every look's item chips, «Мои образы» (hearts, localStorage `sys_favs`), the item card on hotspot tap, the progress bar and section toast, «продолжить с места» (`sys_pos`), new looks that fade once seen (`sys_seen`, drop = `p_look_drop_oct*`; the dock/badge/nav card counts update), and a sideways swipe between palettes of one colour.
+- Offline: `/guide-sw.js` (root, scope `/guide`; its own `builds` entry in vercel.json). The page is network-first, images cache-first; it precaches palitry/looks 30s after load.
+- Link check: `node scripts/check-links.mjs` (dead = 404/410; Farfetch, Frankie, Vestiaire, Sézane, H&M and Mango block robots). A weekly GitHub Action `.github/workflows/check-links.yml` sends to Telegram when the repo secrets `TG_TOKEN`/`TG_CHAT` are set.
+- Deploy: Yana wants System changes pushed right away after a mobile-emulation test (no «деплой» round-trip for the guide).
+
 ## Ideas in progress
 - A Sanzo Wada colour dictionary tool: the user picks the colour of their item, sees the nearest Wada colour, then his combinations as book spreads with the 70/20/10 rule. The data comes from sanzo-wada.dmbk.io (159 colours, 348 combinations).
 - The club page «В моём стиле» (based on /uverennost) needs residents' reviews, which are still pending.
