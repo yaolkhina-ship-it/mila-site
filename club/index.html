@@ -111,6 +111,8 @@ var IMG = {
   weekend:['art_renoir','art_degas'],
   events:['mila-portrait','mila-portrait-2']
 };
+var MORE = {vybor:14, dna:17, nasmotr:18, art:24, weekend:19, events:8};
+Object.keys(MORE).forEach(function(r){ for (var n = 0; n < MORE[r]; n++) IMG[r].push('p/' + r + n); });
 var ORDER = ['vybor','dna','nasmotr','art','weekend','events'];
 var ABOUT = {
   vybor:'Что купить и почему: бренды, вещи, украшения, аксессуары.',
@@ -127,7 +129,12 @@ var DAYS = ['воскресенье','понедельник','вторник','
 
 var D = null, RUB = {}, stack = [];
 
-function img(it, i){ var a = IMG[it.r] || IMG.art; return '/club/img/' + a[(i == null ? (it.id * 7 + (it.id >> 2)) : i) % a.length] + '.jpg'; }
+function img(it, i){ var a = IMG[it.r] || IMG.art; return '/club/img/' + a[((i == null ? it.pic : it.pic + i) || 0) % a.length] + '.jpg'; }
+// Картинки по порядку внутри рубрики: соседние материалы никогда не повторяются
+function pics(items){
+  var k = {};
+  items.slice().reverse().forEach(function(it){ var n = k[it.r] = (k[it.r] || 0) + 1; it.pic = n + 1; });
+}
 function esc(s){ return String(s == null ? '' : s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
 function msk(t){ return new Date((t + 3 * 3600) * 1000); } // дата по Москве в UTC-полях
 var MON = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
@@ -148,13 +155,18 @@ function lectures(items){
 function adopt(items){
   items.forEach(function(it, n){
     if (!bare(it)) return;
+    if (it.k === 'видео' && it.d < 300) { it.drop = 1; return; } // короткий ролик без подписи
     var best = null;
     for (var j = Math.max(0, n - 4); j < Math.min(items.length, n + 5); j++) {
       var o = items[j];
       if (o === it || bare(o) || Math.abs(o.t - it.t) > 1800) continue;
       if (!best || Math.abs(o.t - it.t) < Math.abs(best.t - it.t)) best = o;
     }
-    if (best) { it.h = best.h; it.r = best.r; it.tags = best.tags; it.s = best.s; }
+    if (!best) return;
+    // Короткое видео без подписи это часть поста рядом: в списке не дублируем
+    if (it.k !== 'подкаст' && it.k !== 'лекция') { it.drop = 1; return; }
+    it.h = best.h; it.r = best.r; it.tags = best.tags; it.s = best.s;
+    if (best.k === 'пост' || best.k === 'анонс') best.drop = 1; // подпись к подкасту: показываем один раз, сам подкаст
   });
 }
 function title(it){
@@ -333,7 +345,8 @@ function load(){
       lectures(D.items);
       adopt(D.items);
       // Разборы (и рубрика «Ваш гардероб») в материалы не выводим
-      D.items = D.items.filter(function(i){ return i.k === 'лекция' || i.k !== 'разбор' && i.r !== 'garderob' && !/разбор/i.test(i.h + ' ' + i.s + ' ' + (i.tags || []).join(' ')); });
+      pics(D.items);
+      D.items = D.items.filter(function(i){ return !i.drop && (i.k === 'лекция' || i.k !== 'разбор' && i.r !== 'garderob' && !/разбор/i.test(i.h + ' ' + i.s + ' ' + (i.tags || []).join(' '))); });
       render();
     });
   }).catch(function(){
