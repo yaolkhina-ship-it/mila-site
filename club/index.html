@@ -134,7 +134,16 @@ var MON = ['января','февраля','марта','апреля','мая',
 var MONN = ['январь','февраль','март','апрель','май','июнь','июль','август','сентябрь','октябрь','ноябрь','декабрь'];
 function dshort(t){ var d = msk(t); return d.getUTCDate() + ' ' + MON[d.getUTCMonth()].slice(0, 3); }
 var GENERIC = {'Подкаст Милы':1,'Видео':1,'Лекция':1,'Материал':1};
-function bare(it){ return !it.s && (GENERIC[it.h] || !/[A-Za-zА-Яа-яЁё]/.test(it.h || '')); }
+var CODE = /^(код доступа|секретный код|пароль)/i;
+function bare(it){ return CODE.test(it.h || '') || (!it.s && (GENERIC[it.h] || !/[A-Za-zА-Яа-яЁё]/.test(it.h || ''))); }
+// Записи эфиров в канале выглядят как ссылка с кодом доступа: это лекции
+var REC = /запис[ьи]\s+(нашего\s+)?(эфира|беседы|вебинара|лекции|встречи)|#запись|код доступа|секретный код|приятного просмотра|\d+\s*минут[аы]?\s*$/i;
+function lectures(items){
+  items.forEach(function(i){
+    if (i.k !== 'лекция' && REC.test(i.h + ' ' + i.s)) { i.k = 'лекция'; i.r = 'events'; }
+    if (i.k === 'лекция' && (CODE.test(i.h || '') || /^запись эфира$/i.test(i.h))) i.h = 'Запись эфира';
+  });
+}
 // Голосовое или видео без подписи берёт заголовок соседнего поста с текстом (Мила выкладывает их рядом)
 function adopt(items){
   items.forEach(function(it, n){
@@ -180,8 +189,10 @@ function home(){
   var week = items.filter(function(i){ return i.t >= monday; });
   var weekLabel = 'Эта неделя';
   if (week.length < 3) { week = items.slice(0, 6); weekLabel = 'Новое в клубе'; }
-  var media = items.filter(function(i){ return i.k === 'лекция' || i.k === 'подкаст'; });
-  var hero = media[0] || items[0];
+  var lect = items.filter(function(i){ return i.k === 'лекция'; });
+  var pods = items.filter(function(i){ return i.k === 'подкаст'; });
+  var media = lect.concat(pods);
+  var hero = lect[0] && lect[0].t > now - 21 * 86400 ? lect[0] : (pods[0] || items[0]);
   var cnt = {}; items.forEach(function(i){ cnt[i.r] = (cnt[i.r] || 0) + 1; });
   var name = D.user && D.user.first_name;
   var h = (dnow.getUTCHours());
@@ -199,8 +210,10 @@ function home(){
     return '<button class="g' + (n === a.length - 1 && a.length % 2 ? ' wide' : '') + '" data-rub="' + r + '"><img loading="lazy" src="/club/img/' + IMG[r][0] + '.jpg" alt=""><span>' +
       esc(RUB[r]) + '<i>' + cnt[r] + '</i></span></button>';
   }).join('') + '</div>';
-  if (media.length > 1) html += '<div class="sec">ЛЕКЦИИ И ПОДКАСТЫ</div><div class="shelf">' + media.slice(0, 12).map(card).join('') + '</div>' +
-    '<button class="more" data-type="media">ВСЕ ' + media.length + '</button>';
+  if (lect.length) html += '<div class="sec">ЛЕКЦИИ И ЭФИРЫ</div><div class="shelf">' + lect.slice(0, 12).map(card).join('') + '</div>' +
+    (lect.length > 2 ? '<button class="more" data-type="lect">ВСЕ ' + lect.length + '</button>' : '');
+  if (pods.length) html += '<div class="sec">ПОДКАСТЫ МИЛЫ</div><div class="shelf">' + pods.slice(0, 12).map(card).join('') + '</div>' +
+    '<button class="more" data-type="pods">ВСЕ ' + pods.length + '</button>';
   html += '</div><div class="foot rule"></div><div class="foot orn">◆</div></div>';
   return html;
 }
@@ -218,13 +231,13 @@ function list(items, opts){
 }
 
 function rubric(st){
-  var all = D.items.filter(function(i){ return st.rub ? i.r === st.rub : (i.k === 'лекция' || i.k === 'подкаст'); });
+  var all = D.items.filter(function(i){ return st.rub ? i.r === st.rub : i.k === (st.media === 'lect' ? 'лекция' : 'подкаст'); });
   var types = TYPES.filter(function(t){ return all.some(function(i){ return i.k === t; }); });
   var items = st.type ? all.filter(function(i){ return i.k === st.type; }) : all;
-  var name = st.rub ? RUB[st.rub] : 'Лекции и подкасты';
-  var pic = st.rub ? IMG[st.rub][1 % IMG[st.rub].length] : 'art_klimt';
+  var name = st.rub ? RUB[st.rub] : st.media === 'lect' ? 'Лекции и эфиры' : 'Подкасты Милы';
+  var pic = st.rub ? IMG[st.rub][1 % IMG[st.rub].length] : st.media === 'lect' ? 'art_klimt' : 'art_degas';
   return '<div class="view"><div class="banner"><img src="/club/img/' + pic + '.jpg" alt=""><div class="t"><div class="orn">◆ ◆ ◆</div><h2>' + esc(name) +
-    '</h2><p>' + esc(st.rub ? ABOUT[st.rub] : 'Записи эфиров и подкасты Милы.') + '</p></div></div>' +
+    '</h2><p>' + esc(st.rub ? ABOUT[st.rub] : st.media === 'lect' ? 'Записи эфиров, вебинаров и встреч с гостями.' : 'Голосовые подкасты Милы о стиле, брендах и искусстве.') + '</p></div></div>' +
     (types.length > 1 ? '<div class="chips"><button class="chip' + (st.type ? '' : ' on') + '" data-chip="">Все · ' + all.length + '</button>' +
       types.map(function(t){ return '<button class="chip' + (st.type === t ? ' on' : '') + '" data-chip="' + t + '">' + PLURAL[t] + '</button>'; }).join('') + '</div>' : '') +
     list(items, {months: true, withRubric: !st.rub, limit: st.limit}) + '<div class="foot orn">◆</div></div>';
@@ -284,7 +297,7 @@ app.addEventListener('click', function(e){
   var b = e.target.closest('button'); if (!b) return;
   if (b.dataset.open) return open(b.dataset.open);
   if (b.dataset.rub) return go({rub: b.dataset.rub});
-  if (b.dataset.type === 'media') return go({media: 1});
+  if (b.dataset.type) return go({media: b.dataset.type});
   var st = stack[stack.length - 1];
   if (b.dataset.chip != null && st) { st.type = b.dataset.chip; st.limit = 0; haptic(); var y = window.scrollY; render(); window.scrollTo(0, y); return; }
   if (b.dataset.lim) {
@@ -317,9 +330,10 @@ function load(){
     return r.json().then(function(d){
       D = d; RUB = d.rubrics || {};
       D.items.sort(function(a, b){ return b.t - a.t; });
+      lectures(D.items);
       adopt(D.items);
       // Разборы (и рубрика «Ваш гардероб») в материалы не выводим
-      D.items = D.items.filter(function(i){ return i.k !== 'разбор' && i.r !== 'garderob' && !/разбор/i.test(i.h + ' ' + i.s + ' ' + (i.tags || []).join(' ')); });
+      D.items = D.items.filter(function(i){ return i.k === 'лекция' || i.k !== 'разбор' && i.r !== 'garderob' && !/разбор/i.test(i.h + ' ' + i.s + ' ' + (i.tags || []).join(' ')); });
       render();
     });
   }).catch(function(){
