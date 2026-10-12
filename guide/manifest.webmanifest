@@ -1,0 +1,10 @@
+{
+  "name": "Система цветовых сочетаний · Mila Ushakova",
+  "short_name": "Система",
+  "start_url": "/guide/gaidosen.html",
+  "scope": "/guide",
+  "display": "standalone",
+  "background_color": "#0D1A1E",
+  "theme_color": "#0D1A1E",
+  "icons": [{ "src": "/guide/apple-icon.png", "sizes": "180x180", "type": "image/png" }]
+}

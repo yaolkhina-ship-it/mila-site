@@ -1,0 +1,86 @@
+/* Система: функции 10.2026 — меню-шторка, поиск, «Мои образы», карточка вещи, прогресс, продолжить с места */
+
+/* ── Прогресс и раздел ── */
+.prog{position:fixed;top:0;left:0;height:2px;width:0;background:linear-gradient(90deg,#b8903a,#c9a96e);z-index:9996;transition:width .15s linear;pointer-events:none;}
+.sec-toast{position:fixed;left:50%;top:calc(10px + env(safe-area-inset-top));transform:translate(-50%,-140%);opacity:0;z-index:9995;
+  background:rgba(13,26,30,0.9);color:rgba(242,237,240,0.92);border:0.5px solid rgba(201,169,110,0.45);border-radius:100px;
+  padding:7px 16px;font-family:var(--f);font-size:12px;letter-spacing:0.04em;white-space:nowrap;max-width:86vw;overflow:hidden;text-overflow:ellipsis;
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);transition:transform .3s ease,opacity .3s ease;pointer-events:none;}
+.sec-toast.on{transform:translate(-50%,0);opacity:1;}
+
+/* ── Продолжить с места ── */
+.resume{position:fixed;left:12px;right:12px;bottom:calc(70px + env(safe-area-inset-bottom));z-index:9998;display:flex;align-items:center;gap:10px;
+  background:#f5f0ea;color:#0D1A1E;border:0.5px solid rgba(201,169,110,0.6);border-radius:14px;padding:12px 12px 12px 16px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.3);font-family:var(--f);transform:translateY(20px);opacity:0;transition:all .35s ease;pointer-events:none;}
+.resume.on{transform:none;opacity:1;pointer-events:auto;}
+.resume-t{flex:1;min-width:0;}
+.resume-k{font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:#b8903a;}
+.resume-n{font-size:15px;line-height:1.25;margin-top:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.resume-go{all:unset;background:#0D1A1E;color:#f2edf0;font-family:var(--f);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;padding:11px 14px;border-radius:10px;cursor:pointer;}
+.resume-x{all:unset;font-size:20px;line-height:1;color:rgba(13,26,30,0.45);padding:6px;cursor:pointer;}
+
+/* ── Меню-шторка ── */
+.sheet{position:fixed;inset:0;z-index:10000;visibility:hidden;}
+.sheet.on{visibility:visible;}
+.sheet-bg{position:absolute;inset:0;background:rgba(4,10,12,0.55);opacity:0;transition:opacity .3s ease;}
+.sheet.on .sheet-bg{opacity:1;}
+.sheet-panel{position:absolute;left:0;right:0;bottom:0;max-width:480px;margin:0 auto;max-height:88svh;display:flex;flex-direction:column;
+  background:#0D1A1E;border-radius:18px 18px 0 0;border-top:0.5px solid rgba(201,169,110,0.45);box-shadow:0 -10px 40px rgba(0,0,0,0.4);
+  transform:translateY(100%);transition:transform .34s cubic-bezier(.2,.8,.2,1);}
+.sheet.on .sheet-panel{transform:none;}
+.sheet-grab{flex:none;padding:10px 0 6px;display:flex;justify-content:center;cursor:grab;touch-action:none;}
+.sheet-grab i{width:40px;height:4px;border-radius:2px;background:rgba(201,169,110,0.45);}
+.sheet-head{flex:none;padding:4px 18px 12px;}
+.sheet-search{display:flex;align-items:center;gap:10px;background:rgba(242,237,240,0.07);border:0.5px solid rgba(201,169,110,0.35);border-radius:12px;padding:0 12px;}
+.sheet-search svg{flex:none;color:#c9a96e;}
+.sheet-search input{all:unset;flex:1;height:44px;font-family:var(--f);font-size:16px;color:#f2edf0;}
+.sheet-search input::placeholder{color:rgba(242,237,240,0.45);}
+.sheet-clear{all:unset;color:rgba(242,237,240,0.5);font-size:18px;padding:6px;cursor:pointer;display:none;}
+.sheet-search.has .sheet-clear{display:block;}
+.sheet-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;padding:0 22px calc(28px + env(safe-area-inset-bottom));}
+.sheet-body .ni-row{margin-left:-22px;margin-right:-22px;}
+.sheet-sec{font-size:9px;letter-spacing:0.24em;text-transform:uppercase;color:rgba(201,169,110,0.7);font-family:var(--f);margin:14px 0 10px;}
+.sheet-empty{font-size:13px;color:rgba(242,237,240,0.55);font-style:italic;font-family:var(--f);padding:6px 0 14px;line-height:1.5;}
+.sr{display:flex;gap:12px;align-items:center;padding:9px 0;border-bottom:0.5px solid rgba(201,169,110,0.14);cursor:pointer;}
+.sr img{flex:none;width:52px;height:52px;object-fit:cover;border-radius:6px;background:#1b2a2e;}
+.sr-t{font-size:15px;color:#f2edf0;font-family:var(--f);line-height:1.25;}
+.sr-s{font-size:11.5px;color:rgba(201,169,110,0.8);font-family:var(--f);line-height:1.45;margin-top:2px;}
+.sr-s b{color:#f2edf0;font-weight:normal;background:rgba(201,169,110,0.22);border-radius:3px;padding:0 2px;}
+.sr-ic{flex:none;width:52px;height:52px;border-radius:6px;display:flex;align-items:center;justify-content:center;background:rgba(201,169,110,0.12);color:#c9a96e;font-size:18px;}
+.favs{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;margin:0 -22px 4px;padding:0 22px 4px;}
+.favs::-webkit-scrollbar{display:none;}
+.fv{flex:0 0 88px;cursor:pointer;}
+.fv img{width:88px;height:110px;object-fit:cover;border-radius:8px;display:block;background:#1b2a2e;}
+.fv span{display:block;font-size:12px;color:rgba(242,237,240,0.85);font-family:var(--f);margin-top:6px;line-height:1.2;}
+
+/* ── «Мои образы»: сердечко на образе ── */
+.look-collage-wrap{position:relative;}
+.fav-btn{all:unset;position:absolute;top:8px;right:8px;z-index:6;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  background:rgba(255,255,255,0.88);box-shadow:0 2px 10px rgba(0,0,0,0.18);cursor:pointer;-webkit-tap-highlight-color:transparent;transition:transform .2s ease;}
+.fav-btn svg{width:20px;height:20px;stroke:#0D1A1E;fill:none;stroke-width:1.6;transition:all .2s;}
+.fav-btn.on svg{fill:#c97184;stroke:#c97184;}
+.fav-btn.pop{transform:scale(1.18);}
+.fav-toast{position:fixed;left:50%;bottom:calc(76px + env(safe-area-inset-bottom));transform:translate(-50%,10px);opacity:0;z-index:9998;background:#0D1A1E;color:#f2edf0;
+  font-family:var(--f);font-size:13px;padding:10px 16px;border-radius:100px;border:0.5px solid rgba(201,169,110,0.5);transition:all .3s ease;pointer-events:none;white-space:nowrap;}
+.fav-toast.on{transform:translate(-50%,0);opacity:1;}
+
+/* ── Карточка вещи по нажатию на точку ── */
+.hs-card{position:absolute;z-index:8;width:min(240px,72%);background:#fff;border-radius:12px;box-shadow:0 10px 30px rgba(13,26,30,0.28);padding:12px 12px 12px 14px;
+  font-family:var(--f);color:#0D1A1E;opacity:0;transform:translateY(6px) scale(.98);transition:opacity .18s ease,transform .18s ease;pointer-events:none;}
+.hs-card.on{opacity:1;transform:none;pointer-events:auto;}
+.hs-name{font-size:14px;line-height:1.3;}
+.hs-brand{font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:#b8903a;margin-top:4px;}
+.hs-open{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:10px;background:#0D1A1E;color:#f2edf0 !important;text-decoration:none !important;
+  font-size:11px;letter-spacing:0.12em;text-transform:uppercase;height:40px;border-radius:9px;}
+.look-hotspot.act{transform:translate(-50%,-50%) scale(1.25);box-shadow:0 0 0 6px rgba(201,169,110,0.45);}
+.look-link-chip.hl{background:#0D1A1E !important;color:#f2edf0 !important;border-color:#0D1A1E !important;}
+
+/* ── Цвета: свайп между палитрами ── */
+.swipe-hint{position:absolute;right:14px;bottom:calc(20px + env(safe-area-inset-bottom));z-index:3;font-size:10px;letter-spacing:0.12em;color:#fff;font-family:var(--f);
+  background:rgba(0,0,0,0.35);padding:5px 12px;border-radius:20px;pointer-events:none;}
+
+/* подпись палитры наверху, чтобы не пряталась под панелью */
+.pal-pg-nav{top:calc(14px + env(safe-area-inset-top)) !important;bottom:auto !important;left:14px !important;}
+.swipe-hint{bottom:auto;top:calc(14px + env(safe-area-inset-top));}
+.dock button,.dock a{padding:0 13px !important;}
+.dock .d-new,.dock .d-sup{padding:0 12px !important;}

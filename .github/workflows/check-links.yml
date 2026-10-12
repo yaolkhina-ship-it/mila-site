@@ -1,0 +1,18 @@
+name: Проверка ссылок Системы
+on:
+  schedule:
+    - cron: '0 6 * * 1'   # понедельник, 09:00 по Москве
+  workflow_dispatch:
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      # Отчёт уходит в Telegram, когда в настройках репозитория заданы секреты TG_TOKEN и TG_CHAT
+      - run: node scripts/check-links.mjs --telegram
+        env:
+          TG_TOKEN: ${{ secrets.TG_TOKEN }}
+          TG_CHAT: ${{ secrets.TG_CHAT }}

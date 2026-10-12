@@ -26,6 +26,10 @@
       "use": "@vercel/static"
     },
     {
+      "src": "guide-sw.js",
+      "use": "@vercel/static"
+    },
+    {
       "src": "portfolio/**",
       "use": "@vercel/static"
     },
