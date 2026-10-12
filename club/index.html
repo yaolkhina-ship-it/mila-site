@@ -319,7 +319,7 @@ function load(){
       D.items.sort(function(a, b){ return b.t - a.t; });
       adopt(D.items);
       // Разборы (и рубрика «Ваш гардероб») в материалы не выводим
-      D.items = D.items.filter(function(i){ return i.k !== 'разбор' && i.r !== 'garderob'; });
+      D.items = D.items.filter(function(i){ return i.k !== 'разбор' && i.r !== 'garderob' && !/разбор/i.test(i.h + ' ' + i.s + ' ' + (i.tags || []).join(' ')); });
       render();
     });
   }).catch(function(){
