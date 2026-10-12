@@ -127,7 +127,7 @@ var DAYS = ['воскресенье','понедельник','вторник','
 
 var D = null, RUB = {}, stack = [];
 
-function img(it, i){ var a = IMG[it.r] || IMG.art; return 'img/' + a[(i == null ? (it.id * 7 + (it.id >> 2)) : i) % a.length] + '.jpg'; }
+function img(it, i){ var a = IMG[it.r] || IMG.art; return '/club/img/' + a[(i == null ? (it.id * 7 + (it.id >> 2)) : i) % a.length] + '.jpg'; }
 function esc(s){ return String(s == null ? '' : s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
 function msk(t){ return new Date((t + 3 * 3600) * 1000); } // дата по Москве в UTC-полях
 var MON = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
@@ -196,7 +196,7 @@ function home(){
     (hero.k === 'подкаст' ? 'СЛУШАТЬ' : hero.k === 'лекция' ? 'СМОТРЕТЬ' : 'ОТКРЫТЬ') + (mins(hero) ? ' · ' + mins(hero).toUpperCase() : '') + '</span></div></button>';
   html += '<div class="sec">' + weekLabel.toUpperCase() + '</div>' + week.map(function(i){ return row(i, true); }).join('');
   html += '<div class="sec">РАЗДЕЛЫ</div><div class="grid">' + ORDER.filter(function(r){ return cnt[r]; }).map(function(r, n, a){
-    return '<button class="g' + (n === a.length - 1 && a.length % 2 ? ' wide' : '') + '" data-rub="' + r + '"><img loading="lazy" src="img/' + IMG[r][0] + '.jpg" alt=""><span>' +
+    return '<button class="g' + (n === a.length - 1 && a.length % 2 ? ' wide' : '') + '" data-rub="' + r + '"><img loading="lazy" src="/club/img/' + IMG[r][0] + '.jpg" alt=""><span>' +
       esc(RUB[r]) + '<i>' + cnt[r] + '</i></span></button>';
   }).join('') + '</div>';
   if (media.length > 1) html += '<div class="sec">ЛЕКЦИИ И ПОДКАСТЫ</div><div class="shelf">' + media.slice(0, 12).map(card).join('') + '</div>' +
@@ -223,7 +223,7 @@ function rubric(st){
   var items = st.type ? all.filter(function(i){ return i.k === st.type; }) : all;
   var name = st.rub ? RUB[st.rub] : 'Лекции и подкасты';
   var pic = st.rub ? IMG[st.rub][1 % IMG[st.rub].length] : 'art_klimt';
-  return '<div class="view"><div class="banner"><img src="img/' + pic + '.jpg" alt=""><div class="t"><div class="orn">◆ ◆ ◆</div><h2>' + esc(name) +
+  return '<div class="view"><div class="banner"><img src="/club/img/' + pic + '.jpg" alt=""><div class="t"><div class="orn">◆ ◆ ◆</div><h2>' + esc(name) +
     '</h2><p>' + esc(st.rub ? ABOUT[st.rub] : 'Записи эфиров и подкасты Милы.') + '</p></div></div>' +
     (types.length > 1 ? '<div class="chips"><button class="chip' + (st.type ? '' : ' on') + '" data-chip="">Все · ' + all.length + '</button>' +
       types.map(function(t){ return '<button class="chip' + (st.type === t ? ' on' : '') + '" data-chip="' + t + '">' + PLURAL[t] + '</button>'; }).join('') + '</div>' : '') +
@@ -296,7 +296,7 @@ app.addEventListener('click', function(e){
 
 // ── состояния ──
 function state(pic, h, p, btn, act){
-  app.innerHTML = '<div class="state view"><div class="frame"><img src="img/' + pic + '.jpg" alt=""></div><div class="orn">◆ ◆ ◆</div><h1>' + h + '</h1><p>' + p + '</p>' +
+  app.innerHTML = '<div class="state view"><div class="frame"><img src="/club/img/' + pic + '.jpg" alt=""></div><div class="orn">◆ ◆ ◆</div><h1>' + h + '</h1><p>' + p + '</p>' +
     (btn ? '<button class="btn" id="act">' + btn + '</button>' : '') + '</div>';
   if (btn) document.getElementById('act').onclick = act;
 }
