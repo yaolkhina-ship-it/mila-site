@@ -25,7 +25,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;text-a
 @keyframes in{from{opacity:0;transform:translateY(8px)}}
 
 /* обложка */
-.cov{position:relative;min-height:calc(100svh - 50px);display:flex;flex-direction:column;justify-content:flex-end;padding:0 0 34px;margin:0 -22px;overflow:hidden}
+.cov{position:relative;min-height:calc(100svh - 50px);display:flex;flex-direction:column;justify-content:flex-end;padding:0 0 92px;margin:0 -22px;overflow:hidden}
 .cov img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 25%}
 .cov:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,26,30,.15) 0%,rgba(13,26,30,.35) 45%,rgba(13,26,30,.94) 82%)}
 .cov .in{position:relative;z-index:1;padding:0 26px}
@@ -86,7 +86,35 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;text-a
 .again{display:flex;gap:8px;margin-top:20px}
 .again button{flex:1;text-align:center;border:.5px solid var(--deep);padding:12px 6px;font-size:10px;letter-spacing:.14em;text-transform:uppercase}
 .again button.dk{background:var(--deep);color:var(--pale)}
-#legal{padding:22px 16px 26px;text-align:center;font-family:-apple-system,'Helvetica Neue',Arial,sans-serif;font-size:12px;line-height:1.7;color:#E8E2D6;opacity:.6}
+/* навигация как в Системе: док внизу, меню-шторка, хлебные крошки */
+.dock{position:fixed;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));z-index:50;display:flex;align-items:stretch;
+  background:rgba(13,26,30,.94);border:.5px solid rgba(201,169,110,.5);border-radius:24px;box-shadow:0 6px 20px rgba(0,0,0,.28);
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);overflow:hidden;transition:transform .28s ease,opacity .28s ease}
+.dock.hide{transform:translateY(calc(100% + 30px));opacity:0;pointer-events:none}
+.dock button,.dock a{all:unset;box-sizing:border-box;display:flex;align-items:center;gap:7px;height:46px;padding:0 15px;cursor:pointer;
+  font-family:var(--f);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(242,237,240,.9)}
+.dock > * + *{border-left:.5px solid rgba(201,169,110,.28)}
+.dock .ic{color:var(--gold);font-size:14px;letter-spacing:0}
+.dock .d-back.off,.dock .d-sys.off{display:none}
+.dock .d-sup{padding:0 13px;color:#fff;background:#c97184}
+.dock button:active,.dock a:active{background:rgba(201,169,110,.18)}
+.crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:0 0 14px}
+.crumbs button{font-size:10px;letter-spacing:.12em;text-transform:uppercase;border:.5px solid var(--goldm);color:var(--gold);padding:5px 10px;border-radius:20px}
+.crumbs button:active{background:rgba(201,169,110,.18)}
+.crumbs i{color:var(--goldm);font-style:normal;font-size:11px}
+.sheet-bg{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:60;opacity:0;pointer-events:none;transition:opacity .25s}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:61;max-width:480px;margin:0 auto;max-height:84svh;overflow-y:auto;background:var(--deep);
+  border-top:.5px solid var(--goldm);border-radius:18px 18px 0 0;padding:10px 22px calc(26px + env(safe-area-inset-bottom));transform:translateY(105%);transition:transform .3s ease}
+.menu-on .sheet-bg{opacity:1;pointer-events:auto}.menu-on .sheet{transform:none}
+.sheet .grab{width:40px;height:4px;border-radius:4px;background:rgba(201,169,110,.4);margin:0 auto 16px}
+.sheet .row2{display:flex;gap:8px;margin-bottom:6px}
+.sheet .row2 button{flex:1;text-align:center;border:.5px solid var(--goldm);padding:11px 6px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(242,237,240,.85)}
+.sheet .row2 button.on{background:rgba(201,169,110,.16);border-color:var(--gold);color:#fff}
+.sheet h3{font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);font-weight:400;margin:20px 0 4px}
+.sheet .ev{display:flex;justify-content:space-between;width:100%;padding:11px 0;border-bottom:.3px solid rgba(201,169,110,.16);font-size:14px;color:rgba(242,237,240,.88)}
+.sheet .ev.cur{color:var(--gold)}
+.sheet .ev:after{content:"→";color:var(--goldm)}
+#legal{padding-bottom:90px !important;padding:22px 16px 26px;text-align:center;font-family:-apple-system,'Helvetica Neue',Arial,sans-serif;font-size:12px;line-height:1.7;color:#E8E2D6;opacity:.6}
 #legal a{color:inherit;text-decoration:underline;margin:0 9px;white-space:nowrap}
 </style>
 </head>
@@ -94,6 +122,14 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;text-a
 <div class="app">
   <div class="top"><span>Mila Ushakova · Система имиджа</span><a id="sys" href="/guide" style="display:none">← Система</a></div>
   <div id="v"></div>
+  <nav class="dock" id="dock" aria-label="Навигация">
+    <button class="d-back off" id="dBack" type="button"><span class="ic">&larr;</span>Назад</button>
+    <button class="d-menu" id="dMenu" type="button"><span class="ic">&#9776;</span>Меню</button>
+    <a class="d-sys off" id="dSys" href="/guide"><span class="ic">&#10022;</span>Система</a>
+    <a class="d-sup" href="https://t.me/MilaUshakova_ClubBot?start=support" target="_blank" rel="noopener" aria-label="Поддержка в Telegram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 4L3 11.5l6 2.2M21 4l-3.4 16L9.5 15M21 4L9.5 15m0 0v5l3-3.4"/></svg></a>
+  </nav>
+  <div class="sheet-bg" id="sheetBg"></div>
+  <div class="sheet" id="sheet"></div>
   <div id="legal">
     <a href="/oferta" target="_blank">Договор оферты</a>
     <a href="/privacy" target="_blank">Политика конфиденциальности</a>
@@ -121,12 +157,18 @@ var st = {sex: null, sit: null, env: null, goal: null};
 try { st.sex = localStorage.getItem('img_sex'); } catch(e){}
 var v = document.getElementById('v');
 // Открыли из Системы: показываем дорогу назад
-if (/[?&]from=system/.test(location.search) || /\/guide\/?(gaidosen)?(\?|#|$)/.test(document.referrer)) document.getElementById('sys').style.display = '';
+var fromSys = /[?&]from=system/.test(location.search) || /\/guide\/?(gaidosen)?(\?|#|$)/.test(document.referrer);
+try { if (fromSys) sessionStorage.setItem('img_from_sys', '1'); else fromSys = sessionStorage.getItem('img_from_sys') === '1'; } catch(e){}
+if (fromSys) { document.getElementById('sys').style.display = ''; document.getElementById('dSys').classList.remove('off'); }
 
 function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
 function steps(n){ return '<div class="steps">' + [1,2,3].map(function(i){ return '<span' + (i <= n ? ' class="on"' : '') + '></span>'; }).join('') + '</div>'; }
 function show(html){ v.innerHTML = '<div class="view">' + html + '</div>'; window.scrollTo(0, 0); }
 
+function crumbs(n){
+  return '<div class="crumbs"><button data-tab="' + st.env + '">' + esc(ENV[st.env].n) + '</button><i>›</i><button data-tab="' + st.env + '">' + esc(st.sit) + '</button>' +
+    (n === 3 ? '<i>›</i><button data-go="2">' + esc(st.goal) + '</button>' : '') + '</div>';
+}
 function cover(){
   show('<div class="cov"><img src="/club/img/p/events3.jpg" alt=""><div class="in">' +
     '<div class="kick">Для бизнеса · для мужчин и женщин</div>' +
@@ -143,15 +185,14 @@ function step1(){
     '<div class="list">' + ENV[t].s.map(function(s){ return '<button class="ev" data-sit="' + esc(s) + '" data-env="' + t + '">' + esc(s) + '</button>'; }).join('') + '</div>');
 }
 function step2(){
-  show(steps(2) + '<button class="back" data-go="1">← ' + esc(st.sit) + '</button><div class="kick">Шаг 2 · Цель</div><div class="q">Чего я хочу добиться?</div><div class="hint">Одна встреча, одна цель, один образ</div>' +
+  show(steps(2) + crumbs(2) + '<div class="kick">Шаг 2 · Цель</div><div class="q">Чего я хочу добиться?</div><div class="hint">Одна встреча, одна цель, один образ</div>' +
     '<div class="goals">' + GOALS.map(function(g, i){ return '<button class="goal" data-goal="' + esc(g) + '"><small>' + (i < 9 ? '0' : '') + (i + 1) + '</small><b>' + esc(g) + '</b></button>'; }).join('') + '</div>');
 }
 function step3(){
   var L = LOOKS[st.sit + '|' + st.goal] || LOOKS[st.goal] || {};
   var x = L[st.sex || 'w'] || {};
   var looks = (x.looks && x.looks.length) ? x.looks : [{}, {}, {}];
-  show(steps(3) + '<button class="back" data-go="2">← Другая цель</button>' +
-    '<div class="pick"><span>' + esc(ENV[st.env].n) + '</span><span>' + esc(st.sit) + '</span><span>' + esc(st.goal) + '</span></div>' +
+  show(steps(3) + crumbs(3) +
     '<div class="res"><div class="kick">Шаг 3 · Образы · ' + (st.sex === 'm' ? 'для мужчин' : 'для женщин') + '</div><h2>' + esc(st.goal) + '</h2>' +
     '<div class="note">' + (x.note ? esc(x.note) : '<span class="ph">Принцип образа: например, вязаный кардиган, приглушённые оттенки, мягкая обувь</span>') + '</div>' +
     '<div class="looks">' + looks.map(function(l, i){
@@ -161,15 +202,59 @@ function step3(){
     '<div class="again"><button data-go="2">Другая цель</button><button class="dk" data-go="1">Новое событие</button></div></div>');
 }
 
-v.addEventListener('click', function(e){
-  var b = e.target.closest('button'); if (!b) return;
-  if (b.dataset.sex) { st.sex = b.dataset.sex; try { localStorage.setItem('img_sex', st.sex); } catch(e){} cover(); return; }
-  if (b.dataset.tab) { st.env = +b.dataset.tab; step1(); return; }
-  if (b.dataset.sit) { st.sit = b.dataset.sit; st.env = +b.dataset.env; step2(); return; }
-  if (b.dataset.goal) { st.goal = b.dataset.goal; step3(); return; }
-  if (b.dataset.go === '1') step1(); else if (b.dataset.go === '2') step2();
+// Каждый шаг в истории браузера: работают «Назад» в доке, жест назад на телефоне и кнопка браузера
+var VIEWS = {cover: cover, s1: step1, s2: step2, s3: step3};
+function draw(){ (VIEWS[st.view] || cover)(); document.getElementById('dBack').classList.toggle('off', st.view === 'cover'); }
+function go(view, patch, replace){
+  for (var k in patch) st[k] = patch[k];
+  st.view = view;
+  var h = {view: st.view, env: st.env, sit: st.sit, goal: st.goal};
+  try { replace ? history.replaceState(h, '') : history.pushState(h, ''); } catch(e){}
+  closeMenu(); draw();
+}
+window.addEventListener('popstate', function(e){
+  var h = e.state || {view: 'cover'};
+  st.view = h.view; st.env = h.env; st.sit = h.sit; st.goal = h.goal;
+  closeMenu(); draw();
 });
-cover();
+document.getElementById('dBack').addEventListener('click', function(){
+  if (history.state && history.state.view !== 'cover' && history.length > 1) history.back();
+  else go(st.view === 's3' ? 's2' : st.view === 's2' ? 's1' : 'cover', {}, true);
+});
+
+// Меню-шторка: обложка, для кого, все события сразу
+var sheet = document.getElementById('sheet');
+function openMenu(){
+  sheet.innerHTML = '<div class="grab"></div><div class="row2"><button data-go="cover">На обложку</button>' + (fromSys ? '<button data-sys="1">В Систему ✦</button>' : '') + '</div>' +
+    '<div class="row2"><button data-sex="w"' + (st.sex !== 'm' ? ' class="on"' : '') + '>Для женщин</button><button data-sex="m"' + (st.sex === 'm' ? ' class="on"' : '') + '>Для мужчин</button></div>' +
+    ENV.map(function(e, i){ return '<h3>' + e.n + '</h3>' + e.s.map(function(x){
+      return '<button class="ev' + (x === st.sit ? ' cur' : '') + '" data-sit="' + esc(x) + '" data-env="' + i + '">' + esc(x) + '</button>'; }).join(''); }).join('');
+  document.body.classList.add('menu-on');
+}
+function closeMenu(){ document.body.classList.remove('menu-on'); }
+document.getElementById('dMenu').addEventListener('click', function(){ document.body.classList.contains('menu-on') ? closeMenu() : openMenu(); });
+document.getElementById('sheetBg').addEventListener('click', closeMenu);
+
+function onTap(e){
+  var b = e.target.closest('button'); if (!b) return;
+  if (b.dataset.sys) { location.href = '/guide'; return; }
+  if (b.dataset.sex) { st.sex = b.dataset.sex; try { localStorage.setItem('img_sex', st.sex); } catch(e){}
+    if (document.body.classList.contains('menu-on')) { openMenu(); draw(); } else cover(); return; }
+  if (b.dataset.tab) return go('s1', {env: +b.dataset.tab});
+  if (b.dataset.sit) return go('s2', {sit: b.dataset.sit, env: +b.dataset.env});
+  if (b.dataset.goal) return go('s3', {goal: b.dataset.goal});
+  if (b.dataset.go === 'cover') return go('cover', {});
+  if (b.dataset.go === '1') return go('s1', {});
+  if (b.dataset.go === '2') return go('s2', {});
+}
+v.addEventListener('click', onTap);
+sheet.addEventListener('click', onTap);
+
+// Док прячется, пока листают вниз, и возвращается при движении вверх
+var lastY = 0, dock = document.getElementById('dock');
+window.addEventListener('scroll', function(){ var y = window.scrollY; dock.classList.toggle('hide', y > lastY + 4 && y > 120); if (Math.abs(y - lastY) > 4) lastY = y; }, {passive: true});
+
+go('cover', {}, true);
 })();
 </script>
 </body>
