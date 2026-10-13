@@ -95,6 +95,10 @@
       "dest": "/guide/gaidosen.html"
     },
     {
+      "src": "/guide/business/?",
+      "dest": "/guide/business.html"
+    },
+    {
       "src": "/guide/(.*)",
       "dest": "/guide/$1"
     },
