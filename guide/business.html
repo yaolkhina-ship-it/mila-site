@@ -25,7 +25,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;text-a
 @keyframes in{from{opacity:0;transform:translateY(8px)}}
 
 /* обложка */
-.cov{position:relative;min-height:calc(100svh - 50px);display:flex;flex-direction:column;justify-content:flex-end;padding:0 0 92px;margin:0 -22px;overflow:hidden}
+.cov{position:relative;min-height:calc(100svh - 50px);display:flex;flex-direction:column;justify-content:flex-end;padding:0 0 80px;margin:0 -22px;overflow:hidden}
 .cov img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 25%}
 .cov:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,26,30,.15) 0%,rgba(13,26,30,.35) 45%,rgba(13,26,30,.94) 82%)}
 .cov .in{position:relative;z-index:1;padding:0 26px}
@@ -114,6 +114,20 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;text-a
 .sheet .ev{display:flex;justify-content:space-between;width:100%;padding:11px 0;border-bottom:.3px solid rgba(201,169,110,.16);font-size:14px;color:rgba(242,237,240,.88)}
 .sheet .ev.cur{color:var(--gold)}
 .sheet .ev:after{content:"→";color:var(--goldm)}
+/* тарифы */
+.tf{border:.5px solid rgba(201,169,110,.35);padding:20px 18px 18px;margin-top:12px}
+.tf.hi{border-color:var(--gold);background:rgba(201,169,110,.07)}
+.tf .nm{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.tf .nm b{font-size:12px;letter-spacing:.26em;font-weight:700;color:#fff}
+.tf .nm span{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--goldm)}
+.tf .pr{font-family:var(--c);font-weight:300;font-size:38px;line-height:1;color:var(--gold);margin:14px 0 4px}
+.tf .pr small{font-family:var(--f);font-size:11px;color:rgba(242,237,240,.55);margin-left:6px}
+.tf ul{list-style:none;margin-top:10px}
+.tf .pick-t{display:block;width:100%;margin-top:14px;text-align:center !important;border:.5px solid var(--gold);color:var(--gold);font-size:10px;letter-spacing:.2em;text-transform:uppercase;padding:11px;text-decoration:none}
+.tf.hi .pick-t{background:var(--gold);color:var(--deep)}
+.tf li{font-size:13px;line-height:1.6;color:rgba(242,237,240,.82);padding:3px 0 3px 16px;position:relative}
+.tf li:before{content:"";position:absolute;left:0;top:13px;width:7px;height:1px;background:var(--gold)}
+.link{display:block;width:100%;margin-top:14px;text-align:center !important;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);padding:8px}
 #legal{padding-bottom:90px !important;padding:22px 16px 26px;text-align:center;font-family:-apple-system,'Helvetica Neue',Arial,sans-serif;font-size:12px;line-height:1.7;color:#E8E2D6;opacity:.6}
 #legal a{color:inherit;text-decoration:underline;margin:0 9px;white-space:nowrap}
 </style>
@@ -168,6 +182,23 @@ function crumbs(n){
   return '<div class="crumbs"><button data-tab="' + st.env + '">' + esc(ENV[st.env].n) + '</button><i>›</i><button data-tab="' + st.env + '">' + esc(st.sit) + '</button>' +
     (n === 3 ? '<i>›</i><button data-go="2">' + esc(st.goal) + '</button>' : '') + '</div>';
 }
+var CONTACT = 'https://t.me/MilaUshakova_ClubBot?start=support';
+var TARIFFS = [
+  {n:'TEAM', who:'до 20 сотрудников', p:'150 000 ₽', t:'6 месяцев', inc:['Доступ к Системе имиджа']},
+  {n:'BUSINESS', who:'до 50 сотрудников', p:'300 000 ₽', t:'6 месяцев', inc:['Доступ к Системе имиджа','Онлайн-лекция Милы','Ответы на вопросы (Q&A)'], hi:1},
+  {n:'EXECUTIVE', who:'до 30 руководителей', p:'400 000 ₽', inc:['Доступ к Системе имиджа','Лекция Милы','Разбор корпоративных ситуаций']},
+  {n:'CORPORATE', who:'до 100 сотрудников', p:'590 000 ₽', inc:['Система, адаптированная под компанию','Лекция Милы','Корпоративные рекомендации']},
+  {n:'CUSTOM', who:'от 100 сотрудников', p:'от 750 000 ₽', inc:['Международные компании','Индивидуальная интеграция']}
+];
+function tariffs(){
+  show('<div class="kick">Для компаний</div><div class="q">Единый уровень впечатления для всей команды</div><div class="hint">Доступ к Системе имиджа для сотрудников и руководителей</div>' +
+    TARIFFS.map(function(t){ return '<div class="tf' + (t.hi ? ' hi' : '') + '"><div class="nm"><b>' + t.n + '</b><span>' + t.who + '</span></div>' +
+      '<div class="pr">' + t.p + (t.t ? '<small>доступ ' + t.t + '</small>' : '') + '</div><ul>' + t.inc.map(function(x){ return '<li>' + esc(x) + '</li>'; }).join('') + '</ul>' +
+      '<a class="pick-t" href="' + CONTACT + '" target="_blank" rel="noopener">Выбрать ' + t.n + '</a></div>'; }).join('') +
+    '<div class="hint" style="margin-top:20px">Не знаете, какой тариф подойдёт? Напишите, подберём под задачи компании.</div>' +
+    '<a class="cta" href="' + CONTACT + '" target="_blank" rel="noopener">Обсудить подключение</a>' +
+    '<button class="link" data-go="1">Посмотреть, как работает Система →</button>');
+}
 function cover(){
   show('<div class="cov"><img src="/guide/business-img/cover.jpg" alt="" fetchpriority="high"><div class="in">' +
     '<div class="kick">Для бизнеса · для мужчин и женщин</div>' +
@@ -175,7 +206,7 @@ function cover(){
     '<div class="chain">Куда я иду <b>→</b><br>какое впечатление хочу создать <b>→</b><br>что надеть</div>' +
     '<div class="lead">Инструмент управления впечатлением в профессиональной и деловой среде. Три шага перед любой встречей.</div>' +
     '<div class="sex"><button data-sex="w"' + (st.sex === 'w' ? ' class="on"' : '') + '>Для женщин</button><button data-sex="m"' + (st.sex === 'm' ? ' class="on"' : '') + '>Для мужчин</button></div>' +
-    '<button class="cta" data-go="1">Начать</button></div></div>');
+    '<button class="cta" data-go="1">Начать</button><button class="link" data-go="tariffs">Тарифы для компаний</button></div></div>');
 }
 function step1(){
   var t = st.env || 0;
@@ -198,11 +229,12 @@ function step3(){
       return '<div class="lk"><div class="im">' + (l.img ? '<img loading="lazy" src="' + esc(l.img) + '" alt="">' : 'образ ' + (i + 1)) + '</div><div class="it">' +
         (l.items || []).map(function(it){ return it.url ? '<a href="' + esc(it.url) + '" target="_blank" rel="noopener">' + esc(it.t) + '</a>' : '<span>' + esc(it.t) + '</span>'; }).join('') + '</div></div>';
     }).join('') + '</div>' +
-    '<div class="again"><button data-go="2">Другая цель</button><button class="dk" data-go="1">Новое событие</button></div></div>');
+    '<div class="again"><button data-go="2">Другая цель</button><button class="dk" data-go="1">Новое событие</button></div></div>' +
+    '<button class="link" data-go="tariffs">Подключить для компании →</button>');
 }
 
 // Каждый шаг в истории браузера: работают «Назад» в доке, жест назад на телефоне и кнопка браузера
-var VIEWS = {cover: cover, s1: step1, s2: step2, s3: step3};
+var VIEWS = {cover: cover, s1: step1, s2: step2, s3: step3, tariffs: tariffs};
 function draw(){ (VIEWS[st.view] || cover)(); document.getElementById('dBack').classList.toggle('off', st.view === 'cover'); }
 function go(view, patch, replace){
   for (var k in patch) st[k] = patch[k];
@@ -224,7 +256,7 @@ document.getElementById('dBack').addEventListener('click', function(){
 // Меню-шторка: обложка, для кого, все события сразу
 var sheet = document.getElementById('sheet');
 function openMenu(){
-  sheet.innerHTML = '<div class="grab"></div><div class="row2"><button data-go="cover">На обложку</button>' + (fromSys ? '<button data-sys="1">В Систему ✦</button>' : '') + '</div>' +
+  sheet.innerHTML = '<div class="grab"></div><div class="row2"><button data-go="cover">На обложку</button><button data-go="tariffs">Тарифы</button>' + (fromSys ? '<button data-sys="1">В Систему ✦</button>' : '') + '</div>' +
     '<div class="row2"><button data-sex="w"' + (st.sex !== 'm' ? ' class="on"' : '') + '>Для женщин</button><button data-sex="m"' + (st.sex === 'm' ? ' class="on"' : '') + '>Для мужчин</button></div>' +
     ENV.map(function(e, i){ return '<h3>' + e.n + '</h3>' + e.s.map(function(x){
       return '<button class="ev' + (x === st.sit ? ' cur' : '') + '" data-sit="' + esc(x) + '" data-env="' + i + '">' + esc(x) + '</button>'; }).join(''); }).join('');
@@ -243,6 +275,7 @@ function onTap(e){
   if (b.dataset.sit) return go('s2', {sit: b.dataset.sit, env: +b.dataset.env});
   if (b.dataset.goal) return go('s3', {goal: b.dataset.goal});
   if (b.dataset.go === 'cover') return go('cover', {});
+  if (b.dataset.go === 'tariffs') return go('tariffs', {});
   if (b.dataset.go === '1') return go('s1', {});
   if (b.dataset.go === '2') return go('s2', {});
 }
@@ -253,7 +286,7 @@ sheet.addEventListener('click', onTap);
 var lastY = 0, dock = document.getElementById('dock');
 window.addEventListener('scroll', function(){ var y = window.scrollY; dock.classList.toggle('hide', y > lastY + 4 && y > 120); if (Math.abs(y - lastY) > 4) lastY = y; }, {passive: true});
 
-go('cover', {}, true);
+go(/tariff/.test(location.hash) ? 'tariffs' : 'cover', {}, true);
 })();
 </script>
 </body>
