@@ -94,7 +94,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .read h2{font-family:'Poiret One';font-weight:400;font-size:28px;line-height:1.15;color:var(--hi);margin:8px 0 18px}
 .read .tx{white-space:pre-wrap;line-height:1.6;font-size:17.5px}
 .read .note{margin-top:26px;padding-top:16px;border-top:1px solid var(--line);color:var(--mute);font-size:15px;line-height:1.5}
-.read .note a{color:var(--gold)}
+.read .note a,.read .tx a{color:var(--gold);word-break:break-all}
 .v2 .sback,.v2 .sback button{background:#fff;color:#111}.v2 .read h2{font-family:'Prata',serif;color:#111}.v2 .lf input{color:#111;border-color:#bbb}
 .state .frame{border:1px solid var(--gold);padding:5px;margin-bottom:24px}
 .state .frame img{width:180px;height:220px;filter:sepia(.25)}
@@ -392,10 +392,15 @@ function open(id){
 function reader(id){
   var it = D.items.find(function(i){ return i.id == id; }) || {};
   var media = /video|audio|voice|video_note|photo|document/.test(it.m || '') || it.d > 0;
+  var tx = it.x || it.s || '';
+  var body = esc(tx).replace(/https?:\/\/[^\s<]+[^\s<.,;:!?)»"]/g, function(u){ return '<a href="' + u + '" target="_blank" rel="noopener">' + u + '</a>'; });
+  var extra = (it.ln || []).filter(function(u){ return tx.indexOf(u) < 0 && !/^https:\/\/t\.me\/c\//.test(u); });
+  var zoom = (it.ln || []).concat(tx.match(/https?:\/\/[^\s]*zoom\.us[^\s]*/g) || []).length > 0;
+  var btns = extra.map(function(u){ return '<a class="btn" style="display:inline-block;margin:6px 8px 0 0;text-decoration:none" href="' + esc(u) + '" target="_blank" rel="noopener">' + (/zoom\.us/.test(u) ? 'Смотреть запись' : 'Открыть ссылку') + '</a>'; }).join('');
   var d = new Date(it.t * 1000);
   return '<div class="view read"><div class="meta">' + esc(RUB[it.r] || '') + ' · ' + d.toLocaleDateString('ru-RU', {day:'numeric', month:'long', year:'numeric'}) + '</div>' +
-    '<h2>' + esc(title(it)) + '</h2><div class="tx">' + esc(it.x || it.s || '') + '</div>' +
-    (media ? '<div class="note">К этому посту есть ' + (it.d > 0 ? 'запись' : 'фото или файл') + ', её можно посмотреть в канале клуба в Telegram, когда он заработает: <a href="' + esc(it.url) + '" target="_blank" rel="noopener">открыть пост</a>.</div>' : '') +
+    '<h2>' + esc(title(it)) + '</h2><div class="tx">' + body + '</div>' + (btns ? '<div style="margin-top:18px">' + btns + '</div>' : '') +
+    (media && !zoom ? '<div class="note">К этому посту есть ' + (it.d > 0 ? 'запись' : 'фото или файл') + ', её можно посмотреть в канале клуба в Telegram, когда он заработает: <a href="' + esc(it.url) + '" target="_blank" rel="noopener">открыть пост</a>.</div>' : '') +
     '</div>';
 }
 
