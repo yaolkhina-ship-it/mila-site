@@ -82,6 +82,20 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 .state{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 30px}
 .state h1{font-family:'Poiret One';font-weight:400;font-size:34px;line-height:1.05;color:var(--hi);margin:16px 0 14px;letter-spacing:.04em}
 .state p{color:var(--ink);opacity:.85;line-height:1.45;margin:0 0 24px;max-width:320px}
+.lf{display:flex;flex-direction:column;gap:12px;width:100%;max-width:300px}
+.lf input{font:inherit;font-size:17px;background:transparent;color:var(--hi);border:0;border-bottom:1px solid var(--gold2);padding:10px 2px;outline:0;border-radius:0}
+.lf input:focus{border-color:var(--gold)}
+.lf .btn{margin-top:10px}
+.lf .err{color:#e08a7a;font-size:15px;min-height:20px}
+.lf .alt{margin-top:18px;font-size:15px;color:var(--mute);text-decoration:underline;background:none}
+.sback{position:sticky;top:0;z-index:5;display:flex;justify-content:space-between;align-items:center;padding:12px 18px;background:var(--bg);border-bottom:1px solid var(--line);font-family:'Poiret One';letter-spacing:.18em;font-size:12.5px;color:var(--gold);text-transform:uppercase}
+.sback button{color:var(--gold);font:inherit;letter-spacing:inherit;background:none}
+.read{padding:26px 24px 60px;max-width:680px;margin:0 auto}
+.read h2{font-family:'Poiret One';font-weight:400;font-size:28px;line-height:1.15;color:var(--hi);margin:8px 0 18px}
+.read .tx{white-space:pre-wrap;line-height:1.6;font-size:17.5px}
+.read .note{margin-top:26px;padding-top:16px;border-top:1px solid var(--line);color:var(--mute);font-size:15px;line-height:1.5}
+.read .note a{color:var(--gold)}
+.v2 .sback,.v2 .sback button{background:#fff;color:#111}.v2 .read h2{font-family:'Prata',serif;color:#111}.v2 .lf input{color:#111;border-color:#bbb}
 .state .frame{border:1px solid var(--gold);padding:5px;margin-bottom:24px}
 .state .frame img{width:180px;height:220px;filter:sepia(.25)}
 .btn{font-family:'Poiret One';font-size:14px;letter-spacing:.2em;text-transform:uppercase;background:var(--gold);color:#0b0b0c;padding:13px 26px}
@@ -156,6 +170,12 @@ body.v2,.v2 html{background:#fff}
 var tg = window.Telegram && Telegram.WebApp;
 var BOT = 'https://t.me/MilaUshakova_ClubBot';
 var API = 'https://mila-bot-production-14c0.up.railway.app/club/api/materials';
+var LOGIN_API = 'https://mila-bot-production-14c0.up.railway.app/club/api/login';
+// Вход по логину и паролю: для тех, у кого не открывается Telegram
+var TOK_KEY = 'club_site_token';
+function tokGet(){ try { return localStorage.getItem(TOK_KEY) || ''; } catch(e){ return ''; } }
+function tokSet(v){ try { v ? localStorage.setItem(TOK_KEY, v) : localStorage.removeItem(TOK_KEY); } catch(e){} }
+var SITE = false;
 var app = document.getElementById('app');
 
 // Обложки: картины и мода, у каждой рубрики своя подборка
@@ -327,7 +347,11 @@ function search(q){
 
 function render(){
   var st = stack[stack.length - 1] || {};
-  app.innerHTML = st.rub || st.media ? rubric(st) : home();
+  app.innerHTML = (SITE && stack.length ? '<div class="sback"><button id="sb">‹ Назад</button><span>Материалы клуба</span></div>' : '') +
+    (st.read ? reader(st.read) : st.rub || st.media ? rubric(st) : home()) +
+    (SITE && !stack.length ? '<div class="foot" style="text-align:center;padding:10px 0 40px"><button class="lf-out" id="out" style="background:none;color:var(--mute);text-decoration:underline;font:inherit;font-size:14px">Выйти</button></div>' : '');
+  var sb = document.getElementById('sb'); if (sb) sb.onclick = back;
+  var out = document.getElementById('out'); if (out) out.onclick = function(){ tokSet(''); SITE = false; stack = []; loginForm(''); };
   window.scrollTo(0, st.y || 0);
   if (tg && tg.BackButton) { stack.length ? tg.BackButton.show() : tg.BackButton.hide(); }
   var q = document.getElementById('q');
@@ -362,7 +386,17 @@ function open(id){
   var it = D.items.find(function(i){ return i.id == id; });
   if (!it) return;
   haptic();
+  if (SITE) return go({read: it.id});
   if (tg && tg.openTelegramLink) tg.openTelegramLink(it.url); else window.open(it.url, '_blank');
+}
+function reader(id){
+  var it = D.items.find(function(i){ return i.id == id; }) || {};
+  var media = /video|audio|voice|video_note|photo|document/.test(it.m || '') || it.d > 0;
+  var d = new Date(it.t * 1000);
+  return '<div class="view read"><div class="meta">' + esc(RUB[it.r] || '') + ' · ' + d.toLocaleDateString('ru-RU', {day:'numeric', month:'long', year:'numeric'}) + '</div>' +
+    '<h2>' + esc(title(it)) + '</h2><div class="tx">' + esc(it.x || it.s || '') + '</div>' +
+    (media ? '<div class="note">К этому посту есть ' + (it.d > 0 ? 'запись' : 'фото или файл') + ', её можно посмотреть в канале клуба в Telegram, когда он заработает: <a href="' + esc(it.url) + '" target="_blank" rel="noopener">открыть пост</a>.</div>' : '') +
+    '</div>';
 }
 
 app.addEventListener('click', function(e){
@@ -390,13 +424,41 @@ function toBot(start){
   if (tg && tg.openTelegramLink && tg.initData) { tg.openTelegramLink(u); } else location.href = u;
 }
 
+function loginForm(err){
+  app.innerHTML = '<div class="state view"><div class="frame"><img src="/club/img/art_vermeer.jpg" alt=""></div><div class="orn">◆ ◆ ◆</div><h1>Материалы<br>клуба</h1>' +
+    '<p>Войдите по логину и паролю, которые прислала команда клуба.</p>' +
+    '<form class="lf" id="lf" autocomplete="on"><input name="username" id="lg" placeholder="Логин" autocapitalize="none" autocorrect="off" spellcheck="false" autocomplete="username">' +
+    '<input name="password" id="pw" type="password" placeholder="Пароль" autocapitalize="none" autocomplete="current-password">' +
+    '<div class="err" id="er">' + esc(err) + '</div><button class="btn" type="submit" id="go">Войти</button></form>' +
+    '<button class="alt" id="viatg">У меня работает Telegram</button></div>';
+  document.getElementById('viatg').onclick = function(){ toBot(''); };
+  document.getElementById('lf').onsubmit = function(e){
+    e.preventDefault();
+    var lg = document.getElementById('lg').value.trim(), pw = document.getElementById('pw').value.trim(), er = document.getElementById('er'), go = document.getElementById('go');
+    if (!lg || !pw) { er.textContent = 'Введите логин и пароль.'; return; }
+    go.disabled = true; er.textContent = '';
+    fetch(LOGIN_API, {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({login: lg, password: pw})})
+      .then(function(r){ return r.json().catch(function(){ return {}; }).then(function(d){ return {s: r.status, d: d}; }); })
+      .then(function(x){
+        go.disabled = false;
+        if (x.s === 200 && x.d.token) { tokSet(x.d.token); load(); return; }
+        er.textContent = x.s === 403 ? 'Резидентство закончилось, доступ закрыт.' : x.s === 429 ? 'Слишком много попыток. Попробуйте через 15 минут.' : 'Неверный логин или пароль.';
+      })
+      .catch(function(){ go.disabled = false; er.textContent = 'Нет связи. Проверьте интернет и попробуйте ещё раз.'; });
+  };
+}
+
 function load(){
   var init = tg && tg.initData;
   var demo = /^(localhost|127\.0\.0\.1)$/.test(location.hostname) || location.protocol === 'file:';
-  if (!init && !demo) return state('art_vermeer', 'Материалы<br>клуба', 'Откройте материалы из бота клуба «В моём стиле» в Telegram.', 'Открыть бота', function(){ toBot(''); });
+  var tok = !init && tokGet();
+  if (!init && !demo && !tok) return loginForm('');
+  SITE = !!tok;
   app.innerHTML = '<div class="state"><div class="orn pulse">◆ ◆ ◆</div></div>';
-  var req = init ? fetch(API, {headers: {'X-Init-Data': init}}) : fetch('demo.json');
+  var req = init ? fetch(API, {headers: {'X-Init-Data': init}}) : tok ? fetch(API, {headers: {'X-Site-Token': tok}}) : fetch('demo.json');
   req.then(function(r){
+    if (tok && r.status === 401) { tokSet(''); loginForm(''); return; }
+    if (tok && r.status === 403) { tokSet(''); state('art_madamex', 'Доступ<br>закончился', 'Материалы открыты резидентам клуба. Продлите участие, и мы пришлём новый логин и пароль.', 'Продлить участие', function(){ toBot('club'); }); return; }
     if (r.status === 403) { state('art_madamex', 'Доступ<br>для резидентов', 'Материалы открыты участницам клуба. Продлите участие, и всё снова будет здесь.', 'Продлить участие', function(){ toBot('club'); }); return; }
     if (!r.ok) throw new Error(r.status);
     return r.json().then(function(d){
