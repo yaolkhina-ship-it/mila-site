@@ -52,6 +52,14 @@ body.dark-top .top .ed{color:rgba(241,236,226,.6)}
 .cov .ed2{display:flex;justify-content:space-between;border-top:1px solid rgba(241,236,226,.3);padding-top:12px;margin-bottom:26px;color:rgba(241,236,226,.7)}
 .cov h1{font-family:var(--serif);font-weight:300;font-size:68px;line-height:.92;letter-spacing:-.01em}
 .cov h1 i{color:#C4A877;font-weight:300}
+.cov.plain{justify-content:center}
+.cov.plain .in{padding-top:40px}
+.cov.plain .sub{margin-top:0;font-family:var(--serif);font-size:24px;line-height:1.3;color:var(--paper)}
+.cov > .in > .cta:first-of-type{margin-top:30px}
+.au p{font-size:14px;line-height:1.7;color:var(--ink2);font-weight:300;margin:0 0 12px}
+.au .au-ph{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center top;margin:18px 0 22px;filter:grayscale(1) contrast(1.02)}
+.au .au-role{margin:0 0 18px}
+.au .cta{margin-top:26px}
 .cov .sub{margin-top:18px;font-size:14px;line-height:1.65;color:rgba(241,236,226,.78);font-weight:300;max-width:360px}
 .toc{margin-top:26px;border-top:1px solid rgba(241,236,226,.22)}
 .toc div{display:grid;grid-template-columns:44px 1fr;align-items:baseline;padding:12px 0;border-bottom:1px solid rgba(241,236,226,.22)}
@@ -241,8 +249,24 @@ function sexLabel(){ return st.sex === 'm' ? 'для мужчин' : 'для ж�
 
 function cover(){
   show('<div class="cov"><img src="/guide/business-img/cover.jpg" alt="" fetchpriority="high"><div class="in">' +
-    '<div class="ed2 cap"><span>Для бизнеса</span><span>Мужчины и женщины</span></div>' +
+    '<div class="ed2 cap"><span>Для бизнеса</span><span>Мила Ушакова</span></div>' +
     '<h1>Система<br><i>имиджа</i></h1>' +
+    '<button class="cta" data-go="about">Далее</button></div></div>', true);
+}
+function about(){
+  show('<div class="pad au"><div class="cap br">Об авторе</div>' +
+    '<img class="au-ph" src="/guide/about-photo.jpg" alt="Мила Ушакова">' +
+    '<div class="h2">Мила <i>Ушакова</i></div>' +
+    '<div class="cap mute au-role">Image Expert · Fashion Analyst</div>' +
+    '<p>Персональный стилист и аналитик моды. Более 7 лет работаю с клиентами по всему миру, помогая выстраивать стиль, который отражает личность, образ жизни и внутреннее состояние.</p>' +
+    '<p>Приглашённый редактор Vogue, L\'Officiel и No Chaser.</p>' +
+    '<p>Аккредитованный стилист недель моды: Paris, Milan, Copenhagen, Yerevan.</p>' +
+    '<p>Основатель fashion-клуба «В моём стиле» и автор Системы цветовых сочетаний.</p>' +
+    '<button class="cta dk" data-go="intro">Далее</button></div>');
+}
+function intro(){
+  show('<div class="cov plain"><div class="in">' +
+    '<div class="ed2 cap"><span>Система имиджа</span><span>Мужчины и женщины</span></div>' +
     '<div class="sub">Инструмент управления впечатлением в профессиональной и деловой среде. Три решения перед любой встречей.</div>' +
     '<div class="toc"><div><span>01</span><b>Куда я иду</b></div><div><span>02</span><b>Какое впечатление хочу создать</b></div><div><span>03</span><b>Что надеть</b></div></div>' +
     '<div class="seg"><button data-sex="w"' + (st.sex !== 'm' ? ' class="on"' : '') + '>Для женщин</button><button data-sex="m"' + (st.sex === 'm' ? ' class="on"' : '') + '>Для мужчин</button></div>' +
@@ -289,7 +313,7 @@ function tariffs(){
 }
 
 // История: «Назад» в доке, жест назад и кнопка браузера идут по шагам
-var VIEWS = {cover: cover, s1: step1, s2: step2, s3: step3, tariffs: tariffs};
+var VIEWS = {cover: cover, about: about, intro: intro, s1: step1, s2: step2, s3: step3, tariffs: tariffs};
 function draw(){ (VIEWS[st.view] || cover)(); document.getElementById('dBack').classList.toggle('off', st.view === 'cover'); document.getElementById('dTar').classList.toggle('off', st.view === 'tariffs'); }
 function go(view, patch, replace){
   for (var k in patch) st[k] = patch[k];
@@ -305,14 +329,14 @@ window.addEventListener('popstate', function(e){
 });
 document.getElementById('dBack').addEventListener('click', function(){
   if (history.state && history.length > 1 && history.state.view !== 'cover') history.back();
-  else go(st.view === 's3' ? 's2' : st.view === 's2' ? 's1' : 'cover', {}, true);
+  else go({s3:'s2', s2:'s1', s1:'intro', intro:'about'}[st.view] || 'cover', {}, true);
 });
 document.getElementById('dTar').addEventListener('click', function(){ go('tariffs', {}); });
 
 var sheet = document.getElementById('sheet');
 function openMenu(){
   var n = 0;
-  sheet.innerHTML = '<div class="grab"></div><div class="quick"><button data-go="cover">Обложка</button><button data-go="tariffs">Тарифы</button>' +
+  sheet.innerHTML = '<div class="grab"></div><div class="quick"><button data-go="cover">Обложка</button><button data-go="about">Об авторе</button><button data-go="intro">О Системе</button><button data-go="tariffs">Тарифы</button>' +
     '<button data-sex="w"' + (st.sex !== 'm' ? ' class="on"' : '') + '>Для женщин</button><button data-sex="m"' + (st.sex === 'm' ? ' class="on"' : '') + '>Для мужчин</button>' +
     (fromSys ? '<button data-sys="1" style="grid-column:1/-1">← В Систему цветовых сочетаний</button>' : '') + '</div>' +
     ENV.map(function(e, i){ return '<h3><span>' + e.n + '</span><i>' + e.r + '</i></h3>' + e.s.map(function(x){ n++;
@@ -332,6 +356,8 @@ function onTap(e){
   if (b.dataset.sit) return go('s2', {sit: b.dataset.sit, env: +b.dataset.env});
   if (b.dataset.goal) return go('s3', {goal: b.dataset.goal});
   if (b.dataset.go === 'cover') return go('cover', {});
+  if (b.dataset.go === 'about') return go('about', {});
+  if (b.dataset.go === 'intro') return go('intro', {});
   if (b.dataset.go === 'tariffs') return go('tariffs', {});
   if (b.dataset.go === '1') return go('s1', {});
   if (b.dataset.go === '2') return go('s2', {});
