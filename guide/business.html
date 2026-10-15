@@ -52,7 +52,7 @@ body.dark-top .top .ed{color:rgba(241,236,226,.6)}
 .cov .ed2{display:flex;justify-content:space-between;border-top:1px solid rgba(241,236,226,.3);padding-top:12px;margin-bottom:26px;color:rgba(241,236,226,.7)}
 .cov h1{font-family:var(--serif);font-weight:300;font-size:68px;line-height:.92;letter-spacing:-.01em}
 .cov h1 i{color:#C4A877;font-weight:300}
-.cov img.col{filter:none;object-position:50% 0%}
+.cov img.col{filter:none;height:calc(100% - 290px);object-position:60% 90%;-webkit-mask-image:linear-gradient(180deg,#000 70%,transparent);mask-image:linear-gradient(180deg,#000 70%,transparent)}
 .cov.plain{justify-content:center}
 .cov.plain .in{padding-top:40px}
 .cov.plain .sub{margin-top:0;font-family:var(--serif);font-size:24px;line-height:1.3;color:var(--paper)}
@@ -166,6 +166,10 @@ body.dark-top .top .ed{color:rgba(241,236,226,.6)}
 .dock > * + *{border-left:1px solid rgba(241,236,226,.14)}
 .dock .ic{color:#C4A877;font-size:13px;letter-spacing:0}
 .dock .off{display:none !important}
+.dock .d-docs{flex:0 0 auto;padding:0 16px;color:#C4A877}
+.view{padding-bottom:calc(49px + env(safe-area-inset-bottom))}
+.sheet .docs{display:grid;gap:0;margin-top:6px}
+.sheet .docs a{display:block;padding:16px 0;border-bottom:1px solid var(--rule);font-family:var(--serif);font-size:20px;color:var(--ink);text-decoration:none}
 .dock .d-sup{padding:0 18px;color:#C4A877;flex:0 0 auto}
 .dock button{flex:1 1 0;justify-content:center;padding:0 8px}
 .dock button:active,.dock a:active{background:#2a2826}
@@ -183,7 +187,7 @@ body.dark-top .top .ed{color:rgba(241,236,226,.6)}
 .sheet .ev b{font-size:16px}
 .sheet .ev.cur b{color:var(--bronze)}
 
-#legal{padding:18px 16px calc(66px + env(safe-area-inset-bottom));text-align:center;font-size:11px;line-height:1.8;color:var(--mute);background:var(--paper);border-top:1px solid var(--rule)}
+#legal{display:none;padding:18px 16px calc(66px + env(safe-area-inset-bottom));text-align:center;font-size:11px;line-height:1.8;color:var(--mute);background:var(--paper);border-top:1px solid var(--rule)}
 #legal a{color:inherit;margin:0 9px;white-space:nowrap}
 </style>
 </head>
@@ -194,6 +198,7 @@ body.dark-top .top .ed{color:rgba(241,236,226,.6)}
   <nav class="dock" id="dock" aria-label="Навигация">
     <button class="d-back off" id="dBack" type="button"><span class="ic">&larr;</span>Назад</button>
     <button id="dMenu" type="button"><span class="ic">&#9776;</span>Меню</button>
+    <button id="dDocs" type="button" class="d-docs" aria-label="Документы"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6v18h12V7z"/><path d="M14 3v4h4M9 12h6M9 16h6"/></svg></button>
     <button id="dTar" type="button"><span class="ic">&#8381;</span>Тарифы</button>
     <a class="d-sup" href="https://t.me/MilaUshakova_ClubBot?start=support" target="_blank" rel="noopener" aria-label="Написать в Telegram"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 4L3 11.5l6 2.2M21 4l-3.4 16L9.5 15M21 4L9.5 15m0 0v5l3-3.4"/></svg></a>
   </nav>
@@ -251,7 +256,7 @@ function crumbs(n){
 function sexLabel(){ return st.sex === 'm' ? 'для мужчин' : 'для женщин'; }
 
 function cover(){
-  show('<div class="cov"><img class="col" src="/guide/business-img/cover-bag.jpg" alt="" fetchpriority="high"><div class="in">' +
+  show('<div class="cov"><img class="col" src="/guide/business-img/cover-gallery.jpg" alt="" fetchpriority="high"><div class="in">' +
     '<div class="ed2 cap"><span>Для бизнеса</span><span>Мила Ушакова</span></div>' +
     '<h1>Система<br><i>имиджа</i></h1>' +
     '<button class="cta" data-go="about">Далее</button></div></div>', true);
@@ -338,7 +343,7 @@ document.getElementById('dTar').addEventListener('click', function(){ go('tariff
 
 var sheet = document.getElementById('sheet');
 function openMenu(){
-  var n = 0;
+  var n = 0; sheet.dataset.k = 'menu';
   sheet.innerHTML = '<div class="grab"></div><div class="quick"><button data-go="cover">Обложка</button><button data-go="about">Об авторе</button><button data-go="intro">О Системе</button><button data-go="tariffs">Тарифы</button>' +
     '<button data-sex="w"' + (st.sex !== 'm' ? ' class="on"' : '') + '>Для женщин</button><button data-sex="m"' + (st.sex === 'm' ? ' class="on"' : '') + '>Для мужчин</button>' +
     (fromSys ? '<button data-sys="1" style="grid-column:1/-1">← В Систему цветовых сочетаний</button>' : '') + '</div>' +
@@ -347,8 +352,16 @@ function openMenu(){
   document.body.classList.add('menu-on');
 }
 function closeMenu(){ document.body.classList.remove('menu-on'); }
-document.getElementById('dMenu').addEventListener('click', function(){ document.body.classList.contains('menu-on') ? closeMenu() : openMenu(); });
+document.getElementById('dMenu').addEventListener('click', function(){ document.body.classList.contains('menu-on') && sheet.dataset.k === 'menu' ? closeMenu() : openMenu(); });
 document.getElementById('sheetBg').addEventListener('click', closeMenu);
+document.getElementById('dDocs').addEventListener('click', function(){
+  if (document.body.classList.contains('menu-on') && sheet.dataset.k === 'docs') return closeMenu();
+  sheet.dataset.k = 'docs';
+  sheet.innerHTML = '<div class="grab"></div><h3><span>Документы</span><i>ИП Ольхина Я.Ф.</i></h3><div class="docs">' +
+    '<a href="/oferta" target="_blank">Договор оферты</a><a href="/privacy" target="_blank">Политика конфиденциальности</a>' +
+    '<a href="https://t.me/MilaUshakova_ClubBot?start=support" target="_blank" rel="noopener">Поддержка</a></div>';
+  document.body.classList.add('menu-on');
+});
 
 function onTap(e){
   var b = e.target.closest('button'); if (!b) return;
