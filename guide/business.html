@@ -158,15 +158,16 @@ body.dark-top .top .ed{color:rgba(241,236,226,.6)}
 .note{margin-top:30px;font-family:var(--serif);font-style:italic;font-weight:300;font-size:22px;line-height:1.45;color:var(--ink2)}
 
 /* док и шторка */
-.dock{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(14px + env(safe-area-inset-bottom));z-index:50;display:flex;align-items:stretch;
-  background:var(--ink);color:var(--paper);border-radius:2px;overflow:hidden;transition:transform .3s ease,opacity .3s ease}
-.dock.hide{transform:translate(-50%,calc(100% + 30px));opacity:0;pointer-events:none}
+.dock{position:fixed;left:50%;transform:translateX(-50%);bottom:0;width:100%;max-width:520px;padding-bottom:env(safe-area-inset-bottom);z-index:50;display:flex;align-items:stretch;
+  background:var(--ink);color:var(--paper);border-radius:0;border-top:1px solid rgba(241,236,226,.12);overflow:hidden;transition:transform .3s ease,opacity .3s ease}
+.dock.hide{transform:translate(-50%,calc(100% + 2px));opacity:0;pointer-events:none}
 .dock button,.dock a{all:unset;box-sizing:border-box;display:flex;align-items:center;gap:8px;height:48px;padding:0 16px;cursor:pointer;
   font-family:var(--sans);font-size:10px;font-weight:400;letter-spacing:.24em;text-transform:uppercase;white-space:nowrap}
 .dock > * + *{border-left:1px solid rgba(241,236,226,.14)}
 .dock .ic{color:#C4A877;font-size:13px;letter-spacing:0}
 .dock .off{display:none !important}
-.dock .d-sup{padding:0 15px;color:#C4A877}
+.dock .d-sup{padding:0 18px;color:#C4A877;flex:0 0 auto}
+.dock button{flex:1 1 0;justify-content:center;padding:0 8px}
 .dock button:active,.dock a:active{background:#2a2826}
 .sheet-bg{position:fixed;inset:0;background:rgba(17,19,21,.45);z-index:60;opacity:0;pointer-events:none;transition:opacity .25s}
 .sheet{position:fixed;left:0;right:0;bottom:0;z-index:61;max-width:520px;margin:0 auto;max-height:86svh;overflow-y:auto;background:var(--paper);
@@ -182,7 +183,7 @@ body.dark-top .top .ed{color:rgba(241,236,226,.6)}
 .sheet .ev b{font-size:16px}
 .sheet .ev.cur b{color:var(--bronze)}
 
-#legal{padding:18px 16px 86px;text-align:center;font-size:11px;line-height:1.8;color:var(--mute);background:var(--paper);border-top:1px solid var(--rule)}
+#legal{padding:18px 16px calc(66px + env(safe-area-inset-bottom));text-align:center;font-size:11px;line-height:1.8;color:var(--mute);background:var(--paper);border-top:1px solid var(--rule)}
 #legal a{color:inherit;margin:0 9px;white-space:nowrap}
 </style>
 </head>
@@ -368,7 +369,7 @@ v.addEventListener('click', onTap);
 sheet.addEventListener('click', onTap);
 
 var lastY = 0, dock = document.getElementById('dock');
-window.addEventListener('scroll', function(){ var y = window.scrollY; dock.classList.toggle('hide', y > lastY + 4 && y > 140); if (Math.abs(y - lastY) > 4) lastY = y; }, {passive: true});
+window.addEventListener('scroll', function(){ var y = window.scrollY; var end = y + innerHeight > document.documentElement.scrollHeight - 80; dock.classList.toggle('hide', !end && y > lastY + 4 && y > 140); if (Math.abs(y - lastY) > 4) lastY = y; }, {passive: true});
 
 go(/tariff/.test(location.hash) ? 'tariffs' : 'cover', {}, true);
 })();
