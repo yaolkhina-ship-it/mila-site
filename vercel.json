@@ -155,6 +155,13 @@
       "dest": "/club/$1"
     },
     {
+      "src": "/ai-preview-h(\\.html)?",
+      "status": 301,
+      "headers": {
+        "Location": "/ai"
+      }
+    },
+    {
       "src": "/",
       "dest": "/index.html"
     },
