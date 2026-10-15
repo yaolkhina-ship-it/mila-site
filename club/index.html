@@ -481,7 +481,8 @@ function load(){
   });
 }
 
-var V2 = /(^|[?&])v=(2|vogue)/.test(location.search) || !!(tg && tg.initDataUnsafe && /vogue|^2$/.test(tg.initDataUnsafe.start_param || ''));
+// Основной стиль «Vogue»; прежний «Ар-деко» по ?v=1
+var V2 = !(/(^|[?&])v=(1|deco)/.test(location.search) || !!(tg && tg.initDataUnsafe && /deco|^1$/.test(tg.initDataUnsafe.start_param || '')));
 if (V2) { document.body.classList.add('v2'); document.documentElement.style.background = '#fff'; }
 if (tg) {
   try {
