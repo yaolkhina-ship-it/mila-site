@@ -58,9 +58,10 @@ body.dark-top .top .ed{color:rgba(241,236,226,.6)}
 .cov.plain .sub{margin-top:0;font-family:var(--serif);font-size:24px;line-height:1.3;color:var(--paper)}
 .cov > .in > .cta:first-of-type{margin-top:30px}
 .au p{font-size:14px;line-height:1.7;color:var(--ink2);font-weight:300;margin:0 0 12px}
-.au .au-ph{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center top;margin:18px 0 22px;filter:grayscale(1) contrast(1.02)}
+.au .au-ph{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center top;margin:18px 0 22px;filter:none}
 .au .au-role{margin:0 0 18px}
 .au .cta{margin-top:26px}
+.pad.au{padding-bottom:26px}
 .cov .sub{margin-top:18px;font-size:14px;line-height:1.65;color:rgba(241,236,226,.78);font-weight:300;max-width:360px}
 .toc{margin-top:26px;border-top:1px solid rgba(241,236,226,.22)}
 .toc div{display:grid;grid-template-columns:44px 1fr;align-items:baseline;padding:12px 0;border-bottom:1px solid rgba(241,236,226,.22)}
@@ -181,7 +182,7 @@ body.dark-top .top .ed{color:rgba(241,236,226,.6)}
 .sheet .ev b{font-size:16px}
 .sheet .ev.cur b{color:var(--bronze)}
 
-#legal{padding:26px 16px 100px;text-align:center;font-size:11px;line-height:1.8;color:var(--mute);background:var(--paper);border-top:1px solid var(--rule)}
+#legal{padding:18px 16px 86px;text-align:center;font-size:11px;line-height:1.8;color:var(--mute);background:var(--paper);border-top:1px solid var(--rule)}
 #legal a{color:inherit;margin:0 9px;white-space:nowrap}
 </style>
 </head>
@@ -249,7 +250,7 @@ function crumbs(n){
 function sexLabel(){ return st.sex === 'm' ? 'для мужчин' : 'для женщин'; }
 
 function cover(){
-  show('<div class="cov"><img class="col" src="/guide/business-img/cover-tailoring.jpg" alt="" fetchpriority="high"><div class="in">' +
+  show('<div class="cov"><img class="col" src="/guide/business-img/cover-rings.jpg" alt="" fetchpriority="high"><div class="in">' +
     '<div class="ed2 cap"><span>Для бизнеса</span><span>Мила Ушакова</span></div>' +
     '<h1>Система<br><i>имиджа</i></h1>' +
     '<button class="cta" data-go="about">Далее</button></div></div>', true);
