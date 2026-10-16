@@ -5,10 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
 <title>Материалы клуба</title>
-<script src="https://telegram.org/js/telegram-web-app.js"></script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poiret+One&family=Forum&family=Prata&family=Tenor+Sans&display=swap" rel="stylesheet">
+<script src="/club/tg.js"></script>
+<link href="/club/fonts/fonts.css" rel="stylesheet">
 <style>
 :root{--bg:#0b0b0c;--ink:#e9dcc0;--hi:#f3e6c8;--gold:#c8a45c;--gold2:rgba(200,164,92,.5);--line:rgba(200,164,92,.2);--mute:#9d927c}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -169,8 +167,8 @@ body.v2,.v2 html{background:#fff}
 (function(){
 var tg = window.Telegram && Telegram.WebApp;
 var BOT = 'https://t.me/MilaUshakova_ClubBot';
-var API = 'https://mila-bot-production-14c0.up.railway.app/club/api/materials';
-var LOGIN_API = 'https://mila-bot-production-14c0.up.railway.app/club/api/login';
+var API = '/club/api/materials';
+var LOGIN_API = '/club/api/login';
 // Вход по логину и паролю: для тех, у кого не открывается Telegram
 var TOK_KEY = 'club_site_token';
 function tokGet(){ try { return localStorage.getItem(TOK_KEY) || ''; } catch(e){ return ''; } }

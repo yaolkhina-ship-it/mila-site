@@ -147,6 +147,10 @@
       "dest": "/portfolio/$1"
     },
     {
+      "src": "/club/api/(.*)",
+      "dest": "https://mila-bot-production-14c0.up.railway.app/club/api/$1"
+    },
+    {
       "src": "/club/?",
       "dest": "/club/index.html"
     },
