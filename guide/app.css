@@ -212,3 +212,9 @@ html.feed #ap{padding-bottom:0;}
 .m2 .pal-bd{flex:1;min-height:0;overflow-y:auto;}
 .m2 .pal-bd .a-bd{padding-top:0;}
 .a-hero .ov{padding-top:110px;background:linear-gradient(transparent,rgba(13,26,30,.55) 35%,rgba(13,26,30,.95));}
+/* яркая метка «новинка» */
+.a-new{display:inline-block;font-style:normal;font-family:-apple-system,'Helvetica Neue',Arial,sans-serif;font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#fff;background:#d6336c;padding:5px 9px;border-radius:12px;line-height:1;vertical-align:middle;margin-left:10px;box-shadow:0 2px 8px rgba(214,51,108,.35);animation:aNew 2.4s ease-in-out infinite;}
+.a-new.on-img{position:absolute;left:8px;top:8px;margin:0;}
+.a-tc .im{position:relative;}
+@keyframes aNew{0%,100%{transform:scale(1);}50%{transform:scale(1.07);}}
+@media (prefers-reduced-motion:reduce){.a-new{animation:none;}}

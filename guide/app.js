@@ -161,8 +161,8 @@
     h += '<div class="a-sec"><b>Цвета</b><a href="' + H + '#/colors">все</a></div><div class="a-sw">' + colors.map(function (c, i) {
       return '<a href="' + H + '#/color/' + i + '"><i style="background:' + (SW[c.name] || '#999') + '"></i>' + esc(c.name.replace(' и ', ' и ')) + '</a>';
     }).join('') + '</div>';
-    h += '<div class="a-sec"><b>Тренды</b><a href="' + H + '#/trends">все ' + trends.length + '</a></div><div class="a-row">' + trends.map(function (t) {
-      var L = looks[t.looks[0]]; return '<a class="a-tc" href="' + H + '#/trend/' + t.slug + '"><img loading="lazy" src="' + esc(L ? L.img : '') + '" alt=""><span>' + esc(t.name) + '</span></a>';
+    h += '<div class="a-sec"><b>Тренды' + (trends.some(function (t) { return t.isNew; }) ? '<em class="a-new">новинка</em>' : '') + '</b><a href="' + H + '#/trends">все ' + trends.length + '</a></div><div class="a-row">' + trends.map(function (t) {
+      var L = looks[t.looks[0]]; return '<a class="a-tc" href="' + H + '#/trend/' + t.slug + '"><div class="im"><img loading="lazy" src="' + esc(L ? L.img : '') + '" alt="">' + (t.isNew ? '<em class="a-new on-img">новинка</em>' : '') + '</div><span>' + esc(t.name) + '</span></a>';
     }).join('') + '</div>';
     h += '<div class="a-sec"><b>Инструменты</b></div><div class="a-tiles">' +
       '<a class="a-tile dk" href="' + H + '#/page/p_contrast"><span class="k" style="color:var(--gold)">Разбор по фото</span><span class="t">Контраст внешности</span></a>' +
