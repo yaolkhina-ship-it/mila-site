@@ -15,6 +15,7 @@
 
   /* у Системы <base href="/guide/">: ссылки вида "#/..." увели бы на /guide/, поэтому адрес страницы пишется целиком */
   var H = location.pathname + location.search;
+  var CLUB = 'https://t.me/MilaUshakova_ClubBot?start=club', CONTACT = 'https://t.me/__CONTACT__';
 
   /* ── Данные из страниц ── */
   var pages = $$('.app > .pg[id]');
@@ -72,7 +73,7 @@
     me: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.5-7 10-7 10z"/></svg>'
   };
   var tab = document.createElement('nav'); tab.className = 'a-tab'; tab.setAttribute('aria-label', 'Разделы Системы');
-  tab.innerHTML = '<a href="' + H + '#/" data-t="home">' + I.home + 'Главная</a><a href="' + H + '#/colors" data-t="colors">' + I.col + 'Цвета</a>' +
+  tab.innerHTML = '<a href="' + H + '#/" data-t="home">' + I.home + 'Главная</a><a href="' + H + '#/pal/all" data-t="pal">' + I.col + 'Палитры</a>' +
     '<a href="' + H + '#/trends" data-t="trends">' + I.tr + 'Тренды</a><a href="' + H + '#/search" data-t="search">' + I.se + 'Поиск</a>' +
     '<a href="' + H + '#/mine" data-t="mine">' + I.me + 'Мои<span class="badge" hidden></span></a>';
   document.body.appendChild(tab);
@@ -95,11 +96,67 @@
   var obr = function (n) { return plural(n, 'образ', 'образа', 'образов'); };
 
   /* ── Экраны ── */
+  var ART = [
+    ['vermeer', 'Девушка с жемчужной серёжкой', 'Ян Вермеер', 'около 1665'],
+    ['klimt', 'Портрет Адели Блох-Бауэр I', 'Густав Климт', '1907'],
+    ['monet', 'Прогулка. Женщина с зонтиком', 'Клод Моне', '1875'],
+    ['agnew', 'Леди Агнью', 'Джон Сингер Сарджент', '1892'],
+    ['madamex', 'Портрет мадам X', 'Джон Сингер Сарджент', '1884'],
+    ['fragonard', 'Качели', 'Жан Оноре Фрагонар', '1767'],
+    ['manet', 'Бар в «Фоли-Бержер»', 'Эдуар Мане', '1882'],
+    ['caillebotte', 'Парижская улица в дождливую погоду', 'Гюстав Кайботт', '1877'],
+    ['degas', 'Звезда', 'Эдгар Дега', 'около 1878'],
+    ['renoir', 'Бал в Мулен де ла Галетт', 'Пьер Огюст Ренуар', '1876'],
+    ['venus', 'Рождение Венеры', 'Сандро Боттичелли', 'около 1485']
+  ].map(function (a) { return { id: a[0], img: 'art/' + a[0] + '.jpg', name: a[1], who: a[2], year: a[3] }; });
+  var MONTHS = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
+  function dayNo(d) { return Math.floor((d - new Date(d.getFullYear(), 0, 0)) / 864e5); }
+  function artFor(off) { var d = new Date(); d.setDate(d.getDate() - off); return { a: ART[dayNo(d) % ART.length], d: d }; }
+  /* разбор палитры как в Color Room: цвета с кодами, тёплый/холодный, светлота, гармония */
+  function hsl(hex) {
+    var r = parseInt(hex.substr(1, 2), 16) / 255, g = parseInt(hex.substr(3, 2), 16) / 255, b = parseInt(hex.substr(5, 2), 16) / 255;
+    var mx = Math.max(r, g, b), mn = Math.min(r, g, b), l = (mx + mn) / 2, d = mx - mn, h = 0, sa = 0;
+    if (d) { sa = d / (1 - Math.abs(2 * l - 1)); h = mx === r ? ((g - b) / d) % 6 : mx === g ? (b - r) / d + 2 : (r - g) / d + 4; h = (h * 60 + 360) % 360; }
+    return { h: h, s: sa, l: l, warm: r - b };
+  }
+  function breakdown(list) {
+    if (!list.length) return '';
+    var cs = list.map(function (c) { var x = hsl(c.hex); x.p = c.p; x.hex = c.hex; return x; });
+    var tot = cs.reduce(function (a, c) { return a + c.p; }, 0) || 1;
+    var warm = cs.reduce(function (a, c) { return a + c.warm * c.p; }, 0) / tot, light = cs.reduce(function (a, c) { return a + c.l * c.p; }, 0) / tot;
+    var wPos = Math.max(4, Math.min(96, 50 + warm * 160)), lPos = Math.max(4, Math.min(96, light * 100));
+    var chroma = cs.filter(function (c) { return c.s > 0.22 && c.l > 0.12 && c.l < 0.92; }), harm;
+    if (!chroma.length) harm = 'Нейтральная палитра: глубину дают светлота и фактура, а не цвет.';
+    else {
+      var hs = chroma.map(function (c) { return c.h; }).sort(function (a, b) { return a - b; }), gap = 0;
+      for (var i = 0; i < hs.length; i++) gap = Math.max(gap, ((hs[(i + 1) % hs.length] - hs[i]) + 360) % 360 || (hs.length === 1 ? 360 : 0));
+      var span = 360 - gap;
+      harm = span < 35 ? 'Монохромная палитра: один оттенок в разной светлоте и насыщенности.' :
+        span < 100 ? 'Соседние оттенки: цвета стоят рядом на цветовом круге, поэтому палитра звучит мягко.' :
+        'Контраст оттенков: в палитре встречаются цвета с противоположных сторон круга, один из них работает акцентом.';
+    }
+    var temp = warm > 0.06 ? 'Тёплая' : warm < -0.06 ? 'Холодная' : 'Сбалансированная по температуре';
+    var val = light < 0.33 ? 'тёмная по светлоте' : light > 0.62 ? 'светлая по светлоте' : 'средняя по светлоте';
+    return '<div class="a-bd"><div class="a-bd-h">Цвет</div><div class="a-bd-sw">' + list.map(function (c) {
+        return '<div><i style="background:' + c.hex + '"></i><span>' + c.hex.toUpperCase() + '</span></div>'; }).join('') + '</div>' +
+      '<div class="a-bd-sc"><span>холодный</span><span>тёплый</span></div><div class="a-bd-bar t"><b style="left:' + wPos + '%"></b></div>' +
+      '<div class="a-bd-sc"><span>тёмный</span><span>светлый</span></div><div class="a-bd-bar l"><b style="left:' + lPos + '%"></b></div>' +
+      '<div class="a-bd-h2">Гармония</div><p>' + harm + '</p><div class="a-bd-h2">Температура и светлота</div><p>' + temp + ' палитра, ' + val + '.</p></div>';
+  }
+  function fillBreakdown(el, src) { if (el) swatches(src, function (list) { el.innerHTML = breakdown(list.filter(function (c) { return c.p >= 2; })); }); }
   var V = {};
+  function ctaBlock() {
+    return '<div class="a-cta"><div class="a-lbl" style="color:var(--gold)">Fashion-клуб «В моём стиле»</div>' +
+      '<div class="t">Новые образы, разборы и встречи с Милой каждую неделю</div>' +
+      '<a class="a-btn gold" href="' + CLUB + '" target="_blank" rel="noopener">Стать резидентом</a>' +
+      (CONTACT.indexOf('__') < 0 ? '<a class="a-btn line" href="' + CONTACT + '" target="_blank" rel="noopener">Сотрудничество</a>' : '') + '</div>';
+  }
   V.home = function () {
     var d = DROPS.oct, first = looks[d.ids[0]], last = looks[LS.get('app_last', '')];
     var h = top('', 'Система цветовых сочетаний');
-    if (first) h += '<a class="a-hero" href="' + H + '#/drop/oct"><img src="' + esc(first.pal || first.img) + '" alt=""><div class="ov"><div><div class="a-lbl" style="color:var(--gold)">Новый дроп · октябрь</div><div class="t">' + obr(d.ids.length) + '</div></div><span class="a-pill">Смотреть</span></div></a>';
+    var td = artFor(0).a;
+    h += '<a class="a-hero" href="' + H + '#/art/0"><img src="' + esc(td.img) + '" alt="' + esc(td.name) + '"><div class="ov"><div><div class="a-lbl" style="color:var(--gold)">Палитра дня · из искусства</div><div class="t">' + esc(td.name) + '</div><div style="font-size:12px;opacity:.75;margin-top:2px">' + esc(td.who) + ', ' + td.year + '</div><div class="sws hero-sw" data-src="' + esc(td.img) + '"></div></div><span class="a-pill">Разбор</span></div></a>';
+    if (first) h += '<a class="a-cont" href="' + H + '#/drop/oct"><img src="' + esc(first.pal || first.img) + '" alt="" style="object-fit:cover"><div style="flex:1"><div class="a-lbl">Новый дроп · октябрь</div><div style="font-size:15px;margin-top:3px">' + obr(d.ids.length) + '</div></div><span style="color:var(--gold2)">›</span></a>';
     if (last) h += '<a class="a-cont" href="' + H + '#/look/' + last.id + '"><img src="' + esc(last.img) + '" alt=""><div style="flex:1"><div class="a-lbl">Продолжить</div><div style="font-size:15px;margin-top:3px">образ ' + esc(last.name) + '</div></div><span style="color:var(--gold2)">›</span></a>';
     h += '<div class="a-sec"><b>Цвета</b><a href="' + H + '#/colors">все</a></div><div class="a-sw">' + colors.map(function (c, i) {
       return '<a href="' + H + '#/color/' + i + '"><i style="background:' + (SW[c.name] || '#999') + '"></i>' + esc(c.name.replace(' и ', ' и ')) + '</a>';
@@ -117,7 +174,35 @@
       '<div class="a-list a-chap">' + [['p2', 'О Системе'], ['p3', 'Как пользоваться'], ['p_bonus', 'Бонус: промокоды партнёров'], ['p6', 'Рекомендации на сезон']].map(function (r) {
         return '<a href="' + H + '#/page/' + r[0] + '"><span class="t">' + r[1] + '</span><span class="n">›</span></a>'; }).join('') +
       '<a href="' + H + '#/more"><span class="t">Промо от брендов и категории</span><span class="n">›</span></a></div>';
+    h += ctaBlock();
     return h;
+  };
+  /* лента вдохновения: сначала палитра на весь экран, из неё переход к образу */
+  function palList(f) {
+    var ids = order.filter(function (id) { return looks[id].pal; });
+    if (f === 'new') return ids.filter(function (id) { return /drop_/.test(id); });
+    if (f != null && f !== '' && f !== 'all' && colors[+f]) return colors[+f].looks.filter(function (id) { return looks[id].pal; });
+    return ids;
+  }
+  V.pal = function (f) {
+    f = f || 'all';
+    var chips = [['all', 'Все'], ['new', 'Новинки']].concat(colors.map(function (c, i) { return [String(i), c.name]; }));
+    return '<div class="a-feed-chips">' + chips.map(function (c) { return '<a href="' + H + '#/pal/' + c[0] + '"' + (c[0] === f ? ' class="on"' : '') + '>' + esc(c[1]) + '</a>'; }).join('') + '</div>' +
+      '<div class="a-feed">' + palList(f).map(function (id) { var L = looks[id];
+        return '<section class="a-slide"><img loading="lazy" src="' + esc(L.pal) + '" alt="Палитра ' + esc(L.name) + '">' +
+          '<div class="cap"><div><div class="a-lbl" style="color:var(--gold)">' + (L.isNew ? 'Новинка · октябрь' : (L.color != null ? esc(colors[L.color].name) : 'Дроп сентября')) + '</div><div class="t">' + esc(L.name) + '</div><div class="sws dots" data-src="' + esc(L.pal) + '"></div></div>' +
+          '<a class="a-btn gold go" href="' + H + '#/pal/' + f + '/look/' + id + '">Образ ›</a></div></section>'; }).join('') + '</div>';
+  };
+  V.art = function (off) {
+    off = Math.max(0, Math.min(6, +off || 0)); var x = artFor(off), a = x.a;
+    var tabs = '<div class="a-art-tabs"><a href="' + H + '#/art/0"' + (off === 0 ? ' class="on"' : '') + '>Сегодня</a><a href="' + H + '#/art/1"' + (off > 0 ? ' class="on"' : '') + '>Предыдущие дни</a></div>';
+    if (off > 0 && false) return '';
+    var prev = [1, 2, 3].map(function (k) { var y = artFor(k);
+      return '<a class="a-art-day" href="' + H + '#/art/' + k + '"><img loading="lazy" src="' + esc(y.a.img) + '" alt=""><div><div class="a-lbl">' + y.d.getDate() + ' ' + MONTHS[y.d.getMonth()] + '</div><div class="t">' + esc(y.a.name) + '</div><div class="s">' + esc(y.a.who) + ', ' + y.a.year + '</div></div></a>'; }).join('');
+    return top('#/', 'Палитра дня') + tabs + '<img class="a-art-img" src="' + esc(a.img) + '" alt="' + esc(a.name) + '">' +
+      '<div class="a-art-cap"><div class="t">' + esc(a.name) + '</div><div class="s">' + esc(a.who) + ', ' + a.year + '</div><div class="a-lbl" style="margin-top:6px">' + x.d.getDate() + ' ' + MONTHS[x.d.getMonth()] + '</div></div>' +
+      '<div id="aBd" data-src="' + esc(a.img) + '"></div>' +
+      '<div class="a-sec"><b>Предыдущие дни</b></div><div class="a-art-prev">' + prev + '</div>';
   };
   V.colors = function () {
     return top('', 'Цвета') + '<h1 class="a-h">Цветовые сочетания</h1><div class="a-sub">9 цветов · ' + obr(colors.reduce(function (s, c) { return s + c.looks.length; }, 0)) + '</div>' +
@@ -170,6 +255,7 @@
     var row = function (href, t, n) { return '<a href="' + (href.charAt(0) === '#' ? H + href : href) + '"><span class="t">' + esc(t) + '</span><span class="n">' + (n || '') + ' ›</span></a>'; };
     return top('#/', 'Ещё') + '<h1 class="a-h">Ещё</h1>' +
       '<div class="a-list">' + PAGES.map(function (p) { return row('#/page/' + p[0], p[1]); }).join('') + '</div>' +
+      ctaBlock() +
       '<div class="a-sec"><b>Промо от брендов</b></div><div class="a-list">' + promos.map(function (p) { return row('#/page/' + p.id, navText[p.id] || p.id); }).join('') + '</div>' +
       '<div class="a-sec"><b>Категории</b></div><div class="a-list">' + cats.map(function (p) { return row('#/page/' + p.id, navText[p.id] || p.id); }).join('') + '</div>' +
       '<div class="a-list" style="margin-top:20px">' + row('https://t.me/MilaUshakova_ClubBot?start=support', 'Поддержка в Telegram') + row('/oferta', 'Договор оферты') + row('/privacy', 'Политика конфиденциальности') + '</div>' +
@@ -190,6 +276,7 @@
     if (m[1] === 'color' && colors[+m[2]]) return colors[+m[2]].looks;
     if (m[1] === 'trend') { var t = trends.filter(function (x) { return x.slug === m[2]; })[0]; if (t) return t.looks; }
     if (m[1] === 'drop' && DROPS[m[2]]) return DROPS[m[2]].ids;
+    if (m[1] === 'pal') return palList(m[2]);
     if (m[1] === 'mine') return favs();
     if (m[1] === 'search') return searchIds.length ? searchIds : order;
     return order;
@@ -235,7 +322,7 @@
   window.addEventListener('resize', fitLook);
   function openSheet(id, base) {
     var L = looks[id]; if (!L) return closeSheet();
-    if (sheetId !== id) side = L.pal ? 'pal' : 'look';
+    if (sheetId !== id) side = L.pal && base.indexOf('/pal') !== 0 ? 'pal' : 'look';
     ctxIds = listFor(base); ctxBase = base; sheetId = id; LS.set('app_last', id);
     var ix = ctxIds.indexOf(id), n = ctxIds.length, fav = favs().indexOf(id) >= 0;
     var wrap = L.pg.querySelector('.look-collage-wrap').cloneNode(true), links = L.pg.querySelector('.look-links').cloneNode(true);
@@ -248,7 +335,7 @@
     var body = '';
     if (mode === '1') body = '<div class="m1-pal">' + (L.pal ? '<img src="' + esc(L.pal) + '" alt="">' : '') + '<div class="sws"></div></div><div class="stage"></div><div class="items row"></div>';
     if (mode === '2') body = '<div class="seg"><button type="button" data-side="pal"' + (side === 'pal' ? ' class="on"' : '') + '>Палитра</button><button type="button" data-side="look"' + (side === 'look' ? ' class="on"' : '') + '>Образ</button></div>' +
-      (side === 'pal' ? '<div class="stage pal-side">' + (L.pal ? '<img src="' + esc(L.pal) + '" alt="">' : '') + '<button type="button" class="flip" data-side="look">Смотреть образ ›</button></div><div class="sws big"></div>' : '<div class="stage"></div><div class="items row"></div>');
+      (side === 'pal' ? '<div class="stage pal-side">' + (L.pal ? '<img src="' + esc(L.pal) + '" alt="">' : '') + '<button type="button" class="flip" data-side="look">Смотреть образ ›</button></div><div class="pal-bd"></div>' : '<div class="stage"></div><div class="items row"></div>');
     if (mode === '3') body = '<div class="stage"><button type="button" class="m3-pal" aria-label="Открыть палитру">' + (L.pal ? '<img src="' + esc(L.pal) + '" alt="">' : '') + '</button><div class="m3-full">' + (L.pal ? '<img src="' + esc(L.pal) + '" alt="">' : '') + '</div></div>' +
       '<div class="m3-row"><div class="sws dots"></div><button type="button" class="m3-items">Вещи образа · ' + L.items.length + '</button></div><div class="drawer"><div class="dr-h"><b>Вещи образа</b><button type="button" class="dr-x" aria-label="Закрыть">✕</button></div><div class="items col"></div></div>';
     sheet.innerHTML = '<div class="wrap m' + mode + '">' + bar + '<div class="sw-in">' + body + '</div>' + nav + '</div>';
@@ -256,6 +343,7 @@
     /* карточка вещи из ux.js ищет вокруг точки контейнер .in: даём его, иначе нажатие на точку ничего не открывает */
     if (st && !st.classList.contains('pal-side')) { var box = document.createElement('div'); box.className = 'in a-in'; box.appendChild(wrap); st.insertBefore(box, st.firstChild); }
     var it = $('.items', sheet); if (it) it.appendChild(links);
+    fillBreakdown($('.pal-bd', sheet), L.pal);
     var sw = $('.sws', sheet);
     if (sw) swatches(L.pal, function (list) {
       sw.innerHTML = list.filter(function (c) { return c.p >= 2; }).map(function (c) { return '<i style="background:' + c.hex + (sw.classList.contains('big') ? ';flex:1' : '') + '">' + '' + '</i>'; }).join('');
@@ -312,13 +400,27 @@
         if (pg) { var ph = document.createComment('pg'); pg.parentNode.insertBefore(ph, pg); $('#aPg').appendChild(pg); moved = { pg: pg, ph: ph }; }
         var bk = $('.a-back', av); if (bk && bk.getAttribute('href') === 'back') { if (!opened) { bk.textContent = 'На главную ›'; } bk.addEventListener('click', function (e) { e.preventDefault(); if (opened) history.back(); else location.hash = '#/'; }); }
       }
+      document.documentElement.classList.toggle('feed', v === 'pal');
+      $$('.hero-sw', av).forEach(function (el) { swatches(el.getAttribute('data-src'), function (list) { el.innerHTML = list.filter(function (c) { return c.p >= 2; }).map(function (c) { return '<i style="background:' + c.hex + '"></i>'; }).join(''); }); });
+      var bd = $('#aBd', av); if (bd) fillBreakdown(bd, bd.getAttribute('data-src'));
+      if (v === 'pal') {
+        var feed = $('.a-feed', av), seen = function () {
+          $$('.sws[data-src]', feed).forEach(function (el) {
+            var r = el.getBoundingClientRect(); if (r.top > window.innerHeight * 2 || r.bottom < -200) return;
+            var src = el.getAttribute('data-src'); el.removeAttribute('data-src');
+            swatches(src, function (list) { el.innerHTML = list.filter(function (c) { return c.p >= 2; }).map(function (c) { return '<i style="background:' + c.hex + '"></i>'; }).join(''); });
+          });
+        };
+        feed.addEventListener('scroll', seen, { passive: true }); setTimeout(seen, 50);
+        var oc = $('.a-feed-chips .on', av); if (oc) oc.scrollIntoView({ inline: 'center', block: 'nearest' });
+      }
       if (v === 'search') {
         var inp = $('.a-search input', av);
         inp.addEventListener('input', function () { runSearch(inp.value); });
         $$('.a-hint button', av).forEach(function (b) { b.addEventListener('click', function () { inp.value = b.textContent; runSearch(b.textContent); }); });
         if (lastQ) runSearch(lastQ);
       }
-      var tk = { home: 'home', colors: 'colors', color: 'colors', trends: 'trends', trend: 'trends', search: 'search', mine: 'mine' }[v] || '';
+      var tk = { home: 'home', pal: 'pal', colors: 'pal', color: 'pal', trends: 'trends', trend: 'trends', search: 'search', mine: 'mine' }[v] || '';
       $$('a', tab).forEach(function (a) { a.classList.toggle('on', a.dataset.t === tk); });
       curBase = base;
       window.scrollTo(0, scrolls[base] || 0);

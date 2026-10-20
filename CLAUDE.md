@@ -40,6 +40,9 @@ A paid product: a mobile page of full-screen snap slides (`.pg`). `scrollToEl(id
 - Look card «Две стороны»: Палитра (photo + swatches computed in the browser) / Образ (cloned collage inside a `.in` box so ux.js item cards work, chips row), round ‹ › and colour/trend tags, sideways swipe.
 - `<base href="/guide/">`: every in-app href is prefixed with `location.pathname`, or `#/x` would leave the page. Old links like `/guide#p_look_4` are translated on load. `window.scrollToEl` is overridden to route.
 - First visit shows «О Системе» (p2) once (`sys_app_intro`).
+- «Палитры» tab: full-screen palette feed `#/pal/<all|new|N>`; «Образ ›» opens the card on the look side.
+- Home hero «Палитра дня из искусства»: paintings in `guide/art/` (ART list in app.js, rotates by day of year), `#/art/<days back>` = breakdown (hex swatches, cool/warm, dark/light, rule-based harmony text, previous 3 days). The card's palette side uses the same breakdown.
+- CTA block on home and «Ещё»: «Стать резидентом» → bot `?start=club`; «Сотрудничество» is hidden until `CONTACT` in app.js gets Yana's Telegram link (placeholder `__CONTACT__`).
 - Trends (4, Mila's picks): Атласная сумка, Юбки в стиле Prada, Короткий жакет, Необычные подвески; pages `p_trend_<slug>`, nav section 04.
 
 ## Ideas in progress
