@@ -91,7 +91,7 @@
       "dest": "/guide.html"
     },
     {
-      "src": "/guide",
+      "src": "/guide/?",
       "dest": "/guide/gaidosen.html"
     },
     {
