@@ -386,7 +386,7 @@ body{background:#0D1A1E;height:100%;}
 /* ТРЕНДЫ */
 .tr-index{margin:-4px 0 8px;padding:12px 0 0 24px;}
 .tr-index .tr-item{font-size:12px;letter-spacing:0.06em;text-transform:uppercase;}
-.tr-new::after{content:'новое';font-size:7px;letter-spacing:0.08em;text-transform:uppercase;vertical-align:super;margin-left:3px;color:var(--gold);}
+.tr-new::after{content:'новинка';font-size:7px;letter-spacing:0.08em;text-transform:uppercase;vertical-align:super;margin-left:3px;color:var(--gold);}
 .tr-pg .tr-new::after{font-size:9px;color:var(--gold2);}
 .tr-count{font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--deep);opacity:.55;margin:-12px 0 16px;font-family:var(--f);}
 .tr-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
@@ -525,10 +525,10 @@ body{background:#0D1A1E;height:100%;}
   </div>
   <div class="ni" onclick="scrollToEl('p_trend_satin')"><span class="ni-n">04</span><div class="ni-body"><div class="ni-t">Тренды</div></div></div>
   <div class="tr-index">
-    <div class="tone-item tr-item" onclick="scrollToEl('p_trend_satin')">Атласная сумка</div>
-    <div class="tone-item tr-item" onclick="scrollToEl('p_trend_prada')">Юбки в стиле Prada</div>
-    <div class="tone-item tr-item" onclick="scrollToEl('p_trend_cropped')">Короткий жакет</div>
-    <div class="tone-item tr-item" onclick="scrollToEl('p_trend_pendant')">Необычные подвески</div>
+    <div class="tone-item tr-item" onclick="scrollToEl('p_trend_satin')">Атласная сумка<span class="tr-new"></span></div>
+    <div class="tone-item tr-item" onclick="scrollToEl('p_trend_prada')">Юбки в стиле Prada<span class="tr-new"></span></div>
+    <div class="tone-item tr-item" onclick="scrollToEl('p_trend_cropped')">Короткий жакет<span class="tr-new"></span></div>
+    <div class="tone-item tr-item" onclick="scrollToEl('p_trend_pendant')">Необычные подвески<span class="tr-new"></span></div>
   </div>
   <div class="ni" onclick="scrollToEl('p_promo_povod')"><span class="ni-n">05</span><div class="ni-body"><div class="ni-t">Промо от брендов<svg width="14" height="14" viewBox="0 0 24 24" style="margin-left:8px;vertical-align:-2px;" fill="#DC2626" stroke="#DC2626" stroke-width="0.5"><path d="M20.59 13.41L13.42 20.58a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><circle cx="7" cy="7" r="1.6" fill="#fff" stroke="none"/></svg></div></div></div>
   <div class="tone-index">
@@ -3195,7 +3195,7 @@ body{background:#0D1A1E;height:100%;}
   <div class="pg snd tr-pg" id="p_trend_satin">
     <div class="in" style="background:var(--sand);">
       <div class="lbl">Тренды · 01 / 04</div>
-      <div class="ins-h">Атласная сумка</div>
+      <div class="ins-h">Атласная сумка<span class="tr-new"></span></div>
       <div class="tr-count">6 образов</div>
       <div class="tr-grid">
         <div class="tr-look is-new" onclick="scrollToEl('p_look_drop_oct1')"><img loading="lazy" src="looks/63_pencils.jpg" alt=""><span>карандаши</span></div>
@@ -3211,7 +3211,7 @@ body{background:#0D1A1E;height:100%;}
   <div class="pg snd tr-pg" id="p_trend_prada">
     <div class="in" style="background:var(--sand);">
       <div class="lbl">Тренды · 02 / 04</div>
-      <div class="ins-h">Юбки в стиле Prada</div>
+      <div class="ins-h">Юбки в стиле Prada<span class="tr-new"></span></div>
       <div class="tr-count">8 образов</div>
       <div class="tr-grid">
         <div class="tr-look is-new" onclick="scrollToEl('p_look_drop_oct4')"><img loading="lazy" src="looks/66_dress.jpg" alt=""><span>платье</span></div>
@@ -3229,7 +3229,7 @@ body{background:#0D1A1E;height:100%;}
   <div class="pg snd tr-pg" id="p_trend_cropped">
     <div class="in" style="background:var(--sand);">
       <div class="lbl">Тренды · 03 / 04</div>
-      <div class="ins-h">Короткий жакет</div>
+      <div class="ins-h">Короткий жакет<span class="tr-new"></span></div>
       <div class="tr-count">8 образов</div>
       <div class="tr-grid">
         <div class="tr-look" onclick="scrollToEl('p_look_drop_new2')"><img loading="lazy" src="looks/59_book.jpg" alt=""><span>книга</span></div>
@@ -3247,7 +3247,7 @@ body{background:#0D1A1E;height:100%;}
   <div class="pg snd tr-pg" id="p_trend_pendant">
     <div class="in" style="background:var(--sand);">
       <div class="lbl">Тренды · 04 / 04</div>
-      <div class="ins-h">Необычные подвески</div>
+      <div class="ins-h">Необычные подвески<span class="tr-new"></span></div>
       <div class="tr-count">6 образов</div>
       <div class="tr-grid">
         <div class="tr-look is-new" onclick="scrollToEl('p_look_drop_oct2')"><img loading="lazy" src="looks/64_curtain.jpg" alt=""><span>занавес</span></div>
