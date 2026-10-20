@@ -15,7 +15,7 @@
 
   /* у Системы <base href="/guide/">: ссылки вида "#/..." увели бы на /guide/, поэтому адрес страницы пишется целиком */
   var H = location.pathname + location.search;
-  var CLUB = 'https://t.me/MilaUshakova_ClubBot?start=club', CONTACT = 'https://t.me/__CONTACT__';
+  var CLUB = 'https://t.me/MilaUshakova_ClubBot?start=club', CONTACT = 'https://t.me/YanaOlkhina';
 
   /* ── Данные из страниц ── */
   var pages = $$('.app > .pg[id]');
