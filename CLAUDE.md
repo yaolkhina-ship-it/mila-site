@@ -33,6 +33,15 @@ A paid product: a mobile page of full-screen snap slides (`.pg`). `scrollToEl(id
 - Link check: `node scripts/check-links.mjs` (dead = 404/410; Farfetch, Frankie, Vestiaire, Sézane, H&M and Mango block robots). A weekly GitHub Action `.github/workflows/check-links.yml` sends to Telegram when the repo secrets `TG_TOKEN`/`TG_CHAT` are set.
 - Deploy: Yana wants System changes pushed right away after a mobile-emulation test (no «деплой» round-trip for the guide).
 
+### App mode (20.10.2026): the System opens as an app, not a feed
+- `guide/app.js` + `guide/app.css` (bump `?v=`), loaded after ux.js. They hide the slide feed and build screens from the same DOM:
+  home, colours (groups from the p4 tone-index start ids), trends (`.tr-pg`), drops (`p_look_drop_oct*` = October, other `p_look_drop_*` = September), search, «Мои» (`sys_favs`), «Ещё».
+- Hash routes: `#/`, `#/colors`, `#/color/N`, `#/trends`, `#/trend/<slug>`, `#/drop/oct|sep`, `#/search`, `#/mine`, `#/more`, `#/page/<pg id>` (the original page is moved into the screen and back). `/look/<look id>` on any route opens the look card.
+- Look card «Две стороны»: Палитра (photo + swatches computed in the browser) / Образ (cloned collage inside a `.in` box so ux.js item cards work, chips row), round ‹ › and colour/trend tags, sideways swipe.
+- `<base href="/guide/">`: every in-app href is prefixed with `location.pathname`, or `#/x` would leave the page. Old links like `/guide#p_look_4` are translated on load. `window.scrollToEl` is overridden to route.
+- First visit shows «О Системе» (p2) once (`sys_app_intro`).
+- Trends (4, Mila's picks): Атласная сумка, Юбки в стиле Prada, Короткий жакет, Необычные подвески; pages `p_trend_<slug>`, nav section 04.
+
 ## Ideas in progress
 - A Sanzo Wada colour dictionary tool: the user picks the colour of their item, sees the nearest Wada colour, then his combinations as book spreads with the 70/20/10 rule. The data comes from sanzo-wada.dmbk.io (159 colours, 348 combinations).
 - The club page «В моём стиле» (based on /uverennost) needs residents' reviews, which are still pending.
