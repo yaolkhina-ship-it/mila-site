@@ -43,6 +43,8 @@ A paid product: a mobile page of full-screen snap slides (`.pg`). `scrollToEl(id
 - «Палитры» tab: full-screen palette feed `#/pal/<all|new|N>`; «Образ ›» opens the card on the look side.
 - Home hero «Палитра дня из искусства»: paintings in `guide/art/` (ART list in app.js, rotates by day of year), `#/art/<days back>` = breakdown (hex swatches, cool/warm, dark/light, rule-based harmony text, previous 3 days). The card's palette side uses the same breakdown.
 - CTA block on home and «Ещё»: «Стать резидентом» → bot `?start=club`; «Сотрудничество» → t.me/YanaOlkhina (`CONTACT` in app.js).
+- Design rules from Yana (20.10): keep the System colours and PT Serif, change navigation only; accent badges gold, never pink; «новинка» only next to a section heading, not on every card; palette first, then the look. When a layout misses, show 2–3 switchable variants and let her pick.
+- Edit a trend: change the `.tr-look` cells of its `p_trend_<slug>` page in gaidosen.html (and the nav list in p4); app.js reads them.
 - Trends (4, Mila's picks): Атласная сумка, Юбки в стиле Prada, Короткий жакет, Необычные подвески; pages `p_trend_<slug>`, nav section 04.
 
 ## Ideas in progress
