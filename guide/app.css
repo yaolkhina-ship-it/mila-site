@@ -218,3 +218,4 @@ html.feed #ap{padding-bottom:0;}
 .a-tc .im{position:relative;}
 @keyframes aNew{0%,100%{transform:scale(1);}50%{transform:scale(1.07);}}
 @media (prefers-reduced-motion:reduce){.a-new{animation:none;}}
+.a-new{background:var(--gold);color:#0D1A1E;box-shadow:0 2px 8px rgba(201,169,110,.45);}
