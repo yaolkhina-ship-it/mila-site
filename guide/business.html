@@ -309,11 +309,13 @@ body.on-cover .view{padding-bottom:0}
 .stp .sx button{font-family:var(--serif);font-size:15px;letter-spacing:.08em;color:var(--mute);padding:4px 2px;border-bottom:1px solid transparent}
 .stp .sx button.on{color:var(--ink);border-bottom-color:var(--bronze)}
 .stp .sx i{font-style:normal;color:var(--rule)}
+.top .logo{color:inherit;cursor:pointer}
+.who2 button.on{outline:2px solid var(--bronze);outline-offset:4px}
 </style>
 </head>
 <body>
 <div class="app">
-  <div class="top"><div class="logo">Mila Ushakova</div><a class="sys" id="sys" href="/guide" style="display:none">← Система</a><span class="ed" id="ed">Система имиджа</span><button class="tmenu" id="tMenu" type="button">Меню</button></div>
+  <div class="top"><button class="logo" id="tLogo" type="button" aria-label="На обложку">Mila Ushakova</button><a class="sys" id="sys" href="/guide" style="display:none">← Система</a><span class="ed" id="ed">Система имиджа</span><button class="tmenu" id="tMenu" type="button">Меню</button></div>
   <div id="v"></div>
   <nav class="dock" id="dock" aria-label="Навигация">
     <button class="d-back off" id="dBack" type="button"><span class="ic">&larr;</span>Назад</button>
@@ -433,15 +435,14 @@ function intro(){
     '<div class="ed2 cap"><span>Система имиджа</span><span>Мужчины и женщины</span></div>' +
     '<div class="sub">Инструмент управления впечатлением в профессиональной и деловой среде. Четыре шага перед любой встречей.</div>' +
     '<div class="toc">' + STEPS.map(function(t, i){ return '<div><span>' + nn(i + 1) + '</span><b>' + t + '</b></div>'; }).join('') + '</div>' +
-    '<div class="seg"><button data-sex="w"' + (st.sex !== 'm' ? ' class="on"' : '') + '>Для женщин</button><button data-sex="m"' + (st.sex === 'm' ? ' class="on"' : '') + '>Для мужчин</button></div>' +
     '<button class="cta" data-go="1">Начать</button>' +
     '<button class="ghost" data-go="tariffs"><u>Тарифы для компаний</u></button></div></div>', true);
 }
 function step0(){
   show('<div class="pad">' + '<div class="stp"><span></span><span class="n">00 / ' + nn(STEPS.length) + '</span></div>' +
     '<div class="h2">Для кого <i class="br">образ</i></div><div class="lede">Образы, детали и примеры в Системе разные для женщин и мужчин.</div>' +
-    '<div class="who2"><button data-sex="w" data-next="1"><img src="business-img/ev-boss-w.jpg" alt=""><b>Женщина</b></button>' +
-    '<button data-sex="m" data-next="1"><img src="business-img/ev-boss-m.jpg" alt=""><b>Мужчина</b></button></div></div>');
+    '<div class="who2"><button data-sex="w" data-next="1"' + (st.sex === 'w' ? ' class="on"' : '') + '><img src="business-img/ev-boss-w.jpg" alt=""><b>Женщина</b></button>' +
+    '<button data-sex="m" data-next="1"' + (st.sex === 'm' ? ' class="on"' : '') + '><img src="business-img/ev-boss-m.jpg" alt=""><b>Мужчина</b></button></div></div>');
 }
 function step1(){
   var t = st.env || 0;
@@ -529,6 +530,7 @@ function openMenu(){
 }
 function closeMenu(){ document.body.classList.remove('menu-on'); }
 document.getElementById('tMenu').addEventListener('click', function(){ openMenu(); });
+document.getElementById('tLogo').addEventListener('click', function(){ go('cover', {}); });
 document.getElementById('dMenu').addEventListener('click', function(){ document.body.classList.contains('menu-on') && sheet.dataset.k === 'menu' ? closeMenu() : openMenu(); });
 document.getElementById('sheetBg').addEventListener('click', closeMenu);
 document.getElementById('dDocs').addEventListener('click', function(){
@@ -554,7 +556,7 @@ function onTap(e){
   if (b.dataset.go === 'about') return go('about', {});
   if (b.dataset.go === 'intro') return go('intro', {});
   if (b.dataset.go === 'tariffs') return go('tariffs', {});
-  if (b.dataset.go === '1') return go(st.sex ? 's1' : 's0', {});
+  if (b.dataset.go === '1') return go(st.view === 'cover' || st.view === 'intro' || !st.sex ? 's0' : 's1', {});
   if (b.dataset.go === '2') return go(st.sit ? 's2' : 's1', {});
   if (b.dataset.go === '3') return go(st.goal ? 's3' : 's2', {});
   if (b.dataset.go === '4') return go('s4', {tab: 0});
