@@ -5,20 +5,21 @@
 <base href="/guide/">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
-<meta name="theme-color" content="#1C1B1A">
+<meta name="theme-color" content="#111111">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Система имиджа">
 <link rel="apple-touch-icon" href="/guide/apple-icon.png">
 <title>Система имиджа для бизнеса · Mila Ushakova</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-/* Executive edition: слоновая кость, графит, бронзовая линия. Как годовой отчёт частного банка. */
+/* 21.10: чёрный, белый, золото; заголовки узкими заглавными (Oswald), как чёрно-белый манифест Saint Laurent.
+   Продукт и визуал передают четыре качества: интеллект, точность, влияние, культурная насмотренность. */
 :root{
-  --paper:#F1ECE2;--paper2:#E9E3D7;--ink:#1C1B1A;--ink2:#34322F;--mute:#86817A;
-  --bronze:#A88B5C;--bronze2:rgba(168,139,92,.5);--rule:rgba(28,27,26,.12);--rule-d:rgba(241,236,226,.16);
-  --serif:'Cormorant Garamond',Georgia,serif;--sans:'Jost',-apple-system,'Helvetica Neue',Arial,sans-serif;
+  --paper:#F4F2EE;--paper2:#E8E5DF;--ink:#111111;--ink2:#2B2B2B;--mute:#7E7B76;
+  --bronze:#B08F57;--bronze2:rgba(176,143,87,.55);--rule:rgba(17,17,17,.12);--rule-d:rgba(244,242,238,.16);
+  --serif:'Oswald','Arial Narrow',sans-serif;--sans:'Jost',-apple-system,'Helvetica Neue',Arial,sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html,body{background:var(--ink)}
@@ -31,14 +32,14 @@ a{color:inherit}
 .br{color:var(--bronze)}
 
 /* верхняя плашка */
-.top{position:sticky;top:0;z-index:40;display:flex;justify-content:space-between;align-items:center;height:52px;padding:0 30px;background:rgba(241,236,226,.92);
+.top{position:sticky;top:0;z-index:40;display:flex;justify-content:space-between;align-items:center;height:52px;padding:0 30px;background:rgba(244,242,238,.92);
   -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--rule)}
 .top .logo{font-family:var(--serif);font-size:16px;letter-spacing:.02em;white-space:nowrap}
 .top .logo i{color:var(--bronze)}
 .top .ed{font-size:9px;font-weight:400;letter-spacing:.28em;text-transform:uppercase;color:var(--mute)}
 .top a.sys{font-size:9px;font-weight:400;letter-spacing:.24em;text-transform:uppercase;color:var(--bronze);text-decoration:none}
 body.dark-top .top{background:var(--ink);border-bottom-color:var(--rule-d);color:var(--paper)}
-body.dark-top .top .ed{color:rgba(241,236,226,.6)}
+body.dark-top .top .ed{color:rgba(244,242,238,.6)}
 
 .view{animation:in .4s cubic-bezier(.2,.7,.2,1)}
 @keyframes in{from{opacity:0;transform:translateY(10px)}}
@@ -47,11 +48,11 @@ body.dark-top .top .ed{color:rgba(241,236,226,.6)}
 /* обложка */
 .cov{position:relative;min-height:calc(100svh - 52px);background:var(--ink);color:var(--paper);display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden}
 .cov img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 22%;filter:grayscale(1) contrast(1.02) brightness(.8)}
-.cov:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(17,19,21,0) 22%,rgba(17,19,21,.55) 52%,rgba(17,19,21,.97) 80%)}
+.cov:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(17,17,17,0) 22%,rgba(17,17,17,.55) 52%,rgba(17,17,17,.97) 80%)}
 .cov .in{position:relative;z-index:1;padding:0 30px 96px}
-.cov .ed2{display:flex;justify-content:space-between;border-top:1px solid rgba(241,236,226,.3);padding-top:12px;margin-bottom:26px;color:rgba(241,236,226,.7)}
+.cov .ed2{display:flex;justify-content:space-between;border-top:1px solid rgba(244,242,238,.3);padding-top:12px;margin-bottom:26px;color:rgba(244,242,238,.7)}
 .cov h1{font-family:var(--serif);font-weight:300;font-size:68px;line-height:.92;letter-spacing:-.01em}
-.cov h1 i{color:#C4A877;font-weight:300}
+.cov h1 i{color:#C9A96A;font-weight:300}
 .cov img.col{filter:none;height:calc(100% - 290px);object-position:60% 90%;-webkit-mask-image:linear-gradient(180deg,#000 70%,transparent);mask-image:linear-gradient(180deg,#000 70%,transparent)}
 .cov.plain{justify-content:center}
 .cov.plain .in{padding-top:40px}
@@ -62,20 +63,20 @@ body.dark-top .top .ed{color:rgba(241,236,226,.6)}
 .au .au-role{margin:0 0 18px}
 .au .cta{margin-top:26px}
 .pad.au{padding-bottom:26px}
-.cov .sub{margin-top:18px;font-size:14px;line-height:1.65;color:rgba(241,236,226,.78);font-weight:300;max-width:360px}
-.toc{margin-top:26px;border-top:1px solid rgba(241,236,226,.22)}
-.toc div{display:grid;grid-template-columns:44px 1fr;align-items:baseline;padding:12px 0;border-bottom:1px solid rgba(241,236,226,.22)}
-.toc span{font-family:var(--serif);font-style:italic;color:#C4A877;font-size:15px}
+.cov .sub{margin-top:18px;font-size:14px;line-height:1.65;color:rgba(244,242,238,.78);font-weight:300;max-width:360px}
+.toc{margin-top:26px;border-top:1px solid rgba(244,242,238,.22)}
+.toc div{display:grid;grid-template-columns:44px 1fr;align-items:baseline;padding:12px 0;border-bottom:1px solid rgba(244,242,238,.22)}
+.toc span{font-family:var(--serif);font-style:italic;color:#C9A96A;font-size:15px}
 .toc b{font-family:var(--serif);font-weight:300;font-size:23px}
-.seg{display:grid;grid-template-columns:1fr 1fr;margin-top:24px;border:1px solid rgba(241,236,226,.35)}
-.seg button{text-align:center;padding:12px 6px;font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:rgba(241,236,226,.75)}
-.seg button + button{border-left:1px solid rgba(241,236,226,.35)}
+.seg{display:grid;grid-template-columns:1fr 1fr;margin-top:24px;border:1px solid rgba(244,242,238,.35)}
+.seg button{text-align:center;padding:12px 6px;font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:rgba(244,242,238,.75)}
+.seg button + button{border-left:1px solid rgba(244,242,238,.35)}
 .seg button.on{background:var(--paper);color:var(--ink)}
 .cta{display:flex;justify-content:space-between;align-items:center;width:100%;margin-top:12px;background:var(--paper);color:var(--ink);padding:18px 20px;font-size:11px;font-weight:400;letter-spacing:.26em;text-transform:uppercase;text-decoration:none}
 .cta:after{content:"→";font-size:16px;letter-spacing:0}
 .cta.dk{background:var(--ink);color:var(--paper)}
 .cta.br{background:var(--bronze);color:#fff}
-.ghost{display:block;width:100%;text-align:center !important;margin-top:16px;font-size:10px;font-weight:400;letter-spacing:.26em;text-transform:uppercase;color:rgba(241,236,226,.75);padding:6px}
+.ghost{display:block;width:100%;text-align:center !important;margin-top:16px;font-size:10px;font-weight:400;letter-spacing:.26em;text-transform:uppercase;color:rgba(244,242,238,.75);padding:6px}
 .ghost u{text-decoration:none;border-bottom:1px solid var(--bronze2);padding-bottom:3px}
 .ghost.lt{color:var(--ink2)}
 
@@ -99,7 +100,7 @@ body.dark-top .top .ed{color:rgba(241,236,226,.6)}
 .envs b{display:block;font-family:var(--serif);font-weight:400;font-style:italic;font-size:18px;color:var(--mute)}
 .envs span{display:block;margin-top:4px;font-size:9.5px;font-weight:400;letter-spacing:.18em;text-transform:uppercase;color:var(--mute)}
 .envs button.on{background:var(--ink)}
-.envs button.on b{color:#C4A877}.envs button.on span{color:var(--paper)}
+.envs button.on b{color:#C9A96A}.envs button.on span{color:var(--paper)}
 .events{margin-top:6px}
 .ev{display:grid;grid-template-columns:46px 1fr 18px;align-items:center;width:100%;padding:17px 0;border-bottom:1px solid var(--rule)}
 .ev small{font-size:11px;color:var(--bronze);font-weight:500}
@@ -117,11 +118,11 @@ body.dark-top .top .ed{color:rgba(241,236,226,.6)}
 
 /* бриф и образы */
 .brief{background:var(--ink);color:var(--paper);margin:0 -30px;padding:30px 30px 32px}
-.brief .cap{color:#C4A877}
+.brief .cap{color:#C9A96A}
 .brief h2{font-family:var(--serif);font-weight:300;font-size:44px;line-height:1.02;margin:12px 0 18px}
 .brief dl{display:grid;grid-template-columns:96px 1fr;border-top:1px solid var(--rule-d)}
 .brief dt,.brief dd{padding:11px 0;border-bottom:1px solid var(--rule-d);font-size:13px}
-.brief dt{font-size:9.5px;font-weight:400;letter-spacing:.22em;text-transform:uppercase;color:rgba(241,236,226,.55);padding-top:13px}
+.brief dt{font-size:9.5px;font-weight:400;letter-spacing:.22em;text-transform:uppercase;color:rgba(244,242,238,.55);padding-top:13px}
 .principle{margin:30px 0 22px;font-family:var(--serif);font-style:italic;font-weight:300;font-size:26px;line-height:1.38;color:var(--ink2)}
 .looks{display:flex;gap:14px;overflow-x:auto;margin:0 -30px;padding:0 30px 8px;scroll-snap-type:x mandatory;scroll-padding-left:22px;scrollbar-width:none}
 .looks::-webkit-scrollbar{display:none}
@@ -140,8 +141,8 @@ body.dark-top .top .ed{color:rgba(241,236,226,.6)}
 
 /* тарифы: как прайс частного банка */
 .tf-head{background:var(--ink);color:var(--paper);margin:0 -30px;padding:36px 30px 36px}
-.tf-head .h2 i{color:#C4A877}
-.tf-head .lede{color:rgba(241,236,226,.65)}
+.tf-head .h2 i{color:#C9A96A}
+.tf-head .lede{color:rgba(244,242,238,.65)}
 .tf{padding:24px 0 22px;border-bottom:1px solid var(--rule)}
 .tf .row{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
 .tf .nm{font-size:12px;font-weight:400;letter-spacing:.34em}
@@ -159,21 +160,21 @@ body.dark-top .top .ed{color:rgba(241,236,226,.6)}
 
 /* док и шторка */
 .dock{position:fixed;left:50%;transform:translateX(-50%);bottom:0;width:100%;max-width:520px;padding-bottom:env(safe-area-inset-bottom);z-index:50;display:flex;align-items:stretch;
-  background:var(--ink);color:var(--paper);border-radius:0;border-top:1px solid rgba(241,236,226,.12);overflow:hidden;transition:transform .3s ease,opacity .3s ease}
+  background:var(--ink);color:var(--paper);border-radius:0;border-top:1px solid rgba(244,242,238,.12);overflow:hidden;transition:transform .3s ease,opacity .3s ease}
 .dock.hide{transform:translate(-50%,calc(100% + 2px));opacity:0;pointer-events:none}
 .dock button,.dock a{all:unset;box-sizing:border-box;display:flex;align-items:center;gap:8px;height:48px;padding:0 16px;cursor:pointer;
   font-family:var(--sans);font-size:10px;font-weight:400;letter-spacing:.24em;text-transform:uppercase;white-space:nowrap}
-.dock > * + *{border-left:1px solid rgba(241,236,226,.14)}
-.dock .ic{color:#C4A877;font-size:13px;letter-spacing:0}
+.dock > * + *{border-left:1px solid rgba(244,242,238,.14)}
+.dock .ic{color:#C9A96A;font-size:13px;letter-spacing:0}
 .dock .off{display:none !important}
-.dock .d-docs{flex:0 0 auto;padding:0 16px;color:#C4A877}
+.dock .d-docs{flex:0 0 auto;padding:0 16px;color:#C9A96A}
 .view{padding-bottom:calc(49px + env(safe-area-inset-bottom))}
 .sheet .docs{display:grid;gap:0;margin-top:6px}
 .sheet .docs a{display:block;padding:16px 0;border-bottom:1px solid var(--rule);font-family:var(--serif);font-size:20px;color:var(--ink);text-decoration:none}
-.dock .d-sup{padding:0 18px;color:#C4A877;flex:0 0 auto}
+.dock .d-sup{padding:0 18px;color:#C9A96A;flex:0 0 auto}
 .dock button{flex:1 1 0;justify-content:center;padding:0 8px}
-.dock button:active,.dock a:active{background:#2a2826}
-.sheet-bg{position:fixed;inset:0;background:rgba(17,19,21,.45);z-index:60;opacity:0;pointer-events:none;transition:opacity .25s}
+.dock button:active,.dock a:active{background:#262626}
+.sheet-bg{position:fixed;inset:0;background:rgba(17,17,17,.45);z-index:60;opacity:0;pointer-events:none;transition:opacity .25s}
 .sheet{position:fixed;left:0;right:0;bottom:0;z-index:61;max-width:520px;margin:0 auto;max-height:86svh;overflow-y:auto;background:var(--paper);
   padding:14px 30px calc(30px + env(safe-area-inset-bottom));transform:translateY(105%);transition:transform .32s cubic-bezier(.2,.7,.2,1)}
 .menu-on .sheet-bg{opacity:1;pointer-events:auto}.menu-on .sheet{transform:none}
@@ -189,6 +190,63 @@ body.dark-top .top .ed{color:rgba(241,236,226,.6)}
 
 #legal{display:none;padding:18px 16px calc(66px + env(safe-area-inset-bottom));text-align:center;font-size:11px;line-height:1.8;color:var(--mute);background:var(--paper);border-top:1px solid var(--rule)}
 #legal a{color:inherit;margin:0 9px;white-space:nowrap}
+/* узкие заглавные вместо антиквы: курсив убран, акцент цветом */
+.top .logo{font-family:var(--sans);font-size:11px;font-weight:500;letter-spacing:.26em;text-transform:uppercase}
+.cov h1,.h2,.brief h2,.toc b,.ev b,.goal b,.tf .pr,.sol h2{font-weight:400;text-transform:uppercase;letter-spacing:.005em}
+.cov h1{font-size:76px;line-height:.9}
+.h2{font-size:52px;line-height:.95}
+.h2 i,.cov h1 i,.tf-head .h2 i{font-style:normal}
+.toc span,.prog span,.envs b,.lk .im .n,.sheet h3 i{font-style:normal;font-family:var(--serif)}
+.toc b{font-size:22px;font-weight:300}
+.cov.plain .sub,.principle,.note{font-family:var(--sans);font-style:normal;font-weight:300}
+.cov.plain .sub{font-size:18px;line-height:1.5}
+.principle{font-size:18px;line-height:1.6}
+.note{font-size:17px;line-height:1.6}
+.sheet .docs a{font-family:var(--sans);font-size:15px;letter-spacing:.04em}
+.ev b{font-size:20px;font-weight:300}
+.goal b{font-size:24px;font-weight:300}
+.tf .pr{font-size:44px;font-weight:300}
+.brief h2{font-size:40px}
+/* шаг: номер и пейджер */
+.stp{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}
+.stp .n{font-family:var(--serif);font-size:15px;color:var(--bronze);letter-spacing:.08em}
+.pager{display:grid;grid-template-columns:52px 1fr 52px;align-items:center;margin-top:30px}
+.pager button{width:52px;height:52px;border:1px solid var(--ink);border-radius:50%;text-align:center !important;font-size:18px}
+.pager button:disabled{opacity:.25;cursor:default}
+.pager span{text-align:center;font-family:var(--serif);font-size:14px;letter-spacing:.14em;color:var(--mute)}
+/* события с фото */
+.ev.im{grid-template-columns:72px 1fr 18px;gap:0 14px;padding:10px 0}
+.ev .th{width:72px;height:72px;object-fit:cover;display:block;filter:grayscale(.15)}
+.ev .th.no{display:flex;align-items:center;justify-content:center;background:var(--ink);color:var(--bronze);font-family:var(--serif);font-size:18px}
+.ev.im small{display:none}
+/* цели: выбор как радиокнопка */
+.goal{grid-template-columns:34px 1fr auto;align-items:center}
+.goal small{width:20px;height:20px;border:1px solid var(--bronze);border-radius:50%;font-size:0}
+.goal.on{background:var(--ink);color:var(--paper);margin:0 -14px;padding-left:14px;padding-right:14px;width:calc(100% + 28px)}
+.goal.on small{border:6px solid var(--bronze)}
+/* комментарий эксперта */
+.xp{display:grid;grid-template-columns:1fr 46%;gap:18px;align-items:start}
+.xp img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:center top;display:block}
+.xp .cap{color:var(--bronze);line-height:1.8}
+.qt{font-family:Georgia,serif;font-size:64px;line-height:.6;color:var(--bronze);margin:30px 0 6px}
+.xp-t{font-size:16px;line-height:1.7;font-weight:300;color:var(--ink2)}
+.xp-t p + p{margin-top:14px}
+.sig{display:flex;align-items:center;gap:14px;margin-top:26px}
+.sig i{flex:1;height:1px;background:var(--bronze2)}
+.sig span{font-family:var(--serif);font-size:13px;letter-spacing:.24em;text-transform:uppercase;color:var(--bronze)}
+/* решение */
+.sol h2{font-family:var(--serif);font-size:48px;line-height:.95;margin:4px 0 18px}
+.sol dl{border-top:1px solid var(--rule)}
+.sol dt{font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--mute);padding-top:12px}
+.sol dd{font-size:18px;padding:2px 0 12px;border-bottom:1px solid var(--rule)}
+.sol dd.gl{background:var(--ink);color:#C9A96A;padding:10px 14px;margin:6px 0 12px;border:0;font-family:var(--serif);text-transform:uppercase;letter-spacing:.06em}
+.tabs3{display:grid;grid-template-columns:repeat(3,1fr);margin-top:22px;border-bottom:1px solid var(--rule)}
+.tabs3 button{text-align:center !important;padding:12px 0;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--mute);border-bottom:2px solid transparent}
+.tabs3 button.on{color:var(--ink);border-bottom-color:var(--bronze)}
+.tab-t{font-size:15px;line-height:1.7;font-weight:300;padding:16px 0 4px;color:var(--ink2)}
+.cov .links{margin-top:22px}
+.cov .links button{display:block;padding:7px 0;font-size:13px;letter-spacing:.06em;color:rgba(244,242,238,.85)}
+.cov .links button:after{content:" →";color:#C9A96A}
 </style>
 </head>
 <body>
@@ -226,6 +284,18 @@ var GOALS = ['Убедить','Вызвать доверие','Располож�
 // LOOKS['Вызвать доверие'] = {w:{note:'…', looks:[{img:'business-img/…jpg', items:[{t:'Кардиган', url:'https://…'}]}]}, m:{…}}
 var LOOKS = {};
 
+// Фото событий: общее (*) или своё для женщин (w) и мужчин (m)
+var EVIMG = {
+  'Офис': {'*':'ev-office'}, 'Переговоры': {'*':'ev-negot'}, 'Презентация, питч': {'*':'ev-present'},
+  'Собеседование': {w:'ev-interview-w', m:'ev-interview-m'}, 'Casual Friday': {w:'ev-casual-w', m:'ev-casual-m'},
+  'Встреча с руководством': {w:'ev-boss-w', m:'ev-boss-m'}, 'Публичное выступление, конференция': {'*':'ev-stage'},
+  'Первый рабочий день': {w:'ev-first-w'}, 'Встреча с клиентом или партнёром': {w:'ev-client-w'},
+  'Командировка': {w:'ev-trip-w'}, 'Деловой завтрак': {w:'ev-breakfast-w'}
+};
+function evImg(sit){ var e = EVIMG[sit]; if (!e) return ''; var f = e[st.sex || 'w'] || e['*']; return f ? 'business-img/' + f + '.jpg' : ''; }
+// Шаг 3: комментарий Милы. Ключ «ситуация|цель» или «ситуация». Абзацы через \n.
+var COMMENTS = {};
+
 var CONTACT = 'https://t.me/MilaUshakova_ClubBot?start=support';
 var TARIFFS = [
   {n:'TEAM', who:'до 20 сотрудников', p:'150 000 ₽', t:'6 месяцев', inc:['Доступ к Системе имиджа']},
@@ -235,7 +305,7 @@ var TARIFFS = [
   {n:'CUSTOM', who:'от 100 сотрудников', p:'от 750 000 ₽', inc:['Международные компании','Индивидуальная интеграция']}
 ];
 
-var st = {sex: null, sit: null, env: 0, goal: null, view: 'cover'};
+var st = {sex: null, sit: null, env: 0, goal: null, view: 'cover', tab: 0};
 try { st.sex = localStorage.getItem('img_sex'); } catch(e){}
 var v = document.getElementById('v');
 var fromSys = /[?&]from=system/.test(location.search) || /\/guide\/?(gaidosen)?(\?|#|$)/.test(document.referrer);
@@ -253,12 +323,19 @@ function crumbs(n){
   return '<div class="crumbs"><button data-tab="' + st.env + '">' + esc(ENV[st.env].n) + '</button><i>/</i><button data-tab="' + st.env + '">' + esc(st.sit) + '</button>' +
     (n === 3 ? '<i>/</i><button data-go="2">' + esc(st.goal) + '</button>' : '') + '</div>';
 }
+var STEPS = ['Что предстоит', 'Ваша цель', 'Комментарий эксперта', 'Решение'];
+function stepHead(n){ return '<div class="stp"><span></span><span class="n">' + nn(n) + ' / ' + nn(STEPS.length) + '</span></div>'; }
+function pager(n, canNext){
+  return '<div class="pager"><button data-go="' + (n === 1 ? 'intro' : n - 1) + '" aria-label="Назад">‹</button><span>' + nn(n) + ' / ' + nn(STEPS.length) + '</span>' +
+    '<button data-go="' + (n + 1) + '" aria-label="Дальше"' + (canNext && n < STEPS.length ? '' : ' disabled') + '>›</button></div>';
+}
 function sexLabel(){ return st.sex === 'm' ? 'для мужчин' : 'для женщин'; }
 
 function cover(){
   show('<div class="cov"><img class="col" src="/guide/business-img/cover-gallery.jpg" alt="" fetchpriority="high"><div class="in">' +
     '<div class="ed2 cap"><span>Для бизнеса</span><span>Мила Ушакова</span></div>' +
-    '<h1>Система<br><i>имиджа</i></h1>' +
+    '<h1>Система<br><i style="color:#C9A96A">имиджа</i></h1>' +
+    '<div class="links"><button data-go="1">Что предстоит</button><button data-go="1">Ваша цель</button><button data-go="1">Решение</button></div>' +
     '<button class="cta" data-go="about">Далее</button></div></div>', true);
 }
 function about(){
@@ -275,40 +352,54 @@ function about(){
 function intro(){
   show('<div class="cov plain"><div class="in">' +
     '<div class="ed2 cap"><span>Система имиджа</span><span>Мужчины и женщины</span></div>' +
-    '<div class="sub">Инструмент управления впечатлением в профессиональной и деловой среде. Три решения перед любой встречей.</div>' +
-    '<div class="toc"><div><span>01</span><b>Куда я иду</b></div><div><span>02</span><b>Какое впечатление хочу создать</b></div><div><span>03</span><b>Что надеть</b></div></div>' +
+    '<div class="sub">Инструмент управления впечатлением в профессиональной и деловой среде. Четыре шага перед любой встречей.</div>' +
+    '<div class="toc">' + STEPS.map(function(t, i){ return '<div><span>' + nn(i + 1) + '</span><b>' + t + '</b></div>'; }).join('') + '</div>' +
     '<div class="seg"><button data-sex="w"' + (st.sex !== 'm' ? ' class="on"' : '') + '>Для женщин</button><button data-sex="m"' + (st.sex === 'm' ? ' class="on"' : '') + '>Для мужчин</button></div>' +
     '<button class="cta" data-go="1">Начать</button>' +
     '<button class="ghost" data-go="tariffs"><u>Тарифы для компаний</u></button></div></div>', true);
 }
 function step1(){
-  var t = st.env || 0, base = 0;
-  for (var i = 0; i < t; i++) base += ENV[i].s.length;
-  show('<div class="pad">' + prog(1) + '<div class="cap br">Шаг 1 · Событие</div><div class="h2">Куда я <i>иду?</i></div><div class="lede">Сначала определяется среда. От неё зависят правила, которые читают окружающие.</div>' +
+  var t = st.env || 0;
+  show('<div class="pad">' + stepHead(1) + '<div class="h2">Что <i class="br">предстоит</i></div><div class="lede">Сначала определяется среда. От неё зависят правила, которые читают окружающие.</div>' +
     '<div class="envs">' + ENV.map(function(e, i){ return '<button class="' + (i === t ? 'on' : '') + '" data-tab="' + i + '"><b>' + e.r + '</b><span>' + e.n + '</span></button>'; }).join('') + '</div>' +
-    '<div class="events">' + ENV[t].s.map(function(s, k){ return '<button class="ev" data-sit="' + esc(s) + '" data-env="' + t + '"><small>' + nn(base + k + 1) + '</small><b>' + esc(s) + '</b></button>'; }).join('') + '</div></div>');
+    '<div class="events">' + ENV[t].s.map(function(s, k){ var im = evImg(s);
+      return '<button class="ev im" data-sit="' + esc(s) + '" data-env="' + t + '">' + (im ? '<img class="th" loading="lazy" src="' + im + '" alt="">' : '<span class="th no">' + ENV[t].r + '</span>') + '<b>' + esc(s) + '</b></button>'; }).join('') + '</div>' +
+    pager(1, !!st.sit) + '</div>');
 }
 function step2(){
-  show('<div class="pad">' + prog(2) + crumbs(2) + '<div class="cap br">Шаг 2 · Цель</div><div class="h2">Чего я хочу <i>добиться?</i></div><div class="lede">Одна встреча, одна цель, один образ.</div>' +
-    '<div class="goals">' + GOALS.map(function(g, i){ return '<button class="goal" data-goal="' + esc(g) + '"><small>' + nn(i + 1) + '</small><b>' + esc(g) + '</b><em>→</em></button>'; }).join('') + '</div></div>');
+  show('<div class="pad">' + stepHead(2) + crumbs(2) + '<div class="h2">Ваша <i class="br">цель</i></div><div class="lede">Одна встреча, одна цель, один образ.</div>' +
+    '<div class="goals">' + GOALS.map(function(g){ return '<button class="goal' + (g === st.goal ? ' on' : '') + '" data-goal="' + esc(g) + '"><small></small><b>' + esc(g) + '</b><em>→</em></button>'; }).join('') + '</div>' +
+    pager(2, !!st.goal) + '</div>');
 }
 function step3(){
+  var c = COMMENTS[st.sit + '|' + st.goal] || COMMENTS[st.sit] || '';
+  show('<div class="pad">' + stepHead(3) + crumbs(3) +
+    '<div class="xp"><div><div class="h2" style="font-size:40px;margin-top:0">Почему это <i class="br">работает</i></div></div><img src="/guide/business-img/cover.jpg" alt="Мила Ушакова"></div>' +
+    '<div class="qt">“</div><div class="xp-t">' + (c ? c.split('\n').map(function(p){ return '<p>' + esc(p) + '</p>'; }).join('') :
+      '<p><span class="ph">Комментарий Милы: «' + esc(st.sit) + '» и цель «' + esc(st.goal) + '». Почему такой образ работает.</span></p>') + '</div>' +
+    '<div class="sig"><i></i><span>Мила Ушакова</span></div>' +
+    pager(3, true) + '</div>');
+}
+function step4(){
   var L = LOOKS[st.sit + '|' + st.goal] || LOOKS[st.goal] || {};
   var x = L[st.sex || 'w'] || {};
   var looks = (x.looks && x.looks.length) ? x.looks : [{}, {}, {}];
-  show('<div class="pad">' + prog(3) + crumbs(3) +
-    '<div class="brief"><div class="cap">Бриф · ' + sexLabel() + '</div><h2>' + esc(st.goal) + '</h2>' +
-      '<dl><dt>Среда</dt><dd>' + esc(ENV[st.env].n) + '</dd><dt>Событие</dt><dd>' + esc(st.sit) + '</dd><dt>Цель</dt><dd>' + esc(st.goal) + '</dd></dl></div>' +
+  var TABS = [['Силуэт', 'sil'], ['Цвет', 'col'], ['Детали', 'det']], tb = TABS[st.tab || 0];
+  show('<div class="pad sol">' + stepHead(4) + crumbs(3) +
+    '<h2>Ваше <span class="br">решение</span></h2>' +
+    '<dl><dt>Сценарий</dt><dd>' + esc(st.sit) + '</dd><dt>Цель</dt><dd class="gl">' + esc(st.goal) + '</dd><dt>Для кого</dt><dd>' + (st.sex === 'm' ? 'Мужчина' : 'Женщина') + '</dd></dl>' +
     '<div class="principle">' + (x.note ? esc(x.note) : '<span class="ph">Принцип образа. Например: вязаный кардиган, приглушённые оттенки, мягкая обувь</span>') + '</div>' +
     '<div class="looks">' + looks.map(function(l, i){
       return '<div class="lk"><div class="im">' + (l.img ? '<img loading="lazy" src="' + esc(l.img) + '" alt="">' : '<span class="ph">образ ' + (i + 1) + '</span>') + '<span class="n">' + nn(i + 1) + '</span></div>' +
         (l.items && l.items.length ? '<ul>' + l.items.map(function(it){ return '<li>' + (it.url ? '<a href="' + esc(it.url) + '" target="_blank" rel="noopener">' + esc(it.t) + '</a>' : esc(it.t)) + '<span class="br">↗</span></li>'; }).join('') + '</ul>' : '') + '</div>';
     }).join('') + '</div>' +
+    '<div class="tabs3">' + TABS.map(function(t, i){ return '<button data-tabx="' + i + '"' + (i === (st.tab || 0) ? ' class="on"' : '') + '>' + t[0] + '</button>'; }).join('') + '</div>' +
+    '<div class="tab-t">' + (x[tb[1]] ? esc(x[tb[1]]) : '<span class="ph">' + tb[0] + ': рекомендация Милы</span>') + '</div>' +
     '<div class="pair"><button data-go="2">Другая цель</button><button class="dk" data-go="1">Новое событие</button></div>' +
     '<button class="ghost lt" data-go="tariffs"><u>Подключить для компании</u></button></div>');
 }
 function tariffs(){
-  show('<div class="pad" style="padding-top:0"><div class="tf-head"><div class="cap" style="color:#C4A877">Для компаний</div><div class="h2" style="color:var(--paper)">Единый уровень впечатления <i>для всей команды</i></div>' +
+  show('<div class="pad" style="padding-top:0"><div class="tf-head"><div class="cap" style="color:#C9A96A">Для компаний</div><div class="h2" style="color:var(--paper)">Единый уровень впечатления <i>для всей команды</i></div>' +
     '<div class="lede">Доступ к Системе имиджа для сотрудников и руководителей. Формат подбираем под задачи компании.</div></div>' +
     TARIFFS.map(function(t){ return '<div class="tf' + (t.hi ? ' hi' : '') + '">' + (t.hi ? '<span class="badge">Рекомендуем</span>' : '') +
       '<div class="row"><span class="nm">' + t.n + '</span><span class="who">' + t.who + '</span></div>' +
@@ -321,7 +412,7 @@ function tariffs(){
 }
 
 // История: «Назад» в доке, жест назад и кнопка браузера идут по шагам
-var VIEWS = {cover: cover, about: about, intro: intro, s1: step1, s2: step2, s3: step3, tariffs: tariffs};
+var VIEWS = {cover: cover, about: about, intro: intro, s1: step1, s2: step2, s3: step3, s4: step4, tariffs: tariffs};
 function draw(){ (VIEWS[st.view] || cover)(); document.getElementById('dBack').classList.toggle('off', st.view === 'cover'); document.getElementById('dTar').classList.toggle('off', st.view === 'tariffs'); }
 function go(view, patch, replace){
   for (var k in patch) st[k] = patch[k];
@@ -337,7 +428,7 @@ window.addEventListener('popstate', function(e){
 });
 document.getElementById('dBack').addEventListener('click', function(){
   if (history.state && history.length > 1 && history.state.view !== 'cover') history.back();
-  else go({s3:'s2', s2:'s1', s1:'intro', intro:'about'}[st.view] || 'cover', {}, true);
+  else go({s4:'s3', s3:'s2', s2:'s1', s1:'intro', intro:'about'}[st.view] || 'cover', {}, true);
 });
 document.getElementById('dTar').addEventListener('click', function(){ go('tariffs', {}); });
 
@@ -371,12 +462,15 @@ function onTap(e){
   if (b.dataset.tab) return go('s1', {env: +b.dataset.tab});
   if (b.dataset.sit) return go('s2', {sit: b.dataset.sit, env: +b.dataset.env});
   if (b.dataset.goal) return go('s3', {goal: b.dataset.goal});
+  if (b.dataset.tabx) { st.tab = +b.dataset.tabx; var y = window.scrollY; draw(); window.scrollTo(0, y); return; }
   if (b.dataset.go === 'cover') return go('cover', {});
   if (b.dataset.go === 'about') return go('about', {});
   if (b.dataset.go === 'intro') return go('intro', {});
   if (b.dataset.go === 'tariffs') return go('tariffs', {});
   if (b.dataset.go === '1') return go('s1', {});
-  if (b.dataset.go === '2') return go('s2', {});
+  if (b.dataset.go === '2') return go(st.sit ? 's2' : 's1', {});
+  if (b.dataset.go === '3') return go(st.goal ? 's3' : 's2', {});
+  if (b.dataset.go === '4') return go('s4', {tab: 0});
 }
 v.addEventListener('click', onTap);
 sheet.addEventListener('click', onTap);

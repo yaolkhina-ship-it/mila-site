@@ -53,3 +53,8 @@ A paid product: a mobile page of full-screen snap slides (`.pg`). `scrollToEl(id
 
 ## Related
 - The bot lives in a separate private repo, `mila-bot` (Railway; a push restarts the bot, so **never push it during a mailing**).
+
+### Система имиджа `/guide/business` (business.html), redesign 21.10.2026
+- Black / white / gold (`--ink #111`, `--paper #F4F2EE`, gold `#B08F57`/`#C9A96A`); headings Oswald uppercase (Saint Laurent manifesto look), body Jost.
+- Compass from Yana: product and visuals convey intellect, precision, influence and cultural erudition (насмотренность).
+- Flow: cover → Об авторе → О Системе → 01 Что предстоит (event list with photos, `EVIMG`, `business-img/ev-*.jpg`, per sex) → 02 Ваша цель → 03 Комментарий эксперта (`COMMENTS`) → 04 Решение (`LOOKS`: note, looks, tabs Силуэт/Цвет/Детали = keys sil/col/det). Empty data shows dashed placeholders.
