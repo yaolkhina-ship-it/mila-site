@@ -244,14 +244,66 @@ body.dark-top .top .ed{color:rgba(244,242,238,.6)}
 .tabs3 button{text-align:center !important;padding:12px 0;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--mute);border-bottom:2px solid transparent}
 .tabs3 button.on{color:var(--ink);border-bottom-color:var(--bronze)}
 .tab-t{font-size:15px;line-height:1.7;font-weight:300;padding:16px 0 4px;color:var(--ink2)}
-.cov .links{margin-top:22px}
-.cov .links button{display:block;padding:7px 0;font-size:13px;letter-spacing:.06em;color:rgba(244,242,238,.85)}
-.cov .links button:after{content:" →";color:#C9A96A}
+/* 21.10: гармония. Шкала шрифта 1.25: 10 · 13 · 16 · 20 · 24 · 32 · 44 · 56; отступы кратны 8. */
+.cov:not(.plain){justify-content:flex-start}
+.cov:not(.plain):after{display:none}
+.cov img.col{position:relative;inset:auto;display:block;width:100%;height:36svh;min-height:280px;object-position:50% 88%;flex:0 0 auto;
+  -webkit-mask-image:linear-gradient(180deg,#000 88%,transparent);mask-image:linear-gradient(180deg,#000 88%,transparent)}
+.cov:not(.plain) .in{padding:16px 32px 80px}
+.cov .ed2{margin-bottom:24px;padding-top:16px}
+.cov h1{font-size:56px;line-height:.92}
+.cov .links{margin-top:24px;border-top:1px solid rgba(244,242,238,.2)}
+.cov .links button{display:grid;grid-template-columns:40px 1fr auto;align-items:baseline;width:100%;height:48px;padding:12px 0 0;border-bottom:1px solid rgba(244,242,238,.2);
+  font-family:var(--serif);font-weight:300;font-size:20px;letter-spacing:.04em;text-transform:uppercase;color:var(--paper)}
+.cov .links button span{font-size:13px;color:#C9A96A;letter-spacing:.08em}
+.cov .links button:after{content:"→";color:#C9A96A;font-family:var(--sans);font-size:16px}
+.cov > .in > .cta:first-of-type,.cov .links + .cta{margin-top:24px}
+.pad{padding:32px 32px 48px}
+.h2{font-size:44px;line-height:.96;margin:8px 0}
+.ev b,.goal b,.toc b{font-size:20px;font-weight:300;line-height:1.2}
+.ev.im{grid-template-columns:72px 1fr 16px;gap:0 16px;padding:8px 0}
+.goal{padding:16px 0}
+.sol h2,.brief h2{font-size:44px}
+.xp .h2{font-size:32px !important}
+.lede,.tab-t,.xp-t{font-size:16px;line-height:1.6}
+.principle{font-size:20px;line-height:1.5}
+.pager{margin-top:32px;grid-template-columns:48px 1fr 48px}
+.pager button{width:48px;height:48px;font-size:16px}
+.stp{margin-bottom:8px}
+.envs{margin:24px -16px 0}
+.cta{padding:16px 24px;height:56px}
+/* 21.10: обложка по мотивам Saint Laurent в наших цветах: фото на весь экран, фигура справа открыта, текст внизу слева */
+.cov.sl{justify-content:flex-end}
+.cov.sl:after{display:block;background:linear-gradient(90deg,rgba(17,17,17,.55) 0%,rgba(17,17,17,.15) 55%,rgba(17,17,17,0) 70%),linear-gradient(180deg,rgba(17,17,17,0) 45%,rgba(17,17,17,.35) 65%,#111 86%)}
+.cov.sl img.col{position:absolute;left:0;right:0;top:-14%;bottom:auto;width:100%;height:100%;min-height:0;object-position:8% 50%;-webkit-mask-image:linear-gradient(180deg,#000 80%,transparent 100%);mask-image:linear-gradient(180deg,#000 80%,transparent 100%)}
+.cov.sl .in{padding:0 32px 80px}
+.cov.sl .eb{color:rgba(244,242,238,.85);margin-bottom:16px}
+.cov.sl .eb button{font:inherit;letter-spacing:inherit;text-transform:inherit;color:inherit;border-bottom:1px solid #C9A96A;padding-bottom:2px}
+.cov.sl h1{font-size:56px;line-height:.92}
+.cov.sl .row3{display:flex;justify-content:space-between;gap:12px;margin-top:32px}
+.cov.sl .row3 button{font-family:var(--serif);font-weight:400;font-size:16px;letter-spacing:.06em;text-transform:uppercase;color:var(--paper);border-bottom:1px solid #C9A96A;padding-bottom:4px;white-space:nowrap}
+.cov.sl .nx{display:flex;justify-content:space-between;align-items:center;width:100%;margin-top:24px;padding:16px 0 0;border-top:1px solid rgba(244,242,238,.2);
+  font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:rgba(244,242,238,.75)}
+.cov.sl .nx span{color:#C9A96A;font-size:16px;letter-spacing:0}
+/* обложка как на скрине Saint Laurent: только логотип и «Меню», фото на весь экран, без нижней панели */
+.top .tmenu{display:none;font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--paper)}
+body.on-cover .top{position:absolute;left:0;right:0;background:transparent;border-bottom:0;-webkit-backdrop-filter:none;backdrop-filter:none}
+body.on-cover .top .ed,body.on-cover .top a.sys{display:none !important}
+body.on-cover .top .tmenu{display:block}
+body.on-cover .dock{display:none}
+body.on-cover .view{padding-bottom:0}
+.cov.sl{min-height:100svh}
+.cov.sl img.col{top:0;height:100%;object-position:27% 50%;filter:brightness(.62) contrast(1.05);-webkit-mask-image:none;mask-image:none}
+.cov.sl:after{background:linear-gradient(180deg,rgba(17,17,17,.6) 0%,rgba(17,17,17,0) 18%,rgba(17,17,17,0) 50%,rgba(17,17,17,.75) 82%,#111 100%)}
+.cov.sl .in{padding:0 32px calc(40px + env(safe-area-inset-bottom))}
+.cov.sl h1{font-size:64px;line-height:.9}
+.cov.sl .row3{margin-top:48px}
+.cov.sl .row3 button{font-family:var(--sans);font-weight:500;font-size:12px;letter-spacing:.14em}
 </style>
 </head>
 <body>
 <div class="app">
-  <div class="top"><div class="logo">Mila Ushakova</div><a class="sys" id="sys" href="/guide" style="display:none">← Система</a><span class="ed" id="ed">Система имиджа</span></div>
+  <div class="top"><div class="logo">Mila Ushakova</div><a class="sys" id="sys" href="/guide" style="display:none">← Система</a><span class="ed" id="ed">Система имиджа</span><button class="tmenu" id="tMenu" type="button">Меню</button></div>
   <div id="v"></div>
   <nav class="dock" id="dock" aria-label="Навигация">
     <button class="d-back off" id="dBack" type="button"><span class="ic">&larr;</span>Назад</button>
@@ -350,11 +402,10 @@ function pager(n, canNext){
 function sexLabel(){ return st.sex === 'm' ? 'для мужчин' : 'для женщин'; }
 
 function cover(){
-  show('<div class="cov"><img class="col" src="/guide/business-img/cover-gallery.jpg" alt="" fetchpriority="high"><div class="in">' +
-    '<div class="ed2 cap"><span>Для бизнеса</span><span>Мила Ушакова</span></div>' +
+  show('<div class="cov sl"><img class="col" src="/guide/business-img/cover-gallery.jpg" alt="" fetchpriority="high"><div class="in">' +
+    '<div class="eb cap">Для бизнеса · <button data-go="about">Мила Ушакова</button></div>' +
     '<h1>Система<br><i style="color:#C9A96A">имиджа</i></h1>' +
-    '<div class="links"><button data-go="1">Что предстоит</button><button data-go="1">Ваша цель</button><button data-go="1">Решение</button></div>' +
-    '<button class="cta" data-go="about">Далее</button></div></div>', true);
+    '<div class="row3"><button data-go="1">Что предстоит</button><button data-go="1">Ваша цель</button><button data-go="1">Решение</button></div></div></div>', true);
 }
 function about(){
   show('<div class="pad au"><div class="cap br">Об авторе</div>' +
@@ -431,7 +482,7 @@ function tariffs(){
 
 // История: «Назад» в доке, жест назад и кнопка браузера идут по шагам
 var VIEWS = {cover: cover, about: about, intro: intro, s1: step1, s2: step2, s3: step3, s4: step4, tariffs: tariffs};
-function draw(){ (VIEWS[st.view] || cover)(); document.getElementById('dBack').classList.toggle('off', st.view === 'cover'); document.getElementById('dTar').classList.toggle('off', st.view === 'tariffs'); }
+function draw(){ (VIEWS[st.view] || cover)(); document.body.classList.toggle('on-cover', st.view === 'cover'); document.getElementById('dBack').classList.toggle('off', st.view === 'cover'); document.getElementById('dTar').classList.toggle('off', st.view === 'tariffs'); }
 function go(view, patch, replace){
   for (var k in patch) st[k] = patch[k];
   st.view = view;
@@ -461,6 +512,7 @@ function openMenu(){
   document.body.classList.add('menu-on');
 }
 function closeMenu(){ document.body.classList.remove('menu-on'); }
+document.getElementById('tMenu').addEventListener('click', function(){ openMenu(); });
 document.getElementById('dMenu').addEventListener('click', function(){ document.body.classList.contains('menu-on') && sheet.dataset.k === 'menu' ? closeMenu() : openMenu(); });
 document.getElementById('sheetBg').addEventListener('click', closeMenu);
 document.getElementById('dDocs').addEventListener('click', function(){
