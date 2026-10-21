@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="utf-8">
+<base href="/kniga/">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Перепроложить? · Мила Ушакова</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bad+Script&family=Caveat:wght@400;600&family=Marck+Script&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=PT+Serif:ital@0;1&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+img{display:block;max-width:100%}
+body{-webkit-font-smoothing:antialiased;transition:background .3s}
+.sw{position:sticky;top:0;z-index:9;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:10px 12px;background:rgba(20,20,20,.92);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.sw::-webkit-scrollbar{display:none}
+.sw button{all:unset;flex:0 0 auto;cursor:pointer;font:500 10px/1 Jost,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#bbb;padding:9px 10px;border:1px solid #444}
+.sw button.on{color:#111;background:#e9dcc4;border-color:#e9dcc4}
+.book{max-width:620px;margin:0 auto}
+.cover{position:relative;min-height:calc(100svh - 46px);display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden}
+.cover h1{font-weight:400}
+.verbs{display:flex;flex-wrap:wrap;gap:4px 14px;margin-top:14px}
+.author{margin-top:22px}
+.pref{padding:56px 32px}
+.frag{padding:0 0 48px}
+.fh{padding:48px 32px 22px}
+.fh .k{font:400 10px/1.6 Jost,sans-serif;letter-spacing:.28em;text-transform:uppercase}
+.fh h2{font-weight:400;line-height:1}
+.ill{margin:0 0 30px}
+.ill .ph{aspect-ratio:3/4;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;font:400 11px/1.6 Jost,sans-serif;letter-spacing:.2em;text-transform:uppercase}
+.tx{padding:0 32px}
+.tx p{margin:0 0 1em}
+.end{padding:40px 32px 80px;text-align:center}
+.src{padding:40px 32px 90px;font:300 14px/1.65 Jost,sans-serif}
+.src h3{font:500 10px/1 Jost,sans-serif;letter-spacing:.28em;text-transform:uppercase;margin:0 0 12px}
+.src b{font-weight:500}
+.card{display:none}
+
+/* I. Travel Book (Louis Vuitton): слоновая бумага, рисунок на весь разворот, антиква, город рукописью */
+.v1{background:#F6F1E7;color:#1E1C1A}
+.v1 .cover{background:#F6F1E7;padding:0 32px 48px}
+.v1 .cover img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 20%}
+.v1 .cover:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(246,241,231,0) 40%,rgba(246,241,231,.92) 72%,#F6F1E7 92%)}
+.v1 .cover > div{position:relative;z-index:1}
+.v1 .cover .k{font:400 10px/1 Jost,sans-serif;letter-spacing:.3em;text-transform:uppercase;color:#7a6a55}
+.v1 .cover h1{font:400 50px/1.1 'Bad Script',cursive;margin-top:14px;color:#1E1C1A}
+.v1 .verbs span{font:italic 400 19px/1.3 'Cormorant Garamond',serif;color:#6d5d48}
+.v1 .author{font:500 11px/1 Jost,sans-serif;letter-spacing:.3em;text-transform:uppercase}
+.v1 .pref{font:italic 400 22px/1.5 'Cormorant Garamond',serif;color:#4a3f33;border-top:1px solid #d9cdb6;border-bottom:1px solid #d9cdb6;margin:0 32px;padding:40px 0}
+.v1 .fh .k{color:#9b7f57}
+.v1 .fh h2{font:400 72px/1 'Bad Script',cursive;margin-top:8px}
+.v1 .tx{font:400 19px/1.7 'Cormorant Garamond',serif}
+.v1 .ill .ph{background:#ece4d4;color:#9b7f57;outline:1px dashed #c6b392;outline-offset:-14px}
+.v1 .end{font:400 34px/1.2 'Bad Script',cursive;color:#9b7f57}
+.v1 .src{color:#4a3f33}
+
+/* II. Assouline (Chanel, Dior): тканевая обложка, вклеенная иллюстрация, золотое тиснение, строгая антиква */
+.v2{background:#E9E5DE;color:#222}
+.v2 .cover{background:#1F2A40;color:#D8B871;justify-content:center;align-items:center;text-align:center;padding:48px 32px;
+  background-image:repeating-linear-gradient(0deg,rgba(255,255,255,.025) 0 1px,transparent 1px 3px),repeating-linear-gradient(90deg,rgba(0,0,0,.05) 0 1px,transparent 1px 3px)}
+.v2 .cover img{width:62%;aspect-ratio:3/4;object-fit:cover;object-position:50% 20%;border:10px solid #F4EFE6;box-shadow:0 10px 30px rgba(0,0,0,.35);margin-bottom:34px}
+.v2 .cover .k{font:400 10px/1 Jost,sans-serif;letter-spacing:.34em;text-transform:uppercase;color:#b89a5c}
+.v2 .cover h1{font:400 50px/1.05 'Marck Script',cursive;margin-top:14px;color:#E2C47F}
+.v2 .verbs{justify-content:center}
+.v2 .verbs span{font:400 12px/1.4 Jost,sans-serif;letter-spacing:.22em;text-transform:uppercase;color:#b89a5c}
+.v2 .author{font:400 14px/1 'PT Serif',serif;letter-spacing:.4em;text-transform:uppercase;color:#E2C47F}
+.v2 .pref{font:italic 400 18px/1.7 'PT Serif',serif;text-align:center;color:#444;padding:64px 40px}
+.v2 .fh{text-align:center;padding-top:64px}
+.v2 .fh .k{color:#8a7448}
+.v2 .fh h2{font:400 56px/1 'Marck Script',cursive;margin-top:10px;color:#1F2A40}
+.v2 .ill{padding:0 32px}
+.v2 .ill img,.v2 .ill .ph{border:10px solid #fff;box-shadow:0 4px 18px rgba(0,0,0,.12)}
+.v2 .ill .ph{background:#f4efe6;color:#8a7448}
+.v2 .tx{font:400 17px/1.75 'PT Serif',serif;text-align:justify;hyphens:auto;-webkit-hyphens:auto;padding:0 40px}
+.v2 .tx p:first-child:first-letter{float:left;font:400 64px/.85 'PT Serif',serif;margin:6px 10px 0 0;color:#1F2A40}
+.v2 .end{font:400 10px/1 Jost,sans-serif;letter-spacing:.34em;text-transform:uppercase;color:#8a7448}
+.v2 .src{color:#444}
+
+/* III. Carnet de voyage (Hermès): записная книжка, оранжевый, рисунки вклеены на скотч, рукописные заметки, открытка */
+.v3{background:#F2E8D8;color:#2a241d;background-image:radial-gradient(rgba(120,90,50,.06) 1px,transparent 1px);background-size:6px 6px}
+.v3 .cover{background:#E2611B;color:#FFF4E6;padding:0 28px 44px}
+.v3 .cover img{position:absolute;top:56px;right:-6%;width:78%;transform:rotate(4deg);border:8px solid #fffaf0;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+.v3 .cover > div{position:relative;z-index:1}
+.v3 .cover .k{font:600 22px/1 Caveat,cursive;color:#FFE1C2}
+.v3 .cover h1{font:600 54px/.95 Caveat,cursive;margin-top:6px}
+.v3 .verbs span{font:400 24px/1.1 Caveat,cursive;color:#FFE9D3}
+.v3 .author{font:500 11px/1 Jost,sans-serif;letter-spacing:.3em;text-transform:uppercase;color:#fff}
+.v3 .pref{font:400 26px/1.35 Caveat,cursive;color:#7a3b14;padding:48px 28px}
+.v3 .fh .k{font:600 20px/1 Caveat,cursive;letter-spacing:0;text-transform:none;color:#E2611B}
+.v3 .fh h2{font:600 76px/1 Caveat,cursive;margin-top:4px}
+.v3 .ill{padding:0 40px;position:relative}
+.v3 .ill img,.v3 .ill .ph{transform:rotate(-2deg);border:8px solid #fffaf0;box-shadow:0 6px 18px rgba(0,0,0,.15)}
+.v3 .ill:before{content:"";position:absolute;z-index:1;top:-10px;left:50%;width:110px;height:28px;margin-left:-55px;background:rgba(226,97,27,.35);transform:rotate(-4deg)}
+.v3 .ill .ph{background:#fffaf0;color:#E2611B}
+.v3 .tx{font:400 18px/1.7 'Cormorant Garamond',serif;font-weight:500}
+.v3 .card{display:block;margin:30px 32px 0;padding:22px 22px 26px;background:#fffaf0;transform:rotate(1.5deg);box-shadow:0 6px 18px rgba(0,0,0,.12);border-left:6px solid #E2611B}
+.v3 .card .s{font:500 9px/1 Jost,sans-serif;letter-spacing:.3em;text-transform:uppercase;color:#a07a55}
+.v3 .card .t{font:600 40px/1.1 Caveat,cursive;color:#2a241d;margin-top:10px}
+.v3 .end{font:600 30px/1.2 Caveat,cursive;color:#E2611B}
+.v3 .src{color:#4a3f33}
+
+/* IV. Vogue: белая полоса журнала, чёрный, крупная антиква, подпись под рисунком, рукописное название */
+.v4{background:#fff;color:#111}
+.v4 .cover{background:#fff;padding:0 28px 40px;justify-content:flex-start;padding-top:28px}
+.v4 .cover img{order:2;width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 15%;margin-top:22px}
+.v4 .cover > div{order:1}
+.v4 .cover .k{font:500 11px/1 Jost,sans-serif;letter-spacing:.42em;text-transform:uppercase;border-top:2px solid #111;border-bottom:1px solid #111;padding:10px 0;text-align:center}
+.v4 .cover h1{font:400 50px/1.05 'Great Vibes',cursive;text-align:center;margin-top:22px}
+.v4 .verbs{justify-content:center}
+.v4 .verbs span{font:italic 400 16px/1.4 'Playfair Display',serif;color:#555}
+.v4 .author{font:500 11px/1 Jost,sans-serif;letter-spacing:.38em;text-transform:uppercase;text-align:center}
+.v4 .pref{font:italic 400 24px/1.4 'Playfair Display',serif;text-align:center;padding:56px 28px;border-bottom:1px solid #111;margin:0 28px;padding-left:0;padding-right:0}
+.v4 .fh{text-align:center}
+.v4 .fh .k{color:#b0001e}
+.v4 .fh h2{font:400 84px/1 'Great Vibes',cursive}
+.v4 .ill{padding:0}
+.v4 .ill .ph{background:#f2f2f2;color:#777}
+.v4 .tx{font:400 18px/1.75 'Playfair Display',serif}
+.v4 .tx p:first-child{font-size:22px;font-style:italic}
+.v4 .end{font:400 40px/1 'Great Vibes',cursive}
+.v4 .src{color:#333}
+
+/* V. Dior: пудровый, серо-бежевый, тонкая рамка, каллиграфия */
+.v5{background:#F4E9E6;color:#5a4a46}
+.v5 .cover{background:#F4E9E6;align-items:center;justify-content:center;text-align:center;padding:40px 30px;border:1px solid #c9b2ab;margin:14px;min-height:calc(100svh - 74px)}
+.v5 .cover img{width:70%;aspect-ratio:3/4;object-fit:cover;object-position:50% 15%;border-radius:200px 200px 0 0;margin-bottom:28px;filter:saturate(.85)}
+.v5 .cover .k{font:400 10px/1 Jost,sans-serif;letter-spacing:.4em;text-transform:uppercase;color:#a08a83}
+.v5 .cover h1{font:400 52px/1.05 'Great Vibes',cursive;color:#6b5450;margin-top:12px}
+.v5 .verbs{justify-content:center}
+.v5 .verbs span{font:italic 400 18px/1.4 'Cormorant Garamond',serif;color:#9b837c}
+.v5 .author{font:400 11px/1 Jost,sans-serif;letter-spacing:.36em;text-transform:uppercase;color:#6b5450}
+.v5 .pref{font:italic 400 21px/1.55 'Cormorant Garamond',serif;text-align:center;padding:56px 36px;color:#7a6560}
+.v5 .fh{text-align:center}
+.v5 .fh .k{color:#a08a83}
+.v5 .fh h2{font:400 76px/1 'Great Vibes',cursive;color:#6b5450}
+.v5 .ill{padding:0 34px}
+.v5 .ill img,.v5 .ill .ph{border-radius:200px 200px 0 0}
+.v5 .ill .ph{background:#eddcd7;color:#a08a83}
+.v5 .tx{font:400 19px/1.75 'Cormorant Garamond',serif;color:#4f3f3b;padding:0 34px}
+.v5 .end{font:400 38px/1 'Great Vibes',cursive;color:#a08a83}
+.v5 .src{color:#5a4a46}
+
+/* VI. Масло: по мотивам картины с жёлтыми цветами, кобальт, оранжевый, жёлтый */
+.v6{background:#16306A;color:#F6EBD7}
+.v6 .cover{background:#E8611A;padding:0 28px 40px}
+.v6 .cover img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 25%}
+.v6 .cover:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(22,48,106,0) 45%,rgba(22,48,106,.85) 78%,#16306A 96%)}
+.v6 .cover > div{position:relative;z-index:1}
+.v6 .cover .k{font:500 10px/1 Jost,sans-serif;letter-spacing:.34em;text-transform:uppercase;color:#F2C230}
+.v6 .cover h1{font:400 46px/1.05 'Marck Script',cursive;color:#F2C230;margin-top:12px}
+.v6 .verbs span{font:italic 400 18px/1.3 'Cormorant Garamond',serif;color:#F6EBD7}
+.v6 .author{font:500 11px/1 Jost,sans-serif;letter-spacing:.3em;text-transform:uppercase;color:#E8611A}
+.v6 .pref{font:italic 400 22px/1.5 'Cormorant Garamond',serif;color:#F2C230;padding:52px 30px}
+.v6 .fh .k{color:#E8611A}
+.v6 .fh h2{font:400 74px/1 'Marck Script',cursive;color:#F2C230}
+.v6 .ill{padding:0 30px}
+.v6 .ill img,.v6 .ill .ph{border:6px solid #E8611A}
+.v6 .ill .ph{background:#1d3b7d;color:#F2C230}
+.v6 .tx{font:500 19px/1.7 'Cormorant Garamond',serif;color:#F6EBD7}
+.v6 .end{font:400 38px/1 'Marck Script',cursive;color:#E8611A}
+.v6 .src{color:#F6EBD7}
+#legal{padding:18px 16px 28px;text-align:center;font:400 11px/1.8 Jost,sans-serif;opacity:.7}
+#legal a{color:inherit;margin:0 6px}
+</style></head>
+<body class="v1">
+<nav class="sw" aria-label="Стиль книги">
+  <button data-v="v1" class="on">I · Travel Book</button><button data-v="v2">II · Assouline</button><button data-v="v3">III · Carnet</button><button data-v="v4">IV · Vogue</button><button data-v="v5">V · Dior</button><button data-v="v6">VI · Масло</button>
+</nav>
+<main class="book">
+  <section class="cover"><img class="cv" src="img/sketch.jpg" alt=""><div>
+    <div class="k">Книга</div>
+    <h1>Перепроложить?</h1>
+    <div class="verbs"><span>любить</span><span>встретить</span><span>запомнить</span><span>улыбаться</span><span>открывать</span><span>путешествовать</span></div>
+    <div class="author">Мила Ушакова</div></div>
+  </section>
+  <section class="pref">Рабочее название «Перепроложить?». Пугающая фраза навигатора, когда ты сбиваешься с пути в незнакомой местности. Когда ты решаешь чему голосу следовать за глаголом «перепроложить» стоит его синонимы, любить, встретить, запомнить, улыбаться, открывать, путешествовать.</section>
+
+  <article class="frag">
+    <header class="fh"><div class="k">Отрывок из книги · I</div><h2>Рим</h2></header>
+    <figure class="ill"><img src="img/rim.jpg" alt="Коллаж к истории: piazza Navona"></figure>
+    <div class="tx"><p>В Риме пошел дождь.</p>
+<p>Селфи-палки в руках продавцов из Сомали мгновенно превратились в одноразовые зонты.</p>
+<p>Куда-то помчались карабинеры, запевая мелодию города.</p>
+<p>Брусчатка мгновенно нарядилась в блестящие лакированные туфли.</p>
+<p>Был май.</p>
+<p>Наполняясь любовью к городу, я наблюдала за римлянами, укрывшись в арке кафе на piazza Navona. Я всегда думаю, как это, иметь паспорт и видеть «город рождения Рим».<br>Передо мной сидел ОН.</p>
+<p>Его кудрявая дочка с нежностью раскидала свои пряди у него на коленях, ежесекундно произносилось « Amore», она шутя кормила папу, а он ей подыгрывал…</p>
+<p>Ворот его белоснежной рубашки был синонимом идеальности Tom Ford или хрустящего круассана.<br>Его смуглая кожа римлянина была зацелована итальянским солнцем с самого рождения.</p>
+<p>Увесистые часы на его запястье призывали  не следить за временем. Он поправлял своими пальцами удлиненные черные волосы, а голубые глаза в чёрной оправе Tom Ford. Смотрели. На меня.</p>
+<p>Понаблюдав за этой идиллией любви папы и дочки, я исчезла в бутиках и музеях Рима.</p>
+<p>Прошло два месяца.</p>
+<p>Был июль. Я летела из Ниццы в Рим. Газеты и новостные ленты пестрили сообщениями о возгорании в багажном отделении аэропорта Рима.</p>
+<p>Рейс задержали на 4-5-6-7-8 часов.<br>Я стояла возле табло и продумывала маршрут.</p>
+<p>Я обернулась.<br>Рядом стоял он.<br>Тот самый римлянин в оправе Tom Ford. Тот римлянин, которого хотелось бы показать миру.<br>Он снова был в идеальной белой рубашке с подвернутыми рукавами.<br>«Ciao! Я запомнил тебя и мы давно не виделись. Я Томасо»</p>
+<p>Наш рейс в Рим задержали на 10 часов. Голубые глаза в чёрной оправе Tom Ford. Смотрели. На меня</p></div>
+  </article>
+
+  <article class="frag">
+    <header class="fh"><div class="k">Отрывок из книги · II</div><h2>Руан</h2></header>
+    <figure class="ill"><div class="ph">Иллюстрация к Руану<br>в стиле коллажа к Риму</div></figure>
+    <div class="tx"><p>Я приехала в Руан, когда город окунался в вечернюю синеву. В старину французы называли это время суток l’heure bleue. Англичане называли „смеркание“. Само слово „смеркание“ переливается и раскатывается по словам мерцание, отблески, рождая в голове образы домов, где торопливо прикрывают ставни.</p>
+<p>Я заглушила двигатель на куплете французской песни о любви.<br>Никогда не пропустишь это состояние, когда ты уже на перед знаешь, что тебе всё понравится.<br>Из пряничного двухэтажного домика, прямо у подножья Кафедрального Собора Руана, вышел француз.  Ворот его белой рубашки казался таким накрахмаленным и хрустящим, как утренний круассан, подвернутые рукава открывали его руки, которых касалось летнее солнце, 2 метра его роста застали меня врасплох, от французов такого не ожидаешь. «Меня зовут Этье и я владелец дома, который Вы арендовали, в Вашем распоряжении целый этаж моего дома». Тут бахнул колокол Собора, приводя меня в чувства.</p>
+<p>В доме было трогательно всё. Я бы советовала Этье написать на букинге, как по-французски скрипят полы, какие вазочки стоят по углам, какие шторки в цветочек прикрывают комнату от лишних взглядов.</p>
+<p>Он пригласил меня в гостиную для знакомства , я села в гостевое кожаное харизматичное кресло.</p>
+<p>Оно издавало звуки советской игрушки медведя, который рычал при перевороте.</p>
+<p>«Я архитектор в третьем поколении».<br>Сейчас  произнесите это и представьте этого месье… След этих трёх поколений был почти везде, изысканные картины, посуда, упорядоченно выставленные книги.<br>Мне казалось, что всю запланированную неделю пребывания я зароюсь в этом дофамине. «Вот гостиная, вот мой гардероб»-продолжал он…Гар-де-роб… Я замерла в безмолвии. Стена за стеклянными дверцами, в котором, как в пенале первоклашки, было всё упорядочено. Рубашки-как наточенные карандаши, джемперы Lacoste всевозможных палитр, как краски в коробке, обувь, как чистые тетрадки в клетку.</p>
+<p>«Я завтра уезжаю в Париж. Весь дом в твоем распоряжении на всю неделю. За тобой будет ухаживать гувернантка Мария. Она не говорит по-английски»</p>
+<p>На следующее утро, проглатывая кофе и испачкав губы в апельсиновом джеме круассана, я проводила Этье в Париж.</p>
+<p>7 дней в гостиной пряничного домика в городе Руан я просыпалась и засыпала , чтобы в бесконечном любопытстве к жизни пить горячий кофе, есть самый хрустящий утренний багет, пробовать ароматное масло, пачкать губы апельсиновым джемом и на утренний вопрос Марии «Bonjour, ça va?», отвечать ««Oui, ça va bien»</p>
+<p>Ударил колокол, чтобы привести в чувства. В почтовом ящике лежала открытка из Руана ««Bonjour, ça va?»</p></div>
+    <div class="card"><div class="s">Открытка из Руана</div><div class="t">Bonjour, ça va?</div></div>
+  </article>
+
+  <div class="end">Перепроложить?</div>
+
+  <section class="src"><h3>Откуда стиль</h3>
+    <p><b>I · Travel Book.</b> Путевые книги Louis Vuitton: каждый город рисует художник, рисунок на всю страницу, текста немного, много воздуха.</p>
+    <p><b>II · Assouline.</b> Книги о Chanel, Dior, Hermès в издательстве Assouline: тканевая обложка, вклеенная иллюстрация в белой рамке, золотое тиснение, строгий набор с буквицей.</p>
+    <p><b>III · Carnet.</b> Путевой блокнот в духе Hermès: оранжевый, рисунки вклеены на скотч, заметки от руки, открытка в конце главы.</p>
+    <p><b>IV · Vogue.</b> Журнальная полоса: белая бумага, чёрный, крупная антиква, первый абзац курсивом, название главы каллиграфией.</p>
+    <p><b>V · Dior.</b> Пудровый и серо-бежевый, тонкая рамка, рисунок в арке, как окна на авеню Монтень.</p>
+    <p><b>VI · Масло.</b> По мотивам картины с жёлтыми цветами: кобальт, оранжевый и жёлтый, рисунок в оранжевой раме.</p>
+  </section>
+</main>
+<div id="legal"><a href="https://www.milaushakova.com/oferta">Договор оферты</a>·<a href="https://www.milaushakova.com/privacy">Политика конфиденциальности</a>·<a href="https://t.me/MilaUshakova_ClubBot?start=support">Поддержка</a><br>© 2026 · ИП Ольхина Я.Ф., ИНН 222411003828, ОГРНИП 326220200112474</div>
+<script>
+document.querySelector('.sw').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;
+  document.body.className=b.dataset.v;document.querySelector('.cv').src=b.dataset.v==='v6'?'img/paint.jpg':'img/sketch.jpg';[].forEach.call(this.children,function(x){x.classList.toggle('on',x===b)});b.scrollIntoView({inline:'center',block:'nearest'});
+  try{localStorage.setItem('book_v',b.dataset.v)}catch(_){}window.scrollTo(0,0)});
+try{var v=(location.search.match(/[?&]v=(v[1-6])/)||[])[1]||localStorage.getItem('book_v');if(v){var b=document.querySelector('[data-v="'+v+'"]');if(b)b.click()}}catch(_){}
+</script>
+</body></html>
