@@ -52,6 +52,10 @@
     {
       "src": "club/**",
       "use": "@vercel/static"
+    },
+    {
+      "src": "kniga/**",
+      "use": "@vercel/static"
     }
   ],
   "headers": [
@@ -149,6 +153,14 @@
     {
       "src": "/club/api/(.*)",
       "dest": "https://mila-bot-production-14c0.up.railway.app/club/api/$1"
+    },
+    {
+      "src": "/kniga/?",
+      "dest": "/kniga/index.html"
+    },
+    {
+      "src": "/kniga/(.*)",
+      "dest": "/kniga/$1"
     },
     {
       "src": "/club/?",
