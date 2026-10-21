@@ -103,6 +103,15 @@
       '<a class="a-btn gold" href="' + CLUB + '" target="_blank" rel="noopener">Стать резидентом</a>' +
       (CONTACT.indexOf('__') < 0 ? '<a class="a-btn line" href="' + CONTACT + '" target="_blank" rel="noopener">Сотрудничество</a>' : '') + '</div>';
   }
+  /* «Система имиджа · скоро»: превью экранов на главной, лист ожидания в боте (?start=image) */
+  var IMG_WAIT = 'https://t.me/MilaUshakova_ClubBot?start=image';
+  var IMG_IDEA = 'Цвет решает, как вы выглядите.<br>Имидж решает, как вас прочтут.';
+  function imgTeaser() {
+    return '<div class="a-sec"><b>Система имиджа <em class="a-soon">скоро</em></b></div>' +
+      '<div class="a-pv">' + [1, 2, 3].map(function (i) { return '<img loading="lazy" src="business-img/pv-' + i + '.jpg" alt="">'; }).join('') + '</div>' +
+      '<div class="a-pv-t"><p>' + IMG_IDEA + '</p><p class="s">Что надеть на переговоры, собеседование или деловой ужин, чтобы впечатление работало на вашу цель.</p>' +
+      '<a class="a-wait" href="' + IMG_WAIT + '" target="_blank" rel="noopener">Попасть в список ожидания</a></div>';
+  }
   V.home = function () {
     var d = DROPS.oct, first = looks[d.ids[0]], last = looks[LS.get('app_last', '')];
     var h = top('', 'Система цветовых сочетаний');
@@ -111,6 +120,7 @@
     }).join('') + '</div>';
     if (first) h += '<a class="a-cont" href="' + H + '#/drop/oct"><img src="' + esc(first.pal || first.img) + '" alt="" style="object-fit:cover"><div style="flex:1"><div class="a-lbl">Новый дроп · октябрь</div><div style="font-size:15px;margin-top:3px">' + obr(d.ids.length) + '</div></div><span style="color:var(--gold2)">›</span></a>';
     if (last) h += '<a class="a-cont" href="' + H + '#/look/' + last.id + '"><img src="' + esc(last.img) + '" alt=""><div style="flex:1"><div class="a-lbl">Продолжить</div><div style="font-size:15px;margin-top:3px">образ ' + esc(last.name) + '</div></div><span style="color:var(--gold2)">›</span></a>';
+    h += imgTeaser();
     h += '<div class="a-sec"><b>Цвета</b><a href="' + H + '#/colors">все</a></div><div class="a-sw">' + colors.map(function (c, i) {
       return '<a href="' + H + '#/color/' + i + '"><i style="background:' + (SW[c.name] || '#999') + '"></i>' + esc(c.name.replace(' и ', ' и ')) + '</a>';
     }).join('') + '</div>';
