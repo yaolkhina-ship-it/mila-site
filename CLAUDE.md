@@ -45,7 +45,7 @@ A paid product: a mobile page of full-screen snap slides (`.pg`). `scrollToEl(id
 - CTA block on home and «Ещё»: «Стать резидентом» → bot `?start=club`; «Сотрудничество» → t.me/YanaOlkhina (`CONTACT` in app.js).
 - Design rules from Yana (20.10): keep the System colours and PT Serif, change navigation only; accent badges gold, never pink; «новинка» only next to a section heading, not on every card; palette first, then the look. When a layout misses, show 2–3 switchable variants and let her pick.
 - Edit a trend: change the `.tr-look` cells of its `p_trend_<slug>` page in gaidosen.html (and the nav list in p4); app.js reads them. Cover photo = `data-cover` on the page (`guide/trends/<slug>.jpg`), shown on the home row, as a photo card («плашка») in the trends list and on top of the trend screen. A trend with no looks shows only cover + title.
-- Trends (5): Атласная сумка, Юбки в стиле Prada, Короткий жакет, Необычные подвески, Головные уборы (added 21.10, no looks yet); pages `p_trend_<slug>`, nav section 04.
+- Trends (5): Атласная сумка, Юбки в стиле Prada, Короткий жакет, Необычные подвески, Головные уборы (added 21.10; 6 looks with a clear hat: хурма, жёлтый, сафари, кофе, авто, овчина); pages `p_trend_<slug>`, nav section 04.
 
 ## Ideas in progress
 - A Sanzo Wada colour dictionary tool: the user picks the colour of their item, sees the nearest Wada colour, then his combinations as book spreads with the 70/20/10 rule. The data comes from sanzo-wada.dmbk.io (159 colours, 348 combinations).
