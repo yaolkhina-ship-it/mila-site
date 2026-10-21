@@ -284,13 +284,31 @@ var GOALS = ['Убедить','Вызвать доверие','Располож�
 // LOOKS['Вызвать доверие'] = {w:{note:'…', looks:[{img:'business-img/…jpg', items:[{t:'Кардиган', url:'https://…'}]}]}, m:{…}}
 var LOOKS = {};
 
-// Фото событий: общее (*) или своё для женщин (w) и мужчин (m)
+// Фото событий: женские картинки для женщин (w), мужские для мужчин (m)
 var EVIMG = {
-  'Офис': {'*':'ev-office'}, 'Переговоры': {'*':'ev-negot'}, 'Презентация, питч': {'*':'ev-present'},
-  'Собеседование': {w:'ev-interview-w', m:'ev-interview-m'}, 'Casual Friday': {w:'ev-casual-w', m:'ev-casual-m'},
-  'Встреча с руководством': {w:'ev-boss-w', m:'ev-boss-m'}, 'Публичное выступление, конференция': {'*':'ev-stage'},
-  'Первый рабочий день': {w:'ev-first-w'}, 'Встреча с клиентом или партнёром': {w:'ev-client-w'},
-  'Командировка': {w:'ev-trip-w'}, 'Деловой завтрак': {w:'ev-breakfast-w'}
+  'Офис': {w:'ev-first-w', m:'ev-office'},
+  'Zoom': {w:'ev-client-w', m:'ev-present'},
+  'Встреча с руководством': {w:'ev-boss-w', m:'ev-boss-m'},
+  'Встреча с командой': {w:'ev-breakfast-w', m:'ev-negot'},
+  'Собеседование': {w:'ev-interview-w', m:'ev-interview-m'},
+  'Первый рабочий день': {w:'ev-trip-w', m:'ev-boss-m'},
+  'Новая должность, повышение': {w:'ev-stage', m:'ev-office'},
+  'Casual Friday': {w:'ev-casual-w', m:'ev-casual-m'},
+  'Переговоры': {w:'ev-client-w', m:'ev-negot'},
+  'Встреча с клиентом или партнёром': {w:'ev-boss-w', m:'ev-casual-m'},
+  'Презентация, питч': {w:'ev-first-w', m:'ev-present'},
+  'Публичное выступление, конференция': {w:'ev-stage', m:'ev-interview-m'},
+  'Networking': {w:'ev-breakfast-w', m:'ev-negot'},
+  'Деловой завтрак': {w:'ev-breakfast-w', m:'ev-casual-m'},
+  'Деловой обед': {w:'ev-client-w', m:'ev-negot'},
+  'Деловой ужин': {w:'ev-interview-w', m:'ev-boss-m'},
+  'Командировка': {w:'ev-trip-w', m:'ev-office'},
+  'Культурное или светское событие': {w:'ev-stage', m:'ev-present'},
+  'Корпоратив': {w:'ev-casual-w', m:'ev-casual-m'},
+  'Cocktail': {w:'ev-interview-w', m:'ev-boss-m'},
+  'Торжественный деловой вечер': {w:'ev-stage', m:'ev-boss-m'},
+  'Gala, Black Tie': {w:'ev-stage', m:'ev-interview-m'},
+  'Неформальный вечер с коллегами и партнёрами': {w:'ev-casual-w', m:'ev-casual-m'}
 };
 function evImg(sit){ var e = EVIMG[sit]; if (!e) return ''; var f = e[st.sex || 'w'] || e['*']; return f ? 'business-img/' + f + '.jpg' : ''; }
 // Шаг 3: комментарий Милы. Ключ «ситуация|цель» или «ситуация». Абзацы через \n.
