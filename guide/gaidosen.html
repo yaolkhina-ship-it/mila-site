@@ -10,7 +10,7 @@
 <link rel="apple-touch-icon" href="/guide/apple-icon.png">
 <meta name="apple-mobile-web-app-title" content="Система">
 <link rel="stylesheet" href="ux.css?v=1">
-<link rel="stylesheet" href="app.css?v=5">
+<link rel="stylesheet" href="app.css?v=6">
 <style>
   @font-face{font-family:'Cormorant Garamond';font-style:italic;font-weight:200 300;font-display:swap;src:url(../fonts/cormorant-italic-light.woff) format('woff')}
   @font-face{font-family:'Cormorant Garamond';font-style:normal;font-weight:200 300;font-display:swap;src:url(../fonts/cormorant-normal-light.woff) format('woff')}
@@ -504,7 +504,7 @@ body{background:#0D1A1E;height:100%;}
     <div class="in">
   <div class="nav-h">Навигация</div>
   <div class="ni-row">
-    <div class="ni-new" onclick="scrollToEl('p_trend_satin')"><span class="ni-new-star">✦</span><div class="ni-new-t">Тренды</div><div class="ni-new-s">4 тренда сезона</div><span class="ni-new-b">NEW</span></div>
+    <div class="ni-new" onclick="scrollToEl('p_trend_satin')"><span class="ni-new-star">✦</span><div class="ni-new-t">Тренды</div><div class="ni-new-s">5 трендов сезона</div><span class="ni-new-b">NEW</span></div>
     <div class="ni-new" onclick="scrollToEl('p_contrast')"><span class="ni-new-star">✦</span><div class="ni-new-t">Контраст внешности</div><div class="ni-new-s">разбор по фото</div><span class="ni-new-b">NEW</span></div>
     <div class="ni-new" onclick="scrollToEl('p_drop_oct1')"><span class="ni-new-star">✦</span><div class="ni-new-t">Новый дроп</div><div class="ni-new-s">5 новых образов</div><span class="ni-new-b">NEW</span></div>
     <div class="ni-new" onclick="scrollToEl('p_rule_proportions')"><span class="ni-new-star">✦</span><div class="ni-new-t">Правило пропорций</div><div class="ni-new-s">проверка образа</div><span class="ni-new-b">NEW</span></div>
@@ -529,6 +529,7 @@ body{background:#0D1A1E;height:100%;}
     <div class="tone-item tr-item" onclick="scrollToEl('p_trend_prada')">Юбки в стиле Prada<span class="tr-new"></span></div>
     <div class="tone-item tr-item" onclick="scrollToEl('p_trend_cropped')">Короткий жакет<span class="tr-new"></span></div>
     <div class="tone-item tr-item" onclick="scrollToEl('p_trend_pendant')">Необычные подвески<span class="tr-new"></span></div>
+    <div class="tone-item tr-item" onclick="scrollToEl('p_trend_hats')">Головные уборы<span class="tr-new"></span></div>
   </div>
   <div class="ni" onclick="scrollToEl('p_promo_povod')"><span class="ni-n">05</span><div class="ni-body"><div class="ni-t">Промо от брендов<svg width="14" height="14" viewBox="0 0 24 24" style="margin-left:8px;vertical-align:-2px;" fill="#DC2626" stroke="#DC2626" stroke-width="0.5"><path d="M20.59 13.41L13.42 20.58a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><circle cx="7" cy="7" r="1.6" fill="#fff" stroke="none"/></svg></div></div></div>
   <div class="tone-index">
@@ -3192,9 +3193,9 @@ body{background:#0D1A1E;height:100%;}
 
 
   <!-- ══════ ТРЕНДЫ ══════ -->
-  <div class="pg snd tr-pg" id="p_trend_satin">
+  <div class="pg snd tr-pg" id="p_trend_satin" data-cover="trends/satin.jpg">
     <div class="in" style="background:var(--sand);">
-      <div class="lbl">Тренды · 01 / 04</div>
+      <div class="lbl">Тренды · 01 / 05</div>
       <div class="ins-h">Атласная сумка<span class="tr-new"></span></div>
       <div class="tr-count">6 образов</div>
       <div class="tr-grid">
@@ -3208,9 +3209,9 @@ body{background:#0D1A1E;height:100%;}
     </div>
     <div class="ft" style="background:var(--sand);">Mila Ushakova</div>
   </div>
-  <div class="pg snd tr-pg" id="p_trend_prada">
+  <div class="pg snd tr-pg" id="p_trend_prada" data-cover="trends/prada.jpg">
     <div class="in" style="background:var(--sand);">
-      <div class="lbl">Тренды · 02 / 04</div>
+      <div class="lbl">Тренды · 02 / 05</div>
       <div class="ins-h">Юбки в стиле Prada<span class="tr-new"></span></div>
       <div class="tr-count">8 образов</div>
       <div class="tr-grid">
@@ -3226,9 +3227,9 @@ body{background:#0D1A1E;height:100%;}
     </div>
     <div class="ft" style="background:var(--sand);">Mila Ushakova</div>
   </div>
-  <div class="pg snd tr-pg" id="p_trend_cropped">
+  <div class="pg snd tr-pg" id="p_trend_cropped" data-cover="trends/cropped.jpg">
     <div class="in" style="background:var(--sand);">
-      <div class="lbl">Тренды · 03 / 04</div>
+      <div class="lbl">Тренды · 03 / 05</div>
       <div class="ins-h">Короткий жакет<span class="tr-new"></span></div>
       <div class="tr-count">8 образов</div>
       <div class="tr-grid">
@@ -3244,9 +3245,9 @@ body{background:#0D1A1E;height:100%;}
     </div>
     <div class="ft" style="background:var(--sand);">Mila Ushakova</div>
   </div>
-  <div class="pg snd tr-pg" id="p_trend_pendant">
+  <div class="pg snd tr-pg" id="p_trend_pendant" data-cover="trends/pendant.jpg">
     <div class="in" style="background:var(--sand);">
-      <div class="lbl">Тренды · 04 / 04</div>
+      <div class="lbl">Тренды · 04 / 05</div>
       <div class="ins-h">Необычные подвески<span class="tr-new"></span></div>
       <div class="tr-count">6 образов</div>
       <div class="tr-grid">
@@ -3256,6 +3257,16 @@ body{background:#0D1A1E;height:100%;}
         <div class="tr-look" onclick="scrollToEl('p_look_25')"><img loading="lazy" src="looks/19.jpg" alt=""><span>помидоры</span></div>
         <div class="tr-look" onclick="scrollToEl('p_look_30')"><img loading="lazy" src="looks/22_beads.jpg" alt=""><span>бусины</span></div>
         <div class="tr-look" onclick="scrollToEl('p_look_18')"><img loading="lazy" src="looks/14_bluepants.jpg" alt=""><span>сандалии</span></div>
+      </div>
+    </div>
+    <div class="ft" style="background:var(--sand);">Mila Ushakova</div>
+  </div>
+
+  <div class="pg snd tr-pg" id="p_trend_hats" data-cover="trends/hats.jpg">
+    <div class="in" style="background:var(--sand);">
+      <div class="lbl">Тренды · 05 / 05</div>
+      <div class="ins-h">Головные уборы<span class="tr-new"></span></div>
+      <div class="tr-grid">
       </div>
     </div>
     <div class="ft" style="background:var(--sand);">Mila Ushakova</div>
@@ -4617,5 +4628,5 @@ html{scroll-snap-type:y proximity;}
 })();
 </script>
 <script src="ux.js?v=1"></script>
-<script src="app.js?v=5"></script>
+<script src="app.js?v=6"></script>
 </body></html>

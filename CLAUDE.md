@@ -37,15 +37,15 @@ A paid product: a mobile page of full-screen snap slides (`.pg`). `scrollToEl(id
 - `guide/app.js` + `guide/app.css` (bump `?v=`), loaded after ux.js. They hide the slide feed and build screens from the same DOM:
   home, colours (groups from the p4 tone-index start ids), trends (`.tr-pg`), drops (`p_look_drop_oct*` = October, other `p_look_drop_*` = September), search, «Мои» (`sys_favs`), «Ещё».
 - Hash routes: `#/`, `#/colors`, `#/color/N`, `#/trends`, `#/trend/<slug>`, `#/drop/oct|sep`, `#/search`, `#/mine`, `#/more`, `#/page/<pg id>` (the original page is moved into the screen and back). `/look/<look id>` on any route opens the look card.
-- Look card «Две стороны»: Палитра (photo + swatches computed in the browser) / Образ (cloned collage inside a `.in` box so ux.js item cards work, chips row), round ‹ › and colour/trend tags, sideways swipe.
+- Look card «Две стороны»: Палитра (photo only; the computed colour breakdown was removed 21.10 as misleading) / Образ (cloned collage inside a `.in` box so ux.js item cards work, chips row), round ‹ › and colour/trend tags, sideways swipe.
 - `<base href="/guide/">`: every in-app href is prefixed with `location.pathname`, or `#/x` would leave the page. Old links like `/guide#p_look_4` are translated on load. `window.scrollToEl` is overridden to route.
 - First visit shows «О Системе» (p2) once (`sys_app_intro`).
 - «Палитры» tab: full-screen palette feed `#/pal/<all|new|N>`; «Образ ›» opens the card on the look side.
-- Home hero «Палитра дня из искусства»: paintings in `guide/art/` (ART list in app.js, rotates by day of year), `#/art/<days back>` = breakdown (hex swatches, cool/warm, dark/light, rule-based harmony text, previous 3 days). The card's palette side uses the same breakdown.
+- Home hero «Палитра дня из искусства» and `#/art` were removed 21.10 at Yana's request (paintings still sit in `guide/art/`, unused).
 - CTA block on home and «Ещё»: «Стать резидентом» → bot `?start=club`; «Сотрудничество» → t.me/YanaOlkhina (`CONTACT` in app.js).
 - Design rules from Yana (20.10): keep the System colours and PT Serif, change navigation only; accent badges gold, never pink; «новинка» only next to a section heading, not on every card; palette first, then the look. When a layout misses, show 2–3 switchable variants and let her pick.
-- Edit a trend: change the `.tr-look` cells of its `p_trend_<slug>` page in gaidosen.html (and the nav list in p4); app.js reads them.
-- Trends (4, Mila's picks): Атласная сумка, Юбки в стиле Prada, Короткий жакет, Необычные подвески; pages `p_trend_<slug>`, nav section 04.
+- Edit a trend: change the `.tr-look` cells of its `p_trend_<slug>` page in gaidosen.html (and the nav list in p4); app.js reads them. Cover photo = `data-cover` on the page (`guide/trends/<slug>.jpg`), shown on the home row, as a photo card («плашка») in the trends list and on top of the trend screen. A trend with no looks shows only cover + title.
+- Trends (5): Атласная сумка, Юбки в стиле Prada, Короткий жакет, Необычные подвески, Головные уборы (added 21.10, no looks yet); pages `p_trend_<slug>`, nav section 04.
 
 ## Ideas in progress
 - A Sanzo Wada colour dictionary tool: the user picks the colour of their item, sees the nearest Wada colour, then his combinations as book spreads with the 70/20/10 rule. The data comes from sanzo-wada.dmbk.io (159 colours, 348 combinations).
