@@ -299,6 +299,16 @@ body.on-cover .view{padding-bottom:0}
 .cov.sl h1{font-size:64px;line-height:.9}
 .cov.sl .row3{margin-top:48px}
 .cov.sl .row3 button{font-family:var(--sans);font-weight:500;font-size:12px;letter-spacing:.14em}
+/* выбор пола: первый шаг и переключатель Ж | М в шапке шагов */
+.who2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:32px}
+.who2 button{position:relative;display:block;aspect-ratio:3/4;overflow:hidden;background:var(--ink)}
+.who2 img{width:100%;height:100%;object-fit:cover;display:block;opacity:.85}
+.who2 b{position:absolute;left:0;right:0;bottom:0;padding:32px 16px 16px;background:linear-gradient(transparent,rgba(17,17,17,.85));color:var(--paper);
+  font-family:var(--serif);font-weight:400;font-size:20px;letter-spacing:.06em;text-transform:uppercase}
+.stp .sx{display:flex;align-items:center;gap:8px;font-size:13px}
+.stp .sx button{font-family:var(--serif);font-size:15px;letter-spacing:.08em;color:var(--mute);padding:4px 2px;border-bottom:1px solid transparent}
+.stp .sx button.on{color:var(--ink);border-bottom-color:var(--bronze)}
+.stp .sx i{font-style:normal;color:var(--rule)}
 </style>
 </head>
 <body>
@@ -394,7 +404,7 @@ function crumbs(n){
     (n === 3 ? '<i>/</i><button data-go="2">' + esc(st.goal) + '</button>' : '') + '</div>';
 }
 var STEPS = ['Что предстоит', 'Ваша цель', 'Комментарий эксперта', 'Решение'];
-function stepHead(n){ return '<div class="stp"><span></span><span class="n">' + nn(n) + ' / ' + nn(STEPS.length) + '</span></div>'; }
+function stepHead(n){ return '<div class="stp"><span class="sx"><button data-sex="w"' + (st.sex !== 'm' ? ' class="on"' : '') + ' aria-label="Для женщин">Ж</button><i>|</i><button data-sex="m"' + (st.sex === 'm' ? ' class="on"' : '') + ' aria-label="Для мужчин">М</button></span><span class="n">' + nn(n) + ' / ' + nn(STEPS.length) + '</span></div>'; }
 function pager(n, canNext){
   return '<div class="pager"><button data-go="' + (n === 1 ? 'intro' : n - 1) + '" aria-label="Назад">‹</button><span>' + nn(n) + ' / ' + nn(STEPS.length) + '</span>' +
     '<button data-go="' + (n + 1) + '" aria-label="Дальше"' + (canNext && n < STEPS.length ? '' : ' disabled') + '>›</button></div>';
@@ -426,6 +436,12 @@ function intro(){
     '<div class="seg"><button data-sex="w"' + (st.sex !== 'm' ? ' class="on"' : '') + '>Для женщин</button><button data-sex="m"' + (st.sex === 'm' ? ' class="on"' : '') + '>Для мужчин</button></div>' +
     '<button class="cta" data-go="1">Начать</button>' +
     '<button class="ghost" data-go="tariffs"><u>Тарифы для компаний</u></button></div></div>', true);
+}
+function step0(){
+  show('<div class="pad">' + '<div class="stp"><span></span><span class="n">00 / ' + nn(STEPS.length) + '</span></div>' +
+    '<div class="h2">Для кого <i class="br">образ</i></div><div class="lede">Образы, детали и примеры в Системе разные для женщин и мужчин.</div>' +
+    '<div class="who2"><button data-sex="w" data-next="1"><img src="business-img/ev-boss-w.jpg" alt=""><b>Женщина</b></button>' +
+    '<button data-sex="m" data-next="1"><img src="business-img/ev-boss-m.jpg" alt=""><b>Мужчина</b></button></div></div>');
 }
 function step1(){
   var t = st.env || 0;
@@ -481,7 +497,7 @@ function tariffs(){
 }
 
 // История: «Назад» в доке, жест назад и кнопка браузера идут по шагам
-var VIEWS = {cover: cover, about: about, intro: intro, s1: step1, s2: step2, s3: step3, s4: step4, tariffs: tariffs};
+var VIEWS = {cover: cover, about: about, intro: intro, s0: step0, s1: step1, s2: step2, s3: step3, s4: step4, tariffs: tariffs};
 function draw(){ (VIEWS[st.view] || cover)(); document.body.classList.toggle('on-cover', st.view === 'cover'); document.getElementById('dBack').classList.toggle('off', st.view === 'cover'); document.getElementById('dTar').classList.toggle('off', st.view === 'tariffs'); }
 function go(view, patch, replace){
   for (var k in patch) st[k] = patch[k];
@@ -497,7 +513,7 @@ window.addEventListener('popstate', function(e){
 });
 document.getElementById('dBack').addEventListener('click', function(){
   if (history.state && history.length > 1 && history.state.view !== 'cover') history.back();
-  else go({s4:'s3', s3:'s2', s2:'s1', s1:'intro', intro:'about'}[st.view] || 'cover', {}, true);
+  else go({s4:'s3', s3:'s2', s2:'s1', s1:'intro', s0:'cover', intro:'about'}[st.view] || 'cover', {}, true);
 });
 document.getElementById('dTar').addEventListener('click', function(){ go('tariffs', {}); });
 
@@ -528,6 +544,7 @@ function onTap(e){
   var b = e.target.closest('button'); if (!b) return;
   if (b.dataset.sys) { location.href = '/guide'; return; }
   if (b.dataset.sex) { st.sex = b.dataset.sex; try { localStorage.setItem('img_sex', st.sex); } catch(e){}
+    if (b.dataset.next) return go('s1', {});
     if (document.body.classList.contains('menu-on')) openMenu(); draw(); return; }
   if (b.dataset.tab) return go('s1', {env: +b.dataset.tab});
   if (b.dataset.sit) return go('s2', {sit: b.dataset.sit, env: +b.dataset.env});
@@ -537,7 +554,7 @@ function onTap(e){
   if (b.dataset.go === 'about') return go('about', {});
   if (b.dataset.go === 'intro') return go('intro', {});
   if (b.dataset.go === 'tariffs') return go('tariffs', {});
-  if (b.dataset.go === '1') return go('s1', {});
+  if (b.dataset.go === '1') return go(st.sex ? 's1' : 's0', {});
   if (b.dataset.go === '2') return go(st.sit ? 's2' : 's1', {});
   if (b.dataset.go === '3') return go(st.goal ? 's3' : 's2', {});
   if (b.dataset.go === '4') return go('s4', {tab: 0});
