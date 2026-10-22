@@ -194,3 +194,12 @@ html.feed #ap{padding-bottom:0;}
 .a-trcov{display:block;width:calc(100% - 40px);margin:8px 20px 0;max-height:52svh;object-fit:cover;object-position:center 30%;border-radius:6px;}
 .a-trc img[src$="pendant.jpg"],.a-tc img[src$="pendant.jpg"]{object-position:center 96%;}
 .a-trc img[src$="satin.jpg"]{object-position:center 45%;}
+/* Скоро: Система имиджа (21.10): превью экранов, пометка «скоро», маленькая кнопка списка ожидания */
+.a-soon{font-style:normal;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold2);margin-left:10px;vertical-align:middle;}
+.a-pv{display:flex;gap:10px;overflow-x:auto;padding:0 20px 4px;scrollbar-width:none;}
+.a-pv::-webkit-scrollbar{display:none;}
+.a-pv img{flex:0 0 132px;width:132px;height:286px;object-fit:cover;object-position:top;border-radius:14px;border:1px solid rgba(13,26,30,.12);box-shadow:0 6px 18px rgba(13,26,30,.12);}
+.a-pv-t{padding:14px 20px 0;}
+.a-pv-t p{font-size:16px;line-height:1.4;font-style:italic;color:var(--deep);margin:0 0 8px;}
+.a-pv-t p.s{font-style:normal;font-size:13px;line-height:1.55;color:#5f6a6c;margin-bottom:14px;}
+.a-wait{display:inline-block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--deep);text-decoration:none;border:1px solid rgba(201,169,110,.8);border-radius:18px;padding:9px 16px;}
