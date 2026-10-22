@@ -104,7 +104,7 @@
       (CONTACT.indexOf('__') < 0 ? '<a class="a-btn line" href="' + CONTACT + '" target="_blank" rel="noopener">Сотрудничество</a>' : '') + '</div>';
   }
   /* «Система имиджа · скоро»: превью экранов на главной, лист ожидания в боте (?start=image) */
-  var IMG_WAIT = 'https://t.me/MilaUshakova_ClubBot?start=image';
+  var IMG_WAIT = '/predzapis?src=system';
   var IMG_IDEA = 'Цвет решает, как вы выглядите.<br>Имидж решает, как вас прочтут.';
   function imgTeaser() {
     return '<div class="a-sec"><b>Система имиджа <em class="a-soon">скоро</em></b></div>' +

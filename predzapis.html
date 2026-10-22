@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Система имиджа · предзапись</title>
+<meta name="description" content="Анкета предзаписи в Систему имиджа Милы Ушаковой. Приглашение придёт первым в день открытия.">
+<meta name="robots" content="noindex">
+<meta property="og:title" content="Система имиджа · предзапись">
+<meta property="og:description" content="Цвет решает, как вы выглядите. Имидж решает, как вас прочтут.">
+<meta property="og:image" content="https://www.milaushakova.com/guide/business-img/pv-1.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F4F2EE; --paper2:#E8E5DF; --ink:#111111; --ink2:#2B2B2B; --mute:#7E7B76;
+    --bronze:#B08F57; --rule:rgba(17,17,17,.12); --rule-d:rgba(244,242,238,.16);
+    --serif:'Oswald','Arial Narrow',sans-serif; --sans:'Jost',-apple-system,'Helvetica Neue',Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  .top{background:var(--ink);color:var(--paper);padding:20px 24px;display:flex;justify-content:space-between;align-items:center;font-family:var(--serif);font-size:12px;letter-spacing:4px;text-transform:uppercase}
+  .top span{color:var(--bronze);font-size:11px;letter-spacing:3px}
+  .hero{background:var(--ink);color:var(--paper);padding:56px 24px 64px}
+  .wrap{max-width:640px;margin:0 auto}
+  .eyebrow{font-family:var(--serif);font-size:12px;letter-spacing:4px;color:var(--bronze);text-transform:uppercase}
+  h1{font-family:var(--serif);font-weight:400;font-size:clamp(48px,13vw,84px);line-height:.98;margin:16px 0 0;text-transform:uppercase;letter-spacing:1px}
+  h1 em{font-style:normal;color:var(--bronze)}
+  .idea{margin:32px 0 0;padding:22px 0;border-top:1px solid var(--bronze);border-bottom:1px solid var(--bronze);font-family:var(--serif);font-weight:300;font-size:20px;line-height:1.4;letter-spacing:1px;text-transform:uppercase}
+  .idea span{color:var(--bronze)}
+  .lead{margin:28px 0 0;font-weight:300;font-size:17px;line-height:1.7;color:#d9d3c9}
+  form{padding:48px 24px 24px}
+  .q{padding:28px 0;border-bottom:1px solid var(--rule)}
+  .q:first-child{padding-top:0}
+  .n{font-family:var(--serif);font-size:12px;letter-spacing:3px;color:var(--bronze)}
+  .label{display:block;margin-top:8px;font-family:var(--serif);font-weight:400;font-size:22px;line-height:1.2;text-transform:uppercase;letter-spacing:.5px}
+  .hint{margin-top:6px;font-size:14px;color:var(--mute);font-weight:300}
+  input[type=text],input[type=email]{width:100%;margin-top:16px;padding:12px 0;border:0;border-bottom:1px solid var(--ink);background:transparent;font-family:var(--sans);font-size:18px;font-weight:300;color:var(--ink);border-radius:0;outline:none;-webkit-appearance:none}
+  input[type=text]:focus,input[type=email]:focus{border-bottom-color:var(--bronze)}
+  .opts{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+  .opts label{position:relative;cursor:pointer}
+  .opts input{position:absolute;opacity:0;pointer-events:none}
+  .opts span{display:inline-block;padding:11px 16px;border:1px solid var(--rule);font-size:15px;font-weight:300;line-height:1.2;transition:background .15s,border-color .15s,color .15s}
+  .opts input:checked + span{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+  .opts input:focus-visible + span{outline:2px solid var(--bronze);outline-offset:2px}
+  .consent{display:flex;gap:12px;align-items:flex-start;margin-top:28px;font-size:14px;line-height:1.6;color:var(--ink2);font-weight:300;cursor:pointer}
+  .consent input{margin-top:3px;width:18px;height:18px;accent-color:var(--ink);flex:none}
+  .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+  button{margin-top:32px;width:100%;padding:18px 24px;border:1px solid var(--ink);background:var(--ink);color:var(--paper);font-family:var(--serif);font-size:14px;letter-spacing:4px;text-transform:uppercase;cursor:pointer;border-radius:0;-webkit-appearance:none}
+  button:hover{background:var(--ink2)}
+  button[disabled]{opacity:.5;cursor:default}
+  .err{min-height:22px;margin-top:14px;font-size:14px;color:#8a2a1e}
+  .done{display:none;padding:72px 24px 80px;text-align:center}
+  .done h2{font-family:var(--serif);font-weight:400;font-size:clamp(38px,10vw,56px);line-height:1.02;margin:16px 0 0;text-transform:uppercase}
+  .done p{max-width:440px;margin:22px auto 0;font-size:17px;line-height:1.7;font-weight:300;color:var(--ink2)}
+  .done .sig{margin-top:30px;font-family:var(--serif);font-size:14px;letter-spacing:3px;text-transform:uppercase}
+  .sent form{display:none}
+  .sent .done{display:block}
+  @media (min-width:700px){ .top,.hero,form,.done{padding-left:40px;padding-right:40px} }
+</style>
+</head>
+<body>
+<div class="top"><div>Mila Ushakova</div><span>Первые числа ноября</span></div>
+
+<header class="hero"><div class="wrap">
+  <div class="eyebrow">Предзапись</div>
+  <h1>Система<br><em>имиджа</em></h1>
+  <p class="idea">Цвет решает, как вы выглядите.<br><span>Имидж решает, как вас прочтут.</span></p>
+  <p class="lead">Восемь коротких вопросов. Приглашение придёт вам первым в день открытия, а ответы помогут мне решить, какие ситуации и образы открыть в первую очередь.</p>
+</div></header>
+
+<main class="wrap" id="main">
+<form id="f" novalidate>
+  <div class="q">
+    <div class="n">01</div>
+    <label class="label" for="name">Как к вам обращаться</label>
+    <input type="text" id="name" name="name" autocomplete="name" required>
+  </div>
+  <div class="q">
+    <div class="n">02</div>
+    <label class="label" for="email">E-mail</label>
+    <div class="hint">На него придёт приглашение</div>
+    <input type="email" id="email" name="email" autocomplete="email" inputmode="email" required>
+  </div>
+  <div class="q">
+    <div class="n">03</div>
+    <label class="label" for="tg">Telegram</label>
+    <div class="hint">Необязательно, например @username</div>
+    <input type="text" id="tg" name="tg" autocomplete="off">
+  </div>
+  <div class="q">
+    <div class="n">04</div>
+    <div class="label">Для кого образ</div>
+    <div class="opts">
+      <label><input type="radio" name="sex" value="Для женщины"><span>Для женщины</span></label>
+      <label><input type="radio" name="sex" value="Для мужчины"><span>Для мужчины</span></label>
+      <label><input type="radio" name="sex" value="Для обоих"><span>Для обоих</span></label>
+    </div>
+  </div>
+  <div class="q">
+    <div class="n">05</div>
+    <div class="label">Ваша роль</div>
+    <div class="opts">
+      <label><input type="radio" name="role" value="Собственник бизнеса"><span>Собственник бизнеса</span></label>
+      <label><input type="radio" name="role" value="Топ-менеджер, руководитель"><span>Топ-менеджер, руководитель</span></label>
+      <label><input type="radio" name="role" value="Специалист в компании"><span>Специалист в компании</span></label>
+      <label><input type="radio" name="role" value="Эксперт, работаю на себя"><span>Эксперт, работаю на себя</span></label>
+      <label><input type="radio" name="role" value="В поиске работы"><span>В поиске работы</span></label>
+      <label><input type="radio" name="role" value="Другое"><span>Другое</span></label>
+    </div>
+  </div>
+  <div class="q">
+    <div class="n">06</div>
+    <div class="label">Где имидж нужен вам прежде всего</div>
+    <div class="hint">Можно несколько</div>
+    <div class="opts">
+      <label><input type="checkbox" name="places" value="Офис"><span>Офис, каждый день</span></label>
+      <label><input type="checkbox" name="places" value="Переговоры"><span>Переговоры</span></label>
+      <label><input type="checkbox" name="places" value="Встречи с клиентами"><span>Встречи с клиентами</span></label>
+      <label><input type="checkbox" name="places" value="Собеседования"><span>Собеседования</span></label>
+      <label><input type="checkbox" name="places" value="Zoom"><span>Zoom и онлайн-встречи</span></label>
+      <label><input type="checkbox" name="places" value="Выступления"><span>Выступления, сцена</span></label>
+      <label><input type="checkbox" name="places" value="Деловой ужин"><span>Деловой ужин, вечер</span></label>
+    </div>
+  </div>
+  <div class="q">
+    <div class="n">07</div>
+    <div class="label">Какое впечатление важнее всего</div>
+    <div class="opts">
+      <label><input type="radio" name="impression" value="Вызвать доверие"><span>Вызвать доверие</span></label>
+      <label><input type="radio" name="impression" value="Показать статус"><span>Показать статус</span></label>
+      <label><input type="radio" name="impression" value="Убедить"><span>Убедить</span></label>
+      <label><input type="radio" name="impression" value="Запомниться"><span>Запомниться</span></label>
+      <label><input type="radio" name="impression" value="Расположить к себе"><span>Расположить к себе</span></label>
+    </div>
+  </div>
+  <div class="q">
+    <div class="n">08</div>
+    <div class="label">Вы уже со мной?</div>
+    <div class="opts">
+      <label><input type="checkbox" name="status" value="Есть Система по цвету"><span>Есть «Система по цвету»</span></label>
+      <label><input type="checkbox" name="status" value="Резидент Fashion клуба"><span>Резидент Fashion клуба</span></label>
+      <label><input type="checkbox" name="status" value="Пока нет"><span>Пока нет</span></label>
+    </div>
+  </div>
+
+  <div class="hp" aria-hidden="true"><input type="text" name="website" tabindex="-1" autocomplete="off"></div>
+
+  <label class="consent"><input type="checkbox" name="consent" id="consent"><span>Я соглашаюсь на обработку персональных данных в соответствии с <a href="/privacy" target="_blank">политикой конфиденциальности</a></span></label>
+
+  <button type="submit" id="btn">Записаться в список первых</button>
+  <div class="err" id="err" role="alert"></div>
+</form>
+
+<section class="done" aria-live="polite">
+  <div class="eyebrow">Система имиджа</div>
+  <h2>Вы в списке первых</h2>
+  <p>Спасибо. Ваша анкета у меня. Приглашение придёт на вашу почту в первых числах ноября, раньше, чем откроется общий доступ.</p>
+  <div class="sig">Мила Ушакова</div>
+</section>
+</main>
+
+<script>
+(function () {
+  var f = document.getElementById('f'), btn = document.getElementById('btn'), err = document.getElementById('err');
+  var src = (new URLSearchParams(location.search).get('src') || 'direct').slice(0, 40);
+  function val(n) { var el = f.querySelector('[name="' + n + '"]:checked'); return el ? el.value : ''; }
+  function vals(n) { return Array.prototype.map.call(f.querySelectorAll('[name="' + n + '"]:checked'), function (el) { return el.value; }); }
+  f.addEventListener('submit', function (e) {
+    e.preventDefault();
+    err.textContent = '';
+    var data = {
+      name: f.name.value.trim(), email: f.email.value.trim(), tg: f.tg.value.trim(),
+      sex: val('sex'), role: val('role'), places: vals('places'), impression: val('impression'),
+      status: vals('status'), consent: f.consent.checked, website: f.website.value, src: src
+    };
+    if (!data.name) { err.textContent = 'Напишите, как к вам обращаться.'; f.name.focus(); return; }
+    if (!/^[^@\s]+@[^@\s]+\.[a-z]{2,}$/i.test(data.email)) { err.textContent = 'Проверьте e-mail.'; f.email.focus(); return; }
+    if (!data.consent) { err.textContent = 'Отметьте согласие на обработку данных.'; return; }
+    btn.disabled = true; btn.textContent = 'Отправляю…';
+    fetch('/api/predzapis', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
+      .then(function (r) { return r.json().then(function (j) { if (!r.ok || !j.ok) throw 0; }); })
+      .then(function () { document.body.classList.add('sent'); window.scrollTo(0, document.getElementById('main').offsetTop - 20); })
+      .catch(function () { btn.disabled = false; btn.textContent = 'Записаться в список первых'; err.textContent = 'Не получилось отправить. Попробуйте ещё раз или напишите в поддержку.'; });
+  });
+})();
+</script>
+
+<div id="legal-strip" style="clear:both;position:relative;z-index:5;padding:22px 16px 26px;text-align:center;font-family:-apple-system,'Helvetica Neue',Arial,sans-serif;font-size:12px;line-height:1.7;color:inherit;opacity:.72;">
+  <a href="/oferta" target="_blank" style="color:inherit;text-decoration:underline;margin:0 9px;white-space:nowrap;">Договор оферты</a>
+  <a href="/privacy" target="_blank" style="color:inherit;text-decoration:underline;margin:0 9px;white-space:nowrap;">Политика конфиденциальности</a>
+  <a href="/privacy" target="_blank" style="color:inherit;text-decoration:underline;margin:0 9px;white-space:nowrap;">Согласие на обработку ПД</a>
+  <a href="https://t.me/MilaUshakova_ClubBot?start=support" target="_blank" style="color:inherit;text-decoration:underline;margin:0 9px;white-space:nowrap;">Поддержка</a>
+  <div style="margin-top:6px;">© 2026 · ИП Ольхина Я.Ф., ИНН 222411003828, ОГРНИП 326220200112474</div>
+</div>
+</body>
+</html>
