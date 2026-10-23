@@ -82,8 +82,8 @@ html.appmode #av .pg > .in{padding-bottom:110px;}
 .a-sheet .sw-in{transition:transform .2s ease,opacity .2s ease;}
 
 /* нижняя панель */
-.a-tab{position:fixed;left:0;right:0;bottom:0;z-index:10000;display:grid;grid-template-columns:repeat(5,1fr);max-width:480px;margin:0 auto;padding:6px 4px calc(6px + env(safe-area-inset-bottom));background:rgba(13,26,30,.97);border-top:.5px solid rgba(201,169,110,.35);}
-.a-tab a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-height:52px;text-decoration:none;font-size:10px;letter-spacing:.04em;color:rgba(242,237,240,.6);-webkit-tap-highlight-color:transparent;}
+.a-tab{position:fixed;left:0;right:0;bottom:0;z-index:10000;display:grid;grid-template-columns:repeat(6,1fr);max-width:480px;margin:0 auto;padding:6px 2px calc(6px + env(safe-area-inset-bottom));background:rgba(13,26,30,.97);border-top:.5px solid rgba(201,169,110,.35);}
+.a-tab a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-height:52px;text-decoration:none;font-size:9.5px;letter-spacing:.02em;color:rgba(242,237,240,.6);-webkit-tap-highlight-color:transparent;}
 .a-tab a.on{color:var(--gold);}
 .a-tab svg{width:22px;height:22px;}
 .a-tab .badge{position:absolute;margin:-18px 0 0 22px;min-width:16px;height:16px;padding:0 4px;border-radius:8px;background:var(--gold);color:#0D1A1E;font-size:9px;line-height:16px;text-align:center;}
@@ -203,3 +203,8 @@ html.feed #ap{padding-bottom:0;}
 .a-pv-t p{font-size:16px;line-height:1.4;font-style:italic;color:var(--deep);margin:0 0 8px;}
 .a-pv-t p.s{font-style:normal;font-size:13px;line-height:1.55;color:#5f6a6c;margin-bottom:14px;}
 .a-wait{display:inline-block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--deep);text-decoration:none;border:1px solid rgba(201,169,110,.8);border-radius:18px;padding:9px 16px;}
+
+.a-chips{display:flex;gap:6px;overflow-x:auto;margin:0 0 16px;padding:0 20px;scrollbar-width:none;}
+.a-chips::-webkit-scrollbar{display:none;}
+.a-chips a{flex:0 0 auto;font-size:12px;padding:8px 13px;border-radius:16px;border:.5px solid rgba(13,26,30,.25);color:#0D1A1E;text-decoration:none;}
+.a-chips a.on{background:#0D1A1E;border-color:#0D1A1E;color:#f5f0ea;}

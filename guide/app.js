@@ -69,11 +69,12 @@
     home: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>',
     col: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="9"/><circle cx="8.5" cy="10" r="1.4"/><circle cx="13" cy="7.8" r="1.4"/><circle cx="16.2" cy="11.5" r="1.4"/><path d="M12 21a2.5 2.5 0 0 1 0-5h1.5"/></svg>',
     tr: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 18l5-6 4 3 7-9"/><path d="M15 6h5v5"/></svg>',
+    look: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 6.5a1.8 1.8 0 1 1 1.8 1.8c-.9 0-1.8.6-1.8 1.5v.7"/><path d="M12 10.5l-9 6.3c-.8.6-.4 1.7.6 1.7h16.8c1 0 1.4-1.1.6-1.7z"/></svg>',
     se: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg>',
     me: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.5-7 10-7 10z"/></svg>'
   };
   var tab = document.createElement('nav'); tab.className = 'a-tab'; tab.setAttribute('aria-label', 'Разделы Системы');
-  tab.innerHTML = '<a href="' + H + '#/" data-t="home">' + I.home + 'Главная</a><a href="' + H + '#/pal/all" data-t="pal">' + I.col + 'Палитры</a>' +
+  tab.innerHTML = '<a href="' + H + '#/" data-t="home">' + I.home + 'Главная</a><a href="' + H + '#/pal/all" data-t="pal">' + I.col + 'Палитры</a><a href="' + H + '#/looks/all" data-t="looks">' + I.look + 'Образы</a>' +
     '<a href="' + H + '#/trends" data-t="trends">' + I.tr + 'Тренды</a><a href="' + H + '#/search" data-t="search">' + I.se + 'Поиск</a>' +
     '<a href="' + H + '#/mine" data-t="mine">' + I.me + 'Мои<span class="badge" hidden></span></a>';
   document.body.appendChild(tab);
@@ -153,6 +154,20 @@
           '<div class="cap"><div><div class="a-lbl" style="color:var(--gold)">' + (L.isNew ? 'Новинка · октябрь' : (L.color != null ? esc(colors[L.color].name) : 'Дроп сентября')) + '</div><div class="t">' + esc(L.name) + '</div><div class="sws dots" data-src="' + esc(L.pal) + '"></div></div>' +
           '<a class="a-btn gold go" href="' + H + '#/pal/' + f + '/look/' + id + '">Образ ›</a></div></section>'; }).join('') + '</div>';
   };
+  /* все образы сеткой: фильтр «Все», «Новинки» и по цветам */
+  function lookList(f) {
+    if (f === 'new') return order.filter(function (id) { return /drop_/.test(id); });
+    if (f != null && f !== '' && f !== 'all' && colors[+f]) return colors[+f].looks;
+    return order;
+  }
+  V.looks = function (f) {
+    f = f || 'all';
+    var ids = lookList(f);
+    var chips = [['all', 'Все'], ['new', 'Новинки']].concat(colors.map(function (c, i) { return [String(i), c.name]; }));
+    return top('', 'Образы') + '<h1 class="a-h">Образы</h1><div class="a-sub">' + obr(ids.length) + '</div>' +
+      '<div class="a-chips">' + chips.map(function (c) { return '<a href="' + H + '#/looks/' + c[0] + '"' + (c[0] === f ? ' class="on"' : '') + '>' + esc(c[1]) + '</a>'; }).join('') + '</div>' +
+      grid(ids, '/looks/' + f);
+  };
   V.colors = function () {
     return top('', 'Цвета') + '<h1 class="a-h">Цветовые сочетания</h1><div class="a-sub">9 цветов · ' + obr(colors.reduce(function (s, c) { return s + c.looks.length; }, 0)) + '</div>' +
       '<div class="a-list">' + colors.map(function (c, i) { return '<a href="' + H + '#/color/' + i + '"><i style="background:' + (SW[c.name] || '#999') + '"></i><span class="t">' + esc(c.name) + '</span><span class="n">' + c.looks.length + ' ›</span></a>'; }).join('') + '</div>';
@@ -227,6 +242,7 @@
     if (m[1] === 'trend') { var t = trends.filter(function (x) { return x.slug === m[2]; })[0]; if (t) return t.looks; }
     if (m[1] === 'drop' && DROPS[m[2]]) return DROPS[m[2]].ids;
     if (m[1] === 'pal') return palList(m[2]);
+    if (m[1] === 'looks') return lookList(m[2]);
     if (m[1] === 'mine') return favs();
     if (m[1] === 'search') return searchIds.length ? searchIds : order;
     return order;
@@ -367,7 +383,7 @@
         $$('.a-hint button', av).forEach(function (b) { b.addEventListener('click', function () { inp.value = b.textContent; runSearch(b.textContent); }); });
         if (lastQ) runSearch(lastQ);
       }
-      var tk = { home: 'home', pal: 'pal', colors: 'pal', color: 'pal', trends: 'trends', trend: 'trends', search: 'search', mine: 'mine' }[v] || '';
+      var tk = { home: 'home', pal: 'pal', looks: 'looks', colors: 'pal', color: 'pal', trends: 'trends', trend: 'trends', search: 'search', mine: 'mine' }[v] || '';
       $$('a', tab).forEach(function (a) { a.classList.toggle('on', a.dataset.t === tk); });
       curBase = base;
       window.scrollTo(0, scrolls[base] || 0);
