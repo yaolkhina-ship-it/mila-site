@@ -105,7 +105,7 @@
   }
   /* «Система имиджа · скоро»: превью экранов на главной, лист ожидания в боте (?start=image) */
   var IMG_WAIT = '/predzapis?src=system';
-  var IMG_IDEA = 'Цвет решает, как вы выглядите.<br>Имидж решает, как вас прочтут.';
+  var IMG_IDEA = 'Цвет меняет образ.<br>Имидж меняет возможности.';
   function imgTeaser() {
     return '<div class="a-sec"><b>Система имиджа <em class="a-soon">скоро</em></b></div>' +
       '<div class="a-pv">' + [1, 2, 3].map(function (i) { return '<img loading="lazy" src="business-img/pv-' + i + '.jpg" alt="">'; }).join('') + '</div>' +

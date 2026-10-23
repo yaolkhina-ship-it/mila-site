@@ -198,8 +198,8 @@ var ABOUT = {
   weekend:'Фильмы, книги, журналы и наблюдения на выходные.',
   events:'Встречи, эфиры и лекции гостей.'
 };
-var TYPES = ['лекция','подкаст','подборка','пост','анонс','видео'];
-var PLURAL = {'лекция':'Лекции','подкаст':'Подкасты','разбор':'Разборы','подборка':'Подборки','пост':'Посты','анонс':'Анонсы','видео':'Видео'};
+var TYPES = ['вебинар','лекция','подкаст','подборка','пост','анонс','видео'];
+var PLURAL = {'вебинар':'Вебинары','лекция':'Лекции','подкаст':'Подкасты','разбор':'Разборы','подборка':'Подборки','пост':'Посты','анонс':'Анонсы','видео':'Видео'};
 var DAYS = ['воскресенье','понедельник','вторник','среда','четверг','пятница','суббота'];
 
 var D = null, RUB = {}, stack = [];
@@ -215,15 +215,15 @@ function msk(t){ return new Date((t + 3 * 3600) * 1000); } // дата по Мо
 var MON = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
 var MONN = ['январь','февраль','март','апрель','май','июнь','июль','август','сентябрь','октябрь','ноябрь','декабрь'];
 function dshort(t){ var d = msk(t); return d.getUTCDate() + ' ' + MON[d.getUTCMonth()].slice(0, 3); }
-var GENERIC = {'Подкаст Милы':1,'Видео':1,'Лекция':1,'Материал':1};
+var GENERIC = {'Подкаст Милы':1,'Видео':1,'Лекция':1,'Материал':1,'Запись эфира':1,'Запись подкаста':1,'Подкаст':1,'Запись беседы':1,'Голос Милы':1};
 var CODE = /^(код доступа|секретный код|пароль)/i;
 function bare(it){ return CODE.test(it.h || '') || (!it.s && (GENERIC[it.h] || !/[A-Za-zА-Яа-яЁё]/.test(it.h || ''))); }
 // Записи эфиров в канале выглядят как ссылка с кодом доступа: это лекции
 var REC = /запис[ьи]\s+(нашего\s+)?(эфира|беседы|вебинара|лекции|встречи)|#запись|код доступа|секретный код|приятного просмотра|\d+\s*минут[аы]?\s*$/i;
 function lectures(items){
   items.forEach(function(i){
-    if (i.k !== 'лекция' && REC.test(i.h + ' ' + i.s)) { i.k = 'лекция'; i.r = 'events'; }
-    if (i.k === 'лекция' && (CODE.test(i.h || '') || /^запись эфира$/i.test(i.h))) i.h = 'Запись эфира';
+    if (i.k !== 'лекция' && i.k !== 'вебинар' && REC.test(i.h + ' ' + i.s)) { i.k = 'вебинар'; i.r = 'events'; }
+    if ((i.k === 'лекция' || i.k === 'вебинар') && (CODE.test(i.h || '') || /^запись эфира$/i.test(i.h))) i.h = 'Запись эфира';
   });
 }
 // Голосовое или видео без подписи берёт заголовок соседнего поста с текстом (Мила выкладывает их рядом)
@@ -239,7 +239,7 @@ function adopt(items){
     }
     if (!best) return;
     // Короткое видео без подписи это часть поста рядом: в списке не дублируем
-    if (it.k !== 'подкаст' && it.k !== 'лекция') { it.drop = 1; return; }
+    if (it.k !== 'подкаст' && it.k !== 'лекция' && it.k !== 'вебинар') { it.drop = 1; return; }
     it.h = best.h; it.r = best.r; it.tags = best.tags; it.s = best.s;
     if (best.k === 'пост' || best.k === 'анонс') best.drop = 1; // подпись к подкасту: показываем один раз, сам подкаст
   });
@@ -247,7 +247,7 @@ function adopt(items){
 function title(it){
   if (/[A-Za-zА-Яа-яЁё]/.test(it.h || '')) return it.h;
   if (it.s && /[A-Za-zА-Яа-яЁё]/.test(it.s)) return it.s.slice(0, 56).replace(/\s+\S*$/, '') + '…';
-  return ({'подкаст':'Подкаст Милы','лекция':'Лекция','видео':'Видео'})[it.k] || 'Материал';
+  return ({'подкаст':'Подкаст Милы','лекция':'Лекция','вебинар':'Запись эфира','видео':'Видео'})[it.k] || 'Материал';
 }
 function mins(it){ return it.d >= 45 ? Math.max(1, Math.round(it.d / 60)) + ' мин' : ''; }
 function meta(it, withRubric){
@@ -278,8 +278,9 @@ function home(){
   if (week.length < 3) { week = items.slice(0, 6); weekLabel = 'Новое в клубе'; }
   var lect = items.filter(function(i){ return i.k === 'лекция'; });
   var pods = items.filter(function(i){ return i.k === 'подкаст'; });
-  var media = lect.concat(pods);
-  var hero = lect[0] && lect[0].t > now - 21 * 86400 ? lect[0] : (pods[0] || items[0]);
+  var webs = items.filter(function(i){ return i.k === 'вебинар'; });
+  var big = webs.concat(lect).sort(function(a, b){ return b.t - a.t; });
+  var hero = big[0] && big[0].t > now - 21 * 86400 ? big[0] : (pods[0] || items[0]);
   var cnt = {}; items.forEach(function(i){ cnt[i.r] = (cnt[i.r] || 0) + 1; });
   var name = D.user && D.user.first_name;
   var h = (dnow.getUTCHours());
@@ -294,13 +295,15 @@ function home(){
     '<div id="res"></div><div id="main">';
   if (hero) html += '<button class="hero" data-open="' + hero.id + '"><img src="' + img(hero, 1) + '" alt=""><div class="cap"><small>' +
     esc(DAYS[msk(hero.t).getUTCDay()] + ' · ' + (RUB[hero.r] || '')) + '</small><b>' + esc(title(hero)) + '</b><span class="go">' +
-    (hero.k === 'подкаст' ? 'СЛУШАТЬ' : hero.k === 'лекция' ? 'СМОТРЕТЬ' : 'ОТКРЫТЬ') + (mins(hero) ? ' · ' + mins(hero).toUpperCase() : '') + '</span></div></button>';
+    (hero.k === 'подкаст' ? 'СЛУШАТЬ' : hero.k === 'лекция' || hero.k === 'вебинар' ? 'СМОТРЕТЬ' : 'ОТКРЫТЬ') + (mins(hero) ? ' · ' + mins(hero).toUpperCase() : '') + '</span></div></button>';
   html += '<div class="sec">' + weekLabel.toUpperCase() + '</div>' + week.map(function(i){ return row(i, true); }).join('');
   html += '<div class="sec">РАЗДЕЛЫ</div><div class="grid">' + ORDER.filter(function(r){ return cnt[r]; }).map(function(r, n, a){
     return '<button class="g' + (n === a.length - 1 && a.length % 2 ? ' wide' : '') + '" data-rub="' + r + '"><img loading="lazy" src="/club/img/' + IMG[r][0] + '.jpg" alt=""><span>' +
       esc(RUB[r]) + '<i>' + cnt[r] + '</i></span></button>';
   }).join('') + '</div>';
-  if (lect.length) html += '<div class="sec">ЛЕКЦИИ И ЭФИРЫ</div><div class="shelf">' + lect.slice(0, 12).map(card).join('') + '</div>' +
+  if (webs.length) html += '<div class="sec">ВЕБИНАРЫ И ЭФИРЫ</div><div class="shelf">' + webs.slice(0, 12).map(card).join('') + '</div>' +
+    (webs.length > 2 ? '<button class="more" data-type="web">ВСЕ ' + webs.length + '</button>' : '');
+  if (lect.length) html += '<div class="sec">ЛЕКЦИИ</div><div class="shelf">' + lect.slice(0, 12).map(card).join('') + '</div>' +
     (lect.length > 2 ? '<button class="more" data-type="lect">ВСЕ ' + lect.length + '</button>' : '');
   if (pods.length) html += '<div class="sec">ПОДКАСТЫ МИЛЫ</div><div class="shelf">' + pods.slice(0, 12).map(card).join('') + '</div>' +
     '<button class="more" data-type="pods">ВСЕ ' + pods.length + '</button>';
@@ -321,13 +324,14 @@ function list(items, opts){
 }
 
 function rubric(st){
-  var all = D.items.filter(function(i){ return st.rub ? i.r === st.rub : i.k === (st.media === 'lect' ? 'лекция' : 'подкаст'); });
+  var MK = {lect: 'лекция', web: 'вебинар', pods: 'подкаст'};
+  var all = D.items.filter(function(i){ return st.rub ? i.r === st.rub : i.k === (MK[st.media] || 'подкаст'); });
   var types = TYPES.filter(function(t){ return all.some(function(i){ return i.k === t; }); });
   var items = st.type ? all.filter(function(i){ return i.k === st.type; }) : all;
-  var name = st.rub ? RUB[st.rub] : st.media === 'lect' ? 'Лекции и эфиры' : 'Подкасты Милы';
-  var pic = st.rub ? IMG[st.rub][1 % IMG[st.rub].length] : st.media === 'lect' ? 'art_klimt' : 'art_degas';
+  var name = st.rub ? RUB[st.rub] : st.media === 'lect' ? 'Лекции' : st.media === 'web' ? 'Вебинары и эфиры' : 'Подкасты Милы';
+  var pic = st.rub ? IMG[st.rub][1 % IMG[st.rub].length] : st.media === 'lect' ? 'art_klimt' : st.media === 'web' ? 'art_madamex' : 'art_degas';
   return '<div class="view"><div class="banner"><img src="/club/img/' + pic + '.jpg" alt=""><div class="t"><div class="orn">◆ ◆ ◆</div><span class="kick">Рубрика</span><h2>' + esc(name) +
-    '</h2><p>' + esc(st.rub ? ABOUT[st.rub] : st.media === 'lect' ? 'Записи эфиров, вебинаров и встреч с гостями.' : 'Голосовые подкасты Милы о стиле, брендах и искусстве.') + '</p></div></div>' +
+    '</h2><p>' + esc(st.rub ? ABOUT[st.rub] : st.media === 'lect' ? 'Лекции Милы и приглашённых экспертов: одна тема, разобранная до конца.' : st.media === 'web' ? 'Записи больших встреч клуба: вебинары, эфиры и беседы с гостями в Zoom.' : 'Голосовые подкасты Милы о стиле, брендах и искусстве.') + '</p></div></div>' +
     (types.length > 1 ? '<div class="chips"><button class="chip' + (st.type ? '' : ' on') + '" data-chip="">Все · ' + all.length + '</button>' +
       types.map(function(t){ return '<button class="chip' + (st.type === t ? ' on' : '') + '" data-chip="' + t + '">' + PLURAL[t] + '</button>'; }).join('') + '</div>' : '') +
     list(items, {months: true, withRubric: !st.rub, limit: st.limit}) + '<div class="foot orn">◆</div></div>';
@@ -471,7 +475,7 @@ function load(){
       adopt(D.items);
       // Разборы (и рубрика «Ваш гардероб») в материалы не выводим
       pics(D.items);
-      D.items = D.items.filter(function(i){ return !i.drop && (i.k === 'лекция' || i.k !== 'разбор' && i.r !== 'garderob' && !/разбор/i.test(i.h + ' ' + i.s + ' ' + (i.tags || []).join(' '))); });
+      D.items = D.items.filter(function(i){ return !i.drop && (i.k === 'лекция' || i.k === 'вебинар' || i.k !== 'разбор' && i.r !== 'garderob' && !/разбор/i.test(i.h + ' ' + i.s + ' ' + (i.tags || []).join(' '))); });
       render();
     });
   }).catch(function(){
