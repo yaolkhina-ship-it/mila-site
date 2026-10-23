@@ -288,7 +288,7 @@
   window.addEventListener('resize', fitLook);
   function openSheet(id, base) {
     var L = looks[id]; if (!L) return closeSheet();
-    if (sheetId !== id) side = L.pal && base.indexOf('/pal') !== 0 ? 'pal' : 'look';
+    if (sheetId !== id) side = L.pal && base.indexOf('/pal') !== 0 && base.indexOf('/looks') !== 0 ? 'pal' : 'look'; // из «Палитр» и «Образов» сразу образ
     ctxIds = listFor(base); ctxBase = base; sheetId = id; LS.set('app_last', id);
     var ix = ctxIds.indexOf(id), n = ctxIds.length, fav = favs().indexOf(id) >= 0;
     var wrap = L.pg.querySelector('.look-collage-wrap').cloneNode(true), links = L.pg.querySelector('.look-links').cloneNode(true);
