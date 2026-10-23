@@ -462,7 +462,7 @@ function load(){
   req.then(function(r){
     if (tok && r.status === 401) { tokSet(''); loginForm(''); return; }
     if (tok && r.status === 403) { tokSet(''); state('art_madamex', 'Доступ<br>закончился', 'Материалы открыты резидентам клуба. Продлите участие, и мы пришлём новый логин и пароль.', 'Продлить участие', function(){ toBot('club'); }); return; }
-    if (r.status === 403) { state('art_madamex', 'Доступ<br>для резидентов', 'Материалы открыты участницам клуба. Продлите участие, и всё снова будет здесь.', 'Продлить участие', function(){ toBot('club'); }); return; }
+    if (r.status === 403) { state('art_madamex', 'Доступ<br>для резидентов', 'Материалы открыты резидентам клуба. Продлите участие, и всё снова будет здесь.', 'Продлить участие', function(){ toBot('club'); }); return; }
     if (!r.ok) throw new Error(r.status);
     return r.json().then(function(d){
       D = d; RUB = d.rubrics || {};
