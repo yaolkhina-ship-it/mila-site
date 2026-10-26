@@ -113,6 +113,30 @@
       '<div class="a-pv-t"><p>' + IMG_IDEA + '</p><p class="s">Что надеть на переговоры, собеседование или деловой ужин, чтобы впечатление работало на вашу цель.</p>' +
       '<a class="a-wait" href="' + IMG_WAIT + '" target="_blank" rel="noopener">Попасть в список ожидания</a></div>';
   }
+  /* Библиотека: лекции Милы на продажу. Новая лекция = новая строка В НАЧАЛЕ списка (первой стоит на полке). */
+  var LECTURES = [
+    { t: 'Многослойность осени', s: 'Как собрать слои, чтобы образ выглядел дорого, а не громоздко', img: '/mnogosloynost-og.jpg',
+      price: '777 ₽', buy: 'https://app.lava.top/products/1ed1a65b-d032-4d33-b2ff-49eea0060747', page: '/mnogosloynost' },
+    { t: 'Масштаб', s: 'Почему одно украшение делает лицо изящнее, а другое теряется', img: '/masshtab-og.jpg',
+      price: '777 ₽', buy: 'https://app.lava.top/products/3e91faa8-7438-4618-a8c1-907018505ea4', page: '/masshtab' }
+  ];
+  function lecCard(L, cls) {
+    return '<div class="' + cls + '"><a href="' + L.page + '" target="_blank" rel="noopener"><img loading="lazy" src="' + esc(L.img) + '" alt=""></a><div class="b">' +
+      '<span class="k">Лекция · запись 48 ч</span><a class="h" href="' + L.page + '" target="_blank" rel="noopener">' + esc(L.t) + '</a><span class="s">' + esc(L.s) + '</span>' +
+      '<div class="buy"><span class="p">' + L.price + '</span><a class="a-buy" href="' + L.buy + '" target="_blank" rel="noopener">Купить</a></div></div></div>';
+  }
+  function libShelf() {
+    return '<div class="a-sec"><b>Библиотека<em class="a-soon">пополняется</em></b><a href="' + H + '#/library">все</a></div>' +
+      '<div class="a-row a-lrow">' + LECTURES.map(function (L) { return lecCard(L, 'a-lec'); }).join('') + '</div>';
+  }
+  V.library = function () {
+    return top('#/', 'Библиотека') + '<h1 class="a-h">Лекции Милы</h1>' +
+      '<div class="a-pv-t"><p class="s">Библиотека пополняется после каждого эфира. Купленная запись приходит на почту.</p></div>' +
+      '<div class="a-llist">' + LECTURES.map(function (L) { return lecCard(L, 'a-lec wide'); }).join('') + '</div>' +
+      '<div class="a-cta"><div class="a-lbl" style="color:var(--gold)">Fashion-клуб «В моём стиле»</div>' +
+      '<div class="t">Резидентам клуба все лекции открыты без оплаты</div>' +
+      '<a class="a-btn gold" href="' + CLUB + '" target="_blank" rel="noopener">Стать резидентом</a></div>';
+  };
   V.home = function () {
     var d = DROPS.oct, first = looks[d.ids[0]], last = looks[LS.get('app_last', '')];
     var h = top('', 'Система цветовых сочетаний');
@@ -120,6 +144,7 @@
     h += '<div class="a-sec"><b>Тренды' + (trends.some(function (t) { return t.isNew; }) ? '<em class="a-new">новинка</em>' : '') + '</b><a href="' + H + '#/trends">все ' + trends.length + '</a></div><div class="a-row">' + trends.map(function (t) {
       return '<a class="a-tc" href="' + H + '#/trend/' + t.slug + '"><div class="im"><img loading="lazy" src="' + esc(t.cover) + '" alt="">' + '</div><span>' + esc(t.name) + '</span></a>';
     }).join('') + '</div>';
+    h += libShelf(); // Библиотека лекций сразу после трендов
     if (first) h += '<a class="a-cont" href="' + H + '#/drop/oct"><img src="' + esc(first.pal || first.img) + '" alt="" style="object-fit:cover"><div style="flex:1"><div class="a-lbl">Новый дроп · октябрь</div><div style="font-size:15px;margin-top:3px">' + obr(d.ids.length) + '</div></div><span style="color:var(--gold2)">›</span></a>';
     if (last) h += '<a class="a-cont" href="' + H + '#/look/' + last.id + '"><img src="' + esc(last.img) + '" alt=""><div style="flex:1"><div class="a-lbl">Продолжить</div><div style="font-size:15px;margin-top:3px">образ ' + esc(last.name) + '</div></div><span style="color:var(--gold2)">›</span></a>';
     h += '<div class="a-sec"><b>Цвета</b><a href="' + H + '#/colors">все</a></div><div class="a-sw">' + colors.map(function (c, i) {
