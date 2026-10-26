@@ -126,10 +126,10 @@
       '<div class="buy"><span class="p">' + L.price + '</span><a class="a-buy" href="' + L.buy + '" target="_blank" rel="noopener">Купить</a></div></div></div>';
   }
   function libShelf() {
-    return '<div class="a-sec"><b>Библиотека<em class="a-soon">пополняется</em></b><a href="' + H + '#/library">все</a></div>' +
+    return '<div class="a-sec"><b>Библиотека<em class="a-soon">пополняется</em></b><a href="' + H + '#/lectures">все</a></div>' +
       '<div class="a-row a-lrow">' + LECTURES.map(function (L) { return lecCard(L, 'a-lec'); }).join('') + '</div>';
   }
-  V.library = function () {
+  V.lectures = function () {
     return top('#/', 'Библиотека') + '<h1 class="a-h">Лекции Милы</h1>' +
       '<div class="a-pv-t"><p class="s">Библиотека пополняется после каждого эфира. Купленная запись приходит на почту.</p></div>' +
       '<div class="a-llist">' + LECTURES.map(function (L) { return lecCard(L, 'a-lec wide'); }).join('') + '</div>' +
