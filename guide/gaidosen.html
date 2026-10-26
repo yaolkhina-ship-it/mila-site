@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<script>/* 26.10: ссылка #/library ушла в общей рассылке, по ней Систему не открываем: ведём на страницу продажи */if(/^#\/library/.test(location.hash)){location.replace('/color-guide#system');}</script>
+<script>/* 26.10: #/library leaked in a mass mailing -> sales page */if(/^#\/library/.test(location.hash)){location.replace('/color-guide#system');}</script>
 <meta charset="UTF-8">
 <base href="/guide/">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
