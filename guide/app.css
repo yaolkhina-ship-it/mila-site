@@ -222,4 +222,5 @@ html.feed #ap{padding-bottom:0;}
 .a-buy{font-size:10px;letter-spacing:.14em;text-transform:uppercase;background:var(--gold);color:#0D1A1E;padding:9px 16px;border-radius:20px;text-decoration:none;white-space:nowrap;}
 .a-llist{display:flex;flex-direction:column;gap:14px;padding:6px 20px 0;}
 .a-lec.wide{flex:none;}
+.a-code{font:inherit;font-size:11px;letter-spacing:.04em;color:#5f6a6c;background:none;border:.5px solid rgba(201,169,110,.55);border-radius:20px;padding:7px 11px;cursor:pointer;white-space:nowrap;}
 .a-lec.wide img{height:170px;}

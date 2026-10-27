@@ -116,22 +116,30 @@
   /* Библиотека: лекции Милы на продажу. Новая лекция = новая строка В НАЧАЛЕ списка (первой стоит на полке). */
   var LECTURES = [
     { t: 'Многослойность осени', s: 'Как собрать слои, чтобы образ выглядел дорого, а не громоздко', img: '/mnogosloynost-og.jpg',
-      price: '777 ₽', buy: 'https://app.lava.top/products/1ed1a65b-d032-4d33-b2ff-49eea0060747', page: '/mnogosloynost' },
+      price: '777 ₽', buy: 'https://app.lava.top/products/1ed1a65b-d032-4d33-b2ff-49eea0060747', page: '/mnogosloynost',
+      rec: 'https://us06web.zoom.us/rec/share/2o6dX5-DiDZetCq6bhoHcINciijsh51TpViS3Lt3lsvtjI0rPt7rJvsrBLSrJzs.UVns3IbVc8pSMseG', code: '4!$snBf5' },
     { t: 'Масштаб', s: 'Почему одно украшение делает лицо изящнее, а другое теряется', img: '/masshtab-og.jpg',
-      price: '777 ₽', buy: 'https://app.lava.top/products/3e91faa8-7438-4618-a8c1-907018505ea4', page: '/masshtab' }
+      price: '777 ₽', buy: 'https://app.lava.top/products/3e91faa8-7438-4618-a8c1-907018505ea4', page: '/masshtab',
+      rec: 'https://us06web.zoom.us/rec/share/MQM19yFsBkRzK0APnkKNkkd_Ja0uvEKRCLv0-7fq3qzPEiLaogrrZOXV754OmKZl.mVj3yU0L5Uskco_Z', code: '5Q7#k3J#' }
   ];
   function lecCard(L, cls) {
     return '<div class="' + cls + '"><a href="' + L.page + '" target="_blank" rel="noopener"><img loading="lazy" src="' + esc(L.img) + '" alt=""></a><div class="b">' +
-      '<span class="k">Лекция · запись 48 ч</span><a class="h" href="' + L.page + '" target="_blank" rel="noopener">' + esc(L.t) + '</a><span class="s">' + esc(L.s) + '</span>' +
-      '<div class="buy"><span class="p">' + L.price + '</span><a class="a-buy" href="' + L.buy + '" target="_blank" rel="noopener">Купить</a></div></div></div>';
+      '<span class="k">Лекция · запись</span><a class="h" href="' + L.rec + '" target="_blank" rel="noopener">' + esc(L.t) + '</a><span class="s">' + esc(L.s) + '</span>' +
+      // 27.10: для владельцев Системы Библиотека бесплатна — запись из клуба (Zoom) и код доступа прямо в карточке
+      '<div class="buy"><button class="a-code" type="button" data-code="' + esc(L.code) + '">Код: ' + esc(L.code) + '</button><a class="a-buy" href="' + L.rec + '" target="_blank" rel="noopener">Смотреть</a></div></div></div>';
   }
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest && e.target.closest('.a-code'); if (!b) return;
+    var c = b.getAttribute('data-code'), t = b.textContent;
+    (navigator.clipboard ? navigator.clipboard.writeText(c) : Promise.reject()).then(function () { b.textContent = 'Скопировано'; setTimeout(function () { b.textContent = t; }, 1500); }, function () {});
+  });
   function libShelf() {
     return '<div class="a-sec"><b>Библиотека<em class="a-soon">пополняется</em></b><a href="' + H + '#/lectures">все</a></div>' +
       '<div class="a-row a-lrow">' + LECTURES.map(function (L) { return lecCard(L, 'a-lec'); }).join('') + '</div>';
   }
   V.lectures = function () {
     return top('#/', 'Библиотека') + '<h1 class="a-h">Лекции Милы</h1>' +
-      '<div class="a-pv-t"><p class="s">Библиотека пополняется после каждого эфира. Купленная запись приходит на почту.</p></div>' +
+      '<div class="a-pv-t"><p class="s">Для владельцев Системы все лекции открыты. Нажмите «Смотреть», на странице записи введите код из карточки (нажмите на код, чтобы скопировать). Библиотека пополняется до конца ноября.</p></div>' +
       '<div class="a-llist">' + LECTURES.map(function (L) { return lecCard(L, 'a-lec wide'); }).join('') + '</div>' +
       '<div class="a-cta"><div class="a-lbl" style="color:var(--gold)">Fashion-клуб «В моём стиле»</div>' +
       '<div class="t">Резидентам клуба все лекции открыты без оплаты</div>' +
