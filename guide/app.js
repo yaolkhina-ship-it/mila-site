@@ -118,9 +118,7 @@
     { t: 'Многослойность осени', s: 'Как собрать слои, чтобы образ выглядел дорого, а не громоздко', img: '/mnogosloynost-og.jpg',
       price: '777 ₽', buy: 'https://app.lava.top/products/1ed1a65b-d032-4d33-b2ff-49eea0060747', page: '/mnogosloynost',
       rec: 'https://us06web.zoom.us/rec/share/2o6dX5-DiDZetCq6bhoHcINciijsh51TpViS3Lt3lsvtjI0rPt7rJvsrBLSrJzs.UVns3IbVc8pSMseG', code: '4!$snBf5' },
-    { t: 'Масштаб', s: 'Почему одно украшение делает лицо изящнее, а другое теряется', img: '/masshtab-og.jpg',
-      price: '777 ₽', buy: 'https://app.lava.top/products/3e91faa8-7438-4618-a8c1-907018505ea4', page: '/masshtab',
-      rec: 'https://us06web.zoom.us/rec/share/MQM19yFsBkRzK0APnkKNkkd_Ja0uvEKRCLv0-7fq3qzPEiLaogrrZOXV754OmKZl.mVj3yU0L5Uskco_Z', code: '5Q7#k3J#' }
+    // 27.10: в Системе пока только «Многослойность»; «Масштаб» убран по её просьбе (запись и код — в клубе, пост 1790)
   ];
   function lecCard(L, cls) {
     return '<div class="' + cls + '"><a href="' + L.page + '" target="_blank" rel="noopener"><img loading="lazy" src="' + esc(L.img) + '" alt=""></a><div class="b">' +
