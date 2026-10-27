@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#111111">
+<title>Цели · Офис · Женщина — сравнение</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* Сравнение двух вариантов целей для Милы. Стиль как у business.html: Oswald + Jost, чёрный, бумага, золото. */
+:root{
+  --paper:#F4F2EE;--paper2:#E8E5DF;--ink:#111111;--ink2:#2B2B2B;--mute:#7E7B76;--gold:#C9A96A;--rule:rgba(17,17,17,.12);
+  --serif:'Oswald','Arial Narrow',sans-serif;--sans:'Jost',-apple-system,'Helvetica Neue',Arial,sans-serif;
+  --g-warm:#C08A78;--g-status:#C9A96A;--g-style:#9C8AB4;--g-grow:#7FA08A;--g-team:#7D95B3;--g-base:#A9A49B;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--ink)}
+body{font-family:var(--sans);color:var(--ink);font-size:15px;line-height:1.45;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.app{max-width:760px;margin:0 auto;background:var(--paper);min-height:100svh}
+.cap{font-size:10px;letter-spacing:.28em;text-transform:uppercase}
+.h{font-family:var(--serif);font-weight:300;text-transform:uppercase;letter-spacing:.02em;line-height:1.05}
+
+/* шапка */
+.top{background:var(--ink);color:var(--paper);padding:calc(32px + env(safe-area-inset-top)) 20px 32px}
+.top .cap{color:var(--gold)}
+.top h1{font-size:44px;margin-top:16px}
+.top p{color:rgba(244,242,238,.72);font-size:16px;margin-top:12px;max-width:520px}
+.nums{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:28px;border-top:1px solid rgba(244,242,238,.16);padding-top:20px}
+.nums div b{display:block;font-family:var(--serif);font-weight:300;font-size:56px;line-height:1;color:var(--gold)}
+.nums div span{display:block;font-size:13px;color:rgba(244,242,238,.72);margin-top:6px}
+
+.pad{padding:32px 20px}
+.sec{font-family:var(--serif);font-weight:400;text-transform:uppercase;font-size:24px;letter-spacing:.03em;margin-bottom:16px}
+
+/* легенда */
+.legend{display:flex;flex-wrap:wrap;gap:8px}
+.legend .note{width:100%;font-size:13px;color:var(--mute);margin-top:8px;display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center}
+
+/* чипы */
+.chip{display:inline-flex;align-items:center;gap:7px;padding:6px 11px 6px 9px;border-radius:999px;font-size:13.5px;line-height:1.2;background:color-mix(in srgb,var(--c) 18%,#fff);border:1.5px solid transparent;max-width:100%}
+.chip::before{content:'';flex:none;width:8px;height:8px;border-radius:50%;background:var(--c)}
+.chip.syn{border-color:var(--c)}
+.chip.off{opacity:.45;text-decoration:line-through;text-decoration-color:rgba(17,17,17,.4)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+
+/* карточки событий */
+.ev{background:#fff;border-top:2px solid var(--ink);margin-bottom:20px}
+.ev header{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:16px 16px 0}
+.ev h3{font-family:var(--serif);font-weight:400;text-transform:uppercase;font-size:22px;letter-spacing:.02em;line-height:1.1}
+.ev header small{font-size:12px;color:var(--mute);white-space:nowrap}
+.cols{display:grid;grid-template-columns:1fr;gap:16px;padding:16px}
+.col .cap{color:var(--mute);margin-bottom:10px;display:flex;justify-content:space-between}
+.col.b .cap{color:#8A6F3E}
+.chg{border-top:1px solid var(--rule);padding:12px 16px 16px;font-size:14px;color:var(--ink2)}
+.chg b{font-weight:500;color:#8A6F3E;margin-right:6px}
+.moved{font-size:12px;color:var(--mute);padding:4px 16px 0}
+@media (min-width:640px){ .cols{grid-template-columns:1fr 1fr} .col.b{border-left:1px solid var(--rule);padding-left:16px} }
+
+/* решить */
+.dark{background:var(--ink);color:var(--paper)}
+.dark .sec{color:var(--paper)}
+.q{border:1px solid rgba(244,242,238,.18);padding:20px 18px;margin-bottom:12px}
+.q i{display:block;font-style:normal;font-family:var(--serif);font-weight:300;font-size:40px;line-height:1;color:var(--gold)}
+.q p{font-size:18px;line-height:1.4;margin-top:10px}
+
+.ctas{display:grid;gap:12px;margin-top:24px}
+.cta{display:block;text-align:center;text-decoration:none;padding:18px 16px;font-size:11px;letter-spacing:.24em;text-transform:uppercase;border:1px solid var(--gold);color:var(--paper)}
+.cta.fill{background:var(--gold);color:var(--ink)}
+.foot{font-size:12px;color:rgba(244,242,238,.5);margin-top:24px}
+</style>
+</head>
+<body>
+<div class="app">
+
+<section class="top">
+  <div class="cap">Система имиджа · для Милы</div>
+  <h1 class="h">Цели · Офис · Женщина</h1>
+  <p>Два варианта. Выберите, по какому пишем тексты.</p>
+  <div class="nums">
+    <div><b id="nA"></b><span id="tA"></span></div>
+    <div><b id="nB"></b><span id="tB"></span></div>
+  </div>
+</section>
+
+<section class="pad">
+  <div class="sec">Смысловые группы</div>
+  <div class="legend" id="legend"></div>
+</section>
+
+<section class="pad" style="padding-top:0">
+  <div class="sec">9 событий</div>
+  <div id="events"></div>
+</section>
+
+<section class="pad dark">
+  <div class="sec">Нужно решить</div>
+  <div class="q"><i>1</i><p>Единый словарь (Б) или свои формулировки под каждое событие (А)?</p></div>
+  <div class="q"><i>2</i><p>Готовые правила «Офис → Убедить» (10 правил): вернуть «Убедить» в Офис или перенести их во «Встречу с руководством»?</p></div>
+  <div class="q"><i>3</i><p>«Неформальный вечер с коллегами» в разделе «Вечер» дублирует Корпоратив. Убираем?</p></div>
+  <div class="q"><i>4</i><p>«Показать открытость новому» важна как отдельная цель?</p></div>
+  <div class="ctas">
+    <a class="cta" href="business?goals=a">Посмотреть вариант А вживую</a>
+    <a class="cta fill" href="business?goals=b">Посмотреть вариант Б вживую</a>
+  </div>
+  <div class="foot">Черновик для обсуждения. В рабочей версии Системы ничего не изменено.</div>
+</section>
+
+</div>
+<script>
+(function(){
+var GROUPS = [
+  {k:'warm', n:'Тепло и контакт', g:['Расположить к себе','Расположить к диалогу','Показать открытость к общению','Сократить дистанцию']},
+  {k:'status', n:'Статус', g:['Показать статус','Подчеркнуть статус','Обозначить новый статус','Усилить авторитет']},
+  {k:'style', n:'Свой стиль', g:['Показать индивидуальность','Показать свой стиль']},
+  {k:'grow', n:'Рост', g:['Обозначить амбицию','Показать готовность к большей роли','Показать готовность к ответственности','Показать открытость новому']},
+  {k:'team', n:'Команда', g:['Показать командность','Показать готовность работать в команде','Показать готовность быть частью команды','Показать принадлежность к команде','Объединить','Сохранить связь с командой']},
+  {k:'base', n:'Базовые', g:[]}
+];
+function grp(goal){ for (var i = 0; i < GROUPS.length - 1; i++) if (GROUPS[i].g.indexOf(goal) > -1) return GROUPS[i].k; return 'base'; }
+
+var EV = [
+  ['Офис',
+   ['Вызвать доверие','Показать компетентность','Показать статус','Установить границы','Сократить дистанцию','Обозначить амбицию','Показать открытость новому'],
+   ['Вызвать доверие','Показать компетентность','Показать статус','Установить границы','Сократить дистанцию','Обозначить амбицию'],
+   '«Открытость новому» пересекается с амбицией.'],
+  ['Zoom',
+   ['Вызвать доверие','Показать компетентность','Убедить','Расположить к себе','Привести к решению'],
+   ['Вызвать доверие','Показать компетентность','Убедить','Расположить к себе'],
+   '«Привести к решению» и «Убедить» визуально одно и то же.'],
+  ['Встреча с руководством',
+   ['Вызвать доверие','Показать компетентность','Убедить','Показать готовность к большей роли','Показать готовность работать в команде','Установить границы'],
+   ['Вызвать доверие','Показать компетентность','Убедить','Обозначить амбицию','Показать командность','Установить границы'],
+   '«Готовность к большей роли» = «Обозначить амбицию», одно слово для всех событий.'],
+  ['Встреча с командой',
+   ['Вызвать доверие','Расположить к диалогу','Объединить','Вдохновить','Убедить','Мобилизовать на результат'],
+   ['Вызвать доверие','Расположить к себе','Объединить','Вдохновить','Мобилизовать на результат'],
+   '«Расположить к диалогу» → «Расположить к себе», как в Zoom и на собеседовании.'],
+  ['Собеседование',
+   ['Вызвать доверие','Показать компетентность','Показать уверенность','Соответствовать уровню позиции','Расположить к себе','Запомниться'],
+   ['Вызвать доверие','Показать компетентность','Соответствовать уровню позиции','Расположить к себе','Запомниться'],
+   '«Уверенность» растворяется в компетентности и уровне позиции.'],
+  ['Первый рабочий день',
+   ['Вызвать доверие','Показать компетентность','Показать открытость к общению','Показать готовность быть частью команды','Обозначить свою роль','Показать индивидуальность'],
+   ['Вызвать доверие','Показать компетентность','Показать командность','Обозначить свою роль','Показать индивидуальность'],
+   '«Открытость к общению» и «часть команды» — одна задача.'],
+  ['Новая должность, повышение',
+   ['Обозначить новый статус','Усилить авторитет','Вызвать доверие','Показать готовность к ответственности','Установить новую дистанцию','Сохранить связь с командой'],
+   ['Показать статус','Вызвать доверие','Обозначить амбицию','Установить границы','Сохранить связь с командой'],
+   '«Новый статус» и «Усилить авторитет» → «Показать статус»; «Новая дистанция» → «Установить границы».'],
+  ['Casual Friday',
+   ['Сохранить профессиональность','Показать принадлежность к команде','Показать индивидуальность','Сократить дистанцию','Выглядеть современно','Выглядеть расслабленно, но уместно'],
+   ['Сохранить профессиональность','Показать командность','Показать индивидуальность','Сократить дистанцию'],
+   '«Современно» и «Расслабленно, но уместно» — не цели, а базовое требование, уходят в правила Милы внутри события.'],
+  ['Корпоратив',
+   ['Показать свой стиль','Подчеркнуть статус','Привлечь внимание','Расположить к себе','Сократить дистанцию','Выглядеть уместно'],
+   ['Показать индивидуальность','Показать статус','Привлечь внимание','Расположить к себе','Сократить дистанцию'],
+   '«Выглядеть уместно» — базовое требование; «Свой стиль» → «Индивидуальность»; «Подчеркнуть статус» → «Показать статус».']
+];
+
+// крупные цифры считаются из списков: число разных формулировок в каждом варианте
+var uA = {}, uB = {}; EV.forEach(function(e){ e[1].forEach(function(g){ uA[g] = 1; }); e[2].forEach(function(g){ uB[g] = 1; }); });
+var nA = Object.keys(uA).length, nB = Object.keys(uB).length;
+document.getElementById('nA').textContent = nA; document.getElementById('tA').textContent = 'Вариант А · ' + nA + ' формулировок';
+document.getElementById('nB').textContent = nB; document.getElementById('tB').textContent = 'Вариант Б · ' + nB + ' формулировок';
+
+function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+function chip(goal, cls){ return '<span class="chip ' + (cls || '') + '" style="--c:var(--g-' + grp(goal) + ')">' + esc(goal) + '</span>'; }
+
+document.getElementById('legend').innerHTML = GROUPS.map(function(g){
+  return '<span class="chip" style="--c:var(--g-' + g.k + ')">' + esc(g.n) + (g.k === 'base' ? ': доверие, компетентность, убедить, границы, запомниться' : '') + '</span>';
+}).join('') + '<div class="note"><span class="chip syn" style="--c:var(--g-status)">рамка</span> синонимы одной группы внутри события <span class="chip off" style="--c:var(--g-base)">бледная</span> убрана или переименована в Б</div>';
+
+document.getElementById('events').innerHTML = EV.map(function(e){
+  var a = e[1], b = e[2], cnt = {};
+  a.forEach(function(g){ var k = grp(g); if (k !== 'base') cnt[k] = (cnt[k] || 0) + 1; });
+  return '<article class="ev"><header><h3>' + esc(e[0]) + '</h3><small>' + a.length + ' → ' + b.length + '</small></header>' +
+    (e[0] === 'Корпоратив' ? '<div class="moved">Переезжает из «Вечера» в «Работу»</div>' : '') +
+    '<div class="cols"><div class="col a"><div class="cap"><span>А · как сейчас</span></div><div class="chips">' +
+      a.map(function(g){ var cls = []; if (cnt[grp(g)] > 1) cls.push('syn'); if (b.indexOf(g) < 0) cls.push('off'); return chip(g, cls.join(' ')); }).join('') +
+    '</div></div><div class="col b"><div class="cap"><span>Б · предложение</span></div><div class="chips">' +
+      b.map(function(g){ return chip(g); }).join('') +
+    '</div></div></div><div class="chg"><b>Что изменилось</b>' + esc(e[3]) + '</div></article>';
+}).join('');
+})();
+</script>
+</body>
+</html>
