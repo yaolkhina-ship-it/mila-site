@@ -381,16 +381,16 @@ var EVIMG = {
   'Презентация, питч': {w:'ev-first-w', m:'ev-present'},
   'Публичное выступление, конференция': {w:'ev-stage', m:'ev-interview-m'},
   'Networking': {w:'ev-breakfast-w', m:'ev-negot'},
-  'Деловой завтрак': {w:'ev-breakfast-w', m:'ev-casual-m'},
-  'Деловой обед': {w:'ev-client-w', m:'ev-negot'},
-  'Деловой ужин': {w:'ev-interview-w', m:'ev-boss-m'},
-  'Командировка': {w:'ev-trip-w', m:'ev-office'},
-  'Культурное или светское событие': {w:'ev-stage', m:'ev-present'},
-  'Корпоратив': {w:'ev-casual-w', m:'ev-casual-m'},
-  'Cocktail': {w:'ev-interview-w', m:'ev-boss-m'},
-  'Торжественный деловой вечер': {w:'ev-stage', m:'ev-boss-m'},
-  'Gala, Black Tie': {w:'ev-stage', m:'ev-interview-m'},
-  'Неформальный вечер с коллегами и партнёрами': {w:'ev-casual-w', m:'ev-casual-m'}
+  'Деловой завтрак': {w:'ev-breakfast2-w', m:'ev-casual-m'},
+  'Деловой обед': {w:'ev-lunch-w', m:'ev-negot'},
+  'Деловой ужин': {w:'ev-dinner-w', m:'ev-boss-m'},
+  'Командировка': {w:'ev-trip2-w', m:'ev-office'},
+  'Культурное или светское событие': {w:'ev-culture-w', m:'ev-present'},
+  'Корпоратив': {w:'ev-corp-w', m:'ev-casual-m'},
+  'Cocktail': {w:'ev-cocktail-w', m:'ev-boss-m'},
+  'Торжественный деловой вечер': {w:'ev-gala-evening-w', m:'ev-boss-m'},
+  'Gala, Black Tie': {w:'ev-blacktie-w', m:'ev-interview-m'},
+  'Неформальный вечер с коллегами и партнёрами': {w:'ev-informal-w', m:'ev-casual-m'}
 };
 function evImg(sit){ var e = EVIMG[sit]; if (!e) return ''; var f = e[st.sex || 'w'] || e['*']; return f ? 'business-img/' + f + '.jpg' : ''; }
 // Шаг 3: комментарий Милы. Ключ «ситуация|цель» или «ситуация». Абзацы через \n.
@@ -460,7 +460,7 @@ function intro(){
 }
 function step0(){
   show('<div class="pad">' + '<div class="stp"><span></span><span class="n">00 / ' + nn(STEPS.length) + '</span></div>' +
-    '<div class="h2">Для кого <i class="br">образ</i></div><div class="lede">Образы, детали и примеры в Системе разные для женщин и мужчин.</div>' +
+    '<div class="h2">Для кого <i class="br">образ</i></div>' +
     '<div class="who2"><button data-sex="w" data-next="1"' + (st.sex === 'w' ? ' class="on"' : '') + '><img src="business-img/ev-boss-w.jpg" alt=""><b>Женщина</b></button>' +
     '<button data-sex="m" data-next="1"' + (st.sex === 'm' ? ' class="on"' : '') + '><img src="business-img/ev-boss-m.jpg" alt=""><b>Мужчина</b></button></div></div>');
 }
