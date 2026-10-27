@@ -115,12 +115,12 @@
     var badge = $('.upd-badge');
     if (badge) { badge.lastChild.textContent = ' +' + left + ' ' + plural(left) + '\n'; if (!left) badge.style.display = 'none'; }
     $$('.ni-new').forEach(function (c) {
-      if (!/p_drop_oct1/.test(c.getAttribute('onclick') || '')) return;
+      if (!/p_drop_oct\d/.test(c.getAttribute('onclick') || '')) return;
       var s = $('.ni-new-s', c), b = $('.ni-new-b', c);
       if (s) s.textContent = left ? left + ' ' + plural(left) : 'все образы просмотрены';
       if (b) b.style.display = left ? '' : 'none';
     });
-    var target = firstUnseen(), tid = target ? prevPg(target).id : 'p_drop_oct1';
+    var target = firstUnseen(), tid = target ? prevPg(target).id : 'p_drop_oct6';
     [dNew, badge].forEach(function (el) { if (el) el.setAttribute('onclick', "scrollToEl('" + tid + "')"); });
   }
   var seenTimer = null, seenCand = null;
