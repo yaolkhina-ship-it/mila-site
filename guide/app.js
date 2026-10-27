@@ -136,9 +136,18 @@
       '<div class="t">Резидентам клуба все лекции открыты без оплаты</div>' +
       '<a class="a-btn gold" href="' + CLUB + '" target="_blank" rel="noopener">Стать резидентом</a></div>';
   };
+  // плашка «сегодня добавлены» на главной: дата выпуска и сколько новых образов с палитрами; показывается 2 дня
+  var NEWS = { date: '2026-10-27', n: 5 };
+  function newsBar() {
+    var d = new Date(NEWS.date + 'T00:00:00'), days = Math.floor((Date.now() - d) / 864e5);
+    if (days < 0 || days > 1) return '';
+    return '<a class="a-news" href="' + H + '#/drop/oct"><b>+' + NEWS.n + '</b><div style="flex:1"><div class="a-lbl">' + (days ? '27 октября' : 'Сегодня') + ' в Системе</div>' +
+      '<div class="t">Добавлены новые образы и палитры</div></div><span>›</span></a>';
+  }
   V.home = function () {
     var d = DROPS.oct, first = looks[d.ids[0]], last = looks[LS.get('app_last', '')];
     var h = top('', 'Система цветовых сочетаний');
+    h += newsBar();
     h += imgTeaser(); // «Система имиджа · скоро» первым блоком
     h += '<div class="a-sec"><b>Тренды' + (trends.some(function (t) { return t.isNew; }) ? '<em class="a-new">новинка</em>' : '') + '</b><a href="' + H + '#/trends">все ' + trends.length + '</a></div><div class="a-row">' + trends.map(function (t) {
       return '<a class="a-tc" href="' + H + '#/trend/' + t.slug + '"><div class="im"><img loading="lazy" src="' + esc(t.cover) + '" alt="">' + '</div><span>' + esc(t.name) + '</span></a>';

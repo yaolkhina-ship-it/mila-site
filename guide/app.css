@@ -224,3 +224,10 @@ html.feed #ap{padding-bottom:0;}
 .a-lec.wide{flex:none;}
 .a-code{font:inherit;font-size:11px;letter-spacing:.04em;color:#5f6a6c;background:none;border:.5px solid rgba(201,169,110,.55);border-radius:20px;padding:7px 11px;cursor:pointer;white-space:nowrap;}
 .a-lec.wide img{height:170px;}
+
+/* плашка «сегодня добавлены новые образы и палитры» */
+.a-news{display:flex;gap:14px;align-items:center;margin:14px 20px 0;padding:14px 16px;background:var(--deep,#0D1A1E);color:#f5f0ea;border-radius:6px;text-decoration:none;}
+.a-news b{font-size:30px;font-weight:normal;color:var(--gold,#C9A96E);line-height:1;}
+.a-news .a-lbl{color:var(--gold,#C9A96E);}
+.a-news .t{font-size:15px;margin-top:3px;}
+.a-news span{color:var(--gold,#C9A96E);font-size:20px;}
