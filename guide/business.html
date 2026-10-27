@@ -63,6 +63,15 @@ body.dark-top .top .ed{color:rgba(244,242,238,.6)}
 .au .au-role{margin:0 0 18px}
 .au .cta{margin-top:26px}
 .pad.au{padding-bottom:26px}
+.au .pj-lead{font-family:var(--serif);font-size:24px;line-height:1.2;color:var(--ink);font-weight:300;margin:6px 0 16px;text-transform:uppercase}
+.au .pj-sec{margin:34px 0 14px;color:var(--bronze);border-top:1px solid var(--rule);padding-top:14px}
+.pj-steps div{display:grid;grid-template-columns:40px 1fr;column-gap:8px;padding:12px 0;border-bottom:1px solid var(--rule)}
+.pj-steps span{font-family:var(--serif);color:var(--bronze);font-size:15px;grid-row:span 2}
+.pj-steps b{font-family:var(--serif);font-weight:400;font-size:20px;text-transform:uppercase;line-height:1.15}
+.au .pj-steps p{margin:4px 0 0;font-size:13.5px}
+.pj-nums{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.pj-nums b{display:block;font-family:var(--serif);font-weight:300;font-size:44px;line-height:1;color:var(--ink)}
+.pj-nums span{display:block;font-size:12px;line-height:1.4;color:var(--mute);margin-top:6px}
 .cov .sub{margin-top:18px;font-size:14px;line-height:1.65;color:rgba(244,242,238,.78);font-weight:300;max-width:360px}
 .toc{margin-top:26px;border-top:1px solid rgba(244,242,238,.22)}
 .toc div{display:grid;grid-template-columns:44px 1fr;align-items:baseline;padding:12px 0;border-bottom:1px solid rgba(244,242,238,.22)}
@@ -439,16 +448,36 @@ function cover(){
     '<h1>Система<br><i style="color:#C9A96A">имиджа</i></h1>' +
     '<div class="row3"><button data-go="1">Что предстоит</button><button data-go="1">Ваша цель</button><button data-go="1">Решение</button></div></div></div>', true);
 }
+// О проекте: что это, как устроено, для кого и об авторе. Тексты из уже утверждённых фраз Милы.
 function about(){
-  show('<div class="pad au"><div class="cap br">Об авторе</div>' +
+  var nEv = ENV.reduce(function(n, e){ return n + e.s.length; }, 0);
+  show('<div class="pad au"><div class="cap br">О проекте</div>' +
+    '<div class="h2">Система <i>имиджа</i></div>' +
+    '<p class="pj-lead">Цвет решает, как вы выглядите. Имидж решает, как вас прочтут.</p>' +
+    '<p>Инструмент управления впечатлением в профессиональной и деловой среде. Четыре шага перед любой встречей.</p>' +
+    '<div class="pj-sec cap">Как это работает</div>' +
+    '<div class="pj-steps">' +
+      '<div><span>01</span><b>Что предстоит</b><p>Сначала определяется среда. От неё зависят правила, которые читают окружающие.</p></div>' +
+      '<div><span>02</span><b>Ваша цель</b><p>Одна встреча, одна цель, один образ.</p></div>' +
+      '<div><span>03</span><b>Комментарий эксперта</b><p>Правила Милы для выбранного события и цели.</p></div>' +
+      '<div><span>04</span><b>Решение</b><p>Готовый образ под вашу задачу.</p></div>' +
+    '</div>' +
+    '<div class="pj-sec cap">Что внутри</div>' +
+    '<div class="pj-nums"><div><b>' + ENV.length + '</b><span>среды: ' + ENV.map(function(e){ return e.n.toLowerCase(); }).join(', ') + '</span></div>' +
+      '<div><b>' + nEv + '</b><span>событий, от офиса до Black Tie</span></div>' +
+      '<div><b>2</b><span>версии: для женщин и для мужчин</span></div></div>' +
+    '<div class="pj-sec cap">Для кого</div>' +
+    '<p>Для тех, чья работа строится на встречах, переговорах и выступлениях. И для компаний: единый уровень впечатления для всей команды.</p>' +
+    '<div class="pj-sec cap">Автор</div>' +
     '<img class="au-ph" src="/guide/business-img/cover.jpg" alt="Мила Ушакова">' +
-    '<div class="h2">Мила <i>Ушакова</i></div>' +
+    '<div class="h2" style="font-size:38px">Мила <i>Ушакова</i></div>' +
     '<div class="cap mute au-role">Image Expert · Fashion Analyst</div>' +
     '<p>Персональный стилист и аналитик моды. Более 7 лет работаю с клиентами по всему миру, помогая выстраивать стиль, который отражает личность, образ жизни и внутреннее состояние.</p>' +
     '<p>Приглашённый редактор Vogue, L\'Officiel и No Chaser.</p>' +
     '<p>Аккредитованный стилист недель моды: Paris, Milan, Copenhagen, Yerevan.</p>' +
     '<p>Основатель fashion-клуба «В моём стиле» и автор Системы цветовых сочетаний.</p>' +
-    '<button class="cta dk" data-go="intro">Далее</button></div>');
+    '<button class="cta dk" data-go="1">Начать</button>' +
+    '<button class="ghost lt" data-go="tariffs"><u>Тарифы для компаний</u></button></div>');
 }
 function intro(){
   show('<div class="cov plain"><div class="in">' +
@@ -543,7 +572,7 @@ document.getElementById('dTar').addEventListener('click', function(){ go('tariff
 var sheet = document.getElementById('sheet');
 function openMenu(){
   var n = 0; sheet.dataset.k = 'menu';
-  sheet.innerHTML = '<div class="grab"></div><div class="quick"><button data-go="cover">Обложка</button><button data-go="about">Об авторе</button><button data-go="intro">О Системе</button><button data-go="tariffs">Тарифы</button>' +
+  sheet.innerHTML = '<div class="grab"></div><div class="quick"><button data-go="cover">Обложка</button><button data-go="about">О проекте</button><button data-go="intro">О Системе</button><button data-go="tariffs">Тарифы</button>' +
     '<button data-sex="w"' + (st.sex !== 'm' ? ' class="on"' : '') + '>Для женщин</button><button data-sex="m"' + (st.sex === 'm' ? ' class="on"' : '') + '>Для мужчин</button>' +
     (fromSys ? '<button data-sys="1" style="grid-column:1/-1">← В Систему цветовых сочетаний</button>' : '') + '</div>' +
     ENV.map(function(e, i){ return '<h3><span>' + e.n + '</span><i>' + e.r + '</i></h3>' + e.s.map(function(x){ n++;
