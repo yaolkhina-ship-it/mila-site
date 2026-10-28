@@ -120,7 +120,7 @@
       if (s) s.textContent = left ? left + ' ' + plural(left) : 'все образы просмотрены';
       if (b) b.style.display = left ? '' : 'none';
     });
-    var target = firstUnseen(), tid = target ? prevPg(target).id : 'p_drop_oct8';
+    var target = firstUnseen(), tid = target ? prevPg(target).id : 'p_drop_oct10';
     [dNew, badge].forEach(function (el) { if (el) el.setAttribute('onclick', "scrollToEl('" + tid + "')"); });
   }
   var seenTimer = null, seenCand = null;
