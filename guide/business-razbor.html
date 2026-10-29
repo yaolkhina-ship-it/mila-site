@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<base href="/guide/">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#111111">
+<title>Разбор образа · превью · Система имиджа</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ПРЕВЬЮ 29.10: шаг «Почему это работает» как интерактивный разбор образа.
+   Образ перед глазами → пункт → на образе подсвечивается то, о чём он. Последний пункт = психологический подтекст. */
+:root{
+  --paper:#F4F2EE;--paper2:#E8E5DF;--ink:#111111;--ink2:#2B2B2B;--mute:#7E7B76;
+  --bronze:#B08F57;--gold:#C9A96A;--bronze2:rgba(176,143,87,.55);--rule:rgba(17,17,17,.12);
+  --serif:'Oswald','Arial Narrow',sans-serif;--sans:'Jost',-apple-system,'Helvetica Neue',Arial,sans-serif;
+  --look:#F6F5F1;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{background:var(--ink)}
+body{font-family:var(--sans);color:var(--ink);font-size:15px;-webkit-font-smoothing:antialiased;font-feature-settings:"tnum" 1,"lnum" 1}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;text-align:left}
+.app{max-width:520px;margin:0 auto;min-height:100svh;background:var(--paper)}
+.top{position:sticky;top:0;z-index:20;display:flex;justify-content:space-between;align-items:center;height:56px;padding:0 22px;background:rgba(244,242,238,.94);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--rule)}
+.top b{font-size:11px;font-weight:500;letter-spacing:.32em}
+.top span{font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--mute)}
+.pv{background:var(--bronze);color:var(--paper);font-size:10px;letter-spacing:.24em;text-transform:uppercase;text-align:center;padding:7px 0}
+.head{padding:24px 22px 0}
+.crumbs{display:flex;gap:8px;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink2)}
+.crumbs i{font-style:normal;color:var(--bronze)}
+h1{font-family:var(--serif);font-weight:400;font-size:44px;line-height:.98;text-transform:uppercase;margin:16px 0 0}
+h1 em{font-style:normal;color:var(--bronze)}
+
+/* сцена: образ всегда перед глазами */
+.stage{position:sticky;top:56px;z-index:10;background:var(--paper);padding:20px 22px 12px;border-bottom:1px solid var(--rule)}
+.frame{position:relative;height:min(46svh,420px);background:var(--look);overflow:hidden}
+.box{position:relative;height:100%;aspect-ratio:2/3;max-width:100%;margin:0 auto}
+.frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;transition:opacity .5s ease,filter .8s ease,transform .8s ease}
+.frame img.off{opacity:0}
+.frame.psy img{filter:grayscale(1) blur(6px);transform:scale(1.04);opacity:.28}
+.hot{position:absolute;width:44px;height:44px;margin:-22px 0 0 -22px;border-radius:50%;border:1px solid var(--bronze);transition:left .6s ease,top .6s ease,opacity .3s;pointer-events:none}
+.hot::before{content:"";position:absolute;inset:15px;border-radius:50%;background:var(--bronze)}
+.hot::after{content:"";position:absolute;inset:-1px;border-radius:50%;border:1px solid var(--bronze);animation:pulse 2.2s ease-out infinite}
+@keyframes pulse{from{transform:scale(1);opacity:.9}to{transform:scale(2.1);opacity:0}}
+.hot.off{opacity:0}
+.cnt{position:absolute;left:12px;top:10px;font-family:var(--serif);font-size:13px;letter-spacing:.12em;color:var(--ink2)}
+.tag{position:absolute;right:12px;top:12px;font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--mute)}
+.over{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:0 34px;text-align:center;opacity:0;transition:opacity .8s ease .2s;pointer-events:none}
+.frame.psy .over{opacity:1}
+.over svg{width:46px;height:46px}
+.over p{font-family:var(--serif);font-weight:400;font-size:24px;line-height:1.15;text-transform:uppercase;color:var(--ink)}
+.over p em{font-style:normal;color:var(--bronze)}
+.prog{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-top:12px}
+.prog i{height:2px;background:var(--rule);transition:background .4s}
+.prog i.on{background:var(--bronze)}
+.prog i.psy{background:rgba(17,17,17,.3)}
+.prog i.psy.on{background:var(--ink)}
+
+/* пункты */
+.pts{list-style:none;padding:0 22px}
+.pt{border-bottom:1px solid var(--rule)}
+.pt > button{display:grid;grid-template-columns:34px 1fr 20px;align-items:baseline;width:100%;padding:18px 0}
+.pt .n{font-family:var(--serif);font-size:13px;letter-spacing:.06em;color:var(--bronze)}
+.pt .t{font-weight:500;font-size:16px;line-height:1.4}
+.pt .pl{font-family:var(--serif);font-weight:300;font-size:20px;line-height:1;color:var(--bronze);transition:transform .35s}
+.pt.on .pl{transform:rotate(45deg)}
+.pt .body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s ease}
+.pt.on .body{grid-template-rows:1fr}
+.pt .body > div{overflow:hidden;padding-left:34px}
+.pt .body p{font-size:15px;line-height:1.65;font-weight:300;color:var(--ink2);padding-bottom:6px}
+.pt .nx{display:inline-flex;gap:10px;margin:10px 0 20px;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink);border-bottom:1px solid var(--bronze2);padding-bottom:3px}
+.pt.dim .t{color:var(--mute)}
+
+/* психологический подтекст — фирменный знак */
+.pt.psy{margin:12px -22px 0;padding:0 22px;background:var(--ink);border:0}
+.pt.psy .mk{grid-column:1/-1;display:flex;align-items:center;gap:10px;margin-bottom:12px;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}
+.pt.psy .mk svg{flex:none;width:20px;height:20px}
+.pt.psy .mk em{flex:1;height:1px;background:rgba(201,169,106,.35)}
+.pt.psy > button{padding:24px 0 22px;grid-template-columns:1fr 20px}
+.pt.psy .t{font-family:var(--serif);font-weight:400;font-size:24px;line-height:1.2;color:var(--paper)}
+.pt.psy .pl{color:var(--gold)}
+.pt.psy .body > div{padding-left:0}
+.pt.psy .body p{color:rgba(244,242,238,.8)}
+.pt.psy .nx{color:var(--paper);border-color:rgba(201,169,106,.5)}
+.end{padding:30px 22px 60px}
+.end .sig{display:flex;align-items:center;gap:14px}
+.end .sig i{flex:1;height:1px;background:var(--bronze2)}
+.end .sig span{font-family:var(--serif);font-size:13px;letter-spacing:.24em;text-transform:uppercase;color:var(--bronze)}
+.end button{display:block;width:100%;margin-top:26px;padding:16px;text-align:center;background:var(--ink);color:var(--gold);font-size:11px;letter-spacing:.28em;text-transform:uppercase}
+
+/* компьютер: образ слева, пункты справа, наведение открывает текст */
+@media (min-width:960px){
+  .app{max-width:1120px}
+  .wrap{display:grid;grid-template-columns:1fr 1fr;gap:56px;padding:0 48px}
+  .head{padding:32px 48px 8px}
+  h1{font-size:56px}
+  .stage{top:76px;align-self:start;padding:24px 0;border:0}
+  .frame{height:calc(100vh - 170px);max-height:760px}
+  .pts{padding:24px 0 0}
+  .pt.psy{margin:16px 0 0;padding:0 28px}
+  .end{padding:30px 0 80px}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="top"><b>MILA USHAKOVA</b><span>Система имиджа</span></div>
+  <div class="pv">Превью · разбор образа</div>
+  <div class="head">
+    <div class="crumbs"><span>Работа</span><i>/</i><span>Офис</span><i>/</i><span>Вызвать доверие</span></div>
+    <h1>Почему это <em>работает</em></h1>
+  </div>
+  <div class="wrap">
+    <div class="stage">
+      <div class="frame" id="frame">
+        <div class="box"><img id="imA" alt=""><img id="imB" class="off" alt="">
+        <span class="hot off" id="hot"></span></div>
+        <span class="cnt" id="cnt"></span><span class="tag" id="tag">Образ</span>
+        <div class="over"><span id="mkBig"></span><p>Имидж не в одежде,<br><em>а в мышлении</em></p></div>
+      </div>
+      <div class="prog" id="prog"></div>
+    </div>
+    <div>
+      <ol class="pts" id="pts"></ol>
+      <div class="end"><div class="sig"><i></i><span>Мила Ушакова</span></div><button>Смотреть все образы →</button></div>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+var MARK = function(sz){ return '<svg viewBox="0 0 20 20" width="' + sz + '" height="' + sz + '" fill="none" stroke="#B08F57" stroke-width=".8"><circle cx="10" cy="10" r="9"/><circle cx="10" cy="10" r="5"/><circle cx="10" cy="10" r="1.6" fill="#B08F57" stroke="none"/></svg>'; };
+// Пункт → образ, на котором он виден, и точка на нём (в % от кадра 900×1350).
+var P = [
+  {t:'Считайте ДНК среды.', b:'Если в офисе есть дресс-код, найдите один характерный для него элемент и интерпретируйте его в своём стиле. Если дресс-кода нет, опирайтесь на собственную визуальную идентичность — аутентичность делает человека более понятным и убедительным.', img:3, x:25, y:24},
+  {t:'Учитывайте степень прилегания.', b:'Оставляйте пространство между телом и одеждой. Свобода посадки даёт свободу движения, а пластика тела становится спокойнее и естественнее.', img:2, x:73, y:62},
+  {t:'Уделите внимание портретной зоне.', b:'Посмотрите на себя в кадрировании до груди. Волосы, оправа, украшения и линия горловины формируют первое впечатление ещё до того, как собеседник успевает рассмотреть образ целиком.', img:1, x:30, y:8},
+  {t:'Выстройте порядок восприятия.', b:'Посмотрите на себя несколько секунд и отметьте, куда первым направляется взгляд. Для доверия сильная последовательность — лицо, затем образ целиком, затем детали. Такая визуальная ясность облегчает первое считывание человека.', img:6, x:80, y:10},
+  {t:'Учитывайте тактильность образа.', b:'Добавьте фактуру, которая визуально ассоциируется с приятным прикосновением: кашемир, трикотаж, замшу, мягкую кожу, пластичную ткань. Тактильные ассоциации способны психологически сокращать дистанцию.', img:4, x:70, y:26},
+  {t:'Найдите свой узнаваемый маркер.', b:'Выберите одну характерную деталь и периодически повторяйте её: оправу, часы, серьги, кольцо, брошь. Повторяемость формирует узнаваемость, а знакомое быстрее вызывает ощущение предсказуемости.', img:7, x:31, y:62},
+  {t:'Удерживайте зрительный контакт.', b:'Во время знакомства или разговора задерживайте взгляд чуть дольше привычного. Прямой спокойный взгляд усиливает ощущение открытости и внимания. Если собеседник первым отводит глаза, сократите продолжительность контакта — комфорт другого человека также влияет на доверие.', psy:true}
+];
+var src = function(n){ return 'business-img/look-office-trust-w-' + n + '.jpg'; };
+var frame = document.getElementById('frame'), A = document.getElementById('imA'), B = document.getElementById('imB'),
+    hot = document.getElementById('hot'), cnt = document.getElementById('cnt'), tag = document.getElementById('tag'),
+    pts = document.getElementById('pts'), prog = document.getElementById('prog');
+document.getElementById('mkBig').innerHTML = MARK(46);
+var nn = function(i){ return (i < 9 ? '0' : '') + (i + 1); };
+pts.innerHTML = P.map(function(p, i){
+  var last = i === P.length - 1;
+  return '<li class="pt' + (p.psy ? ' psy' : '') + '" data-i="' + i + '"><button>' +
+    (p.psy ? '<span class="mk">' + MARK(20).replace(/#B08F57/g, '#C9A96A') + '<span>Психологический подтекст</span><em></em><span>' + nn(i) + '</span></span>' : '<span class="n">' + nn(i) + '</span>') +
+    '<span class="t">' + p.t + '</span><span class="pl">+</span></button>' +
+    '<div class="body"><div><p>' + p.b + '</p>' + (last ? '' : '<button class="nx" data-next="' + (i + 1) + '">Далее <span>→</span></button>') + '</div></div></li>';
+}).join('');
+prog.innerHTML = P.map(function(p){ return '<i' + (p.psy ? ' class="psy"' : '') + '></i>'; }).join('');
+var cur = -1, shown = 0, front = A, back = B;
+function showImg(n){
+  if (!n || n === shown) return; shown = n;
+  back.src = src(n); back.classList.remove('off'); front.classList.add('off');
+  var t = front; front = back; back = t;
+}
+function setActive(i){
+  cur = i; var p = P[i];
+  [].forEach.call(pts.children, function(li, k){ li.classList.toggle('on', k === i); li.classList.toggle('dim', k !== i); });
+  [].forEach.call(prog.children, function(el, k){ el.classList.toggle('on', k <= i); });
+  frame.classList.toggle('psy', !!p.psy);
+  cnt.textContent = nn(i) + ' / ' + nn(P.length - 1);
+  tag.textContent = p.psy ? '' : 'Смотрите сюда';
+  if (p.psy) { hot.classList.add('off'); return; }
+  showImg(p.img);
+  hot.classList.remove('off'); hot.style.left = p.x + '%'; hot.style.top = p.y + '%';
+}
+// старт: образ целиком, без подсказок
+A.src = src(5); shown = 5; cnt.textContent = '— / 07'; tag.textContent = 'Образ целиком';
+pts.addEventListener('click', function(e){
+  var nx = e.target.closest('[data-next]');
+  if (nx) { var j = +nx.dataset.next; setActive(j); var li = pts.children[j]; setTimeout(function(){ li.scrollIntoView({behavior:'smooth', block:'center'}); }, 80); return; }
+  var li = e.target.closest('.pt'); if (!li) return;
+  var i = +li.dataset.i;
+  if (i === cur) { li.classList.remove('on'); [].forEach.call(pts.children, function(x){ x.classList.remove('dim'); }); cur = -1; return; }
+  setActive(i);
+});
+// на компьютере текст открывается наведением
+if (matchMedia('(hover:hover) and (pointer:fine)').matches) {
+  pts.addEventListener('mouseover', function(e){ var li = e.target.closest('.pt'); if (li && +li.dataset.i !== cur) setActive(+li.dataset.i); });
+}
+})();
+</script>
+</body>
+</html>
