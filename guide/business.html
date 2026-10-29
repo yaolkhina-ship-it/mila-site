@@ -523,7 +523,7 @@ function step3(){
   var c = COMMENTS[st.sit + '|' + st.goal] || COMMENTS[st.sit] || '';
   var R = RULES[st.sit + '|' + st.goal + '|' + (st.sex || 'w')];
   show('<div class="pad">' + stepHead(3) + crumbs(3) +
-    '<div class="xp"><div><div class="h2" style="font-size:40px;margin-top:0">Почему это <i class="br">работает</i></div></div><img src="/guide/business-img/cover.jpg" alt="Мила Ушакова"></div>' +
+    '<div class="h2" style="font-size:40px;margin-top:0">Почему это <i class="br">работает</i></div>' +
     (R ? '<ol class="rules">' + R.map(function(r, i){ return r[2] ? '<li class="psy"><div class="mk">' + PSY_MARK + '<span>Психологический подтекст</span><em></em><span>' + nn(i + 1) + '</span></div><b>' + esc(r[0]) + '</b>' + (r[1] ? '<p>' + esc(r[1]) + '</p>' : '') + '</li>' :
       '<li><span class="rn">' + nn(i + 1) + '</span><div><b>' + esc(r[0]) + '</b>' + (r[1] ? '<p>' + esc(r[1]) + '</p>' : '') + '</div></li>'; }).join('') + '</ol>' :
     '<div class="qt">“</div><div class="xp-t">' + (c ? c.split('\n').map(function(p){ return '<p>' + esc(p) + '</p>'; }).join('') :
