@@ -18,7 +18,7 @@
    Продукт и визуал передают четыре качества: интеллект, точность, влияние, культурная насмотренность. */
 :root{
   --paper:#F4F2EE;--paper2:#E8E5DF;--ink:#111111;--ink2:#2B2B2B;--mute:#7E7B76;
-  --bronze:#B08F57;--bronze2:rgba(176,143,87,.55);--rule:rgba(17,17,17,.12);--rule-d:rgba(244,242,238,.16);
+  --bord:#5A1A22;--bronze:#B08F57;--bronze2:rgba(176,143,87,.55);--rule:rgba(17,17,17,.12);--rule-d:rgba(244,242,238,.16);
   --serif:'Oswald','Arial Narrow',sans-serif;--sans:'Jost',-apple-system,'Helvetica Neue',Arial,sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
@@ -248,13 +248,61 @@ body.dark-top .top .ed{color:rgba(244,242,238,.6)}
 .rules .rn{flex:none;width:26px;font-family:var(--serif);font-size:13px;letter-spacing:1px;color:var(--bronze);padding-top:3px}
 .rules b{display:block;font-weight:500;font-size:16px;line-height:1.45;color:var(--ink)}
 .rules p{margin:6px 0 0;font-size:15px;line-height:1.65;font-weight:300;color:var(--ink2)}
-.rules li.psy{display:block;margin:8px -22px 0;padding:24px 22px 26px;background:var(--ink);border:0}
+.rules li.psy{display:block;margin:8px -32px 0;padding:24px 32px 26px;background:var(--bord);border:0}
 .psy .mk{display:flex;align-items:center;gap:10px;margin-bottom:14px;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:#C9A96A}
 .psy .mk svg{flex:none;width:20px;height:20px}
 .psy .mk em{flex:1;height:1px;background:rgba(201,169,106,.35)}
 .rules .psy b{font-family:var(--serif);font-weight:400;font-size:24px;line-height:1.2;color:var(--paper)}
 .rules .psy p{color:rgba(244,242,238,.78)}
 .sig{display:flex;align-items:center;gap:14px;margin-top:26px}
+/* 29.10 «Сила деталей» как разбор образа: образ перед глазами, пункт → точка на вещи, финал «То, что не зависит от одежды» */
+.rz-stage{position:sticky;top:52px;z-index:10;background:var(--paper);margin:20px -32px 0;padding:12px 32px 12px;border-bottom:1px solid var(--rule)}
+.rz-frame{position:relative;height:min(46svh,420px);background:#F6F5F1;overflow:hidden}
+.rz-box{position:relative;height:100%;aspect-ratio:2/3;max-width:100%;margin:0 auto}
+.rz-frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;transition:opacity .5s ease,filter .8s ease,transform .8s ease}
+.rz-frame img.off{opacity:0}
+.rz-frame.psy img{filter:grayscale(1) blur(6px);transform:scale(1.04);opacity:.28}
+.rz-hot{position:absolute;width:44px;height:44px;margin:-22px 0 0 -22px;border-radius:50%;border:1px solid var(--bronze);transition:left .6s ease,top .6s ease,opacity .3s;pointer-events:none}
+.rz-hot::before{content:"";position:absolute;inset:15px;border-radius:50%;background:var(--bronze)}
+.rz-hot::after{content:"";position:absolute;inset:-1px;border-radius:50%;border:1px solid var(--bronze);animation:rzp 2.2s ease-out infinite}
+@keyframes rzp{from{transform:scale(1);opacity:.9}to{transform:scale(2.1);opacity:0}}
+.rz-hot.off{opacity:0}
+.rz-cnt{position:absolute;left:12px;top:10px;font-family:var(--serif);font-size:13px;letter-spacing:.12em;color:var(--ink2)}
+.rz-tag{position:absolute;right:12px;top:12px;font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--mute)}
+.rz-over{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:0 34px;text-align:center;opacity:0;transition:opacity .8s ease .2s;pointer-events:none}
+.rz-frame.psy .rz-over{opacity:1}
+.rz-over svg{width:46px;height:46px}
+.rz-over p{font-family:var(--serif);font-weight:400;font-size:24px;line-height:1.15;text-transform:uppercase;color:var(--ink)}
+.rz-over p em{font-style:normal;color:var(--bronze)}
+.rz-prog{display:grid;gap:4px;margin-top:12px}
+.rz-prog i{height:2px;background:var(--rule);transition:background .4s}
+.rz-prog i.on{background:var(--bronze)}
+.rz-prog i.psy{background:rgba(90,26,34,.3)}
+.rz-prog i.psy.on{background:var(--bord)}
+.rz-pts{list-style:none;margin:0;padding:0}
+.rz-pt{border-bottom:1px solid var(--rule)}
+.rz-pt > button{display:grid;grid-template-columns:34px 1fr 20px;align-items:baseline;width:100%;padding:18px 0}
+.rz-pt .n{font-family:var(--serif);font-size:13px;letter-spacing:.06em;color:var(--bronze)}
+.rz-pt .t{font-weight:500;font-size:16px;line-height:1.4}
+.rz-pt .pl{font-family:var(--serif);font-weight:300;font-size:20px;line-height:1;color:var(--bronze);transition:transform .35s}
+.rz-pt.on .pl{transform:rotate(45deg)}
+.rz-pt .body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s ease}
+.rz-pt.on .body{grid-template-rows:1fr}
+.rz-pt .body > div{overflow:hidden;padding-left:34px}
+.rz-pt .body p{font-size:15px;line-height:1.65;font-weight:300;color:var(--ink2);padding-bottom:6px}
+.rz-pt .nx{display:inline-flex;gap:10px;margin:10px 0 20px;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink);border-bottom:1px solid var(--bronze2);padding-bottom:3px}
+.rz-pt.dim .t{color:var(--mute)}
+.rz-pt.psy{margin:12px -32px 0;padding:0 32px;background:var(--bord);border:0}
+.rz-pt.psy .mk{grid-column:1/-1;display:flex;align-items:center;gap:10px;margin-bottom:12px;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:#C9A96A}
+.rz-pt.psy .mk svg{flex:none;width:20px;height:20px}
+.rz-pt.psy .mk em{flex:1;height:1px;background:rgba(201,169,106,.35)}
+.rz-pt.psy > button{padding:24px 0 22px;grid-template-columns:1fr 20px}
+.rz-pt.psy .t{font-family:var(--serif);font-weight:400;font-size:24px;line-height:1.2;color:var(--paper)}
+.rz-pt.psy .pl{color:#C9A96A}
+.rz-pt.psy .body > div{padding-left:0}
+.rz-pt.psy .body p{color:rgba(244,242,238,.8)}
+.rz-pt.psy .nx{color:var(--paper);border-color:rgba(201,169,106,.5)}
+.rz-all{display:block;width:100%;margin-top:26px;padding:16px;text-align:center !important;background:var(--ink);color:#C9A96A;font-size:11px;letter-spacing:.28em;text-transform:uppercase}
 .sig i{flex:1;height:1px;background:var(--bronze2)}
 .sig span{font-family:var(--serif);font-size:13px;letter-spacing:.24em;text-transform:uppercase;color:var(--bronze)}
 /* решение */
@@ -519,12 +567,55 @@ function step2(){
 }
 // Фирменный знак психологического подтекста: фокус внутри (не в одежде, а в мышлении)
 var PSY_MARK = '<svg viewBox="0 0 20 20" fill="none" stroke="#C9A96A" stroke-width="1"><circle cx="10" cy="10" r="9"/><circle cx="10" cy="10" r="5"/><circle cx="10" cy="10" r="1.6" fill="#C9A96A" stroke="none"/></svg>';
+var PSY_LABEL = 'То, что не зависит от одежды';
+// Разбор образа: для каждого правила номер образа из LOOKS (1…) и точка на нём в % кадра 900×1350. Правило «*» (подтекст) — без точки.
+var RAZBOR = {
+  'Офис|Вызвать доверие|w': {start: 5, pts: [[3,25,24],[2,73,62],[1,30,8],[6,80,10],[4,70,26],[7,31,62],null]}
+};
+var rz = {cur: -1, shown: 0};
+function rzMark(sz, c){ return PSY_MARK.replace('<svg ', '<svg width="' + sz + '" height="' + sz + '" ').replace(/#C9A96A/g, c); }
+function razbor(R, Z, looks){
+  var nn2 = nn(R.length);
+  rz = {cur: -1, shown: Z.start, R: R, Z: Z, looks: looks};
+  return '<div class="rz-stage"><div class="rz-frame" id="rzF"><div class="rz-box"><img id="rzA" src="' + esc(looks[Z.start - 1].img) + '" alt=""><img id="rzB" class="off" alt=""><span class="rz-hot off" id="rzH"></span></div>' +
+      '<span class="rz-cnt" id="rzC">— / ' + nn2 + '</span><span class="rz-tag" id="rzT">Образ целиком</span>' +
+      '<div class="rz-over">' + rzMark(46, '#B08F57') + '<p>Имидж не в одежде,<br><em>а в мышлении</em></p></div></div>' +
+      '<div class="rz-prog" id="rzP" style="grid-template-columns:repeat(' + R.length + ',1fr)">' + R.map(function(r){ return '<i' + (r[2] ? ' class="psy"' : '') + '></i>'; }).join('') + '</div></div>' +
+    '<ol class="rz-pts" id="rzL">' + R.map(function(r, i){ var last = i === R.length - 1;
+      return '<li class="rz-pt' + (r[2] ? ' psy' : '') + '"><button data-rz="' + i + '">' +
+        (r[2] ? '<span class="mk">' + PSY_MARK + '<span>' + PSY_LABEL + '</span><em></em><span>' + nn(i + 1) + '</span></span>' : '<span class="n">' + nn(i + 1) + '</span>') +
+        '<span class="t">' + esc(r[0]) + '</span><span class="pl">+</span></button>' +
+        '<div class="body"><div>' + (r[1] ? '<p>' + esc(r[1]) + '</p>' : '') + (last ? '' : '<button class="nx" data-rznext="' + (i + 1) + '">Далее <span>→</span></button>') + '</div></div></li>'; }).join('') + '</ol>';
+}
+function rzSet(i){
+  var L = document.getElementById('rzL'); if (!L) return;
+  var R = rz.R, p = rz.Z.pts[i], psy = !!R[i][2], F = document.getElementById('rzF'), H = document.getElementById('rzH');
+  if (i === rz.cur) { rz.cur = -1; [].forEach.call(L.children, function(li){ li.classList.remove('on', 'dim'); }); return; }
+  rz.cur = i;
+  [].forEach.call(L.children, function(li, k){ li.classList.toggle('on', k === i); li.classList.toggle('dim', k !== i); });
+  [].forEach.call(document.getElementById('rzP').children, function(el, k){ el.classList.toggle('on', k <= i); });
+  F.classList.toggle('psy', psy);
+  document.getElementById('rzC').textContent = nn(i + 1) + ' / ' + nn(R.length);
+  document.getElementById('rzT').textContent = psy ? '' : 'Смотрите сюда';
+  if (psy || !p) { H.classList.add('off'); return; }
+  if (p[0] !== rz.shown) {
+    var a = document.getElementById('rzA'), b = document.getElementById('rzB'), front = a.classList.contains('off') ? b : a, back = front === a ? b : a;
+    back.src = rz.looks[p[0] - 1].img; back.classList.remove('off'); front.classList.add('off'); rz.shown = p[0];
+  }
+  H.classList.remove('off'); H.style.left = p[1] + '%'; H.style.top = p[2] + '%';
+}
 function step3(){
   var c = COMMENTS[st.sit + '|' + st.goal] || COMMENTS[st.sit] || '';
   var R = RULES[st.sit + '|' + st.goal + '|' + (st.sex || 'w')];
+  var Z = RAZBOR[st.sit + '|' + st.goal + '|' + (st.sex || 'w')], LK = ((LOOKS[st.sit + '|' + st.goal] || {})[st.sex || 'w'] || {}).looks;
+  if (R && Z && LK && LK.length) {
+    show('<div class="pad">' + stepHead(3) + crumbs(3) + '<div class="h2" style="font-size:40px;margin-top:0">Сила <i class="br">деталей</i></div>' +
+      razbor(R, Z, LK) + '<div class="sig"><i></i><span>Мила Ушакова</span></div><button class="rz-all" data-go="4">Смотреть все образы →</button>' + pager(3, true) + '</div>');
+    return;
+  }
   show('<div class="pad">' + stepHead(3) + crumbs(3) +
     '<div class="h2" style="font-size:40px;margin-top:0">Сила <i class="br">деталей</i></div>' +
-    (R ? '<ol class="rules">' + R.map(function(r, i){ return r[2] ? '<li class="psy"><div class="mk">' + PSY_MARK + '<span>Психологический подтекст</span><em></em><span>' + nn(i + 1) + '</span></div><b>' + esc(r[0]) + '</b>' + (r[1] ? '<p>' + esc(r[1]) + '</p>' : '') + '</li>' :
+    (R ? '<ol class="rules">' + R.map(function(r, i){ return r[2] ? '<li class="psy"><div class="mk">' + PSY_MARK + '<span>' + PSY_LABEL + '</span><em></em><span>' + nn(i + 1) + '</span></div><b>' + esc(r[0]) + '</b>' + (r[1] ? '<p>' + esc(r[1]) + '</p>' : '') + '</li>' :
       '<li><span class="rn">' + nn(i + 1) + '</span><div><b>' + esc(r[0]) + '</b>' + (r[1] ? '<p>' + esc(r[1]) + '</p>' : '') + '</div></li>'; }).join('') + '</ol>' :
     '<div class="qt">“</div><div class="xp-t">' + (c ? c.split('\n').map(function(p){ return '<p>' + esc(p) + '</p>'; }).join('') :
       '<p><span class="ph">Комментарий Милы: «' + esc(st.sit) + '» и цель «' + esc(st.goal) + '». Почему такой образ работает.</span></p>') + '</div>') +
@@ -609,6 +700,8 @@ document.getElementById('dDocs').addEventListener('click', function(){
 
 function onTap(e){
   var b = e.target.closest('button'); if (!b) return;
+  if (b.dataset.rznext) { var j = +b.dataset.rznext; rzSet(j); var li = document.getElementById('rzL').children[j]; setTimeout(function(){ li.scrollIntoView({behavior: 'smooth', block: 'center'}); }, 80); return; }
+  if (b.dataset.rz) { rzSet(+b.dataset.rz); return; }
   if (b.dataset.sys) { location.href = '/guide'; return; }
   if (b.dataset.sex) { st.sex = b.dataset.sex; try { localStorage.setItem('img_sex', st.sex); } catch(e){}
     if (st.view === 's2' && st.goal && goalsFor(st.sit).indexOf(st.goal) < 0) st.goal = null;
@@ -628,6 +721,8 @@ function onTap(e){
   if (b.dataset.go === '4') return go('s4', {tab: 0});
 }
 v.addEventListener('click', onTap);
+// На компьютере пункты разбора открываются наведением
+if (matchMedia('(hover:hover) and (pointer:fine)').matches) v.addEventListener('mouseover', function(e){ var b = e.target.closest('[data-rz]'); if (b && +b.dataset.rz !== rz.cur) rzSet(+b.dataset.rz); });
 sheet.addEventListener('click', onTap);
 
 var lastY = 0, dock = document.getElementById('dock');
