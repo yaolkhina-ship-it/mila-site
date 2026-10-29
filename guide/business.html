@@ -445,7 +445,7 @@ function crumbs(n){
   return '<div class="crumbs"><button data-tab="' + st.env + '">' + esc(ENV[st.env].n) + '</button><i>/</i><button data-tab="' + st.env + '">' + esc(st.sit) + '</button>' +
     (n === 3 ? '<i>/</i><button data-go="2">' + esc(st.goal) + '</button>' : '') + '</div>';
 }
-var STEPS = ['Что предстоит', 'Ваша цель', 'Комментарий эксперта', 'Решение'];
+var STEPS = ['Что предстоит', 'Ваша цель', 'Сила деталей', 'Решение'];
 function stepHead(n){ return '<div class="stp"><span class="sx"><button data-sex="w"' + (st.sex !== 'm' ? ' class="on"' : '') + ' aria-label="Для женщин">Ж</button><i>|</i><button data-sex="m"' + (st.sex === 'm' ? ' class="on"' : '') + ' aria-label="Для мужчин">М</button></span><span class="n">' + nn(n) + ' / ' + nn(STEPS.length) + '</span></div>'; }
 function pager(n, canNext){
   return '<div class="pager"><button data-go="' + (n === 1 ? 'intro' : n - 1) + '" aria-label="Назад">‹</button><span>' + nn(n) + ' / ' + nn(STEPS.length) + '</span>' +
@@ -470,7 +470,7 @@ function about(){
     '<div class="pj-steps">' +
       '<div><span>01</span><b>Что предстоит</b><p>Сначала определяется среда. От неё зависят правила, которые читают окружающие.</p></div>' +
       '<div><span>02</span><b>Ваша цель</b><p>Одна встреча, одна цель, один образ.</p></div>' +
-      '<div><span>03</span><b>Комментарий эксперта</b><p>Правила Милы для выбранного события и цели.</p></div>' +
+      '<div><span>03</span><b>Сила деталей</b><p>Правила Милы для выбранного события и цели.</p></div>' +
       '<div><span>04</span><b>Решение</b><p>Готовый образ под вашу задачу.</p></div>' +
     '</div>' +
     '<div class="pj-sec cap">Что внутри</div>' +
@@ -523,7 +523,7 @@ function step3(){
   var c = COMMENTS[st.sit + '|' + st.goal] || COMMENTS[st.sit] || '';
   var R = RULES[st.sit + '|' + st.goal + '|' + (st.sex || 'w')];
   show('<div class="pad">' + stepHead(3) + crumbs(3) +
-    '<div class="h2" style="font-size:40px;margin-top:0">Почему это <i class="br">работает</i></div>' +
+    '<div class="h2" style="font-size:40px;margin-top:0">Сила <i class="br">деталей</i></div>' +
     (R ? '<ol class="rules">' + R.map(function(r, i){ return r[2] ? '<li class="psy"><div class="mk">' + PSY_MARK + '<span>Психологический подтекст</span><em></em><span>' + nn(i + 1) + '</span></div><b>' + esc(r[0]) + '</b>' + (r[1] ? '<p>' + esc(r[1]) + '</p>' : '') + '</li>' :
       '<li><span class="rn">' + nn(i + 1) + '</span><div><b>' + esc(r[0]) + '</b>' + (r[1] ? '<p>' + esc(r[1]) + '</p>' : '') + '</div></li>'; }).join('') + '</ol>' :
     '<div class="qt">“</div><div class="xp-t">' + (c ? c.split('\n').map(function(p){ return '<p>' + esc(p) + '</p>'; }).join('') :
