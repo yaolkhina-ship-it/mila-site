@@ -433,7 +433,9 @@ function goalsFor(sit){ var r = REL[st.sex || 'w']; return (r && r[sit]) || GOAL
 var LOOKS = {
   'Офис|Вызвать доверие': {w:{looks:[1,2,3,4,5,6,7].map(function(n){ return {img:'business-img/look-office-trust-w-' + n + '.jpg'}; })}},
   'Офис|Показать компетентность': {w:{looks:[1,2,3].map(function(n){ return {img:'business-img/look-office-comp-w-' + n + '.jpg'}; })}},
-  'Офис|Показать статус': {w:{looks:[1,2,3,4].map(function(n){ return {img:'business-img/look-office-status-w-' + n + '.jpg'}; })}}
+  'Офис|Показать статус': {w:{looks:[1,2,3,4].map(function(n){ return {img:'business-img/look-office-status-w-' + n + '.jpg'}; })}},
+  // 29.10: образы без текста, цель определена по образам (закрытая линия шеи, строгий крой, монохром); правила и разбор — когда придёт текст
+  'Офис|Установить границы': {w:{looks:[1,2,3,4,5,6].map(function(n){ return {img:'business-img/look-office-bound-w-' + n + '.jpg'}; })}}
 };
 
 // Фото событий: женские картинки для женщин (w), мужские для мужчин (m)
