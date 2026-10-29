@@ -17,7 +17,7 @@
   --paper:#F4F2EE;--paper2:#E8E5DF;--ink:#111111;--ink2:#2B2B2B;--mute:#7E7B76;
   --bronze:#B08F57;--gold:#C9A96A;--bronze2:rgba(176,143,87,.55);--rule:rgba(17,17,17,.12);
   --serif:'Oswald','Arial Narrow',sans-serif;--sans:'Jost',-apple-system,'Helvetica Neue',Arial,sans-serif;
-  --look:#F6F5F1;
+  --look:#F6F5F1;--bord:#5A1A22;
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html,body{background:var(--ink)}
@@ -56,8 +56,8 @@ h1 em{font-style:normal;color:var(--bronze)}
 .prog{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-top:12px}
 .prog i{height:2px;background:var(--rule);transition:background .4s}
 .prog i.on{background:var(--bronze)}
-.prog i.psy{background:rgba(17,17,17,.3)}
-.prog i.psy.on{background:var(--ink)}
+.prog i.psy{background:rgba(90,26,34,.3)}
+.prog i.psy.on{background:var(--bord)}
 
 /* пункты */
 .pts{list-style:none;padding:0 22px}
@@ -75,7 +75,7 @@ h1 em{font-style:normal;color:var(--bronze)}
 .pt.dim .t{color:var(--mute)}
 
 /* психологический подтекст — фирменный знак */
-.pt.psy{margin:12px -22px 0;padding:0 22px;background:var(--ink);border:0}
+.pt.psy{margin:12px -22px 0;padding:0 22px;background:var(--bord);border:0}
 .pt.psy .mk{grid-column:1/-1;display:flex;align-items:center;gap:10px;margin-bottom:12px;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}
 .pt.psy .mk svg{flex:none;width:20px;height:20px}
 .pt.psy .mk em{flex:1;height:1px;background:rgba(201,169,106,.35)}
@@ -151,7 +151,7 @@ var nn = function(i){ return (i < 9 ? '0' : '') + (i + 1); };
 pts.innerHTML = P.map(function(p, i){
   var last = i === P.length - 1;
   return '<li class="pt' + (p.psy ? ' psy' : '') + '" data-i="' + i + '"><button>' +
-    (p.psy ? '<span class="mk">' + MARK(20).replace(/#B08F57/g, '#C9A96A') + '<span>Психологический подтекст</span><em></em><span>' + nn(i) + '</span></span>' : '<span class="n">' + nn(i) + '</span>') +
+    (p.psy ? '<span class="mk">' + MARK(20).replace(/#B08F57/g, '#C9A96A') + '<span>То, что не зависит от одежды</span><em></em><span>' + nn(i) + '</span></span>' : '<span class="n">' + nn(i) + '</span>') +
     '<span class="t">' + p.t + '</span><span class="pl">+</span></button>' +
     '<div class="body"><div><p>' + p.b + '</p>' + (last ? '' : '<button class="nx" data-next="' + (i + 1) + '">Далее <span>→</span></button>') + '</div></div></li>';
 }).join('');
