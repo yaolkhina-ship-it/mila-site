@@ -60,6 +60,10 @@
     {
       "src": "kniga/**",
       "use": "@vercel/static"
+    },
+    {
+      "src": "team/**",
+      "use": "@vercel/static"
     }
   ],
   "headers": [
@@ -165,6 +169,14 @@
     {
       "src": "/kniga/?",
       "dest": "/kniga/index.html"
+    },
+    {
+      "src": "/team/?",
+      "dest": "/team/index.html"
+    },
+    {
+      "src": "/team/(.*)",
+      "dest": "/team/$1"
     },
     {
       "src": "/kniga/(.*)",
