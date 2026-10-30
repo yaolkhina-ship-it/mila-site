@@ -90,7 +90,7 @@ async function login(pw, remember){
   document.getElementById('built').textContent = 'обновлено ' + D.built;
   render();
 }
-document.getElementById('f').onsubmit = function(e){ e.preventDefault(); login(document.getElementById('pw').value, true); };
+document.getElementById('f').onsubmit = function(e){ e.preventDefault(); login(document.getElementById('pw').value.trim().replace(/[\u2010-\u2015\u2212]/g, '-').toLowerCase(), true); };
 try { var saved = sessionStorage.getItem('tp'); if (saved) login(saved, false); } catch(e){}
 
 var esc = function(s){ return String(s == null ? '' : s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); };
