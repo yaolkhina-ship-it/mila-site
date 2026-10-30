@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="ru"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0D1A1E">
+<title>Пульт · Mila Ushakova</title>
+<style>
+/* Пульт команды: все продукты, продажи, клиенты, рассылки и работы в одном месте.
+   Данные лежат рядом в data.enc (зашифрованы), расшифровываются в браузере паролем. Цвета Системы: песок, глубокий, золото. */
+:root{--bg:#F5F0EA;--card:#fff;--deep:#0D1A1E;--ink:#1d2427;--mute:#7b8285;--gold:#B8903A;--line:rgba(13,26,30,.12);--ok:#2f7a4f;--bad:#a33a2a}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--ink);font:15px/1.45 -apple-system,"Helvetica Neue",Arial,sans-serif}
+button,input,select{font:inherit;color:inherit}
+a{color:inherit}
+#lock{min-height:100svh;display:grid;place-items:center;background:var(--deep);color:#f5f0ea;padding:24px}
+#lock form{width:min(360px,100%);display:grid;gap:14px}
+#lock h1{font:400 34px/1.1 Georgia,serif}
+#lock small{color:#9aa3a5;letter-spacing:.2em;text-transform:uppercase;font-size:10px}
+#lock input{padding:14px 16px;border:1px solid rgba(245,240,234,.3);background:transparent;border-radius:10px}
+#lock button{padding:14px;border:0;border-radius:10px;background:var(--gold);color:var(--deep);font-weight:600;cursor:pointer}
+#err{color:#e9a08f;font-size:13px;min-height:18px}
+#app{display:none}
+header{position:sticky;top:0;z-index:5;background:var(--deep);color:#f5f0ea;padding:calc(12px + env(safe-area-inset-top)) 16px 0}
+.hd{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.hd b{font:400 20px Georgia,serif}.hd span{font-size:11px;color:#9aa3a5}
+nav{display:flex;gap:4px;overflow-x:auto;margin-top:10px;scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+nav button{all:unset;cursor:pointer;padding:10px 12px;font-size:13px;color:#b9c0c2;border-bottom:2px solid transparent;white-space:nowrap}
+nav button.on{color:#fff;border-color:var(--gold)}
+main{max-width:1100px;margin:0 auto;padding:18px 16px 60px}
+h2{font:400 26px/1.15 Georgia,serif;margin:6px 0 14px}
+h3{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--mute);font-weight:500;margin:22px 0 10px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.kpi{background:var(--card);border-radius:14px;padding:14px;border:1px solid var(--line)}
+.kpi small{display:block;font-size:11px;color:var(--mute)}
+.kpi b{display:block;font:400 28px/1.1 Georgia,serif;margin-top:6px}
+.kpi i{font-style:normal;font-size:12px;color:var(--mute)}
+.card{background:var(--card);border-radius:14px;border:1px solid var(--line);padding:4px 14px;overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th{text-align:left;font-weight:500;color:var(--mute);font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:10px 8px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:9px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+td.n,th.n{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.bars{display:grid;gap:8px;padding:12px 0}
+.bar{display:grid;grid-template-columns:70px 1fr 90px;gap:10px;align-items:center;font-size:13px}
+.bar i{display:block;height:10px;border-radius:5px;background:var(--gold)}
+.tools{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.tools input,.tools select{padding:9px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;min-width:0}
+.tools input{flex:1 1 200px}
+.tag{display:inline-block;font-size:11px;padding:3px 8px;border-radius:20px;background:rgba(184,144,58,.14);color:#7a5d1f;white-space:nowrap}
+.tag.r{background:rgba(163,58,42,.12);color:var(--bad)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.pc{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;display:grid;gap:6px}
+.pc b{font:400 18px/1.2 Georgia,serif}
+.pc .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.pc a{font-size:12px;padding:6px 10px;border-radius:8px;background:var(--deep);color:#f5f0ea;text-decoration:none}
+.pc a.l{background:transparent;color:var(--deep);border:1px solid var(--line)}
+.muted{color:var(--mute);font-size:12px}
+.foot{margin-top:28px;color:var(--mute);font-size:12px}
+@media (max-width:640px){.hide-m{display:none}}
+</style>
+</head><body>
+<div id="lock"><form id="f">
+  <small>Mila Ushakova · команда</small>
+  <h1>Пульт</h1>
+  <input id="pw" type="password" placeholder="Пароль" autocomplete="current-password" autofocus>
+  <button>Войти</button>
+  <div id="err"></div>
+</form></div>
+<div id="app">
+  <header><div class="hd"><b>Пульт</b><span id="built"></span></div><nav id="nav"></nav></header>
+  <main id="main"></main>
+</div>
+<script>
+(function(){
+var D, TAB = 'home';
+var b64 = function(s){ return Uint8Array.from(atob(s), function(c){ return c.charCodeAt(0); }); };
+async function open(pw){
+  var e = await (await fetch('data.enc?v=' + Date.now())).json();
+  var base = await crypto.subtle.importKey('raw', new TextEncoder().encode(pw), 'PBKDF2', false, ['deriveKey']);
+  var key = await crypto.subtle.deriveKey({name:'PBKDF2', salt:b64(e.salt), iterations:e.iter, hash:'SHA-256'}, base, {name:'AES-GCM', length:256}, false, ['decrypt']);
+  var pt = await crypto.subtle.decrypt({name:'AES-GCM', iv:b64(e.iv)}, key, b64(e.ct));
+  return JSON.parse(new TextDecoder().decode(pt));
+}
+async function login(pw, remember){
+  try { D = await open(pw); } catch(x){ document.getElementById('err').textContent = 'Неверный пароль'; try { sessionStorage.removeItem('tp'); } catch(e){} return; }
+  try { if (remember) sessionStorage.setItem('tp', pw); } catch(e){}
+  document.getElementById('lock').style.display = 'none'; document.getElementById('app').style.display = 'block';
+  document.getElementById('built').textContent = 'обновлено ' + D.built;
+  render();
+}
+document.getElementById('f').onsubmit = function(e){ e.preventDefault(); login(document.getElementById('pw').value, true); };
+try { var saved = sessionStorage.getItem('tp'); if (saved) login(saved, false); } catch(e){}
+
+var esc = function(s){ return String(s == null ? '' : s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); };
+var rub = function(n){ return Math.round(n).toLocaleString('ru-RU') + ' ₽'; };
+var MON = ['янв','фев','мар','апр','май','июн','июл','авг','сен','окт','ноя','дек'];
+var mon = function(m){ var p = m.split('-'); return MON[+p[1] - 1] + ' ' + p[0].slice(2); };
+var ok = function(s){ return !s.refund; };
+
+var TABS = [['home','Главная'],['sales','Продажи'],['clients','Клиенты'],['products','Продукты'],['mail','Рассылки'],['works','Все работы']];
+function nav(){ document.getElementById('nav').innerHTML = TABS.map(function(t){ return '<button data-t="'+t[0]+'"'+(t[0]===TAB?' class="on"':'')+'>'+t[1]+'</button>'; }).join(''); }
+document.getElementById('nav').onclick = function(e){ var b = e.target.closest('[data-t]'); if (b){ TAB = b.dataset.t; render(); scrollTo(0,0); } };
+
+function byProduct(list){ var m = {}; list.forEach(function(s){ var k = s.p; m[k] = m[k] || {n:0, rub:0, fx:0}; m[k].n++; if (s.cur === 'RUB') m[k].rub += s.sum; else m[k].fx++; }); return m; }
+function byMonth(list){ var m = {}; list.forEach(function(s){ var k = s.d.slice(0,7); m[k] = m[k] || {n:0, rub:0}; m[k].n++; if (s.cur === 'RUB') m[k].rub += s.sum; }); return m; }
+
+function home(){
+  var S = D.sales.filter(ok), now = new Date(), ym = now.toISOString().slice(0,7);
+  var last = S.reduce(function(a, s){ return s.d > a ? s.d : a; }, '');
+  var lastDay = last.slice(0,10), cut7 = new Date(new Date(lastDay).getTime() - 6*864e5).toISOString().slice(0,10);
+  var m = S.filter(function(s){ return s.d.slice(0,7) === lastDay.slice(0,7); }), w = S.filter(function(s){ return s.d.slice(0,10) >= cut7; });
+  var sum = function(l){ return l.reduce(function(a, s){ return a + (s.cur === 'RUB' ? s.sum : 0); }, 0); };
+  var bp = byProduct(m), bm = byMonth(S), months = Object.keys(bm).sort(), max = Math.max.apply(null, months.map(function(k){ return bm[k].rub; }));
+  var emails = {}; S.forEach(function(s){ emails[s.email] = 1; });
+  return '<h2>Сводка</h2>' +
+    '<div class="kpis">' +
+      '<div class="kpi"><small>Оплат за '+mon(lastDay.slice(0,7))+'</small><b>'+m.length+'</b><i>'+rub(sum(m))+' + валюта</i></div>' +
+      '<div class="kpi"><small>За последние 7 дней</small><b>'+w.length+'</b><i>'+rub(sum(w))+'</i></div>' +
+      '<div class="kpi"><small>Всего оплат</small><b>'+S.length+'</b><i>'+rub(sum(S))+' в рублях</i></div>' +
+      '<div class="kpi"><small>Покупателей</small><b>'+Object.keys(emails).length+'</b><i>уникальные e-mail</i></div>' +
+    '</div>' +
+    '<h3>Этот месяц по продуктам</h3><div class="card"><table><tr><th>Продукт</th><th class="n">Оплат</th><th class="n">Рубли</th><th class="n hide-m">В валюте</th></tr>' +
+      Object.keys(bp).sort(function(a,b){ return bp[b].n - bp[a].n; }).map(function(k){ return '<tr><td>'+esc(k)+'</td><td class="n">'+bp[k].n+'</td><td class="n">'+rub(bp[k].rub)+'</td><td class="n hide-m">'+bp[k].fx+'</td></tr>'; }).join('') + '</table></div>' +
+    '<h3>Выручка в рублях по месяцам</h3><div class="card"><div class="bars">' +
+      months.map(function(k){ return '<div class="bar"><span>'+mon(k)+'</span><i style="width:'+(bm[k].rub/max*100).toFixed(1)+'%"></i><span class="n" style="text-align:right">'+rub(bm[k].rub)+'</span></div>'; }).join('') + '</div></div>' +
+    '<p class="foot">Данные Lava до '+esc(last)+' · файл «'+esc(D.source)+'». Суммы = сколько пришло после комиссии Lava; оплаты в евро и долларах считаются штуками.</p>';
+}
+
+function sales(){
+  var prods = Object.keys(byProduct(D.sales)).sort(), months = Object.keys(byMonth(D.sales)).sort().reverse();
+  return '<h2>Продажи</h2><div class="tools"><input id="q" placeholder="Поиск: e-mail, имя, продукт"><select id="fp"><option value="">Все продукты</option>'+prods.map(function(p){ return '<option>'+esc(p)+'</option>'; }).join('')+'</select><select id="fm"><option value="">Все месяцы</option>'+months.map(function(m){ return '<option value="'+m+'">'+mon(m)+'</option>'; }).join('')+'</select></div><div id="st"></div><div class="card"><table id="tb"></table></div>';
+}
+function salesFill(){
+  var q = (document.getElementById('q').value || '').toLowerCase(), fp = document.getElementById('fp').value, fm = document.getElementById('fm').value;
+  var L = D.sales.filter(function(s){ return (!fp || s.p === fp) && (!fm || s.d.slice(0,7) === fm) && (!q || (s.email + ' ' + s.name + ' ' + s.p + ' ' + s.tariff).toLowerCase().indexOf(q) >= 0); }).sort(function(a,b){ return a.d < b.d ? 1 : -1; });
+  var r = L.filter(ok).reduce(function(a, s){ return a + (s.cur === 'RUB' ? s.sum : 0); }, 0);
+  document.getElementById('st').innerHTML = '<p class="muted" style="margin-bottom:8px">'+L.length+' оплат · '+rub(r)+' в рублях</p>';
+  document.getElementById('tb').innerHTML = '<tr><th>Дата</th><th>Продукт</th><th class="hide-m">Покупатель</th><th class="n">Сумма</th></tr>' + L.slice(0, 400).map(function(s){
+    return '<tr><td style="white-space:nowrap">'+esc(s.d.slice(8,10)+'.'+s.d.slice(5,7)+' '+s.d.slice(11))+'</td><td>'+esc(s.p)+(s.p !== s.tariff ? '<div class="muted">'+esc(s.tariff)+'</div>' : '')+(s.refund ? ' <span class="tag r">возврат</span>' : '')+(s.kind ? ' <span class="tag">'+s.kind+'</span>' : '')+(s.promo ? ' <span class="tag">'+esc(s.promo)+'</span>' : '')+'</td><td class="hide-m">'+esc(s.email)+(s.name ? '<div class="muted">'+esc(s.name)+'</div>' : '')+'</td><td class="n">'+(s.cur === 'RUB' ? rub(s.sum) : s.sum + ' ' + s.cur)+'</td></tr>'; }).join('') + (L.length > 400 ? '<tr><td colspan="4" class="muted">Показаны первые 400, уточните фильтр</td></tr>' : '');
+}
+
+function clients(){ return '<h2>Клиенты</h2><div class="tools"><input id="cq" placeholder="Поиск по e-mail или имени"><select id="cf"><option value="">Все</option><option value="club">Были в клубе</option><option value="multi">Купили 2+ продукта</option></select></div><div id="cs"></div><div class="card"><table id="ct"></table></div>'; }
+function clientsFill(){
+  var q = (document.getElementById('cq').value || '').toLowerCase(), f = document.getElementById('cf').value, C = {};
+  D.sales.filter(ok).forEach(function(s){ var c = C[s.email] = C[s.email] || {email:s.email, name:'', prods:{}, n:0, rub:0, first:s.d, last:s.d, clubLast:''};
+    c.n++; if (s.cur === 'RUB') c.rub += s.sum; c.prods[s.p] = 1; if (s.name) c.name = s.name; if (s.d < c.first) c.first = s.d; if (s.d > c.last) c.last = s.d;
+    if (s.p.indexOf('Клуб') === 0 && s.d > c.clubLast) c.clubLast = s.d; });
+  var L = Object.keys(C).map(function(k){ return C[k]; }).filter(function(c){ return (!q || (c.email + ' ' + c.name).toLowerCase().indexOf(q) >= 0) && (f !== 'club' || c.clubLast) && (f !== 'multi' || Object.keys(c.prods).length > 1); }).sort(function(a,b){ return b.rub - a.rub; });
+  document.getElementById('cs').innerHTML = '<p class="muted" style="margin-bottom:8px">'+L.length+' клиентов</p>';
+  document.getElementById('ct').innerHTML = '<tr><th>Клиент</th><th>Что купил</th><th class="n">Оплат</th><th class="n hide-m">Рубли</th><th class="hide-m">Последняя</th></tr>' + L.slice(0, 400).map(function(c){
+    return '<tr><td>'+esc(c.email)+(c.name ? '<div class="muted">'+esc(c.name)+'</div>' : '')+'</td><td>'+Object.keys(c.prods).map(function(p){ return '<span class="tag">'+esc(p.replace('Лекция ','').replace('Система цветовых сочетаний','Система'))+'</span>'; }).join(' ')+(c.clubLast ? '<div class="muted">клуб: последняя оплата '+c.clubLast.slice(8,10)+'.'+c.clubLast.slice(5,7)+'</div>' : '')+'</td><td class="n">'+c.n+'</td><td class="n hide-m">'+rub(c.rub)+'</td><td class="hide-m" style="white-space:nowrap">'+c.last.slice(8,10)+'.'+c.last.slice(5,7)+'</td></tr>'; }).join('');
+}
+
+function products(){
+  var bp = byProduct(D.sales.filter(ok));
+  return '<h2>Продукты</h2><div class="grid">' + D.products.map(function(p){ var k = p.name.indexOf('Клуб') === 0 ? 'Клуб «В моём стиле»' : p.name, s = bp[k];
+    return '<div class="pc"><span class="tag" style="justify-self:start">'+esc(p.status)+'</span><b>'+esc(p.name)+'</b><span class="muted">'+esc(p.type)+' · '+esc(p.price)+'</span>'+(s ? '<span>'+s.n+' оплат · '+rub(s.rub)+'</span>' : '<span class="muted">продаж пока нет в отчёте</span>')+
+      '<div class="row">'+(p.buy ? '<a href="'+esc(p.buy)+'" target="_blank" rel="noopener">Ссылка на оплату</a>' : '')+(p.page ? '<a class="l" href="'+esc(p.page)+'" target="_blank" rel="noopener">Страница</a>' : '')+'</div></div>'; }).join('') + '</div>';
+}
+
+function mail(){
+  return '<h2>Рассылки</h2><div class="card"><table><tr><th>Дата</th><th>Тема</th><th class="n">Отправлено</th><th class="hide-m">Через</th></tr>' + D.mailings.map(function(m){
+    return '<tr><td style="white-space:nowrap">'+m.date.slice(8,10)+'.'+m.date.slice(5,7)+'</td><td>'+esc(m.subject)+'</td><td class="n">'+(m.sent || '—')+'</td><td class="hide-m">'+esc(m.via)+'</td></tr>'; }).join('') + '</table></div><p class="foot">Дата = последняя запись в журнале отправки. Показаны рассылки, по которым есть журнал отправки.</p>';
+}
+
+function works(){
+  var G = {}; D.works.forEach(function(w){ (G[w.group] = G[w.group] || []).push(w); });
+  return '<h2>Все работы</h2>' + Object.keys(G).map(function(g){ return '<h3>'+esc(g)+'</h3><div class="card"><table>' + G[g].map(function(w){
+    return '<tr><td>'+(w.url ? '<a href="'+esc(w.url)+'" target="_blank" rel="noopener">'+esc(w.name)+'</a>' : esc(w.name))+'</td><td class="muted">'+esc(w.status)+'</td></tr>'; }).join('') + '</table></div>'; }).join('');
+}
+
+function render(){
+  nav(); var M = document.getElementById('main');
+  M.innerHTML = {home:home, sales:sales, clients:clients, products:products, mail:mail, works:works}[TAB]();
+  if (TAB === 'sales'){ ['q','fp','fm'].forEach(function(id){ document.getElementById(id).oninput = salesFill; }); salesFill(); }
+  if (TAB === 'clients'){ ['cq','cf'].forEach(function(id){ document.getElementById(id).oninput = clientsFill; }); clientsFill(); }
+}
+})();
+</script>
+</body></html>
