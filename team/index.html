@@ -99,7 +99,7 @@ var MON = ['янв','фев','мар','апр','май','июн','июл','ав�
 var mon = function(m){ var p = m.split('-'); return MON[+p[1] - 1] + ' ' + p[0].slice(2); };
 var ok = function(s){ return !s.refund; };
 
-var TABS = [['home','Главная'],['bot','Бот · заявки'],['sales','Продажи'],['clients','Контакты'],['products','Продукты'],['mail','Рассылки'],['works','Все работы']];
+var TABS = [['home','Главная'],['bot','Бот · заявки'],['fin','Финансы'],['sales','Продажи'],['clients','Контакты'],['products','Продукты'],['mail','Рассылки'],['works','Все работы']];
 function nav(){ document.getElementById('nav').innerHTML = TABS.map(function(t){ return '<button data-t="'+t[0]+'"'+(t[0]===TAB?' class="on"':'')+'>'+t[1]+'</button>'; }).join(''); }
 document.getElementById('nav').onclick = function(e){ var b = e.target.closest('[data-t]'); if (b){ TAB = b.dataset.t; render(); scrollTo(0,0); } };
 
@@ -222,9 +222,46 @@ async function botFill(){
       '<p class="foot">Живые данные из бота на момент открытия вкладки.</p>';
   } catch(e){ el.innerHTML = '<p class="muted">Бот пока не отдаёт данные ('+esc(e.message)+'). Нужна выкладка бота с адресом /club/api/team.</p>'; }
 }
+// Финансы: по месяцам и продуктам из Lava (оборот, комиссия, налог, доли), выводы из таблицы «расчеты», расходы
+function fin(){
+  var F = D.fin, R = function(s, v){ return s.cur === 'RUB' ? v : v * (F.rate[s.cur] || 0); };
+  var rows = {}, months = {};
+  D.sales.filter(ok).forEach(function(s){ var m = s.d.slice(0,7), k = m + '|' + s.p, r = rows[k] = rows[k] || {m:m, p:s.p, n:0, gross:0, fee:0, net:0};
+    r.n++; r.net += R(s, s.sum); r.fee += R(s, s.fee); r.gross += R(s, s.sum + (s.fp === 'Customer' ? 0 : s.fee)); months[m] = 1; });
+  var exp = {}; F.expenses.forEach(function(e){ exp[e.m] = (exp[e.m] || 0) + (e.cur === 'RUB' ? e.sum : e.sum * (F.rate[e.cur] || 0)); });
+  var M = Object.keys(months).sort().reverse(), pct = function(a, b){ return b ? (a / b * 100).toFixed(1) + '%' : '—'; };
+  var tot = {gross:0, fee:0, net:0, tax:0, mila:0, yana:0, exp:0};
+  var html = M.map(function(m){
+    var L = Object.keys(rows).filter(function(k){ return k.indexOf(m) === 0; }).map(function(k){ return rows[k]; }).sort(function(a,b){ return b.net - a.net; });
+    var t = {gross:0, fee:0, net:0}; L.forEach(function(r){ t.gross += r.gross; t.fee += r.fee; t.net += r.net; });
+    var tr = F.tax[m] || 0, tax = t.net * tr, base = t.net - tax, e = exp[m] || 0;
+    tot.gross += t.gross; tot.fee += t.fee; tot.net += t.net; tot.tax += tax; tot.mila += base * F.split['Мила']; tot.yana += base * F.split['Яна']; tot.exp += e;
+    return '<h3>'+mon(m)+'</h3><div class="card"><table><tr><th>Продукт</th><th class="n">Оплат</th><th class="n">Оборот</th><th class="n">Комиссия Lava</th><th class="n hide-m">%</th><th class="n">Получено</th></tr>' +
+      L.map(function(r){ return '<tr><td>'+esc(r.p)+'</td><td class="n">'+r.n+'</td><td class="n">'+rub(r.gross)+'</td><td class="n">'+rub(r.fee)+'</td><td class="n hide-m">'+pct(r.fee, r.gross)+'</td><td class="n">'+rub(r.net)+'</td></tr>'; }).join('') +
+      '<tr><td><b style="color:var(--ink);font-size:13px;letter-spacing:0;text-transform:none;margin:0">Итого</b></td><td></td><td class="n"><b style="color:var(--ink);font-size:13px;margin:0">'+rub(t.gross)+'</b></td><td class="n">'+rub(t.fee)+'</td><td class="n hide-m">'+pct(t.fee, t.gross)+'</td><td class="n"><b style="color:var(--ink);font-size:13px;margin:0">'+rub(t.net)+'</b></td></tr>' +
+      '<tr><td colspan="5" class="muted">Налог '+(tr*100)+'%</td><td class="n">−'+rub(tax)+'</td></tr>' +
+      '<tr><td colspan="5">Мила '+(F.split['Мила']*100)+'%</td><td class="n">'+rub(base*F.split['Мила'])+'</td></tr>' +
+      '<tr><td colspan="5">Яна '+(F.split['Яна']*100)+'%</td><td class="n">'+rub(base*F.split['Яна'])+'</td></tr>' +
+      (e ? '<tr><td colspan="5" class="muted">Расходы месяца</td><td class="n">−'+rub(e)+'</td></tr>' : '') + '</table></div>';
+  }).join('');
+  var P = F.payouts, ps = {net:0, tax:0, m:0, y:0}; P.forEach(function(x){ ps.net += x.net; ps.tax += x.tax; ps.m += x.m; ps.y += x.y; });
+  return '<h2>Финансы</h2><div class="kpis">' +
+    '<div class="kpi"><small>Оборот через Lava</small><b>'+rub(tot.gross)+'</b><i>комиссия '+rub(tot.fee)+' · '+pct(tot.fee, tot.gross)+'</i></div>' +
+    '<div class="kpi"><small>Налог (расчёт)</small><b>'+rub(tot.tax)+'</b><i>по ставкам месяцев</i></div>' +
+    '<div class="kpi"><small>Мила '+(F.split['Мила']*100)+'%</small><b>'+rub(tot.mila)+'</b><i>после комиссии и налога</i></div>' +
+    '<div class="kpi"><small>Яна '+(F.split['Яна']*100)+'%</small><b>'+rub(tot.yana)+'</b><i>после комиссии и налога</i></div>' +
+    '<div class="kpi"><small>Расходы</small><b>'+rub(tot.exp)+'</b><i>'+F.expenses.length+' статей</i></div></div>' +
+    '<p class="foot" style="margin-top:12px">Расчёт по отчёту Lava: оборот = цена для покупателя, комиссия = из отчёта, валюта по ≈ курсу € '+F.rate.EUR+' и $ '+F.rate.USD+'. Не входят продажи вне Lava (ЮKassa в мае, пилотный проект) — они в «Выводах» ниже.</p>' +
+    html +
+    '<h3>Выводы на карту (из таблицы «расчеты»)</h3><div class="card"><table><tr><th>Когда</th><th>Что</th><th class="n">На карту</th><th class="n hide-m">Налог</th><th class="n">Мила</th><th class="n">Яна</th></tr>' +
+      P.map(function(x){ return '<tr><td style="white-space:nowrap">'+esc(x.d)+'</td><td>'+esc(x.what)+'</td><td class="n">'+rub(x.net)+'</td><td class="n hide-m">'+rub(x.tax)+'</td><td class="n">'+rub(x.m)+'</td><td class="n">'+rub(x.y)+'</td></tr>'; }).join('') +
+      '<tr><td></td><td><b style="color:var(--ink);font-size:13px;letter-spacing:0;text-transform:none;margin:0">Всего</b></td><td class="n">'+rub(ps.net)+'</td><td class="n hide-m">'+rub(ps.tax)+'</td><td class="n">'+rub(ps.m)+'</td><td class="n">'+rub(ps.y)+'</td></tr></table></div>' +
+    '<h3>Расходы</h3><div class="card"><table><tr><th>Месяц</th><th>Статья</th><th class="n">Сумма</th></tr>' +
+      F.expenses.map(function(e){ return '<tr><td>'+mon(e.m)+'</td><td>'+esc(e.what)+'</td><td class="n">'+(e.cur === 'RUB' ? rub(e.sum) : e.sum + ' $ ≈ ' + rub(e.sum * F.rate[e.cur])) +'</td></tr>'; }).join('') + '</table></div>';
+}
 function render(){
   nav(); var M = document.getElementById('main');
-  M.innerHTML = {bot:bot, home:home, sales:sales, clients:clients, products:products, mail:mail, works:works}[TAB]();
+  M.innerHTML = {fin:fin, bot:bot, home:home, sales:sales, clients:clients, products:products, mail:mail, works:works}[TAB]();
   if (TAB === 'bot') botFill();
   if (TAB === 'sales'){ ['q','fp','fm'].forEach(function(id){ document.getElementById(id).oninput = salesFill; }); salesFill(); }
   if (TAB === 'clients'){ ['cq','cf'].forEach(function(id){ document.getElementById(id).oninput = clientsFill; }); clientsFill(); }
