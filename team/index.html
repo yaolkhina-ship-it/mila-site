@@ -99,7 +99,7 @@ var MON = ['янв','фев','мар','апр','май','июн','июл','ав�
 var mon = function(m){ var p = m.split('-'); return MON[+p[1] - 1] + ' ' + p[0].slice(2); };
 var ok = function(s){ return !s.refund; };
 
-var TABS = [['home','Главная'],['sales','Продажи'],['clients','Клиенты'],['products','Продукты'],['mail','Рассылки'],['works','Все работы']];
+var TABS = [['home','Главная'],['bot','Бот · заявки'],['sales','Продажи'],['clients','Клиенты'],['products','Продукты'],['mail','Рассылки'],['works','Все работы']];
 function nav(){ document.getElementById('nav').innerHTML = TABS.map(function(t){ return '<button data-t="'+t[0]+'"'+(t[0]===TAB?' class="on"':'')+'>'+t[1]+'</button>'; }).join(''); }
 document.getElementById('nav').onclick = function(e){ var b = e.target.closest('[data-t]'); if (b){ TAB = b.dataset.t; render(); scrollTo(0,0); } };
 
@@ -171,9 +171,38 @@ function works(){
     return '<tr><td>'+(w.url ? '<a href="'+esc(w.url)+'" target="_blank" rel="noopener">'+esc(w.name)+'</a>' : esc(w.name))+'</td><td class="muted">'+esc(w.status)+'</td></tr>'; }).join('') + '</table></div>'; }).join('');
 }
 
+// Бот: заявки и клуб живьём из базы бота (через /club/api/team, токен лежит в зашифрованных данных)
+function bot(){ return '<h2>Бот · заявки</h2><div id="bt"><p class="muted">Загружаю из бота…</p></div>'; }
+function dd(s){ return s ? s.slice(8,10)+'.'+s.slice(5,7)+' '+s.slice(11,16) : ''; }
+async function botFill(){
+  var el = document.getElementById('bt');
+  try {
+    var r = await fetch('/club/api/team', {headers:{'X-Team-Token': D.bot_token}, cache:'no-store'});
+    if (!r.ok) throw new Error(r.status);
+    var B = await r.json(), now = B.now, day = 86400;
+    var since = function(s, d){ return s && (new Date(s.replace(' ','T') + '+03:00').getTime()/1000) > now - d*day; };
+    var r7 = B.regs.filter(function(x){ return since(x.created_at, 7); }), p7 = B.pending.filter(function(x){ return since(x.created_at, 7); });
+    var act = B.members.filter(function(m){ return m.expires_at > now; }), soon = act.filter(function(m){ return m.expires_at < now + 14*day; });
+    var ev = {}; B.regs.forEach(function(x){ ev[x.event] = (ev[x.event] || 0) + 1; });
+    var who = function(x){ return (x.full_name ? esc(x.full_name) : '') + (x.username ? ' <span class="muted">@'+esc(x.username)+'</span>' : (!x.full_name ? '<span class="muted">id '+x.user_id+'</span>' : '')); };
+    var dt = function(ts){ var d = new Date(ts*1000); return ('0'+d.getDate()).slice(-2)+'.'+('0'+(d.getMonth()+1)).slice(-2)+'.'+d.getFullYear(); };
+    el.innerHTML = '<div class="kpis">' +
+      '<div class="kpi"><small>Заявок за 7 дней</small><b>'+r7.length+'</b><i>регистрации и лист ожидания</i></div>' +
+      '<div class="kpi"><small>Начали оплату за 7 дней</small><b>'+p7.length+'</b><i>счёт в боте</i></div>' +
+      '<div class="kpi"><small>Резидентов клуба</small><b>'+act.length+'</b><i>с активным доступом</i></div>' +
+      '<div class="kpi"><small>Заканчивается за 14 дней</small><b>'+soon.length+'</b><i>напомнить о продлении</i></div></div>' +
+      '<h3>Заявки по событиям</h3><div class="card"><table><tr><th>Событие</th><th class="n">Всего</th></tr>' + Object.keys(ev).map(function(k){ return '<tr><td>'+esc(B.events[k] || k)+'</td><td class="n">'+ev[k]+'</td></tr>'; }).join('') + '</table></div>' +
+      '<h3>Последние заявки</h3><div class="card"><table><tr><th>Когда</th><th>Кто</th><th class="hide-m">Куда</th></tr>' + B.regs.slice(0, 60).map(function(x){ return '<tr><td style="white-space:nowrap">'+dd(x.created_at)+'</td><td>'+who(x)+'<div class="muted" style="display:none"></div></td><td class="hide-m">'+esc(B.events[x.event] || x.event)+'</td></tr>'; }).join('') + '</table></div>' +
+      '<h3>Начали оплату в боте</h3><div class="card"><table><tr><th>Когда</th><th>E-mail</th><th>Тариф</th></tr>' + B.pending.slice(0, 40).map(function(x){ return '<tr><td style="white-space:nowrap">'+dd(x.created_at)+'</td><td>'+esc(x.email || '')+'</td><td>'+esc(x.tariff || '')+'</td></tr>'; }).join('') + '</table></div>' +
+      '<h3>Клуб · доступ</h3><div class="card"><table><tr><th>Резидент</th><th>Тариф</th><th class="n">До</th></tr>' + B.members.map(function(m){ var on = m.expires_at > now;
+        return '<tr><td>'+(m.username ? '@'+esc(m.username) : '<span class="muted">id '+m.user_id+'</span>')+'</td><td>'+esc(m.tariff || '')+'</td><td class="n">'+(on ? (m.expires_at < now + 14*day ? '<span class="tag r">'+dt(m.expires_at)+'</span>' : dt(m.expires_at)) : '<span class="muted">истёк '+dt(m.expires_at)+'</span>')+'</td></tr>'; }).join('') + '</table></div>' +
+      '<p class="foot">Живые данные из бота на момент открытия вкладки.</p>';
+  } catch(e){ el.innerHTML = '<p class="muted">Бот пока не отдаёт данные ('+esc(e.message)+'). Нужна выкладка бота с адресом /club/api/team.</p>'; }
+}
 function render(){
   nav(); var M = document.getElementById('main');
-  M.innerHTML = {home:home, sales:sales, clients:clients, products:products, mail:mail, works:works}[TAB]();
+  M.innerHTML = {bot:bot, home:home, sales:sales, clients:clients, products:products, mail:mail, works:works}[TAB]();
+  if (TAB === 'bot') botFill();
   if (TAB === 'sales'){ ['q','fp','fm'].forEach(function(id){ document.getElementById(id).oninput = salesFill; }); salesFill(); }
   if (TAB === 'clients'){ ['cq','cf'].forEach(function(id){ document.getElementById(id).oninput = clientsFill; }); clientsFill(); }
 }
