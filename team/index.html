@@ -99,7 +99,7 @@ var MON = ['янв','фев','мар','апр','май','июн','июл','ав�
 var mon = function(m){ var p = m.split('-'); return MON[+p[1] - 1] + ' ' + p[0].slice(2); };
 var ok = function(s){ return !s.refund; };
 
-var TABS = [['home','Главная'],['bot','Бот · заявки'],['sales','Продажи'],['clients','Клиенты'],['products','Продукты'],['mail','Рассылки'],['works','Все работы']];
+var TABS = [['home','Главная'],['bot','Бот · заявки'],['sales','Продажи'],['clients','Контакты'],['products','Продукты'],['mail','Рассылки'],['works','Все работы']];
 function nav(){ document.getElementById('nav').innerHTML = TABS.map(function(t){ return '<button data-t="'+t[0]+'"'+(t[0]===TAB?' class="on"':'')+'>'+t[1]+'</button>'; }).join(''); }
 document.getElementById('nav').onclick = function(e){ var b = e.target.closest('[data-t]'); if (b){ TAB = b.dataset.t; render(); scrollTo(0,0); } };
 
@@ -141,16 +141,39 @@ function salesFill(){
     return '<tr><td style="white-space:nowrap">'+esc(s.d.slice(8,10)+'.'+s.d.slice(5,7)+' '+s.d.slice(11))+'</td><td>'+esc(s.p)+(s.p !== s.tariff ? '<div class="muted">'+esc(s.tariff)+'</div>' : '')+(s.refund ? ' <span class="tag r">возврат</span>' : '')+(s.kind ? ' <span class="tag">'+s.kind+'</span>' : '')+(s.promo ? ' <span class="tag">'+esc(s.promo)+'</span>' : '')+'</td><td class="hide-m">'+esc(s.email)+(s.name ? '<div class="muted">'+esc(s.name)+'</div>' : '')+'</td><td class="n">'+(s.cur === 'RUB' ? rub(s.sum) : s.sum + ' ' + s.cur)+'</td></tr>'; }).join('') + (L.length > 400 ? '<tr><td colspan="4" class="muted">Показаны первые 400, уточните фильтр</td></tr>' : '');
 }
 
-function clients(){ return '<h2>Клиенты</h2><div class="tools"><input id="cq" placeholder="Поиск по e-mail или имени"><select id="cf"><option value="">Все</option><option value="club">Были в клубе</option><option value="multi">Купили 2+ продукта</option></select></div><div id="cs"></div><div class="card"><table id="ct"></table></div>'; }
-function clientsFill(){
-  var q = (document.getElementById('cq').value || '').toLowerCase(), f = document.getElementById('cf').value, C = {};
-  D.sales.filter(ok).forEach(function(s){ var c = C[s.email] = C[s.email] || {email:s.email, name:'', prods:{}, n:0, rub:0, first:s.d, last:s.d, clubLast:''};
-    c.n++; if (s.cur === 'RUB') c.rub += s.sum; c.prods[s.p] = 1; if (s.name) c.name = s.name; if (s.d < c.first) c.first = s.d; if (s.d > c.last) c.last = s.d;
+function clients(){ return '<h2>Контакты</h2><div class="tools"><input id="cq" placeholder="Поиск: e-mail, имя, @ник"><select id="cf"><option value="">Все</option><option value="buy">Купили</option><option value="lead">Только заявки (не покупали)</option><option value="club">Были в клубе</option><option value="multi">Купили 2+ продукта</option></select></div><div id="cs"><p class="muted">Загружаю заявки из бота…</p></div><div class="card"><table id="ct"></table></div>'; }
+var BOTDATA = null;
+async function botData(){ if (BOTDATA) return BOTDATA; try { var r = await fetch('/club/api/team', {headers:{'X-Team-Token': D.bot_token}, cache:'no-store'}); if (r.ok) BOTDATA = await r.json(); } catch(e){} return BOTDATA; }
+var CONTACTS = null;
+async function buildContacts(){
+  if (CONTACTS) return CONTACTS;
+  var C = {}, get = function(k){ return C[k] = C[k] || {key:k, email:'', name:'', tg:'', prods:{}, src:{}, n:0, rub:0, last:'', clubLast:''}; };
+  D.sales.filter(ok).forEach(function(s){ var c = get(s.email); c.email = s.email;
+    c.n++; if (s.cur === 'RUB') c.rub += s.sum; c.prods[s.p] = 1; if (s.name) c.name = s.name; if (s.d > c.last) c.last = s.d;
     if (s.p.indexOf('Клуб') === 0 && s.d > c.clubLast) c.clubLast = s.d; });
-  var L = Object.keys(C).map(function(k){ return C[k]; }).filter(function(c){ return (!q || (c.email + ' ' + c.name).toLowerCase().indexOf(q) >= 0) && (f !== 'club' || c.clubLast) && (f !== 'multi' || Object.keys(c.prods).length > 1); }).sort(function(a,b){ return b.rub - a.rub; });
-  document.getElementById('cs').innerHTML = '<p class="muted" style="margin-bottom:8px">'+L.length+' клиентов</p>';
-  document.getElementById('ct').innerHTML = '<tr><th>Клиент</th><th>Что купил</th><th class="n">Оплат</th><th class="n hide-m">Рубли</th><th class="hide-m">Последняя</th></tr>' + L.slice(0, 400).map(function(c){
-    return '<tr><td>'+esc(c.email)+(c.name ? '<div class="muted">'+esc(c.name)+'</div>' : '')+'</td><td>'+Object.keys(c.prods).map(function(p){ return '<span class="tag">'+esc(p.replace('Лекция ','').replace('Система цветовых сочетаний','Система'))+'</span>'; }).join(' ')+(c.clubLast ? '<div class="muted">клуб: последняя оплата '+c.clubLast.slice(8,10)+'.'+c.clubLast.slice(5,7)+'</div>' : '')+'</td><td class="n">'+c.n+'</td><td class="n hide-m">'+rub(c.rub)+'</td><td class="hide-m" style="white-space:nowrap">'+c.last.slice(8,10)+'.'+c.last.slice(5,7)+'</td></tr>'; }).join('');
+  Object.keys(D.contacts || {}).forEach(function(e){ var c = get(e); c.email = e; D.contacts[e].forEach(function(l){ c.src[l] = 1; }); });
+  var B = await botData();
+  if (B) {
+    var mail = {}; B.pending.forEach(function(p){ if (p.email) mail[p.user_id] = p.email.toLowerCase(); });
+    B.regs.forEach(function(r){ var e = mail[r.user_id], c = get(e || ('tg:' + r.user_id)); if (e) c.email = e;
+      if (r.full_name && !c.name) c.name = r.full_name; if (r.username) c.tg = r.username;
+      c.src['Эфир «' + (B.events[r.event] || r.event) + '» · бот'] = 1; if (r.created_at > c.last) c.last = r.created_at; });
+  }
+  CONTACTS = {list: Object.keys(C).map(function(k){ return C[k]; }), bot: !!B};
+  return CONTACTS;
+}
+async function clientsFill(){
+  var X = await buildContacts(), q = (document.getElementById('cq').value || '').toLowerCase(), f = document.getElementById('cf').value;
+  var L = X.list.filter(function(c){ var bought = Object.keys(c.prods).length > 0;
+    return (!q || (c.email + ' ' + c.name + ' @' + c.tg).toLowerCase().indexOf(q) >= 0) && (f !== 'buy' || bought) && (f !== 'lead' || !bought) && (f !== 'club' || c.clubLast) && (f !== 'multi' || Object.keys(c.prods).length > 1); })
+    .sort(function(a,b){ return (b.rub - a.rub) || (a.last < b.last ? 1 : -1); });
+  var buyers = X.list.filter(function(c){ return Object.keys(c.prods).length; }).length;
+  document.getElementById('cs').innerHTML = '<p class="muted" style="margin-bottom:8px">'+L.length+' контактов · всего '+X.list.length+': '+buyers+' покупателей, '+(X.list.length - buyers)+' только с заявок'+(X.bot ? '' : ' · бот сейчас не ответил, заявок из бота нет')+'</p>';
+  document.getElementById('ct').innerHTML = '<tr><th>Контакт</th><th>Покупки и заявки</th><th class="n">Оплат</th><th class="n hide-m">Рубли</th></tr>' + L.slice(0, 500).map(function(c){
+    return '<tr><td>'+(c.email ? esc(c.email) : '<span class="muted">только Telegram</span>')+(c.name ? '<div class="muted">'+esc(c.name)+'</div>' : '')+(c.tg ? '<div class="muted">@'+esc(c.tg)+'</div>' : '')+'</td><td>'+
+      Object.keys(c.prods).map(function(p){ return '<span class="tag">'+esc(p.replace('Лекция ','').replace('Система цветовых сочетаний','Система'))+'</span>'; }).join(' ')+' '+
+      Object.keys(c.src).map(function(s){ return '<span class="tag" style="background:rgba(13,26,30,.07);color:#3a4448">'+esc(s)+'</span>'; }).join(' ')+
+      (c.clubLast ? '<div class="muted">клуб: последняя оплата '+c.clubLast.slice(8,10)+'.'+c.clubLast.slice(5,7)+'</div>' : '')+'</td><td class="n">'+(c.n || '—')+'</td><td class="n hide-m">'+(c.rub ? rub(c.rub) : '—')+'</td></tr>'; }).join('') + (L.length > 500 ? '<tr><td colspan="4" class="muted">Показаны первые 500, уточните поиск</td></tr>' : '');
 }
 
 function products(){
