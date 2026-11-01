@@ -302,6 +302,7 @@ body.dark-top .top .ed{color:rgba(244,242,238,.6)}
 .rz-pt.psy .body > div{padding-left:0}
 .rz-pt.psy .body p{color:rgba(244,242,238,.8)}
 .rz-pt.psy .nx{color:var(--paper);border-color:rgba(201,169,106,.5)}
+.lk-strip{display:grid;gap:8px;margin:0 0 24px}.lk-strip button{padding:0;background:#fff;border:0;cursor:pointer}.lk-strip img{display:block;width:100%;aspect-ratio:2/3;object-fit:contain}
 .rz-all{display:block;width:100%;margin-top:26px;padding:16px;text-align:center !important;background:var(--ink);color:#C9A96A;font-size:11px;letter-spacing:.28em;text-transform:uppercase}
 .sig i{flex:1;height:1px;background:var(--bronze2)}
 .sig span{font-family:var(--serif);font-size:13px;letter-spacing:.24em;text-transform:uppercase;color:var(--bronze)}
@@ -642,12 +643,14 @@ function step3(){
   }
   show('<div class="pad">' + stepHead(3) + crumbs(3) +
     '<div class="h2" style="font-size:40px;margin-top:0">Сила <i class="br">деталей</i></div>' +
+    // образы без разбора: полоса превью над правилами (тап → шаг 4)
+    (R && LK && LK.length ? '<div class="lk-strip" style="grid-template-columns:repeat(' + Math.min(LK.length, 4) + ',1fr)">' + LK.slice(0, 4).map(function(l){ return '<button data-go="4"><img loading="lazy" src="' + esc(l.img) + '" alt=""></button>'; }).join('') + '</div>' : '') +
     (R && c ? '<div class="xp-t">' + c.split('\n').map(function(p){ return '<p>' + esc(p) + '</p>'; }).join('') + '</div>' : '') +
     (R ? '<ol class="rules">' + R.map(function(r, i){ return r[2] ? '<li class="psy"><div class="mk">' + PSY_MARK + '<span>' + PSY_LABEL + '</span><em></em><span>' + nn(i + 1) + '</span></div><b>' + esc(r[0]) + '</b>' + (r[1] ? '<p>' + esc(r[1]) + '</p>' : '') + '</li>' :
       '<li><span class="rn">' + nn(i + 1) + '</span><div><b>' + esc(r[0]) + '</b>' + (r[1] ? '<p>' + esc(r[1]) + '</p>' : '') + '</div></li>'; }).join('') + '</ol>' :
     '<div class="qt">“</div><div class="xp-t">' + (c ? c.split('\n').map(function(p){ return '<p>' + esc(p) + '</p>'; }).join('') :
       '<p><span class="ph">Комментарий Милы: «' + esc(st.sit) + '» и цель «' + esc(st.goal) + '». Почему такой образ работает.</span></p>') + '</div>') +
-    '<div class="sig"><i></i><span>Мила Ушакова</span></div>' +
+    '<div class="sig"><i></i><span>Мила Ушакова</span></div>' + (R && LK && LK.length ? '<button class="rz-all" data-go="4">Смотреть все образы →</button>' : '') +
     pager(3, true) + '</div>');
 }
 function step4(){
