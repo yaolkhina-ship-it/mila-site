@@ -122,7 +122,7 @@ var MON = ['янв','фев','мар','апр','май','июн','июл','ав�
 var mon = function(m){ var p = m.split('-'); return MON[+p[1] - 1] + ' ' + p[0].slice(2); };
 var ok = function(s){ return !s.refund; };
 
-var TABS = [['home','Главная'],['bot','Бот · заявки'],['fin','Финансы'],['sales','Продажи'],['clients','Контакты'],['matrix','Матрица'],['products','Продукты'],['mail','Рассылки'],['works','Все работы']];
+var TABS = [['home','Главная'],['bot','Бот · заявки'],['fin','Финансы'],['exp','Расходы'],['sales','Продажи'],['clients','Контакты'],['matrix','Матрица'],['products','Продукты'],['mail','Рассылки'],['works','Все работы']];
 function nav(){ document.getElementById('nav').innerHTML = TABS.map(function(t){ return '<button data-t="'+t[0]+'"'+(t[0]===TAB?' class="on"':'')+'>'+t[1]+'</button>'; }).join(''); }
 document.getElementById('nav').onclick = function(e){ var b = e.target.closest('[data-t]'); if (b){ TAB = b.dataset.t; render(); scrollTo(0,0); } };
 
@@ -382,6 +382,28 @@ function fin(){
       F.expenses.map(function(e){ return '<tr><td>'+mon(e.m)+'</td><td>'+esc(e.what)+'</td><td class="n">'+(e.cur === 'RUB' ? rub(e.sum) : e.sum + ' $ ≈ ' + rub(e.sum * F.rate[e.cur])) +'</td></tr>'; }).join('') + '</table></div>';
 }
 // Продуктовая матрица Милы: что есть, что создать, что в будущем; доход / PR / усилие по 5-балльной шкале
+// Расходы: из таблицы «расчеты». Ежемесячные сервисы — матрицей по месяцам, разовые — списком. Доллары по курсу из Финансов.
+function expenses(){
+  var F = D.fin, E = F.expenses, R = function(e){ return e.cur === 'RUB' ? e.sum : e.sum * (F.rate[e.cur] || 0); };
+  var months = Object.keys(E.reduce(function(a, e){ a[e.m] = 1; return a; }, {})).sort();
+  var srv = {}, once = [], tot = 0, totS = 0;
+  E.forEach(function(e){ var v = R(e); tot += v; if (e.g && e.g !== 'Разово'){ totS += v; var x = srv[e.g] = srv[e.g] || {}; var c = x[e.m] = x[e.m] || {rub:0, usd:0, items:[]}; c.rub += v; if (e.cur !== 'RUB') c.usd += e.sum; c.items.push(e.what); } else once.push(e); });
+  var names = Object.keys(srv).sort(), sm = months.filter(function(m){ return names.some(function(n){ return srv[n][m]; }); });
+  var lastM = sm[sm.length-1], lastSum = names.reduce(function(a, n){ return a + (srv[n][lastM] ? srv[n][lastM].rub : 0); }, 0);
+  var cell = function(c){ return c ? rub(c.rub) + (c.usd ? '<div class="muted">' + c.usd + ' $</div>' : '') : '—'; };
+  return '<h2>Расходы</h2><div class="kpis">' +
+      '<div class="kpi"><small>Всего расходов</small><b>' + rub(tot) + '</b><i>' + E.length + ' статей</i></div>' +
+      '<div class="kpi"><small>Сервисы за ' + (lastM ? mon(lastM) : '—') + '</small><b>' + rub(lastSum) + '</b><i>бот, рассылки, ключи, Zoom, Продамус</i></div>' +
+      '<div class="kpi"><small>Сервисы всего</small><b>' + rub(totS) + '</b><i>с ' + (sm[0] ? mon(sm[0]) : '—') + '</i></div>' +
+      '<div class="kpi"><small>Разовые всего</small><b>' + rub(tot - totS) + '</b><i>' + once.length + ' статей</i></div></div>' +
+    '<h3>Ежемесячные сервисы</h3><div class="card"><table><tr><th>Сервис</th>' + sm.map(function(m){ return '<th class="n">' + mon(m) + '</th>'; }).join('') + '<th class="n">Всего</th></tr>' +
+      names.map(function(n){ var t = 0; sm.forEach(function(m){ if (srv[n][m]) t += srv[n][m].rub; }); return '<tr><td>' + esc(n) + '</td>' + sm.map(function(m){ return '<td class="n">' + cell(srv[n][m]) + '</td>'; }).join('') + '<td class="n"><b>' + rub(t) + '</b></td></tr>'; }).join('') +
+      '<tr><td><b>Итого</b></td>' + sm.map(function(m){ return '<td class="n"><b>' + rub(names.reduce(function(a, n){ return a + (srv[n][m] ? srv[n][m].rub : 0); }, 0)) + '</b></td>'; }).join('') + '<td class="n"><b>' + rub(totS) + '</b></td></tr></table></div>' +
+    '<h3>Разовые расходы</h3><div class="card"><table><tr><th>Месяц</th><th>Что</th><th class="n">Сумма</th></tr>' +
+      once.slice().sort(function(a, b){ return a.m < b.m ? 1 : -1; }).map(function(e){ return '<tr><td>' + mon(e.m) + '</td><td>' + esc(e.what) + '</td><td class="n">' + (e.cur === 'RUB' ? rub(e.sum) : e.sum + ' $ ≈ ' + rub(R(e))) + '</td></tr>'; }).join('') + '</table></div>' +
+    '<p class="foot">Из Google-таблицы «расчеты» (колонки «расход»). Доллары по курсу ' + (F.rate.USD || '') + ' ₽. В «Финансах» эти же расходы вычитаются из остатка по месяцам.</p>';
+}
+
 function matrix(){
   var CAT = {'Цифровые':'#5D8A5D','Сообщество':'#8B6FAF','Живые / Онлайн':'#B86B4A','Личное':'#B8874A','B2B':'#4A789D'};
   var COL = ['#5D8A5D','#1A1A18','#9B8060','#888','#BBB'];
@@ -397,7 +419,7 @@ function matrix(){
 }
 function render(){
   nav(); var M = document.getElementById('main');
-  M.innerHTML = {matrix:matrix, fin:fin, bot:bot, home:home, sales:sales, clients:clients, products:products, mail:mail, works:works}[TAB]();
+  M.innerHTML = {matrix:matrix, fin:fin, exp:expenses, bot:bot, home:home, sales:sales, clients:clients, products:products, mail:mail, works:works}[TAB]();
   if (TAB === 'bot') botFill();
   if (TAB === 'home') document.getElementById('tree').onclick = function(e){ var b = e.target.closest('.mx'); if (!b) return; var open = b.textContent[0] === '▸'; b.textContent = (open ? '▾ ' : '▸ ') + b.textContent.slice(2); this.querySelectorAll('tr[data-p="' + b.dataset.m + '"]').forEach(function(r){ r.hidden = !open; }); };
   if (TAB === 'home'){ dynDraw(); document.getElementById('dynSeg').onclick = function(e){ var b = e.target.closest('[data-g]'); if (!b) return; DYN = b.dataset.g; this.querySelectorAll('button').forEach(function(x){ x.classList.toggle('on', x === b); }); dynDraw(); }; }
