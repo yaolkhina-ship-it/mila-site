@@ -311,8 +311,7 @@ body.dark-top .top .ed{color:rgba(244,242,238,.6)}
 .vc.bd .ic{margin-left:4px;border-left-color:var(--bord);border-left-width:12px;border-top-width:8px;border-bottom-width:8px}
 .vc.bd.on .ic{margin-left:0;width:12px;height:15px;border:0;border-left:4px solid var(--bord);border-right:4px solid var(--bord)}
 .vc.bd .vb{flex:1;min-width:0}.vc.bd small{display:block;margin-bottom:8px;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:#C9A96A}
-.wv{display:flex;align-items:center;gap:2px;height:30px}.wv i{flex:1;min-height:3px;border-radius:2px;background:rgba(244,242,238,.28);transition:background .2s}.wv i.p{background:#C9A96A}
-.vc.bd.on .wv i.n{animation:bob .42s ease-in-out infinite alternate}@keyframes bob{from{transform:scaleY(.45)}to{transform:scaleY(1.2)}}
+.wv{display:flex;align-items:center;gap:2px;height:30px}.wv i{flex:1;min-height:3px;border-radius:2px;background:linear-gradient(90deg,#C9A96A var(--f,0%),rgba(244,242,238,.28) var(--f,0%));transform-origin:center}
 .vc.bd .tm{display:block;margin-top:8px;font-size:12px;letter-spacing:.04em;color:rgba(244,242,238,.75)}.vc.bd .tm b{font-weight:500;color:#C9A96A;font-variant-numeric:tabular-nums}
 .bav-cap{display:flex;align-items:baseline;gap:12px;padding:14px 0;border-bottom:1px solid var(--rule)}.bav-cap .n{font-family:var(--serif);font-size:13px;color:var(--bronze)}.bav-cap b{flex:1;font-weight:500;font-size:15px;line-height:1.4}
 .bav-cap button{flex:none;background:none;border:0;padding:0;font:inherit;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--bronze);cursor:pointer}
@@ -610,18 +609,45 @@ function nn(n){ return (n < 10 ? '0' : '') + n; }
 // Один плеер на страницу: кнопка .vc показывает паузу и прогресс
 var au = null, auBtn = null;
 function voiceStop(){ if (au) au.pause(); if (auBtn) auBtn.classList.remove('on'); }
-// Волна: сыгранное золотом, у бегунка столбики «дышат»; тап по волне перематывает
-function wave(b, t){
+// Волна идёт с голосом: золото заполняет столбик по времени, а столбики у бегунка растут от настоящей громкости речи и стихают на паузах
+function voiceEnv(V){
+  if (V.env !== undefined) return; V.env = null;
+  var C = window.OfflineAudioContext || window.webkitOfflineAudioContext; if (!C || !window.fetch) return;
+  fetch(V.a).then(function(r){ return r.arrayBuffer(); }).then(function(buf){
+    return new Promise(function(ok, no){ new C(1, 1, 22050).decodeAudioData(buf, ok, no); });
+  }).then(function(ab){
+    var d = ab.getChannelData(0), n = Math.max(1, Math.round(ab.sampleRate * 0.05)), e = [], i, k, x;
+    for (i = 0; i + n <= d.length; i += n) { x = 0; for (k = 0; k < n; k++) x += d[i + k] * d[i + k]; e.push(Math.sqrt(x / n)); }
+    var top = e.slice().sort(function(p, q){ return p - q; })[Math.floor(e.length * 0.95)] || 1;
+    V.env = e.map(function(y){ return Math.min(1, y / top); });
+  }).catch(function(){});
+}
+function wave(b, t, lv){
   var V = VOICE[b.dataset.voice], bars = b.querySelectorAll('.wv i'), k = t / V.d * bars.length;
-  [].forEach.call(bars, function(x, i){ x.className = (i < k ? 'p' : '') + (Math.abs(i - k) < 3 ? ' n' : ''); x.style.animationDelay = (i % 4) * -0.12 + 's'; });
+  [].forEach.call(bars, function(x, i){
+    x.style.setProperty('--f', Math.max(0, Math.min(1, k - i)) * 100 + '%');
+    var dist = Math.abs(i + 0.5 - k), near = lv && dist < 5 ? 1 - dist / 5 : 0;
+    x.style.transform = near ? 'scaleY(' + (1 + (lv * 0.8 - 0.4) * near).toFixed(3) + ')' : '';
+  });
   b.querySelector('.tm b').textContent = t ? mss(t) + ' / ' + mss(V.d) : mss(V.d);
+}
+var wvLv = 0;
+function waveRun(b, a){
+  if (auBtn !== b || au !== a || a.paused) return;
+  var V = VOICE[b.dataset.voice], env = V.env, tg = env ? env[Math.floor(a.currentTime / 0.05)] || 0 : 0;
+  wvLv += (tg - wvLv) * 0.3;
+  wave(b, a.currentTime, wvLv);
+  requestAnimationFrame(function(){ waveRun(b, a); });
 }
 function voice(b, e){
   var wv = e && e.target.closest('.wv');
   if (wv && auBtn === b && au) { var r = wv.getBoundingClientRect(); au.currentTime = Math.max(0, Math.min(1, (e.clientX - r.left) / r.width)) * (au.duration || VOICE[b.dataset.voice].d); wave(b, au.currentTime); if (!au.paused) return; }
   else if (auBtn === b && au && !au.paused) { voiceStop(); return; }
   if (auBtn !== b) { voiceStop(); au = new Audio(VOICE[b.dataset.voice].a); auBtn = b;
-    au.addEventListener('timeupdate', function(){ wave(b, au.currentTime); });
+    (function(a){ voiceEnv(VOICE[b.dataset.voice]);
+      a.addEventListener('play', function(){ waveRun(b, a); });
+      a.addEventListener('pause', function(){ wave(b, a.currentTime); });
+    })(au);
     au.addEventListener('ended', function(){ b.classList.remove('on'); wave(b, 0); }); }
   b.classList.add('on'); var pr = au.play(); if (pr) pr.catch(function(){ b.classList.remove('on'); });
 }
