@@ -303,6 +303,16 @@ body.dark-top .top .ed{color:rgba(244,242,238,.6)}
 .rz-pt.psy .body p{color:rgba(244,242,238,.8)}
 .rz-pt.psy .nx{color:var(--paper);border-color:rgba(201,169,106,.5)}
 .ba{margin:8px 0 28px}.ba .cap{margin:0 0 14px;color:var(--gold,#A88B5C)}.ba-im{position:relative;margin:0 0 12px}.ba-im img{display:block;width:100%;height:auto}.ba-im span{position:absolute;top:10px;padding:4px 8px;background:rgba(17,17,17,.55);color:#F4F1EA;font-size:10px;letter-spacing:.22em;text-transform:uppercase}.ba-im .l{left:10px}.ba-im .r{left:calc(50% + 10px)}
+.pz-cta{display:grid;grid-template-columns:1fr auto;align-items:center;width:100%;margin-top:28px;padding:22px 20px;background:var(--ink);color:var(--paper)}
+.pz-cta b{font-family:var(--serif);font-weight:300;font-size:24px;line-height:1.15}.pz-cta small{display:block;margin-top:6px;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:#C9A96A}.pz-cta em{font-style:normal;color:#C9A96A}
+.pz-list{margin:18px 0 24px;padding:0;list-style:none;border-top:1px solid var(--rule)}.pz-list li{padding:12px 0;border-bottom:1px solid var(--rule);font-size:14px;line-height:1.55;color:var(--ink2)}.pz-list b{font-weight:500;color:var(--ink)}
+.pz-q{margin:0 0 28px;padding:24px 22px;background:#5A1A22;color:#F4F1EA}.pz-q p{margin:0;font-family:var(--serif);font-weight:300;font-size:21px;line-height:1.35}.pz-q .cap{display:block;margin-bottom:12px;color:#C9A96A}
+.pz-up{position:relative;display:block;width:100%;padding:18px;text-align:center;background:var(--ink);color:#C9A96A;font-size:11px;letter-spacing:.28em;text-transform:uppercase;cursor:pointer}.pz-up input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.pz-note{margin:10px 0 0;font-size:12px;color:var(--mute);text-align:center}
+.pz-res{display:grid;grid-template-columns:96px 1fr;gap:18px;align-items:center;margin:30px 0 8px;padding-top:24px;border-top:1px solid var(--ink)}.pz-res canvas{width:96px;height:120px;object-fit:cover;background:var(--paper2)}
+.pz-res dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:13px}.pz-res dt{color:var(--mute)}.pz-res dd{margin:0;font-weight:500}
+.pz-card{display:grid;grid-template-columns:34px 1fr;padding:16px 0;border-bottom:1px solid var(--rule)}.pz-card .n{font-size:11px;color:var(--bronze);font-weight:500;padding-top:4px}.pz-card b{font-family:var(--serif);font-weight:300;font-size:22px}.pz-card p{margin:6px 0 0;font-size:14px;line-height:1.6;color:var(--ink2)}
+.pz-draft{margin:14px 0 0;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--mute)}
 .lk-strip{display:grid;gap:8px;margin:0 0 24px}.lk-strip button{padding:0;background:#fff;border:0;cursor:pointer}.lk-strip img{display:block;width:100%;aspect-ratio:2/3;object-fit:contain}
 .rz-all{display:block;width:100%;margin-top:26px;padding:16px;text-align:center !important;background:var(--ink);color:#C9A96A;font-size:11px;letter-spacing:.28em;text-transform:uppercase}
 .sig i{flex:1;height:1px;background:var(--bronze2)}
@@ -595,6 +605,7 @@ function step1(){
 function step2(){
   show('<div class="pad">' + stepHead(2) + crumbs(2) + '<div class="h2">Ваша <i class="br">цель</i></div><div class="lede">Одна встреча, одна цель, один образ.</div>' +
     '<div class="goals">' + goalsFor(st.sit).map(function(g){ return '<button class="goal' + (g === st.goal ? ' on' : '') + '" data-goal="' + esc(g) + '"><small></small><b>' + esc(g) + '</b><em>→</em></button>'; }).join('') + '</div>' +
+    (PZ_SITS[st.sit] ? pzCta() : '') +
     pager(2, !!st.goal) + '</div>');
 }
 // Фирменный знак психологического подтекста: фокус внутри (не в одежде, а в мышлении)
@@ -659,7 +670,7 @@ function step3(){
   if (R && Z && LK && LK.length) {
     show('<div class="pad">' + stepHead(3) + crumbs(3) + '<div class="h2" style="font-size:40px;margin-top:0">Сила <i class="br">деталей</i></div>' +
       (c ? '<div class="xp-t">' + c.split('\n').map(function(p){ return '<p>' + esc(p) + '</p>'; }).join('') + '</div>' : '') +
-      razbor(R, Z, LK) + '<div class="sig"><i></i><span>Мила Ушакова</span></div><button class="rz-all" data-go="4">Смотреть все образы →</button>' + pager(3, true) + '</div>');
+      razbor(R, Z, LK) + '<div class="sig"><i></i><span>Мила Ушакова</span></div><button class="rz-all" data-go="4">Смотреть все образы →</button>' + (PZ_SITS[st.sit] ? pzCta() : '') + pager(3, true) + '</div>');
     return;
   }
   show('<div class="pad">' + stepHead(3) + crumbs(3) +
@@ -711,7 +722,46 @@ function tariffs(){
 }
 
 // История: «Назад» в доке, жест назад и кнопка браузера идут по шагам
-var VIEWS = {cover: cover, about: about, intro: intro, s0: step0, s1: step1, s2: step2, s3: step3, s4: step4, tariffs: tariffs};
+// Инструмент «Сила вашей портретной зоны» (Zoom): анализ фото в браузере, guide/portrait/*.mjs
+var PZ_SITS = {'Zoom': 1};
+function pzCta(){ return '<button class="pz-cta" data-go="portrait"><span><b>Сила вашей портретной зоны</b><small>Применить к себе</small></span><em>→</em></button>'; }
+var PZ_ITEMS = [['Украшения', 'рекомендуемый масштаб серёг, толщина цепей, размер подвесок'], ['Очки', 'масштаб оправы относительно лица, толщина, геометрия'], ['Лацканы', 'ширина и форма, которые поддерживают архитектуру лица и плеч'], ['Вырез', 'глубина, открытость, геометрия линии'], ['Воротник', 'масштаб и форма'], ['Принт возле лица', 'размер раппорта и степень графичности'], ['Аксессуары', 'платок, брошь, украшения — насколько крупным может быть визуальный элемент рядом с лицом']];
+var PZ_RETAKE = {noface: 'Мы не нашли лицо. Сфотографируйтесь анфас при дневном свете.', many: 'В кадре несколько лиц. Нужно фото, где вы одна.', small: 'Лицо слишком далеко. Сделайте кадр по плечи.', turned: 'Голова повёрнута. Посмотрите прямо в камеру.'};
+function portrait(){
+  show('<div class="pad"><div class="crumbs"><button data-go="2">Zoom</button><i>/</i><span>Портретная зона</span></div>' +
+    '<div class="h2" style="font-size:40px;margin-top:0">Сила вашей <i class="br">портретной зоны</i></div>' +
+    '<div class="xp-t"><p>Система видит масштаб и геометрию черт и работает с тем, что находится непосредственно рядом с лицом:</p></div>' +
+    '<ul class="pz-list">' + PZ_ITEMS.map(function(x){ return '<li><b>' + esc(x[0]) + '</b>: ' + esc(x[1]) + '</li>'; }).join('') + '</ul>' +
+    '<div class="pz-q"><span class="cap">Красная помада</span><p>Говорят, это энергия. Но мы не видим своих губ, значит, наносим её для другого и показываем энергию другому.</p></div>' +
+    '<label class="pz-up"><input type="file" accept="image/*" id="pzIn">Применить: загрузить фото</label>' +
+    '<p class="pz-note">Фото анфас при дневном свете. Оно остаётся на вашем телефоне и никуда не отправляется.</p>' +
+    '<div id="pzOut"></div>' +
+    '<div class="sig"><i></i><span>Мила Ушакова</span></div></div>');
+  document.getElementById('pzIn').addEventListener('change', function(e){
+    var f = e.target.files && e.target.files[0], out = document.getElementById('pzOut'); if (!f) return;
+    out.innerHTML = '<p class="pz-note" style="margin-top:24px">Смотрим на масштаб и геометрию черт…</p>';
+    var img = new Image(); img.onload = function(){
+      Promise.all([import('./portrait/portrait.mjs'), import('./portrait/rules.mjs')]).then(function(m){ return m[0].analyze(img).then(function(r){ pzShow(r, m[1], img); }); })
+        .catch(function(){ out.innerHTML = '<p class="pz-note" style="margin-top:24px">Не получилось открыть фото. Попробуйте другое.</p>'; });
+    };
+    img.src = URL.createObjectURL(f);
+  });
+}
+function pzShow(r, R, img){
+  var out = document.getElementById('pzOut');
+  if (r.status !== 'ok') { out.innerHTML = '<p class="pz-note" style="margin-top:24px;color:var(--ink)">' + esc(PZ_RETAKE[r.reason] || 'Попробуйте другое фото.') + '</p>'; return; }
+  out.innerHTML = '<div class="pz-res"><canvas id="pzFace" width="192" height="240"></canvas><dl>' +
+      '<dt>Масштаб черт</dt><dd>' + R.LABELS.scale[r.scale] + '</dd><dt>Геометрия</dt><dd>' + R.LABELS.geom[r.geom] + '</dd><dt>Пропорция</dt><dd>' + R.LABELS.shape[r.shape] + '</dd></dl></div>' +
+    R.ZONE.map(function(z, i){ var a = z[r.scale] || z[r.shape] || ''; return '<div class="pz-card"><span class="n">' + nn(i + 1) + '</span><div><b>' + esc(z.t) + '</b><p>' + esc(a + (a ? ' ' : '') + (z[r.geom] || '')) + '</p></div></div>'; }).join('') +
+    '<p class="pz-draft">Черновик · правила уточняются</p>' +
+    '<button class="rz-all" data-go="2">К образам Zoom →</button>';
+  // Превью: лицо из фото, кадр 4:5 с запасом вокруг
+  var c = document.getElementById('pzFace'), x = c.getContext('2d'), W = img.naturalWidth, H = img.naturalHeight, b = r.box;
+  var bh = b.h * H * 1.5, bw = bh * 0.8, cx = (b.x + b.w / 2) * W, cy = (b.y + b.h / 2) * H;
+  x.drawImage(img, cx - bw / 2, cy - bh / 2, bw, bh, 0, 0, 192, 240);
+  out.scrollIntoView({behavior: 'smooth', block: 'start'});
+}
+var VIEWS = {portrait: portrait, cover: cover, about: about, intro: intro, s0: step0, s1: step1, s2: step2, s3: step3, s4: step4, tariffs: tariffs};
 function draw(){ (VIEWS[st.view] || cover)(); document.body.classList.toggle('on-cover', st.view === 'cover'); document.getElementById('dBack').classList.toggle('off', st.view === 'cover'); document.getElementById('dTar').classList.toggle('off', st.view === 'tariffs'); }
 function go(view, patch, replace){
   for (var k in patch) st[k] = patch[k];
@@ -776,6 +826,7 @@ function onTap(e){
   if (b.dataset.go === '2') return go(st.sit ? 's2' : 's1', {});
   if (b.dataset.go === '3') return go(st.goal ? 's3' : 's2', {});
   if (b.dataset.go === '4') return go('s4', {tab: 0});
+  if (b.dataset.go === 'portrait') return go('portrait', {});
 }
 v.addEventListener('click', onTap);
 // На компьютере пункты разбора открываются наведением
