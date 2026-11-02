@@ -45,6 +45,16 @@ td.n,th.n{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
 .bars{display:grid;gap:8px;padding:12px 0}
 .bar{display:grid;grid-template-columns:70px 1fr 90px;gap:10px;align-items:center;font-size:13px}
 .bar i{display:block;height:10px;border-radius:5px;background:var(--gold)}
+.lg{display:flex;flex-wrap:wrap;gap:6px 16px;padding:12px 0 0;font-size:12px;color:var(--ink)}.lg i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.tip .r{white-space:nowrap}.tip .r span{white-space:normal}.tip em{display:block;font-style:normal;color:#e3c37a;margin-bottom:2px}
+.tip .r i{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:6px}
+.dyn-h{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:22px 0 10px}.dyn-h h3{margin:0}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fff}.seg button{all:unset;cursor:pointer;padding:6px 12px;font-size:12px;color:var(--mute)}.seg button.on{background:var(--deep);color:#f5f0ea}
+.dyn{position:relative;padding:14px 0 6px}.dyn svg{display:block;width:100%;height:auto;overflow:visible}.dyn text{font-size:11px;fill:var(--mute);font-variant-numeric:tabular-nums}.dyn .v{fill:var(--ink);font-size:11.5px;font-weight:500}
+.dyn .hit{fill:transparent;cursor:pointer}.dyn .hit:hover+rect,.dyn .hit:hover+path{opacity:.75}
+.tip{position:absolute;z-index:3;pointer-events:none;background:var(--deep);color:#f5f0ea;border-radius:10px;padding:10px 12px;font-size:12px;line-height:1.5;min-width:180px;max-width:260px;box-shadow:0 6px 20px rgba(0,0,0,.15);display:none}.tip b{font:400 17px Georgia,serif;display:block}.tip span{color:#b9c0c2}.tip .r{display:flex;justify-content:space-between;gap:10px}
+details.dt summary{cursor:pointer;color:var(--mute);font-size:12px;padding:8px 0}
+.up{color:var(--ok)}.dn{color:var(--bad)}
 .tools{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
 .tools input,.tools select{padding:9px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;min-width:0}
 .tools input{flex:1 1 200px}
@@ -56,6 +66,18 @@ td.n,th.n{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
 .pc .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
 .pc a{font-size:12px;padding:6px 10px;border-radius:8px;background:var(--deep);color:#f5f0ea;text-decoration:none}
 .pc a.l{background:transparent;color:var(--deep);border:1px solid var(--line)}
+.mx-board{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;align-items:start}
+@media (max-width:900px){.mx-board{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.mx-board{grid-template-columns:1fr}}
+.mx-col h4{font:400 17px/1.2 Georgia,serif;margin-bottom:10px;padding-bottom:8px;border-bottom:2px solid var(--c,#999)}
+.mx-col h4 small{display:block;font:500 10px/1 -apple-system,Arial;letter-spacing:.14em;color:var(--mute);margin-bottom:4px}
+.mx-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 12px 12px;margin-bottom:8px;border-top:3px solid var(--k)}
+.mx-card .k{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+.mx-card b{display:block;font-size:14px;font-weight:600;margin:3px 0 2px;line-height:1.3}
+.mx-card .pr{font-size:12px;color:var(--gold);margin-bottom:8px}
+.mx-dots{display:flex;gap:12px}.mx-dots small{display:block;font-size:9px;color:var(--mute);text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px}
+.mx-dots i{display:inline-block;width:7px;height:7px;border-radius:50%;background:#ece8e0;margin-right:2px}
+.mx-now{margin-top:8px;font-size:11.5px;line-height:1.35;padding:6px 8px;border-radius:8px;background:rgba(47,122,79,.09);color:#2f6b47}
 .muted{color:var(--mute);font-size:12px}
 .foot{margin-top:28px;color:var(--mute);font-size:12px}
 @media (max-width:640px){.hide-m{display:none}}
@@ -99,12 +121,84 @@ var MON = ['янв','фев','мар','апр','май','июн','июл','ав�
 var mon = function(m){ var p = m.split('-'); return MON[+p[1] - 1] + ' ' + p[0].slice(2); };
 var ok = function(s){ return !s.refund; };
 
-var TABS = [['home','Главная'],['bot','Бот · заявки'],['fin','Финансы'],['sales','Продажи'],['clients','Контакты'],['products','Продукты'],['mail','Рассылки'],['works','Все работы']];
+var TABS = [['home','Главная'],['bot','Бот · заявки'],['fin','Финансы'],['sales','Продажи'],['clients','Контакты'],['matrix','Матрица'],['products','Продукты'],['mail','Рассылки'],['works','Все работы']];
 function nav(){ document.getElementById('nav').innerHTML = TABS.map(function(t){ return '<button data-t="'+t[0]+'"'+(t[0]===TAB?' class="on"':'')+'>'+t[1]+'</button>'; }).join(''); }
 document.getElementById('nav').onclick = function(e){ var b = e.target.closest('[data-t]'); if (b){ TAB = b.dataset.t; render(); scrollTo(0,0); } };
 
 function byProduct(list){ var m = {}; list.forEach(function(s){ var k = s.p; m[k] = m[k] || {n:0, rub:0, fx:0}; m[k].n++; if (s.cur === 'RUB') m[k].rub += s.sum; else m[k].fx++; }); return m; }
 function byMonth(list){ var m = {}; list.forEach(function(s){ var k = s.d.slice(0,7); m[k] = m[k] || {n:0, rub:0}; m[k].n++; if (s.cur === 'RUB') m[k].rub += s.sum; }); return m; }
+
+// Динамика: выручка (рубли после комиссии) по неделям (пн–вс) или месяцам, столбцы + подсказка с продуктами
+var DYN = 'w';
+// События на графике: дата → подпись (запуски, сезоны)
+var EVENTS = [['2026-08-27', '2-й сезон Системы']];
+var PCOL = [['Система цветовых сочетаний', '#2a78d6'], ['Клуб «В моём стиле»', '#eb6834'], ['Лекция «Многослойность осени»', '#1baf7a'], ['Лекция «Масштаб»', '#eda100'], ['Лекция «Дресс-код»', '#e87ba4'], ['Другое', '#a3a19b']];
+function pkey(p){ for (var i = 0; i < PCOL.length - 1; i++) if (PCOL[i][0] === p) return p; return 'Другое'; }
+function pcol(p){ for (var i = 0; i < PCOL.length; i++) if (PCOL[i][0] === p) return PCOL[i][1]; return PCOL[PCOL.length-1][1]; }
+function ymd(t){ return t.getFullYear() + '-' + String(t.getMonth()+1).padStart(2,'0') + '-' + String(t.getDate()).padStart(2,'0'); }  // местная дата, без сдвига в UTC
+function monday(d){ var t = new Date(d.slice(0,10) + 'T00:00:00'); t.setDate(t.getDate() - (t.getDay() + 6) % 7); return ymd(t); }
+function dm(k){ return k.slice(8,10) + '.' + k.slice(5,7); }
+function periods(S, g){
+  var m = {}; S.forEach(function(s){ var k = g === 'w' ? monday(s.d) : s.d.slice(0,7); var x = m[k] = m[k] || {k:k, n:0, rub:0, fx:0, p:{}};
+    x.n++; if (s.cur === 'RUB') x.rub += s.sum; else x.fx++; var pk = pkey(s.p); x.p[pk] = (x.p[pk] || 0) + (s.cur === 'RUB' ? s.sum : 0); });
+  var keys = Object.keys(m).sort(); if (!keys.length) return [];
+  // пустые недели/месяцы тоже показываем нулём
+  var out = [], cur = keys[0], last = keys[keys.length-1];
+  while (cur <= last){ out.push(m[cur] || {k:cur, n:0, rub:0, fx:0, p:{}});
+    if (g === 'w'){ var t = new Date(cur + 'T00:00:00'); t.setDate(t.getDate() + 7); cur = ymd(t); }
+    else { var y = +cur.slice(0,4), mo = +cur.slice(5,7) + 1; if (mo > 12){ mo = 1; y++; } cur = y + '-' + String(mo).padStart(2,'0'); } }
+  return out;
+}
+function plabel(k, g){ if (g === 'm') return mon(k); var e = new Date(k + 'T00:00:00'); e.setDate(e.getDate() + 6); return dm(k) + '–' + String(e.getDate()).padStart(2,'0') + '.' + String(e.getMonth()+1).padStart(2,'0'); }
+function compact(v){ return v >= 1e6 ? (v/1e6).toFixed(v >= 1e7 ? 0 : 1).replace('.', ',') + ' млн' : v >= 1e3 ? Math.round(v/1e3) + ' тыс' : String(Math.round(v)); }
+function kpiWeek(S, sum){
+  var P = periods(S, 'w'); if (P.length < 2) return '';
+  var a = P[P.length-1], b = P[P.length-2], c = P[P.length-3], d = c && c.rub ? Math.round((b.rub - c.rub) / c.rub * 100) : null;
+  return '<div class="kpi"><small>Эта неделя · ' + plabel(a.k, 'w') + '</small><b>' + rub(a.rub) + '</b><i>' + a.n + ' оплат · неделя идёт</i></div>' +
+    '<div class="kpi"><small>Прошлая неделя · ' + plabel(b.k, 'w') + '</small><b>' + rub(b.rub) + '</b><i>' + b.n + ' оплат' + (d !== null ? ' · <span class="' + (d >= 0 ? 'up' : 'dn') + '">' + (d >= 0 ? '+' : '−') + Math.abs(d) + '% к позапрошлой</span>' : '') + '</i></div>';
+}
+function dynDraw(){
+  var S = D.sales.filter(ok), g = DYN, P = periods(S, g); if (g === 'w') P = P.slice(-26);
+  var box = document.getElementById('dyn'); if (!box) return;
+  var W = Math.max(320, box.clientWidth), H = 240, L = 46, R = 8, T = 40, B = 26, iw = W - L - R, ih = H - T - B;
+  var max = Math.max.apply(null, P.map(function(x){ return x.rub; })) || 1;
+  var step = Math.pow(10, Math.floor(Math.log10(max))), nice = Math.ceil(max / step) * step; if (nice / step > 5) step *= 2; nice = Math.ceil(max / step) * step;
+  var bw = iw / P.length, w = Math.min(24, Math.max(4, bw - 2)), y = function(v){ return T + ih - v / nice * ih; };
+  var last = new Date(), lastK = g === 'w' ? monday(ymd(last)) : ymd(last).slice(0,7);
+  var maxI = P.reduce(function(a, x, i){ return x.rub > P[a].rub ? i : a; }, 0), every = Math.ceil(P.length / Math.floor(iw / 52));
+  var svg = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Выручка по ' + (g === 'w' ? 'неделям' : 'месяцам') + '">';
+  for (var v = 0; v <= nice; v += step) svg += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + y(v) + '" y2="' + y(v) + '" stroke="rgba(13,26,30,.08)"/><text x="' + (L - 6) + '" y="' + (y(v) + 4) + '" text-anchor="end">' + compact(v) + '</text>';
+  P.forEach(function(x, i){
+    var cx = L + bw * i + bw / 2, x0 = cx - w / 2, open = x.k >= lastK, acc = 0;
+    EVENTS.forEach(function(ev){ if ((g === 'w' ? monday(ev[0]) : ev[0].slice(0,7)) !== x.k) return;
+      var ex = L + bw * i; svg += '<line x1="' + ex + '" x2="' + ex + '" y1="' + (T - 14) + '" y2="' + y(0) + '" stroke="rgba(13,26,30,.45)"/><text x="' + (ex + 4) + '" y="' + (T - 6) + '" style="fill:var(--ink)">' + esc(ev[1]) + ' · ' + dm(ev[0]) + '</text>'; });
+    svg += '<rect class="hit" data-i="' + i + '" x="' + (L + bw * i) + '" y="' + T + '" width="' + bw + '" height="' + ih + '"/><g style="pointer-events:none"' + (open ? ' opacity=".5"' : '') + '>';
+    var segs = PCOL.filter(function(c){ return x.p[c[0]] > 0; }), top = segs.length - 1;
+    segs.forEach(function(c, j){
+      var v0 = acc, v1 = acc + x.p[c[0]]; acc = v1;
+      var yb = y(v0) - (j ? 1 : 0), yt = y(v1) + (j < top ? 1 : 0), hh = yb - yt; if (hh <= 0.5) return;   // 2px белый зазор между сегментами
+      var r = j === top ? Math.min(4, hh, w / 2) : 0;
+      svg += '<path fill="' + c[1] + '" d="M' + x0 + ',' + yb + 'V' + (yt + r) + (r ? 'Q' + x0 + ',' + yt + ' ' + (x0 + r) + ',' + yt + 'H' + (x0 + w - r) + 'Q' + (x0 + w) + ',' + yt + ' ' + (x0 + w) + ',' + (yt + r) : 'H' + (x0 + w)) + 'V' + yb + 'Z"/>';
+    });
+    svg += '</g>';
+    if (i === maxI || i === P.length - 1) svg += '<text class="v" x="' + cx + '" y="' + (y(x.rub) - 6) + '" text-anchor="middle">' + compact(x.rub) + '</text>';
+    if (i % every === 0) svg += '<text x="' + cx + '" y="' + (H - 8) + '" text-anchor="middle">' + (g === 'w' ? dm(x.k) : mon(x.k).slice(0,3)) + '</text>';
+  });
+  svg += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + y(0) + '" y2="' + y(0) + '" stroke="rgba(13,26,30,.25)"/></svg><div class="tip" id="tip"></div>';
+  var used = PCOL.filter(function(c){ return P.some(function(x){ return x.p[c[0]] > 0; }); });
+  box.innerHTML = '<div class="lg">' + used.map(function(c){ return '<span><i style="background:' + c[1] + '"></i>' + esc(c[0]) + '</span>'; }).join('') + '</div>' + svg;
+  var tip = document.getElementById('tip');
+  var showTip = function(e){ var t = e.target.closest('.hit'); if (!t){ tip.style.display = 'none'; return; }
+    var x = P[+t.dataset.i], prods = Object.keys(x.p).filter(function(k){ return x.p[k] > 0; }).sort(function(a, b){ return x.p[b] - x.p[a]; });
+    var evs = EVENTS.filter(function(ev){ return (g === 'w' ? monday(ev[0]) : ev[0].slice(0,7)) === x.k; });
+    tip.innerHTML = evs.map(function(ev){ return '<em>' + esc(ev[1]) + ' · ' + dm(ev[0]) + '</em>'; }).join('') + '<span>' + plabel(x.k, g) + (x.k >= lastK ? ' · ещё идёт' : '') + '</span><b>' + rub(x.rub) + '</b><span>' + x.n + ' оплат' + (x.fx ? ', из них ' + x.fx + ' в валюте' : '') + '</span>' +
+      prods.map(function(k){ return '<div class="r"><span><i style="background:' + pcol(k) + '"></i>' + esc(k) + '</span>' + rub(x.p[k]) + '</div>'; }).join('');
+    tip.style.display = 'block'; var bx = box.getBoundingClientRect(), tr = t.getBoundingClientRect();
+    var left = tr.left - bx.left + tr.width / 2 - tip.offsetWidth / 2; tip.style.left = Math.max(0, Math.min(bx.width - tip.offsetWidth, left)) + 'px'; tip.style.top = '0px'; };
+  box.onmousemove = showTip; box.onclick = showTip; box.onmouseleave = function(){ tip.style.display = 'none'; };
+  document.getElementById('dynT').innerHTML = '<table><tr><th>' + (g === 'w' ? 'Неделя' : 'Месяц') + '</th><th class="n">Оплат</th><th class="n">Рубли</th>' + used.map(function(c){ return '<th class="n">' + esc(c[0].replace(/^Лекция /, '')) + '</th>'; }).join('') + '<th class="n">В валюте</th></tr>' +
+    P.slice().reverse().map(function(x){ return '<tr><td style="white-space:nowrap">' + plabel(x.k, g) + '</td><td class="n">' + x.n + '</td><td class="n">' + rub(x.rub) + '</td>' + used.map(function(c){ return '<td class="n">' + (x.p[c[0]] ? rub(x.p[c[0]]) : '—') + '</td>'; }).join('') + '<td class="n">' + x.fx + '</td></tr>'; }).join('') + '</table>';
+}
 
 function home(){
   var S = D.sales.filter(ok), now = new Date(), ym = now.toISOString().slice(0,7);
@@ -117,14 +211,14 @@ function home(){
   return '<h2>Сводка</h2>' +
     '<div class="kpis">' +
       '<div class="kpi"><small>Оплат за '+mon(lastDay.slice(0,7))+'</small><b>'+m.length+'</b><i>'+rub(sum(m))+' + валюта</i></div>' +
-      '<div class="kpi"><small>За последние 7 дней</small><b>'+w.length+'</b><i>'+rub(sum(w))+'</i></div>' +
+      kpiWeek(S, sum) +
       '<div class="kpi"><small>Всего оплат</small><b>'+S.length+'</b><i>'+rub(sum(S))+' в рублях</i></div>' +
       '<div class="kpi"><small>Покупателей</small><b>'+Object.keys(emails).length+'</b><i>уникальные e-mail</i></div>' +
     '</div>' +
     '<h3>Этот месяц по продуктам</h3><div class="card"><table><tr><th>Продукт</th><th class="n">Оплат</th><th class="n">Рубли</th><th class="n hide-m">В валюте</th></tr>' +
       Object.keys(bp).sort(function(a,b){ return bp[b].n - bp[a].n; }).map(function(k){ return '<tr><td>'+esc(k)+'</td><td class="n">'+bp[k].n+'</td><td class="n">'+rub(bp[k].rub)+'</td><td class="n hide-m">'+bp[k].fx+'</td></tr>'; }).join('') + '</table></div>' +
-    '<h3>Выручка в рублях по месяцам</h3><div class="card"><div class="bars">' +
-      months.map(function(k){ return '<div class="bar"><span>'+mon(k)+'</span><i style="width:'+(bm[k].rub/max*100).toFixed(1)+'%"></i><span class="n" style="text-align:right">'+rub(bm[k].rub)+'</span></div>'; }).join('') + '</div></div>' +
+    '<div class="dyn-h"><h3>Выручка по продуктам, ₽</h3><div class="seg" id="dynSeg"><button data-g="w"'+(DYN==='w'?' class="on"':'')+'>Недели</button><button data-g="m"'+(DYN==='m'?' class="on"':'')+'>Месяцы</button></div></div>' +
+    '<div class="card"><div class="dyn" id="dyn"></div><details class="dt"><summary>Цифрами</summary><div id="dynT"></div></details></div>' +
     '<p class="foot">Данные Lava до '+esc(last)+' · файл «'+esc(D.source)+'». Суммы = сколько пришло после комиссии Lava; оплаты в евро и долларах считаются штуками.</p>';
 }
 
@@ -259,10 +353,25 @@ function fin(){
     '<h3>Расходы</h3><div class="card"><table><tr><th>Месяц</th><th>Статья</th><th class="n">Сумма</th></tr>' +
       F.expenses.map(function(e){ return '<tr><td>'+mon(e.m)+'</td><td>'+esc(e.what)+'</td><td class="n">'+(e.cur === 'RUB' ? rub(e.sum) : e.sum + ' $ ≈ ' + rub(e.sum * F.rate[e.cur])) +'</td></tr>'; }).join('') + '</table></div>';
 }
+// Продуктовая матрица Милы: что есть, что создать, что в будущем; доход / PR / усилие по 5-балльной шкале
+function matrix(){
+  var CAT = {'Цифровые':'#5D8A5D','Сообщество':'#8B6FAF','Живые / Онлайн':'#B86B4A','Личное':'#B8874A','B2B':'#4A789D'};
+  var COL = ['#5D8A5D','#1A1A18','#9B8060','#888','#BBB'];
+  var dots = function(n, c){ var o = ''; for (var i = 0; i < 5; i++) o += '<i'+(i < n ? ' style="background:'+c+'"' : '')+'></i>'; return o; };
+  var all = [].concat.apply([], D.matrix.map(function(c){ return c.items; })), live = all.filter(function(x){ return x.now; }).length;
+  return '<h2>Продуктовая матрица</h2><p class="muted" style="margin:-6px 0 14px">Матрица Милы (июль 2026). Зелёная строка — что из этого уже сделано к '+D.built.slice(0,5)+': '+live+' из '+all.length+'.</p>' +
+    '<div class="tools" style="gap:6px">' + Object.keys(CAT).map(function(k){ return '<span class="tag" style="background:#fff;border:1px solid var(--line);color:#555"><i style="display:inline-block;width:8px;height:8px;border-radius:50%;background:'+CAT[k]+';margin-right:5px"></i>'+k+'</span>'; }).join('') + '</div>' +
+    '<div class="mx-board">' + D.matrix.map(function(c, ci){ var p = c.col.split(' · ');
+      return '<div class="mx-col" style="--c:'+COL[ci]+'"><h4><small>'+esc(p[0])+'</small>'+esc(p[1])+'</h4>' + c.items.map(function(x){ var k = CAT[x.cat] || '#999';
+        return '<div class="mx-card" style="--k:'+k+'"><span class="k">'+esc(x.cat)+'</span><b>'+esc(x.name)+'</b><div class="pr">'+esc(x.price)+'</div>' +
+          '<div class="mx-dots"><span><small>Доход</small>'+dots(x.inc,'#9B8060')+'</span><span><small>PR</small>'+dots(x.pr,'#5D8A8A')+'</span><span><small>Усилие</small>'+dots(x.eff,'#D4B896')+'</span></div>' +
+          (x.now ? '<div class="mx-now">'+esc(x.now)+'</div>' : '') + '</div>'; }).join('') + '</div>'; }).join('') + '</div>';
+}
 function render(){
   nav(); var M = document.getElementById('main');
-  M.innerHTML = {fin:fin, bot:bot, home:home, sales:sales, clients:clients, products:products, mail:mail, works:works}[TAB]();
+  M.innerHTML = {matrix:matrix, fin:fin, bot:bot, home:home, sales:sales, clients:clients, products:products, mail:mail, works:works}[TAB]();
   if (TAB === 'bot') botFill();
+  if (TAB === 'home'){ dynDraw(); document.getElementById('dynSeg').onclick = function(e){ var b = e.target.closest('[data-g]'); if (!b) return; DYN = b.dataset.g; this.querySelectorAll('button').forEach(function(x){ x.classList.toggle('on', x === b); }); dynDraw(); }; }
   if (TAB === 'sales'){ ['q','fp','fm'].forEach(function(id){ document.getElementById(id).oninput = salesFill; }); salesFill(); }
   if (TAB === 'clients'){ ['cq','cf'].forEach(function(id){ document.getElementById(id).oninput = clientsFill; }); clientsFill(); }
 }
