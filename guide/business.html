@@ -303,7 +303,7 @@ body.dark-top .top .ed{color:rgba(244,242,238,.6)}
 .rz-pt.psy .body p{color:rgba(244,242,238,.8)}
 .rz-pt.psy .nx{color:var(--paper);border-color:rgba(201,169,106,.5)}
 .ba{margin:8px 0 28px}.ba .cap{margin:0 0 14px;color:var(--gold,#A88B5C)}.ba-im{position:relative;margin:0 0 12px}.ba-im img{display:block;width:100%;height:auto}.ba-im span{position:absolute;top:10px;padding:4px 8px;background:rgba(17,17,17,.55);color:#F4F1EA;font-size:10px;letter-spacing:.22em;text-transform:uppercase}.ba-im .l{left:10px}.ba-im .r{left:calc(50% + 10px)}
-.bav{margin:0 0 28px;scroll-margin-top:70px}.bav .ba-im{margin:0}
+.bav{margin:0 0 28px;scroll-margin-top:70px}.lk-hero{display:block;width:100%;padding:0;border:0;background:#fff;cursor:pointer}.lk-hero img{display:block;width:100%;height:auto}.lk .vc.bd{margin-top:-1px}.bav .ba-im{margin:0}
 .vc.bd{margin:0;padding:18px 18px 20px;background:var(--bord);border:0;color:var(--paper,#F4F2EE)}.vc.bd .ic{border-left-color:#C9A96A}.vc.bd.on .ic{border-color:#C9A96A}
 .vc.bd .tx{font-size:15px}.vc.bd .tx small{display:block;margin-bottom:4px;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:#C9A96A}.vc.bd .du{color:#C9A96A}.vc.bd .bar i{background:#C9A96A}
 .bav-cap{display:flex;align-items:baseline;gap:12px;padding:14px 0;border-bottom:1px solid var(--rule)}.bav-cap .n{font-family:var(--serif);font-size:13px;color:var(--bronze)}.bav-cap b{flex:1;font-weight:500;font-size:15px;line-height:1.4}
@@ -518,18 +518,22 @@ function bav(R, L){
     (L.length > 1 ? '<div class="bav-th" style="grid-template-columns:repeat(' + L.length + ',1fr)">' + L.map(function(x, k){
       return '<button data-bav="' + k + '"><img loading="lazy" src="' + esc(x.src) + '" alt=""><span>' + nn(x.n) + (VOICE[x.src] ? ' · <i class="hp"></i>' : '') + '</span></button>'; }).join('') + '</div>' : '') + '</div>';
 }
+function vcBd(src, label){
+  return '<button class="vc bd" data-voice="' + esc(src) + '"><i class="ic"></i><span class="tx"><small>Комментарий Милы</small>' + label + '</span><span class="du">' + VOICE[src].t + '</span><i class="bar"><i></i></i></button>';
+}
 function bavSet(k){
   var L = bavList(), x = L[k], R = st._bavR; if (!x) return;
   voiceStop(); auBtn = null;
   document.getElementById('bavI').src = x.src;
-  document.getElementById('bavV').innerHTML = VOICE[x.src] ? '<button class="vc bd" data-voice="' + esc(x.src) + '"><i class="ic"></i><span class="tx"><small>Комментарий Милы</small>Послушать к этому кадру</span><span class="du">' + VOICE[x.src].t + '</span><i class="bar"><i></i></i></button>' : '';
+  document.getElementById('bavV').innerHTML = VOICE[x.src] ? vcBd(x.src, 'Послушать к этому кадру') : '';
   document.getElementById('bavC').innerHTML = '<span class="n">' + nn(x.n) + '</span><b>' + esc(R[x.n - 1] ? R[x.n - 1][0] : '') + '</b><button data-bapt="' + x.n + '">К пункту ↓</button>';
   [].forEach.call(document.querySelectorAll('.bav-th button'), function(b, i){ b.classList.toggle('on', i === k); });
 }
 
 // Голосовые комментарии Милы к кадрам: ключ = путь к фото, t = длительность для подписи
 var VOICE = {
-  'business-img/ba-promo-w-2.jpg': {a:'business-img/voice-ba-promo-w-2.m4a', t:'1 мин 25 сек'}
+  'business-img/ba-promo-w-2.jpg': {a:'business-img/voice-ba-promo-w-2.m4a', t:'1 мин 25 сек'},
+  'business-img/look-negot-trust-w-3.jpg': {a:'business-img/voice-negot-trust-w-3.m4a', t:'2 мин 4 сек'}
 };
 
 // Фото событий: женские картинки для женщин (w), мужские для мужчин (m)
@@ -744,11 +748,13 @@ function step3(){
     return;
   }
   var BAV = R && (st.sex || 'w') === 'w' && BAP[st.sit] ? bavList() : null; st._bavR = R;
+  var LV = (LK || []).filter(function(l){ return VOICE[l.img]; })[0], LS = (LK || []).filter(function(l){ return l !== LV; });
   show('<div class="pad">' + stepHead(3) + crumbs(3) +
     '<div class="h2" style="font-size:40px;margin-top:0">Сила <i class="br">деталей</i></div>' +
     // образы без разбора: полоса превью над правилами (тап → шаг 4)
     (R && BAV ? bav(R, BAV) : '') +
-    (R && LK && LK.length ? '<div class="lk-strip" style="grid-template-columns:repeat(' + Math.min(LK.length, 4) + ',1fr)">' + LK.slice(0, 4).map(function(l){ return '<button data-go="4"><img loading="lazy" src="' + esc(l.img) + '" alt=""></button>'; }).join('') + '</div>' : '') +
+    (R && LV ? '<div class="bav"><button class="lk-hero" data-go="4"><img src="' + esc(LV.img) + '" alt=""></button>' + vcBd(LV.img, 'Послушать к этому образу') + '</div>' : '') +
+    (R && LS && LS.length ? '<div class="lk-strip" style="grid-template-columns:repeat(' + Math.min(LS.length, 4) + ',1fr)">' + LS.slice(0, 4).map(function(l){ return '<button data-go="4"><img loading="lazy" src="' + esc(l.img) + '" alt=""></button>'; }).join('') + '</div>' : '') +
     (R && c ? '<div class="xp-t">' + c.split('\n').map(function(p){ return '<p>' + esc(p) + '</p>'; }).join('') + '</div>' : '') +
     (R ? '<ol class="rules">' + R.map(function(r, i){ return r[2] ? '<li class="psy"><div class="mk">' + PSY_MARK + '<span>' + PSY_LABEL + '</span><em></em><span>' + nn(i + 1) + '</span></div><b>' + esc(r[0]) + '</b>' + (r[1] ? '<p>' + esc(r[1]) + '</p>' : '') + '</li>' :
       '<li id="rl' + (i + 1) + '"><span class="rn">' + nn(i + 1) + '</span><div><b>' + esc(r[0]) + '</b>' + (r[1] ? '<p>' + esc(r[1]) + '</p>' : '') + (BAV ? BAV.map(function(x, k){ return x.n === i + 1 ? '<button class="pt-ba" data-bav="' + k + '" data-up="1"><img src="' + esc(x.src) + '" alt=""><span>До и после' + (VOICE[x.src] ? ' · с голосом Милы' : '') + ' ↑</span></button>' : ''; }).join('') : '') + '</div></li>'; }).join('') + '</ol>' :
@@ -772,7 +778,7 @@ function step4(){
     (ba ? '<div class="ba"><div class="cap">Как меняется восприятие от одной детали</div>' + ba.map(function(src){
       return baImg(src); }).join('') + '</div>' : '') +
     (looks.length ? '<div class="looks">' : '<div>') + looks.map(function(l, i){
-      return '<div class="lk"><div class="im' + (l.img ? ' fl' : '') + '">' + (l.img ? '<img loading="lazy" src="' + esc(l.img) + '" alt="">' : '<span class="ph">образ ' + (i + 1) + '</span>') + '<span class="n">' + nn(i + 1) + '</span></div>' +
+      return '<div class="lk"><div class="im' + (l.img ? ' fl' : '') + '">' + (l.img ? '<img loading="lazy" src="' + esc(l.img) + '" alt="">' : '<span class="ph">образ ' + (i + 1) + '</span>') + '<span class="n">' + nn(i + 1) + '</span></div>' + (l.img && VOICE[l.img] ? vcBd(l.img, 'Послушать к этому образу') : '') +
         (l.items && l.items.length ? '<ul>' + l.items.map(function(it){ return '<li>' + (it.url ? '<a href="' + esc(it.url) + '" target="_blank" rel="noopener">' + esc(it.t) + '</a>' : esc(it.t)) + '<span class="br">↗</span></li>'; }).join('') + '</ul>' : '') + '</div>';
     }).join('') + '</div>' +
     (x.sil || x.col || x.det || !real ? '<div class="tabs3">' + TABS.map(function(t, i){ return '<button data-tabx="' + i + '"' + (i === (st.tab || 0) ? ' class="on"' : '') + '>' + t[0] + '</button>'; }).join('') + '</div>' +
