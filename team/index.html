@@ -133,7 +133,11 @@ function byMonth(list){ var m = {}; list.forEach(function(s){ var k = s.d.slice(
 var DYN = 'w';
 // События на графике: дата → подпись (запуски, сезоны)
 var EVENTS = [['2026-08-27', '2-й сезон Системы']];
-var PCOL = [['Система цветовых сочетаний', '#2a78d6'], ['Клуб «В моём стиле»', '#eb6834'], ['Пилотный проект', '#6250d6'], ['Лекция «Многослойность осени»', '#1baf7a'], ['Лекция «Масштаб»', '#eda100'], ['Лекция «Дресс-код»', '#e87ba4'], ['Другое', '#a3a19b']];
+var PCOL = [['Система · 1-й сезон', '#e34948'], ['Система · 2-й сезон', '#2a78d6'], ['Клуб «В моём стиле»', '#eb6834'], ['Пилотный проект', '#6250d6'], ['Лекция «Многослойность осени»', '#1baf7a'], ['Лекция «Масштаб»', '#eda100'], ['Лекция «Дресс-код»', '#e87ba4'], ['Другое', '#a3a19b']];
+// Система делится на сезоны: 2-й сезон стартовал 27.08.2026 (Яна, 02.11)
+var SEASON2 = '2026-08-27';
+var SHORT = {'Система · 1-й сезон': 'Система, 1 сезон', 'Система · 2-й сезон': 'Система, 2 сезон', 'Клуб «В моём стиле»': 'Клуб (продл.)', 'Пилотный проект': 'Пилот', 'Лекция «Многослойность осени»': 'Многослойность', 'Лекция «Масштаб»': 'Масштаб', 'Лекция «Дресс-код»': 'Дресс-код'};
+function skey(s){ return s.p === 'Система цветовых сочетаний' ? (s.d.slice(0,10) >= SEASON2 ? 'Система · 2-й сезон' : 'Система · 1-й сезон') : pkey(s.p); }
 function pkey(p){ for (var i = 0; i < PCOL.length - 1; i++) if (PCOL[i][0] === p) return p; return 'Другое'; }
 function pcol(p){ for (var i = 0; i < PCOL.length; i++) if (PCOL[i][0] === p) return PCOL[i][1]; return PCOL[PCOL.length-1][1]; }
 function ymd(t){ return t.getFullYear() + '-' + String(t.getMonth()+1).padStart(2,'0') + '-' + String(t.getDate()).padStart(2,'0'); }  // местная дата, без сдвига в UTC
@@ -141,7 +145,7 @@ function monday(d){ var t = new Date(d.slice(0,10) + 'T00:00:00'); t.setDate(t.g
 function dm(k){ return k.slice(8,10) + '.' + k.slice(5,7); }
 function periods(S, g){
   var m = {}; S.forEach(function(s){ var k = g === 'w' ? monday(s.d) : s.d.slice(0,7); var x = m[k] = m[k] || {k:k, n:0, rub:0, fx:0, p:{}};
-    x.n++; if (s.cur === 'RUB') x.rub += s.sum; else x.fx++; var pk = pkey(s.p); x.p[pk] = (x.p[pk] || 0) + (s.cur === 'RUB' ? s.sum : 0); });
+    x.n++; if (s.cur === 'RUB') x.rub += s.sum; else x.fx++; var pk = skey(s); x.p[pk] = (x.p[pk] || 0) + (s.cur === 'RUB' ? s.sum : 0); });
   var keys = Object.keys(m).sort(); if (!keys.length) return [];
   // пустые недели/месяцы тоже показываем нулём
   var out = [], cur = keys[0], last = keys[keys.length-1];
@@ -205,9 +209,9 @@ function dynDraw(){
 // В ячейке — число оплат продукта; у клуба в скобках продления = повторные оплаты с того же e-mail.
 var CLUB = 'Клуб «В моём стиле»';
 function tree(S){
-  var cols = PCOL.filter(function(c){ return S.some(function(s){ return pkey(s.p) === c[0]; }); }).map(function(c){ return c[0]; });
+  var cols = PCOL.filter(function(c){ return S.some(function(s){ return skey(s) === c[0]; }); }).map(function(c){ return c[0]; });
   var seen = {}, rows = S.slice().sort(function(a, b){ return a.d < b.d ? -1 : 1; }).map(function(s){ var k = s.p + '|' + s.email, r = !!seen[k]; seen[k] = 1; return {s: s, again: r}; });
-  var agg = function(list){ var x = {n:0, rub:0, fx:0, c:{}, club:0, buyers:{}}; list.forEach(function(o){ var k = pkey(o.s.p); x.n++; x.c[k] = (x.c[k] || 0) + 1; if (k === CLUB && o.again) x.club++;
+  var agg = function(list){ var x = {n:0, rub:0, fx:0, c:{}, club:0, buyers:{}}; list.forEach(function(o){ var k = skey(o.s); x.n++; x.c[k] = (x.c[k] || 0) + 1; if (k === CLUB && o.again) x.club++;
       if (o.s.cur === 'RUB') x.rub += o.s.sum; else x.fx++; x.buyers[k + '|' + o.s.email] = 1; }); return x; };
   var cell = function(x, c){ var n = x.c[c] || 0; return '<td class="n">' + (n ? n + (c === CLUB && x.club ? ' <span class="muted">(' + x.club + ')</span>' : '') : '—') + '</td>'; };
   var row = function(label, x, cls, attr){ return '<tr class="' + cls + '"' + (attr || '') + '><td style="white-space:nowrap">' + label + '</td>' + cols.map(function(c){ return cell(x, c); }).join('') + '<td class="n"><b>' + x.n + '</b></td><td class="n">' + rub(x.rub) + '</td></tr>'; };
@@ -219,7 +223,7 @@ function tree(S){
     Object.keys(byW).sort().reverse().forEach(function(wk){ html += row('<span style="padding-left:18px">' + plabel(wk, 'w') + '</span>', agg(byW[wk]), 'wk', ' data-p="' + mk + '" hidden'); });
   });
   var buyers = cols.map(function(c){ var n = 0; for (var k in all.buyers) if (k.split('|')[0] === c) n++; return esc(c.replace(/^Лекция /, '')) + ' — ' + n; }).join(' · ');
-  return '<h3>Продажи: всего → месяцы → недели</h3><div class="card"><table id="tree"><tr><th></th>' + cols.map(function(c){ return '<th class="n"><i style="display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:5px;background:' + pcol(c) + '"></i>' + esc(c.replace(/^Лекция /, '').replace('Система цветовых сочетаний', 'Система').replace('Клуб «В моём стиле»', 'Клуб (продления)')) + '</th>'; }).join('') + '<th class="n">Всего</th><th class="n">Рубли</th></tr>' + html + '</table></div>' +
+  return '<h3>Продажи: всего → месяцы → недели</h3><div class="card"><table id="tree"><tr><th></th>' + cols.map(function(c){ return '<th class="n"><i style="display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:5px;background:' + pcol(c) + '"></i>' + esc(SHORT[c] || c) + '</th>'; }).join('') + '<th class="n">Всего</th><th class="n">Рубли</th></tr>' + html + '</table></div>' +
     '<p class="muted" style="margin-top:6px">Нажмите на месяц, чтобы раскрыть недели (неделя с пн по вс; если она переходит в следующий месяц, оплаты делятся по месяцам). Покупателей: ' + buyers + '. Рубли — после комиссии Lava, без оплат в валюте. Возвраты не считаются. Пилот: 7 оплат по 39 000 ₽ на карту Милы внесены вручную из таблицы «расчеты» (дата условная — 17.08), 8-я участница платила через Lava в валюте.</p>';
 }
 
