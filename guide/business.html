@@ -475,7 +475,8 @@ var LOOKS = {
   'Собеседование|Вызвать доверие': {w:{looks:[1,2,3].map(function(n){ return {img:'business-img/look-interview-trust-w-' + n + '.jpg'}; })}},
   'Собеседование|Показать уверенность': {w:{looks:[1,2,3].map(function(n){ return {img:'business-img/look-interview-conf-w-' + n + '.jpg'}; })}},
   'Собеседование|Запомниться': {w:{looks:[1,2,3].map(function(n){ return {img:'business-img/look-interview-mem-w-' + n + '.jpg'}; })}},
-  'Переговоры|Вызвать доверие': {w:{looks:[{img:'business-img/look-negot-trust-w-1.jpg'}]}},
+  // порядок как прислала Мила: 2–5, затем 1
+  'Переговоры|Вызвать доверие': {w:{looks:[2,3,4,5,1].map(function(n){ return {img:'business-img/look-negot-trust-w-' + n + '.jpg'}; })}},
   // «|*» = на все цели события; «Бизнес|*» = на все события среды «Бизнес»
   'Бизнес|*': {w:{looks:[1,2,3,4,5,6].map(function(n){ return {img:'business-img/look-business-w-' + n + '.jpg'}; })}},
   'Casual Friday|*': {w:{looks:[1,2,3].map(function(n){ return {img:'business-img/look-casual-w-' + n + '.jpg'}; })}}
