@@ -501,7 +501,11 @@ function goalsFor(sit){ var r = REL[st.sex || 'w']; return (r && r[sit]) || GOAL
 
 // Шаг 3: образы. Ключ «ситуация|цель» или только «цель».
 // LOOKS['Вызвать доверие'] = {w:{note:'…', looks:[{img:'business-img/…jpg', items:[{t:'Кардиган', url:'https://…'}]}]}, m:{…}}
+var PRES_LOOKS = ['look-business-w-3','look-boss-comp-w-2','look-office-bound-w-6','look-office-comp-w-6','look-office-comp-w-4'].map(function(n){ return {img:'business-img/' + n + '.jpg'}; });
 var LOOKS = {
+  // 02.11: образы Милы для «Презентация, публичное выступление» (шестой был копией первого); голос Мила запишет сама
+  'Презентация, питч|*': {w:{looks:PRES_LOOKS}},
+  'Публичное выступление, конференция, networking|*': {w:{looks:PRES_LOOKS}},
   'Офис|Вызвать доверие': {w:{looks:[1,2,3,4,5,6,7].map(function(n){ return {img:'business-img/look-office-trust-w-' + n + '.jpg'}; })}},
   'Офис|Показать компетентность': {w:{looks:[1,2,3,4,5,6,7].map(function(n){ return {img:'business-img/look-office-comp-w-' + n + '.jpg'}; })}},
   // 30.10: Мила прислала эти 6 образов к «Показать статус» (раньше они стояли в «Установить границы»)
