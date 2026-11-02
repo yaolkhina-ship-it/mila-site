@@ -310,7 +310,7 @@ body.dark-top .top .ed{color:rgba(244,242,238,.6)}
 .vc.bd .tp-l{display:flex;align-items:center;gap:10px;margin:6px 0 10px;font-size:15px}
 .vc.bd .ic{flex:none;width:0;height:0;margin:0;border-left:9px solid #C9A96A;border-top:6px solid transparent;border-bottom:6px solid transparent}
 .vc.bd.on .ic{width:9px;height:11px;border:0;border-left:3px solid #C9A96A;border-right:3px solid #C9A96A}
-.vc.bd .tape{display:block;width:100%;height:52px}
+.wv{display:flex;align-items:center;gap:2px;height:30px;margin-top:2px}.wv i{flex:1;min-height:3px;border-radius:2px;background:linear-gradient(90deg,#C9A96A var(--f,0%),rgba(244,242,238,.28) var(--f,0%));transform-origin:center}
 .bav-cap{display:flex;align-items:baseline;gap:12px;padding:14px 0;border-bottom:1px solid var(--rule)}.bav-cap .n{font-family:var(--serif);font-size:13px;color:var(--bronze)}.bav-cap b{flex:1;font-weight:500;font-size:15px;line-height:1.4}
 .bav-cap button{flex:none;background:none;border:0;padding:0;font:inherit;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--bronze);cursor:pointer}
 .bav-th{display:grid;gap:6px;margin-top:12px}.bav-th button{padding:0;background:none;border:0;cursor:pointer;opacity:.55;text-align:left}.bav-th button.on{opacity:1}
@@ -556,10 +556,11 @@ function bav(R, L){
       return '<button data-bav="' + k + '"><img loading="lazy" src="' + esc(x.src) + '" alt=""><span>' + nn(x.n) + (VOICE[x.src] ? ' · <i class="hp"></i>' : '') + '</span></button>'; }).join('') + '</div>' : '') + '</div>';
 }
 function mss(t){ t = Math.round(t); return Math.floor(t / 60) + ':' + ('0' + t % 60).slice(-2); }
-// Голос Милы = портновский сантиметр: деления = секунды, золотая булавка = где сейчас голос
+// Голос Милы: простая волна, сыгранное золотом, у бегунка столбики следуют за громкостью речи
 function vcBd(src, label){
-  return '<button class="vc bd" data-voice="' + esc(src) + '"><span class="tp-top"><small>Пояснение Милы</small><b class="t">' + mss(VOICE[src].d) + '</b></span>' +
-    '<span class="tp-l"><i class="ic"></i>' + label + '</span><canvas class="tape"></canvas></button>';
+  var V = VOICE[src];
+  return '<button class="vc bd" data-voice="' + esc(src) + '"><span class="tp-top"><small>Пояснение Милы</small><b class="t">' + mss(V.d) + '</b></span>' +
+    '<span class="tp-l"><i class="ic"></i>' + label + '</span><span class="wv">' + V.w.split('').map(function(h){ return '<i style="height:' + (h * 11) + '%"></i>'; }).join('') + '</span></button>';
 }
 function bavSet(k){
   var L = bavList(), x = L[k], R = st._bavR; if (!x) return;
@@ -648,24 +649,13 @@ function voiceEnv(V){
   }).catch(function(){});
 }
 function wave(b, t, lv){
-  var V = VOICE[b.dataset.voice], c = b.querySelector('canvas'), r = c.getBoundingClientRect(), dp = window.devicePixelRatio || 1;
+  var V = VOICE[b.dataset.voice], bars = b.querySelectorAll('.wv i'), k = t / V.d * bars.length;
+  [].forEach.call(bars, function(x, i){
+    x.style.setProperty('--f', Math.max(0, Math.min(1, k - i)) * 100 + '%');
+    var dist = Math.abs(i + 0.5 - k), near = lv && dist < 5 ? 1 - dist / 5 : 0;
+    x.style.transform = near ? 'scaleY(' + (1 + (lv * 0.8 - 0.4) * near).toFixed(3) + ')' : '';
+  });
   b.querySelector('.t').textContent = t ? mss(t) + ' / ' + mss(V.d) : mss(V.d);
-  if (!r.width) return;
-  if (c.width !== Math.round(r.width * dp)) { c.width = Math.round(r.width * dp); c.height = Math.round(r.height * dp); }
-  var x = c.getContext('2d'), w = r.width, px = 8 + (w - 16) * t / V.d, now = performance.now(), ty = 18, th = 30;
-  lv = lv || 0;
-  x.setTransform(dp, 0, 0, dp, 0, 0); x.clearRect(0, 0, w, r.height);
-  x.fillStyle = '#EDE3CC'; x.fillRect(0, ty, w, th);
-  x.fillStyle = 'rgba(201,169,106,.6)'; x.fillRect(0, ty, px, th);
-  x.fillStyle = x.strokeStyle = '#3A2A1C'; x.font = '300 8px Oswald, sans-serif'; x.textAlign = 'center';
-  for (var s = 0; s <= V.d; s += 2) {
-    var xx = 8 + (w - 16) * s / V.d, big = s % 10 === 0, near = Math.max(0, 1 - Math.abs(xx - px) / 28);
-    var len = (big ? 13 : 7) * (1 + near * lv * (1.2 + .4 * Math.sin(now / 85 + s * 1.7)));
-    x.lineWidth = big ? 1 : .6; x.beginPath(); x.moveTo(xx, ty); x.lineTo(xx, ty + len); x.stroke();
-    if (big && s && s < V.d - 5) x.fillText(s, xx, ty + th - 4);
-  }
-  x.strokeStyle = x.fillStyle = '#C9A96A'; x.lineWidth = 1.2; x.beginPath(); x.moveTo(px, 7); x.lineTo(px, ty + th + 2); x.stroke();
-  x.beginPath(); x.arc(px, 6, 4.5 + lv * 2, 0, 7); x.fill();
 }
 function tapeAll(){ [].forEach.call(document.querySelectorAll('.vc.bd'), function(b){ wave(b, auBtn === b && au ? au.currentTime : 0); }); }
 addEventListener('resize', tapeAll);
@@ -678,7 +668,7 @@ function waveRun(b, a){
   requestAnimationFrame(function(){ waveRun(b, a); });
 }
 function voice(b, e){
-  var wv = e && e.target.closest('canvas');
+  var wv = e && e.target.closest('.wv');
   if (wv && auBtn === b && au) { var r = wv.getBoundingClientRect(); au.currentTime = Math.max(0, Math.min(1, (e.clientX - r.left) / r.width)) * (au.duration || VOICE[b.dataset.voice].d); wave(b, au.currentTime); if (!au.paused) return; }
   else if (auBtn === b && au && !au.paused) { voiceStop(); return; }
   if (auBtn !== b) { voiceStop(); au = new Audio(VOICE[b.dataset.voice].a); auBtn = b;
