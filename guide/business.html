@@ -495,6 +495,8 @@ var REL = { w: {
 function envOf(sit){ for (var i = 0; i < ENV.length; i++) if (ENV[i].s.indexOf(sit) >= 0) return ENV[i].n; return ''; }
 // Ключ с самым точным совпадением: «событие|цель», затем «событие|*», затем «среда|*»
 function keyIn(o, sfx){ var k = [st.sit + '|' + st.goal, st.sit + '|*', envOf(st.sit) + '|*']; for (var i = 0; i < k.length; i++) if (o[k[i] + (sfx || '')]) return k[i]; return ''; }
+// Образы присланы на конкретную цель: показываем только их, без подстановки образов всей среды
+function lookKey(){ var k = [st.sit + '|' + st.goal, st.sit + '|*']; return LOOKS[k[0]] ? k[0] : LOOKS[k[1]] ? k[1] : ''; }
 function goalsFor(sit){ var r = REL[st.sex || 'w']; return (r && r[sit]) || GOALS; }
 
 // Шаг 3: образы. Ключ «ситуация|цель» или только «цель».
@@ -840,7 +842,7 @@ function wallInit(){
 function step3(){
   var c = COMMENTS[st.sit + '|' + st.goal] || COMMENTS[st.sit] || COMMENTS[envOf(st.sit)] || '';
   var sx = '|' + (st.sex || 'w'), rk = keyIn(RULES, sx), R = rk ? RULES[rk + sx] : null;
-  var Z = rk ? RAZBOR[rk + sx] : null, lk = keyIn(LOOKS), LK = lk ? ((LOOKS[lk] || {})[st.sex || 'w'] || {}).looks : null;
+  var Z = rk ? RAZBOR[rk + sx] : null, lk = lookKey(), LK = lk ? ((LOOKS[lk] || {})[st.sex || 'w'] || {}).looks : null;
   if (R && Z && LK && LK.length) {
     show('<div class="pad">' + stepHead(3) + crumbs(3) + '<div class="h2" style="font-size:40px;margin-top:0">Сила <i class="br">деталей</i></div>' +
       (c ? '<div class="xp-t">' + c.split('\n').map(function(p){ return '<p>' + esc(p) + '</p>'; }).join('') + '</div>' : '') +
@@ -865,7 +867,7 @@ function step3(){
   wallInit();
 }
 function step4(){
-  var L = LOOKS[keyIn(LOOKS)] || LOOKS[st.goal] || {};
+  var L = LOOKS[lookKey()] || LOOKS[st.goal] || {};
   var x = L[st.sex || 'w'] || {};
   var ba = (BA[st.sit + '|' + st.goal] || {})[st.sex || 'w'];
   var real = !!(x.looks && x.looks.length) || !!ba, looks = x.looks && x.looks.length ? x.looks : ba ? [] : [{}, {}, {}];
