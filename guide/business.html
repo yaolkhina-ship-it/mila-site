@@ -514,7 +514,7 @@ var BAP = {
   }
 };
 function baImg(src){
-  return '<div class="ba-im"><img loading="lazy" src="' + esc(src) + '" alt=""><span class="l">До</span><span class="r">После</span></div>' + (VOICE[src] ? vcBd(src, 'Послушать к этому кадру') : '');
+  return '<div class="ba-im"><img loading="lazy" src="' + esc(src) + '" alt=""><span class="l">До</span><span class="r">После</span></div>' + (VOICE[src] ? vcBd(src, 'Слушать') : '');
 }
 
 // Просмотр «до / после» над пунктами: сначала кадр с голосом Милы, миниатюры остальных; пункты связаны с кадрами
@@ -533,7 +533,7 @@ function bav(R, L){
 function mss(t){ t = Math.round(t); return Math.floor(t / 60) + ':' + ('0' + t % 60).slice(-2); }
 function vcBd(src, label){
   var V = VOICE[src];
-  return '<button class="vc bd" data-voice="' + esc(src) + '"><span class="pl"><i class="ic"></i></span><span class="vb"><small>Комментарий Милы</small>' +
+  return '<button class="vc bd" data-voice="' + esc(src) + '"><span class="pl"><i class="ic"></i></span><span class="vb"><small>Пояснение Милы</small>' +
     '<span class="wv">' + V.w.split('').map(function(h){ return '<i style="height:' + (h * 11) + '%"></i>'; }).join('') + '</span>' +
     '<span class="tm"><b>' + mss(V.d) + '</b> · ' + label + '</span></span></button>';
 }
@@ -541,7 +541,7 @@ function bavSet(k){
   var L = bavList(), x = L[k], R = st._bavR; if (!x) return;
   voiceStop(); auBtn = null;
   document.getElementById('bavI').src = x.src;
-  document.getElementById('bavV').innerHTML = VOICE[x.src] ? vcBd(x.src, 'Послушать к этому кадру') : '';
+  document.getElementById('bavV').innerHTML = VOICE[x.src] ? vcBd(x.src, 'Слушать') : '';
   document.getElementById('bavC').innerHTML = '<span class="n">' + nn(x.n) + '</span><b>' + esc(R[x.n - 1] ? R[x.n - 1][0] : '') + '</b><button data-bapt="' + x.n + '">К пункту ↓</button>';
   [].forEach.call(document.querySelectorAll('.bav-th button'), function(b, i){ b.classList.toggle('on', i === k); });
 }
@@ -804,11 +804,11 @@ function step3(){
     '<div class="h2" style="font-size:40px;margin-top:0">Сила <i class="br">деталей</i></div>' +
     // образы без разбора: полоса превью над правилами (тап → шаг 4)
     (R && BAV ? bav(R, BAV) : '') +
-    (R && LV ? '<div class="bav"><button class="lk-hero" data-go="4"><img src="' + esc(LV.img) + '" alt=""></button>' + vcBd(LV.img, 'Послушать к этому образу') + '</div>' : '') +
+    (R && LV ? '<div class="bav"><button class="lk-hero" data-go="4"><img src="' + esc(LV.img) + '" alt=""></button>' + vcBd(LV.img, 'Слушать') + '</div>' : '') +
     (R && LS && LS.length ? '<div class="lk-strip" style="grid-template-columns:repeat(' + Math.min(LS.length, 4) + ',1fr)">' + LS.slice(0, 4).map(function(l){ return '<button data-go="4"><img loading="lazy" src="' + esc(l.img) + '" alt=""></button>'; }).join('') + '</div>' : '') +
     (R && c ? '<div class="xp-t">' + c.split('\n').map(function(p){ return '<p>' + esc(p) + '</p>'; }).join('') + '</div>' : '') +
     (R ? '<ol class="rules">' + R.map(function(r, i){ return r[2] ? '<li class="psy"><div class="mk">' + PSY_MARK + '<span>' + PSY_LABEL + '</span><em></em><span>' + nn(i + 1) + '</span></div><b>' + esc(r[0]) + '</b>' + (r[1] ? '<p>' + esc(r[1]) + '</p>' : '') + '</li>' :
-      '<li id="rl' + (i + 1) + '" class="acc"><span class="rn">' + nn(i + 1) + '</span><div><b>' + esc(r[0]) + '<em class="pm"></em></b><div class="rb"><div>' + (r[1] ? '<p>' + esc(r[1]) + '</p>' : '') + (BAV ? BAV.map(function(x, k){ return x.n === i + 1 ? '<button class="pt-ba" data-bav="' + k + '" data-up="1"><img src="' + esc(x.src) + '" alt=""><span>До и после' + (VOICE[x.src] ? ' · с голосом Милы' : '') + ' ↑</span></button>' : ''; }).join('') : '') + '</div></div></div></li>'; }).join('') + '</ol>' :
+      '<li id="rl' + (i + 1) + '" class="acc"><span class="rn">' + nn(i + 1) + '</span><div><b>' + esc(r[0]) + '<em class="pm"></em></b><div class="rb"><div>' + (r[1] ? '<p>' + esc(r[1]) + '</p>' : '') + (BAV ? BAV.map(function(x, k){ return x.n === i + 1 ? '<button class="pt-ba" data-bav="' + k + '" data-up="1"><img src="' + esc(x.src) + '" alt=""><span>До и после' + (VOICE[x.src] ? ' · пояснение Милы' : '') + ' ↑</span></button>' : ''; }).join('') : '') + '</div></div></div></li>'; }).join('') + '</ol>' :
     TO_SYSTEM[st.sit] && LK && LK.length ? '<div class="cap" style="margin:0 0 14px;color:#A88B5C">Образы из Системы по цвету</div><div class="lk-strip" style="grid-template-columns:repeat(' + Math.min(LK.length, 4) + ',1fr)">' + LK.slice(0, 4).map(function(l){ return '<button data-go="4"><img loading="lazy" src="' + esc(l.img) + '" alt=""></button>'; }).join('') + '</div><button class="rz-all" data-sys="1">Продолжить просмотр →</button>' :
     '<div class="qt">“</div><div class="xp-t">' + (c ? c.split('\n').map(function(p){ return '<p>' + esc(p) + '</p>'; }).join('') :
       '<p><span class="ph">Комментарий Милы: «' + esc(st.sit) + '» и цель «' + esc(st.goal) + '». Почему такой образ работает.</span></p>') + '</div>') +
@@ -829,7 +829,7 @@ function step4(){
     (ba ? '<div class="ba"><div class="cap">Как меняется восприятие от одной детали</div>' + ba.map(function(src){
       return baImg(src); }).join('') + '</div>' : '') +
     (looks.length ? '<div class="looks">' : '<div>') + looks.map(function(l, i){
-      return '<div class="lk"><div class="im' + (l.img ? ' fl' : '') + '">' + (l.img ? '<img loading="lazy" src="' + esc(l.img) + '" alt="">' : '<span class="ph">образ ' + (i + 1) + '</span>') + '<span class="n">' + nn(i + 1) + '</span></div>' + (l.img && VOICE[l.img] ? vcBd(l.img, 'Послушать к этому образу') : '') +
+      return '<div class="lk"><div class="im' + (l.img ? ' fl' : '') + '">' + (l.img ? '<img loading="lazy" src="' + esc(l.img) + '" alt="">' : '<span class="ph">образ ' + (i + 1) + '</span>') + '<span class="n">' + nn(i + 1) + '</span></div>' + (l.img && VOICE[l.img] ? vcBd(l.img, 'Слушать') : '') +
         (l.items && l.items.length ? '<ul>' + l.items.map(function(it){ return '<li>' + (it.url ? '<a href="' + esc(it.url) + '" target="_blank" rel="noopener">' + esc(it.t) + '</a>' : esc(it.t)) + '<span class="br">↗</span></li>'; }).join('') + '</ul>' : '') + '</div>';
     }).join('') + '</div>' +
     (x.sil || x.col || x.det || !real ? '<div class="tabs3">' + TABS.map(function(t, i){ return '<button data-tabx="' + i + '"' + (i === (st.tab || 0) ? ' class="on"' : '') + '>' + t[0] + '</button>'; }).join('') + '</div>' +
