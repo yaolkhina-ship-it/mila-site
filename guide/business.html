@@ -304,8 +304,16 @@ body.dark-top .top .ed{color:rgba(244,242,238,.6)}
 .rz-pt.psy .nx{color:var(--paper);border-color:rgba(201,169,106,.5)}
 .ba{margin:8px 0 28px}.ba .cap{margin:0 0 14px;color:var(--gold,#A88B5C)}.ba-im{position:relative;margin:0 0 12px}.ba-im img{display:block;width:100%;height:auto}.ba-im span{position:absolute;top:10px;padding:4px 8px;background:rgba(17,17,17,.55);color:#F4F1EA;font-size:10px;letter-spacing:.22em;text-transform:uppercase}.ba-im .l{left:10px}.ba-im .r{left:calc(50% + 10px)}
 .bav{margin:0 0 28px;scroll-margin-top:70px}.lk-hero{display:block;width:100%;padding:0;border:0;background:#fff;cursor:pointer}.lk-hero img{display:block;width:100%;height:auto}.lk .vc.bd{margin-top:-1px}.bav .ba-im{margin:0}
-.vc.bd{margin:0;padding:18px 18px 20px;background:var(--bord);border:0;color:var(--paper,#F4F2EE)}.vc.bd .ic{border-left-color:#C9A96A}.vc.bd.on .ic{border-color:#C9A96A}
-.vc.bd .tx{font-size:15px}.vc.bd .tx small{display:block;margin-bottom:4px;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:#C9A96A}.vc.bd .du{color:#C9A96A}.vc.bd .bar i{background:#C9A96A}
+.vc.bd{margin:0;padding:18px 18px 16px;gap:16px;background:var(--bord);border:0;color:var(--paper,#F4F2EE)}
+.vc.bd .pl{position:relative;flex:none;display:flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:50%;background:#C9A96A}
+.vc.bd .pl::after{content:'';position:absolute;inset:-6px;border-radius:50%;border:1px solid rgba(201,169,106,.6);opacity:0}
+.vc.bd.on .pl::after{animation:ring 1.6s ease-out infinite}@keyframes ring{0%{transform:scale(.9);opacity:.9}100%{transform:scale(1.35);opacity:0}}
+.vc.bd .ic{margin-left:4px;border-left-color:var(--bord);border-left-width:12px;border-top-width:8px;border-bottom-width:8px}
+.vc.bd.on .ic{margin-left:0;width:12px;height:15px;border:0;border-left:4px solid var(--bord);border-right:4px solid var(--bord)}
+.vc.bd .vb{flex:1;min-width:0}.vc.bd small{display:block;margin-bottom:8px;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:#C9A96A}
+.wv{display:flex;align-items:center;gap:2px;height:30px}.wv i{flex:1;min-height:3px;border-radius:2px;background:rgba(244,242,238,.28);transition:background .2s}.wv i.p{background:#C9A96A}
+.vc.bd.on .wv i.n{animation:bob .42s ease-in-out infinite alternate}@keyframes bob{from{transform:scaleY(.45)}to{transform:scaleY(1.2)}}
+.vc.bd .tm{display:block;margin-top:8px;font-size:12px;letter-spacing:.04em;color:rgba(244,242,238,.75)}.vc.bd .tm b{font-weight:500;color:#C9A96A;font-variant-numeric:tabular-nums}
 .bav-cap{display:flex;align-items:baseline;gap:12px;padding:14px 0;border-bottom:1px solid var(--rule)}.bav-cap .n{font-family:var(--serif);font-size:13px;color:var(--bronze)}.bav-cap b{flex:1;font-weight:500;font-size:15px;line-height:1.4}
 .bav-cap button{flex:none;background:none;border:0;padding:0;font:inherit;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--bronze);cursor:pointer}
 .bav-th{display:grid;gap:6px;margin-top:12px}.bav-th button{padding:0;background:none;border:0;cursor:pointer;opacity:.55;text-align:left}.bav-th button.on{opacity:1}
@@ -502,7 +510,7 @@ var BAP = {
   }
 };
 function baImg(src){
-  return '<div class="ba-im"><img loading="lazy" src="' + esc(src) + '" alt=""><span class="l">До</span><span class="r">После</span></div>' + (VOICE[src] ? '<button class="vc" data-voice="' + esc(src) + '"><i class="ic"></i><span class="tx">Послушать комментарий Милы</span><span class="du">' + VOICE[src].t + '</span><i class="bar"><i></i></i></button>' : '');
+  return '<div class="ba-im"><img loading="lazy" src="' + esc(src) + '" alt=""><span class="l">До</span><span class="r">После</span></div>' + (VOICE[src] ? vcBd(src, 'Послушать к этому кадру') : '');
 }
 
 // Просмотр «до / после» над пунктами: сначала кадр с голосом Милы, миниатюры остальных; пункты связаны с кадрами
@@ -518,8 +526,12 @@ function bav(R, L){
     (L.length > 1 ? '<div class="bav-th" style="grid-template-columns:repeat(' + L.length + ',1fr)">' + L.map(function(x, k){
       return '<button data-bav="' + k + '"><img loading="lazy" src="' + esc(x.src) + '" alt=""><span>' + nn(x.n) + (VOICE[x.src] ? ' · <i class="hp"></i>' : '') + '</span></button>'; }).join('') + '</div>' : '') + '</div>';
 }
+function mss(t){ t = Math.round(t); return Math.floor(t / 60) + ':' + ('0' + t % 60).slice(-2); }
 function vcBd(src, label){
-  return '<button class="vc bd" data-voice="' + esc(src) + '"><i class="ic"></i><span class="tx"><small>Комментарий Милы</small>' + label + '</span><span class="du">' + VOICE[src].t + '</span><i class="bar"><i></i></i></button>';
+  var V = VOICE[src];
+  return '<button class="vc bd" data-voice="' + esc(src) + '"><span class="pl"><i class="ic"></i></span><span class="vb"><small>Комментарий Милы</small>' +
+    '<span class="wv">' + V.w.split('').map(function(h){ return '<i style="height:' + (h * 11) + '%"></i>'; }).join('') + '</span>' +
+    '<span class="tm"><b>' + mss(V.d) + '</b> · ' + label + '</span></span></button>';
 }
 function bavSet(k){
   var L = bavList(), x = L[k], R = st._bavR; if (!x) return;
@@ -532,8 +544,9 @@ function bavSet(k){
 
 // Голосовые комментарии Милы к кадрам: ключ = путь к фото, t = длительность для подписи
 var VOICE = {
-  'business-img/ba-promo-w-2.jpg': {a:'business-img/voice-ba-promo-w-2.m4a', t:'1 мин 25 сек'},
-  'business-img/look-negot-trust-w-3.jpg': {a:'business-img/voice-negot-trust-w-3.m4a', t:'2 мин 4 сек'}
+  // d = длительность в секундах, w = громкость по отрезкам 1–9 (волна как в Telegram)
+  'business-img/ba-promo-w-2.jpg': {a:'business-img/voice-ba-promo-w-2.m4a', d:85, w:'85556695779659698797477766576995577666886744'},
+  'business-img/look-negot-trust-w-3.jpg': {a:'business-img/voice-negot-trust-w-3.m4a', d:124, w:'77979868854885557657756766866585655768695665'}
 };
 
 // Фото событий: женские картинки для женщин (w), мужские для мужчин (m)
@@ -592,12 +605,19 @@ function nn(n){ return (n < 10 ? '0' : '') + n; }
 // Один плеер на страницу: кнопка .vc показывает паузу и прогресс
 var au = null, auBtn = null;
 function voiceStop(){ if (au) au.pause(); if (auBtn) auBtn.classList.remove('on'); }
-function voice(b){
-  if (auBtn === b && au && !au.paused) { voiceStop(); return; }
-  voiceStop();
-  if (auBtn !== b) { au = new Audio(VOICE[b.dataset.voice].a); auBtn = b;
-    au.addEventListener('timeupdate', function(){ b.querySelector('.bar i').style.width = (au.currentTime / (au.duration || 1) * 100) + '%'; });
-    au.addEventListener('ended', function(){ b.classList.remove('on'); b.querySelector('.bar i').style.width = '0'; }); }
+// Волна: сыгранное золотом, у бегунка столбики «дышат»; тап по волне перематывает
+function wave(b, t){
+  var V = VOICE[b.dataset.voice], bars = b.querySelectorAll('.wv i'), k = t / V.d * bars.length;
+  [].forEach.call(bars, function(x, i){ x.className = (i < k ? 'p' : '') + (Math.abs(i - k) < 3 ? ' n' : ''); x.style.animationDelay = (i % 4) * -0.12 + 's'; });
+  b.querySelector('.tm b').textContent = t ? mss(t) + ' / ' + mss(V.d) : mss(V.d);
+}
+function voice(b, e){
+  var wv = e && e.target.closest('.wv');
+  if (wv && auBtn === b && au) { var r = wv.getBoundingClientRect(); au.currentTime = Math.max(0, Math.min(1, (e.clientX - r.left) / r.width)) * (au.duration || VOICE[b.dataset.voice].d); wave(b, au.currentTime); if (!au.paused) return; }
+  else if (auBtn === b && au && !au.paused) { voiceStop(); return; }
+  if (auBtn !== b) { voiceStop(); au = new Audio(VOICE[b.dataset.voice].a); auBtn = b;
+    au.addEventListener('timeupdate', function(){ wave(b, au.currentTime); });
+    au.addEventListener('ended', function(){ b.classList.remove('on'); wave(b, 0); }); }
   b.classList.add('on'); var pr = au.play(); if (pr) pr.catch(function(){ b.classList.remove('on'); });
 }
 function show(html, dark){ voiceStop(); auBtn = null; v.innerHTML = '<div class="view">' + html + '</div>'; document.body.classList.toggle('dark-top', !!dark); window.scrollTo(0, 0); }
@@ -888,7 +908,7 @@ function onTap(e){
   var b = e.target.closest('button'); if (!b) return;
   if (b.dataset.rznext) { var j = +b.dataset.rznext; rzSet(j); var li = document.getElementById('rzL').children[j]; setTimeout(function(){ li.scrollIntoView({behavior: 'smooth', block: 'center'}); }, 80); return; }
   if (b.dataset.rz) { rzSet(+b.dataset.rz); return; }
-  if (b.dataset.voice) { voice(b); return; }
+  if (b.dataset.voice) { voice(b, e); return; }
   if (b.dataset.bav) { bavSet(+b.dataset.bav); if (b.dataset.up) document.getElementById('bav').scrollIntoView({behavior: 'smooth', block: 'start'}); return; }
   if (b.dataset.bapt) { var li = document.getElementById('rl' + b.dataset.bapt); li.scrollIntoView({behavior: 'smooth', block: 'center'}); li.classList.remove('flash'); void li.offsetWidth; li.classList.add('flash'); return; }
   if (b.dataset.sys) { location.href = '/guide'; return; }
