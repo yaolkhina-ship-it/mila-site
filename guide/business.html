@@ -303,6 +303,7 @@ body.dark-top .top .ed{color:rgba(244,242,238,.6)}
 .rz-pt.psy .body p{color:rgba(244,242,238,.8)}
 .rz-pt.psy .nx{color:var(--paper);border-color:rgba(201,169,106,.5)}
 .ba{margin:8px 0 28px}.ba .cap{margin:0 0 14px;color:var(--gold,#A88B5C)}.ba-im{position:relative;margin:0 0 12px}.ba-im img{display:block;width:100%;height:auto}.ba-im span{position:absolute;top:10px;padding:4px 8px;background:rgba(17,17,17,.55);color:#F4F1EA;font-size:10px;letter-spacing:.22em;text-transform:uppercase}.ba-im .l{left:10px}.ba-im .r{left:calc(50% + 10px)}
+.ba-pt{margin:16px 0 0}.ba-pt .ba-im:last-child{margin-bottom:0}
 .vc{position:relative;display:flex;align-items:center;gap:12px;width:100%;margin:-4px 0 20px;padding:14px 16px;background:none;border:1px solid rgba(168,139,92,.45);color:var(--ink,#111);font:inherit;font-size:13px;letter-spacing:.02em;text-align:left;cursor:pointer;overflow:hidden}
 .vc .ic{flex:none;width:0;height:0;border-left:9px solid var(--gold,#A88B5C);border-top:6px solid transparent;border-bottom:6px solid transparent;margin-left:2px}
 .vc.on .ic{width:9px;height:12px;border:0;border-left:3px solid var(--gold,#A88B5C);border-right:3px solid var(--gold,#A88B5C)}
@@ -477,6 +478,19 @@ var BA = {
   'Новая должность, повышение|Сохранить связь с командой': BA_PROMO,
   'Новая должность, повышение|Вызвать доверие': {w:[1,2].map(function(n){ return 'business-img/ba-promo-trust-w-' + n + '.jpg'; })}
 };
+
+// До / после под пунктами текста (шаг 3): ключ «ситуация», номер пункта → фото
+var BAP = {
+  'Новая должность, повышение': {
+    3: ['business-img/ba-promo-w-1.jpg'],
+    5: ['business-img/ba-promo-trust-w-2.jpg', 'business-img/ba-promo-trust-w-1.jpg'],
+    6: ['business-img/ba-promo-w-3.jpg'],
+    7: ['business-img/ba-promo-w-2.jpg']
+  }
+};
+function baImg(src){
+  return '<div class="ba-im"><img loading="lazy" src="' + esc(src) + '" alt=""><span class="l">До</span><span class="r">После</span></div>' + (VOICE[src] ? '<button class="vc" data-voice="' + esc(src) + '"><i class="ic"></i><span class="tx">Послушать комментарий Милы</span><span class="du">' + VOICE[src].t + '</span><i class="bar"><i></i></i></button>' : '');
+}
 
 // Голосовые комментарии Милы к кадрам: ключ = путь к фото, t = длительность для подписи
 var VOICE = {
@@ -700,7 +714,7 @@ function step3(){
     (R && LK && LK.length ? '<div class="lk-strip" style="grid-template-columns:repeat(' + Math.min(LK.length, 4) + ',1fr)">' + LK.slice(0, 4).map(function(l){ return '<button data-go="4"><img loading="lazy" src="' + esc(l.img) + '" alt=""></button>'; }).join('') + '</div>' : '') +
     (R && c ? '<div class="xp-t">' + c.split('\n').map(function(p){ return '<p>' + esc(p) + '</p>'; }).join('') + '</div>' : '') +
     (R ? '<ol class="rules">' + R.map(function(r, i){ return r[2] ? '<li class="psy"><div class="mk">' + PSY_MARK + '<span>' + PSY_LABEL + '</span><em></em><span>' + nn(i + 1) + '</span></div><b>' + esc(r[0]) + '</b>' + (r[1] ? '<p>' + esc(r[1]) + '</p>' : '') + '</li>' :
-      '<li><span class="rn">' + nn(i + 1) + '</span><div><b>' + esc(r[0]) + '</b>' + (r[1] ? '<p>' + esc(r[1]) + '</p>' : '') + '</div></li>'; }).join('') + '</ol>' :
+      '<li><span class="rn">' + nn(i + 1) + '</span><div><b>' + esc(r[0]) + '</b>' + (r[1] ? '<p>' + esc(r[1]) + '</p>' : '') + (((BAP[st.sit] || {})[i + 1] || []).length && (st.sex || 'w') === 'w' ? '<div class="ba-pt">' + BAP[st.sit][i + 1].map(baImg).join('') + '</div>' : '') + '</div></li>'; }).join('') + '</ol>' :
     TO_SYSTEM[st.sit] && LK && LK.length ? '<div class="cap" style="margin:0 0 14px;color:#A88B5C">Образы из Системы по цвету</div><div class="lk-strip" style="grid-template-columns:repeat(' + Math.min(LK.length, 4) + ',1fr)">' + LK.slice(0, 4).map(function(l){ return '<button data-go="4"><img loading="lazy" src="' + esc(l.img) + '" alt=""></button>'; }).join('') + '</div><button class="rz-all" data-sys="1">Продолжить просмотр →</button>' :
     '<div class="qt">“</div><div class="xp-t">' + (c ? c.split('\n').map(function(p){ return '<p>' + esc(p) + '</p>'; }).join('') :
       '<p><span class="ph">Комментарий Милы: «' + esc(st.sit) + '» и цель «' + esc(st.goal) + '». Почему такой образ работает.</span></p>') + '</div>') +
@@ -718,7 +732,7 @@ function step4(){
     '<dl><dt>Сценарий</dt><dd>' + esc(st.sit) + '</dd><dt>Цель</dt><dd class="gl">' + esc(st.goal) + '</dd><dt>Для кого</dt><dd>' + (st.sex === 'm' ? 'Мужчина' : 'Женщина') + '</dd></dl>' +
     (x.note || !real ? '<div class="principle">' + (x.note ? esc(x.note) : '<span class="ph">Принцип образа. Например: вязаный кардиган, приглушённые оттенки, мягкая обувь</span>') + '</div>' : '') +
     (ba ? '<div class="ba"><div class="cap">Как меняется восприятие от одной детали</div>' + ba.map(function(src){
-      return '<div class="ba-im"><img loading="lazy" src="' + esc(src) + '" alt=""><span class="l">До</span><span class="r">После</span></div>' + (VOICE[src] ? '<button class="vc" data-voice="' + esc(src) + '"><i class="ic"></i><span class="tx">Послушать комментарий Милы</span><span class="du">' + VOICE[src].t + '</span><i class="bar"><i></i></i></button>' : ''); }).join('') + '</div>' : '') +
+      return baImg(src); }).join('') + '</div>' : '') +
     (looks.length ? '<div class="looks">' : '<div>') + looks.map(function(l, i){
       return '<div class="lk"><div class="im' + (l.img ? ' fl' : '') + '">' + (l.img ? '<img loading="lazy" src="' + esc(l.img) + '" alt="">' : '<span class="ph">образ ' + (i + 1) + '</span>') + '<span class="n">' + nn(i + 1) + '</span></div>' +
         (l.items && l.items.length ? '<ul>' + l.items.map(function(it){ return '<li>' + (it.url ? '<a href="' + esc(it.url) + '" target="_blank" rel="noopener">' + esc(it.t) + '</a>' : esc(it.t)) + '<span class="br">↗</span></li>'; }).join('') + '</ul>' : '') + '</div>';
