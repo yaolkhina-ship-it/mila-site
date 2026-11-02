@@ -55,6 +55,7 @@ td.n,th.n{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
 .tip{position:absolute;z-index:3;pointer-events:none;background:var(--deep);color:#f5f0ea;border-radius:10px;padding:10px 12px;font-size:12px;line-height:1.5;min-width:180px;max-width:260px;box-shadow:0 6px 20px rgba(0,0,0,.15);display:none}.tip b{font:400 17px Georgia,serif;display:block}.tip span{color:#b9c0c2}.tip .r{display:flex;justify-content:space-between;gap:10px}
 details.dt summary{cursor:pointer;color:var(--mute);font-size:12px;padding:8px 0}
 .up{color:var(--ok)}.dn{color:var(--bad)}
+#tree tr.tot td{background:rgba(184,144,58,.10)}#tree tr.mo td{border-top:1px solid rgba(13,26,30,.25)}#tree tr.wk td{color:var(--mute);font-size:12.5px}.mx{all:unset;cursor:pointer;font-weight:500}
 .tools{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
 .tools input,.tools select{padding:9px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;min-width:0}
 .tools input{flex:1 1 200px}
@@ -200,6 +201,28 @@ function dynDraw(){
     P.slice().reverse().map(function(x){ return '<tr><td style="white-space:nowrap">' + plabel(x.k, g) + '</td><td class="n">' + x.n + '</td><td class="n">' + rub(x.rub) + '</td>' + used.map(function(c){ return '<td class="n">' + (x.p[c[0]] ? rub(x.p[c[0]]) : '—') + '</td>'; }).join('') + '<td class="n">' + x.fx + '</td></tr>'; }).join('') + '</table>';
 }
 
+// Продажи по уровням: всего → месяцы → недели (недели раскрываются под месяцем своего понедельника).
+// В ячейке — число оплат продукта; у клуба в скобках продления = повторные оплаты с того же e-mail.
+var CLUB = 'Клуб «В моём стиле»';
+function tree(S){
+  var cols = PCOL.filter(function(c){ return S.some(function(s){ return pkey(s.p) === c[0]; }); }).map(function(c){ return c[0]; });
+  var seen = {}, rows = S.slice().sort(function(a, b){ return a.d < b.d ? -1 : 1; }).map(function(s){ var k = s.p + '|' + s.email, r = !!seen[k]; seen[k] = 1; return {s: s, again: r}; });
+  var agg = function(list){ var x = {n:0, rub:0, fx:0, c:{}, club:0, buyers:{}}; list.forEach(function(o){ var k = pkey(o.s.p); x.n++; x.c[k] = (x.c[k] || 0) + 1; if (k === CLUB && o.again) x.club++;
+      if (o.s.cur === 'RUB') x.rub += o.s.sum; else x.fx++; x.buyers[k + '|' + o.s.email] = 1; }); return x; };
+  var cell = function(x, c){ var n = x.c[c] || 0; return '<td class="n">' + (n ? n + (c === CLUB && x.club ? ' <span class="muted">(' + x.club + ')</span>' : '') : '—') + '</td>'; };
+  var row = function(label, x, cls, attr){ return '<tr class="' + cls + '"' + (attr || '') + '><td style="white-space:nowrap">' + label + '</td>' + cols.map(function(c){ return cell(x, c); }).join('') + '<td class="n"><b>' + x.n + '</b></td><td class="n">' + rub(x.rub) + '</td></tr>'; };
+  var byM = {}; rows.forEach(function(o){ (byM[o.s.d.slice(0,7)] = byM[o.s.d.slice(0,7)] || []).push(o); });
+  var all = agg(rows), html = row('<b>Всего</b>', all, 'tot');
+  Object.keys(byM).sort().reverse().forEach(function(mk){
+    html += row('<button class="mx" data-m="' + mk + '">▸ ' + mon(mk) + '</button>', agg(byM[mk]), 'mo');
+    var byW = {}; byM[mk].forEach(function(o){ var w = monday(o.s.d); if (w.slice(0,7) !== mk && byM[w.slice(0,7)]) w = w; (byW[w] = byW[w] || []).push(o); });
+    Object.keys(byW).sort().reverse().forEach(function(wk){ html += row('<span style="padding-left:18px">' + plabel(wk, 'w') + '</span>', agg(byW[wk]), 'wk', ' data-p="' + mk + '" hidden'); });
+  });
+  var buyers = cols.map(function(c){ var n = 0; for (var k in all.buyers) if (k.split('|')[0] === c) n++; return esc(c.replace(/^Лекция /, '')) + ' — ' + n; }).join(' · ');
+  return '<h3>Продажи: всего → месяцы → недели</h3><div class="card"><table id="tree"><tr><th></th>' + cols.map(function(c){ return '<th class="n"><i style="display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:5px;background:' + pcol(c) + '"></i>' + esc(c.replace(/^Лекция /, '').replace('Система цветовых сочетаний', 'Система').replace('Клуб «В моём стиле»', 'Клуб (продления)')) + '</th>'; }).join('') + '<th class="n">Всего</th><th class="n">Рубли</th></tr>' + html + '</table></div>' +
+    '<p class="muted" style="margin-top:6px">Нажмите на месяц, чтобы раскрыть недели (неделя с пн по вс; если она переходит в следующий месяц, оплаты делятся по месяцам). Покупателей: ' + buyers + '. Рубли — после комиссии Lava, без оплат в валюте. Возвраты не считаются.</p>';
+}
+
 function home(){
   var S = D.sales.filter(ok), now = new Date(), ym = now.toISOString().slice(0,7);
   var last = S.reduce(function(a, s){ return s.d > a ? s.d : a; }, '');
@@ -215,6 +238,7 @@ function home(){
       '<div class="kpi"><small>Всего оплат</small><b>'+S.length+'</b><i>'+rub(sum(S))+' в рублях</i></div>' +
       '<div class="kpi"><small>Покупателей</small><b>'+Object.keys(emails).length+'</b><i>уникальные e-mail</i></div>' +
     '</div>' +
+    tree(S) +
     '<h3>Этот месяц по продуктам</h3><div class="card"><table><tr><th>Продукт</th><th class="n">Оплат</th><th class="n">Рубли</th><th class="n hide-m">В валюте</th></tr>' +
       Object.keys(bp).sort(function(a,b){ return bp[b].n - bp[a].n; }).map(function(k){ return '<tr><td>'+esc(k)+'</td><td class="n">'+bp[k].n+'</td><td class="n">'+rub(bp[k].rub)+'</td><td class="n hide-m">'+bp[k].fx+'</td></tr>'; }).join('') + '</table></div>' +
     '<div class="dyn-h"><h3>Выручка по продуктам, ₽</h3><div class="seg" id="dynSeg"><button data-g="w"'+(DYN==='w'?' class="on"':'')+'>Недели</button><button data-g="m"'+(DYN==='m'?' class="on"':'')+'>Месяцы</button></div></div>' +
@@ -371,6 +395,7 @@ function render(){
   nav(); var M = document.getElementById('main');
   M.innerHTML = {matrix:matrix, fin:fin, bot:bot, home:home, sales:sales, clients:clients, products:products, mail:mail, works:works}[TAB]();
   if (TAB === 'bot') botFill();
+  if (TAB === 'home') document.getElementById('tree').onclick = function(e){ var b = e.target.closest('.mx'); if (!b) return; var open = b.textContent[0] === '▸'; b.textContent = (open ? '▾ ' : '▸ ') + b.textContent.slice(2); this.querySelectorAll('tr[data-p="' + b.dataset.m + '"]').forEach(function(r){ r.hidden = !open; }); };
   if (TAB === 'home'){ dynDraw(); document.getElementById('dynSeg').onclick = function(e){ var b = e.target.closest('[data-g]'); if (!b) return; DYN = b.dataset.g; this.querySelectorAll('button').forEach(function(x){ x.classList.toggle('on', x === b); }); dynDraw(); }; }
   if (TAB === 'sales'){ ['q','fp','fm'].forEach(function(id){ document.getElementById(id).oninput = salesFill; }); salesFill(); }
   if (TAB === 'clients'){ ['cq','cf'].forEach(function(id){ document.getElementById(id).oninput = clientsFill; }); clientsFill(); }
