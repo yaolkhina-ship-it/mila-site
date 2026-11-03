@@ -423,7 +423,7 @@ body.on-cover .view{padding-bottom:0}
 .who2 button.on{outline:2px solid var(--bronze);outline-offset:4px}
 /* 02.11 галерея: работы на стене без белой коробки; белый фон снимков растворяется в цвете стены */
 .crumbs{gap:3px 8px;margin-bottom:14px}
-.crumbs button{border:0;padding:0;font-size:10px;letter-spacing:.14em;color:var(--mute)}.crumbs i{color:var(--bronze2)}
+.crumbs button{border:0;padding:0;font-size:10px;letter-spacing:.14em;color:var(--mute)}.crumbs i{color:var(--bronze2)}.crumbs button.env{color:#A88B5C}
 .rules b{font-weight:400}
 .rules p{white-space:pre-line}
 .psy .mk{letter-spacing:.14em}
@@ -476,7 +476,7 @@ body.on-cover .view{padding-bottom:0}
 // Шаг 1: среда и ситуация
 var ENV = [
   {n:'Работа', r:'I', s:['Офис','Zoom','Встреча с руководством','Встреча с командой','Собеседование','Новая должность, повышение','Casual Friday']},
-  {n:'Бизнес', r:'II', s:['Переговоры','Встреча с клиентом или партнёром','Презентация, питч','Публичное выступление, конференция, networking']},
+  {n:'Бизнес', r:'II', s:['Переговоры','Встреча с клиентом или партнёром','Публичное выступление, конференция, networking']},
   {n:'Вне офиса', r:'III', s:['Деловые встречи в ресторане','Командировка','Культурное или светское событие']},
   {n:'Вечер', r:'IV', s:['Корпоратив, Black Tie','Cocktail']}
 ];
@@ -488,6 +488,11 @@ var REL = { w: {
   'Офис': ['Вызвать доверие','Убедить','Показать компетентность','Показать статус','Показать открытость новому'],
   'Zoom': ['Вызвать доверие','Привести к решению'],  // 01.11 Мила: в Zoom только две цели
   'Переговоры': ['Вызвать доверие','Показать компетентность'],  // 02.11 Мила: в Переговорах две цели
+  // 03.11: Мила сократила цели в «Бизнесе» и «Вне офиса»
+  'Встреча с клиентом или партнёром': ['Убедить'],
+  'Публичное выступление, конференция, networking': ['Убедить','Вдохновить'],
+  'Деловые встречи в ресторане': ['Выстроить коммуникацию'],
+  'Культурное или светское событие': ['Запомниться','Показать современность'],
   'Встреча с руководством': ['Вызвать доверие','Показать компетентность','Показать готовность к большей роли','Показать готовность работать в команде'],
   'Встреча с командой': ['Показать готовность работать в команде','Вызвать доверие','Вдохновить'],
   'Собеседование': ['Вызвать доверие','Показать компетентность','Показать уверенность'],
@@ -608,7 +613,6 @@ var EVIMG = {
   'Casual Friday': {w:'ev-casual-w', m:'ev-casual-m'},
   'Переговоры': {w:'ev-client-w', m:'ev-negot'},
   'Встреча с клиентом или партнёром': {w:'ev-boss-w', m:'ev-casual-m'},
-  'Презентация, питч': {w:'ev-first-w', m:'ev-present'},
   'Публичное выступление, конференция, networking': {w:'ev-stage', m:'ev-interview-m'},
   'Деловые встречи в ресторане': {w:'ev-breakfast2-w', m:'ev-casual-m'},
   'Командировка': {w:'ev-trip2-w', m:'ev-office'},
@@ -701,7 +705,8 @@ function prog(n){
   return '<div class="prog">' + L.map(function(t, i){ return (i ? '<i' + (i < n ? ' class="on"' : '') + '></i>' : '') + '<span' + (i < n ? ' class="on"' : '') + '>' + (i + 1) + '. ' + t + '</span>'; }).join('') + '</div>';
 }
 function crumbs(n){
-  return '<div class="crumbs"><button data-tab="' + st.env + '">' + esc(st.sit) + '</button>' +
+  var ei = 0; ENV.forEach(function(e, i){ if (e.s.indexOf(st.sit) >= 0) ei = i; });  // 03.11: всегда видно раздел: Работа, Бизнес, Вне офиса, Вечер
+  return '<div class="crumbs"><button class="env" data-tab="' + ei + '">' + esc(ENV[ei].n) + '</button><i>·</i><button data-tab="' + ei + '">' + esc(st.sit) + '</button>' +
     (n === 3 ? '<i>·</i><button data-go="2">' + esc(st.goal) + '</button>' : '') + '</div>';
 }
 var STEPS = ['Что предстоит', 'Ваша цель', 'Сила деталей', 'Решение'];
