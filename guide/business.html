@@ -545,11 +545,12 @@ var LOOKS = {
 var TO_SYSTEM = {'Casual Friday': 1};
 
 // До / после (фото 3:2, слева «до», справа «после»): ключ «ситуация|цель», показываются на шаге 4
-var BA_PROMO = {w:[1,2,3].map(function(n){ return 'business-img/ba-promo-w-' + n + '.jpg'; })};
+var BA_PROMO = {w:[1,2,3].map(function(n){ return 'business-img/ba-promo-w-' + n + '.jpg'; }).concat([1,2].map(function(n){ return 'business-img/ba-promo-trust-w-' + n + '.jpg'; }))};
 var BA = {
+  // 03.11: все 5 пар «до и после» остаются при каждой цели Повышения
   'Новая должность, повышение|Обозначить новый статус': BA_PROMO,
-  'Новая должность, повышение|Сохранить связь с командой': BA_PROMO,
-  'Новая должность, повышение|Вызвать доверие': {w:[1,2].map(function(n){ return 'business-img/ba-promo-trust-w-' + n + '.jpg'; })}
+  'Новая должность, повышение|Усилить авторитет': BA_PROMO,
+  'Новая должность, повышение|Сохранить связь с командой': BA_PROMO
 };
 
 // До / после под пунктами текста (шаг 3): ключ «ситуация», номер пункта → фото
