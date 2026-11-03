@@ -525,6 +525,7 @@ var LOOKS = {
   'Офис|Убедить': {w:{looks:[1,2,3,4,5].map(function(n){ return {img:'business-img/look-office-persuade-w-' + n + '.jpg'}; })}},
   'Встреча с командой|Показать готовность работать в команде': {w:{looks:[1,2,3,4,5,6].map(function(n){ return {img:'business-img/look-team-ready-w-' + n + '.jpg'}; })}},
   'Собеседование|Показать компетентность': {w:{looks:[1,2,3,4,5].map(function(n){ return {img:'business-img/look-interview-comp-w-' + n + '.jpg'}; })}},
+  'Переговоры|Показать компетентность': {w:{looks:[1,2,3].map(function(n){ return {img:'business-img/look-negot-comp-w-' + n + '.jpg'}; })}},
   'Презентация, питч|*': {w:{looks:PRES_LOOKS}},
   'Публичное выступление, конференция, networking|*': {w:{looks:PRES_LOOKS}},
   'Офис|Вызвать доверие': {w:{looks:[1,2,3,4,5,6,7].map(function(n){ return {img:'business-img/look-office-trust-w-' + n + '.jpg'}; })}},
@@ -866,7 +867,8 @@ function wallInit(){
 function step3(){
   var c = COMMENTS[st.sit + '|' + st.goal] || COMMENTS[st.sit] || COMMENTS[envOf(st.sit)] || '';
   var sx = '|' + (st.sex || 'w'), rk = keyIn(RULES, sx), R = rk ? RULES[rk + sx] : null;
-  var Z = rk ? RAZBOR[rk + sx] : null, lk = lookKey(), LK = lk ? ((LOOKS[lk] || {})[st.sex || 'w'] || {}).looks : null;
+  var lk = lookKey(), LK = lk ? ((LOOKS[lk] || {})[st.sex || 'w'] || {}).looks : null;
+  var Z = rk && rk === lk ? RAZBOR[rk + sx] : null;  // точки разбора привязаны к своим образам: чужой набор образов разбор не использует
   if (R && Z && LK && LK.length) {
     show('<div class="pad">' + stepHead(3) + crumbs(3) + '<div class="h2" style="font-size:40px;margin-top:0">Сила <i class="br">деталей</i></div>' +
       (c ? '<div class="xp-t">' + c.split('\n').map(function(p){ return '<p>' + esc(p) + '</p>'; }).join('') + '</div>' : '') +
