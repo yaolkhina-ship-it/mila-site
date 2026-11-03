@@ -522,6 +522,9 @@ var LOOKS = {
   // 03.11: образы Милы
   'Корпоратив, Black Tie|Показать стиль': {w:{looks:[1,2,3,4,5,6,7,8,9].map(function(n){ return {img:'business-img/look-corp-w-' + n + '.jpg'}; })}},
   'Cocktail|*': {w:{looks:[1,2,3,4,5,6].map(function(n){ return {img:'business-img/look-cocktail-w-' + n + '.jpg'}; })}},
+  'Офис|Убедить': {w:{looks:[1,2,3,4,5].map(function(n){ return {img:'business-img/look-office-persuade-w-' + n + '.jpg'}; })}},
+  'Встреча с командой|Показать готовность работать в команде': {w:{looks:[1,2,3,4,5,6].map(function(n){ return {img:'business-img/look-team-ready-w-' + n + '.jpg'}; })}},
+  'Собеседование|Показать компетентность': {w:{looks:[1,2,3,4,5].map(function(n){ return {img:'business-img/look-interview-comp-w-' + n + '.jpg'}; })}},
   'Презентация, питч|*': {w:{looks:PRES_LOOKS}},
   'Публичное выступление, конференция, networking|*': {w:{looks:PRES_LOOKS}},
   'Офис|Вызвать доверие': {w:{looks:[1,2,3,4,5,6,7].map(function(n){ return {img:'business-img/look-office-trust-w-' + n + '.jpg'}; })}},
@@ -907,7 +910,7 @@ function step4(){
     (x.sil || x.col || x.det || !real ? '<div class="tabs3">' + TABS.map(function(t, i){ return '<button data-tabx="' + i + '"' + (i === (st.tab || 0) ? ' class="on"' : '') + '>' + t[0] + '</button>'; }).join('') + '</div>' +
     '<div class="tab-t">' + (x[tb[1]] ? esc(x[tb[1]]) : '<span class="ph">' + tb[0] + ': рекомендация Милы</span>') + '</div>' : '') +
     (TO_SYSTEM[st.sit] ? '<button class="rz-all" data-sys="1" style="margin-bottom:24px">Продолжить просмотр →</button>' : '') +
-    '<div class="pair"><button data-go="2">Другая цель</button><button class="dk" data-go="1">Новое событие</button></div>' +
+    '<div class="pair">' + (goalsFor(st.sit).length > 1 ? '<button data-go="2">Другая цель</button>' : '') + '<button class="dk" data-go="1">Новое событие</button></div>' +
     '<button class="ghost lt" data-go="books"><u>Книжная полка</u></button>' +
     '<button class="ghost lt" data-go="tariffs"><u>Подключить для компании</u></button></div>');
 }
@@ -996,7 +999,7 @@ window.addEventListener('popstate', function(e){
 });
 document.getElementById('dBack').addEventListener('click', function(){
   if (history.state && history.length > 1 && history.state.view !== 'cover') history.back();
-  else go({s4:'s3', s3:'s2', s2:'s1', s1:'intro', s0:'cover', intro:'about'}[st.view] || 'cover', {}, true);
+  else go(st.view === 's3' && st.sit && goalsFor(st.sit).length === 1 ? 's1' : {s4:'s3', s3:'s2', s2:'s1', s1:'intro', s0:'cover', intro:'about'}[st.view] || 'cover', {}, true);
 });
 
 var sheet = document.getElementById('sheet');
@@ -1036,7 +1039,8 @@ function onTap(e){
     if (b.dataset.next) return go('s1', {});
     if (document.body.classList.contains('menu-on')) openMenu(); draw(); return; }
   if (b.dataset.tab) return go('s1', {env: +b.dataset.tab});
-  if (b.dataset.sit) return go('s2', {sit: b.dataset.sit, env: +b.dataset.env, goal: b.dataset.sit === st.sit ? st.goal : null});
+  // 03.11: одна цель у события: шаг выбора пропускаем, блок раскрывается сразу
+  if (b.dataset.sit) { var og = goalsFor(b.dataset.sit); return og.length === 1 ? go('s3', {sit: b.dataset.sit, env: +b.dataset.env, goal: og[0]}) : go('s2', {sit: b.dataset.sit, env: +b.dataset.env, goal: b.dataset.sit === st.sit ? st.goal : null}); }
   if (b.dataset.goal) return go('s3', {goal: b.dataset.goal});
   if (b.dataset.tabx) { st.tab = +b.dataset.tabx; var y = window.scrollY; draw(); window.scrollTo(0, y); return; }
   if (b.dataset.go === 'cover') return go('cover', {});
@@ -1044,7 +1048,7 @@ function onTap(e){
   if (b.dataset.go === 'intro') return go('intro', {});
   if (b.dataset.go === 'tariffs') return go('tariffs', {});
   if (b.dataset.go === '1') return go(st.view === 'cover' || st.view === 'intro' || !st.sex ? 's0' : 's1', {});
-  if (b.dataset.go === '2') return go(st.sit ? 's2' : 's1', {});
+  if (b.dataset.go === '2') { if (!st.sit) return go('s1', {}); var og2 = goalsFor(st.sit); if (og2.length === 1) return st.view === 's1' ? go('s3', {goal: og2[0]}) : go('s1', {}); return go('s2', {}); }
   if (b.dataset.go === '3') return go(st.goal ? 's3' : 's2', {});
   if (b.dataset.go === '4') return go('s4', {tab: 0});
   if (b.dataset.go === 'portrait') return go('portrait', {});
