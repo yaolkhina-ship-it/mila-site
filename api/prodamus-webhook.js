@@ -45,7 +45,7 @@ async function sendWelcome(email, access) {
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(200).send('ok');
-  const secret = process.env.PRODAMUS_SECRET, url = process.env.UPSTASH_REDIS_REST_URL, token = process.env.UPSTASH_REDIS_REST_TOKEN;
+  const secret = process.env.PRODAMUS_SECRET, url = process.env.KV_REST_API_URL, token = process.env.KV_REST_API_TOKEN;
   if (!secret || !url || !token) { console.error('prodamus: not configured'); return res.status(503).send('not configured'); }
   const raw = await readRaw(req);
   let data;

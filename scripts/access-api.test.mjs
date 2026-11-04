@@ -16,7 +16,7 @@ globalThis.fetch = async (url, opt) => {
   if (c === 'EXPIRE') result = 1;
   return { ok: true, status: 200, json: async () => ({ result }) };
 };
-process.env.PRODAMUS_SECRET = 'ps'; process.env.UPSTASH_REDIS_REST_URL = 'https://r.test'; process.env.UPSTASH_REDIS_REST_TOKEN = 't';
+process.env.PRODAMUS_SECRET = 'ps'; process.env.KV_REST_API_URL = 'https://r.test'; process.env.KV_REST_API_TOKEN = 't';
 process.env.SESSION_SECRET = 'ss'; process.env.RESEND_API_KEY = 'k';
 
 // .js с export в каталоге без type: module на Vercel собирается сборщиком; здесь загружаем копию как модуль
