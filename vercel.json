@@ -119,7 +119,7 @@
       "dest": "/guide/$1"
     },
     {
-      "src": "/image-system/?",
+      "src": "/sistem-image/?",
       "dest": "/guide/business.html"
     },
     {
