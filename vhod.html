@@ -22,10 +22,14 @@ footer{padding:18px 16px 24px;text-align:center;font-size:11.5px;line-height:1.7
   <form id="f1"><p>Введите почту, которую указали при оплате. На неё придёт код.</p><input id="email" type="email" autocomplete="email" inputmode="email" placeholder="Почта" required aria-label="Почта"><button>Получить код</button></form>
   <form id="f2" hidden><p id="sent"></p><input id="code" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="······" required aria-label="Код из письма"><button>Войти</button><button type="button" class="link" id="back">Другая почта или новый код</button></form>
   <div id="msg" role="alert"></div>
+  <p style="margin-top:22px;font-size:15px">Ещё нет доступа? <a href="/image" style="color:#C9A96A">Открыть Систему имиджа</a></p>
 </main>
 <footer><a href="/oferta">Договор оферты</a> · <a href="/privacy">Политика конфиденциальности</a> · <a href="https://t.me/MilaUshakova_ClubBot?start=support">Поддержка</a><br>© 2026 · ИП Ольхина Я.Ф., ИНН 222411003828, ОГРНИП 326220200112474</footer>
 <script>
+if(/tariff/.test(location.hash))location.replace('/tariffs');
 var $=function(i){return document.getElementById(i)},NEXT='/sistem-image';
+if(/expired=1/.test(location.search))document.addEventListener('DOMContentLoaded',function(){$('msg').textContent='Срок доступа закончился. Продлить можно на странице оплаты.'});
+fetch('/api/access?do=me').then(function(r){return r.json()}).then(function(m){if(m.signedIn&&m.active)location.replace(NEXT)}).catch(function(){});
 function post(a,b){return fetch('/api/access?do='+a,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)}).then(function(r){return r.json().then(function(j){j.status=r.status;return j})})}
 function say(t){$('msg').textContent=t||''}
 function fail(){say('Сейчас не получилось. Попробуйте ещё раз или напишите в поддержку.')}

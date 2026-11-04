@@ -30,6 +30,13 @@
       "use": "@vercel/node"
     },
     {
+      "src": "api/image-gate.js",
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": "private/**"
+      }
+    },
+    {
       "src": "api/prodamus-webhook.js",
       "use": "@vercel/node"
     },
@@ -131,8 +138,23 @@
       "dest": "/guide/gaidosen.html"
     },
     {
-      "src": "/guide/business/?",
-      "dest": "/guide/business.html"
+      "src": "/guide/business(\\.html|/)?",
+      "dest": "/api/image-gate.js"
+    },
+    {
+      "src": "/guide/business-razbor(\\.html)?",
+      "status": 302,
+      "headers": {
+        "Location": "/vhod"
+      }
+    },
+    {
+      "src": "/guide/business-img/([^/]+)",
+      "dest": "/api/image-gate.js?f=$1"
+    },
+    {
+      "src": "/tariffs/?",
+      "dest": "/tariffs.html"
     },
     {
       "src": "/guide/(.*)",
@@ -140,11 +162,11 @@
     },
     {
       "src": "/sistem-image/?",
-      "dest": "/guide/business.html"
+      "dest": "/api/image-gate.js"
     },
     {
       "src": "/sistema-imidzha/?",
-      "dest": "/guide/business.html"
+      "dest": "/api/image-gate.js"
     },
     {
       "src": "/image/?",
