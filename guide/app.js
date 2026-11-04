@@ -154,10 +154,8 @@
       '<div class="t">Добавлены новые образы и палитры</div></div><span>›</span></a>';
   }
   V.home = function () {
-    var d = DROPS.oct, first = looks[d.ids[0]], last = looks[LS.get('app_last', '')];
     var h = top('', 'Система цветовых сочетаний');
-    h += '<div class="a-sec"><b>О Системе</b></div>' +
-      '<a class="a-mila" href="' + H + '#/page/p1"><img src="about-photo.jpg" alt=""><div><div class="t" style="margin-top:0">Мила Ушакова</div><div class="s">Персональный стилист и аналитик моды</div></div><span>›</span></a>' +
+    h += '<a class="a-mila" style="margin-top:14px" href="' + H + '#/page/p1"><img src="about-photo.jpg" alt=""><div><div class="t" style="margin-top:0">Мила Ушакова</div><div class="s">Персональный стилист и аналитик моды</div></div><span>›</span></a>' +
       '<div class="a-list a-chap">' + [['p2', 'О Системе'], ['p3', 'Как пользоваться'], ['p_bonus', 'Бонус: промокоды партнёров'], ['p6', 'Рекомендации на сезон']].map(function (r) {
         return '<a href="' + H + '#/page/' + r[0] + '"><span class="t">' + r[1] + '</span><span class="n">›</span></a>'; }).join('') +
       '<a href="' + H + '#/more"><span class="t">Промо от брендов и категории</span><span class="n">›</span></a></div>';
@@ -167,11 +165,6 @@
       return '<a class="a-tc" href="' + H + '#/trend/' + t.slug + '"><div class="im"><img loading="lazy" src="' + esc(t.cover) + '" alt="">' + '</div><span>' + esc(t.name) + '</span></a>';
     }).join('') + '</div>';
     h += libShelf(); // Библиотека лекций сразу после трендов
-    if (first) h += '<a class="a-cont" href="' + H + '#/drop/oct"><img src="' + esc(first.pal || first.img) + '" alt="" style="object-fit:cover"><div style="flex:1"><div class="a-lbl">Дроп · октябрь</div><div style="font-size:15px;margin-top:3px">' + obr(d.ids.length) + '</div></div><span style="color:var(--gold2)">›</span></a>';
-    if (last) h += '<a class="a-cont" href="' + H + '#/look/' + last.id + '"><img src="' + esc(last.img) + '" alt=""><div style="flex:1"><div class="a-lbl">Продолжить</div><div style="font-size:15px;margin-top:3px">образ ' + esc(last.name) + '</div></div><span style="color:var(--gold2)">›</span></a>';
-    h += '<div class="a-sec"><b>Цвета</b><a href="' + H + '#/colors">все</a></div><div class="a-sw">' + colors.map(function (c, i) {
-      return '<a href="' + H + '#/color/' + i + '"><i style="background:' + (SW[c.name] || '#999') + '"></i>' + esc(c.name.replace(' и ', ' и ')) + '</a>';
-    }).join('') + '</div>';
     h += ctaBlock();
     return h;
   };
