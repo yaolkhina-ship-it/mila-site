@@ -102,3 +102,13 @@ test('сессия: подделка и истёкшая не проходят',
   const body = Buffer.from(JSON.stringify({ e: 'evil@b.ru', x: 9e15 })).toString('base64url');
   assert.equal(A.readSession(body + '.' + crypto.randomBytes(32).toString('base64url'), 'sec', NOW), null);
 });
+test('общее название Prodamus: тариф по точной сумме', async () => {
+  const name = 'Доступ к обучающим материалам';
+  assert.equal(A.tierFromItem({ name, sum: '7000.00' }), 'base'); assert.equal(A.tierFromItem({ name, price: '9900' }), 'premium');
+  assert.equal(A.tierFromItem({ name, sum: '11900' }), 'premium'); assert.equal(A.tierFromItem({ name, sum: '2900' }), 'upgrade');
+  assert.equal(A.tierFromItem({ name, sum: '777' }), null); assert.equal(A.tierFromItem({ name: 'Лекция', sum: '7000' }), null);
+  const s = memStore(); await A.applyPayment(s, pay({ order_id: '50', products: [{ name, sum: '9900' }] }), NOW);
+  assert.equal((await A.getAccess(s, 'anna@mail.ru', NOW)).tier, 'premium');
+  const t = memStore(); await A.applyPayment(t, pay({ order_id: '51', products: [{ name, sum: '777' }] }), NOW);
+  assert.equal((await A.getAccess(t, 'anna@mail.ru', NOW)).active, false);
+});
