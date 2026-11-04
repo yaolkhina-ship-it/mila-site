@@ -976,13 +976,28 @@ var BOOKS = [
   {a:'Debrett’s', t:'A–Z of Modern Manners', w:'Чтобы понимать современный британский этикет и применять его к реальной жизни: приглашениям, дресс-кодам, общению, работе и социальным ситуациям.', q:['“We need to preserve politeness as the vital ingredient in the cocktail of manners.”','«Нам необходимо сохранять вежливость как важнейшую составляющую хороших манер».']},
   {a:'Паола Волкова', t:'Мост через бездну', w:'Чтобы развивать насмотренность и учиться видеть связи между искусством, человеком, временем и культурой.', q:['«Тайна — вот стимул любого немеркнущего интереса к истории, искусству, гению».']}
 ];
+// 04.11: четыре видео тарифа «Премиум». Идентификаторы плеера приходят с сервера только при действующем премиуме
+function videos(){
+  show('<div class="pad"><div class="h2" style="font-size:40px;margin-top:0">Видео <i class="br">Милы</i></div><div id="vidL" class="xp-t"><p>Загружаем…</p></div><div class="sig"><i></i><span>Мила Ушакова</span></div></div>');
+  fetch('/api/access?do=videos').then(function(r){ return r.json(); }).then(function(d){
+    var el = document.getElementById('vidL'); if (!el) return;
+    var premium = d.active && d.tier === 'premium';
+    var note = premium ? '' : d.signedIn ? '<p>Видео входят в тариф «Премиум».</p><a class="rz-all" style="display:block;text-decoration:none;text-align:center" href="/image#pay">Подключить премиум →</a>' : '<p>Видео входят в тариф «Премиум». Войдите с почтой, которую указали при оплате.</p><a class="rz-all" style="display:block;text-decoration:none;text-align:center" href="/vhod">Войти →</a>';
+    el.innerHTML = note + d.items.map(function(v){
+      var head = '<div class="cap" style="margin:26px 0 10px;color:var(--ink)">' + esc(v.title) + '</div>';
+      if (!v.ready) return head + '<p style="color:var(--mute)">Скоро</p>';
+      if (premium && v.id) return head + '<div style="position:relative;aspect-ratio:16/9;background:#111"><iframe src="https://kinescope.io/embed/' + encodeURIComponent(v.id) + '" title="' + esc(v.title) + '" allow="autoplay; fullscreen; picture-in-picture; encrypted-media; gyroscope; accelerometer; clipboard-write" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;border:0"></iframe></div>';
+      return head + '<p style="color:var(--mute)">Доступно в тарифе «Премиум»</p>';
+    }).join('');
+  }).catch(function(){ var el = document.getElementById('vidL'); if (el) el.innerHTML = '<p>Сейчас не получилось загрузить видео. Обновите страницу или напишите в поддержку.</p>'; });
+}
 function books(){
   show('<div class="pad"><div class="h2" style="font-size:40px;margin-top:0">Книжная <i class="br">полка</i></div><ol class="bk">' +
     BOOKS.map(function(b, i){ return '<li><span class="rn">' + nn(i + 1) + '</span><div><small>' + esc(b.a) + '</small><h3>' + esc(b.t) + '</h3><div class="cap">Для чего читать</div><p>' + esc(b.w) + '</p>' +
       (b.q ? '<blockquote>' + b.q.map(function(x){ return '<p>' + esc(x) + '</p>'; }).join('') + '</blockquote>' : '') + '</div></li>'; }).join('') +
     '</ol><div class="sig"><i></i><span>Мила Ушакова</span></div></div>');
 }
-var VIEWS = {books: books, portrait: portrait, cover: cover, about: about, intro: intro, s0: step0, s1: step1, s2: step2, s3: step3, s4: step4, tariffs: tariffs};
+var VIEWS = {videos: videos, books: books, portrait: portrait, cover: cover, about: about, intro: intro, s0: step0, s1: step1, s2: step2, s3: step3, s4: step4, tariffs: tariffs};
 // 03.11: раздел всегда виден в закреплённой верхней строке, в том числе при прокрутке
 function edLabel(){ var e = document.getElementById('ed'), n = st.view === 's1' ? ENV[st.env || 0].n : /^(s2|s3|s4|portrait)$/.test(st.view) ? envOf(st.sit) : ''; e.textContent = n || 'Система имиджа'; e.classList.toggle('in', !!n); }
 function draw(){ (VIEWS[st.view] || cover)(); edLabel(); document.body.classList.toggle('on-cover', st.view === 'cover'); document.getElementById('dBack').classList.toggle('off', st.view === 'cover'); }
@@ -1006,7 +1021,7 @@ document.getElementById('dBack').addEventListener('click', function(){
 var sheet = document.getElementById('sheet');
 function openMenu(){
   var n = 0; sheet.dataset.k = 'menu';
-  sheet.innerHTML = '<div class="grab"></div><div class="quick"><button data-go="cover">Обложка</button><button data-go="about">О проекте</button><button data-go="intro">О Системе</button><button data-go="tariffs">Тарифы</button><button data-go="books" style="grid-column:1/-1">Книжная полка</button>' +
+  sheet.innerHTML = '<div class="grab"></div><div class="quick"><button data-go="cover">Обложка</button><button data-go="about">О проекте</button><button data-go="intro">О Системе</button><button data-go="tariffs">Тарифы</button><button data-go="videos">Видео</button><button data-go="books">Книжная полка</button>' +
     '<button data-sex="w"' + (st.sex !== 'm' ? ' class="on"' : '') + '>Для женщин</button><button class="soon" disabled>Для мужчин · скоро</button>' +
     (fromSys ? '<button data-sys="1" style="grid-column:1/-1">← В Систему цветовых сочетаний</button>' : '') + '</div>' +
     ENV.map(function(e, i){ return '<h3><span>' + e.n + '</span><i>' + e.r + '</i></h3>' + e.s.map(function(x){ n++;
@@ -1055,6 +1070,7 @@ function onTap(e){
   if (b.dataset.go === '4') return go('s4', {tab: 0});
   if (b.dataset.go === 'portrait') return go('portrait', {});
   if (b.dataset.go === 'books') return go('books', {});
+  if (b.dataset.go === 'videos') return go('videos', {});
 }
 v.addEventListener('click', onTap);
 // Пункты свёрнуты до названия: на компьютере раскрываются при наведении, на телефоне по тапу

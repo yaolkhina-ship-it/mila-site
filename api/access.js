@@ -13,6 +13,8 @@ async function sendCode(email, code) {
   if (!r.ok) throw new Error('mail ' + r.status);
 }
 
+const VIDEOS = [{ key: 'watch', title: 'Часовой этикет' }, { key: 'accessories', title: 'Этикет аксессуаров' }, { key: 'perfume', title: 'Парфюмерный этикет' }, { key: 'dresscode', title: 'Дресс-код' }];
+const READY = ['watch', 'perfume'];
 const cookieOf = (req) => (String(req.headers.cookie || '').match(/(?:^|;\s*)ms_s=([^;]+)/) || [])[1];
 const setCookie = (res, val, age) => res.setHeader('Set-Cookie', `ms_s=${val}; Path=/; Max-Age=${age}; HttpOnly; Secure; SameSite=Lax`);
 
@@ -27,6 +29,14 @@ export default async function handler(req, res) {
       const email = readSession(cookieOf(req), secret);
       if (!email) return res.status(200).json({ signedIn: false });
       return res.status(200).json({ signedIn: true, email, ...(await getAccess(store, email)) });
+    }
+    if (action === 'videos' && req.method === 'GET') {
+      const email = readSession(cookieOf(req), secret);
+      const a = email ? await getAccess(store, email) : { active: false, tier: null };
+      const premium = a.active && a.tier === 'premium';
+      const ids = premium ? (await store.getJson('videos')) || {} : {};
+      const items = VIDEOS.map((v) => ({ key: v.key, title: v.title, id: ids[v.key] || null, ready: READY.includes(v.key) }));
+      return res.status(200).json({ signedIn: !!email, active: !!a.active, tier: a.tier || null, items });
     }
     if (req.method !== 'POST') return res.status(405).json({ ok: false });
     if (action === 'code') {
