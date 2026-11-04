@@ -120,3 +120,12 @@ test('чужой продукт без почты на разбор не поп�
   const s = memStore(); const r = await A.applyPayment(s, pay({ order_id: '61', customer_email: '', products: [{ name: 'Лекция', sum: '777' }] }), NOW);
   assert.equal(r.skipped, 'other-product'); assert.equal(s.m.has('review:61'), false);
 });
+test('тариф по номеру заказа, в том числе при другой сумме', async () => {
+  const name = 'Доступ к обучающим материалам';
+  const a = memStore(); await A.applyPayment(a, pay({ order_id: '70', order_num: 'Система Имиджа Базовый', sum: '75.00', products: [{ name, sum: '75.00' }] }), NOW);
+  assert.equal((await A.getAccess(a, 'anna@mail.ru', NOW)).tier, 'base');
+  const b = memStore(); await A.applyPayment(b, pay({ order_id: '71', order_num: 'Система Имиджа  Премиум', products: [{ name, sum: '105' }] }), NOW);
+  assert.equal((await A.getAccess(b, 'anna@mail.ru', NOW)).tier, 'premium');
+  const c = memStore(); const r = await A.applyPayment(c, pay({ order_id: '1', order_num: 'test', sum: '1000.00', products: [{ name, sum: '1000.00' }] }), NOW);
+  assert.equal(r.skipped, 'other-product');
+});
