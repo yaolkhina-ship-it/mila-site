@@ -119,6 +119,10 @@
       "dest": "/guide/$1"
     },
     {
+      "src": "/image-system/?",
+      "dest": "/guide/business.html"
+    },
+    {
       "src": "/sistema-imidzha/?",
       "dest": "/guide/business.html"
     },
