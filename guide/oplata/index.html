@@ -1,167 +1,157 @@
 <!DOCTYPE html>
 <html lang="ru"><head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#DDD8CE">
+<meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#0B0B0B">
 <title>Система имиджа · Мила Ушакова</title>
-<meta name="description" content="Инструмент управления впечатлением в профессиональной и деловой среде.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500&family=Jost:wght@300;400&display=swap" rel="stylesheet">
 <style>
-:root{--clay:#DDD8CE;--p:#F4F2EE;--i:#111;--i2:#2B2B2B;--m:#6F6C67;--b:#B08F57;--bord:#5A1A22;--r:rgba(17,17,17,.15);--rd:rgba(244,242,238,.18)}
-*{box-sizing:border-box;margin:0}html{scroll-behavior:smooth;background:var(--clay)}
-body{font-family:Jost,-apple-system,sans-serif;font-weight:300;color:var(--i);background:var(--p);overflow-x:hidden;-webkit-font-smoothing:antialiased;font-size:18px;line-height:1.45}
-.os,h1,h2,h3{font-family:Oswald,'Arial Narrow',sans-serif;font-weight:300;text-transform:uppercase}
-.cap{font:400 11px/1.3 Oswald,sans-serif;letter-spacing:.2em;text-transform:uppercase}
-.wrap{max-width:720px;margin:0 auto;padding:68px 22px}
-h2{font-size:clamp(36px,10.4vw,58px);line-height:1.06;margin:14px 0 22px}h2 i{font-style:normal;color:var(--b)}
+/* Арт-дирекция: чёрное, белое, фотография. Один экран, одна мысль. Цвет только в образах Милы. */
+:root{--k:#0B0B0B;--w:#F7F6F3;--g:#8B8983;--l:rgba(11,11,11,.16);--ld:rgba(247,246,243,.22)}
+*{box-sizing:border-box;margin:0}html{background:var(--k);scroll-behavior:smooth}
+body{font-family:Jost,-apple-system,sans-serif;font-weight:300;font-size:18px;line-height:1.42;color:var(--w);background:var(--k);overflow-x:hidden;-webkit-font-smoothing:antialiased}
 a{color:inherit}
-.btn{display:block;width:100%;padding:19px;border:0;background:var(--i);color:var(--p);text-align:center;text-decoration:none;font:400 14px/1 Oswald,sans-serif;letter-spacing:.18em;text-transform:uppercase;cursor:pointer}
-/* Первый экран */
-#hero{background:var(--clay);min-height:100svh;display:flex;flex-direction:column;align-items:center;padding:max(16px,env(safe-area-inset-top)) 22px 20px}
-#hero{overflow:hidden}#bigw{font:500 42vw/.92 Oswald,sans-serif;letter-spacing:-.005em;color:var(--b);white-space:nowrap;margin-top:6px}#hero>*{position:relative}#ph{z-index:1;margin-top:-13vw}
-#hero .top{width:100%;max-width:720px;display:flex;justify-content:space-between;color:#55524d}
-#pl{font:300 clamp(26px,7.4vw,40px)/1.05 Oswald,sans-serif;text-transform:uppercase;text-align:center;min-height:1.1em;margin:14px 0 8px;transition:opacity .3s}
-#ph{position:relative;flex:1 1 0;min-height:300px;max-height:54svh;aspect-ratio:390/844;background:var(--i);padding:7px;border-radius:32px;box-shadow:0 24px 46px rgba(0,0,0,.28)}
-#sc{position:relative;width:100%;height:100%;overflow:hidden;border-radius:26px;background:var(--p)}
-#sc img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;transition:transform .7s cubic-bezier(.6,0,.2,1);transform:translateX(100%)}
-#f{position:absolute;width:30px;height:30px;margin:-15px;border-radius:50%;background:rgba(176,143,87,.55);border:1px solid #fff;transition:left .7s,top .7s;pointer-events:none}
-#hero .sub{text-align:center;font-size:15px;line-height:1.3;margin:0 0 12px;max-width:390px;color:var(--i2)}
-#hero .btn{max-width:390px}
-/* Атомы */
-#atoms{height:280svh;background:var(--p)}#atoms .stick{position:sticky;top:0;height:100svh;overflow:hidden;padding:22px 22px 12px;display:flex;flex-direction:column;max-width:720px;margin:0 auto}#atoms h2{font-size:clamp(30px,8.6vw,52px);margin:8px 0 10px}#atoms .cap{color:#86693a}
-#xf{position:relative;flex:1;min-height:0}#xf img{position:absolute;will-change:transform;transform-origin:0 0}#xf span{position:absolute;font:400 10px/1.2 Oswald,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:var(--i2);opacity:0;border-top:1px solid var(--b);padding-top:4px;white-space:nowrap}
-.lead{font:300 clamp(28px,8vw,42px)/1.14 Oswald,sans-serif;text-transform:uppercase}
-.rv{opacity:0;transform:translateY(26px);transition:opacity .8s,transform .8s cubic-bezier(.2,.7,.2,1)}.rv.in{opacity:1;transform:none}
-/* Без теории */
-.dark{background:var(--i);color:var(--p)}.dark .cap{color:var(--b)}
-.who{margin-top:30px;padding-top:20px;border-top:1px solid var(--rd);color:rgba(244,242,238,.8)}
-/* Среды */
-.env{display:grid;grid-template-columns:42px 1fr;padding:18px 0;border-top:1px solid var(--r)}.env>span{font:300 17px/1.5 Oswald,sans-serif;color:var(--b)}.env h3{font-size:25px;line-height:1.2;margin-bottom:5px}.env p{font-size:16px;line-height:1.5;color:var(--i2)}
-.nums{margin:6px 0 0}.nums>div{display:flex;align-items:flex-end;justify-content:space-between;border-top:1px solid var(--r);padding:6px 0 10px}.nums b{font:300 clamp(92px,29vw,160px)/.95 Oswald,sans-serif}.nums span{font-size:15px;color:var(--m);padding-bottom:12px}
-#tick{overflow:hidden;padding:0 0 60px}.tr{border-top:1px solid var(--r);padding:12px 0 14px}.tr small{display:block;padding:0 22px 2px;font:400 11px/1.4 Oswald,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#86693a}.tl{font:300 clamp(46px,13.5vw,84px)/1.1 Oswald,sans-serif;text-transform:uppercase;white-space:nowrap;width:max-content;padding:0 22px;will-change:transform}.tl i{font-style:normal;color:var(--b);padding:0 .25em}
-/* Пример рекомендации */
-.rec{background:var(--clay)}.fig{background:#F4F2EE;margin:0 -22px 22px;display:flex;justify-content:center;padding:18px}.fig img{display:block;width:100%;max-width:440px;mix-blend-mode:multiply}
-.pt{display:grid;grid-template-columns:34px 1fr;padding:15px 0;border-top:1px solid var(--r)}.pt>span{font:400 14px/1.6 Oswald,sans-serif;color:#86693a}.pt b{display:block;font-weight:400;margin-bottom:4px}.pt p{font-size:16px;color:var(--i2)}
-/* Голос */
-.voice{background:var(--bord);color:var(--p)}.voice .cap{color:#D9BE8A}.voice h2 i{color:#D9BE8A}.voice p+p{margin-top:12px}
-.vfig{background:#F4F2EE;margin:24px -22px 0;padding:14px;display:flex;justify-content:center}.vfig img{width:100%;max-width:420px;display:block;mix-blend-mode:multiply}
-#play{display:flex;align-items:center;gap:14px;width:calc(100% + 44px);margin:0 -22px;padding:14px 22px;background:#111;color:var(--p);border:0;cursor:pointer;text-align:left;font:inherit}
-#play em{flex:none;width:44px;height:44px;border-radius:50%;background:var(--b);display:flex;align-items:center;justify-content:center}#play svg{width:16px;height:16px;fill:#111}
-#wv{flex:1;display:flex;align-items:center;gap:2px;height:32px;min-width:0;overflow:hidden}#wv i{flex:1;min-width:1px;background:rgba(244,242,238,.35)}#wv i.on{background:var(--b)}#tm{font-size:13px;flex:none}
-/* Автор */
-.au img{display:block;width:calc(100% + 44px);margin:0 -22px 26px;aspect-ratio:4/5;object-fit:cover;object-position:50% 18%}.au p+p{margin-top:12px}.au .cap{color:#86693a;margin:-12px 0 20px}.proof{margin-top:24px;padding-top:18px;border-top:1px solid var(--r)}
-/* Цены */
-#pay{background:var(--i);color:var(--p)}#pay .cap{color:var(--b)}.card{border:1px solid var(--rd);padding:24px 20px;margin-top:16px}.card.hi{border-color:var(--b)}.card h3{font-size:18px;letter-spacing:.14em;color:var(--b);font-weight:400}.pr{font:300 clamp(58px,17vw,84px)/1 Oswald,sans-serif;margin:12px 0 6px}.pr sup{font-size:.42em;vertical-align:.8em;color:var(--b);margin-left:4px}.lat{font-size:15px;color:rgba(244,242,238,.68);margin-bottom:20px}.card ul{list-style:none;padding:0;margin:0 0 22px}.card li{padding:10px 0;border-top:1px solid var(--rd);font-size:16px}.card li.v{font:300 18px/1.25 Oswald,sans-serif;text-transform:uppercase;letter-spacing:.03em}#pay .btn{background:var(--b);color:var(--i);font-weight:500}
-.fix{margin-top:16px;padding:16px;background:var(--b);color:var(--i);font-size:15px;line-height:1.4;font-weight:400}.fix b{display:block;font:500 13px/1.3 Oswald,sans-serif;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px}
-.dev{display:none;margin-top:12px;padding:10px;border:1px dashed var(--b);font-size:13px;line-height:1.35;color:var(--b)}
-/* Вопросы */
-details{border-top:1px solid var(--r);padding:16px 0}details:last-of-type{border-bottom:1px solid var(--r)}summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:14px;font-weight:400}summary::-webkit-details-marker{display:none}summary::after{content:"+";color:var(--b);font-size:22px;line-height:1}details[open] summary::after{content:"–"}details p{margin-top:9px;font-size:16px;color:var(--i2)}.tmp{color:#86693a;border:1px dashed #86693a;padding:6px 8px;display:block;font-size:14px}
-/* Финал */
-.fin{background:var(--clay);text-align:center}.fin h2{margin-bottom:26px}.note{font-size:13px;line-height:1.5;color:#55524d;margin-top:22px;text-align:left}
-#legal-strip{padding:22px 16px 90px;text-align:center;font-size:12px;line-height:1.7;color:var(--p);opacity:.95;background:var(--i)}#legal-strip span{opacity:.7}
+.t{font:400 10.5px/1.5 Oswald,'Arial Narrow',sans-serif;letter-spacing:.26em;text-transform:uppercase}
+.big{font-family:Oswald,'Arial Narrow',sans-serif;font-weight:300;text-transform:uppercase;line-height:1.02;letter-spacing:.002em}
+.lt{background:var(--w);color:var(--k)}
+.scr{min-height:100svh;position:relative;display:flex;flex-direction:column;padding:22px}
+.ph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.06) brightness(.72)}
+.scr>*:not(.ph){position:relative}
+.btn{display:block;width:100%;max-width:440px;padding:19px;text-align:center;text-decoration:none;font:400 13px/1 Oswald,sans-serif;letter-spacing:.24em;text-transform:uppercase;background:var(--w);color:var(--k);border:0;cursor:pointer}
+.lt .btn{background:var(--k);color:var(--w)}
+.rv{opacity:0;transform:translateY(22px);transition:opacity 1s,transform 1s cubic-bezier(.2,.7,.2,1)}.rv.in{opacity:1;transform:none}
+/* 1 Вход */
+#hero{padding-top:max(16px,env(safe-area-inset-top));padding-bottom:16px;align-items:center;overflow:hidden}
+#hero .top{width:100%;display:flex;justify-content:space-between;color:var(--g)}
+#bigw{font:400 42vw/.9 Oswald,sans-serif;white-space:nowrap;margin-top:8px;color:var(--w)}
+#phn{position:relative;z-index:1;flex:1 1 0;min-height:290px;max-height:56svh;aspect-ratio:390/844;background:#000;padding:6px;border-radius:30px;box-shadow:0 0 0 1px rgba(247,246,243,.28);touch-action:pan-y;cursor:pointer}
+#sc{position:relative;width:100%;height:100%;overflow:hidden;border-radius:24px;background:var(--w)}
+#sc img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top;opacity:0;transform:translate3d(100%,0,0);transition:transform .75s cubic-bezier(.6,0,.2,1)}
+#sc img.on{opacity:1;transform:none}#sc img.out{opacity:1;transform:translate3d(-100%,0,0)}
+body.calm #sc img{transform:none!important;transition:opacity .6s}body.calm #sc img.out{opacity:0}
+#dots{display:flex;gap:6px;margin:12px 0 10px}#dots i{width:22px;height:1px;background:var(--ld)}#dots i.on{background:var(--w)}
+#pl{font:300 25px/1.1 Oswald,sans-serif;text-transform:uppercase;min-height:28px}
+#hero .btn{margin-top:12px}
+/* 2 Манифест */
+#man{justify-content:center}#man .big{font-size:clamp(46px,14.4vw,104px)}#man .t{color:var(--g);margin-bottom:26px}#man .bt{margin-top:26px;color:var(--g)}
+/* 3 Как вас прочтут */
+#read,#au,#vc{padding-bottom:84px}#read{justify-content:flex-end}#read .big{font-size:clamp(44px,13.4vw,96px)}#read .t{margin-bottom:14px}#read p{margin-top:18px;font-size:17px;max-width:470px}
+/* 4 События */
+#ev{padding:58px 0 50px}#ev .hd{padding:0 22px 26px}#tick{overflow:hidden}.tr{border-top:1px solid var(--ld);padding:11px 0 15px}.tr small{display:block;padding:0 22px 2px;color:var(--g);font:400 10.5px/1.5 Oswald,sans-serif;letter-spacing:.26em;text-transform:uppercase}.tl{font:300 clamp(50px,15vw,92px)/1.08 Oswald,sans-serif;text-transform:uppercase;white-space:nowrap;width:max-content;padding:0 22px;will-change:transform}.tl i{font-style:normal;color:var(--g);padding:0 .22em}
+/* 5 Атомы */
+#atoms{height:280svh;background:var(--w);color:var(--k)}#atoms .stick{position:sticky;top:0;height:100svh;overflow:hidden;padding:22px 22px 66px;display:flex;flex-direction:column;max-width:720px;margin:0 auto}#atoms .big{font-size:clamp(31px,9.2vw,56px);margin:8px 0 12px}#atoms .t{color:#6f6d68}
+#xf{position:relative;flex:1;min-height:0}#xf img{position:absolute;will-change:transform;transform-origin:0 0}#xf span{position:absolute;font:400 9.5px/1.2 Oswald,sans-serif;letter-spacing:.22em;text-transform:uppercase;color:var(--k);opacity:0;border-top:1px solid var(--k);padding-top:4px;white-space:nowrap}
+/* 6 Рекомендация */
+#rec{padding:30px 22px 70px}#rec .in{max-width:680px;margin:0 auto}#rec .q{font-size:clamp(38px,11vw,70px);margin:14px 0 18px}#rec p{font-size:19px;max-width:560px}#rec .t{color:#6f6d68}#rec .sig{margin-top:22px;color:#6f6d68}
+/* 7 Голос */
+#vc{justify-content:space-between;background:var(--k)}#vc .big{font-size:clamp(46px,14.4vw,104px);margin:12px 0 18px}#vc .t{color:var(--g)}#vc p{max-width:500px}#vc p+p{margin-top:10px}
+#play{display:flex;align-items:center;gap:14px;width:100%;margin-top:26px;padding:16px 0;background:none;border:0;border-top:1px solid var(--ld);border-bottom:1px solid var(--ld);color:var(--w);cursor:pointer;font:inherit;text-align:left}#play em{flex:none;width:52px;height:52px;border-radius:50%;background:var(--w);display:flex;align-items:center;justify-content:center}#play svg{width:17px;height:17px;fill:var(--k)}
+#wv{flex:1;display:flex;align-items:center;gap:2px;height:36px;min-width:0;overflow:hidden}#wv i{flex:1;min-width:1px;background:rgba(247,246,243,.32)}#wv i.on{background:var(--w)}#tm{font-size:13px;flex:none}
+/* 8 Автор */
+#au{justify-content:flex-end}#au .ph{object-position:50% 16%;filter:grayscale(1) contrast(1.05) brightness(.82)}#au::after{content:"";position:absolute;inset:45% 0 0;background:linear-gradient(transparent,rgba(11,11,11,.92) 62%);pointer-events:none}#au>*:not(.ph){z-index:1}#au .big{font-size:clamp(60px,19vw,132px);line-height:.95}#au ul{list-style:none;padding:0;margin-top:18px;border-top:1px solid var(--ld)}#au li{padding:8px 0;border-bottom:1px solid var(--ld);font:400 11px/1.4 Oswald,sans-serif;letter-spacing:.18em;text-transform:uppercase}
+/* 9 Цена */
+#pay{padding:62px 22px 56px}#pay .in{max-width:680px;margin:0 auto}#pay h2{font-size:clamp(46px,14.4vw,92px);margin:10px 0 34px}#pay .t{color:#6f6d68}
+.tier{border-top:1px solid var(--k);padding:14px 0 34px}.tier .hd{display:flex;justify-content:space-between;align-items:baseline}.pr{font:300 clamp(84px,27vw,150px)/1 Oswald,sans-serif;margin:8px 0 2px;letter-spacing:-.01em}.pr small{font-size:.28em;margin-left:6px}.lat{color:#6f6d68;font-size:15px;margin-bottom:18px}.tier ul{list-style:none;padding:0;margin:0 0 20px}.tier li{padding:7px 0;font-size:17px}.tier li.v{font:300 21px/1.15 Oswald,sans-serif;text-transform:uppercase;border-top:1px solid var(--l);padding:9px 0}.fix{border:1px solid var(--k);padding:16px;font-size:16px}.fix b{display:block;font:400 11px/1.5 Oswald,sans-serif;letter-spacing:.2em;text-transform:uppercase;margin-bottom:6px}
+.dev{display:none;margin-bottom:14px;padding:10px;border:1px dashed #6f6d68;font-size:13px;color:#6f6d68}
+/* 10 Вопросы */
+#faq{padding:56px 22px}#faq .in{max-width:680px;margin:0 auto}details{border-top:1px solid var(--ld);padding:15px 0}details:last-child{border-bottom:1px solid var(--ld)}summary{list-style:none;display:flex;justify-content:space-between;gap:14px;cursor:pointer;font:300 21px/1.2 Oswald,sans-serif;text-transform:uppercase}summary::-webkit-details-marker{display:none}summary::after{content:"+"}details[open] summary::after{content:"–"}details p{margin-top:9px;font-size:16px;color:rgba(247,246,243,.78)}#faq .t{color:var(--g);margin-bottom:18px}.tmp{display:block;border:1px dashed var(--g);padding:7px;font-size:14px;color:var(--g)}
+/* 11 Финал */
+#fin{justify-content:center;gap:28px;align-items:flex-start}#fin .big{font-size:clamp(46px,14.4vw,104px)}.note{font-size:12.5px;line-height:1.5;color:var(--g);max-width:520px}
+#legal-strip{padding:20px 16px 84px;text-align:center;font-size:11.5px;line-height:1.7;color:var(--g);border-top:1px solid var(--ld)}
 /* Панель покупки */
-#bar{position:fixed;left:0;right:0;bottom:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 16px max(10px,env(safe-area-inset-bottom));background:var(--p);border-top:1px solid var(--r);transform:translateY(110%);transition:transform .3s}#bar.on{transform:none}#bar span{font-size:14px;line-height:1.2}#bar b{display:block;font:400 21px/1.1 Oswald,sans-serif}#bar a{flex:none;padding:13px 20px;background:var(--i);color:var(--p);text-decoration:none;font:400 12px/1 Oswald,sans-serif;letter-spacing:.16em;text-transform:uppercase}
-@media(min-width:760px){.fig,.vfig{margin-left:0;margin-right:0}#play{width:100%;margin:0}.au img{width:100%;margin-left:0;margin-right:0}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+#bar{position:fixed;left:0;right:0;bottom:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:9px 16px max(9px,env(safe-area-inset-bottom));background:var(--k);color:var(--w);border-top:1px solid var(--ld);transform:translateY(110%);transition:transform .3s}#bar.on{transform:none}#bar b{font:300 20px/1 Oswald,sans-serif}#bar a{flex:none;padding:12px 20px;background:var(--w);color:var(--k);text-decoration:none;font:400 11px/1 Oswald,sans-serif;letter-spacing:.22em;text-transform:uppercase}
+@media(min-width:760px){.scr{padding:32px 48px}#man,#read,#fin,#vc{padding-left:8vw;padding-right:8vw}}
 </style></head><body>
 
-<section id="hero">
-  <div class="top cap"><span>Система имиджа</span><span>Мила Ушакова</span></div>
+<section id="hero" class="scr">
+  <div class="top t"><span>Система имиджа</span><span>Мила Ушакова</span></div>
   <div id="bigw">ИМИДЖ</div>
-  <div id="ph"><div id="sc"></div><div id="f"></div></div>
-  <div id="pl" aria-live="off"></div>
-  <p class="sub">Инструмент управления впечатлением в профессиональной и деловой среде.</p>
+  <div id="phn" aria-label="Экраны Системы имиджа"><div id="sc"></div></div>
+  <div id="dots"></div>
+  <div id="pl"></div>
   <a class="btn" href="#pay">Открыть доступ от 7 000 ₽</a>
 </section>
 
+<section id="man" class="scr lt">
+  <div class="t rv">Без теории</div>
+  <div class="big rv">Имидж, это не одежда, это амбиция человека на жизнь</div>
+  <div class="t bt rv">Мила Ушакова</div>
+</section>
+
+<section id="read" class="scr">
+  <img class="ph" loading="lazy" src="s/ev-boss-w.jpg" alt="">
+  <div class="t rv">Для тех, кто проходит собеседования, проводит встречи в Zoom, встречается с клиентами</div>
+  <div class="big rv">Имидж решает, как вас прочтут</div>
+  <p class="rv">Имидж давно стал неотъемлемой частью бизнеса и жизни, и решения в нём должны быть такими же точными, как в деле.</p>
+</section>
+
+<section id="ev"><div class="hd"><div class="t" style="color:var(--g)">4 среды · 14 событий · 100+ образов Милы</div></div><div id="tick"><div class="tr"><small>I · Работа</small><div class="tl">Офис<i>/</i>Zoom<i>/</i>Встреча с руководством<i>/</i>Встреча с командой<i>/</i>Собеседование<i>/</i>Новая должность, повышение<i>/</i>Casual Friday</div></div><div class="tr"><small>II · Бизнес</small><div class="tl">Переговоры<i>/</i>Встреча с клиентом или партнёром<i>/</i>Публичное выступление, конференция, networking</div></div><div class="tr"><small>III · Вне офиса</small><div class="tl">Деловые встречи в ресторане<i>/</i>Командировка</div></div><div class="tr"><small>IV · Вечер</small><div class="tl">Корпоратив, Black Tie<i>/</i>Cocktail</div></div></div></section>
+
 <section id="atoms"><div class="stick">
-  <div class="cap">Без теории</div>
-  <h2>Внешний вид, расщеплённый <i>на атомы</i></h2>
+  <div class="t">Событие, цель, образ</div>
+  <div class="big">Внешний вид, расщеплённый на атомы</div>
   <div id="xf"></div>
 </div></section>
 
-<section class="dark"><div class="wrap">
-  <p class="lead rv">Событие, цель, которой вы хотите достичь, и образ, который к ней ведёт.</p>
-  <p class="who rv">Для тех, кто проходит собеседования, проводит встречи в Zoom, встречается с клиентами. Имидж давно стал неотъемлемой частью бизнеса и жизни, и решения в нём должны быть такими же точными, как в деле.</p>
+<section id="rec" class="lt"><div class="in">
+  <div class="t rv">Рекомендация Милы · Офис · Убедить</div>
+  <div class="big q rv">Соберите внимание ближе к лицу</div>
+  <p class="rv">Оправа, серьги, воротник, лацканы, линия горловины работают как обрамление. Во время разговора взгляд собеседника должен возвращаться к вашему лицу.</p>
 </div></section>
 
-<section><div class="wrap">
-  <div class="cap">Что внутри</div>
-  <h2 class="rv">От офиса <i>до Black Tie</i></h2>
-  <div class="nums rv"><div><b>4</b><span>среды</span></div><div><b>14</b><span>событий</span></div><div><b>100+</b><span>образов Милы</span></div></div>
-</div>
-<div id="tick"><div class="tr"><small>I · Работа</small><div class="tl">Офис<i>/</i>Zoom<i>/</i>Встреча с руководством<i>/</i>Встреча с командой<i>/</i>Собеседование<i>/</i>Новая должность, повышение<i>/</i>Casual Friday</div></div><div class="tr"><small>II · Бизнес</small><div class="tl">Переговоры<i>/</i>Встреча с клиентом или партнёром<i>/</i>Публичное выступление, конференция, networking</div></div><div class="tr"><small>III · Вне офиса</small><div class="tl">Деловые встречи в ресторане<i>/</i>Командировка</div></div><div class="tr"><small>IV · Вечер</small><div class="tl">Корпоратив, Black Tie<i>/</i>Cocktail</div></div></div>
-<div class="wrap" style="padding-top:0;padding-bottom:0">
-</div></section>
-
-<section class="rec"><div class="wrap">
-  <div class="cap">Как это выглядит</div>
-  <h2 class="rv">Офис. <i>Убедить</i></h2>
-  <figure class="fig"><img loading="lazy" src="s/rec-look.jpg" alt="Образ для цели Убедить"></figure>
-  <div class="pt"><span>01</span><div><b>Соберите внимание ближе к лицу.</b><p>Оправа, серьги, воротник, лацканы, линия горловины работают как обрамление. Во время разговора взгляд собеседника должен возвращаться к вашему лицу.</p></div></div>
-  <div class="pt"><span>02</span><div><b>Выберите один элемент, который удерживает внимание.</b><p>Важно, чтобы в образе была понятная визуальная иерархия.</p></div></div>
-</div></section>
-
-<section class="voice"><div class="wrap">
-  <div class="cap">Голос Милы</div>
-  <h2 class="rv">Галерее нужен <i>голос</i></h2>
-  <p>Можно просто увидеть цветы, а можно послушать аудиогид, и после него будут не «цветы в вазе», а идея художника передать многоцветие.</p>
-  <p>Самые ключевые образы я разбираю голосом. Почему замша. Почему рядом с ней кожа. Почему этот оттенок оказался возле лица.</p>
-  <figure class="vfig"><img loading="lazy" src="s/voice-look.jpg" alt="Образ с голосовым разбором"></figure>
+<section id="vc" class="scr">
+  <div><div class="t rv">Голос Милы</div>
+  <div class="big rv">Галерее нужен голос</div>
+  <p class="rv">Можно просто увидеть цветы, а можно послушать аудиогид, и после него будут не «цветы в вазе», а идея художника передать многоцветие.</p>
+  <p class="rv">Самые ключевые образы я разбираю голосом. Почему замша. Почему рядом с ней кожа. Почему этот оттенок оказался возле лица.</p></div>
   <button id="play" aria-label="Послушать разбор"><em><svg viewBox="0 0 16 16"><path id="ic" d="M4 2l10 6-10 6z"/></svg></em><span id="wv"></span><span id="tm">2:04</span></button>
-  <audio id="au" preload="none" src="s/voice.m4a"></audio>
-</div></section>
+  <audio id="au2" preload="none" src="s/voice.m4a"></audio>
+</section>
 
-<section class="au"><div class="wrap">
-  <img loading="lazy" src="s/mila.jpg" alt="Мила Ушакова">
-  <h2 class="rv">Мила <i>Ушакова</i></h2>
-  <div class="cap">Image Expert · Fashion Analyst</div>
-  <p>Персональный стилист и аналитик моды. Более 7 лет работаю с клиентами по всему миру, помогая выстраивать стиль, который отражает личность, образ жизни и внутреннее состояние.</p>
-  <p>Приглашённый редактор Vogue, L'Officiel и No Chaser.</p>
-  <p>Аккредитованный стилист недель моды: Paris, Milan, Copenhagen, Yerevan.</p>
-  <p class="proof">Основатель fashion-клуба «В моём стиле» и автор Системы цветовых сочетаний: более 580 покупателей.</p>
-</div></section>
+<section id="au" class="scr">
+  <img class="ph" loading="lazy" src="s/mila.jpg" alt="Мила Ушакова">
+  <div class="t">Image Expert · Fashion Analyst</div>
+  <div class="big" style="margin-top:8px">Мила Ушакова</div>
+  <ul><li>Приглашённый редактор Vogue, L'Officiel, No Chaser</li><li>Недели моды: Paris, Milan, Copenhagen, Yerevan</li><li>Более 7 лет с клиентами по всему миру</li><li>Автор Системы цветовых сочетаний: более 580 покупателей</li><li>Основатель fashion-клуба «В моём стиле»</li></ul>
+</section>
 
-<section id="pay"><div class="wrap">
-  <div class="cap">Цена открытия</div>
-  <h2 class="rv">До 1 декабря</h2>
-  <div class="card"><h3>База</h3><div class="pr">7 000<sup>₽</sup></div><p class="lat">С 1 декабря 8 500 ₽</p>
-    <ul><li>Система имиджа на 6 месяцев</li></ul><a class="btn" id="b1" href="#pay">Оплатить базу</a></div>
-  <div class="card hi"><h3>Премиум</h3><div class="pr">9 900<sup>₽</sup></div><p class="lat">С 1 декабря 11 900 ₽</p>
-    <ul><li>Система имиджа на 6 месяцев и четыре видео:</li><li class="v">Часовой этикет</li><li class="v">Этикет аксессуаров</li><li class="v">Парфюмерный этикет</li><li class="v">Дресс-код</li></ul><a class="btn" id="b2" href="#pay">Оплатить премиум</a></div>
+<section id="pay" class="lt"><div class="in">
+  <div class="t">Цена открытия</div>
+  <h2 class="big">До 1 декабря</h2>
   <p class="dev" id="dev">Просмотр: ссылки на оплату появятся, когда будут созданы продукты в Lava.</p>
+  <div class="tier"><div class="hd t"><span>База</span><span>6 месяцев</span></div><div class="pr">7 000<small>₽</small></div><p class="lat">С 1 декабря 8 500 ₽</p><ul><li>Система имиджа</li></ul><a class="btn" id="b1" href="#pay" style="max-width:none">Оплатить</a></div>
+  <div class="tier"><div class="hd t"><span>Премиум</span><span>6 месяцев</span></div><div class="pr">9 900<small>₽</small></div><p class="lat">С 1 декабря 11 900 ₽</p><ul><li>Система имиджа и четыре видео:</li><li class="v">Часовой этикет</li><li class="v">Этикет аксессуаров</li><li class="v">Парфюмерный этикет</li><li class="v">Дресс-код</li></ul><a class="btn" id="b2" href="#pay" style="max-width:none">Оплатить</a></div>
   <p class="fix"><b>Обладателям Системы по цвету и резидентам клуба</b>Цена 7 000 ₽ за базу и 9 900 ₽ за премиум сохраняется и после 1 декабря.</p>
 </div></section>
 
-<section><div class="wrap">
-  <div class="cap">Вопросы</div>
-  <h2 class="rv">Коротко <i>о главном</i></h2>
+<section id="faq"><div class="in"><div class="t">Вопросы</div>
   <details><summary>Как я получу доступ?</summary><p><span class="tmp">Просмотр: текст появится, когда будет решено, как выдаётся доступ.</span></p></details>
   <details><summary>Где открывается Система?</summary><p>На телефоне и на компьютере, в браузере. Устанавливать ничего не нужно.</p></details>
-  <details><summary>На какой срок открывается доступ?</summary><p>На 6 месяцев с момента оплаты.</p></details>
+  <details><summary>На какой срок доступ?</summary><p>На 6 месяцев с момента оплаты.</p></details>
   <details><summary>Есть ли версия для мужчин?</summary><p>Сейчас открыта женская версия. Мужская выйдет позже.</p></details>
   <details><summary>Можно подключить компанию?</summary><p>Да. Единый уровень впечатления для всей команды: <a href="https://www.milaushakova.com/guide/business#tariffs">тарифы для компаний</a>.</p></details>
 </div></section>
 
-<section class="fin"><div class="wrap">
-  <h2 class="rv">Имидж, это не одежда, это <i style="color:#86693a;font-style:normal">амбиция человека на жизнь</i></h2>
+<section id="fin" class="scr lt">
+  <div class="big rv">Сначала цель. Потом одежда.</div>
   <a class="btn" href="#pay">Открыть доступ</a>
-  <p class="note">Вся информация носит рекомендательный характер и создана как инструмент, который может повышать качество жизни, усиливать профессиональные возможности и поддерживать рост дохода.</p>
-</div></section>
+  <p class="note" style="color:#6f6d68">Вся информация носит рекомендательный характер и создана как инструмент, который может повышать качество жизни, усиливать профессиональные возможности и поддерживать рост дохода.</p>
+</section>
 
-<div id="legal-strip"><a href="https://www.milaushakova.com/oferta">Договор оферты</a> · <a href="https://www.milaushakova.com/privacy">Политика конфиденциальности</a> · <a href="https://www.milaushakova.com/privacy">Согласие на обработку ПД</a> · <a href="https://t.me/MilaUshakova_ClubBot?start=support">Поддержка</a><br><span>© 2026 · ИП Ольхина Я.Ф., ИНН 222411003828, ОГРНИП 326220200112474</span></div>
-
-<div id="bar"><span>Цена открытия<b>от 7 000 ₽</b></span><a href="#pay">Выбрать</a></div>
+<div id="legal-strip"><a href="https://www.milaushakova.com/oferta">Договор оферты</a> · <a href="https://www.milaushakova.com/privacy">Политика конфиденциальности</a> · <a href="https://www.milaushakova.com/privacy">Согласие на обработку ПД</a> · <a href="https://t.me/MilaUshakova_ClubBot?start=support">Поддержка</a><br>© 2026 · ИП Ольхина Я.Ф., ИНН 222411003828, ОГРНИП 326220200112474</div>
+<div id="bar"><b>от 7 000 ₽</b><a href="#pay">Выбрать</a></div>
 
 <script>
-var $=function(i){return document.getElementById(i)},still=matchMedia('(prefers-reduced-motion:reduce)').matches,LAVA={b1:'',b2:''};
-// Первый экран: настоящая Система листается в телефоне
-var SC=[['s/1.jpg','Что предстоит',[50,52]],['s/2.jpg','Ваша цель',[42,38]],['s/3.jpg','Образы Милы',[78,42]],['s/4.jpg','Образы Милы',[30,42]],['s/5.jpg','Рекомендации',[60,50]]],ci=0;
-var im=SC.map(function(x,i){var m=new Image();m.src=x[0];m.alt='';if(!i)m.style.transform='none';$('sc').appendChild(m);return m});
-function pt(){var x=SC[ci];if($('pl').textContent!==x[1]){$('pl').textContent=x[1]}$('f').style.left=x[2][0]+'%';$('f').style.top=x[2][1]+'%'}pt();
-if(!still)setInterval(function(){if(scrollY>innerHeight)return;var o=ci;ci=(ci+1)%SC.length;im[ci].style.transition='none';im[ci].style.transform='translateX(100%)';im[ci].offsetWidth;im[ci].style.transition='';im[ci].style.transform='none';im[o].style.transform='translateX(-100%)';pt()},2800);
-// Панель покупки: после первого экрана, кроме блока цен
-var pay=$('pay'),bar=$('bar');function sb(){var r=pay.getBoundingClientRect();bar.classList.toggle('on',scrollY>innerHeight*.7&&!(r.top<innerHeight&&r.bottom>0))}addEventListener('scroll',sb,{passive:true});sb();
+var $=function(i){return document.getElementById(i)},LAVA={b1:'',b2:''};
+// 1. Система в телефоне идёт всегда. При настройке «Уменьшение движения» кадры сменяются мягко, без сдвига.
+if(matchMedia('(prefers-reduced-motion:reduce)').matches)document.body.classList.add('calm');
+var SC=[['s/1.jpg','Что предстоит'],['s/2.jpg','Ваша цель'],['s/3.jpg','Образы Милы'],['s/4.jpg','Образы Милы'],['s/5.jpg','Рекомендации']],ci=0,lastT=0;
+var im=SC.map(function(x,i){var m=new Image();m.src=x[0];m.alt='';if(!i)m.className='on';$('sc').appendChild(m);var d=document.createElement('i');if(!i)d.className='on';$('dots').appendChild(d);return m});
+$('pl').textContent=SC[0][1];
+function go(n){var o=ci;ci=(n+SC.length)%SC.length;if(o===ci)return;im[ci].style.transition='none';im[ci].className='';void im[ci].offsetWidth;im[ci].style.transition='';im[ci].className='on';im[o].className='out';[].forEach.call($('dots').children,function(d,i){d.className=i===ci?'on':''});$('pl').textContent=SC[ci][1];lastT=Date.now();var q=o;setTimeout(function(){if(q!==ci)im[q].className=''},800)}
+setInterval(function(){if(Date.now()-lastT>2600&&scrollY<innerHeight)go(ci+1)},400);
+var sx=null,ph=$('phn');ph.addEventListener('pointerdown',function(e){sx=e.clientX});ph.addEventListener('pointerup',function(e){if(sx===null)return;var d=e.clientX-sx;sx=null;go(ci+(d>30?-1:1))});
+function fit(){var b=$('bigw'),mx=Math.min(innerWidth,1180);b.style.fontSize='200px';var f=Math.min(200*(mx-14)/b.scrollWidth,innerHeight*.3);b.style.fontSize=f+'px';ph.style.marginTop=(-f*.16)+'px'}
 // Атомы: образ раскладывается на вещи при прокрутке
 var XI=[{"f": "a/i0.png", "x": 0.03, "y": 0.042222222222222223, "w": 0.78, "h": 0.9266666666666666, "area": 52075}, {"f": "a/i1.png", "x": 0.54, "y": 0.5088888888888888, "w": 0.4066666666666667, "h": 0.1711111111111111, "area": 7543}, {"f": "a/i2.png", "x": 0.5633333333333334, "y": 0.7222222222222222, "w": 0.37, "h": 0.21555555555555556, "area": 5805}, {"f": "a/i3.png", "x": 0.8, "y": 0.29555555555555557, "w": 0.15333333333333332, "h": 0.2222222222222222, "area": 2822}, {"f": "a/i4.png", "x": 0.6233333333333333, "y": 0.15333333333333332, "w": 0.32, "h": 0.07777777777777778, "area": 2387}, {"f": "a/i5.png", "x": 0.6266666666666667, "y": 0.27111111111111114, "w": 0.18666666666666668, "h": 0.07333333333333333, "area": 1272}],XA=0.6666666666666666,XT=[[.02,.02,.66,'Силуэт'],[.66,.46,.33,'Клатч'],[.66,.68,.3,'Обувь'],[.84,.25,.11,'Помада'],[.66,.03,.31,'Оправа'],[.66,.25,.13,'Серьги']];
 var xf=$('xf'),xe=XI.map(function(t,i){var m=new Image();m.src='s/a/i'+i+'.png';m.alt='';xf.appendChild(m);var l=document.createElement('span');l.textContent=XT[i][3];xf.appendChild(l);return {m:m,l:l,t:t,x:XT[i]}});
@@ -169,15 +159,12 @@ function xs(){var r=xf.getBoundingClientRect(),H=r.height,W=r.width,fh=Math.min(
  xe.forEach(function(o,i){var t=o.t,x=o.x,ww=t.w*fw,x0=ox+t.x*fw,y0=t.y*fh,sc=Math.min(x[2]*W/ww,(i?1:.96)*(x[2]*W/ww)),x1=x[0]*W,y1=x[1]*H;if(!o.m.style.width)o.m.style.width=ww+'px';o.m.style.width=ww+'px';var s=1+(sc-1)*e;var k=Math.max(0,e-.04*i);k=Math.min(1,k/(1-.04*i||1));var X=x0+(x1-x0)*k,Y=y0+(y1-y0)*k;o.m.style.transform='translate('+X+'px,'+Y+'px) scale('+(1+(sc-1)*k)+')';var hh=t.h*fh*sc;o.l.style.left=x1+'px';o.l.style.top=(y1+hh+3)+'px';o.l.style.opacity=Math.max(0,(e-.8)/.2)})}
 // Строки событий едут при прокрутке, в разные стороны
 var TK=[].slice.call(document.querySelectorAll('.tl'));function tk(){TK.forEach(function(l,i){var r=l.parentNode.getBoundingClientRect(),q=Math.max(0,Math.min(1,1-(r.top+r.height)/(innerHeight+r.height))),mx=Math.max(0,l.offsetWidth-innerWidth);var x=i%2?(q-1)*mx:-q*mx;l.style.transform='translateX('+x+'px)'})}
-// Слово за телефоном медленно уходит при прокрутке, заголовки проявляются
-function hw(){var b=$('bigw'),mx=Math.min(innerWidth,1180);b.style.fontSize='200px';var f=Math.min(200*(mx-16)/b.scrollWidth,innerHeight*.3);b.style.fontSize=f+'px';$('ph').style.marginTop=(-f*.3)+'px'}
-var rv=document.querySelectorAll('.rv');if('IntersectionObserver' in window&&!still){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.15});rv.forEach(function(x){io.observe(x)})}else rv.forEach(function(x){x.classList.add('in')});
-function all(){xs();tk()}function rs(){hw();all()}addEventListener('scroll',function(){requestAnimationFrame(all)},{passive:true});addEventListener('resize',rs);addEventListener('load',rs);(document.fonts&&document.fonts.ready||Promise.resolve()).then(rs);rs();
-// Кнопки оплаты
-['b1','b2'].forEach(function(k){if(LAVA[k])$(k).href=LAVA[k];else $(k).addEventListener('click',function(e){e.preventDefault();$('dev').style.display='block'})});
-// Голос: волна из настоящей громкости записи
-var W='77979868854885557657756766866585655768695665',N=innerWidth<500?46:70,bars=[];for(var i=0;i<N;i++){var v=+W[Math.floor(i*W.length/N)],b=document.createElement('i');b.style.height=(18+v*9)+'%';$('wv').appendChild(b);bars.push(b)}
-var au=$('au'),ic=$('ic');function mss(t){t=Math.round(t);return Math.floor(t/60)+':'+('0'+t%60).slice(-2)}
-$('play').onclick=function(){if(au.paused){au.play()}else{au.pause()}};au.onplay=function(){ic.setAttribute('d','M4 2h3v12H4zM9 2h3v12H9z')};au.onpause=function(){ic.setAttribute('d','M4 2l10 6-10 6z')};
-au.ontimeupdate=function(){var k=au.currentTime/(au.duration||124);bars.forEach(function(x,i){x.classList.toggle('on',i/N<=k)});$('tm').textContent=mss((au.duration||124)-au.currentTime)};
+
+var rv=document.querySelectorAll('.rv');if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.1});rv.forEach(function(x){io.observe(x)})}else rv.forEach(function(x){x.classList.add('in')});
+function all(){xs();tk()}function rs(){fit();all()}addEventListener('scroll',function(){requestAnimationFrame(all)},{passive:true});addEventListener('resize',rs);addEventListener('load',rs);(document.fonts&&document.fonts.ready||Promise.resolve()).then(rs);rs();
+var pay=$('pay'),bar=$('bar');function sb(){var r=pay.getBoundingClientRect();bar.classList.toggle('on',scrollY>innerHeight*.7&&!(r.top<innerHeight&&r.bottom>0))}addEventListener('scroll',sb,{passive:true});sb();
+['b1','b2'].forEach(function(k){if(LAVA[k])$(k).href=LAVA[k];else $(k).addEventListener('click',function(e){e.preventDefault();$('dev').style.display='block';$('dev').scrollIntoView({block:'center'})})});
+var W='77979868854885557657756766866585655768695665',N=innerWidth<500?44:70,bars=[];for(var i=0;i<N;i++){var v=+W[Math.floor(i*W.length/N)],b=document.createElement('i');b.style.height=(18+v*9)+'%';$('wv').appendChild(b);bars.push(b)}
+var au=$('au2'),ic=$('ic');function mss(t){t=Math.round(t);return Math.floor(t/60)+':'+('0'+t%60).slice(-2)}
+$('play').onclick=function(){if(au.paused)au.play();else au.pause()};au.onplay=function(){ic.setAttribute('d','M4 2h3v12H4zM9 2h3v12H9z')};au.onpause=function(){ic.setAttribute('d','M4 2l10 6-10 6z')};au.ontimeupdate=function(){var k=au.currentTime/(au.duration||124);bars.forEach(function(x,i){x.classList.toggle('on',i/N<=k)});$('tm').textContent=mss((au.duration||124)-au.currentTime)};
 </script></body></html>
