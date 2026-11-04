@@ -740,13 +740,13 @@ function about(){
   var nEv = ENV.reduce(function(n, e){ return n + e.s.length; }, 0);
   show('<div class="pad au"><div class="cap br">О проекте</div>' +
     '<div class="h2">Система <i>имиджа</i></div>' +
-    '<p class="pj-lead">Цвет решает, как вы выглядите. Имидж решает, как вас прочтут.</p>' +
+    '<p class="pj-lead">Имидж это ваше решение, какое произвести впечатление. Имидж решает, как вас прочтут.</p>' +
     '<p>Инструмент управления впечатлением в профессиональной и деловой среде. Четыре шага перед любой встречей.</p>' +
     '<div class="pj-sec cap">Как это работает</div>' +
     '<div class="pj-steps">' +
-      '<div><span>01</span><b>Что предстоит</b><p>Сначала определяется среда. От неё зависят правила, которые читают окружающие.</p></div>' +
+      '<div><span>01</span><b>Что предстоит</b><p>Сначала определяется среда. От неё зависят рекомендации.</p></div>' +
       '<div><span>02</span><b>Ваша цель</b><p>Одна встреча, одна цель, один образ.</p></div>' +
-      '<div><span>03</span><b>Сила деталей</b><p>Правила Милы для выбранного события и цели.</p></div>' +
+      '<div><span>03</span><b>Сила деталей</b><p>Рекомендации Милы для выбранного события и цели.</p></div>' +
       '<div><span>04</span><b>Решение</b><p>Готовый образ под вашу задачу.</p></div>' +
     '</div>' +
     '<div class="pj-sec cap">Что внутри</div>' +
@@ -782,14 +782,14 @@ function step0(){
 }
 function step1(){
   var t = st.env || 0;
-  show('<div class="pad">' + stepHead(1) + '<div class="h2">Что <i class="br">предстоит</i></div><div class="lede">Сначала определяется среда. От неё зависят правила, которые читают окружающие.</div>' +
+  show('<div class="pad">' + stepHead(1) + '<div class="h2">Что <i class="br">предстоит</i></div><div class="lede">Сначала определяется среда. От неё зависят рекомендации.</div>' +
     '<div class="envs">' + ENV.map(function(e, i){ return '<button class="' + (i === t ? 'on' : '') + '" data-tab="' + i + '"><b>' + e.r + '</b><span>' + e.n + '</span></button>'; }).join('') + '</div>' +
     '<div class="events">' + ENV[t].s.map(function(s, k){ var im = evImg(s);
       return '<button class="ev im" data-sit="' + esc(s) + '" data-env="' + t + '">' + (im ? '<img class="th" loading="lazy" src="' + im + '" alt="">' : '<span class="th no">' + ENV[t].r + '</span>') + '<b>' + esc(s) + '</b></button>'; }).join('') + '</div>' +
     pager(1, !!st.sit) + '</div>');
 }
 function step2(){
-  show('<div class="pad">' + stepHead(2) + crumbs(2) + '<div class="h2">Ваша <i class="br">цель</i></div><div class="lede">Одна встреча, одна цель, один образ.</div>' +
+  show('<div class="pad">' + stepHead(2) + crumbs(2) + '<div class="h2">Ваша <i class="br">цель</i></div>' +
     '<div class="goals">' + goalsFor(st.sit).map(function(g){ return '<button class="goal' + (g === st.goal ? ' on' : '') + '" data-goal="' + esc(g) + '"><small></small><b>' + esc(g) + '</b><em>→</em></button>'; }).join('') + '</div>' +
     (PZ_SITS[st.sit] ? pzCta() : '') +
     pager(2, !!st.goal) + '</div>');
