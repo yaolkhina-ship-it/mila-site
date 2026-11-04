@@ -43,6 +43,12 @@
     else if (curColor >= 0) { L.color = curColor; colors[curColor].looks.push(p.id); }
     prevPal = null;
   });
+  /* 04.11: дропы раскладываются и по цветам, новые идут первыми. Разметка по палитрам, Мила проверяет: правьте здесь */
+  var DROP_COLOR = { 'Красный': ['p_look_drop_oct9', 'p_look_drop_oct6', 'p_look_drop_oct4', 'p_look_drop_new', 'p_look_drop_10'],
+    'Розовый': ['p_look_drop_oct2'], 'Оранжевый': ['p_look_drop_oct7', 'p_look_drop_oct3'], 'Жёлтый': ['p_look_drop_new3'],
+    'Зелёный': ['p_look_drop_2', 'p_look_drop_4'], 'Синий': ['p_look_drop_oct8', 'p_look_drop_oct5', 'p_look_drop_new4'], 'Фиолетовый': ['p_look_drop_5'],
+    'Бежевый и коричневый': ['p_look_drop_new5', 'p_look_drop_3'], 'Серый и чёрный': ['p_look_drop_oct10', 'p_look_drop_oct1', 'p_look_drop_new2', 'p_look_drop_1'] };
+  colors.forEach(function (c, i) { var add = (DROP_COLOR[c.name] || []).filter(function (id) { return looks[id]; }); add.forEach(function (id) { looks[id].color = i; }); c.looks = add.concat(c.looks); });
   var trends = $$('.tr-pg').map(function (p) {
     var h = $('.ins-h', p);
     return { slug: p.id.replace('p_trend_', ''), name: h ? h.firstChild.textContent.trim() : '', isNew: !!$('.tr-new', p), cover: p.getAttribute('data-cover') || '',
@@ -109,15 +115,15 @@
   var IMG_IDEA = 'Цвет меняет образ.<br>Имидж меняет возможности.';
   function imgTeaser() {
     return '<div class="a-sec"><b>Система имиджа <em class="a-soon">скоро</em></b></div>' +
-      '<div class="a-pv">' + [1, 2, 3].map(function (i) { return '<img loading="lazy" src="business-img/pv-' + i + '.jpg" alt="">'; }).join('') + '</div>' +
+      '<a href="' + IMG_WAIT + '" target="_blank" rel="noopener" style="display:block;margin:0 20px"><img loading="lazy" src="business-img/cover-gallery.jpg" alt="" style="display:block;width:100%;aspect-ratio:16/10;object-fit:cover;object-position:60% 88%;border-radius:6px"></a>' +
       '<div class="a-pv-t"><p>' + IMG_IDEA + '</p><p class="s">Что надеть на переговоры, собеседование или деловой ужин, чтобы впечатление работало на вашу цель.</p>' +
       '<a class="a-wait" href="' + IMG_WAIT + '" target="_blank" rel="noopener">Попасть в список ожидания</a></div>';
   }
   /* Библиотека: лекции Милы на продажу. Новая лекция = новая строка В НАЧАЛЕ списка (первой стоит на полке). */
   var LECTURES = [
-    // 29.10: «Дресс-код», 777 ₽ / 48 ч, без подзаголовка (её решение); обложка и название ведут на предзапись в Систему имиджа
+    // 29.10: «Дресс-код», 777 ₽ / 48 ч, без подзаголовка (её решение); 04.11: обложка, название и кнопка ведут на оплату Prodamus
     { t: 'Дресс-код', s: '', img: '/dresscode-og.jpg',
-      price: '777 ₽', buy: 'https://app.lava.top/products/b9e330b8-cdd4-419c-95d6-c2b91bc32a96', page: '/predzapis?src=system-lec' },
+      price: '777 ₽', buy: 'https://payform.ru/ptcUyYC/', page: 'https://payform.ru/ptcUyYC/' },
     { t: 'Многослойность осени', s: 'Как собрать слои, чтобы образ выглядел дорого, а не громоздко', img: '/mnogosloynost-og.jpg',
       price: '777 ₽', buy: 'https://app.lava.top/products/1ed1a65b-d032-4d33-b2ff-49eea0060747', page: '/mnogosloynost' },
     // 27.10: в Системе пока только «Многослойность» (платно, её решение); «Масштаб» убран
@@ -150,18 +156,14 @@
   V.home = function () {
     var d = DROPS.oct, first = looks[d.ids[0]], last = looks[LS.get('app_last', '')];
     var h = top('', 'Система цветовых сочетаний');
-    h += '<div class="a-sec"><b>О Системе</b></div>' +
-      '<a class="a-mila" href="' + H + '#/page/p1"><img src="about-photo.jpg" alt=""><div><div class="t" style="margin-top:0">Мила Ушакова</div><div class="s">Персональный стилист и аналитик моды</div></div><span>›</span></a>' +
-      '<div class="a-list a-chap">' + [['p2', 'О Системе'], ['p3', 'Как пользоваться'], ['p_bonus', 'Бонус: промокоды партнёров'], ['p6', 'Рекомендации на сезон']].map(function (r) {
-        return '<a href="' + H + '#/page/' + r[0] + '"><span class="t">' + r[1] + '</span><span class="n">›</span></a>'; }).join('') +
-      '<a href="' + H + '#/more"><span class="t">Промо от брендов и категории</span><span class="n">›</span></a></div>';
+    h += '<a class="a-mila" href="' + H + '#/page/p1"><img src="about-photo.jpg" alt=""><div><div class="t" style="margin-top:0">Мила Ушакова</div><div class="s">Персональный стилист и аналитик моды</div></div><span>›</span></a>'; // 04.11: наверху карточка Милы, разделы внизу главной
     h += newsBar();
     h += imgTeaser(); // «Система имиджа · скоро» первым блоком
     h += '<div class="a-sec"><b>Тренды' + (trends.some(function (t) { return t.isNew; }) ? '<em class="a-new">новинка</em>' : '') + '</b><a href="' + H + '#/trends">все ' + trends.length + '</a></div><div class="a-row">' + trends.map(function (t) {
       return '<a class="a-tc" href="' + H + '#/trend/' + t.slug + '"><div class="im"><img loading="lazy" src="' + esc(t.cover) + '" alt="">' + '</div><span>' + esc(t.name) + '</span></a>';
     }).join('') + '</div>';
     h += libShelf(); // Библиотека лекций сразу после трендов
-    if (first) h += '<a class="a-cont" href="' + H + '#/drop/oct"><img src="' + esc(first.pal || first.img) + '" alt="" style="object-fit:cover"><div style="flex:1"><div class="a-lbl">Новый дроп · октябрь</div><div style="font-size:15px;margin-top:3px">' + obr(d.ids.length) + '</div></div><span style="color:var(--gold2)">›</span></a>';
+    if (first) h += '<a class="a-cont" href="' + H + '#/drop/oct"><img src="' + esc(first.pal || first.img) + '" alt="" style="object-fit:cover"><div style="flex:1"><div class="a-lbl">Дроп · октябрь</div><div style="font-size:15px;margin-top:3px">' + obr(d.ids.length) + '</div></div><span style="color:var(--gold2)">›</span></a>';
     if (last) h += '<a class="a-cont" href="' + H + '#/look/' + last.id + '"><img src="' + esc(last.img) + '" alt=""><div style="flex:1"><div class="a-lbl">Продолжить</div><div style="font-size:15px;margin-top:3px">образ ' + esc(last.name) + '</div></div><span style="color:var(--gold2)">›</span></a>';
     h += '<div class="a-sec"><b>Цвета</b><a href="' + H + '#/colors">все</a></div><div class="a-sw">' + colors.map(function (c, i) {
       return '<a href="' + H + '#/color/' + i + '"><i style="background:' + (SW[c.name] || '#999') + '"></i>' + esc(c.name.replace(' и ', ' и ')) + '</a>';
@@ -171,6 +173,9 @@
       '<a class="a-tile" href="' + H + '#/page/p_rule_proportions"><span class="k">Проверка образа</span><span class="t">Правило пропорций</span></a>' +
       '<a class="a-tile" href="' + H + '#/drop/sep"><span class="k">' + obr(DROPS.sep.ids.length) + '</span><span class="t">Дроп сентября</span></a>' +
       '<a class="a-tile" href="' + H + '#/more"><span class="k">Промо, категории</span><span class="t">Все разделы</span></a></div>';
+    h += '<div class="a-sec"><b>О Системе</b></div>' + '<div class="a-list a-chap">' + [['p2', 'О Системе'], ['p3', 'Как пользоваться'], ['p_bonus', 'Бонус: промокоды партнёров'], ['p6', 'Рекомендации на сезон']].map(function (r) {
+        return '<a href="' + H + '#/page/' + r[0] + '"><span class="t">' + r[1] + '</span><span class="n">›</span></a>'; }).join('') +
+      '<a href="' + H + '#/more"><span class="t">Промо от брендов и категории</span><span class="n">›</span></a></div>';
     h += ctaBlock();
     return h;
   };
