@@ -172,11 +172,6 @@
     h += '<div class="a-sec"><b>Цвета</b><a href="' + H + '#/colors">все</a></div><div class="a-sw">' + colors.map(function (c, i) {
       return '<a href="' + H + '#/color/' + i + '"><i style="background:' + (SW[c.name] || '#999') + '"></i>' + esc(c.name.replace(' и ', ' и ')) + '</a>';
     }).join('') + '</div>';
-    h += '<div class="a-sec"><b>Инструменты</b></div><div class="a-tiles">' +
-      '<a class="a-tile dk" href="' + H + '#/page/p_contrast"><span class="k" style="color:var(--gold)">Разбор по фото</span><span class="t">Контраст внешности</span></a>' +
-      '<a class="a-tile" href="' + H + '#/page/p_rule_proportions"><span class="k">Проверка образа</span><span class="t">Правило пропорций</span></a>' +
-      '<a class="a-tile" href="' + H + '#/drop/sep"><span class="k">' + obr(DROPS.sep.ids.length) + '</span><span class="t">Дроп сентября</span></a>' +
-      '<a class="a-tile" href="' + H + '#/more"><span class="k">Промо, категории</span><span class="t">Все разделы</span></a></div>';
     h += ctaBlock();
     return h;
   };
