@@ -210,7 +210,7 @@ body.fx .cov .eb,body.fx .cov h1{animation:rise 1.2s cubic-bezier(.16,1,.3,1) bo
 
 <div class="top"><span class="logo">Mila Ushakova</span><span class="ed" id="ed">Система имиджа</span><button class="tmenu" id="tMenu" type="button" aria-label="Меню"><svg viewBox="0 0 24 16" width="24" height="16" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M0 1h24M0 8h24M0 15h24"/></svg></button></div>
 <div id="v"><div class="view"><div class="cov sl"><img class="col" src="l/cover.jpg" alt="" fetchpriority="high"><div class="in">
-  <div class="eb cap">Для женщин и мужчин · <span style="border-bottom:1px solid #C9A96A;padding-bottom:2px">Мила Ушакова</span></div>
+  <div class="eb cap">Для женщин и мужчин</div>
   <h1>Система<br><i style="color:#C9A96A">имиджа</i></h1>
 </div></div></div></div>
 
@@ -219,7 +219,7 @@ body.fx .cov .eb,body.fx .cov h1{animation:rise 1.2s cubic-bezier(.16,1,.3,1) bo
   <h2>Стоимость</h2>
   <div class="tier"><div class="r"><h3>База</h3><div class="pr"><small class="nw">сейчас</small>7 000 <i>₽</i></div></div><p class="lat hot"><b>С 1 декабря 8 500 ₽</b><span>Сейчас выгода 1 500 ₽</span></p><p class="d">Система имиджа.</p><a class="btn" id="b1" href="#pay">Оплатить</a></div>
   <div class="tier"><div class="r"><h3>Премиум</h3><div class="pr"><small class="nw">сейчас</small>9 900 <i>₽</i></div></div><p class="lat hot"><b>С 1 декабря 11 900 ₽</b><span>Сейчас выгода 2 000 ₽</span></p><p class="d">Система имиджа и видео: «Часовой этикет», «Этикет аксессуаров», «Парфюмерный этикет», «Дресс-код».</p><a class="btn" id="b2" href="#pay">Оплатить</a></div>
-  <p class="dev" id="dev">Просмотр: ссылки на оплату появятся, когда будут созданы продукты в Lava.</p>
+  <p class="dev" id="dev">Просмотр: ссылки на оплату появятся, когда будут созданы продукты в Prodamus.</p>
   <p class="fix">Сейчас открыта женская версия. Мужская выйдет позже.<br><br>Для обладателей Системы по цвету и резидентов клуба цена 7 000 ₽ и 9 900 ₽ сохраняется и после 1 декабря.</p>
 </section>
 
@@ -271,7 +271,7 @@ body.fx .cov .eb,body.fx .cov h1{animation:rise 1.2s cubic-bezier(.16,1,.3,1) bo
 <script>
 var mn=document.getElementById('mn');document.getElementById('tMenu').onclick=function(){mn.hidden=false};document.getElementById('mnX').onclick=function(){mn.hidden=true};mn.addEventListener('click',function(e){if(e.target.tagName==='A')mn.hidden=true});
 document.querySelectorAll('[data-to]').forEach(function(b){b.addEventListener('click',function(){document.querySelector(b.dataset.to).scrollIntoView({behavior:'smooth'})})});
-var LAVA={b1:'',b2:''};['b1','b2'].forEach(function(k){var a=document.getElementById(k);if(LAVA[k])a.href=LAVA[k];else a.addEventListener('click',function(e){e.preventDefault();var d=document.getElementById('dev');d.style.display='block';d.scrollIntoView({block:'center'})})});
+var PAY={b1:'',b2:''};['b1','b2'].forEach(function(k){var a=document.getElementById(k);if(PAY[k])a.href=PAY[k];else a.addEventListener('click',function(e){e.preventDefault();var d=document.getElementById('dev');d.style.display='block';d.scrollIntoView({block:'center'})})});
 </script><script>
 (function(){
  if(matchMedia('(prefers-reduced-motion:reduce)').matches||!('IntersectionObserver' in window))return;
