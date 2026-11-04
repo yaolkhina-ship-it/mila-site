@@ -231,3 +231,9 @@ html.feed #ap{padding-bottom:0;}
 .a-news .a-lbl{color:var(--gold,#C9A96E);}
 .a-news .t{font-size:15px;margin-top:3px;}
 .a-news span{color:var(--gold,#C9A96E);font-size:20px;}
+/* 04.11: блок Системы имиджа на чёрном фоне */
+.a-imgblk{margin-top:24px;padding:2px 0 26px;background:#111;color:#f4f2ee}
+.a-imgblk .a-sec b{color:#f4f2ee}
+.a-imgblk .a-pv-t p{color:#f4f2ee}
+.a-imgblk .a-pv-t p.s{color:rgba(244,242,238,.72)}
+.a-imgblk .a-wait{color:#f4f2ee;border-color:#c9a96e}

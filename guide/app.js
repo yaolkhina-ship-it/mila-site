@@ -114,10 +114,10 @@
   var IMG_WAIT = '/predzapis?src=system';
   var IMG_IDEA = 'Цвет меняет образ.<br>Имидж меняет возможности.';
   function imgTeaser() {
-    return '<div class="a-sec"><b>Система имиджа <em class="a-soon">скоро</em></b></div>' +
+    return '<div class="a-imgblk"><div class="a-sec"><b>Система имиджа <em class="a-soon">скоро</em></b></div>' +
       '<a href="' + IMG_WAIT + '" target="_blank" rel="noopener" style="display:block;margin:0 20px"><img loading="lazy" src="business-img/cover-gallery.jpg" alt="" style="display:block;width:100%;aspect-ratio:16/10;object-fit:cover;object-position:60% 88%;border-radius:6px"></a>' +
       '<div class="a-pv-t"><p>' + IMG_IDEA + '</p><p class="s">Что надеть на переговоры, собеседование или деловой ужин, чтобы впечатление работало на вашу цель.</p>' +
-      '<a class="a-wait" href="' + IMG_WAIT + '" target="_blank" rel="noopener">Попасть в список ожидания</a></div>';
+      '<a class="a-wait" href="' + IMG_WAIT + '" target="_blank" rel="noopener">Попасть в список ожидания</a></div></div>';
   }
   /* Библиотека: лекции Милы на продажу. Новая лекция = новая строка В НАЧАЛЕ списка (первой стоит на полке). */
   var LECTURES = [
@@ -153,12 +153,17 @@
     return '<a class="a-news" href="' + H + '#/drop/oct"><b>+' + NEWS.n + '</b><div style="flex:1"><div class="a-lbl">' + (days ? '27 октября' : 'Сегодня') + ' в Системе</div>' +
       '<div class="t">Добавлены новые образы и палитры</div></div><span>›</span></a>';
   }
+  V.tools = function () {
+    return top('#/', 'Инструменты') + '<h1 class="a-h">Инструменты</h1><div class="a-tiles">' +
+      '<a class="a-tile dk" href="' + H + '#/page/p_contrast"><span class="k" style="color:var(--gold)">Разбор по фото</span><span class="t">Контраст внешности</span></a>' +
+      '<a class="a-tile" href="' + H + '#/page/p_rule_proportions"><span class="k">Проверка образа</span><span class="t">Правило пропорций</span></a></div>';
+  };
   V.home = function () {
     var h = top('', 'Система цветовых сочетаний');
     h += '<a class="a-mila" style="margin-top:14px" href="' + H + '#/page/p1"><img src="about-photo.jpg" alt=""><div><div class="t" style="margin-top:0">Мила Ушакова</div><div class="s">Персональный стилист и аналитик моды</div></div><span>›</span></a>' +
       '<div class="a-list a-chap">' + [['p2', 'О Системе'], ['p3', 'Как пользоваться'], ['p_bonus', 'Бонус: промокоды партнёров'], ['p6', 'Рекомендации на сезон']].map(function (r) {
         return '<a href="' + H + '#/page/' + r[0] + '"><span class="t">' + r[1] + '</span><span class="n">›</span></a>'; }).join('') +
-      '<a href="' + H + '#/more"><span class="t">Промо от брендов и категории</span><span class="n">›</span></a></div>';
+      '<a href="' + H + '#/tools"><span class="t">Инструменты</span><span class="n">›</span></a></div>';
     h += newsBar();
     h += imgTeaser(); // «Система имиджа · скоро» первым блоком
     h += '<div class="a-sec"><b>Тренды' + (trends.some(function (t) { return t.isNew; }) ? '<em class="a-new">новинка</em>' : '') + '</b><a href="' + H + '#/trends">все ' + trends.length + '</a></div><div class="a-row">' + trends.map(function (t) {
@@ -166,6 +171,7 @@
     }).join('') + '</div>';
     h += libShelf(); // Библиотека лекций сразу после трендов
     h += ctaBlock();
+    h += '<div class="a-empty" style="font-size:11px;line-height:1.8"><a href="' + H + '#/more" style="color:inherit">Все разделы</a> · <a href="/oferta" style="color:inherit">Договор оферты</a> · <a href="/privacy" style="color:inherit">Политика конфиденциальности</a> · <a href="https://t.me/MilaUshakova_ClubBot?start=support" target="_blank" rel="noopener" style="color:inherit">Поддержка</a><br>© 2026 · ИП Ольхина Я.Ф., ИНН 222411003828, ОГРНИП 326220200112474</div>';
     return h;
   };
   /* лента вдохновения: сначала палитра на весь экран, из неё переход к образу */
