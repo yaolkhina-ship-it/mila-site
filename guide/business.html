@@ -421,6 +421,9 @@ body.on-cover .view{padding-bottom:0}
 .stp .sx i{font-style:normal;color:var(--rule)}
 .top .logo{color:inherit;cursor:pointer}
 .who2 button.on{outline:2px solid var(--bronze);outline-offset:4px}
+.who2 button.soon{cursor:default}.who2 button.soon img{opacity:.38;filter:grayscale(1)}.who2 button.soon em{position:absolute;top:16px;left:16px;font-style:normal;font-size:10px;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:#C9A96A}
+.stp .sx button.soon{display:inline-flex;align-items:baseline;gap:6px;cursor:default;opacity:.7}.stp .sx button.soon small{font-family:var(--sans,inherit);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#A88B5C}
+.sheet .quick button.soon{border-color:var(--rule);color:var(--mute);cursor:default}
 /* 02.11 галерея: работы на стене без белой коробки; белый фон снимков растворяется в цвете стены */
 .crumbs{gap:3px 8px;margin-bottom:14px}
 .crumbs button{border:0;padding:0;font-size:10px;letter-spacing:.14em;color:var(--mute)}.crumbs i{color:var(--bronze2)}.crumbs button.env{color:#A88B5C}.top .ed.in{color:#A88B5C;font-size:12px;letter-spacing:.2em}
@@ -652,7 +655,7 @@ var TARIFFS = [
 ];
 
 var st = {sex: null, sit: null, env: 0, goal: null, view: 'cover', tab: 0};
-try { st.sex = localStorage.getItem('img_sex'); } catch(e){}
+try { st.sex = localStorage.getItem('img_sex'); if (st.sex === 'm') { st.sex = 'w'; localStorage.setItem('img_sex', 'w'); } } catch(e){}  // 04.11: мужская версия закрыта, «скоро»
 var v = document.getElementById('v');
 var fromSys = /[?&]from=system/.test(location.search) || /\/guide\/?(gaidosen)?(\?|#|$)/.test(document.referrer);
 try { if (fromSys) sessionStorage.setItem('img_from_sys', '1'); else fromSys = sessionStorage.getItem('img_from_sys') === '1'; } catch(e){}
@@ -719,7 +722,7 @@ function crumbs(n){
     (n === 3 ? '<i>·</i><button data-go="2">' + esc(st.goal) + '</button>' : '') + '</div>';
 }
 var STEPS = ['Что предстоит', 'Ваша цель', 'Сила деталей', 'Решение'];
-function stepHead(n){ return '<div class="stp"><span class="sx"><button data-sex="w"' + (st.sex !== 'm' ? ' class="on"' : '') + ' aria-label="Для женщин">Ж</button><i>|</i><button data-sex="m"' + (st.sex === 'm' ? ' class="on"' : '') + ' aria-label="Для мужчин">М</button></span><span class="n">' + nn(n) + ' / ' + nn(STEPS.length) + '</span></div>'; }
+function stepHead(n){ return '<div class="stp"><span class="sx"><button data-sex="w"' + (st.sex !== 'm' ? ' class="on"' : '') + ' aria-label="Для женщин">Ж</button><i>|</i><button class="soon" disabled aria-label="Для мужчин: скоро">М<small>скоро</small></button></span><span class="n">' + nn(n) + ' / ' + nn(STEPS.length) + '</span></div>'; }
 function pager(n, canNext){
   return '<div class="pager"><button data-go="' + (n === 1 ? 'intro' : n - 1) + '" aria-label="Назад">‹</button><span>' + nn(n) + ' / ' + nn(STEPS.length) + '</span>' +
     '<button data-go="' + (n + 1) + '" aria-label="Дальше"' + (canNext && n < STEPS.length ? '' : ' disabled') + '>›</button></div>';
@@ -749,7 +752,7 @@ function about(){
     '<div class="pj-sec cap">Что внутри</div>' +
     '<div class="pj-nums"><div><b>' + ENV.length + '</b><span>среды: ' + ENV.map(function(e){ return e.n.toLowerCase(); }).join(', ') + '</span></div>' +
       '<div><b>' + nEv + '</b><span>событий, от офиса до Black Tie</span></div>' +
-      '<div><b>2</b><span>версии: для женщин и для мужчин</span></div></div>' +
+      '<div><b>2</b><span>версии: для женщин, для мужчин скоро</span></div></div>' +
     '<div class="pj-sec cap">Для кого</div>' +
     '<p>Для тех, чья работа строится на встречах, переговорах и выступлениях. И для компаний: единый уровень впечатления для всей команды.</p>' +
     '<div class="pj-sec cap">Автор</div>' +
@@ -765,7 +768,7 @@ function about(){
 }
 function intro(){
   show('<div class="cov plain"><div class="in">' +
-    '<div class="ed2 cap"><span>Система имиджа</span><span>Мужчины и женщины</span></div>' +
+    '<div class="ed2 cap"><span>Система имиджа</span><span>Женщины · мужчины скоро</span></div>' +
     '<div class="sub">Инструмент управления впечатлением в профессиональной и деловой среде. Четыре шага перед любой встречей.</div>' +
     '<div class="toc">' + STEPS.map(function(t, i){ return '<div><span>' + nn(i + 1) + '</span><b>' + t + '</b></div>'; }).join('') + '</div>' +
     '<button class="cta" data-go="1">Начать</button>' +
@@ -775,7 +778,7 @@ function step0(){
   show('<div class="pad">' + '<div class="stp"><span></span><span class="n">00 / ' + nn(STEPS.length) + '</span></div>' +
     '<div class="h2">Для кого <i class="br">образ</i></div>' +
     '<div class="who2"><button data-sex="w" data-next="1"' + (st.sex === 'w' ? ' class="on"' : '') + '><img src="business-img/ev-boss-w.jpg" alt=""><b>Женщина</b></button>' +
-    '<button data-sex="m" data-next="1"' + (st.sex === 'm' ? ' class="on"' : '') + '><img src="business-img/ev-boss-m.jpg" alt=""><b>Мужчина</b></button></div></div>');
+    '<button class="soon" disabled aria-label="Мужчина: скоро"><img src="business-img/ev-boss-m.jpg" alt=""><em>Скоро</em><b>Мужчина</b></button></div></div>');
 }
 function step1(){
   var t = st.env || 0;
@@ -1009,7 +1012,7 @@ var sheet = document.getElementById('sheet');
 function openMenu(){
   var n = 0; sheet.dataset.k = 'menu';
   sheet.innerHTML = '<div class="grab"></div><div class="quick"><button data-go="cover">Обложка</button><button data-go="about">О проекте</button><button data-go="intro">О Системе</button><button data-go="tariffs">Тарифы</button><button data-go="books" style="grid-column:1/-1">Книжная полка</button>' +
-    '<button data-sex="w"' + (st.sex !== 'm' ? ' class="on"' : '') + '>Для женщин</button><button data-sex="m"' + (st.sex === 'm' ? ' class="on"' : '') + '>Для мужчин</button>' +
+    '<button data-sex="w"' + (st.sex !== 'm' ? ' class="on"' : '') + '>Для женщин</button><button class="soon" disabled>Для мужчин · скоро</button>' +
     (fromSys ? '<button data-sys="1" style="grid-column:1/-1">← В Систему цветовых сочетаний</button>' : '') + '</div>' +
     ENV.map(function(e, i){ return '<h3><span>' + e.n + '</span><i>' + e.r + '</i></h3>' + e.s.map(function(x){ n++;
       return '<button class="ev' + (x === st.sit ? ' cur' : '') + '" data-sit="' + esc(x) + '" data-env="' + i + '"><small>' + nn(n) + '</small><b>' + esc(x) + '</b></button>'; }).join(''); }).join('');
@@ -1037,6 +1040,7 @@ function onTap(e){
   if (b.dataset.bav) { bavSet(+b.dataset.bav); if (b.dataset.up) document.getElementById('bav').scrollIntoView({behavior: 'smooth', block: 'start'}); return; }
   if (b.dataset.bapt) { var li = document.getElementById('rl' + b.dataset.bapt); li.scrollIntoView({behavior: 'smooth', block: 'center'}); li.classList.add('open'); li.classList.remove('flash'); void li.offsetWidth; li.classList.add('flash'); return; }
   if (b.dataset.sys) { location.href = '/guide'; return; }
+  if (b.dataset.sex === 'm') return;
   if (b.dataset.sex) { st.sex = b.dataset.sex; try { localStorage.setItem('img_sex', st.sex); } catch(e){}
     if (st.view === 's2' && st.goal && goalsFor(st.sit).indexOf(st.goal) < 0) st.goal = null;
     if (b.dataset.next) return go('s1', {});
