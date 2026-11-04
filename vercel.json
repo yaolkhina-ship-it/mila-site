@@ -26,6 +26,14 @@
       "use": "@vercel/node"
     },
     {
+      "src": "api/access.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/prodamus-webhook.js",
+      "use": "@vercel/node"
+    },
+    {
       "src": "guide/**",
       "use": "@vercel/static"
     },
@@ -93,6 +101,18 @@
     {
       "src": "/api/predzapis",
       "dest": "/api/predzapis.js"
+    },
+    {
+      "src": "/api/prodamus-webhook",
+      "dest": "/api/prodamus-webhook.js"
+    },
+    {
+      "src": "/api/access",
+      "dest": "/api/access.js"
+    },
+    {
+      "src": "/vhod/?",
+      "dest": "/vhod.html"
     },
     {
       "src": "/webinar",
