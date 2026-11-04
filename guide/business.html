@@ -360,6 +360,8 @@ body.dark-top .top .ed{color:rgba(244,242,238,.6)}
 .cov img.col{position:relative;inset:auto;display:block;width:100%;height:36svh;min-height:280px;object-position:50% 88%;flex:0 0 auto;
   -webkit-mask-image:linear-gradient(180deg,#000 88%,transparent);mask-image:linear-gradient(180deg,#000 88%,transparent)}
 .cov:not(.plain) .in{padding:16px 32px 80px}
+/* 04.11 плашка Милы на обложке, как информационная панель YouTube */
+.cov-note{display:flex;gap:10px;align-items:flex-start;margin-top:22px;padding:10px 12px;background:rgba(244,242,238,.08);border-radius:3px}.cov-note svg{flex:none;width:16px;height:16px;margin-top:1px}.cov-note p{margin:0;font-family:var(--sans);font-size:11.5px;line-height:1.45;font-weight:300;color:rgba(244,242,238,.82)}
 .cov .ed2{margin-bottom:24px;padding-top:16px}
 .cov h1{font-size:56px;line-height:.92}
 .cov .links{margin-top:24px;border-top:1px solid rgba(244,242,238,.2)}
@@ -732,7 +734,8 @@ function cover(){
   show('<div class="cov sl"><img class="col" src="/guide/business-img/cover-gallery.jpg" alt="" fetchpriority="high"><div class="in">' +
     '<div class="eb cap">Для бизнеса · <button data-go="about">Мила Ушакова</button></div>' +
     '<h1>Система<br><i style="color:#C9A96A">имиджа</i></h1>' +
-    '<div class="row3"><button data-go="1">Что предстоит</button><button data-go="1">Ваша цель</button><button data-go="1">Решение</button></div></div></div>', true);
+    '<div class="row3"><button data-go="1">Что предстоит</button><button data-go="1">Ваша цель</button><button data-go="1">Решение</button></div>' +
+    '<aside class="cov-note"><svg viewBox="0 0 16 16" fill="none" stroke="#C9A96A" aria-hidden="true"><circle cx="8" cy="8" r="7.2"/><path d="M8 7v4.4M8 4.4v.9"/></svg><p>Вся информация носит рекомендательный характер и создана как инструмент, который может повышать качество жизни, усиливать профессиональные возможности и поддерживать рост дохода.</p></aside></div></div>', true);
 }
 // О проекте: что это, как устроено, для кого и об авторе. Тексты из уже утверждённых фраз Милы.
 function about(){
