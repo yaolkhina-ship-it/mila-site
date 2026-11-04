@@ -119,6 +119,10 @@
       "dest": "/guide/$1"
     },
     {
+      "src": "/sistema-imidzha/?",
+      "dest": "/guide/business.html"
+    },
+    {
       "src": "/image/?",
       "dest": "/guide/oplata2/index.html"
     },

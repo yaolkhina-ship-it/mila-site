@@ -208,6 +208,55 @@ body.fx .cov .eb,body.fx .cov h1{animation:rise 1.2s cubic-bezier(.16,1,.3,1) bo
 #legal-strip{padding-bottom:84px!important}
 .cov.sl .in{padding-bottom:26px!important}.btn.cv{margin-top:22px;background:#C9A96A;color:#111;font-weight:500}
 #bar small{color:#FF4B3A}
+
+/* Компьютерная версия: горизонтальная раскладка. Всё только от 900px, телефон не меняется */
+@media (min-width:900px){
+ body{background:#0B0B0B}
+ .app{max-width:none!important;min-height:0}
+ .top{padding-left:4vw!important;padding-right:4vw!important}
+ /* Обложка: картина слева, название справа */
+ .cov.sl{flex-direction:row!important;min-height:100svh!important;align-items:stretch}
+ .cov.sl img.col{position:relative!important;inset:auto!important;flex:0 0 62%!important;width:62%!important;height:100svh!important;min-height:0!important;object-position:50% 70%!important;-webkit-mask-image:none!important;mask-image:none!important}
+ .cov.sl .in{position:relative;min-width:0;flex:1;display:flex;flex-direction:column;justify-content:flex-end;padding:56px 4vw 7vh!important;max-width:none}
+ .cov.sl h1{font-size:clamp(76px,7.4vw,124px)!important}
+ .btn.cv{max-width:420px;margin-top:32px}
+ /* Блоки: заголовок слева, содержание справа */
+ .w{max-width:none!important;padding:130px 6vw 0!important}
+ #get,#faq{display:grid;grid-template-columns:36% 1fr;column-gap:4vw;align-content:start}
+ #get>.t,#get>h2,#faq>.t{grid-column:1}
+ #get>.lead,#get>.inc,#faq>details{grid-column:2}
+ #get>.t{grid-row:1}#get>h2{grid-row:2 / span 3}
+ #get>.lead{grid-row:1 / span 2;margin-top:0;font-size:24px;line-height:1.4}
+ #get>.inc{grid-row:3;margin-top:30px}
+ #faq>.t{grid-row:1 / span 6}
+ #faq>details:first-of-type{border-top:0;padding-top:0}
+ h2{font-size:clamp(60px,5.6vw,92px)!important}
+ /* Среды в один ряд, шаги в один ряд */
+ #how .rail{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;max-width:none;padding:44px 6vw 0;overflow:visible}
+ #how .rail figure{max-width:none;flex:none;min-width:0}
+ #how .rail img{aspect-ratio:3/4}
+ #how .w:last-child{padding-top:0!important}
+ #how .steps{display:grid;grid-template-columns:repeat(3,1fr);column-gap:3vw;margin-top:44px}
+ /* Два тарифа рядом */
+ #pay{display:grid;grid-template-columns:1fr 1fr;column-gap:4vw}
+ #pay>.t,#pay>h2,#pay>.dev,#pay>.fix{grid-column:1 / -1}
+ #pay>.tier{display:flex;flex-direction:column;margin-top:30px}
+ #pay>.tier .btn{margin-top:auto}
+ #pay>.fix{margin-top:30px;font-size:16px}
+ /* Автор: большое фото и текст */
+ #author{display:grid;grid-template-columns:36% 1fr;column-gap:4vw;align-items:start}
+ #author>.t,#author>h2{grid-column:1}
+ #author>.au{grid-column:2;grid-row:1 / span 2;margin-top:0;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:3vw;align-items:end}
+ #author .au p{font-size:19px!important}
+ /* Финал */
+ .w.end{display:grid;grid-template-columns:1.6fr 1fr;column-gap:6vw;align-items:end;padding-bottom:110px!important}
+ .w.end .q{grid-row:1 / span 2;margin-bottom:0;font-size:clamp(50px,4.6vw,76px)!important}
+ .w.end .note{margin-top:20px}
+ /* Панель покупки на всю ширину, меню шире */
+ #bar{left:0!important;right:0;max-width:none!important;padding-left:6vw!important;padding-right:6vw!important;transform:translateY(110%)!important}
+ #bar.on{transform:none!important}
+ #mn{max-width:none!important;align-items:center}
+}
 </style></head><body class="on-cover dark-top" data-d="a"><div class="app">
 
 <div class="top"><span class="logo">Mila Ushakova</span><span class="ed" id="ed">Система имиджа</span><button class="tmenu" id="tMenu" type="button" aria-label="Меню"><svg viewBox="0 0 24 16" width="24" height="16" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M0 1h24M0 8h24M0 15h24"/></svg></button></div>
