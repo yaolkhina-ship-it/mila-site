@@ -119,6 +119,10 @@
       "dest": "/guide/$1"
     },
     {
+      "src": "/image/?",
+      "dest": "/guide/oplata2/index.html"
+    },
+    {
       "src": "/lectures",
       "dest": "/lectures.html"
     },
