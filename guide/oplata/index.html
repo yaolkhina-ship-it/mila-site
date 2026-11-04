@@ -1,25 +1,21 @@
 <!DOCTYPE html>
 <html lang="ru"><head><meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#F4F2EE">
+<meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#111111">
 <title>Система имиджа · Мила Ушакова</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 /* Лёгкость: воздух, мало слов, ничего из внутренней части Системы. Логика показана картинками. */
 :root{--p:#F4F2EE;--i:#111;--i2:#3A3936;--m:#7E7B76;--b:#A88B5C;--l:rgba(17,17,17,.13)}
-*{box-sizing:border-box;margin:0}html{background:var(--p);scroll-behavior:smooth}
-body{font-family:Jost,-apple-system,sans-serif;font-weight:300;font-size:18px;line-height:1.5;color:var(--i);background:var(--p);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box;margin:0}html{scroll-behavior:smooth}
+body{font-family:Jost,-apple-system,sans-serif;font-weight:300;font-size:18px;line-height:1.5;color:var(--i);overflow-x:hidden;-webkit-font-smoothing:antialiased}
 a{color:inherit}
 .t{font:400 10.5px/1.5 Oswald,'Arial Narrow',sans-serif;letter-spacing:.26em;text-transform:uppercase;color:var(--m)}
 h2{font:300 clamp(34px,9.6vw,54px)/1.08 Oswald,'Arial Narrow',sans-serif;text-transform:uppercase;margin:12px 0 0}
 .w{max-width:640px;margin:0 auto;padding:84px 26px 0}
 .btn{display:block;padding:18px;text-align:center;text-decoration:none;background:var(--i);color:var(--p);font:400 12px/1 Oswald,sans-serif;letter-spacing:.24em;text-transform:uppercase;border:0;cursor:pointer}
-/* Обложка, как главный экран Системы */
-#c{position:relative;height:100svh;min-height:560px;background:var(--p);display:flex;flex-direction:column}
-#c img{flex:1;min-height:0;width:100%;object-fit:cover;object-position:60% 88%;display:block}
-#c .x{padding:20px 26px max(22px,env(safe-area-inset-bottom));max-width:640px;width:100%;margin:0 auto}
-#c h1{font:300 clamp(50px,15vw,84px)/.96 Oswald,sans-serif;text-transform:uppercase;margin:6px 0 18px}#c h1 i{font-style:normal;color:var(--b)}
+#mn{position:fixed;inset:0;z-index:60;background:#111;color:#F4F2EE;display:flex;flex-direction:column;justify-content:center;padding:26px;max-width:520px;margin:0 auto}#mn[hidden]{display:none}#mn a{font:300 34px/1.5 Oswald,sans-serif;text-transform:uppercase;text-decoration:none}#mnX{position:absolute;top:14px;right:20px;font-size:30px;color:inherit;background:none;border:0;cursor:pointer}
 /* Логика: четыре среды картинками */
 .rail{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;padding:28px 26px 4px;scrollbar-width:none;max-width:1100px;margin:0 auto}.rail::-webkit-scrollbar{display:none}
 .rail figure{flex:0 0 66%;max-width:320px;margin:0;scroll-snap-align:center}.rail img{display:block;width:100%;aspect-ratio:3/4;object-fit:cover}.rail figcaption{font:300 21px/1.2 Oswald,sans-serif;text-transform:uppercase;padding-top:11px}
@@ -36,18 +32,106 @@ h2{font:300 clamp(34px,9.6vw,54px)/1.08 Oswald,'Arial Narrow',sans-serif;text-tr
 details{border-top:1px solid var(--l);padding:13px 0}details:last-of-type{border-bottom:1px solid var(--l)}summary{list-style:none;display:flex;justify-content:space-between;gap:12px;cursor:pointer;font-size:17px}summary::-webkit-details-marker{display:none}summary::after{content:"+";color:var(--b)}details[open] summary::after{content:"–"}details p{margin-top:6px;font-size:15px;color:var(--i2)}.tmp{display:block;border:1px dashed var(--m);padding:6px;font-size:13px;color:var(--m)}
 .end{padding-bottom:66px}.q{font:300 clamp(30px,8.6vw,46px)/1.12 Oswald,sans-serif;text-transform:uppercase;margin-bottom:24px}.note{font-size:12.5px;line-height:1.5;color:var(--m);margin-top:22px}
 #legal-strip{padding:18px 16px 26px;text-align:center;font-size:11.5px;line-height:1.7;color:var(--m);border-top:1px solid var(--l)}
-</style></head><body>
+.app,body{
+  --paper:#F4F2EE;--paper2:#E8E5DF;--ink:#111111;--ink2:#2B2B2B;--mute:#7E7B76;
+  --bord:#5A1A22;--bronze:#B08F57;--bronze2:rgba(176,143,87,.55);--rule:rgba(17,17,17,.12);--rule-d:rgba(244,242,238,.16);
+  --serif:'Oswald','Arial Narrow',sans-serif;--sans:'Jost',-apple-system,'Helvetica Neue',Arial,sans-serif;
+}
+.app{max-width:520px;margin:0 auto;min-height:100svh;background:var(--paper);position:relative}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;text-align:left}
+.cap{font-family:var(--sans);font-size:10px;font-weight:400;letter-spacing:.28em;text-transform:uppercase}
+.top{position:sticky;top:0;z-index:40;display:flex;justify-content:space-between;align-items:center;height:52px;padding:0 30px;background:rgba(244,242,238,.92);
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--rule)}
+.top .logo{font-family:var(--serif);font-size:16px;letter-spacing:.02em;white-space:nowrap}
+.top .logo i{color:var(--bronze)}
+.top .ed{font-size:9px;font-weight:400;letter-spacing:.28em;text-transform:uppercase;color:var(--mute)}
+.top a.sys{font-size:9px;font-weight:400;letter-spacing:.24em;text-transform:uppercase;color:var(--bronze);text-decoration:none}
+body.dark-top .top{background:var(--ink);border-bottom-color:var(--rule-d);color:var(--paper)}
+body.dark-top .top .ed{color:rgba(244,242,238,.6)}
+.view{animation:in .4s cubic-bezier(.2,.7,.2,1)}
+.cov{position:relative;min-height:calc(100svh - 52px);background:var(--ink);color:var(--paper);display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden}
+.cov img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 22%;filter:grayscale(1) contrast(1.02) brightness(.8)}
+.cov:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(17,17,17,0) 22%,rgba(17,17,17,.55) 52%,rgba(17,17,17,.97) 80%)}
+.cov .in{position:relative;z-index:1;padding:0 30px 96px}
+.cov .ed2{display:flex;justify-content:space-between;border-top:1px solid rgba(244,242,238,.3);padding-top:12px;margin-bottom:26px;color:rgba(244,242,238,.7)}
+.cov h1{font-family:var(--serif);font-weight:300;font-size:68px;line-height:.92;letter-spacing:-.01em}
+.cov h1 i{color:#C9A96A;font-weight:300}
+.cov img.col{filter:none;height:calc(100% - 290px);object-position:60% 90%;-webkit-mask-image:linear-gradient(180deg,#000 70%,transparent);mask-image:linear-gradient(180deg,#000 70%,transparent)}
+.cov.plain{justify-content:center}
+.cov.plain .in{padding-top:40px}
+.cov.plain .sub{margin-top:0;font-family:var(--serif);font-size:24px;line-height:1.3;color:var(--paper)}
+.cov > .in > .cta:first-of-type{margin-top:30px}
+.cov .sub{margin-top:18px;font-size:14px;line-height:1.65;color:rgba(244,242,238,.78);font-weight:300;max-width:360px}
+.brief .cap{color:#C9A96A}
+.view{padding-bottom:calc(49px + env(safe-area-inset-bottom))}
+.top .logo{font-family:var(--sans);font-size:11px;font-weight:500;letter-spacing:.26em;text-transform:uppercase}
+.cov h1,.h2,.brief h2,.toc b,.ev b,.goal b,.tf .pr,.sol h2{font-weight:400;text-transform:uppercase;letter-spacing:.005em}
+.cov h1{font-size:76px;line-height:.9}
+.h2 i,.cov h1 i,.tf-head .h2 i{font-style:normal}
+.cov.plain .sub,.principle,.note{font-family:var(--sans);font-style:normal;font-weight:300}
+.cov.plain .sub{font-size:18px;line-height:1.5}
+.xp .cap{color:var(--bronze);line-height:1.8}
+.ba .cap{margin:0 0 14px;color:var(--gold,#A88B5C)}
+.bk .cap{margin-bottom:8px;color:#A88B5C}
+.pz-q .cap{display:block;margin-bottom:12px;color:#C9A96A}
+.cov:not(.plain){justify-content:flex-start}
+.cov:not(.plain):after{display:none}
+.cov img.col{position:relative;inset:auto;display:block;width:100%;height:36svh;min-height:280px;object-position:50% 88%;flex:0 0 auto;
+  -webkit-mask-image:linear-gradient(180deg,#000 88%,transparent);mask-image:linear-gradient(180deg,#000 88%,transparent)}
+.cov:not(.plain) .in{padding:16px 32px 80px}
+.cov .ed2{margin-bottom:24px;padding-top:16px}
+.cov h1{font-size:56px;line-height:.92}
+.cov .links{margin-top:24px;border-top:1px solid rgba(244,242,238,.2)}
+.cov .links button{display:grid;grid-template-columns:40px 1fr auto;align-items:baseline;width:100%;height:48px;padding:12px 0 0;border-bottom:1px solid rgba(244,242,238,.2);
+  font-family:var(--serif);font-weight:300;font-size:20px;letter-spacing:.04em;text-transform:uppercase;color:var(--paper)}
+.cov .links button span{font-size:13px;color:#C9A96A;letter-spacing:.08em}
+.cov .links button:after{content:"→";color:#C9A96A;font-family:var(--sans);font-size:16px}
+.cov > .in > .cta:first-of-type,.cov .links + .cta{margin-top:24px}
+.cov.sl{justify-content:flex-end}
+.cov.sl:after{display:block;background:linear-gradient(90deg,rgba(17,17,17,.55) 0%,rgba(17,17,17,.15) 55%,rgba(17,17,17,0) 70%),linear-gradient(180deg,rgba(17,17,17,0) 45%,rgba(17,17,17,.35) 65%,#111 86%)}
+.cov.sl img.col{position:absolute;left:0;right:0;top:-14%;bottom:auto;width:100%;height:100%;min-height:0;object-position:8% 50%;-webkit-mask-image:linear-gradient(180deg,#000 80%,transparent 100%);mask-image:linear-gradient(180deg,#000 80%,transparent 100%)}
+.cov.sl .in{padding:0 32px 80px}
+.cov.sl .eb{color:rgba(244,242,238,.85);margin-bottom:16px}
+.cov.sl .eb button{font:inherit;letter-spacing:inherit;text-transform:inherit;color:inherit;border-bottom:1px solid #C9A96A;padding-bottom:2px}
+.cov.sl h1{font-size:56px;line-height:.92}
+.cov.sl .row3{display:flex;justify-content:space-between;gap:12px;margin-top:32px}
+.cov.sl .row3 button{font-family:var(--serif);font-weight:400;font-size:16px;letter-spacing:.06em;text-transform:uppercase;color:var(--paper);border-bottom:1px solid #C9A96A;padding-bottom:4px;white-space:nowrap}
+.cov.sl .nx{display:flex;justify-content:space-between;align-items:center;width:100%;margin-top:24px;padding:16px 0 0;border-top:1px solid rgba(244,242,238,.2);
+  font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:rgba(244,242,238,.75)}
+.cov.sl .nx span{color:#C9A96A;font-size:16px;letter-spacing:0}
+.top .tmenu{display:none;font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--paper)}
+body.on-cover .top{position:absolute;left:0;right:0;background:transparent;border-bottom:0;-webkit-backdrop-filter:none;backdrop-filter:none}
+body.on-cover .top .ed,body.on-cover .top a.sys{display:none !important}
+body.on-cover .top .tmenu{display:block}
+body.on-cover .dock{display:none}
+body.on-cover .view{padding-bottom:0}
+.cov.sl{min-height:100svh}
+.cov.sl img.col{top:0;height:100%;object-position:27% 50%;filter:brightness(.62) contrast(1.05);-webkit-mask-image:none;mask-image:none}
+.cov.sl:after{background:linear-gradient(180deg,rgba(17,17,17,.6) 0%,rgba(17,17,17,0) 18%,rgba(17,17,17,0) 50%,rgba(17,17,17,.75) 82%,#111 100%)}
+.cov.sl .in{padding:0 32px calc(40px + env(safe-area-inset-bottom))}
+.cov.sl h1{font-size:64px;line-height:.9}
+.cov.sl .row3{margin-top:48px}
+.cov.sl .row3 button{font-family:var(--sans);font-weight:500;font-size:12px;letter-spacing:.14em}
+.top .logo{color:inherit;cursor:pointer}
+.top .ed.in{color:#A88B5C;font-size:12px;letter-spacing:.2em}
+.app::after{content:'';position:fixed;inset:0;z-index:40;background:rgba(12,10,9,.8);opacity:0;pointer-events:none;transition:opacity 1.2s ease}
+.app:has(.vc.bd.on)::after{opacity:1}
+.app:has(.vc.bd.on) :is(.wall,.wl-v,.wl-lb,.bav,.looks,.ba){position:relative;z-index:41}
+.app:has(.vc.bd.on) .wl-lb{color:rgba(244,242,238,.7);border-top-color:rgba(244,242,238,.2)}
+.app:has(.vc.bd.on) .wl-lb b{color:var(--paper)}
+.app:has(.vc.bd.on) .wall{background:#F7F3EA}
+.app:has(.vc.bd.on) .wall figure{background:#F7F3EA}
+@media (prefers-reduced-motion:reduce){.app::after{transition:none}}
+</style></head><body class="on-cover dark-top"><div class="app">
 
-<section id="c">
-  <img src="l/cover.jpg" alt="" fetchpriority="high">
-  <div class="x">
-    <div class="t">Мила Ушакова</div>
-    <h1>Система<br><i>имиджа</i></h1>
-    <a class="btn" href="#pay">Открыть доступ</a>
-  </div>
-</section>
+<div class="top"><span class="logo">Mila Ushakova</span><span class="ed" id="ed">Система имиджа</span><button class="tmenu" id="tMenu" type="button">Меню</button></div>
+<div id="v"><div class="view"><div class="cov sl"><img class="col" src="l/cover.jpg" alt="" fetchpriority="high"><div class="in">
+  <div class="eb cap">Для бизнеса · <button type="button" data-to="#author">Мила Ушакова</button></div>
+  <h1>Система<br><i style="color:#C9A96A">имиджа</i></h1>
+  <div class="row3"><button type="button" data-to="#how">Что предстоит</button><button type="button" data-to="#how">Ваша цель</button><button type="button" data-to="#how">Решение</button></div>
+</div></div></div></div>
 
-<section>
+<section id="how">
   <div class="w" style="padding-bottom:0"><div class="t">Как устроена</div><h2>Для вашей среды</h2></div>
   <div class="rail" tabindex="0" aria-label="Среды Системы">
     <figure><img loading="lazy" src="l/ev-office.jpg" alt=""><figcaption>Офис</figcaption></figure>
@@ -62,14 +146,14 @@ details{border-top:1px solid var(--l);padding:13px 0}details:last-of-type{border
   </ol></div>
 </section>
 
-<section class="w">
+<section class="w" id="get">
   <div class="t">Что вы получаете</div>
   <h2>Без теории</h2>
   <p class="lead">Инструмент управления впечатлением в профессиональной и деловой среде. Для тех, кто проходит собеседования, проводит встречи в Zoom, встречается с клиентами.</p>
   <ul class="inc"><li>14 событий, от офиса до Black Tie</li><li>Больше 100 образов Милы</li><li>Рекомендации под каждую цель</li><li>Голосовые разборы ключевых образов</li></ul>
 </section>
 
-<section class="w">
+<section class="w" id="author">
   <div class="t">Автор</div>
   <h2>Мила Ушакова</h2>
   <div class="au"><img loading="lazy" src="l/mila.jpg" alt="Мила Ушакова"><div><p>Приглашённый редактор Vogue, L'Officiel и No Chaser.</p><p>Аккредитованный стилист недель моды: Paris, Milan, Copenhagen, Yerevan.</p><p>Автор Системы цветовых сочетаний.</p></div></div>
@@ -84,7 +168,7 @@ details{border-top:1px solid var(--l);padding:13px 0}details:last-of-type{border
   <p class="fix">Для обладателей Системы по цвету и резидентов клуба цена 7 000 ₽ и 9 900 ₽ сохраняется и после 1 декабря.</p>
 </section>
 
-<section class="w">
+<section class="w" id="faq">
   <div class="t" style="margin-bottom:14px">Вопросы</div>
   <details><summary>Как я получу доступ?</summary><p><span class="tmp">Просмотр: текст появится, когда будет решено, как выдаётся доступ.</span></p></details>
   <details><summary>Где открывается Система?</summary><p>На телефоне и на компьютере, в браузере.</p></details>
@@ -99,6 +183,10 @@ details{border-top:1px solid var(--l);padding:13px 0}details:last-of-type{border
 </section>
 
 <div id="legal-strip"><a href="https://www.milaushakova.com/oferta">Договор оферты</a> · <a href="https://www.milaushakova.com/privacy">Политика конфиденциальности</a> · <a href="https://www.milaushakova.com/privacy">Согласие на обработку ПД</a> · <a href="https://t.me/MilaUshakova_ClubBot?start=support">Поддержка</a><br>© 2026 · ИП Ольхина Я.Ф., ИНН 222411003828, ОГРНИП 326220200112474</div>
+</div>
+<div id="mn" hidden><button type="button" id="mnX" aria-label="Закрыть">×</button><a href="#how">Как устроена</a><a href="#get">Что вы получаете</a><a href="#author">Автор</a><a href="#pay">Цена</a><a href="#faq">Вопросы</a></div>
 <script>
+var mn=document.getElementById('mn');document.getElementById('tMenu').onclick=function(){mn.hidden=false};document.getElementById('mnX').onclick=function(){mn.hidden=true};mn.addEventListener('click',function(e){if(e.target.tagName==='A')mn.hidden=true});
+document.querySelectorAll('[data-to]').forEach(function(b){b.addEventListener('click',function(){document.querySelector(b.dataset.to).scrollIntoView({behavior:'smooth'})})});
 var LAVA={b1:'',b2:''};['b1','b2'].forEach(function(k){var a=document.getElementById(k);if(LAVA[k])a.href=LAVA[k];else a.addEventListener('click',function(e){e.preventDefault();var d=document.getElementById('dev');d.style.display='block';d.scrollIntoView({block:'center'})})});
 </script></body></html>
