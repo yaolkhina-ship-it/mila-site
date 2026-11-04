@@ -721,7 +721,7 @@ function crumbs(n){
   return '<div class="crumbs"><button class="env" data-tab="' + ei + '">' + esc(ENV[ei].n) + '</button><i>·</i><button data-tab="' + ei + '">' + esc(st.sit) + '</button>' +
     (n === 3 ? '<i>·</i><button data-go="2">' + esc(st.goal) + '</button>' : '') + '</div>';
 }
-var STEPS = ['Что предстоит', 'Ваша цель', 'Сила деталей', 'Решение'];
+var STEPS = ['Что предстоит', 'Ваша цель', 'Рекомендации Милы', 'Решение'];
 function stepHead(n){ return '<div class="stp"><span class="sx"><button data-sex="w"' + (st.sex !== 'm' ? ' class="on"' : '') + ' aria-label="Для женщин">Ж</button><i>|</i><button class="soon" disabled aria-label="Для мужчин: скоро">М<small>скоро</small></button></span><span class="n">' + nn(n) + ' / ' + nn(STEPS.length) + '</span></div>'; }
 function pager(n, canNext){
   return '<div class="pager"><button data-go="' + (n === 1 ? 'intro' : n - 1) + '" aria-label="Назад">‹</button><span>' + nn(n) + ' / ' + nn(STEPS.length) + '</span>' +
@@ -746,7 +746,7 @@ function about(){
     '<div class="pj-steps">' +
       '<div><span>01</span><b>Что предстоит</b><p>Сначала определяется среда. От неё зависят рекомендации.</p></div>' +
       '<div><span>02</span><b>Ваша цель</b><p>Одна встреча, одна цель, один образ.</p></div>' +
-      '<div><span>03</span><b>Сила деталей</b><p>Рекомендации Милы для выбранного события и цели.</p></div>' +
+      '<div><span>03</span><b>Рекомендации Милы</b><p>Для выбранного события и цели.</p></div>' +
       '<div><span>04</span><b>Решение</b><p>Готовый образ под вашу задачу.</p></div>' +
     '</div>' +
     '<div class="pj-sec cap">Что внутри</div>' +
@@ -875,8 +875,7 @@ function step3(){
   // 04.11 Яна: разбор с наведением на пункты убран, образы везде листаются одной лентой, как в Офис · Убедить. Данные RAZBOR сохранены.
   var BAV = R && (st.sex || 'w') === 'w' && BAP[st.sit] ? bavList() : null; st._bavR = R;
   show('<div class="pad">' + stepHead(3) + crumbs(3) +
-    '<div class="h2" style="font-size:40px;margin-top:0">Сила <i class="br">деталей</i></div>' +
-    // образы без разбора: полоса превью над правилами (тап → шаг 4)
+        // образы без разбора: полоса превью над правилами (тап → шаг 4)
     (R && BAV ? bav(R, BAV) : '') +
     (R && LK && LK.length && TO_SYSTEM[st.sit] ? '<div class="cap" style="margin:0 0 14px;color:#A88B5C">Образы из Системы по цвету</div>' : '') +
     (R && LK && LK.length && !BAV ? wall(LK) : '') +
