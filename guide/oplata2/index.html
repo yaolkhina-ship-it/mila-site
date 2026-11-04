@@ -199,13 +199,29 @@ body.fx .pic{overflow:hidden}body.fx .pic img{transform:scale(1.09);transition:t
 body.fx .cov .eb,body.fx .cov h1{animation:rise 1.2s cubic-bezier(.16,1,.3,1) both}body.fx .cov h1{animation-delay:.18s}@keyframes rise{from{opacity:0;transform:translate3d(0,46px,0)}to{opacity:1;transform:none}}
 .flow{background:linear-gradient(180deg,#F4F2EE 0%,#F4F2EE 38%,#C9A96A 62%,#C9A96A 100%);background-size:100% 260%;background-position:50% var(--fy,0%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
 .fig-wrap{display:block}
+
+.nw{display:block;font:400 11px/1.4 Jost,sans-serif;letter-spacing:.2em;text-transform:uppercase;margin-bottom:2px;text-align:left}
+.lat.hot{text-align:left!important;margin-top:6px;color:#FF4B3A!important;font-size:17px}.lat.hot b{font-weight:500;display:block}.lat.hot span{display:block;font-size:14px;font-weight:400}
+.tier .r{align-items:flex-end}
+.tap{cursor:pointer}
+#bar{position:fixed;left:50%;bottom:0;width:100%;max-width:520px;z-index:40;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:9px 16px max(9px,env(safe-area-inset-bottom));background:#0B0B0B;color:#F7F6F3;border-top:1px solid rgba(247,246,243,.2);transform:translate(-50%,110%);transition:transform .3s}#bar.on{transform:translate(-50%,0)}#bar b{display:block;font:400 21px/1.1 Oswald,sans-serif}#bar small{display:block;font-size:12px;color:#FF4B3A;font-weight:500}#bar a{flex:none;padding:13px 20px;background:#C9A96A;color:#111;text-decoration:none;font:500 12px/1 Oswald,sans-serif;letter-spacing:.18em;text-transform:uppercase}
+#legal-strip{padding-bottom:84px!important}
 </style></head><body class="on-cover dark-top" data-d="a"><div class="app">
 
 <div class="top"><span class="logo">Mila Ushakova</span><span class="ed" id="ed">Система имиджа</span><button class="tmenu" id="tMenu" type="button" aria-label="Меню"><svg viewBox="0 0 24 16" width="24" height="16" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M0 1h24M0 8h24M0 15h24"/></svg></button></div>
 <div id="v"><div class="view"><div class="cov sl"><img class="col" src="l/cover.jpg" alt="" fetchpriority="high"><div class="in">
-  <div class="eb cap">Для бизнеса · <button type="button" data-to="#author">Мила Ушакова</button></div>
+  <div class="eb cap">Для женщин и мужчин · <span style="border-bottom:1px solid #C9A96A;padding-bottom:2px">Мила Ушакова</span></div>
   <h1>Система<br><i style="color:#C9A96A">имиджа</i></h1>
 </div></div></div></div>
+
+<section class="w" id="pay">
+  <div class="t">Доступ на 6 месяцев</div>
+  <h2>Стоимость</h2>
+  <div class="tier"><div class="r"><h3>База</h3><div class="pr"><small class="nw">сейчас</small>7 000 <i>₽</i></div></div><p class="lat hot"><b>С 1 декабря 8 500 ₽</b><span>Сейчас выгода 1 500 ₽</span></p><p class="d">Система имиджа.</p><a class="btn" id="b1" href="#pay">Оплатить</a></div>
+  <div class="tier"><div class="r"><h3>Премиум</h3><div class="pr"><small class="nw">сейчас</small>9 900 <i>₽</i></div></div><p class="lat hot"><b>С 1 декабря 11 900 ₽</b><span>Сейчас выгода 2 000 ₽</span></p><p class="d">Система имиджа и видео: «Часовой этикет», «Этикет аксессуаров», «Парфюмерный этикет», «Дресс-код».</p><a class="btn" id="b2" href="#pay">Оплатить</a></div>
+  <p class="dev" id="dev">Просмотр: ссылки на оплату появятся, когда будут созданы продукты в Lava.</p>
+  <p class="fix">Сейчас открыта женская версия. Мужская выйдет позже.<br><br>Для обладателей Системы по цвету и резидентов клуба цена 7 000 ₽ и 9 900 ₽ сохраняется и после 1 декабря.</p>
+</section>
 
 <section id="how">
   <div class="w" style="padding-bottom:0"><div class="t">Как устроена</div><h2>Для вашей<br><i>среды</i></h2></div>
@@ -233,15 +249,6 @@ body.fx .cov .eb,body.fx .cov h1{animation:rise 1.2s cubic-bezier(.16,1,.3,1) bo
   <div class="t">Автор</div>
   <h2>Мила<br><i>Ушакова</i></h2>
   <div class="au"><img loading="lazy" src="l/mila.jpg" alt="Мила Ушакова"><div><p>Приглашённый редактор Vogue, L'Officiel и No Chaser.</p><p>Аккредитованный стилист недель моды: Paris, Milan, Copenhagen, Yerevan.</p><p>Автор Системы цветовых сочетаний.</p></div></div>
-</section>
-
-<section class="w" id="pay">
-  <div class="t">Доступ на 6 месяцев</div>
-  <h2>Цена<br><i>открытия</i></h2>
-  <div class="tier"><div class="r"><h3>База</h3><div class="pr">7 000 <i>₽</i></div></div><p class="lat">С 1 декабря 8 500 ₽</p><p class="d">Система имиджа.</p><a class="btn" id="b1" href="#pay">Оплатить</a></div>
-  <div class="tier"><div class="r"><h3>Премиум</h3><div class="pr">9 900 <i>₽</i></div></div><p class="lat">С 1 декабря 11 900 ₽</p><p class="d">Система имиджа и видео: «Часовой этикет», «Этикет аксессуаров», «Парфюмерный этикет», «Дресс-код».</p><a class="btn" id="b2" href="#pay">Оплатить</a></div>
-  <p class="dev" id="dev">Просмотр: ссылки на оплату появятся, когда будут созданы продукты в Lava.</p>
-  <p class="fix">Для обладателей Системы по цвету и резидентов клуба цена 7 000 ₽ и 9 900 ₽ сохраняется и после 1 декабря.</p>
 </section>
 
 <section class="w" id="faq">
@@ -281,6 +288,16 @@ var LAVA={b1:'',b2:''};['b1','b2'].forEach(function(k){var a=document.getElement
  var fl=document.querySelectorAll('.lead,.q');fl.forEach(function(e){e.classList.add('flow');e.querySelectorAll('i').forEach(function(i){i.style.color='inherit'})});
  function f(){fl.forEach(function(e){var r=e.getBoundingClientRect(),k=1-(r.top+r.height/2)/innerHeight;e.style.setProperty('--fy',Math.max(0,Math.min(100,k*140))+'%')})}
  addEventListener('scroll',function(){requestAnimationFrame(f)},{passive:true});f();
+})();
+</script>
+<div id="bar"><span><b>7 000 ₽</b><small>С 1 декабря 8 500 ₽</small></span><a href="#pay">Оплатить</a></div>
+<script>
+(function(){var pay=document.getElementById('pay'),bar=document.getElementById('bar');
+function go(){pay.scrollIntoView({behavior:'smooth',block:'start'})}
+// Куда бы ни нажать, человек попадает к оплате: картинка, текст, шаг
+document.querySelector('.app').classList.add('tap');
+document.querySelector('.app').addEventListener('click',function(e){if(e.target.closest('a,button,details,summary,input,#pay,#mn,.top,#legal-strip'))return;if(window.getSelection&&String(getSelection()))return;go()});
+function sb(){var r=pay.getBoundingClientRect();bar.classList.toggle('on',scrollY>innerHeight*.5&&!(r.top<innerHeight*.75&&r.bottom>innerHeight*.25))}addEventListener('scroll',sb,{passive:true});sb();
 })();
 </script>
 </body></html>
