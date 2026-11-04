@@ -112,3 +112,11 @@ test('общее название Prodamus: тариф по точной сум�
   const t = memStore(); await A.applyPayment(t, pay({ order_id: '51', products: [{ name, sum: '777' }] }), NOW);
   assert.equal((await A.getAccess(t, 'anna@mail.ru', NOW)).active, false);
 });
+test('оплата без почты не теряется: уходит на ручной разбор с телефоном', async () => {
+  const s = memStore(); const r = await A.applyPayment(s, pay({ order_id: '60', customer_email: '', customer_phone: '+79990001122' }), NOW);
+  assert.equal(r.skipped, 'no-email'); assert.equal(JSON.parse(s.m.get('review:60')).phone, '+79990001122');
+});
+test('чужой продукт без почты на разбор не попадает', async () => {
+  const s = memStore(); const r = await A.applyPayment(s, pay({ order_id: '61', customer_email: '', products: [{ name: 'Лекция', sum: '777' }] }), NOW);
+  assert.equal(r.skipped, 'other-product'); assert.equal(s.m.has('review:61'), false);
+});
