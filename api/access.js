@@ -1,6 +1,5 @@
 // Вход по почте и коду, проверка доступа.
 // POST /api/access?do=code {email} · POST /api/access?do=verify {email, code} · POST /api/access?do=logout · GET /api/access?do=me
-import { requestCode, verifyCode, getAccess, readSession, upstashStore, SESSION_DAYS } from '../lib/access-core.mjs';
 
 async function sendCode(email, code) {
   const r = await fetch('https://api.resend.com/emails', {
@@ -19,6 +18,7 @@ const setCookie = (res, val, age) => res.setHeader('Set-Cookie', `ms_s=${val}; P
 
 export default async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store');
+  const { requestCode, verifyCode, getAccess, readSession, upstashStore, SESSION_DAYS } = await import('../lib/access-core.mjs');
   const secret = process.env.SESSION_SECRET, url = process.env.KV_REST_API_URL, token = process.env.KV_REST_API_TOKEN;
   if (!secret || !url || !token || !process.env.RESEND_API_KEY) return res.status(503).json({ ok: false, error: 'not-configured' });
   const store = upstashStore(url, token), action = req.query.do, body = req.body || {};

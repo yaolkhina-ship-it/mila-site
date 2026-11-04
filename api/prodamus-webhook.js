@@ -1,6 +1,5 @@
 // Уведомление Prodamus об оплате: проверяем подпись и записываем доступ.
 // Секреты только в переменных окружения Vercel. Без верной подписи доступ не открывается.
-import { applyPayment, verifySign, unflatten, upstashStore } from '../lib/access-core.mjs';
 
 export const config = { api: { bodyParser: false } };
 
@@ -10,7 +9,7 @@ async function readRaw(req) {
   return Buffer.concat(chunks).toString('utf8');
 }
 
-export function parseBody(raw, contentType) {
+function parseBody(raw, contentType, unflatten) {
   const ct = String(contentType || '');
   if (ct.includes('application/json')) return JSON.parse(raw);
   const flat = {};
@@ -44,12 +43,13 @@ async function sendWelcome(email, access) {
 }
 
 export default async function handler(req, res) {
+  const { applyPayment, verifySign, unflatten, upstashStore } = await import('../lib/access-core.mjs');
   if (req.method !== 'POST') return res.status(200).send('ok');
   const secret = process.env.PRODAMUS_SECRET, url = process.env.KV_REST_API_URL, token = process.env.KV_REST_API_TOKEN;
   if (!secret || !url || !token) { console.error('prodamus: not configured'); return res.status(503).send('not configured'); }
   const raw = await readRaw(req);
   let data;
-  try { data = parseBody(raw, req.headers['content-type']); } catch (e) { return res.status(400).send('bad body'); }
+  try { data = parseBody(raw, req.headers['content-type'], unflatten); } catch (e) { return res.status(400).send('bad body'); }
   const sign = req.headers['sign'] || req.headers['Sign'];
   const signed = data && typeof data.submit === 'object' ? data.submit : data;
   // В журнал только служебное: ни почты, ни телефона
