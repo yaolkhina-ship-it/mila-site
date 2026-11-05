@@ -28,6 +28,7 @@ footer{padding:18px 16px 24px;text-align:center;font-size:11.5px;line-height:1.7
 <script>
 if(/tariff/.test(location.hash))location.replace('/tariffs');
 var $=function(i){return document.getElementById(i)},NEXT='/sistem-image';
+if(/other=1/.test(location.search))document.addEventListener('DOMContentLoaded',function(){$('msg').textContent='Вы вошли на другом устройстве. Доступ работает на одном устройстве: чтобы продолжить здесь, войдите снова.'});
 if(/expired=1/.test(location.search))document.addEventListener('DOMContentLoaded',function(){$('msg').textContent='Срок доступа закончился. Продлить можно на странице оплаты.'});
 fetch('/api/access?do=me').then(function(r){return r.json()}).then(function(m){if(m.signedIn&&m.active)location.replace(NEXT)}).catch(function(){});
 function post(a,b){return fetch('/api/access?do='+a,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)}).then(function(r){return r.json().then(function(j){j.status=r.status;return j})})}

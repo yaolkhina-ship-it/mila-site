@@ -129,3 +129,14 @@ test('тариф по номеру заказа, в том числе при д�
   const c = memStore(); const r = await A.applyPayment(c, pay({ order_id: '1', order_num: 'test', sum: '1000.00', products: [{ name, sum: '1000.00' }] }), NOW);
   assert.equal(r.skipped, 'other-product');
 });
+test('одно устройство: второй вход отключает первый', async () => {
+  const store = memStore(); await store.setJson('acc:a@b.ru', { tier: 'base', until: '2099-01-01T00:00:00Z' });
+  const login = async () => { let code; await A.requestCode(store, 'a@b.ru', 'sec', async (e, c) => { code = c; }); return (await A.verifyCode(store, 'a@b.ru', code, 'sec')).session; };
+  const first = await login();
+  assert.equal((await A.currentSession(store, first, 'sec')).email, 'a@b.ru');
+  const second = await login();
+  const old = await A.currentSession(store, first, 'sec');
+  assert.equal(old.email, null); assert.equal(old.replaced, true);
+  assert.equal((await A.currentSession(store, second, 'sec')).email, 'a@b.ru');
+  assert.equal((await A.currentSession(store, 'мусор', 'sec')).replaced, false);
+});

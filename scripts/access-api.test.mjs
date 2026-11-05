@@ -67,12 +67,13 @@ test('без входа тариф не виден, чужая почта код
 test('видео: идентификаторы получает только премиум', async () => {
   redis.set('videos', JSON.stringify({ watch: 'W1', perfume: 'P1' }));
   redis.set('acc:base@mail.ru', JSON.stringify({ tier: 'base', until: '2099-01-01T00:00:00Z' }));
+  redis.set('sid:base@mail.ru', JSON.stringify({ s: 'SB' })); redis.set('sid:anna@mail.ru', JSON.stringify({ s: 'SA' }));
   const { makeSession } = await import(path.join(dir, 'lib/access-core.mjs'));
   let r = mkRes(); await access({ method: 'GET', query: { do: 'videos' }, headers: {} }, r);
   assert.equal(r.out.signedIn, false); assert.ok(r.out.items.every((v) => v.id === null)); assert.equal(r.out.items.length, 4);
-  r = mkRes(); await access({ method: 'GET', query: { do: 'videos' }, headers: { cookie: 'ms_s=' + makeSession('base@mail.ru', 'ss') } }, r);
+  r = mkRes(); await access({ method: 'GET', query: { do: 'videos' }, headers: { cookie: 'ms_s=' + makeSession('base@mail.ru', 'ss', new Date(), 'SB') } }, r);
   assert.equal(r.out.tier, 'base'); assert.ok(r.out.items.every((v) => v.id === null));
-  r = mkRes(); await access({ method: 'GET', query: { do: 'videos' }, headers: { cookie: 'ms_s=' + makeSession('anna@mail.ru', 'ss') } }, r);
+  r = mkRes(); await access({ method: 'GET', query: { do: 'videos' }, headers: { cookie: 'ms_s=' + makeSession('anna@mail.ru', 'ss', new Date(), 'SA') } }, r);
   assert.equal(r.out.tier, 'premium'); assert.equal(r.out.items.find((v) => v.key === 'watch').id, 'W1');
   assert.equal(r.out.items.find((v) => v.key === 'dresscode').ready, false);
 });

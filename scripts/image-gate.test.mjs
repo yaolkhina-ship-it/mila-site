@@ -18,8 +18,9 @@ const mk = () => { const r = { code: 200, h: {}, out: null, status(c) { r.code =
 const call = async (query, cookie, headers = {}) => { const r = mk(); await gate({ query, headers: { cookie, ...headers } }, r); return r; };
 const look = fs.readdirSync(path.join(root, 'private/business-img')).find((n) => n.startsWith('look-'));
 const voice = fs.readdirSync(path.join(root, 'private/business-img')).find((n) => n.endsWith('.m4a'));
-const good = 'ms_s=' + makeSession('anna@mail.ru', 'ss');
-const old = 'ms_s=' + makeSession('old@mail.ru', 'ss');
+redis.set('sid:anna@mail.ru', JSON.stringify({ s: 'S1' })); redis.set('sid:old@mail.ru', JSON.stringify({ s: 'S2' }));
+const good = 'ms_s=' + makeSession('anna@mail.ru', 'ss', new Date(), 'S1');
+const old = 'ms_s=' + makeSession('old@mail.ru', 'ss', new Date(), 'S2');
 redis.set('acc:anna@mail.ru', JSON.stringify({ tier: 'base', until: '2099-01-01T00:00:00Z' }));
 redis.set('acc:old@mail.ru', JSON.stringify({ tier: 'base', until: '2020-01-01T00:00:00Z' }));
 
@@ -42,4 +43,11 @@ test('обложка открыта всем, другие файлы и обх�
 test('голос отдаётся частями для Safari', async () => {
   const r = await call({ f: voice }, good, { range: 'bytes=0-99' }); assert.equal(r.code, 206); assert.equal(r.h['Content-Length'], 100); assert.match(r.h['Content-Range'], /^bytes 0-99\//); assert.equal(r.out.length, 100);
   assert.equal((await call({ f: voice }, undefined, { range: 'bytes=0-99' })).code, 403);
+});
+test('одно устройство: прежний вход перекрыт новым', async () => {
+  const prev = 'ms_s=' + makeSession('anna@mail.ru', 'ss', new Date(), 'S0');
+  let r = await call({}, prev); assert.equal(r.code, 302); assert.equal(r.h.Location, '/vhod?other=1');
+  r = await call({ f: 'look-1.jpg' }, prev); assert.ok([403, 404].includes(r.code));
+  r = await call({}, 'ms_s=' + makeSession('anna@mail.ru', 'ss')); assert.equal(r.h.Location, '/vhod?other=1');
+  r = await call({}, good); assert.equal(r.code, 200);
 });
