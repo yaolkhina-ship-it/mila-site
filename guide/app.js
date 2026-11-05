@@ -116,7 +116,7 @@
   function imgTeaser() {
     return '<div class="a-imgblk"><div class="a-sec"><b>Система имиджа</b></div>' +
       '<a href="' + IMG_WAIT + '" target="_blank" rel="noopener" style="display:block;margin:0 20px"><img loading="lazy" src="business-img/cover-gallery.jpg" alt="" style="display:block;width:100%;aspect-ratio:16/10;object-fit:cover;object-position:60% 88%;border-radius:6px"></a>' +
-      '<div class="a-pv-t"><p>' + IMG_IDEA + '</p><p class="s">Что надеть на переговоры, собеседование или деловой ужин, чтобы впечатление работало на вашу цель.</p>' +
+      '<div class="a-pv-t"><p>' + IMG_IDEA + '</p><p class="s">Что надеть на переговоры, собеседование или деловой ужин, чтобы впечатление работало на вашу цель. Можно оплатить в рассрочку.</p>' +
       '<a class="a-wait" href="' + IMG_WAIT + '" target="_blank" rel="noopener">Открыть Систему имиджа</a></div></div>';
   }
   /* Библиотека: лекции Милы на продажу. Новая лекция = новая строка В НАЧАЛЕ списка (первой стоит на полке). */
