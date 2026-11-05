@@ -26,24 +26,26 @@ function parseBody(raw, contentType, unflatten) {
   return unflatten(flat);
 }
 
-async function sendWelcome(email, access) {
+async function sendWelcome(email, access, welcomeMail) {
   const key = process.env.RESEND_API_KEY;
   if (!key) return;
-  const until = new Date(access.until).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' });
-  await fetch('https://api.resend.com/emails', {
+  const { subject, html } = welcomeMail(email, access);
+  const r = await fetch('https://api.resend.com/emails', {
     method: 'POST',
     headers: { Authorization: 'Bearer ' + key, 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      from: 'Система имиджа <mila@milaushakova.com>',
+      from: 'Мила Ушакова <mila@milaushakova.com>',
       to: email,
-      subject: 'Ваш доступ к Системе имиджа',
-      html: `<p>Оплата получена. Доступ открыт до ${until}.</p><p><a href="https://www.milaushakova.com/vhod">Открыть Систему имиджа</a></p><p>Войдите с почтой, которую указали при оплате: на неё придёт код.</p><p style="font-size:12px;color:#777"><a href="https://www.milaushakova.com/oferta">Договор оферты</a> · <a href="https://www.milaushakova.com/privacy">Политика конфиденциальности</a> · <a href="https://t.me/MilaUshakova_ClubBot?start=support">Поддержка</a><br>ИП Ольхина Я.Ф., ИНН 222411003828, ОГРНИП 326220200112474</p>`,
+      reply_to: 'yaolkhina@gmail.com',
+      subject,
+      html,
     }),
   });
+  if (!r.ok) console.error('prodamus: mail status ' + r.status);
 }
 
 export default async function handler(req, res) {
-  const { applyPayment, verifySign, unflatten, upstashStore } = await import('../lib/access-core.mjs');
+  const { applyPayment, verifySign, unflatten, upstashStore, welcomeMail } = await import('../lib/access-core.mjs');
   if (req.method !== 'POST') return res.status(200).send('ok');
   const secret = process.env.PRODAMUS_SECRET, url = process.env.KV_REST_API_URL, token = process.env.KV_REST_API_TOKEN;
   if (!secret || !url || !token) { console.error('prodamus: not configured'); return res.status(503).send('not configured'); }
@@ -61,7 +63,7 @@ export default async function handler(req, res) {
   try {
     const r = await applyPayment(upstashStore(url, token), data);
     console.log('prodamus: result=' + (r.skipped || r.error || 'granted'));
-    if (r.access && r.email) await sendWelcome(r.email, r.access).catch((e) => console.error('prodamus: mail failed'));
+    if (r.access && r.email) await sendWelcome(r.email, r.access, welcomeMail).catch((e) => console.error('prodamus: mail failed'));
     return res.status(200).send('success');
   } catch (e) {
     console.error('prodamus: store failed'); // 500: Prodamus повторит уведомление

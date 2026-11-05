@@ -156,3 +156,10 @@ test('код: прежний код работает после повторно
   assert.equal((await A.verifyCode(store, 'c@b.ru', a, 'sec')).ok, false);
   assert.equal((await A.verifyCode(store, 'c@b.ru', d, 'sec')).ok, true);
 });
+test('приветственное письмо: тариф, срок, почта, контакт', () => {
+  const b = A.welcomeMail('a<b@c.ru', { tier: 'base', until: '2027-05-05T07:00:00Z' });
+  assert.match(b.html, /в тарифе «Премиум» доступны три/); assert.match(b.html, /5 мая 2027/); assert.match(b.html, /a&lt;b@c\.ru/);
+  assert.match(b.html, /YanaOlkhina/); assert.ok(!/__[A-Z]+__/.test(b.html));
+  const p = A.welcomeMail('p@c.ru', { tier: 'premium', until: '2027-05-05T07:00:00Z' });
+  assert.match(p.html, /Дресс-код появится скоро/); assert.ok(!/три экспертные/.test(p.html));
+});
