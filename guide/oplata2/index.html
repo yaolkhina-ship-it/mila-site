@@ -291,9 +291,9 @@ body.fx .cov .eb,body.fx .cov h1{animation:rise 1.2s cubic-bezier(.16,1,.3,1) bo
 <section class="w" id="pay">
   <div class="t">Доступ на 6 месяцев</div>
   <h2>Стоимость</h2>
-  <div class="tier"><div class="r"><h3>База</h3><div class="pr"><small class="nw">сейчас</small>7 000 <i>₽</i></div></div><p class="lat hot"><b>С 1 декабря 8 500 ₽</b><span>Сейчас выгода 1 500 ₽</span></p><p class="d">Система имиджа.</p><a class="btn" id="b1" href="https://payform.ru/a3cX7gN/" rel="noopener">Оплатить</a></div>
+  <div class="tier"><div class="r"><h3>База</h3><div class="pr"><small class="nw">сейчас</small>7 000 <i>₽</i></div></div><p class="lat hot"><b>С 1 декабря 8 500 ₽</b><span>Сейчас выгода 1 500 ₽</span></p><p class="d">Система имиджа.</p><a class="btn" id="b1" href="https://payform.ru/kicX7Cu/" rel="noopener">Оплатить</a></div>
   <div class="tier"><div class="r"><h3>Премиум</h3><div class="pr"><small class="nw">сейчас</small>9 900 <i>₽</i></div></div><p class="lat hot"><b>С 1 декабря 11 900 ₽</b><span>Сейчас выгода 2 000 ₽</span></p><p class="d">Система имиджа и видео: «Часовой этикет», «Этикет аксессуаров», «Парфюмерный этикет», «Дресс-код».</p><a class="btn" id="b2" href="https://payform.ru/prcX792/" rel="noopener">Оплатить</a></div>
-    <p class="fix">Можно оплатить зарубежной картой: способ и валюта выбираются при оплате. Укажите почту, на неё придёт доступ.<br><br>Сейчас открыта женская версия. Мужская выйдет позже.<br><br>Для обладателей Системы по цвету и резидентов клуба цена 7 000 ₽ и 9 900 ₽ сохраняется и после 1 декабря.</p>
+    <p class="fix">Можно оплатить в рассрочку или зарубежной картой: способ и валюта выбираются при оплате. Укажите почту, на неё придёт доступ.<br><br>Сейчас открыта женская версия. Мужская выйдет позже.<br><br>Для обладателей Системы по цвету и резидентов клуба цена 7 000 ₽ и 9 900 ₽ сохраняется и после 1 декабря.</p>
 </section>
 
 <section class="w" id="author">
@@ -305,6 +305,7 @@ body.fx .cov .eb,body.fx .cov h1{animation:rise 1.2s cubic-bezier(.16,1,.3,1) bo
 <section class="w" id="faq">
   <div class="t" style="margin-bottom:14px">Вопросы</div>
   <details><summary>Как я получу доступ?</summary><p>После оплаты на почту придёт письмо. Войдите на <a href="/vhod">milaushakova.com/vhod</a> с той же почтой: на неё придёт код. Пароль придумывать не нужно.</p></details>
+  <details><summary>Можно оплатить в рассрочку?</summary><p>Да. После кнопки оплаты выберите рассрочку в списке способов и подходящий срок.</p></details>
   <details><summary>Где открывается Система?</summary><p>На телефоне и на компьютере, в браузере.</p></details>
   <details><summary>Есть ли версия для мужчин?</summary><p>Сейчас открыта женская версия. Мужская выйдет позже.</p></details>
   <details><summary>Можно подключить компанию?</summary><p><a href="https://www.milaushakova.com/tariffs">Тарифы для компаний</a>.</p></details>
@@ -322,7 +323,7 @@ body.fx .cov .eb,body.fx .cov h1{animation:rise 1.2s cubic-bezier(.16,1,.3,1) bo
 <script>
 var mn=document.getElementById('mn');document.getElementById('tMenu').onclick=function(){mn.hidden=false};document.getElementById('mnX').onclick=function(){mn.hidden=true};mn.addEventListener('click',function(e){if(e.target.tagName==='A')mn.hidden=true});
 document.querySelectorAll('[data-to]').forEach(function(b){b.addEventListener('click',function(){document.querySelector(b.dataset.to).scrollIntoView({behavior:'smooth'})})});
-var PAY={b1:'https://payform.ru/a3cX7gN/',b2:'https://payform.ru/prcX792/'};['b1','b2'].forEach(function(k){var a=document.getElementById(k);if(PAY[k])a.href=PAY[k];else a.addEventListener('click',function(e){e.preventDefault();var d=document.getElementById('dev');d.style.display='block';d.scrollIntoView({block:'center'})})});
+var PAY={b1:'https://payform.ru/kicX7Cu/',b2:'https://payform.ru/prcX792/'};['b1','b2'].forEach(function(k){var a=document.getElementById(k);if(PAY[k])a.href=PAY[k];else a.addEventListener('click',function(e){e.preventDefault();var d=document.getElementById('dev');d.style.display='block';d.scrollIntoView({block:'center'})})});
 </script><script>
 (function(){
  if(matchMedia('(prefers-reduced-motion:reduce)').matches||!('IntersectionObserver' in window))return;
