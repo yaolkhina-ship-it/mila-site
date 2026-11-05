@@ -140,3 +140,10 @@ test('одно устройство: второй вход отключает п
   assert.equal((await A.currentSession(store, second, 'sec')).email, 'a@b.ru');
   assert.equal((await A.currentSession(store, 'мусор', 'sec')).replaced, false);
 });
+test('одно устройство: команда работает с нескольких', async () => {
+  const store = memStore(); await store.setJson('acc:t@b.ru', { tier: 'premium', until: '2099-01-01T00:00:00Z', team: true });
+  const login = async () => { let code; await A.requestCode(store, 't@b.ru', 'sec', async (e, c) => { code = c; }); return (await A.verifyCode(store, 't@b.ru', code, 'sec')).session; };
+  const first = await login(); const second = await login();
+  assert.equal((await A.currentSession(store, first, 'sec')).email, 't@b.ru');
+  assert.equal((await A.currentSession(store, second, 'sec')).email, 't@b.ru');
+});
