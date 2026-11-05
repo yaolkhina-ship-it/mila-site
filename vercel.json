@@ -94,6 +94,13 @@
   ],
   "routes": [
     {
+      "src": "/predzapis(\\.html|/)?",
+      "status": 302,
+      "headers": {
+        "Location": "/image"
+      }
+    },
+    {
       "src": "/api/webhook",
       "dest": "/api/webhook.js"
     },
