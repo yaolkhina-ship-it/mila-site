@@ -147,3 +147,12 @@ test('одно устройство: команда работает с неск
   assert.equal((await A.currentSession(store, first, 'sec')).email, 't@b.ru');
   assert.equal((await A.currentSession(store, second, 'sec')).email, 't@b.ru');
 });
+test('код: прежний код работает после повторного запроса', async () => {
+  const store = memStore(); await store.setJson('acc:c@b.ru', { tier: 'base', until: '2099-01-01T00:00:00Z' });
+  const ask = async () => { let code; await A.requestCode(store, 'c@b.ru', 'sec', async (e, c) => { code = c; }); return code; };
+  const one = await ask(); await ask();
+  assert.equal((await A.verifyCode(store, 'c@b.ru', one, 'sec')).ok, true);
+  const a = await ask(), b = await ask(), c = await ask(), d = await ask();
+  assert.equal((await A.verifyCode(store, 'c@b.ru', a, 'sec')).ok, false);
+  assert.equal((await A.verifyCode(store, 'c@b.ru', d, 'sec')).ok, true);
+});
