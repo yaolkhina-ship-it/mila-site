@@ -110,14 +110,14 @@
       '<a class="a-btn gold" href="' + CLUB + '" target="_blank" rel="noopener">Стать резидентом</a>' +
       (CONTACT.indexOf('__') < 0 ? '<a class="a-btn line" href="' + CONTACT + '" target="_blank" rel="noopener">Сотрудничество</a>' : '') + '</div>';
   }
-  /* «Система имиджа · скоро»: превью экранов на главной, лист ожидания в боте (?start=image) */
-  var IMG_WAIT = '/predzapis?src=system';
+  /* «Система имиджа»: превью на главной, ведёт на страницу покупки */
+  var IMG_WAIT = '/image';
   var IMG_IDEA = 'Цвет меняет образ.<br>Имидж меняет возможности.';
   function imgTeaser() {
-    return '<div class="a-imgblk"><div class="a-sec"><b>Система имиджа <em class="a-soon">скоро</em></b></div>' +
+    return '<div class="a-imgblk"><div class="a-sec"><b>Система имиджа</b></div>' +
       '<a href="' + IMG_WAIT + '" target="_blank" rel="noopener" style="display:block;margin:0 20px"><img loading="lazy" src="business-img/cover-gallery.jpg" alt="" style="display:block;width:100%;aspect-ratio:16/10;object-fit:cover;object-position:60% 88%;border-radius:6px"></a>' +
       '<div class="a-pv-t"><p>' + IMG_IDEA + '</p><p class="s">Что надеть на переговоры, собеседование или деловой ужин, чтобы впечатление работало на вашу цель.</p>' +
-      '<a class="a-wait" href="' + IMG_WAIT + '" target="_blank" rel="noopener">Попасть в список ожидания</a></div></div>';
+      '<a class="a-wait" href="' + IMG_WAIT + '" target="_blank" rel="noopener">Открыть Систему имиджа</a></div></div>';
   }
   /* Библиотека: лекции Милы на продажу. Новая лекция = новая строка В НАЧАЛЕ списка (первой стоит на полке). */
   var LECTURES = [
@@ -165,7 +165,7 @@
         return '<a href="' + H + '#/page/' + r[0] + '"><span class="t">' + r[1] + '</span><span class="n">›</span></a>'; }).join('') +
       '<a href="' + H + '#/tools"><span class="t">Инструменты</span><span class="n">›</span></a></div>';
     h += newsBar();
-    h += imgTeaser(); // «Система имиджа · скоро» первым блоком
+    h += imgTeaser(); // «Система имиджа» первым блоком
     h += '<div class="a-sec"><b>Тренды' + (trends.some(function (t) { return t.isNew; }) ? '<em class="a-new">новинка</em>' : '') + '</b><a href="' + H + '#/trends">все ' + trends.length + '</a></div><div class="a-row">' + trends.map(function (t) {
       return '<a class="a-tc" href="' + H + '#/trend/' + t.slug + '"><div class="im"><img loading="lazy" src="' + esc(t.cover) + '" alt="">' + '</div><span>' + esc(t.name) + '</span></a>';
     }).join('') + '</div>';
