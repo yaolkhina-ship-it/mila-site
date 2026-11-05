@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#111111">
+<meta name="referrer" content="no-referrer">
+<title>Подарок · Система имиджа</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0}html,body{background:#111;color:#F4F2EE}
+body{font-family:Jost,-apple-system,sans-serif;font-weight:300;font-size:17px;line-height:1.45;min-height:100svh;display:flex;flex-direction:column}
+main{flex:1;width:100%;max-width:440px;margin:0 auto;padding:12vh 26px 40px}
+h1{font:400 56px/.92 Oswald,sans-serif;text-transform:uppercase;margin-bottom:22px}h1 i{font-style:normal;font-weight:300;color:#C9A96A}
+p{color:rgba(244,242,238,.75)}
+input{display:block;width:100%;margin:20px 0 12px;padding:15px;background:none;border:1px solid rgba(244,242,238,.35);color:#F4F2EE;font:300 18px Jost,sans-serif;border-radius:0}
+input:focus{outline:0;border-color:#C9A96A}#code{letter-spacing:.4em;text-align:center;font-size:24px}
+button{display:block;width:100%;padding:17px;background:#C9A96A;color:#111;border:0;font:400 13px/1 Oswald,sans-serif;letter-spacing:.2em;text-transform:uppercase;cursor:pointer}button:disabled{opacity:.5}
+.link{background:none;color:rgba(244,242,238,.7);margin-top:14px;letter-spacing:.06em;text-transform:none;font:300 15px Jost,sans-serif;text-decoration:underline}
+#msg{min-height:24px;margin-top:14px;color:#FF7A6B;font-size:15px}[hidden]{display:none!important}
+footer{padding:18px 16px 24px;text-align:center;font-size:11.5px;line-height:1.7;color:#8B8983}footer a{color:inherit}
+</style></head><body>
+<main>
+  <h1>Система<br><i>имиджа</i></h1>
+  <div id="view"><p>Проверяем подарок…</p></div>
+  <div id="msg" role="alert"></div>
+</main>
+<footer><a href="/oferta">Договор оферты</a> · <a href="/privacy">Политика конфиденциальности</a> · <a href="https://t.me/MilaUshakova_ClubBot?start=support">Поддержка</a><br>© 2026 · ИП Ольхина Я.Ф., ИНН 222411003828, ОГРНИП 326220200112474</footer>
+<script>
+var T=location.pathname.split('/').filter(Boolean)[0]||'',NEXT='/sistem-image',SUP='https://t.me/MilaUshakova_ClubBot?start=support';
+var $=function(i){return document.getElementById(i)};
+function post(a){return fetch('/api/access?do='+a,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({token:T})}).then(function(r){return r.json()})}
+function show(h){$('view').innerHTML=h}
+function used(){show('<p>Этот подарок уже открыт на другом устройстве. Доступ работает только там.</p><p style="margin-top:14px">Если это были вы и устройство сменилось, <a style="color:#C9A96A" href="'+SUP+'">напишите в поддержку</a>.</p>')}
+function fail(){if(/Проверяем/.test($('view').textContent))show('');$('msg').textContent='Сейчас не получилось. Обновите страницу или напишите в поддержку.'}
+function gift(d){show('<p style="color:#C9A96A;font-size:19px">Подарок: премиум-доступ на '+d.months+' месяцев.</p><p style="margin-top:14px">Откройте его там, где будете смотреть. Доступ закрепится за этим браузером на этом устройстве, и срок начнётся с этого момента.</p><p style="margin-top:14px">Если вы сейчас в Telegram или Instagram, сначала откройте ссылку в Safari или Chrome.</p><button id="open" style="margin-top:24px">Открыть подарок</button>');
+$('open').onclick=function(){var b=this;b.disabled=true;$('msg').textContent='';post('gift-open').then(function(r){if(r.ok)return location.replace(NEXT);b.disabled=false;if(r.error==='used')return used();fail()}).catch(function(){b.disabled=false;fail()})}}
+post('gift-status').then(function(d){if(d.state==='mine')return location.replace(NEXT);if(d.state==='new')return gift(d);if(d.state==='used')return used();if(d.state==='invalid')return show('<p>Ссылка не найдена. Проверьте её или <a style="color:#C9A96A" href="'+SUP+'">напишите в поддержку</a>.</p>');fail()}).catch(fail);
+</script></body></html>

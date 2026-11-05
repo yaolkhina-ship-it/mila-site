@@ -129,6 +129,10 @@
       "dest": "/vhod.html"
     },
     {
+      "src": "/imidzh-[a-z0-9]{4,}/?",
+      "dest": "/podarok.html"
+    },
+    {
       "src": "/webinar",
       "dest": "/webinar.html"
     },

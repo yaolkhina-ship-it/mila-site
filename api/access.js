@@ -1,4 +1,5 @@
 // Вход по почте и коду, проверка доступа.
+// POST /api/access?do=gift-status|gift-open {token}: подарочная ссылка
 // POST /api/access?do=code {email} · POST /api/access?do=verify {email, code} · POST /api/access?do=logout · GET /api/access?do=me
 
 async function sendCode(email, code) {
@@ -20,7 +21,7 @@ const setCookie = (res, val, age) => res.setHeader('Set-Cookie', `ms_s=${val}; P
 
 export default async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store');
-  const { requestCode, verifyCode, getAccess, currentSession, upstashStore, SESSION_DAYS } = await import('../lib/access-core.mjs');
+  const { requestCode, verifyCode, getAccess, currentSession, upstashStore, giftStatus, redeemGift, SESSION_DAYS } = await import('../lib/access-core.mjs');
   const secret = process.env.SESSION_SECRET, url = process.env.KV_REST_API_URL, token = process.env.KV_REST_API_TOKEN;
   if (!secret || !url || !token || !process.env.RESEND_API_KEY) return res.status(503).json({ ok: false, error: 'not-configured' });
   const store = upstashStore(url, token), action = req.query.do, body = req.body || {};
@@ -47,6 +48,14 @@ export default async function handler(req, res) {
       const r = await verifyCode(store, body.email, body.code, secret);
       if (!r.ok) return res.status(401).json(r);
       setCookie(res, r.session, SESSION_DAYS * 86400);
+      return res.status(200).json({ ok: true });
+    }
+    if (action === 'gift-status' || action === 'gift-open') {
+      const { GIFTS } = await import('../lib/gifts.mjs');
+      if (action === 'gift-status') return res.status(200).json(await giftStatus(store, body.token, cookieOf(req), secret, GIFTS));
+      const r = await redeemGift(store, body.token, cookieOf(req), secret, GIFTS);
+      if (!r.ok) return res.status(r.error === 'used' ? 409 : 404).json(r);
+      if (r.session) setCookie(res, r.session, r.seconds);
       return res.status(200).json({ ok: true });
     }
     if (action === 'logout') { setCookie(res, '', 0); return res.status(200).json({ ok: true }); }
