@@ -49,6 +49,10 @@
       "use": "@vercel/static"
     },
     {
+      "src": "image-sw.js",
+      "use": "@vercel/static"
+    },
+    {
       "src": "portfolio/**",
       "use": "@vercel/static"
     },
