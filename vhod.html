@@ -25,20 +25,20 @@ footer{padding:18px 16px calc(24px + env(safe-area-inset-bottom));text-align:cen
 .kick{font:400 11px/1 Oswald,sans-serif;letter-spacing:.32em;text-transform:uppercase;color:#C9A96A;margin-bottom:14px}
 .inst h2{font:300 30px/1.08 Oswald,sans-serif;text-transform:uppercase;letter-spacing:.01em;margin-bottom:14px}
 .inst .lead{font-size:16px;margin-bottom:26px}
-.steps{list-style:none;padding:0;border-top:1px solid rgba(201,169,106,.35)}
-.steps li{display:grid;grid-template-columns:34px 1fr 44px;gap:14px;align-items:center;padding:18px 0;border-bottom:1px solid rgba(244,242,238,.12)}
-.steps .n{font:300 30px/1 Oswald,sans-serif;color:#C9A96A}
-.steps .t{font-size:16px;line-height:1.4;color:#F4F2EE}
-.steps .t small{display:block;margin-top:5px;font-size:13.5px;line-height:1.4;color:rgba(244,242,238,.55)}
-.steps b{font-weight:500;color:#F4F2EE}
-.ico{width:44px;height:44px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(244,242,238,.22);border-radius:11px;color:#F4F2EE}
-.ico svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
-.ico.app{border:0;padding:0;overflow:hidden}.ico.app img{width:44px;height:44px;border-radius:11px;display:block}
-.key{margin-top:22px;padding:16px 18px;border-left:2px solid #C9A96A;background:rgba(201,169,106,.08);font-size:15px;line-height:1.45;color:rgba(244,242,238,.85)}
-.key b{font-weight:500;color:#F4F2EE}
-.copy{font-size:11.5px;line-height:1.3;margin-top:12px;background:none;border:1px solid rgba(244,242,238,.35);color:#F4F2EE;padding:14px}
-#doInstall{margin:4px 0 22px}
-.done{margin-top:20px;padding:18px;border:1px solid #C9A96A;color:#F4F2EE;font-size:16px}
+.ii-steps{list-style:none;padding:0;border-top:1px solid rgba(201,169,106,.35)}
+.ii-steps li{display:grid;grid-template-columns:34px 1fr 44px;gap:14px;align-items:center;padding:18px 0;border-bottom:1px solid rgba(244,242,238,.12)}
+.ii-n{font:300 30px/1 Oswald,sans-serif;color:#C9A96A}
+.ii-t{font-size:16px;line-height:1.4;color:#F4F2EE}
+.ii-t small{display:block;margin-top:5px;font-size:13.5px;line-height:1.4;color:rgba(244,242,238,.55)}
+.ii-steps b{font-weight:500;color:#F4F2EE}
+.ii-ico{width:44px;height:44px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(244,242,238,.22);border-radius:11px;color:#F4F2EE}
+.ii-ico svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.ii-ico.ii-app{border:0;overflow:hidden}.ii-app img{width:44px;height:44px;border-radius:11px;display:block}
+.ii-key{margin-top:22px;padding:16px 18px;border-left:2px solid #C9A96A;background:rgba(201,169,106,.08);font-size:15px;line-height:1.45;color:rgba(244,242,238,.85)}
+.ii-key b{font-weight:500;color:#F4F2EE}
+.ii-copy{font-size:11.5px;line-height:1.3;margin-top:12px;background:none;border:1px solid rgba(244,242,238,.35);color:#F4F2EE;padding:14px}
+.ii-install{margin:4px 0 22px}
+.ii-done{margin-top:20px;padding:18px;border:1px solid #C9A96A;color:#F4F2EE;font-size:16px}
 .or{margin-top:26px;text-align:center}
 .help{margin-top:6px;text-align:center;font-size:14px;color:rgba(244,242,238,.5)}.help a{color:inherit}
 .tip{margin-top:20px;font-size:14.5px;color:rgba(244,242,238,.6)}.tip a{color:#C9A96A}
@@ -51,10 +51,7 @@ footer{padding:18px 16px calc(24px + env(safe-area-inset-bottom));text-align:cen
     <p class="kick">Перед входом · одна минута</p>
     <h2>Поставьте Систему на экран телефона</h2>
     <p class="lead">Она будет открываться как приложение: одним касанием, на весь экран, без поиска ссылки в почте.</p>
-    <button id="doInstall" hidden>Установить на телефон</button>
-    <ol class="steps" id="steps"></ol>
-    <div class="key" id="key"></div>
-    <div class="done" id="done" hidden>Готово. Значок «Имидж» уже на экране телефона. Откройте его и войдите по почте.</div>
+    <div id="ii"></div>
     <button type="button" class="link or" id="skip">Войти без установки</button>
     <p class="help">Не получается? <a href="https://t.me/MilaUshakova_ClubBot?start=support">Напишите нам</a>, поможем.</p>
   </section>
@@ -70,6 +67,7 @@ footer{padding:18px 16px calc(24px + env(safe-area-inset-bottom));text-align:cen
   </section>
 </main>
 <footer><a href="/oferta">Договор оферты</a> · <a href="/privacy">Политика конфиденциальности</a> · <a href="https://t.me/MilaUshakova_ClubBot?start=support">Поддержка</a><br>© 2026 · ИП Ольхина Я.Ф., ИНН 222411003828, ОГРНИП 326220200112474</footer>
+<script src="/guide/image-install.js?v=1"></script>
 <script>
 if(/tariff/.test(location.hash))location.replace('/tariffs');
 var $=function(i){return document.getElementById(i)},NEXT='/sistem-image';
@@ -83,90 +81,15 @@ $('f1').onsubmit=function(e){e.preventDefault();say('');var b=this.querySelector
 $('f2').onsubmit=function(e){e.preventDefault();say('');var b=this.querySelector('button');b.disabled=true;post('verify',{email:$('email').value,code:$('code').value}).then(function(r){b.disabled=false;if(r.ok)return location.replace(NEXT);$('code').value='';say(r.error==='wrong'&&r.left>0?'Код не подошёл. Осталось попыток: '+r.left+'.':'Код больше не действует. Запросите новый.')}).catch(function(){b.disabled=false;fail()})};
 $('back').onclick=function(){say('');$('f2').hidden=true;$('f1').hidden=false};
 
-/* Установка на экран телефона: шаги под конкретный телефон и браузер */
+/* Установка на экран телефона: шаги общие с меню Системы, guide/image-install.js */
 (function(){
-  var ua=navigator.userAgent||'';
-  var standalone=window.navigator.standalone===true||(window.matchMedia&&matchMedia('(display-mode: standalone)').matches);
-  var ios=/iPhone|iPad|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
-  var android=/Android/i.test(ua);
-  var LINK='https://www.milaushakova.com/vhod';
-  if('serviceWorker' in navigator&&location.protocol==='https:')navigator.serviceWorker.register('/image-sw.js',{scope:'/vhod'}).catch(function(){});
-  if(standalone){$('appNote').hidden=false;return}
-  if(!ios&&!android){$('deskNote').hidden=false;return}
-
-  var I={
-    share:'<svg viewBox="0 0 24 24"><path d="M12 3v12M8 7l4-4 4 4"/><path d="M7 11H5.5v9.5h13V11H17"/></svg>',
-    plus:'<svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="M12 8.5v7M8.5 12h7"/></svg>',
-    more:'<svg viewBox="0 0 24 24"><circle cx="5.5" cy="12" r="1.2" fill="currentColor"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/><circle cx="18.5" cy="12" r="1.2" fill="currentColor"/></svg>',
-    dots:'<svg viewBox="0 0 24 24"><circle cx="12" cy="5.5" r="1.2" fill="currentColor"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/><circle cx="12" cy="18.5" r="1.2" fill="currentColor"/></svg>',
-    menu:'<svg viewBox="0 0 24 24"><path d="M5 7h14M5 12h14M5 17h14"/></svg>',
-    ok:'<svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
-    compass:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg>',
-    app:'<img src="/guide/image-icon-180.png" alt="">'
-  };
-  var steps=[],key='',inapp=false;
-  var appStep=['app','Найдите на экране значок <b>«Имидж»</b>, откройте его и войдите по почте.','Код придёт на почту, как обычно.'];
-
-  if(ios){
-    var other=/CriOS|FxiOS|EdgiOS|YaBrowser|OPiOS|GSA\//.test(ua);
-    inapp=!other&&(!/Safari\//.test(ua)||/Instagram|FBAN|FBAV|Telegram|VKClient|Line\//.test(ua)||window.navigator.standalone===undefined);
-    if(inapp){
-      steps.push(['compass','Откройте эту страницу в <b>Safari</b>: нажмите <b>⋯</b> или значок компаса в углу экрана и выберите <b>«Открыть в Safari»</b>.','Сейчас страница открыта внутри Telegram, Instagram или почты, оттуда поставить её на экран нельзя.<button type="button" class="copy" data-copy>Скопировать ссылку для Safari</button>']);
-    }
-    if(other){
-      steps.push(['share','Нажмите значок <b>«Поделиться»</b> в адресной строке, вверху или внизу экрана.','Если такого пункта дальше нет, откройте страницу в Safari.<button type="button" class="copy" data-copy>Скопировать ссылку для Safari</button>']);
-    }else{
-      steps.push(['share','Нажмите значок <b>«Поделиться»</b> внизу экрана: квадрат со стрелкой вверх.','В новых iPhone он спрятан за кнопкой <b>⋯</b> рядом с адресом.']);
-    }
-    steps.push(['plus','Пролистайте вниз и выберите <b>«На экран „Домой“»</b>.','Если строки не видно, нажмите <b>«Ещё»</b> в конце списка.']);
-    steps.push(['ok','Нажмите <b>«Добавить»</b> в правом верхнем углу.','Если есть переключатель «Открывать как веб-приложение», оставьте его включённым.']);
-    steps.push(appStep);
-    key='<b>Важно:</b> входите уже из значка на экране. iPhone не переносит вход из Safari в приложение, и его пришлось бы повторить.';
-  }else{
-    inapp=/; wv\)|Instagram|FBAN|FBAV|FB_IAB|Telegram|VKAndroidApp|OKApp/.test(ua);
-    var samsung=/SamsungBrowser/.test(ua);
-    if(inapp){
-      steps.push(['dots','Откройте эту страницу в <b>Chrome</b>: нажмите <b>⋮</b> в углу экрана и выберите <b>«Открыть в браузере»</b>.','Сейчас страница открыта внутри приложения, оттуда поставить её на экран нельзя.<button type="button" class="copy" data-copy>Скопировать ссылку</button>']);
-    }
-    if(samsung){
-      steps.push(['menu','Нажмите <b>≡</b> внизу экрана.','']);
-      steps.push(['plus','Выберите <b>«Добавить страницу на»</b>, затем <b>«Главный экран»</b>.','']);
-    }else{
-      steps.push(['dots','Нажмите <b>⋮</b> в правом верхнем углу браузера.','В Яндекс Браузере это <b>⋮</b> или <b>≡</b> рядом с адресом.']);
-      steps.push(['plus','Выберите <b>«Установить приложение»</b> или <b>«Добавить на главный экран»</b>.','Название пункта зависит от браузера.']);
-    }
-    steps.push(['ok','Подтвердите: <b>«Установить»</b> или <b>«Добавить»</b>.','']);
-    steps.push(appStep);
-    key='Значок появится на экране телефона рядом с другими приложениями. Войти можно уже в нём.';
-  }
-
-  $('steps').innerHTML=steps.map(function(s,i){
-    return '<li><span class="n">'+(i+1)+'</span><span class="t">'+s[1]+(s[2]?'<small>'+s[2]+'</small>':'')+'</span><span class="ico'+(s[0]==='app'?' app':'')+'">'+I[s[0]]+'</span></li>';
-  }).join('');
-  $('key').innerHTML=key;
-  Array.prototype.forEach.call(document.querySelectorAll('[data-copy]'),function(b){
-    b.onclick=function(){
-      var done=function(){b.textContent='Ссылка скопирована';};
-      if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(LINK).then(done,function(){prompt('Скопируйте ссылку',LINK)});
-      else prompt('Скопируйте ссылку',LINK);
-    };
-  });
-
-  // Android Chrome: установка одной кнопкой, когда браузер это позволяет
-  var deferred=null;
-  window.addEventListener('beforeinstallprompt',function(e){
-    if(!android)return;e.preventDefault();deferred=e;$('doInstall').hidden=false;
-  });
-  $('doInstall').onclick=function(){
-    if(!deferred)return;deferred.prompt();
-    deferred.userChoice.then(function(c){if(c&&c.outcome==='accepted'){$('doInstall').hidden=true}deferred=null});
-  };
-  window.addEventListener('appinstalled',function(){$('doInstall').hidden=true;$('done').hidden=false});
-
+  var M=window.ImgInstall&&ImgInstall.mode;
+  if(M==='app'){$('appNote').hidden=false;return}
+  if(M!=='ios'&&M!=='android'){$('deskNote').hidden=false;return}
+  $('ii').innerHTML=ImgInstall.html(false);ImgInstall.bind($('ii'));
   function show(i){$('inst').hidden=!i;$('login').hidden=i;$('showInst').hidden=i;if(i)scrollTo(0,0)}
   var skipped=false;try{skipped=localStorage.getItem('img_install_skip')==='1'}catch(e){}
-  var mid=/other=1|expired=1/.test(location.search);
-  show(!(skipped||mid));
+  show(!(skipped||/other=1|expired=1/.test(location.search)));
   $('skip').onclick=function(){try{localStorage.setItem('img_install_skip','1')}catch(e){}show(false);$('email').focus()};
   $('showInstA').onclick=function(e){e.preventDefault();show(true)};
 })();

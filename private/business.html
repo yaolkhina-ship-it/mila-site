@@ -195,6 +195,22 @@ body.dark-top .top .ed{color:rgba(244,242,238,.6)}
 .sheet .quick{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .sheet .quick button{text-align:center !important;border:1px solid var(--ink);padding:12px 6px;font-size:10px;font-weight:400;letter-spacing:.2em;text-transform:uppercase}
 .sheet .quick button.on{background:var(--ink);color:var(--paper)}
+/* 06.11 «На экран телефона»: шаги из guide/image-install.js */
+.ii-steps{list-style:none;padding:0;margin:26px 0 0;border-top:1px solid var(--ink)}
+.ii-steps li{display:grid;grid-template-columns:34px 1fr 44px;gap:14px;align-items:center;padding:18px 0;border-bottom:1px solid var(--rule)}
+.ii-n{font-family:var(--serif);font-weight:300;font-size:30px;line-height:1;color:var(--bronze)}
+.ii-t{font-size:16px;line-height:1.45;font-weight:300;color:var(--ink)}
+.ii-t small{display:block;margin-top:5px;font-size:13.5px;line-height:1.45;color:var(--mute)}
+.ii-steps b{font-weight:500}
+.ii-ico{width:44px;height:44px;display:flex;align-items:center;justify-content:center;border:1px solid var(--rule);border-radius:11px;color:var(--ink)}
+.ii-ico svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.ii-ico.ii-app{border:0;overflow:hidden}.ii-app img{width:44px;height:44px;border-radius:11px;display:block}
+.ii-key{margin-top:22px;padding:16px 18px;border-left:2px solid var(--bronze);background:var(--paper2);font-size:15px;line-height:1.5;font-weight:300;color:var(--ink2)}
+.ii-key b{font-weight:500;color:var(--ink)}
+.ii-copy{display:block;width:100%;margin-top:12px;border:1px solid var(--ink);padding:13px;font-size:10px;letter-spacing:.2em;text-transform:uppercase;text-align:center !important;color:var(--ink)}
+.ii-install{display:block;width:100%;margin-top:22px;padding:16px;background:var(--ink);color:#C9A96A;font-size:11px;letter-spacing:.28em;text-transform:uppercase;text-align:center !important}
+.ii-done{margin-top:20px;padding:18px;border:1px solid var(--bronze);font-size:16px;font-weight:300}
+.ii-install[hidden],.ii-done[hidden]{display:none !important}
 .sheet h3{display:flex;justify-content:space-between;margin:24px 0 2px;font-size:10px;font-weight:400;letter-spacing:.26em;text-transform:uppercase;color:var(--bronze)}
 .sheet h3 i{font-family:var(--serif);font-size:13px;letter-spacing:0;text-transform:none}
 .sheet .ev{padding:12px 0;grid-template-columns:40px 1fr 18px}
@@ -477,6 +493,7 @@ body.on-cover .view{padding-bottom:0}
     <a href="https://t.me/MilaUshakova_ClubBot?start=support" target="_blank">Поддержка</a>
   </div>
 </div>
+<script src="/guide/image-install.js?v=1"></script>
 <script>
 (function(){
 // Шаг 1: среда и ситуация
@@ -998,7 +1015,17 @@ function books(){
       (b.q ? '<blockquote>' + b.q.map(function(x){ return '<p>' + esc(x) + '</p>'; }).join('') + '</blockquote>' : '') + '</div></li>'; }).join('') +
     '</ol><div class="sig"><i></i><span>Мила Ушакова</span></div></div>');
 }
-var VIEWS = {videos: videos, books: books, portrait: portrait, cover: cover, about: about, intro: intro, s0: step0, s1: step1, s2: step2, s3: step3, s4: step4, tariffs: tariffs};
+// 06.11: как поставить Систему на экран телефона (шаги общие со страницей входа)
+function install(){
+  var M = window.ImgInstall ? ImgInstall.mode : 'desktop', body;
+  if (M === 'app') body = '<p>Система уже стоит на экране вашего телефона и открывается как приложение. Вы сейчас в ней.</p>';
+  else if (M === 'desktop') body = '<p>Систему можно поставить на экран телефона, и она будет открываться как приложение: одним касанием, на весь экран.</p><p>Откройте на телефоне <b>milaushakova.com/vhod</b>, там будет короткая инструкция для вашего телефона.</p>';
+  else body = '<p>Она будет открываться как приложение: одним касанием, на весь экран, без поиска ссылки в почте.</p>' + ImgInstall.html(true);
+  show('<div class="pad"><div class="h2" style="font-size:40px;margin-top:0">На экран <i class="br">телефона</i></div><div class="xp-t" id="iiBox">' + body + '</div>' +
+    '<p class="xp-t" style="margin-top:22px;font-size:14px;color:var(--mute)">Не получается? <a href="https://t.me/MilaUshakova_ClubBot?start=support" target="_blank" rel="noopener" style="color:inherit">Напишите нам</a>, поможем.</p><div class="sig"><i></i><span>Мила Ушакова</span></div></div>');
+  if (window.ImgInstall) ImgInstall.bind(document.getElementById('iiBox'));
+}
+var VIEWS = {install: install, videos: videos, books: books, portrait: portrait, cover: cover, about: about, intro: intro, s0: step0, s1: step1, s2: step2, s3: step3, s4: step4, tariffs: tariffs};
 // 03.11: раздел всегда виден в закреплённой верхней строке, в том числе при прокрутке
 function edLabel(){ var e = document.getElementById('ed'), n = st.view === 's1' ? ENV[st.env || 0].n : /^(s2|s3|s4|portrait)$/.test(st.view) ? envOf(st.sit) : ''; e.textContent = n || 'Система имиджа'; e.classList.toggle('in', !!n); }
 function draw(){ (VIEWS[st.view] || cover)(); edLabel(); document.body.classList.toggle('on-cover', st.view === 'cover'); document.getElementById('dBack').classList.toggle('off', st.view === 'cover'); }
@@ -1023,6 +1050,7 @@ var sheet = document.getElementById('sheet');
 function openMenu(){
   var n = 0; sheet.dataset.k = 'menu';
   sheet.innerHTML = '<div class="grab"></div><div class="quick"><button data-go="cover">Обложка</button><button data-go="about">О проекте</button><button data-go="intro">О Системе</button><button data-go="tariffs">Тарифы</button><button data-go="videos">Видео</button><button data-go="books">Книжная полка</button>' +
+    (window.ImgInstall && ImgInstall.mode === 'app' ? '' : '<button data-go="install" style="grid-column:1/-1">На экран телефона</button>') +
     '<button data-sex="w"' + (st.sex !== 'm' ? ' class="on"' : '') + '>Для женщин</button><button class="soon" disabled>Для мужчин · скоро</button>' +
     (fromSys ? '<button data-sys="1" style="grid-column:1/-1">← В Систему цветовых сочетаний</button>' : '') + '</div>' +
     ENV.map(function(e, i){ return '<h3><span>' + e.n + '</span><i>' + e.r + '</i></h3>' + e.s.map(function(x){ n++;
@@ -1072,6 +1100,7 @@ function onTap(e){
   if (b.dataset.go === 'portrait') return go('portrait', {});
   if (b.dataset.go === 'books') return go('books', {});
   if (b.dataset.go === 'videos') return go('videos', {});
+  if (b.dataset.go === 'install') return go('install', {});
 }
 v.addEventListener('click', onTap);
 // Пункты свёрнуты до названия: на компьютере раскрываются при наведении, на телефоне по тапу
