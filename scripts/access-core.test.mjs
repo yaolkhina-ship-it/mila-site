@@ -15,6 +15,7 @@ function memStore() {
     del: async (k) => { m.delete(k); },
   };
 }
+const SECRET = 's'.repeat(32);
 const NOW = new Date('2026-11-16T10:00:00Z');
 const pay = (o = {}) => ({ payment_status: 'success', customer_email: 'Anna@Mail.ru ', order_id: '1', products: [{ name: 'Система имиджа. База', price: '7000', quantity: '1', sum: '7000' }], ...o });
 
@@ -162,4 +163,25 @@ test('приветственное письмо: тариф, срок, почт�
   assert.match(b.html, /YanaOlkhina/); assert.ok(!/__[A-Z]+__/.test(b.html));
   const p = A.welcomeMail('p@c.ru', { tier: 'premium', until: '2027-05-05T07:00:00Z' });
   assert.match(p.html, /Дресс-код появится скоро/); assert.ok(!/три экспертные/.test(p.html));
+});
+
+// 06.11: вход продлевается сам при открытии
+test('renewSession: свежий токен не трогаем, старый продлеваем с тем же устройством', async () => {
+  const { verifyCode, requestCode, renewSession, currentSession, SESSION_DAYS } = A;
+  const store = memStore(); await store.setJson('acc:r@b.ru', { tier: 'base', until: '2099-01-01T00:00:00Z' });
+  let code; await requestCode(store, 'r@b.ru', SECRET, async (e, c) => { code = c; });
+  const t0 = new Date('2026-11-06T10:00:00Z');
+  const v = await verifyCode(store, 'r@b.ru', code, SECRET, t0);
+  assert.equal(await renewSession(store, v.session, SECRET, new Date(t0.getTime() + 3600e3)), null);
+  const later = new Date(t0.getTime() + 20 * 864e5);
+  const fresh = await renewSession(store, v.session, SECRET, later);
+  assert.ok(fresh);
+  const far = new Date(t0.getTime() + 45 * 864e5); // старый токен уже истёк бы
+  assert.equal((await currentSession(store, v.session, SECRET, far)).email, null);
+  assert.equal((await currentSession(store, fresh, SECRET, far)).email, 'r@b.ru');
+  // вход с другого устройства всё так же отключает это
+  await requestCode(store, 'r@b.ru', SECRET, async (e, c) => { code = c; });
+  await verifyCode(store, 'r@b.ru', code, SECRET, far);
+  assert.equal((await currentSession(store, fresh, SECRET, far)).replaced, true);
+  assert.equal(await renewSession(store, 'мусор', SECRET, later), null);
 });

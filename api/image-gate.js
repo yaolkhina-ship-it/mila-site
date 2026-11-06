@@ -11,14 +11,15 @@ const TYPES = { jpg: 'image/jpeg', jpeg: 'image/jpeg', png: 'image/png', webp: '
 const cookieOf = (req) => (String(req.headers.cookie || '').match(/(?:^|;\s*)ms_s=([^;]+)/) || [])[1];
 
 async function hasAccess(req) {
-  const { currentSession, getAccess, upstashStore } = await import('../lib/access-core.mjs');
+  const { currentSession, getAccess, upstashStore, renewSession, SESSION_DAYS } = await import('../lib/access-core.mjs');
   const secret = process.env.SESSION_SECRET, url = process.env.KV_REST_API_URL, token = process.env.KV_REST_API_TOKEN;
   if (!secret || !url || !token) return { ok: false };
   const store = upstashStore(url, token);
   const { email, replaced } = await currentSession(store, cookieOf(req), secret);
   if (!email) return { ok: false, replaced };
   const a = await getAccess(store, email);
-  return { ok: !!a.active, expired: !a.active && !!a.until };
+  const fresh = a.active ? await renewSession(store, cookieOf(req), secret) : null;
+  return { ok: !!a.active, expired: !a.active && !!a.until, fresh, days: SESSION_DAYS };
 }
 
 function sendFile(req, res, file, name, cache) {
@@ -59,6 +60,7 @@ export default async function handler(req, res) {
   let a;
   try { a = await hasAccess(req); } catch (e) { console.error('gate: store failed'); return res.status(503).send('Сервис временно недоступен. Обновите страницу через минуту.'); }
   if (!a.ok) { res.setHeader('Location', a.expired ? '/vhod?expired=1' : a.replaced ? '/vhod?other=1' : '/vhod'); return res.status(302).end(); }
+  if (a.fresh) res.setHeader('Set-Cookie', `ms_s=${a.fresh}; Path=/; Max-Age=${a.days * 86400}; HttpOnly; Secure; SameSite=Lax`);
   res.setHeader('Content-Type', 'text/html; charset=utf-8');
   return res.status(200).send(fs.readFileSync(path.join(ROOT, 'business.html'), 'utf8'));
 }

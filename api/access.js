@@ -21,7 +21,7 @@ const setCookie = (res, val, age) => res.setHeader('Set-Cookie', `ms_s=${val}; P
 
 export default async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store');
-  const { requestCode, verifyCode, getAccess, currentSession, upstashStore, giftStatus, redeemGift, SESSION_DAYS } = await import('../lib/access-core.mjs');
+  const { requestCode, verifyCode, getAccess, currentSession, renewSession, upstashStore, giftStatus, redeemGift, SESSION_DAYS } = await import('../lib/access-core.mjs');
   const secret = process.env.SESSION_SECRET, url = process.env.KV_REST_API_URL, token = process.env.KV_REST_API_TOKEN;
   if (!secret || !url || !token || !process.env.RESEND_API_KEY) return res.status(503).json({ ok: false, error: 'not-configured' });
   const store = upstashStore(url, token), action = req.query.do, body = req.body || {};
@@ -29,6 +29,8 @@ export default async function handler(req, res) {
     if (action === 'me' && req.method === 'GET') {
       const { email } = await currentSession(store, cookieOf(req), secret);
       if (!email) return res.status(200).json({ signedIn: false });
+      const fresh = await renewSession(store, cookieOf(req), secret);
+      if (fresh) setCookie(res, fresh, SESSION_DAYS * 86400);
       return res.status(200).json({ signedIn: true, email, ...(await getAccess(store, email)) });
     }
     if (action === 'videos' && req.method === 'GET') {
