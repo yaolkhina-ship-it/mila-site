@@ -28,9 +28,11 @@ export default async function handler(req, res) {
   try {
     if (action === 'link' && req.method === 'GET') {
       const r = await linkLogin(store, req.query.t, secret);
-      if (r.ok) setCookie(res, r.session, SESSION_DAYS * 86400);
-      res.setHeader('Location', r.ok ? '/sistem-image' : '/vhod');
-      return res.status(302).end();
+      if (!r.ok) { res.setHeader('Location', '/vhod'); return res.status(302).end(); }
+      // Не 302: встроенные браузеры (Telegram) теряют cookie из ответа-перенаправления. Ставим на обычной странице и переходим скриптом.
+      setCookie(res, r.session, SESSION_DAYS * 86400);
+      res.setHeader('Content-Type', 'text/html; charset=utf-8');
+      return res.status(200).send('<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Система имиджа</title><body style="background:#111;color:#ede8df;font-family:sans-serif;text-align:center;padding-top:40vh">Открываем Систему имиджа…<script>setTimeout(function(){location.replace("/sistem-image")},300)</script><noscript><a href="/sistem-image" style="color:#b8975a">Открыть</a></noscript></body>');
     }
     if (action === 'me' && req.method === 'GET') {
       const { email } = await currentSession(store, cookieOf(req), secret);
