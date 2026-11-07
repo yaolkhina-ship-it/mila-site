@@ -130,16 +130,24 @@ test('тариф по номеру заказа, в том числе при д�
   const c = memStore(); const r = await A.applyPayment(c, pay({ order_id: '1', order_num: 'test', sum: '1000.00', products: [{ name, sum: '1000.00' }] }), NOW);
   assert.equal(r.skipped, 'other-product');
 });
-test('одно устройство: второй вход отключает первый', async () => {
+test('устройства: работают три последних, четвёртый вход отключает первый', async () => {
   const store = memStore(); await store.setJson('acc:a@b.ru', { tier: 'base', until: '2099-01-01T00:00:00Z' });
   const login = async () => { let code; await A.requestCode(store, 'a@b.ru', 'sec', async (e, c) => { code = c; }); return (await A.verifyCode(store, 'a@b.ru', code, 'sec')).session; };
-  const first = await login();
-  assert.equal((await A.currentSession(store, first, 'sec')).email, 'a@b.ru');
-  const second = await login();
+  const first = await login(), second = await login(), third = await login();
+  for (const t of [first, second, third]) assert.equal((await A.currentSession(store, t, 'sec')).email, 'a@b.ru');
+  const fourth = await login();
   const old = await A.currentSession(store, first, 'sec');
   assert.equal(old.email, null); assert.equal(old.replaced, true);
-  assert.equal((await A.currentSession(store, second, 'sec')).email, 'a@b.ru');
+  for (const t of [second, third, fourth]) assert.equal((await A.currentSession(store, t, 'sec')).email, 'a@b.ru');
   assert.equal((await A.currentSession(store, 'мусор', 'sec')).replaced, false);
+});
+test('устройства: старая запись { s } одного устройства читается', async () => {
+  const store = memStore(); await store.setJson('acc:o@b.ru', { tier: 'base', until: '2099-01-01T00:00:00Z' });
+  const tok = A.makeSession('o@b.ru', 'sec', new Date(), 'old1');
+  await store.setJson('sid:o@b.ru', { s: 'old1' });
+  assert.equal((await A.currentSession(store, tok, 'sec')).email, 'o@b.ru');
+  let code; await A.requestCode(store, 'o@b.ru', 'sec', async (e, c) => { code = c; }); await A.verifyCode(store, 'o@b.ru', code, 'sec');
+  assert.equal((await A.currentSession(store, tok, 'sec')).email, 'o@b.ru'); // прежнее устройство не выкинуло
 });
 test('одно устройство: команда работает с нескольких', async () => {
   const store = memStore(); await store.setJson('acc:t@b.ru', { tier: 'premium', until: '2099-01-01T00:00:00Z', team: true });
@@ -179,9 +187,8 @@ test('renewSession: свежий токен не трогаем, старый п
   const far = new Date(t0.getTime() + 45 * 864e5); // старый токен уже истёк бы
   assert.equal((await currentSession(store, v.session, SECRET, far)).email, null);
   assert.equal((await currentSession(store, fresh, SECRET, far)).email, 'r@b.ru');
-  // вход с другого устройства всё так же отключает это
-  await requestCode(store, 'r@b.ru', SECRET, async (e, c) => { code = c; });
-  await verifyCode(store, 'r@b.ru', code, SECRET, far);
+  // три входа с других устройств вытесняют это
+  for (let i = 0; i < 3; i++) { await requestCode(store, 'r@b.ru', SECRET, async (e, c) => { code = c; }); await verifyCode(store, 'r@b.ru', code, SECRET, far); }
   assert.equal((await currentSession(store, fresh, SECRET, far)).replaced, true);
   assert.equal(await renewSession(store, 'мусор', SECRET, later), null);
 });
