@@ -15,7 +15,7 @@ function token(email) {
 }
 
 function valid(email, t) {
-  if (!email || !t || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return false;
+  if (!process.env.UNSUB_SECRET || !email || !t || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return false;
   const a = Buffer.from(token(email)), b = Buffer.from(String(t));
   return a.length === b.length && crypto.timingSafeEqual(a, b);
 }
