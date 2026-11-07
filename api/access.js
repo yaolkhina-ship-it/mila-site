@@ -21,11 +21,17 @@ const setCookie = (res, val, age) => res.setHeader('Set-Cookie', `ms_s=${val}; P
 
 export default async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store');
-  const { requestCode, verifyCode, directLogin, getAccess, currentSession, renewSession, upstashStore, giftStatus, redeemGift, SESSION_DAYS } = await import('../lib/access-core.mjs');
+  const { requestCode, verifyCode, directLogin, linkLogin, getAccess, currentSession, renewSession, upstashStore, giftStatus, redeemGift, SESSION_DAYS } = await import('../lib/access-core.mjs');
   const secret = process.env.SESSION_SECRET, url = process.env.KV_REST_API_URL, token = process.env.KV_REST_API_TOKEN;
   if (!secret || !url || !token || !process.env.RESEND_API_KEY) return res.status(503).json({ ok: false, error: 'not-configured' });
   const store = upstashStore(url, token), action = req.query.do, body = req.body || {};
   try {
+    if (action === 'link' && req.method === 'GET') {
+      const r = await linkLogin(store, req.query.t, secret);
+      if (r.ok) setCookie(res, r.session, SESSION_DAYS * 86400);
+      res.setHeader('Location', r.ok ? '/sistem-image' : '/vhod');
+      return res.status(302).end();
+    }
     if (action === 'me' && req.method === 'GET') {
       const { email } = await currentSession(store, cookieOf(req), secret);
       if (!email) return res.status(200).json({ signedIn: false });

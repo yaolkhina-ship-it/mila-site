@@ -200,3 +200,18 @@ test('вход без кода: только почта из списка и т�
   m.set('acc:other@mail.ru', JSON.stringify({ tier: 'base', until: '2027-05-06T00:00:00Z' }));
   assert.equal((await directLogin(store, 'other@mail.ru', 's', now)).ok, false); // остальные по коду
 });
+
+test('личная ссылка входа: верный секрет и активный доступ', async () => {
+  const { linkLogin, readSession, LOGIN_LINKS } = await import('../lib/access-core.mjs');
+  LOGIN_LINKS[crypto.createHash('sha256').update('test-link').digest('hex')] = 'lanakravtsovaprof@mail.ru';
+  const m = new Map();
+  const store = { getJson: async (k) => (m.has(k) ? JSON.parse(m.get(k)) : null), setJson: async (k, v) => m.set(k, JSON.stringify(v)), del: async (k) => m.delete(k) };
+  const now = new Date('2026-11-07T10:00:00Z');
+  assert.equal((await linkLogin(store, 'test-link', 's', now)).ok, false); // нет доступа
+  m.set('acc:lanakravtsovaprof@mail.ru', JSON.stringify({ tier: 'base', until: '2027-05-06T00:00:00Z' }));
+  const r = await linkLogin(store, 'test-link', 's', now);
+  assert.equal(r.ok, true);
+  assert.equal(readSession(r.session, 's', now), 'lanakravtsovaprof@mail.ru');
+  assert.equal((await linkLogin(store, 'wrong', 's', now)).ok, false);
+  assert.equal((await linkLogin(store, '', 's', now)).ok, false);
+});
