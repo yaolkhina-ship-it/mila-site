@@ -22,6 +22,10 @@
       "use": "@vercel/node"
     },
     {
+      "src": "api/unsub.js",
+      "use": "@vercel/node"
+    },
+    {
       "src": "api/predzapis.js",
       "use": "@vercel/node"
     },
@@ -115,6 +119,10 @@
     {
       "src": "/api/lava-webhook",
       "dest": "/api/lava-webhook.js"
+    },
+    {
+      "src": "/api/unsub",
+      "dest": "/api/unsub.js"
     },
     {
       "src": "/api/predzapis",
