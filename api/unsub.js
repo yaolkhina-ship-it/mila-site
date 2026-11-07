@@ -4,14 +4,14 @@
 //        (rassylka/unsub_guard.py) читают этот флаг и больше не шлют письма на адрес.
 // Почтовые программы (Gmail, Яндекс, Mail.ru) шлют сюда POST по кнопке «Отписаться»
 // из заголовка List-Unsubscribe-Post (One-Click).
-// t = первые 24 символа HMAC-SHA256(RESEND_API_KEY, "unsub:" + email).
+// t = первые 24 символа HMAC-SHA256(UNSUB_SECRET, "unsub:" + email).
 
 const crypto = require('crypto');
 
 const esc = (s) => String(s == null ? '' : s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
 function token(email) {
-  return crypto.createHmac('sha256', process.env.RESEND_API_KEY || '').update('unsub:' + email).digest('hex').slice(0, 24);
+  return crypto.createHmac('sha256', process.env.UNSUB_SECRET || '').update('unsub:' + email).digest('hex').slice(0, 24);
 }
 
 function valid(email, t) {
