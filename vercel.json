@@ -141,6 +141,10 @@
       "dest": "/vhod.html"
     },
     {
+      "src": "/dostup/?",
+      "dest": "/dostup.html"
+    },
+    {
       "src": "/imidzh-[a-z0-9]{4,}/?",
       "dest": "/podarok.html"
     },

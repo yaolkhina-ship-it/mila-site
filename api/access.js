@@ -70,6 +70,22 @@ export default async function handler(req, res) {
       if (r.session) setCookie(res, r.session, r.seconds);
       return res.status(200).json({ ok: true });
     }
+    if (action === 'lava') {
+      // Покупатель Lava открыл ссылку из содержимого продукта и ввёл почту
+      const { claimLava, welcomeMail } = await import('../lib/access-core.mjs');
+      const ip = String(req.headers['x-real-ip'] || req.headers['x-forwarded-for'] || '').split(',')[0].trim();
+      if ((await store.incrExpire('rl:lava:' + ip, 3600)) > 10) return res.status(429).json({ ok: false, error: 'limit' });
+      const r = await claimLava(store, body.t, body.email);
+      console.log('access: lava ' + (r.ok ? (r.again ? 'again' : 'granted ' + r.tier) : r.error));
+      if (!r.ok) return res.status(r.error === 'link' ? 404 : 400).json({ ok: false, error: r.error });
+      if (!r.again) {
+        const mail = (to, subject, html) => fetch('https://api.resend.com/emails', { method: 'POST', headers: { Authorization: 'Bearer ' + process.env.RESEND_API_KEY, 'Content-Type': 'application/json' }, body: JSON.stringify({ from: 'Мила Ушакова <mila@milaushakova.com>', to, reply_to: 'yaolkhina@gmail.com', subject, html }) }).catch(() => {});
+        const w = welcomeMail(r.email, r.access);
+        await mail(r.email, w.subject, w.html);
+        await mail('yaolkhina@gmail.com', `Lava: открыт доступ ${r.tier === 'premium' ? 'Премиум' : 'База'}`, `<p>Покупатель Lava открыл доступ по ссылке из продукта.</p><p>Почта: <b>${String(r.email).replace(/[<>&"]/g, '')}</b><br>Тариф: ${r.tier === 'premium' ? 'Премиум' : 'База'}<br>До: ${String(r.until).slice(0, 10)}</p><p>Сверьте с продажами в Lava.</p>`);
+      }
+      return res.status(200).json({ ok: true, email: r.email, tier: r.tier, until: r.until, again: !!r.again });
+    }
     if (action === 'logout') { setCookie(res, '', 0); return res.status(200).json({ ok: true }); }
     return res.status(404).json({ ok: false });
   } catch (e) {

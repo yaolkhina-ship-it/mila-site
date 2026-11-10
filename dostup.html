@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#111111">
+<title>Доступ · Система имиджа</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0}html,body{background:#111;color:#F4F2EE}
+body{font:300 17px/1.6 Jost,Helvetica,Arial,sans-serif;min-height:100svh;display:flex;align-items:center;justify-content:center;padding:32px max(22px,env(safe-area-inset-left))}
+.w{width:100%;max-width:420px}
+.top{font:400 12px Oswald,sans-serif;letter-spacing:.32em;text-transform:uppercase;display:flex;justify-content:space-between}.top span:last-child{color:#C9A96A}
+h1{font:300 46px/1.05 Oswald,'Arial Narrow',sans-serif;text-transform:uppercase;margin-top:44px}h1 span{color:#C9A96A}
+p{color:#d9d3c9;margin-top:18px}
+label{display:block;font:400 12px Oswald,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:#C9A96A;margin-top:32px}
+input{width:100%;margin-top:10px;padding:16px 14px;background:#0b0b0b;border:1px solid #3a352e;color:#F4F2EE;font:300 18px Jost,sans-serif;border-radius:0}
+input:focus{outline:none;border-color:#C9A96A}
+button,.btn{display:block;width:100%;margin-top:18px;padding:18px;background:#C9A96A;color:#111;border:0;font:500 15px Oswald,sans-serif;letter-spacing:.24em;text-transform:uppercase;text-align:center;text-decoration:none;cursor:pointer}
+button:disabled{opacity:.6}
+.msg{margin-top:16px;color:#E3C48C;min-height:1.6em}
+.small{font-size:14px;color:#8f877b;margin-top:28px}
+.small a{color:#C9A96A}
+</style></head><body><div class="w">
+<div class="top"><span>Mila Ushakova</span><span>Система имиджа</span></div>
+<div id="form">
+<h1>Спасибо<br><span>за покупку</span></h1>
+<p>Укажите почту, которую вы указали при оплате. Доступ откроется сразу, и на эту почту придёт письмо Милы.</p>
+<form id="f"><label for="email">Ваша почта</label><input id="email" type="email" inputmode="email" autocomplete="email" required placeholder="name@mail.ru">
+<button id="go" type="submit">Открыть доступ</button></form>
+<div class="msg" id="msg" role="status"></div>
+</div>
+<div id="done" hidden>
+<h1>Доступ <span>открыт</span></h1>
+<p id="doneText"></p>
+<a class="btn" href="/vhod">Войти в Систему</a>
+</div>
+<p class="small">Вопросы: Telegram <a href="https://t.me/YanaOlkhina">@YanaOlkhina</a></p>
+</div>
+<script>
+var t=new URLSearchParams(location.search).get('t')||'';
+if(!t){document.getElementById('msg').textContent='Ссылка неполная. Откройте её снова из письма Lava или напишите нам.';document.getElementById('go').disabled=true;}
+document.getElementById('f').addEventListener('submit',function(e){e.preventDefault();
+ var b=document.getElementById('go'),m=document.getElementById('msg'),email=document.getElementById('email').value.trim();
+ b.disabled=true;m.textContent='Открываем доступ…';
+ fetch('/api/access?do=lava',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({t:t,email:email})})
+ .then(function(r){return r.json().then(function(d){return [r.status,d]})})
+ .then(function(x){var s=x[0],d=x[1];
+  if(d.ok){var until=d.until?new Date(d.until).toLocaleDateString('ru-RU',{day:'numeric',month:'long',year:'numeric'}):'';
+   document.getElementById('doneText').textContent='Тариф: '+(d.tier==='premium'?'Премиум':'База')+(until?', до '+until:'')+'. Войдите с почтой '+d.email+': на неё придёт код.';
+   document.getElementById('form').hidden=true;document.getElementById('done').hidden=false;return;}
+  b.disabled=false;
+  m.textContent=s===404?'Ссылка недействительна. Напишите нам в Telegram.':s===429?'Слишком много попыток. Попробуйте через час.':d.error==='email'?'Проверьте почту: в ней ошибка.':'Не получилось. Попробуйте ещё раз или напишите нам.';})
+ .catch(function(){b.disabled=false;m.textContent='Нет связи. Попробуйте ещё раз.';});});
+</script>
+</body></html>
