@@ -227,6 +227,19 @@ function tree(S){
     '<p class="muted" style="margin-top:6px">Нажмите на месяц, чтобы раскрыть недели (неделя с пн по вс; если она переходит в следующий месяц, оплаты делятся по месяцам). Покупателей: ' + buyers + '. Рубли — после комиссии Lava, без оплат в валюте. Возвраты не считаются. Пилот: 7 оплат по 39 000 ₽ на карту Милы внесены вручную из таблицы «расчеты» (дата условная — 17.08), 8-я участница платила через Lava в валюте.</p>';
 }
 
+function yesterday(S){
+  var t = new Date(); t.setDate(t.getDate() - 1);
+  var k = t.getFullYear() + '-' + String(t.getMonth()+1).padStart(2,'0') + '-' + String(t.getDate()).padStart(2,'0');
+  var L = S.filter(function(s){ return s.d.slice(0,10) === k; }).sort(function(a,b){ return a.d < b.d ? -1 : 1; });
+  var r = L.reduce(function(a, s){ return a + (s.cur === 'RUB' ? s.sum : 0); }, 0), fx = L.filter(function(s){ return s.cur !== 'RUB'; });
+  var src = function(s){ return s.manual ? s.manual : 'Lava'; };
+  var money = function(s){ return s.cur === 'RUB' ? rub(s.sum) : (Math.round(s.sum*100)/100) + ' ' + (s.cur === 'USD' ? '$' : s.cur === 'EUR' ? '€' : s.cur); };
+  return {k: k, n: L.length,
+    kpi: '<div class="kpi"><small>Вчера · ' + dm(k) + '</small><b>' + L.length + '</b><i>' + rub(r) + (fx.length ? ' + ' + fx.length + ' в валюте' : '') + '</i></div>',
+    table: '<h3>Продажи вчера · ' + dm(k) + '</h3><div class="card">' + (L.length ? '<table><tr><th>Время</th><th>Продукт</th><th class="hide-m">Тариф</th><th class="n">Сумма</th><th class="hide-m">Где</th></tr>' +
+      L.map(function(s){ return '<tr><td>' + s.d.slice(11,16) + '</td><td>' + esc(s.p) + '</td><td class="hide-m">' + esc(s.tariff) + '</td><td class="n">' + money(s) + '</td><td class="hide-m">' + esc(src(s)) + '</td></tr>'; }).join('') + '</table>'
+      : '<p class="muted" style="margin:0">За вчера оплат в системе пока нет. Если отчёт Lava или скрин Продамуса ещё не загружены, они появятся после обновления.</p>') + '</div>'};
+}
 function home(){
   var S = D.sales.filter(ok), now = new Date(), ym = now.toISOString().slice(0,7);
   var last = S.reduce(function(a, s){ return s.d > a ? s.d : a; }, '');
@@ -235,13 +248,16 @@ function home(){
   var sum = function(l){ return l.reduce(function(a, s){ return a + (s.cur === 'RUB' ? s.sum : 0); }, 0); };
   var bp = byProduct(m), bm = byMonth(S), months = Object.keys(bm).sort(), max = Math.max.apply(null, months.map(function(k){ return bm[k].rub; }));
   var emails = {}; S.forEach(function(s){ emails[s.email] = 1; });
+  var Y = yesterday(S);
   return '<h2>Сводка</h2>' +
     '<div class="kpis">' +
+      Y.kpi +
       '<div class="kpi"><small>Оплат за '+mon(lastDay.slice(0,7))+'</small><b>'+m.length+'</b><i>'+rub(sum(m))+' + валюта</i></div>' +
       kpiWeek(S, sum) +
       '<div class="kpi"><small>Всего оплат</small><b>'+S.length+'</b><i>'+rub(sum(S))+' в рублях</i></div>' +
       '<div class="kpi"><small>Покупателей</small><b>'+Object.keys(emails).length+'</b><i>уникальные e-mail</i></div>' +
     '</div>' +
+    Y.table +
     tree(S) +
     '<h3>Этот месяц по продуктам</h3><div class="card"><table><tr><th>Продукт</th><th class="n">Оплат</th><th class="n">Рубли</th><th class="n hide-m">В валюте</th></tr>' +
       Object.keys(bp).sort(function(a,b){ return bp[b].n - bp[a].n; }).map(function(k){ return '<tr><td>'+esc(k)+'</td><td class="n">'+bp[k].n+'</td><td class="n">'+rub(bp[k].rub)+'</td><td class="n hide-m">'+bp[k].fx+'</td></tr>'; }).join('') + '</table></div>' +
