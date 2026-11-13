@@ -79,3 +79,13 @@ test('reset: использованную ссылку можно открыть
   assert.equal((await currentSession(s, b.session, S, now)).email, 'g3@gift.milaushakova.com');
   assert.deepEqual(await redeemGift(s, 'tokr', '', S, g1, now), { ok: false, error: 'used' });
 });
+test('devices: 2 — одна ссылка открывается на двух устройствах, оба работают, третье нет', async () => {
+  const s = mem(); const g = { [hash('tok2d')]: { id: 'g5', tier: 'premium', days: 1, devices: 2 } };
+  const a = await redeemGift(s, 'tok2d', '', S, g, now); assert.equal(a.ok, true);
+  assert.equal((await giftStatus(s, 'tok2d', '', S, g, now)).state, 'new');
+  const b = await redeemGift(s, 'tok2d', '', S, g, now); assert.equal(b.ok, true);
+  assert.equal((await currentSession(s, a.session, S, now)).email, 'g5@gift.milaushakova.com');
+  assert.equal((await currentSession(s, b.session, S, now)).email, 'g5@gift.milaushakova.com');
+  assert.equal((await giftStatus(s, 'tok2d', '', S, g, now)).state, 'used');
+  assert.deepEqual(await redeemGift(s, 'tok2d', '', S, g, now), { ok: false, error: 'used' });
+});
