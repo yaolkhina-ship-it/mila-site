@@ -68,3 +68,14 @@ test('подарок, которого нет в lib/gifts.mjs, Систему �
   await s.setJson('acc:buyer@mail.ru', { tier: 'base', until: '2027-05-01T00:00:00Z' });
   assert.equal((await getAccess(s, 'buyer@mail.ru', now)).active, true);
 });
+test('reset: использованную ссылку можно открыть заново на новом устройстве, старое отключается', async () => {
+  const s = mem(); const g0 = { [hash('tokr')]: { id: 'g3', tier: 'premium', days: 1 } };
+  const a = await redeemGift(s, 'tokr', '', S, g0, now); assert.equal(a.ok, true);
+  assert.equal((await giftStatus(s, 'tokr', '', S, g0, now)).state, 'used');
+  const g1 = { [hash('tokr')]: { id: 'g3', tier: 'premium', days: 1, reset: 1 } };
+  assert.equal((await giftStatus(s, 'tokr', '', S, g1, now)).state, 'new');
+  const b = await redeemGift(s, 'tokr', '', S, g1, now); assert.equal(b.ok, true);
+  assert.equal((await currentSession(s, a.session, S, now)).email, null);
+  assert.equal((await currentSession(s, b.session, S, now)).email, 'g3@gift.milaushakova.com');
+  assert.deepEqual(await redeemGift(s, 'tokr', '', S, g1, now), { ok: false, error: 'used' });
+});
