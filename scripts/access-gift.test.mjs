@@ -52,3 +52,19 @@ test('сбой записи не сжигает ссылку', async () => {
 test('в репозитории нет самой ссылки, только хеш', async () => {
   const fs = await import('node:fs'); const src = fs.readFileSync(new URL('../lib/gifts.mjs', import.meta.url), 'utf8'); assert.match(src, /'[0-9a-f]{64}'/);
 });
+
+// 13.11: короткий доступ в днях и закрытие удалением строки из lib/gifts.mjs
+test('подарок в днях закрывается через заданный срок', async () => {
+  const s = mem(); const g = { [hash('tokd')]: { id: 'g2', tier: 'premium', days: 14 } };
+  assert.equal((await giftStatus(s, 'tokd', '', S, g, now)).days, 14);
+  const a = await redeemGift(s, 'tokd', '', S, g, now); assert.equal(a.ok, true);
+  const u = await currentSession(s, a.session, S, now); assert.equal(u.email, 'g2@gift.milaushakova.com');
+  assert.equal((await getAccess(s, u.email, now)).active, true);
+  assert.equal((await getAccess(s, u.email, new Date(now.getTime() + 15 * 864e5))).active, false);
+});
+test('подарок, которого нет в lib/gifts.mjs, Систему не открывает', async () => {
+  const s = mem(); await s.setJson('acc:g99@gift.milaushakova.com', { tier: 'premium', until: '2027-05-01T00:00:00Z', gift: true });
+  assert.equal((await getAccess(s, 'g99@gift.milaushakova.com', now)).active, false);
+  await s.setJson('acc:buyer@mail.ru', { tier: 'base', until: '2027-05-01T00:00:00Z' });
+  assert.equal((await getAccess(s, 'buyer@mail.ru', now)).active, true);
+});
