@@ -195,6 +195,7 @@ body.dark-top .top .ed{color:rgba(244,242,238,.6)}
 .sheet .quick{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .sheet .quick button{text-align:center !important;border:1px solid var(--ink);padding:12px 6px;font-size:10px;font-weight:400;letter-spacing:.2em;text-transform:uppercase}
 .sheet .quick button.on{background:var(--ink);color:var(--paper)}
+.sheet .quick a.help{grid-column:1/-1;display:block;text-align:center;background:var(--ink);color:var(--paper);padding:13px 6px;font-size:10px;font-weight:400;letter-spacing:.2em;text-transform:uppercase;text-decoration:none}
 /* 06.11 «На экран телефона»: шаги из guide/image-install.js */
 .ii-steps{list-style:none;padding:0;margin:26px 0 0;border-top:1px solid var(--ink)}
 .ii-steps li{display:grid;grid-template-columns:34px 1fr 44px;gap:14px;align-items:center;padding:18px 0;border-bottom:1px solid var(--rule)}
@@ -483,14 +484,14 @@ body.on-cover .view{padding-bottom:0}
     <button class="d-back off" id="dBack" type="button"><span class="ic">&larr;</span>Назад</button>
     <button id="dMenu" type="button"><span class="ic">&#9776;</span>Меню</button>
     <button id="dDocs" type="button" class="d-docs" aria-label="Документы"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6v18h12V7z"/><path d="M14 3v4h4M9 12h6M9 16h6"/></svg></button>
-    <a class="d-sup" href="https://t.me/MilaUshakova_ClubBot?start=support" target="_blank" rel="noopener" aria-label="Написать в Telegram"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 4L3 11.5l6 2.2M21 4l-3.4 16L9.5 15M21 4L9.5 15m0 0v5l3-3.4"/></svg></a>
+    <a class="d-sup" href="https://t.me/YanaOlkhina" target="_blank" rel="noopener" aria-label="По всем вопросам: Telegram @YanaOlkhina"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 4L3 11.5l6 2.2M21 4l-3.4 16L9.5 15M21 4L9.5 15m0 0v5l3-3.4"/></svg></a>
   </nav>
   <div class="sheet-bg" id="sheetBg"></div>
   <div class="sheet" id="sheet"></div>
   <div id="legal">
     <a href="/oferta" target="_blank">Договор оферты</a>
     <a href="/privacy" target="_blank">Политика конфиденциальности</a>
-    <a href="https://t.me/MilaUshakova_ClubBot?start=support" target="_blank">Поддержка</a>
+    <a href="https://t.me/YanaOlkhina" target="_blank">Поддержка</a>
   </div>
 </div>
 <script src="/guide/image-install.js?v=1"></script>
@@ -1022,7 +1023,7 @@ function install(){
   else if (M === 'desktop') body = '<p>Систему можно поставить на экран телефона, и она будет открываться как приложение: одним касанием, на весь экран.</p><p>Откройте на телефоне <b>milaushakova.com/vhod</b>, там будет короткая инструкция для вашего телефона.</p>';
   else body = '<p>Она будет открываться как приложение: одним касанием, на весь экран, без поиска ссылки в почте.</p>' + ImgInstall.html(true);
   show('<div class="pad"><div class="h2" style="font-size:40px;margin-top:0">На экран <i class="br">телефона</i></div><div class="xp-t" id="iiBox">' + body + '</div>' +
-    '<p class="xp-t" style="margin-top:22px;font-size:14px;color:var(--mute)">Не получается? <a href="https://t.me/MilaUshakova_ClubBot?start=support" target="_blank" rel="noopener" style="color:inherit">Напишите нам</a>, поможем.</p><div class="sig"><i></i><span>Мила Ушакова</span></div></div>');
+    '<p class="xp-t" style="margin-top:22px;font-size:14px;color:var(--mute)">Не получается? <a href="https://t.me/YanaOlkhina" target="_blank" rel="noopener" style="color:inherit">Напишите нам</a>, поможем.</p><div class="sig"><i></i><span>Мила Ушакова</span></div></div>');
   if (window.ImgInstall) ImgInstall.bind(document.getElementById('iiBox'));
 }
 var VIEWS = {install: install, videos: videos, books: books, portrait: portrait, cover: cover, about: about, intro: intro, s0: step0, s1: step1, s2: step2, s3: step3, s4: step4, tariffs: tariffs};
@@ -1052,6 +1053,7 @@ function openMenu(){
   sheet.innerHTML = '<div class="grab"></div><div class="quick"><button data-go="cover">Обложка</button><button data-go="about">О проекте</button><button data-go="intro">О Системе</button><button data-go="tariffs">Тарифы</button><button data-go="videos">Видео</button><button data-go="books">Книжная полка</button>' +
     (window.ImgInstall && ImgInstall.mode === 'app' ? '' : '<button data-go="install" style="grid-column:1/-1">На экран телефона</button>') +
     '<button data-sex="w"' + (st.sex !== 'm' ? ' class="on"' : '') + '>Для женщин</button><button class="soon" disabled>Для мужчин · скоро</button>' +
+    '<a class="help" href="https://t.me/YanaOlkhina" target="_blank" rel="noopener">По всем вопросам · Telegram</a>' +
     (fromSys ? '<button data-sys="1" style="grid-column:1/-1">← В Систему цветовых сочетаний</button>' : '') + '</div>' +
     ENV.map(function(e, i){ return '<h3><span>' + e.n + '</span><i>' + e.r + '</i></h3>' + e.s.map(function(x){ n++;
       return '<button class="ev' + (x === st.sit ? ' cur' : '') + '" data-sit="' + esc(x) + '" data-env="' + i + '"><small>' + nn(n) + '</small><b>' + esc(x) + '</b></button>'; }).join(''); }).join('');
@@ -1067,7 +1069,7 @@ document.getElementById('dDocs').addEventListener('click', function(){
   sheet.dataset.k = 'docs';
   sheet.innerHTML = '<div class="grab"></div><h3><span>Документы</span><i>ИП Ольхина Я.Ф.</i></h3><div class="docs">' +
     '<a href="/oferta" target="_blank">Договор оферты</a><a href="/privacy" target="_blank">Политика конфиденциальности</a>' +
-    '<a href="https://t.me/MilaUshakova_ClubBot?start=support" target="_blank" rel="noopener">Поддержка</a></div>';
+    '<a href="https://t.me/YanaOlkhina" target="_blank" rel="noopener">Поддержка</a></div>';
   document.body.classList.add('menu-on');
 });
 
