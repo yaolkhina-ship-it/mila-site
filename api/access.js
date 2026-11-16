@@ -15,7 +15,7 @@ async function sendCode(email, code) {
 }
 
 const VIDEOS = [{ key: 'watch', title: 'Часовой этикет' }, { key: 'accessories', title: 'Этикет аксессуаров' }, { key: 'perfume', title: 'Парфюмерный этикет' }, { key: 'dresscode', title: 'Дресс-код' }];
-const READY = ['watch', 'perfume'];
+const READY = ['watch', 'perfume', 'dresscode'];
 const cookieOf = (req) => (String(req.headers.cookie || '').match(/(?:^|;\s*)ms_s=([^;]+)/) || [])[1];
 const setCookie = (res, val, age) => res.setHeader('Set-Cookie', `ms_s=${val}; Path=/; Max-Age=${age}; HttpOnly; Secure; SameSite=Lax`);
 

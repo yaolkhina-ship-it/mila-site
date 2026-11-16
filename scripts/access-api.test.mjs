@@ -75,5 +75,5 @@ test('видео: идентификаторы получает только п�
   assert.equal(r.out.tier, 'base'); assert.ok(r.out.items.every((v) => v.id === null));
   r = mkRes(); await access({ method: 'GET', query: { do: 'videos' }, headers: { cookie: 'ms_s=' + makeSession('anna@mail.ru', 'ss', new Date(), 'SA') } }, r);
   assert.equal(r.out.tier, 'premium'); assert.equal(r.out.items.find((v) => v.key === 'watch').id, 'W1');
-  assert.equal(r.out.items.find((v) => v.key === 'dresscode').ready, false);
+  assert.equal(r.out.items.find((v) => v.key === 'dresscode').ready, true); assert.equal(r.out.items.find((v) => v.key === 'accessories').ready, false);
 });
