@@ -12,7 +12,7 @@
 <meta name="apple-mobile-web-app-title" content="Система">
 <link rel="stylesheet" href="ux.css?v=1">
 <link rel="icon" href="/guide/icon.svg">
-<link rel="stylesheet" href="app.css?v=14">
+<link rel="stylesheet" href="app.css?v=15">
 <style>
   @font-face{font-family:'Cormorant Garamond';font-style:italic;font-weight:200 300;font-display:swap;src:url(../fonts/cormorant-italic-light.woff) format('woff')}
   @font-face{font-family:'Cormorant Garamond';font-style:normal;font-weight:200 300;font-display:swap;src:url(../fonts/cormorant-normal-light.woff) format('woff')}
@@ -502,6 +502,7 @@ body{background:#0D1A1E;height:100%;}
   <!-- 4 НАВИГАЦИЯ -->
   <div class="pg dk" id="p4">
     <div class="in">
+  <div class="cs-inst" id="csInst" hidden></div>
   <div class="nav-h">Навигация</div>
   <div class="ni-row">
     <div class="ni-new" onclick="scrollToEl('p_trend_satin')"><span class="ni-new-star">✦</span><div class="ni-new-t">Тренды</div><div class="ni-new-s">5 трендов сезона</div><span class="ni-new-b">NEW</span></div>
@@ -4814,6 +4815,33 @@ html{scroll-snap-type:y proximity;}
   syncNew();
 })();
 </script>
+<style>
+/* 16.11 «Установите веб-приложение»: кнопки iPhone / Android, шаги из image-install.js (data-app="color") */
+.cs-inst{margin:0 0 26px;padding-bottom:22px;border-bottom:0.5px solid rgba(201,169,110,0.35);font-family:var(--f);color:#F2EDF0}
+.cs-inst .ii-steps{list-style:none;padding:0;margin:18px 0 0;border-top:0.5px solid rgba(201,169,110,0.45)}
+.cs-inst .ii-steps li{display:grid;grid-template-columns:30px 1fr 42px;gap:12px;align-items:center;padding:14px 0;border-bottom:0.5px solid rgba(242,237,240,0.12)}
+.cs-inst .ii-n{font-size:24px;line-height:1;color:var(--gold)}
+.cs-inst .ii-t{font-size:14px;line-height:1.45;color:#F2EDF0}
+.cs-inst .ii-t small{display:block;margin-top:4px;font-size:12px;color:rgba(242,237,240,0.55)}
+.cs-inst .ii-ico{width:42px;height:42px;display:flex;align-items:center;justify-content:center;border:0.5px solid rgba(242,237,240,0.25);border-radius:10px;color:#F2EDF0}
+.cs-inst .ii-ico svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.cs-inst .ii-ico.ii-app{border:0;overflow:hidden}.cs-inst .ii-app img{width:42px;height:42px;border-radius:10px;display:block}
+.cs-inst .ii-key{margin-top:16px;padding:12px 14px;border-left:1.5px solid var(--gold);background:rgba(201,169,110,0.08);font-size:13px;line-height:1.5;color:rgba(242,237,240,0.85)}
+.cs-inst .ii-copy{display:block;width:100%;margin-top:10px;background:none;border:0.5px solid rgba(242,237,240,0.4);color:#F2EDF0;padding:11px;font-size:10px;letter-spacing:.2em;text-transform:uppercase}
+.cs-inst .ii-install{display:block;width:100%;margin-top:16px;padding:14px;background:var(--gold);color:#0D1A1E;border:0;font-size:11px;letter-spacing:.24em;text-transform:uppercase}
+.cs-inst .ii-done{margin-top:14px;padding:14px;border:0.5px solid var(--gold);font-size:14px}
+.cs-inst .ii-install[hidden],.cs-inst .ii-done[hidden]{display:none !important}
+</style>
+<script src="image-install.js?v=2" data-app="color"></script>
+<script>
+(function(){
+  var b = document.getElementById('csInst');
+  if (!b || !window.ImgInstall || ImgInstall.mode === 'app') return;
+  b.innerHTML = '<div class="nav-h" style="margin-bottom:0">Приложение на телефоне</div>' + ImgInstall.badges();
+  ImgInstall.bindBadges(b, false, false);
+  b.hidden = false;
+})();
+</script>
 <script src="ux.js?v=5"></script>
-<script src="app.js?v=30"></script>
+<script src="app.js?v=31"></script>
 </body></html>

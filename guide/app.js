@@ -158,12 +158,18 @@
       '<a class="a-tile dk" href="' + H + '#/page/p_contrast"><span class="k" style="color:var(--gold)">Разбор по фото</span><span class="t">Контраст внешности</span></a>' +
       '<a class="a-tile" href="' + H + '#/page/p_rule_proportions"><span class="k">Проверка образа</span><span class="t">Правило пропорций</span></a></div>';
   };
+  // 16.11: «Установите веб-приложение на iPhone / Android» (кнопки и шаги из image-install.js, data-app="color")
+  function instBlock() {
+    if (!window.ImgInstall || ImgInstall.mode === 'app') return '';
+    return '<div class="a-sec"><b>Приложение на телефоне</b></div><div class="a-inst" data-ab-root>' + ImgInstall.badges() + '</div>';
+  }
   V.home = function () {
     var h = top('', 'Система цветовых сочетаний');
     h += '<a class="a-mila" style="margin-top:14px" href="' + H + '#/page/p1"><img src="about-photo.jpg" alt=""><div><div class="t" style="margin-top:0">Мила Ушакова</div><div class="s">Персональный стилист и аналитик моды</div></div><span>›</span></a>' +
       '<div class="a-list a-chap">' + [['p2', 'О Системе'], ['p3', 'Как пользоваться'], ['p_bonus', 'Бонус: промокоды партнёров'], ['p6', 'Рекомендации на сезон']].map(function (r) {
         return '<a href="' + H + '#/page/' + r[0] + '"><span class="t">' + r[1] + '</span><span class="n">›</span></a>'; }).join('') +
       '<a href="' + H + '#/tools"><span class="t">Инструменты</span><span class="n">›</span></a></div>';
+    h += instBlock();
     h += newsBar();
     h += imgTeaser(); // «Система имиджа» первым блоком
     h += '<div class="a-sec"><b>Тренды' + (trends.some(function (t) { return t.isNew; }) ? '<em class="a-new">новинка</em>' : '') + '</b><a href="' + H + '#/trends">все ' + trends.length + '</a></div><div class="a-row">' + trends.map(function (t) {
@@ -256,7 +262,7 @@
     var row = function (href, t, n) { return '<a href="' + (href.charAt(0) === '#' ? H + href : href) + '"><span class="t">' + esc(t) + '</span><span class="n">' + (n || '') + ' ›</span></a>'; };
     return top('#/', 'Ещё') + '<h1 class="a-h">Ещё</h1>' +
       '<div class="a-list">' + PAGES.map(function (p) { return row('#/page/' + p[0], p[1]); }).join('') + '</div>' +
-      ctaBlock() +
+      ctaBlock() + instBlock() +
       '<div class="a-sec"><b>Промо от брендов</b></div><div class="a-list">' + promos.map(function (p) { return row('#/page/' + p.id, navText[p.id] || p.id); }).join('') + '</div>' +
       '<div class="a-sec"><b>Категории</b></div><div class="a-list">' + cats.map(function (p) { return row('#/page/' + p.id, navText[p.id] || p.id); }).join('') + '</div>' +
       '<div class="a-list" style="margin-top:20px">' + row('https://t.me/MilaUshakova_ClubBot?start=support', 'Поддержка в Telegram') + row('/oferta', 'Договор оферты') + row('/privacy', 'Политика конфиденциальности') + '</div>' +
@@ -419,6 +425,7 @@
         $$('.a-hint button', av).forEach(function (b) { b.addEventListener('click', function () { inp.value = b.textContent; runSearch(b.textContent); }); });
         if (lastQ) runSearch(lastQ);
       }
+      if (window.ImgInstall) $$('[data-ab-root]', av).forEach(function (r) { ImgInstall.bindBadges(r, false, false); });
       var tk = { home: 'home', pal: 'pal', looks: 'looks', colors: 'pal', color: 'pal', trends: 'trends', trend: 'trends', search: 'search', mine: 'mine' }[v] || '';
       $$('a', tab).forEach(function (a) { a.classList.toggle('on', a.dataset.t === tk); });
       curBase = base;

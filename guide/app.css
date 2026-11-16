@@ -237,3 +237,22 @@ html.feed #ap{padding-bottom:0;}
 .a-imgblk .a-pv-t p{color:#f4f2ee}
 .a-imgblk .a-pv-t p.s{color:rgba(244,242,238,.72)}
 .a-imgblk .a-wait{color:#f4f2ee;border-color:#c9a96e}
+
+/* 16.11 «Установите веб-приложение»: кнопки iPhone / Android и шаги (image-install.js) */
+.a-inst{padding:0 20px 6px}
+.a-inst .ab-row{margin-top:4px}
+.a-inst .ii-steps{list-style:none;padding:0;margin:16px 0 0;border-top:.5px solid var(--gold)}
+.a-inst .ii-steps li{display:grid;grid-template-columns:28px 1fr 42px;gap:12px;align-items:center;padding:14px 0;border-bottom:.5px solid rgba(201,169,110,.25)}
+.a-inst .ii-n{font-size:24px;line-height:1;color:var(--gold2)}
+.a-inst .ii-t{font-size:15px;line-height:1.4;color:var(--deep)}
+.a-inst .ii-t small{display:block;margin-top:4px;font-size:12.5px;line-height:1.4;opacity:.6}
+.a-inst .ii-steps b{font-weight:600}
+.a-inst .ii-ico{width:42px;height:42px;display:flex;align-items:center;justify-content:center;border:.5px solid rgba(13,26,30,.25);border-radius:10px;color:var(--deep)}
+.a-inst .ii-ico svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.a-inst .ii-ico.ii-app{border:0;overflow:hidden}.a-inst .ii-app img{width:42px;height:42px;border-radius:10px;display:block}
+.a-inst .ii-key{margin-top:14px;padding:12px 14px;border-left:1.5px solid var(--gold);background:rgba(201,169,110,.1);font-size:13.5px;line-height:1.5;color:var(--deep)}
+.a-inst .ii-copy{display:block;width:100%;margin-top:10px;background:none;border:.5px solid var(--deep);color:var(--deep);padding:11px;font-size:10px;letter-spacing:.2em;text-transform:uppercase}
+.a-inst .ii-install{display:block;width:100%;margin-top:14px;padding:14px;background:var(--deep);color:var(--gold);border:0;font-size:11px;letter-spacing:.24em;text-transform:uppercase}
+.a-inst .ii-done{margin-top:14px;padding:14px;border:.5px solid var(--gold);font-size:14px}
+.a-inst .ii-install[hidden],.a-inst .ii-done[hidden]{display:none !important}
+.a-inst .ab-note{color:var(--deep)}

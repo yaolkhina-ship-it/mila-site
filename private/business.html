@@ -494,7 +494,7 @@ body.on-cover .view{padding-bottom:0}
     <a href="https://t.me/YanaOlkhina" target="_blank">Поддержка</a>
   </div>
 </div>
-<script src="/guide/image-install.js?v=1"></script>
+<script src="/guide/image-install.js?v=2"></script>
 <script>
 (function(){
 // Шаг 1: среда и ситуация
@@ -1020,11 +1020,11 @@ function books(){
 function install(){
   var M = window.ImgInstall ? ImgInstall.mode : 'desktop', body;
   if (M === 'app') body = '<p>Система уже стоит на экране вашего телефона и открывается как приложение. Вы сейчас в ней.</p>';
-  else if (M === 'desktop') body = '<p>Систему можно поставить на экран телефона, и она будет открываться как приложение: одним касанием, на весь экран.</p><p>Откройте на телефоне <b>milaushakova.com/vhod</b>, там будет короткая инструкция для вашего телефона.</p>';
-  else body = '<p>Она будет открываться как приложение: одним касанием, на весь экран, без поиска ссылки в почте.</p>' + ImgInstall.html(true);
+  else if (M === 'desktop') body = '<p>Систему можно поставить на экран телефона, и она будет открываться как приложение: одним касанием, на весь экран.</p>' + ImgInstall.badges();
+  else body = '<p>Она будет открываться как приложение: одним касанием, на весь экран, без поиска ссылки в почте.</p>' + ImgInstall.badges();
   show('<div class="pad"><div class="h2" style="font-size:40px;margin-top:0">На экран <i class="br">телефона</i></div><div class="xp-t" id="iiBox">' + body + '</div>' +
     '<p class="xp-t" style="margin-top:22px;font-size:14px;color:var(--mute)">Не получается? <a href="https://t.me/YanaOlkhina" target="_blank" rel="noopener" style="color:inherit">Напишите нам</a>, поможем.</p><div class="sig"><i></i><span>Мила Ушакова</span></div></div>');
-  if (window.ImgInstall) ImgInstall.bind(document.getElementById('iiBox'));
+  if (window.ImgInstall && M !== 'app') ImgInstall.bindBadges(document.getElementById('iiBox'), true, true);
 }
 var VIEWS = {install: install, videos: videos, books: books, portrait: portrait, cover: cover, about: about, intro: intro, s0: step0, s1: step1, s2: step2, s3: step3, s4: step4, tariffs: tariffs};
 // 03.11: раздел всегда виден в закреплённой верхней строке, в том числе при прокрутке

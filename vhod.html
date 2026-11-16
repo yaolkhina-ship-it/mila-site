@@ -63,11 +63,12 @@ footer{padding:18px 16px calc(24px + env(safe-area-inset-bottom));text-align:cen
     <div id="msg" role="alert"></div>
     <p class="tip" id="showInst" hidden><a href="#" id="showInstA">Как поставить Систему на экран телефона</a></p>
     <p class="tip" id="deskNote" hidden>На телефоне Систему можно поставить на экран как приложение: откройте milaushakova.com/vhod на телефоне, там будет короткая инструкция.</p>
+    <div id="deskAb"></div>
     <p style="margin-top:22px;font-size:15px">Ещё нет доступа? <a href="/image" style="color:#C9A96A">Открыть Систему имиджа</a></p>
   </section>
 </main>
 <footer><a href="/oferta">Договор оферты</a> · <a href="/privacy">Политика конфиденциальности</a> · <a href="https://t.me/MilaUshakova_ClubBot?start=support">Поддержка</a><br>© 2026 · ИП Ольхина Я.Ф., ИНН 222411003828, ОГРНИП 326220200112474</footer>
-<script src="/guide/image-install.js?v=1"></script>
+<script src="/guide/image-install.js?v=2"></script>
 <script>
 if(/tariff/.test(location.hash))location.replace('/tariffs');
 var $=function(i){return document.getElementById(i)},NEXT='/sistem-image';
@@ -85,8 +86,8 @@ $('back').onclick=function(){say('');$('f2').hidden=true;$('f1').hidden=false};
 (function(){
   var M=window.ImgInstall&&ImgInstall.mode;
   if(M==='app'){$('appNote').hidden=false;return}
-  if(M!=='ios'&&M!=='android'){$('deskNote').hidden=false;return}
-  $('ii').innerHTML=ImgInstall.html(false);ImgInstall.bind($('ii'));
+  if(M!=='ios'&&M!=='android'){$('deskNote').hidden=false;$('deskAb').innerHTML=ImgInstall.badges();ImgInstall.bindBadges($('deskAb'),false,false);return}
+  $('ii').innerHTML=ImgInstall.badges();ImgInstall.bindBadges($('ii'),false,true);
   function show(i){$('inst').hidden=!i;$('login').hidden=i;$('showInst').hidden=i;if(i)scrollTo(0,0)}
   var skipped=false;try{skipped=localStorage.getItem('img_install_skip')==='1'}catch(e){}
   show(!(skipped||/other=1|expired=1/.test(location.search)));
