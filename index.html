@@ -347,11 +347,10 @@ header.hd.is-solid{
   .cine-cap{padding:5.5rem 0 calc(3.75rem + env(safe-area-inset-bottom,0px))}
   .cine h2{font-size:clamp(34px,10vw,48px);max-width:11ch}
   .cine-lead{max-width:32ch;letter-spacing:.03em}
-  .cine-about .cine-media{object-position:50% 12%}
-  .cine-about .cine-cap{padding:5rem 0 calc(3.25rem + env(safe-area-inset-bottom,0px))}
-  .cine-list{max-width:34ch;gap:.5rem}
-  .cine-list p{font-size:12px;letter-spacing:.02em}
   .cine-projects .cine-media{object-position:50% 26%}
+  .about-grid{grid-template-columns:1fr;gap:2rem;padding:5.5rem 0 3.5rem}
+  .about-photo{order:-1;max-height:72vh}
+  .about-list{max-width:none}
   .hd .row{padding-block:20px 14px;gap:.65rem .85rem}
   .monogram{font-size:24px;font-weight:400}
   .nav-desk{gap:clamp(14px,3.2vw,22px)}
@@ -456,43 +455,101 @@ header.hd.is-solid{
   width:48px;height:1px;
   background:rgba(255,255,255,.85);
 }
-.cine-about{
-  min-height:100svh;
+/* Обо мне: белый фон + портрет рядом, не поверх фото */
+.about{
+  background:var(--paper);
+  color:var(--ink);
+  scroll-margin-top:0;
 }
-.cine-about .cine-media{object-position:52% 18%}
-.cine-about .cine-cap{
-  justify-content:flex-end;
-  min-height:100svh;
-  height:auto;
-  padding-top:clamp(5.5rem,12vh,8rem);
-  padding-bottom:calc(3.5rem + env(safe-area-inset-bottom,0px));
+.about-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);
+  gap:clamp(1.75rem,4vw,4.5rem);
+  align-items:center;
+  padding:clamp(5.5rem,10vh,7.5rem) 0 clamp(3.5rem,6vh,5.5rem);
 }
-.cine-about h2{max-width:10ch}
-.cine-about .cine-lead{max-width:36ch}
-.cine-list{
-  margin:1rem 0 0;
-  max-width:42ch;
+.about-copy{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  text-align:left;
+  min-width:0;
+}
+.about h2{
+  margin:0;
+  font-family:var(--serif);
+  font-weight:400;
+  font-size:clamp(40px,6vw,72px);
+  line-height:.9;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  max-width:10ch;
+  text-align:left;
+  font-optical-sizing:auto;
+  -webkit-font-smoothing:antialiased;
+}
+.about-lead{
+  margin:1.15rem 0 0;
+  max-width:36ch;
+  font-family:var(--f);
+  font-size:clamp(13px,1.35vw,15px);
+  font-weight:300;
+  line-height:1.65;
+  letter-spacing:.04em;
+  color:var(--ink);
+  text-align:left;
+}
+.about-list{
+  margin:1.15rem 0 0;
+  max-width:46ch;
   display:flex;
   flex-direction:column;
   gap:.55rem;
   text-align:left;
 }
-.cine-list p{
+.about-list p{
   margin:0;
   font-family:var(--f);
-  font-size:clamp(12px,1.2vw,13.5px);
+  font-size:clamp(12px,1.15vw,13.5px);
   font-weight:300;
   line-height:1.55;
   letter-spacing:.03em;
-  color:rgba(255,255,255,.86);
+  color:rgba(17,17,17,.78);
+}
+.about-link{
+  margin-top:1.45rem;
+  font-family:var(--f);
+  font-size:10px;font-weight:300;
+  letter-spacing:.24em;text-transform:uppercase;
+  color:var(--gold);
+  border-bottom:1px solid transparent;
+  transition:border-color .2s,color .2s;
+}
+.about-link:hover{border-color:var(--gold);color:var(--ink)}
+.about-rule{
+  margin-top:1.25rem;
+  width:48px;height:1px;
+  background:rgba(17,17,17,.55);
+}
+.about-photo{
+  position:relative;
+  min-width:0;
+  align-self:stretch;
+  background:var(--soft);
+}
+.about-photo picture,
+.about-photo img{
+  display:block;
+  width:100%;
+  height:100%;
+  min-height:min(78vh,820px);
+  object-fit:cover;
+  object-position:52% 18%;
 }
 .cine-projects .cine-media{object-position:46% 30%}
 @media (min-width:900px){
   .cine-cap{padding:8rem 0 6.5rem}
-  .cine-about .cine-cap{padding:7rem 0 5.5rem}
-  .cine-about .cine-media{object-position:48% 14%}
   .cine-projects .cine-media{object-position:42% 28%}
-  .cine-list{max-width:46ch;gap:.6rem}
 }
 
 .docs{
@@ -574,28 +631,32 @@ header.hd.is-solid{
     </div></div>
   </section>
 
-  <section class="cine cine-about" id="about" aria-label="Обо мне">
-    <picture>
-      <source srcset="about-mila-portrait.webp" type="image/webp">
-      <img class="cine-media" src="about-mila-portrait.jpg" alt="Мила Ушакова" width="947" height="1280" loading="lazy" decoding="async">
-    </picture>
-    <div class="cine-cap g"><div class="in">
-      <h2>Обо мне</h2>
-      <p class="cine-lead">Международный стилист, fashion-журналист и аналитик индустрии моды.</p>
-      <div class="cine-list">
-        <p>Аккредитована на неделях моды в Париже, Милане и Копенгагене.</p>
-        <p>Автор публикаций в ведущих международных fashion- и деловых изданиях.</p>
-        <p>Изучаю моду в контексте культуры и общественных изменений, а стиль: как образ жизни, способ мышления и инструмент коммуникации.</p>
-        <p>Разрабатываю авторские цифровые продукты, объединяющие стилистику, психологию восприятия и современные технологии.</p>
-        <p>Основатель закрытого fashion-клуба «В моём стиле».</p>
-        <p>Платформы по изучению цвета «Система Цветовых сочетаний».</p>
-        <p>Приложения по имиджу «Система Имиджа».</p>
-        <p>Работаю с частными клиентами.</p>
-        <p>Спикер.</p>
+  <section class="about g" id="about" aria-label="Обо мне">
+    <div class="in about-grid">
+      <div class="about-copy">
+        <h2>Обо мне</h2>
+        <p class="about-lead">Международный стилист, fashion-журналист и аналитик индустрии моды.</p>
+        <div class="about-list">
+          <p>Аккредитована на неделях моды в Париже, Милане и Копенгагене.</p>
+          <p>Автор публикаций в ведущих международных fashion- и деловых изданиях.</p>
+          <p>Изучаю моду в контексте культуры и общественных изменений, а стиль: как образ жизни, способ мышления и инструмент коммуникации.</p>
+          <p>Разрабатываю авторские цифровые продукты, объединяющие стилистику, психологию восприятия и современные технологии.</p>
+          <p>Основатель закрытого fashion-клуба «В моём стиле».</p>
+          <p>Платформы по изучению цвета «Система Цветовых сочетаний».</p>
+          <p>Приложения по имиджу «Система Имиджа».</p>
+          <p>Работаю с частными клиентами.</p>
+          <p>Спикер.</p>
+        </div>
+        <a class="about-link" href="/booking">Запись на консультацию</a>
+        <div class="about-rule" aria-hidden="true"></div>
       </div>
-      <a class="cine-link" href="https://www.milaushakova.com/booking">Запись на консультацию</a>
-      <div class="cine-rule" aria-hidden="true"></div>
-    </div></div>
+      <div class="about-photo">
+        <picture>
+          <source srcset="about-mila-portrait.webp" type="image/webp">
+          <img src="about-mila-portrait.jpg" alt="Мила Ушакова" width="947" height="1280" loading="lazy" decoding="async">
+        </picture>
+      </div>
+    </div>
   </section>
 
   <section class="cine cine-projects" id="projects" aria-label="Проекты">
@@ -628,6 +689,8 @@ header.hd.is-solid{
   const closeBtn = document.querySelector('.nav-close');
   const hint = document.getElementById('ab-hint');
   const abBtns = panel.querySelectorAll('[data-ab]');
+  const hd = document.getElementById('hd');
+  const hero = document.querySelector('.hero');
   let deferred = null;
   let cur = '';
 
@@ -648,6 +711,14 @@ header.hd.is-solid{
   closeBtn.addEventListener('click', () => setOpen(false));
   panel.querySelectorAll('.nav-links a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
+
+  const syncHd = () => {
+    if (!hd || !hero) return;
+    hd.classList.toggle('is-solid', window.scrollY > hero.offsetHeight - 64);
+  };
+  syncHd();
+  window.addEventListener('scroll', syncHd, {passive:true});
+  window.addEventListener('resize', syncHd);
 
   const iosHint = 'Поделиться → На экран «Домой». В Safari: квадрат со стрелкой вверх внизу экрана, затем «На экран „Домой“» и «Добавить».';
   const androidHint = 'В Chrome: ⋮ → «Установить приложение» или «Добавить на главный экран».';
