@@ -44,26 +44,23 @@ html{background:#0D1A1E;}
 .site-footer a{color:var(--muted);text-decoration:underline;font-size:11px;letter-spacing:0.1em;transition:color 0.2s;}
 .site-footer a:hover{color:var(--ochre);}
 
-/* ══ PAGE 1 ══ фон: шляпа + синий веер; текст в чёрных зонах */
+/* ══ PAGE 1 ══ фон: шляпа + синий веер (hi-res); текст справа в чёрном, без вуали на фото */
 #page1{position:relative;overflow:hidden;background:#000;}
 .hero-bg{
   position:absolute;inset:0;z-index:0;
   background-color:#000;
-  background-image:url('/guide/color-bg-fan.jpg');
+  background-image:url('/guide/color-bg-fan.webp');
+  background-image:image-set(
+    url('/guide/color-bg-fan.webp') type('image/webp'),
+    url('/guide/color-bg-fan.jpg') type('image/jpeg')
+  );
   background-size:cover;
   background-repeat:no-repeat;
-  /* держим шляпу и веер в кадре, справа оставляем чёрное */
-  background-position:32% 28%;
+  /* шляпа сверху, веер слева снизу; справа чёрное поле под текст */
+  background-position:28% 35%;
 }
-/* лёгкая вуаль только справа/снизу под текст, веер не глушим */
-.hero-bg::after{
-  content:'';
-  position:absolute;inset:0;
-  background:
-    linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 42%, rgba(0,0,0,.35) 72%, rgba(0,0,0,.55) 100%),
-    linear-gradient(180deg, rgba(0,0,0,.25) 0%, rgba(0,0,0,0) 22%, rgba(0,0,0,0) 48%, rgba(0,0,0,.45) 100%);
-  pointer-events:none;
-}
+/* без затемнения: атмосфера рефа, только чёрный фон страницы */
+.hero-bg::after{content:none;display:none;}
 .hero-content{
   position:relative;z-index:2;flex:1;
   display:flex;flex-direction:column;
@@ -80,7 +77,7 @@ html{background:#0D1A1E;}
   font-size:clamp(40px,6.8vw,78px);
   font-weight:400;line-height:0.92;letter-spacing:.06em;
   text-transform:uppercase;color:#fff;
-  text-shadow:0 2px 28px rgba(0,0,0,.85);
+  text-shadow:0 1px 18px rgba(0,0,0,.55);
   margin:0;max-width:14ch;
 }
 .hero-mid{display:flex;flex-direction:column;align-items:flex-end;gap:8px;max-width:28ch;}
@@ -148,8 +145,8 @@ html{background:#0D1A1E;}
 .logo-mark{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:13px;letter-spacing:0.38em;text-transform:uppercase;text-align:center;color:rgba(255,255,255,0.88);}
 
 /* ══ PAGE 2 — портировано из color-guide-osen-zima.html один в один ══ */
-#page2 .serif{font-family:'Bodoni Moda',Didot,'Times New Roman',serif;font-weight:400;}
-#page2 .p2sans{font-family:'Montserrat','Helvetica Neue',Arial,sans-serif;font-weight:300;}
+#page2 .serif{font-family:'Cormorant Garamond', Georgia, 'Times New Roman', serif;}
+#page2 .p2sans{font-family:'PT Serif', Georgia, 'Times New Roman', serif;}
 #page2 .tracked{letter-spacing:0.2em;text-transform:uppercase;}
 #page2 .link-under{border-bottom:1px solid currentColor;padding-bottom:2px;}
 #page2 .link-under:hover{opacity:0.6;}
@@ -205,14 +202,9 @@ html{background:#0D1A1E;}
   #page2 .footer-legal{flex-wrap:wrap !important;gap:10px 20px !important;}
 }
 
-/* MOBILE: веер по центру кадра, текст внизу справа в чёрном */
+/* MOBILE: кадр без сжатия атмосферы, текст справа снизу */
 @media(max-width:640px){
-  .hero-bg{background-position:38% 22%;}
-  .hero-bg::after{
-    background:
-      linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.2) 55%, rgba(0,0,0,.55) 100%),
-      linear-gradient(180deg, rgba(0,0,0,.2) 0%, rgba(0,0,0,0) 30%, rgba(0,0,0,.55) 100%);
-  }
+  .hero-bg{background-position:34% 30%;}
   .hero-content{padding:88px 20px calc(28px + env(safe-area-inset-bottom,0px));gap:14px;align-items:flex-end;text-align:right;}
   .hero-title{font-size:clamp(34px,11vw,48px);max-width:12ch;}
   .hero-features{max-width:100%;}
@@ -249,7 +241,7 @@ html{background:#0D1A1E;}
 .hero-proof-label{font-size:9px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-top:5px;}
 .btn-white{animation:fadeUp 0.7s 0.45s both ease-out;}
 </style>
-<link rel="stylesheet" href="/site-chrome.css?v=qa1">
+<link rel="stylesheet" href="/site-chrome.css?v=qa2">
 <style>
 .social-br{position:fixed;right:max(14px,env(safe-area-inset-right,0px));bottom:max(18px,env(safe-area-inset-bottom,0px));z-index:10070;writing-mode:vertical-rl;transform:rotate(180deg);font-family:'Montserrat','Helvetica Neue',Arial,sans-serif;font-size:11px;font-weight:300;letter-spacing:.22em;text-transform:uppercase;color:#C9A96A;background:none;border:none;padding:0;box-shadow:none;text-decoration:none;transition:color .2s;}
 .social-br:hover{color:#fff}
@@ -1115,7 +1107,7 @@ if (window.location.hash === '#privacy') {
   <div style="background:#f5efe8;border-radius:16px;padding:32px;max-width:480px;width:100%;position:relative;max-height:90vh;overflow-y:auto;box-shadow:0 24px 60px rgba(0,0,0,0.5);">
     <button onclick="document.getElementById('ym-modal').style.display='none'" style="position:absolute;top:16px;right:16px;background:none;border:none;color:#2a1535;font-size:24px;cursor:pointer;line-height:1;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;">×</button>
 
-    <p style="margin:0 0 4px;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#C9A96A;font-family:'Montserrat',sans-serif;font-weight:300;">Система цветовых сочетаний</p>
+    <p style="margin:0 0 4px;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#c97184;font-family:Georgia,serif;">Система цветовых сочетаний</p>
     <h2 style="margin:0 0 24px;font-size:22px;font-weight:400;color:#2a1535;font-family:Georgia,serif;">Оформление покупки</h2>
 
     <div style="background:#fff;border-radius:10px;padding:16px 20px;margin-bottom:24px;display:flex;justify-content:space-between;align-items:center;">
@@ -1129,19 +1121,19 @@ if (window.location.hash === '#privacy') {
       type="email"
       placeholder="your@email.com"
       style="width:100%;box-sizing:border-box;padding:14px 16px;border:1.5px solid #ddd;border-radius:8px;font-size:15px;font-family:Georgia,serif;color:#2a1535;outline:none;margin-bottom:6px;transition:border-color 0.2s;"
-      onfocus="this.style.borderColor='#C9A96A'"
+      onfocus="this.style.borderColor='#c97184'"
       onblur="this.style.borderColor='#ddd'"
     >
-    <p id="email-error" style="display:none;color:#C9A96A;font-size:12px;margin:0 0 12px;">Введите корректный email</p>
+    <p id="email-error" style="display:none;color:#c97184;font-size:12px;margin:0 0 12px;">Введите корректный email</p>
 
     <p style="font-size:12px;color:#999;margin:0 0 20px;font-family:Georgia,serif;">Ссылка на гайд и чек об оплате придут на этот адрес сразу после покупки</p>
 
     <button
       id="pay-btn"
       onclick="startPayment()"
-      style="width:100%;background:#C9A96A;color:#111;border:none;border-radius:0;padding:16px;font-size:13px;letter-spacing:0.16em;text-transform:uppercase;cursor:pointer;font-family:'Montserrat',sans-serif;font-weight:300;transition:background 0.2s;"
+      style="width:100%;background:#c97184;color:#fff;border:none;border-radius:8px;padding:16px;font-size:15px;letter-spacing:0.08em;cursor:pointer;font-family:Georgia,serif;transition:background 0.2s;"
       onmouseover="this.style.background='#b85f72'"
-      onmouseout="this.style.background='#C9A96A'"
+      onmouseout="this.style.background='#c97184'"
     >
       Оплатить 1 990 ₽
     </button>
@@ -1229,9 +1221,9 @@ async function startPayment() {
   background: var(--ochre-light, #c9a84c);
   color: #000;
 }
-#ym-modal .ym-btn-pay { background: #C9A96A !important; border-color: #C9A96A !important; }
+#ym-modal .ym-btn-pay { background: #c97184 !important; border-color: #c97184 !important; }
 #ym-modal .ym-btn-pay:hover { background: #d19a6a !important; border-color: #d19a6a !important; }
 </style>
   </div>
 </div>
-<script src="/site-chrome.js?v=qa1" defer></script>
+<script src="/site-chrome.js?v=qa2" defer></script>
