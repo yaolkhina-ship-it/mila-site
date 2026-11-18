@@ -123,7 +123,16 @@ body.on-cover .view{padding-bottom:0}
 .app:has(.vc.bd.on) .wall figure{background:#F7F3EA}
 @media (prefers-reduced-motion:reduce){.app::after{transition:none}}
 .top button,.cov button{background:none;border-left:0;border-right:0;border-top:0;padding-left:0;padding-right:0;padding-top:0;color:inherit;cursor:pointer}.top .tmenu{border:0;padding:0;line-height:0;color:#F4F2EE}
-</style></head><body class="on-cover dark-top"><div class="app">
+</style><link rel="stylesheet" href="/site-chrome.css">
+<style>body{padding-top:0 !important}body.has-mu-chrome{padding-top:0 !important}.mu-hd{color:#111}.mu-hd:not(.is-solid){color:#111}</style>
+<style id="mu-image-nav">
+body.has-mu-chrome{padding-top:0 !important}
+.mu-hd{background:transparent !important;border-bottom:none !important;color:#111 !important;backdrop-filter:none !important}
+.mu-hd .mu-nav a{color:#111}
+.mu-hd .mu-menu-btn{color:#111}
+.social-br{color:#C9A96A}
+.social-br:hover{color:#111}
+</style></head><body class="mu-ink-nav" class="on-cover dark-top"><div class="app">
 
 <div class="top"><span class="logo">Mila Ushakova</span><span class="ed" id="ed">Система имиджа</span><button class="tmenu" id="tMenu" type="button" aria-label="Меню"><svg viewBox="0 0 24 16" width="24" height="16" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M0 1h24M0 8h24M0 15h24"/></svg></button></div>
 <div id="v"><div class="view"><div class="cov sl"><img class="col" src="l/cover.jpg" alt="" fetchpriority="high"><div class="in">
@@ -189,4 +198,5 @@ body.on-cover .view{padding-bottom:0}
 var mn=document.getElementById('mn');document.getElementById('tMenu').onclick=function(){mn.hidden=false};document.getElementById('mnX').onclick=function(){mn.hidden=true};mn.addEventListener('click',function(e){if(e.target.tagName==='A')mn.hidden=true});
 document.querySelectorAll('[data-to]').forEach(function(b){b.addEventListener('click',function(){document.querySelector(b.dataset.to).scrollIntoView({behavior:'smooth'})})});
 var LAVA={b1:'',b2:''};['b1','b2'].forEach(function(k){var a=document.getElementById(k);if(LAVA[k])a.href=LAVA[k];else a.addEventListener('click',function(e){e.preventDefault();var d=document.getElementById('dev');d.style.display='block';d.scrollIntoView({block:'center'})})});
-</script></body></html>
+</script><script src="/site-chrome.js" defer></script>
+</body></html>

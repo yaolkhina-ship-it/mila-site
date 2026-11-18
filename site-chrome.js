@@ -1,16 +1,16 @@
 (() => {
   const FONT_HREF = 'https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400&family=Montserrat:wght@300;400;500&display=swap';
-  // Верхнее меню: без «Проекты». Гамбургер: с «Проекты».
+  // Верхнее меню без Клуба/Проектов/Лекций. Гамбургер: полный список.
   const TOP_LINKS = [
     {href: '/about', label: 'Обо мне'},
     {href: '/color-guide', label: 'Система цвета'},
     {href: '/image', label: 'Система имиджа'},
-    {href: 'https://t.me/MilaUshakova_ClubBot?start=club', label: 'Клуб', blank: true},
     {href: 'https://t.me/MilaUshakova_ClubBot?start=support', label: 'Контакты', blank: true}
   ];
   const PANEL_LINKS = [
     {href: '/about', label: 'Обо мне'},
     {href: '/projects', label: 'Проекты'},
+    {href: '/lekcii', label: 'Лекции'},
     {href: '/color-guide', label: 'Система цвета'},
     {href: '/image', label: 'Система имиджа'},
     {href: 'https://t.me/MilaUshakova_ClubBot?start=club', label: 'Клуб', blank: true},
@@ -77,6 +77,21 @@
 
     document.body.prepend(panel);
     document.body.prepend(header);
+    if (!document.querySelector('a.social-br')) {
+      const care = document.createElement('a');
+      care.className = 'social-br';
+      care.href = 'https://t.me/MilaUshakova_ClubBot?start=support';
+      care.target = '_blank';
+      care.rel = 'noopener';
+      care.textContent = 'Служба заботы';
+      document.body.appendChild(care);
+    }
+    // на светлых страницах — solid шапка
+    const dark = document.body.matches('.page, .mu-dark') || !!document.querySelector('.hero-bg, .hero, #page1.page.active');
+    if (document.body.getAttribute('data-mu-solid') === '1' || !dark) header.classList.add('is-solid');
+    else document.body.classList.add('mu-dark');
+    // image/light: white text would fail — force solid
+    if (header.classList.contains('is-solid')) document.body.classList.remove('mu-dark');
 
     const btn = header.querySelector('.mu-menu-btn');
     const closeBtn = panel.querySelector('.mu-close');

@@ -233,6 +233,18 @@
       "dest": "/guide/oplata2/index.html"
     },
     {
+      "src": "/lekcii/?",
+      "dest": "/lekcii.html"
+    },
+    {
+      "src": "/masshtab/?",
+      "dest": "/masshtab.html"
+    },
+    {
+      "src": "/uverennost/?",
+      "dest": "/uverennost.html"
+    },
+    {
       "src": "/lectures",
       "dest": "/lectures.html"
     },

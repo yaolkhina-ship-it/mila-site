@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Лекции и эфиры | Мила Ушакова</title>
+<meta name="description" content="Лекции, подкасты и fashion-эфиры Милы Ушаковой.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400&family=Montserrat:wght@300;400;500&display=swap">
+<link rel="stylesheet" href="/site-chrome.css">
+<style>
+:root{
+  --paper:#FFFFFF;--ink:#111111;--gold:#C9A96A;--rule:#E3E3E3;--mute:#7A7A7A;
+  --f:'Montserrat','Helvetica Neue',Arial,sans-serif;
+  --serif:'Bodoni Moda',Didot,'Times New Roman',serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);font:300 15px/1.55 var(--f)}
+a{color:inherit;text-decoration:none}
+.g{padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.in{max-width:900px;margin:0 auto}
+.wrap{padding:clamp(1.5rem,4vh,3rem) 0 4rem}
+h1{
+  font-family:var(--serif);font-weight:400;
+  font-size:clamp(40px,6vw,64px);line-height:.95;letter-spacing:.06em;
+  text-transform:uppercase;margin:0 0 1rem;
+}
+.lead{font-weight:300;max-width:42ch;margin:0 0 2rem;letter-spacing:.03em;line-height:1.65;color:rgba(17,17,17,.78)}
+.list{list-style:none;border-top:1px solid var(--rule)}
+.list a{
+  display:grid;grid-template-columns:auto 1fr;gap:.35rem 1rem;align-items:baseline;
+  padding:1.2rem 0;border-bottom:1px solid var(--rule);
+}
+.list .k{
+  font-size:10px;font-weight:300;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);
+}
+.list .t{
+  font-family:var(--serif);font-size:clamp(20px,3vw,28px);font-weight:400;letter-spacing:.04em;line-height:1.15;
+}
+.list .s{grid-column:2;font-size:13px;font-weight:300;color:var(--mute);margin-top:.15rem}
+.list a:hover .t{color:var(--gold)}
+.docs{
+  background:#111;color:rgba(255,255,255,.55);
+  padding:1.35rem 0 calc(1.35rem + env(safe-area-inset-bottom,0px));
+  font-size:10px;font-weight:300;letter-spacing:.08em;
+}
+.docs .in{display:flex;flex-wrap:wrap;gap:.65rem 1.25rem;max-width:900px}
+.docs a{color:rgba(255,255,255,.7)}
+.docs a:hover{color:var(--gold)}
+.social-br{
+  position:fixed;right:max(14px,env(safe-area-inset-right,0px));bottom:max(18px,env(safe-area-inset-bottom,0px));
+  z-index:10070;writing-mode:vertical-rl;transform:rotate(180deg);
+  font-size:11px;font-weight:300;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);
+}
+</style>
+</head>
+<body>
+<main class="g">
+  <div class="in wrap">
+    <h1>Лекции</h1>
+    <p class="lead">Подкасты, fashion-эфиры и лекции: всё в одном месте.</p>
+    <div class="list">
+      <a href="/lectures">
+        <span class="k">01</span>
+        <span class="t">Подкасты</span>
+        <span class="s">Серия разговоров о моде, цвете и стиле</span>
+      </a>
+      <a href="/webinar">
+        <span class="k">02</span>
+        <span class="t">Fashion эфир</span>
+        <span class="s">Закрытая встреча стилиста и аналитика моды</span>
+      </a>
+      <a href="/mnogosloynost">
+        <span class="k">03</span>
+        <span class="t">Многослойность</span>
+        <span class="s">Лекция об осеннем многослойном образе</span>
+      </a>
+      <a href="/masshtab">
+        <span class="k">04</span>
+        <span class="t">Масштаб</span>
+        <span class="s">Лекция о масштабе в стиле и впечатлении</span>
+      </a>
+      <a href="/uverennost">
+        <span class="k">05</span>
+        <span class="t">Как звучит уверенность</span>
+        <span class="s">Встреча клуба «В моём стиле»</span>
+      </a>
+    </div>
+  </div>
+</main>
+<footer class="docs g" aria-label="Документы">
+  <div class="in">
+    <a href="/oferta">Оферта</a>
+    <a href="/privacy">Политика конфиденциальности</a>
+    <a href="https://t.me/MilaUshakova_ClubBot?start=support" target="_blank" rel="noopener">Поддержка</a>
+    <span>ИП Ольхина Я.Ф.</span>
+  </div>
+</footer>
+<a class="social-br" href="https://t.me/MilaUshakova_ClubBot?start=support" target="_blank" rel="noopener">Служба заботы</a>
+<script src="/site-chrome.js" defer></script>
+</body>
+</html>
