@@ -5,7 +5,7 @@
     {href: '/about', label: 'Обо мне'},
     {href: '/color-guide', label: 'Система цвета'},
     {href: '/image', label: 'Система имиджа'},
-    {href: 'https://t.me/MilaUshakova_ClubBot?start=support', label: 'Контакты', blank: true}
+    {href: '/contacts', label: 'Контакты'}
   ];
   const PANEL_LINKS = [
     {href: '/about', label: 'Обо мне'},
@@ -14,7 +14,7 @@
     {href: '/color-guide', label: 'Система цвета'},
     {href: '/image', label: 'Система имиджа'},
     {href: 'https://t.me/MilaUshakova_ClubBot?start=club', label: 'Клуб', blank: true},
-    {href: 'https://t.me/MilaUshakova_ClubBot?start=support', label: 'Контакты', blank: true}
+    {href: '/contacts', label: 'Контакты'}
   ];
 
   const ensureFonts = () => {
