@@ -357,7 +357,25 @@ header.hd.is-solid{
 
 
 @media (max-width:640px){
-  .nav-desk{display:none !important}
+  /* все пункты топ-меню остаются видимыми, компактно */
+  .hd .row{
+    grid-template-columns:auto minmax(0,1fr) auto;
+    gap:.4rem .55rem;
+    padding-block:14px 10px;
+  }
+  .monogram{font-size:22px}
+  .nav-desk{
+    display:flex !important;
+    gap:clamp(8px,2.4vw,14px);
+    justify-content:flex-end;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+  }
+  .nav-desk a{
+    font-size:8px;
+    letter-spacing:.08em;
+  }
+  .menu-btn{width:22px;height:14px}
 }
 @media (prefers-reduced-motion:reduce){
   .hero-media,.hero-roles,.hero h1,.hero-rule{animation:none;opacity:1;transform:none}

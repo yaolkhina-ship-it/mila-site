@@ -144,6 +144,25 @@ body.mu-dark.has-mu-chrome{padding-top:0}
   body.has-mu-chrome:not(.mu-dark){padding-top:72px}
   body.mu-dark.has-mu-chrome{padding-top:0}
 }
+@media (max-width:640px){
+  /* compact top: все пункты наверху, не только ☰ */
+  .mu-hd .mu-row{
+    grid-template-columns:auto minmax(0,1fr) auto;
+    gap:.4rem .55rem;
+    padding-block:14px 10px;
+  }
+  .mu-monogram{font-size:22px}
+  .mu-nav{
+    display:flex !important;
+    gap:clamp(8px,2.4vw,14px);
+    justify-content:flex-end;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+  }
+  .mu-nav a{font-size:8px;letter-spacing:.08em}
+  .mu-menu-btn{width:22px;height:14px}
+  body.has-mu-chrome:not(.mu-dark){padding-top:64px}
+}
 
 
 .social-br{position:fixed;right:max(14px,env(safe-area-inset-right,0px));bottom:max(18px,env(safe-area-inset-bottom,0px));z-index:10070;writing-mode:vertical-rl;transform:rotate(180deg);font-family:'Montserrat','Helvetica Neue',Arial,sans-serif;font-size:11px;font-weight:300;letter-spacing:.22em;text-transform:uppercase;color:#C9A96A;background:none;border:none;padding:0;box-shadow:none;text-decoration:none;transition:color .2s;}
