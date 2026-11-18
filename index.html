@@ -5,9 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Мила Ушакова</title>
 <meta name="description" content="Мила Ушакова — image expert и fashion analyst. Автор Системы цветовых сочетаний и Системы имиджа.">
+<link rel="preload" as="image" href="mila-stairs.webp" type="image/webp" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;800&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;800&display=swap"></noscript>
 <style>
 :root{
   --paper:#FFFFFF;
@@ -35,12 +37,11 @@ button{font:inherit;background:none;border:none;color:inherit;cursor:pointer}
 
 header.hd{
   position:fixed;inset:0 0 auto 0;z-index:20;
-  background:rgba(255,255,255,.88);
-  backdrop-filter:blur(12px);
+  background:rgba(255,255,255,.92);
   border-bottom:1px solid transparent;
   transition:border-color .3s,background .3s;
 }
-header.hd.is-solid{border-color:var(--rule);background:rgba(255,255,255,.96)}
+header.hd.is-solid{border-color:var(--rule);background:#fff}
 .hd .row{
   display:grid;grid-template-columns:1fr auto 1fr;
   align-items:center;padding-block:16px 14px;
@@ -279,7 +280,10 @@ header.hd.is-solid{border-color:var(--rule);background:rgba(255,255,255,.96)}
 
 <main>
   <section class="hero" aria-label="Мила Ушакова">
-    <img class="hero-media" src="mila-stairs.jpg" alt="Мила Ушакова" width="1707" height="2560" fetchpriority="high">
+    <picture>
+      <source srcset="mila-stairs.webp" type="image/webp">
+      <img class="hero-media" src="mila-stairs.jpg" alt="Мила Ушакова" width="1200" height="1800" decoding="async" fetchpriority="high">
+    </picture>
     <div class="hero-cap g"><div class="in">
       <p class="hero-roles">Image expert · Fashion analyst</p>
       <h1>Мила<br><span class="gold">Ушакова</span></h1>

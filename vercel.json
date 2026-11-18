@@ -6,7 +6,7 @@
       "use": "@vercel/static"
     },
     {
-      "src": "*.{jpg,jpeg,png,gif,svg,ico,woff2,woff}",
+      "src": "*.{jpg,jpeg,png,gif,webp,svg,ico,woff2,woff}",
       "use": "@vercel/static"
     },
     {
@@ -95,11 +95,20 @@
   ],
   "headers": [
     {
+      "source": "/(.*)\\.(jpg|jpeg|png|gif|webp|woff2|woff|svg|ico)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
       "source": "/(.*)",
       "headers": [
         {
           "key": "Cache-Control",
-          "value": "no-cache, no-store, must-revalidate"
+          "value": "public, max-age=0, must-revalidate"
         }
       ]
     }
