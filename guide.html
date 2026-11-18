@@ -48,12 +48,12 @@ html{background:#0D1A1E;}
 #page1{position:relative;overflow:hidden;}
 .hero-bg{position:absolute;inset:0;background-color:#0D1A1E;background-image:url('/guide/chalk-cover.jpg');background-size:cover;background-repeat:no-repeat;background-position:center;z-index:0;}
 .hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(4,10,12,0.55) 0%,rgba(4,10,12,0.4) 30%,rgba(4,10,12,0.35) 60%,rgba(4,10,12,0.5) 100%);}
-.hero-content{position:relative;z-index:2;flex:1;display:flex;flex-direction:column;justify-content:space-between;align-items:center;text-align:center;padding:56px 32px 92px;width:100%;}
-.hero-title{font-family:'Bodoni Moda',Didot,'Times New Roman',serif;font-size:clamp(42px,8vw,82px);font-weight:300;line-height:0.92;text-transform:uppercase;color:#fff;letter-spacing:0.02em;text-shadow:0 2px 24px rgba(10,3,4,0.75),0 2px 8px rgba(10,3,4,0.8);margin-top:clamp(72px,12vh,120px);}
-.hero-mid{display:flex;flex-direction:column;align-items:center;gap:12px;}
-.hero-eyebrow{font-size:12px;letter-spacing:0.22em;text-transform:uppercase;color:#fff;font-weight:600;}
-.hero-subtitle{font-size:clamp(16px,2.2vw,20px);font-weight:300;line-height:1.5;color:rgba(255,255,255,0.88);}
-.hero-subtitle strong{font-weight:600;color:#fff;}
+.hero-content{position:relative;z-index:2;flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:clamp(96px,14vh,140px) 32px 92px;width:100%;gap:clamp(18px,3vh,28px);}
+.hero-title{font-family:'Bodoni Moda',Didot,'Times New Roman',serif;font-size:clamp(42px,8vw,82px);font-weight:400;line-height:0.92;letter-spacing:.06em;text-transform:uppercase;color:#fff;text-shadow:0 2px 24px rgba(10,3,4,0.75),0 2px 8px rgba(10,3,4,0.8);margin:0;}
+.hero-mid{display:flex;flex-direction:column;align-items:center;gap:10px;}
+.hero-eyebrow{font-family:'Montserrat','Helvetica Neue',Arial,sans-serif;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:#fff;font-weight:300;}
+.hero-subtitle{font-family:'Montserrat','Helvetica Neue',Arial,sans-serif;font-size:clamp(14px,1.8vw,17px);font-weight:300;line-height:1.5;color:rgba(255,255,255,0.88);}
+.hero-subtitle strong{font-weight:400;color:#fff;}
 .hero-features{display:flex;align-items:center;justify-content:center;gap:0;width:100%;max-width:480px;margin-top:4px;}
 .hero-feat{display:flex;flex-direction:column;align-items:center;gap:6px;flex:1;text-align:center;}
 .hero-feat svg{opacity:0.85;color:#fff;}
@@ -64,8 +64,10 @@ html{background:#0D1A1E;}
 .hero-proof-divider{width:1px;height:32px;background:rgba(255,255,255,0.15);flex-shrink:0;}
 .hero-proof-num{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;color:var(--ochre-light);line-height:1;}
 .hero-proof-label{font-size:9px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-top:5px;}
-.btn-white{background:rgba(255,255,255,0.15);color:#fff;font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;padding:18px 64px;border-radius:8px;border:1px solid rgba(255,255,255,0.4);cursor:pointer;transition:all 0.2s;margin-top:16px;backdrop-filter:blur(8px);}
-.btn-white:hover{background:rgba(255,255,255,0.25);transform:scale(1.02);}
+.btn-white{background:rgba(255,255,255,0.12);color:#fff;font-family:'Montserrat','Helvetica Neue',Arial,sans-serif;font-size:12px;font-weight:300;letter-spacing:0.22em;text-transform:uppercase;padding:16px 48px;border-radius:0;border:1px solid rgba(255,255,255,0.45);cursor:pointer;transition:all 0.2s;margin-top:8px;backdrop-filter:blur(8px);}
+.btn-white:hover{background:rgba(255,255,255,0.22);border-color:var(--gold,#C9A96A);color:#fff;}
+/* watermark англ. имени больше не показываем на cover */
+#page1 .logo-mark{display:none !important;}
 
 .update-badge {
   display: inline-flex;
@@ -171,7 +173,7 @@ html{background:#0D1A1E;}
 
 /* MOBILE */
 @media(max-width:640px){
-  .hero-content{padding:48px 20px 36px;}
+  .hero-content{padding:88px 20px 36px;gap:16px;}
   .hero-features{max-width:100%;}
   .hero-feat p{font-size:8px;}
   .p2-wrap{padding:40px 20px 48px;gap:36px;}
@@ -229,8 +231,6 @@ html{background:#0D1A1E;}
 <div id="page1" class="page active">
   <div class="hero-bg"></div>
   <div class="hero-content">
-    <div class="logo-mark" style="position:absolute;top:24px;left:0;right:0;">Mila Ushakova</div>
-
     <h1 class="hero-title">Система<br>цветовых<br>сочетаний</h1>
     <div class="hero-mid">
       <p class="hero-eyebrow">Эксклюзивная система</p>
