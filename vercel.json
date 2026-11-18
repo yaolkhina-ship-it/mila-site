@@ -95,6 +95,14 @@
     {
       "src": "digital/**",
       "use": "@vercel/static"
+    },
+    {
+      "src": "site-chrome.css",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "site-chrome.js",
+      "use": "@vercel/static"
     }
   ],
   "headers": [
@@ -172,6 +180,14 @@
     {
       "src": "/thank-you",
       "dest": "/thank-you.html"
+    },
+    {
+      "src": "/about/?",
+      "dest": "/about.html"
+    },
+    {
+      "src": "/projects/?",
+      "dest": "/projects.html"
     },
     {
       "src": "/color-guide",

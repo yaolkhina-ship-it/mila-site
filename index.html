@@ -168,6 +168,7 @@ header.hd.is-solid{
 .nav-panel.is-open .nav-links a:nth-child(3){transition-delay:.12s}
 .nav-panel.is-open .nav-links a:nth-child(4){transition-delay:.16s}
 .nav-panel.is-open .nav-links a:nth-child(5){transition-delay:.2s}
+.nav-panel.is-open .nav-links a:nth-child(6){transition-delay:.24s}
 .nav-panel .nav-links a:hover{color:var(--gold)}
 .nav-close{
   position:absolute;top:1.35rem;right:1.35rem;z-index:2;
@@ -340,17 +341,6 @@ header.hd.is-solid{
   }
   .hero-roles{font-size:9px;font-weight:300;letter-spacing:.18em;max-width:100%;margin-top:.95rem}
   .hero-rule{margin-top:1rem}
-  .cine::after{
-    background:
-      linear-gradient(180deg,rgba(12,8,4,.35) 0%,transparent 34%,rgba(12,8,4,.55) 78%,rgba(12,8,4,.72) 100%);
-  }
-  .cine-cap{padding:5.5rem 0 calc(3.75rem + env(safe-area-inset-bottom,0px))}
-  .cine h2{font-size:clamp(34px,10vw,48px);max-width:11ch}
-  .cine-lead{max-width:32ch;letter-spacing:.03em}
-  .cine-projects .cine-media{object-position:50% 26%}
-  .about-grid{grid-template-columns:1fr;gap:2rem;padding:5.5rem 0 3.5rem}
-  .about-photo{order:-1;max-height:72vh}
-  .about-list{max-width:none}
   .hd .row{padding-block:20px 14px;gap:.65rem .85rem}
   .monogram{font-size:24px;font-weight:400}
   .nav-desk{gap:clamp(14px,3.2vw,22px)}
@@ -364,209 +354,6 @@ header.hd.is-solid{
   }
 }
 
-/* cinematic panels под hero */
-.cine{
-  position:relative;
-  min-height:100svh;
-  overflow:hidden;
-  background:#1a120c;
-  color:#fff;
-  scroll-margin-top:0;
-}
-.cine picture{
-  position:absolute;inset:0;
-  display:block;
-}
-.cine-media{
-  position:absolute;inset:0;
-  width:100%;height:100%;
-  object-fit:cover;
-  object-position:50% 22%;
-}
-.cine::after{
-  content:"";
-  position:absolute;inset:0;
-  background:
-    linear-gradient(90deg,rgba(12,8,4,.62) 0%,rgba(12,8,4,.28) 44%,rgba(12,8,4,.08) 72%,transparent 100%),
-    linear-gradient(180deg,rgba(12,8,4,.22) 0%,transparent 30%,rgba(12,8,4,.42) 100%);
-  pointer-events:none;
-}
-.cine-cap{
-  position:relative;z-index:2;
-  min-height:100svh;
-  display:flex;flex-direction:column;
-  justify-content:flex-end;
-  align-items:stretch;
-  padding:7rem 0 calc(4.5rem + env(safe-area-inset-bottom,0px));
-  text-align:left;
-}
-.cine-cap .in{
-  width:100%;
-  max-width:1320px;
-  margin:0 auto;
-  display:flex;
-  flex-direction:column;
-  align-items:flex-start;
-  text-align:left;
-}
-.cine-kicker{
-  font-family:var(--f);
-  font-size:10px;font-weight:300;
-  letter-spacing:.28em;text-transform:uppercase;
-  color:rgba(255,255,255,.72);
-  margin:0 0 1rem;
-}
-.cine h2{
-  margin:0;
-  font-family:var(--serif);
-  font-weight:400;
-  font-size:clamp(40px,6.2vw,76px);
-  line-height:.9;
-  letter-spacing:.06em;
-  text-transform:uppercase;
-  max-width:12ch;
-  text-align:left;
-  font-optical-sizing:auto;
-  -webkit-font-smoothing:antialiased;
-}
-.cine-lead{
-  margin:1.15rem 0 0;
-  max-width:34ch;
-  font-family:var(--f);
-  font-size:clamp(13px,1.35vw,15px);
-  font-weight:300;
-  line-height:1.65;
-  letter-spacing:.04em;
-  color:rgba(255,255,255,.88);
-  text-align:left;
-}
-.cine-link{
-  margin-top:1.35rem;
-  font-family:var(--f);
-  font-size:10px;font-weight:300;
-  letter-spacing:.24em;text-transform:uppercase;
-  color:var(--gold);
-  border-bottom:1px solid transparent;
-  transition:border-color .2s,color .2s;
-}
-.cine-link:hover{border-color:var(--gold);color:#fff}
-.cine-rule{
-  margin-top:1.25rem;
-  width:48px;height:1px;
-  background:rgba(255,255,255,.85);
-}
-/* Обо мне: белый фон + портрет рядом, не поверх фото */
-.about{
-  background:var(--paper);
-  color:var(--ink);
-  scroll-margin-top:0;
-}
-.about-grid{
-  display:grid;
-  grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);
-  gap:clamp(1.75rem,4vw,4.5rem);
-  align-items:center;
-  padding:clamp(5.5rem,10vh,7.5rem) 0 clamp(3.5rem,6vh,5.5rem);
-}
-.about-copy{
-  display:flex;
-  flex-direction:column;
-  align-items:flex-start;
-  text-align:left;
-  min-width:0;
-}
-.about h2{
-  margin:0;
-  font-family:var(--serif);
-  font-weight:400;
-  font-size:clamp(40px,6vw,72px);
-  line-height:.9;
-  letter-spacing:.06em;
-  text-transform:uppercase;
-  max-width:10ch;
-  text-align:left;
-  font-optical-sizing:auto;
-  -webkit-font-smoothing:antialiased;
-}
-.about-lead{
-  margin:1.15rem 0 0;
-  max-width:36ch;
-  font-family:var(--f);
-  font-size:clamp(13px,1.35vw,15px);
-  font-weight:300;
-  line-height:1.65;
-  letter-spacing:.04em;
-  color:var(--ink);
-  text-align:left;
-}
-.about-list{
-  margin:1.15rem 0 0;
-  max-width:46ch;
-  display:flex;
-  flex-direction:column;
-  gap:.55rem;
-  text-align:left;
-}
-.about-list p{
-  margin:0;
-  font-family:var(--f);
-  font-size:clamp(12px,1.15vw,13.5px);
-  font-weight:300;
-  line-height:1.55;
-  letter-spacing:.03em;
-  color:rgba(17,17,17,.78);
-}
-.about-link{
-  margin-top:1.45rem;
-  font-family:var(--f);
-  font-size:10px;font-weight:300;
-  letter-spacing:.24em;text-transform:uppercase;
-  color:var(--gold);
-  border-bottom:1px solid transparent;
-  transition:border-color .2s,color .2s;
-}
-.about-link:hover{border-color:var(--gold);color:var(--ink)}
-.about-rule{
-  margin-top:1.25rem;
-  width:48px;height:1px;
-  background:rgba(17,17,17,.55);
-}
-.about-photo{
-  position:relative;
-  min-width:0;
-  align-self:stretch;
-  background:var(--soft);
-}
-.about-photo picture,
-.about-photo img{
-  display:block;
-  width:100%;
-  height:100%;
-  min-height:min(78vh,820px);
-  object-fit:cover;
-  object-position:52% 18%;
-}
-.cine-projects .cine-media{object-position:46% 30%}
-@media (min-width:900px){
-  .cine-cap{padding:8rem 0 6.5rem}
-  .cine-projects .cine-media{object-position:42% 28%}
-}
-
-.docs{
-  background:#111;
-  color:rgba(255,255,255,.55);
-  padding:1.35rem 0 calc(1.35rem + env(safe-area-inset-bottom,0px));
-  font-family:var(--f);
-  font-size:10px;font-weight:300;
-  letter-spacing:.08em;
-}
-.docs .in{
-  display:flex;flex-wrap:wrap;gap:.65rem 1.25rem;
-  align-items:center;justify-content:flex-start;
-}
-.docs a{color:rgba(255,255,255,.7);border-bottom:1px solid transparent}
-.docs a:hover{color:var(--gold);border-color:var(--gold)}
-
 @media (prefers-reduced-motion:reduce){
   .hero-media,.hero-roles,.hero h1,.hero-rule{animation:none;opacity:1;transform:none}
 }
@@ -577,10 +364,10 @@ header.hd.is-solid{
 <header class="hd" id="hd">
   <div class="g"><div class="in row">
     <a class="monogram" href="./" aria-label="Мила Ушакова">MU</a>
-    <nav class="nav-desk" aria-label="Основное меню">
-      <a href="#about">Обо мне</a>
-      <a href="#projects">Проекты</a>
-      <a href="https://www.milaushakova.com/image">Система имиджа</a>
+        <nav class="nav-desk" aria-label="Основное меню">
+      <a href="/about">Обо мне</a>
+      <a href="/color-guide">Система цвета</a>
+      <a href="/image">Система имиджа</a>
       <a href="https://t.me/MilaUshakova_ClubBot?start=club" target="_blank" rel="noopener">Клуб</a>
       <a href="https://t.me/MilaUshakova_ClubBot?start=support" target="_blank" rel="noopener">Контакты</a>
     </nav>
@@ -590,10 +377,11 @@ header.hd.is-solid{
 
 <nav class="nav-panel" id="nav-panel" hidden>
   <button class="nav-close" type="button" aria-label="Закрыть">Закрыть</button>
-  <div class="nav-links">
-    <a href="#about">Обо мне</a>
-    <a href="#projects">Проекты</a>
-    <a href="https://www.milaushakova.com/image">Система имиджа</a>
+    <div class="nav-links">
+    <a href="/about">Обо мне</a>
+    <a href="/projects">Проекты</a>
+    <a href="/color-guide">Система цвета</a>
+    <a href="/image">Система имиджа</a>
     <a href="https://t.me/MilaUshakova_ClubBot?start=club" target="_blank" rel="noopener">Клуб</a>
     <a href="https://t.me/MilaUshakova_ClubBot?start=support" target="_blank" rel="noopener">Контакты</a>
   </div>
@@ -631,54 +419,8 @@ header.hd.is-solid{
     </div></div>
   </section>
 
-  <section class="about g" id="about" aria-label="Обо мне">
-    <div class="in about-grid">
-      <div class="about-copy">
-        <h2>Обо мне</h2>
-        <p class="about-lead">Международный стилист, fashion-журналист и аналитик индустрии моды.</p>
-        <div class="about-list">
-          <p>Аккредитована на неделях моды в Париже, Милане и Копенгагене.</p>
-          <p>Автор публикаций в ведущих международных fashion- и деловых изданиях.</p>
-          <p>Изучаю моду в контексте культуры и общественных изменений, а стиль: как образ жизни, способ мышления и инструмент коммуникации.</p>
-          <p>Разрабатываю авторские цифровые продукты, объединяющие стилистику, психологию восприятия и современные технологии.</p>
-          <p>Основатель закрытого fashion-клуба «В моём стиле».</p>
-          <p>Платформы по изучению цвета «Система Цветовых сочетаний».</p>
-          <p>Приложения по имиджу «Система Имиджа».</p>
-          <p>Работаю с частными клиентами.</p>
-          <p>Спикер.</p>
-        </div>
-        <a class="about-link" href="/booking">Запись на консультацию</a>
-        <div class="about-rule" aria-hidden="true"></div>
-      </div>
-      <div class="about-photo">
-        <picture>
-          <source srcset="about-mila-portrait.webp" type="image/webp">
-          <img src="about-mila-portrait.jpg" alt="Мила Ушакова" width="947" height="1280" loading="lazy" decoding="async">
-        </picture>
-      </div>
-    </div>
-  </section>
-
-  <section class="cine cine-projects" id="projects" aria-label="Проекты">
-    <img class="cine-media" src="webinar-runway.jpg" alt="Подиум" width="1024" height="1280" loading="lazy" decoding="async">
-    <div class="cine-cap g"><div class="in">
-      <p class="cine-kicker">Проекты</p>
-      <h2>Инструменты<br>стиля</h2>
-      <p class="cine-lead">Система цветовых сочетаний, Система имиджа, лекции и клуб «В моём стиле». Ясные решения вместо случайных образов.</p>
-      <a class="cine-link" href="https://www.milaushakova.com/color-guide">Смотреть проекты</a>
-      <div class="cine-rule" aria-hidden="true"></div>
-    </div></div>
-  </section>
 </main>
 
-<footer class="docs g" aria-label="Документы">
-  <div class="in">
-    <a href="/oferta">Оферта</a>
-    <a href="/privacy">Политика конфиденциальности</a>
-    <a href="https://t.me/MilaUshakova_ClubBot?start=support" target="_blank" rel="noopener">Поддержка</a>
-    <span>ИП Ольхина Я.Ф.</span>
-  </div>
-</footer>
 
 <a class="social-br" href="https://t.me/MilaUshakova_ClubBot?start=support" target="_blank" rel="noopener">Служба заботы</a>
 
@@ -689,8 +431,6 @@ header.hd.is-solid{
   const closeBtn = document.querySelector('.nav-close');
   const hint = document.getElementById('ab-hint');
   const abBtns = panel.querySelectorAll('[data-ab]');
-  const hd = document.getElementById('hd');
-  const hero = document.querySelector('.hero');
   let deferred = null;
   let cur = '';
 
@@ -712,13 +452,6 @@ header.hd.is-solid{
   panel.querySelectorAll('.nav-links a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
 
-  const syncHd = () => {
-    if (!hd || !hero) return;
-    hd.classList.toggle('is-solid', window.scrollY > hero.offsetHeight - 64);
-  };
-  syncHd();
-  window.addEventListener('scroll', syncHd, {passive:true});
-  window.addEventListener('resize', syncHd);
 
   const iosHint = 'Поделиться → На экран «Домой». В Safari: квадрат со стрелкой вверх внизу экрана, затем «На экран „Домой“» и «Добавить».';
   const androidHint = 'В Chrome: ⋮ → «Установить приложение» или «Добавить на главный экран».';

@@ -1,9 +1,18 @@
 (() => {
   const FONT_HREF = 'https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400&family=Montserrat:wght@300;400;500&display=swap';
-  const LINKS = [
-    {href: '/#about', label: 'Обо мне'},
-    {href: '/#projects', label: 'Проекты'},
-    {href: 'https://www.milaushakova.com/image', label: 'Система имиджа'},
+  // Верхнее меню: без «Проекты». Гамбургер: с «Проекты».
+  const TOP_LINKS = [
+    {href: '/about', label: 'Обо мне'},
+    {href: '/color-guide', label: 'Система цвета'},
+    {href: '/image', label: 'Система имиджа'},
+    {href: 'https://t.me/MilaUshakova_ClubBot?start=club', label: 'Клуб', blank: true},
+    {href: 'https://t.me/MilaUshakova_ClubBot?start=support', label: 'Контакты', blank: true}
+  ];
+  const PANEL_LINKS = [
+    {href: '/about', label: 'Обо мне'},
+    {href: '/projects', label: 'Проекты'},
+    {href: '/color-guide', label: 'Система цвета'},
+    {href: '/image', label: 'Система имиджа'},
     {href: 'https://t.me/MilaUshakova_ClubBot?start=club', label: 'Клуб', blank: true},
     {href: 'https://t.me/MilaUshakova_ClubBot?start=support', label: 'Контакты', blank: true}
   ];
@@ -51,7 +60,7 @@
       <div class="mu-g"><div class="mu-in mu-row">
         <a class="mu-monogram" href="/" aria-label="Мила Ушакова">MU</a>
         <nav class="mu-nav" aria-label="Основное меню">
-          ${LINKS.map((l) => `<a ${aAttrs(l)}>${l.label}</a>`).join('')}
+          ${TOP_LINKS.map((l) => `<a ${aAttrs(l)}>${l.label}</a>`).join('')}
         </nav>
         <button class="mu-menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="mu-panel"><span></span></button>
       </div></div>`;
@@ -63,7 +72,7 @@
     panel.innerHTML = `
       <button class="mu-close" type="button" aria-label="Закрыть">Закрыть</button>
       <div class="mu-links">
-        ${LINKS.map((l) => `<a ${aAttrs(l)}>${l.label}</a>`).join('')}
+        ${PANEL_LINKS.map((l) => `<a ${aAttrs(l)}>${l.label}</a>`).join('')}
       </div>`;
 
     document.body.prepend(panel);
