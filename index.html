@@ -340,6 +340,18 @@ header.hd.is-solid{
   }
   .hero-roles{font-size:9px;font-weight:300;letter-spacing:.18em;max-width:100%;margin-top:.95rem}
   .hero-rule{margin-top:1rem}
+  .cine::after{
+    background:
+      linear-gradient(180deg,rgba(12,8,4,.35) 0%,transparent 34%,rgba(12,8,4,.55) 78%,rgba(12,8,4,.72) 100%);
+  }
+  .cine-cap{padding:5.5rem 0 calc(3.75rem + env(safe-area-inset-bottom,0px))}
+  .cine h2{font-size:clamp(34px,10vw,48px);max-width:11ch}
+  .cine-lead{max-width:32ch;letter-spacing:.03em}
+  .cine-about .cine-media{object-position:50% 12%}
+  .cine-about .cine-cap{padding:5rem 0 calc(3.25rem + env(safe-area-inset-bottom,0px))}
+  .cine-list{max-width:34ch;gap:.5rem}
+  .cine-list p{font-size:12px;letter-spacing:.02em}
+  .cine-projects .cine-media{object-position:50% 26%}
   .hd .row{padding-block:20px 14px;gap:.65rem .85rem}
   .monogram{font-size:24px;font-weight:400}
   .nav-desk{gap:clamp(14px,3.2vw,22px)}
@@ -353,6 +365,151 @@ header.hd.is-solid{
   }
 }
 
+/* cinematic panels под hero */
+.cine{
+  position:relative;
+  min-height:100svh;
+  overflow:hidden;
+  background:#1a120c;
+  color:#fff;
+  scroll-margin-top:0;
+}
+.cine picture{
+  position:absolute;inset:0;
+  display:block;
+}
+.cine-media{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  object-fit:cover;
+  object-position:50% 22%;
+}
+.cine::after{
+  content:"";
+  position:absolute;inset:0;
+  background:
+    linear-gradient(90deg,rgba(12,8,4,.62) 0%,rgba(12,8,4,.28) 44%,rgba(12,8,4,.08) 72%,transparent 100%),
+    linear-gradient(180deg,rgba(12,8,4,.22) 0%,transparent 30%,rgba(12,8,4,.42) 100%);
+  pointer-events:none;
+}
+.cine-cap{
+  position:relative;z-index:2;
+  min-height:100svh;
+  display:flex;flex-direction:column;
+  justify-content:flex-end;
+  align-items:stretch;
+  padding:7rem 0 calc(4.5rem + env(safe-area-inset-bottom,0px));
+  text-align:left;
+}
+.cine-cap .in{
+  width:100%;
+  max-width:1320px;
+  margin:0 auto;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  text-align:left;
+}
+.cine-kicker{
+  font-family:var(--f);
+  font-size:10px;font-weight:300;
+  letter-spacing:.28em;text-transform:uppercase;
+  color:rgba(255,255,255,.72);
+  margin:0 0 1rem;
+}
+.cine h2{
+  margin:0;
+  font-family:var(--serif);
+  font-weight:400;
+  font-size:clamp(40px,6.2vw,76px);
+  line-height:.9;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  max-width:12ch;
+  text-align:left;
+  font-optical-sizing:auto;
+  -webkit-font-smoothing:antialiased;
+}
+.cine-lead{
+  margin:1.15rem 0 0;
+  max-width:34ch;
+  font-family:var(--f);
+  font-size:clamp(13px,1.35vw,15px);
+  font-weight:300;
+  line-height:1.65;
+  letter-spacing:.04em;
+  color:rgba(255,255,255,.88);
+  text-align:left;
+}
+.cine-link{
+  margin-top:1.35rem;
+  font-family:var(--f);
+  font-size:10px;font-weight:300;
+  letter-spacing:.24em;text-transform:uppercase;
+  color:var(--gold);
+  border-bottom:1px solid transparent;
+  transition:border-color .2s,color .2s;
+}
+.cine-link:hover{border-color:var(--gold);color:#fff}
+.cine-rule{
+  margin-top:1.25rem;
+  width:48px;height:1px;
+  background:rgba(255,255,255,.85);
+}
+.cine-about{
+  min-height:100svh;
+}
+.cine-about .cine-media{object-position:52% 18%}
+.cine-about .cine-cap{
+  justify-content:flex-end;
+  min-height:100svh;
+  height:auto;
+  padding-top:clamp(5.5rem,12vh,8rem);
+  padding-bottom:calc(3.5rem + env(safe-area-inset-bottom,0px));
+}
+.cine-about h2{max-width:10ch}
+.cine-about .cine-lead{max-width:36ch}
+.cine-list{
+  margin:1rem 0 0;
+  max-width:42ch;
+  display:flex;
+  flex-direction:column;
+  gap:.55rem;
+  text-align:left;
+}
+.cine-list p{
+  margin:0;
+  font-family:var(--f);
+  font-size:clamp(12px,1.2vw,13.5px);
+  font-weight:300;
+  line-height:1.55;
+  letter-spacing:.03em;
+  color:rgba(255,255,255,.86);
+}
+.cine-projects .cine-media{object-position:46% 30%}
+@media (min-width:900px){
+  .cine-cap{padding:8rem 0 6.5rem}
+  .cine-about .cine-cap{padding:7rem 0 5.5rem}
+  .cine-about .cine-media{object-position:48% 14%}
+  .cine-projects .cine-media{object-position:42% 28%}
+  .cine-list{max-width:46ch;gap:.6rem}
+}
+
+.docs{
+  background:#111;
+  color:rgba(255,255,255,.55);
+  padding:1.35rem 0 calc(1.35rem + env(safe-area-inset-bottom,0px));
+  font-family:var(--f);
+  font-size:10px;font-weight:300;
+  letter-spacing:.08em;
+}
+.docs .in{
+  display:flex;flex-wrap:wrap;gap:.65rem 1.25rem;
+  align-items:center;justify-content:flex-start;
+}
+.docs a{color:rgba(255,255,255,.7);border-bottom:1px solid transparent}
+.docs a:hover{color:var(--gold);border-color:var(--gold)}
+
 @media (prefers-reduced-motion:reduce){
   .hero-media,.hero-roles,.hero h1,.hero-rule{animation:none;opacity:1;transform:none}
 }
@@ -364,8 +521,8 @@ header.hd.is-solid{
   <div class="g"><div class="in row">
     <a class="monogram" href="./" aria-label="Мила Ушакова">MU</a>
     <nav class="nav-desk" aria-label="Основное меню">
-      <a href="https://www.milaushakova.com/booking">Обо мне</a>
-      <a href="https://www.milaushakova.com/color-guide">Проекты</a>
+      <a href="#about">Обо мне</a>
+      <a href="#projects">Проекты</a>
       <a href="https://www.milaushakova.com/image">Система имиджа</a>
       <a href="https://t.me/MilaUshakova_ClubBot?start=club" target="_blank" rel="noopener">Клуб</a>
       <a href="https://t.me/MilaUshakova_ClubBot?start=support" target="_blank" rel="noopener">Контакты</a>
@@ -377,8 +534,8 @@ header.hd.is-solid{
 <nav class="nav-panel" id="nav-panel" hidden>
   <button class="nav-close" type="button" aria-label="Закрыть">Закрыть</button>
   <div class="nav-links">
-    <a href="https://www.milaushakova.com/booking">Обо мне</a>
-    <a href="https://www.milaushakova.com/color-guide">Проекты</a>
+    <a href="#about">Обо мне</a>
+    <a href="#projects">Проекты</a>
     <a href="https://www.milaushakova.com/image">Система имиджа</a>
     <a href="https://t.me/MilaUshakova_ClubBot?start=club" target="_blank" rel="noopener">Клуб</a>
     <a href="https://t.me/MilaUshakova_ClubBot?start=support" target="_blank" rel="noopener">Контакты</a>
@@ -416,7 +573,51 @@ header.hd.is-solid{
       <div class="hero-rule" aria-hidden="true"></div>
     </div></div>
   </section>
+
+  <section class="cine cine-about" id="about" aria-label="Обо мне">
+    <picture>
+      <source srcset="about-mila-portrait.webp" type="image/webp">
+      <img class="cine-media" src="about-mila-portrait.jpg" alt="Мила Ушакова" width="947" height="1280" loading="lazy" decoding="async">
+    </picture>
+    <div class="cine-cap g"><div class="in">
+      <h2>Обо мне</h2>
+      <p class="cine-lead">Международный стилист, fashion-журналист и аналитик индустрии моды.</p>
+      <div class="cine-list">
+        <p>Аккредитована на неделях моды в Париже, Милане и Копенгагене.</p>
+        <p>Автор публикаций в ведущих международных fashion- и деловых изданиях.</p>
+        <p>Изучаю моду в контексте культуры и общественных изменений, а стиль: как образ жизни, способ мышления и инструмент коммуникации.</p>
+        <p>Разрабатываю авторские цифровые продукты, объединяющие стилистику, психологию восприятия и современные технологии.</p>
+        <p>Основатель закрытого fashion-клуба «В моём стиле».</p>
+        <p>Платформы по изучению цвета «Система Цветовых сочетаний».</p>
+        <p>Приложения по имиджу «Система Имиджа».</p>
+        <p>Работаю с частными клиентами.</p>
+        <p>Спикер.</p>
+      </div>
+      <a class="cine-link" href="https://www.milaushakova.com/booking">Запись на консультацию</a>
+      <div class="cine-rule" aria-hidden="true"></div>
+    </div></div>
+  </section>
+
+  <section class="cine cine-projects" id="projects" aria-label="Проекты">
+    <img class="cine-media" src="webinar-runway.jpg" alt="Подиум" width="1024" height="1280" loading="lazy" decoding="async">
+    <div class="cine-cap g"><div class="in">
+      <p class="cine-kicker">Проекты</p>
+      <h2>Инструменты<br>стиля</h2>
+      <p class="cine-lead">Система цветовых сочетаний, Система имиджа, лекции и клуб «В моём стиле». Ясные решения вместо случайных образов.</p>
+      <a class="cine-link" href="https://www.milaushakova.com/color-guide">Смотреть проекты</a>
+      <div class="cine-rule" aria-hidden="true"></div>
+    </div></div>
+  </section>
 </main>
+
+<footer class="docs g" aria-label="Документы">
+  <div class="in">
+    <a href="/oferta">Оферта</a>
+    <a href="/privacy">Политика конфиденциальности</a>
+    <a href="https://t.me/MilaUshakova_ClubBot?start=support" target="_blank" rel="noopener">Поддержка</a>
+    <span>ИП Ольхина Я.Ф.</span>
+  </div>
+</footer>
 
 <a class="social-br" href="https://t.me/MilaUshakova_ClubBot?start=support" target="_blank" rel="noopener">Служба заботы</a>
 
