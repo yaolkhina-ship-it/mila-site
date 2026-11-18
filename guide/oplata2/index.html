@@ -261,8 +261,10 @@ body.fx .cov .eb,body.fx .cov h1{animation:rise 1.2s cubic-bezier(.16,1,.3,1) bo
 .tier .fx{margin:14px 0 6px;font:400 11px Oswald,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:#C9A96A}.tier .alt2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .tier .alt3{display:block;margin-top:10px;text-align:center;font-size:13px;color:#a9a39a;text-decoration:underline;text-underline-offset:3px}
 .tier .btn.alt,#pay>.tier .btn.alt{margin-top:10px!important;background:none!important;color:#C9A96A!important;border:1px solid #C9A96A!important}
-</style><link rel="stylesheet" href="/site-chrome.css?v=align1">
+</style><link rel="stylesheet" href="/site-chrome.css?v=qa1">
 <style id="mu-image-nav">
+#mn,.app > .top{display:none !important}
+
 /* шапка как на главной: одна линия MU + меню + ☰, поверх тёмного hero */
 body.mu-dark.has-mu-chrome{padding-top:0 !important}
 body.has-mu-chrome .app > .top{display:none !important}
@@ -270,7 +272,9 @@ body.has-mu-chrome .app > .top{display:none !important}
 .mu-hd .mu-nav a,.mu-hd .mu-menu-btn{color:#fff}
 .mu-hd .mu-monogram{color:#C9A96A}
 .social-br{color:#C9A96A}
-.social-br:hover{color:#fff}
+ .social-br:hover{color:#fff}
+body.has-mu-chrome #bar{z-index:10040}
+body.has-mu-chrome .social-br{bottom:max(72px,env(safe-area-inset-bottom,0px))}
 /* колонки hero: фото | текст, ровная сетка */
 @media (min-width:900px){
   .cov.sl{
@@ -360,7 +364,7 @@ body.has-mu-chrome .app > .top{display:none !important}
   <p class="note">Вся информация носит рекомендательный характер и создана как инструмент, который может повышать качество жизни, усиливать профессиональные возможности и поддерживать рост дохода.</p>
 </section>
 
-<div id="legal-strip"><a href="https://www.milaushakova.com/oferta">Договор оферты</a> · <a href="https://www.milaushakova.com/privacy">Политика конфиденциальности</a> · <a href="https://www.milaushakova.com/privacy">Согласие на обработку ПД</a> · <a href="https://t.me/MilaUshakova_ClubBot?start=support">Поддержка</a><br>© 2026 · ИП Ольхина Я.Ф., ИНН 222411003828, ОГРНИП 326220200112474</div>
+<div id="legal-strip"><a href="https://www.milaushakova.com/oferta">Договор оферты</a> · <a href="https://www.milaushakova.com/privacy">Политика конфиденциальности</a> · <a href="https://www.milaushakova.com/privacy">Согласие на обработку ПД</a> · <a href="https://t.me/MilaUshakova_ClubBot?start=support">Служба заботы</a><br>© 2026 · ИП Ольхина Я.Ф., ИНН 222411003828, ОГРНИП 326220200112474</div>
 </div>
 <div id="mn" hidden><button type="button" id="mnX" aria-label="Закрыть">×</button><a href="#how">Как устроена</a><a href="#get">Что вы получаете</a><a href="#author">Автор</a><a href="#pay">Цена</a><a href="#faq">Вопросы</a></div>
 <script>
@@ -395,5 +399,5 @@ document.querySelector('.app').addEventListener('click',function(e){if(e.target.
 function sb(){var r=pay.getBoundingClientRect();bar.classList.toggle('on',scrollY>innerHeight*.5&&!(r.top<innerHeight*.75&&r.bottom>innerHeight*.25))}addEventListener('scroll',sb,{passive:true});sb();
 })();
 </script>
-<script src="/site-chrome.js?v=align1" defer></script>
+<script src="/site-chrome.js?v=qa1" defer></script>
 </body></html>
