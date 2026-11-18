@@ -261,18 +261,45 @@ body.fx .cov .eb,body.fx .cov h1{animation:rise 1.2s cubic-bezier(.16,1,.3,1) bo
 .tier .fx{margin:14px 0 6px;font:400 11px Oswald,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:#C9A96A}.tier .alt2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .tier .alt3{display:block;margin-top:10px;text-align:center;font-size:13px;color:#a9a39a;text-decoration:underline;text-underline-offset:3px}
 .tier .btn.alt,#pay>.tier .btn.alt{margin-top:10px!important;background:none!important;color:#C9A96A!important;border:1px solid #C9A96A!important}
-</style><link rel="stylesheet" href="/site-chrome.css">
-<style>body{padding-top:0 !important}body.has-mu-chrome{padding-top:0 !important}.mu-hd{color:#111}.mu-hd:not(.is-solid){color:#111}</style>
+</style><link rel="stylesheet" href="/site-chrome.css?v=align1">
 <style id="mu-image-nav">
-body.has-mu-chrome{padding-top:0 !important}
-.mu-hd{background:transparent !important;border-bottom:none !important;color:#111 !important;backdrop-filter:none !important}
-.mu-hd .mu-nav a{color:#111}
-.mu-hd .mu-menu-btn{color:#111}
+/* шапка как на главной: одна линия MU + меню + ☰, поверх тёмного hero */
+body.mu-dark.has-mu-chrome{padding-top:0 !important}
+body.has-mu-chrome .app > .top{display:none !important}
+.mu-hd{background:transparent !important;border-bottom:none !important;color:#fff !important;backdrop-filter:none !important}
+.mu-hd .mu-nav a,.mu-hd .mu-menu-btn{color:#fff}
+.mu-hd .mu-monogram{color:#C9A96A}
 .social-br{color:#C9A96A}
-.social-br:hover{color:#111}
-</style></head><body class="mu-ink-nav" class="on-cover dark-top" data-d="a"><div class="app">
+.social-br:hover{color:#fff}
+/* колонки hero: фото | текст, ровная сетка */
+@media (min-width:900px){
+  .cov.sl{
+    display:grid !important;
+    grid-template-columns:minmax(0,1.55fr) minmax(320px,1fr) !important;
+    flex-direction:unset !important;
+    align-items:stretch !important;
+    min-height:100svh !important;
+  }
+  .cov.sl img.col{
+    position:relative !important;inset:auto !important;
+    width:100% !important;height:100svh !important;
+    flex:unset !important;max-width:none !important;
+    object-fit:cover !important;object-position:50% 70% !important;
+  }
+  .cov.sl .in{
+    display:flex;flex-direction:column;justify-content:center;
+    padding:clamp(96px,12vh,140px) clamp(32px,4vw,64px) clamp(48px,8vh,96px) !important;
+    max-width:560px;margin:0 auto;width:100%;box-sizing:border-box;
+  }
+  .cov.sl h1{font-size:clamp(64px,6.4vw,108px)!important;line-height:.92!important}
+  .cov.sl .sub{max-width:28em}
+  .btn.cv{max-width:100%;width:100%}
+}
+</style></head>
+<body class="mu-dark on-cover dark-top" data-d="a"><div class="app">
 
-<div class="top"><span class="logo">Mila Ushakova</span><span class="ed" id="ed">Система имиджа</span><button class="tmenu" id="tMenu" type="button" aria-label="Меню"><svg viewBox="0 0 24 16" width="24" height="16" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M0 1h24M0 8h24M0 15h24"/></svg></button></div>
+<!-- локальная шапка скрыта: используется site-chrome -->
+<div class="top" hidden aria-hidden="true"><span class="logo">Mila Ushakova</span><span class="ed" id="ed">Система имиджа</span><button class="tmenu" id="tMenu" type="button" aria-label="Меню"><svg viewBox="0 0 24 16" width="24" height="16" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M0 1h24M0 8h24M0 15h24"/></svg></button></div>
 <div id="v"><div class="view"><div class="cov sl"><img class="col" src="/guide/oplata2/l/cover.jpg" alt="" fetchpriority="high"><div class="in">
   <div class="eb cap">Для женщин · мужская версия скоро</div>
   <h1>Система<br><i style="color:#C9A96A">имиджа</i></h1>
@@ -337,7 +364,7 @@ body.has-mu-chrome{padding-top:0 !important}
 </div>
 <div id="mn" hidden><button type="button" id="mnX" aria-label="Закрыть">×</button><a href="#how">Как устроена</a><a href="#get">Что вы получаете</a><a href="#author">Автор</a><a href="#pay">Цена</a><a href="#faq">Вопросы</a></div>
 <script>
-var mn=document.getElementById('mn');document.getElementById('tMenu').onclick=function(){mn.hidden=false};document.getElementById('mnX').onclick=function(){mn.hidden=true};mn.addEventListener('click',function(e){if(e.target.tagName==='A')mn.hidden=true});
+var mn=document.getElementById('mn');var tMenu=document.getElementById('tMenu');if(tMenu)tMenu.onclick=function(){mn.hidden=false};var mnX=document.getElementById('mnX');if(mnX)mnX.onclick=function(){mn.hidden=true};if(mn)mn.addEventListener('click',function(e){if(e.target.tagName==='A')mn.hidden=true});
 document.querySelectorAll('[data-to]').forEach(function(b){b.addEventListener('click',function(){document.querySelector(b.dataset.to).scrollIntoView({behavior:'smooth'})})});
 var PAY={b1:'https://payform.ru/kicX7Cu/',b2:'https://payform.ru/5qcX7J0/'};['b1','b2'].forEach(function(k){var a=document.getElementById(k);if(PAY[k])a.href=PAY[k];else a.addEventListener('click',function(e){e.preventDefault();var d=document.getElementById('dev');d.style.display='block';d.scrollIntoView({block:'center'})})});
 </script><script>
@@ -368,5 +395,5 @@ document.querySelector('.app').addEventListener('click',function(e){if(e.target.
 function sb(){var r=pay.getBoundingClientRect();bar.classList.toggle('on',scrollY>innerHeight*.5&&!(r.top<innerHeight*.75&&r.bottom>innerHeight*.25))}addEventListener('scroll',sb,{passive:true});sb();
 })();
 </script>
-<script src="/site-chrome.js" defer></script>
+<script src="/site-chrome.js?v=align1" defer></script>
 </body></html>

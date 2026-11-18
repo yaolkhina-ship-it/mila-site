@@ -27,7 +27,14 @@
   grid-template-columns:auto minmax(0,1fr) auto;
   align-items:center;
   gap:1rem 1.25rem;
-  padding-block:clamp(18px,2.8vh,28px) clamp(14px,2vh,20px);
+  /* одна линия как на главной */
+  padding-block:clamp(24px,3.8vh,36px) clamp(16px,2.4vh,22px);
+  min-height:0;
+}
+.mu-hd .mu-monogram,
+.mu-hd .mu-nav,
+.mu-hd .mu-menu-btn{
+  align-self:center;
 }
 .mu-monogram{
   font-family:var(--mu-serif);

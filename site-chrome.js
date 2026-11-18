@@ -35,10 +35,30 @@
   };
 
   const hideLegacyNav = () => {
-    document.querySelectorAll('body > nav, body > header.topbar, body > header.mast, body > .topbar').forEach((el) => {
-      if (el.classList.contains('mu-hd') || el.classList.contains('mu-panel') || el.id === 'hd') return;
+    const keep = (el) => el.classList.contains('mu-hd') || el.classList.contains('mu-panel') || el.id === 'hd' || el.id === 'mu-hd' || el.id === 'mu-panel';
+    document.querySelectorAll(
+      'body > nav, body > header.topbar, body > header.mast, body > .topbar, .app > .top, .top .tmenu, .top .ed, .top .logo'
+    ).forEach((el) => {
+      if (keep(el)) return;
       el.style.display = 'none';
       el.setAttribute('aria-hidden', 'true');
+    });
+    // страница оплаты имиджа: старая липкая шапка целиком
+    document.querySelectorAll('.app > .top').forEach((el) => {
+      el.style.display = 'none';
+      el.setAttribute('aria-hidden', 'true');
+    });
+    // color-guide page2: убрать «Назад» и бренд-дубль, оставить только якорный ряд
+    document.querySelectorAll('#page2 .btn-back, #page2 .logo-mark').forEach((el) => {
+      const wrap = el.closest('div');
+      if (el.classList.contains('btn-back') && wrap && wrap.parentElement && wrap.parentElement.classList.contains('p2sans')) {
+        wrap.style.display = 'none';
+        wrap.setAttribute('aria-hidden', 'true');
+      }
+      if (el.classList.contains('logo-mark')) {
+        el.style.display = 'none';
+        el.setAttribute('aria-hidden', 'true');
+      }
     });
   };
 
@@ -86,12 +106,16 @@
       care.textContent = 'Служба заботы';
       document.body.appendChild(care);
     }
-    // на светлых страницах — solid шапка
-    const dark = document.body.matches('.page, .mu-dark') || !!document.querySelector('.hero-bg, .hero, #page1.page.active');
-    if (document.body.getAttribute('data-mu-solid') === '1' || !dark) header.classList.add('is-solid');
+    // на светлых страницах — solid шапка; color-guide #system и белые страницы не dark
+    const colorSales = !!document.querySelector('#page2.page.active') || document.body.classList.contains('mu-on-page2');
+    const dark = !colorSales && (
+      document.body.classList.contains('mu-dark') ||
+      !!document.querySelector('.hero:not(.hero-sec), #page1.page.active')
+    );
+    if (document.body.getAttribute('data-mu-solid') === '1' || colorSales || !dark) header.classList.add('is-solid');
     else document.body.classList.add('mu-dark');
-    // image/light: white text would fail — force solid
     if (header.classList.contains('is-solid')) document.body.classList.remove('mu-dark');
+    if (colorSales) document.body.classList.add('mu-on-page2');
 
     const btn = header.querySelector('.mu-menu-btn');
     const closeBtn = panel.querySelector('.mu-close');
