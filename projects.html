@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Проекты | Мила Ушакова</title>
-<meta name="description" content="Проекты Милы Ушаковой: Система цветовых сочетаний, Система имиджа, клуб «В моём стиле».">
+<meta name="description" content="Проекты Милы Ушаковой: системы, клуб, лекции и выездные мероприятия.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400&family=Montserrat:wght@300;400;500&display=swap">
-<link rel="stylesheet" href="/site-chrome.css">
+<link rel="stylesheet" href="/site-chrome.css?v=proj1">
 <style>
 :root{
-  --paper:#FFFFFF;--ink:#111111;--gold:#C9A96A;--rule:#E3E3E3;
+  --paper:#FFFFFF;--ink:#111111;--gold:#C9A96A;--rule:#E3E3E3;--mute:#7A7A7A;
   --f:'Montserrat','Helvetica Neue',Arial,sans-serif;
   --serif:'Bodoni Moda',Didot,'Times New Roman',serif;
 }
@@ -26,7 +26,14 @@ h1{
   font-size:clamp(40px,6vw,64px);line-height:.95;letter-spacing:.06em;
   text-transform:uppercase;margin:0 0 1rem;
 }
-.lead{font-weight:300;max-width:40ch;margin:0 0 2rem;letter-spacing:.03em;line-height:1.65}
+.lead{font-weight:300;max-width:44ch;margin:0 0 2rem;letter-spacing:.03em;line-height:1.65}
+.block{margin-top:2.25rem}
+.block:first-of-type{margin-top:0}
+.h2{
+  font-family:var(--f);font-size:10px;font-weight:300;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--mute);
+  margin:0 0 .85rem;
+}
 .list{list-style:none;display:flex;flex-direction:column;gap:0;border-top:1px solid var(--rule)}
 .list a{
   display:block;padding:1.15rem 0;border-bottom:1px solid var(--rule);
@@ -52,25 +59,39 @@ h1{
 <main class="g">
   <div class="in wrap">
     <h1>Проекты</h1>
-    <p class="lead">Система цветовых сочетаний, Система имиджа, лекции и клуб «В моём стиле».</p>
-    <div class="list">
-      <a href="/color-guide">Система цвета</a>
-      <a href="/image">Система имиджа</a>
-      <a href="https://t.me/MilaUshakova_ClubBot?start=club" target="_blank" rel="noopener">Клуб «В моём стиле»</a>
-      <a href="/lekcii">Лекции и эфиры</a>
-      <a href="/lectures">Подкасты</a>
-    </div>
+    <p class="lead">Системы, клуб, лекции и выездные мероприятия.</p>
+
+    <section class="block" aria-labelledby="proj-core">
+      <h2 class="h2" id="proj-core">Основные</h2>
+      <div class="list">
+        <a href="/color-guide">Система цвета</a>
+        <a href="/image">Система имиджа</a>
+        <a href="https://t.me/MilaUshakova_ClubBot?start=club" target="_blank" rel="noopener">Клуб «В моём стиле»</a>
+        <a href="/lekcii">Лекции и эфиры</a>
+        <a href="/lectures">Подкасты</a>
+      </div>
+    </section>
+
+    <section class="block" aria-labelledby="proj-offsite">
+      <h2 class="h2" id="proj-offsite">Выездные мероприятия</h2>
+      <div class="list">
+        <a href="/tours">Fashion туры по Европе</a>
+        <a href="/switzerland">Тур в Швейцарию</a>
+        <a href="/production">Fashion съёмки</a>
+        <a href="/media">Сотрудничество с media</a>
+      </div>
+    </section>
   </div>
 </main>
 <footer class="docs g" aria-label="Документы">
   <div class="in">
     <a href="/oferta">Оферта</a>
     <a href="/privacy">Политика конфиденциальности</a>
-    <a href="https://t.me/MilaUshakova_ClubBot?start=support" target="_blank" rel="noopener">Поддержка</a>
+    <a href="https://t.me/MilaUshakova_ClubBot?start=support" target="_blank" rel="noopener">Служба заботы</a>
     <span>ИП Ольхина Я.Ф.</span>
   </div>
 </footer>
 <a class="social-br" href="https://t.me/MilaUshakova_ClubBot?start=support" target="_blank" rel="noopener">Служба заботы</a>
-<script src="/site-chrome.js" defer></script>
+<script src="/site-chrome.js?v=proj1" defer></script>
 </body>
 </html>
