@@ -90,6 +90,7 @@ header.hd.is-solid{border-color:var(--rule);background:#fff}
 .nav-panel.is-open a:nth-of-type(2){transition-delay:.08s}
 .nav-panel.is-open a:nth-of-type(3){transition-delay:.12s}
 .nav-panel.is-open a:nth-of-type(4){transition-delay:.16s}
+.nav-panel.is-open a:nth-of-type(5){transition-delay:.2s}
 .nav-panel a:hover{color:var(--ink)}
 .nav-close{
   position:absolute;top:1.35rem;right:1.35rem;
@@ -294,6 +295,95 @@ header.hd.is-solid{border-color:var(--rule);background:#fff}
 .lines a:hover{color:var(--gold)}
 .lines span{color:var(--mute);font-weight:500}
 
+/* digital format */
+.digital{
+  padding:clamp(48px,7vw,96px) 0 clamp(56px,8vw,110px);
+  background:var(--soft);
+  border-top:1px solid var(--rule);
+}
+.digital .head{
+  display:flex;justify-content:space-between;align-items:flex-end;gap:1.5rem;
+  margin-bottom:1.75rem;
+}
+.digital .kicker{
+  font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:10px;
+}
+.digital h2{
+  margin:0;
+  font-weight:800;
+  font-size:clamp(26px,4vw,42px);
+  letter-spacing:-.02em;
+  text-transform:uppercase;
+  line-height:.98;
+}
+.digital h2 .gold{color:var(--gold)}
+.digital .sub{
+  max-width:36ch;
+  color:var(--mute);
+  font-size:15px;
+  line-height:1.55;
+  margin:0;
+}
+.phones{
+  display:flex;gap:14px;
+  overflow-x:auto;
+  padding:6px 2px 18px;
+  scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+}
+.phones::-webkit-scrollbar{display:none}
+.phone{
+  flex:0 0 auto;
+  width:min(42vw,220px);
+  scroll-snap-align:start;
+  text-decoration:none;
+}
+.phone .bezel{
+  background:#111;
+  border-radius:28px;
+  padding:10px;
+  box-shadow:0 18px 40px rgba(0,0,0,.12);
+}
+.phone .screen{
+  aspect-ratio:9/19.5;
+  border-radius:20px;
+  overflow:hidden;
+  background:#1a1a1a;
+}
+.phone img{
+  width:100%;height:100%;
+  object-fit:cover;
+  object-position:top center;
+  display:block;
+}
+.phone .cap{
+  margin-top:12px;
+  font-size:11px;font-weight:600;
+  letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink);
+}
+.phone .cap span{display:block;margin-top:4px;color:var(--mute);font-weight:500;letter-spacing:.08em}
+.digital-actions{
+  display:flex;flex-wrap:wrap;gap:10px;
+  margin-top:8px;
+}
+.digital-actions a{
+  display:inline-block;
+  font-size:12px;font-weight:600;
+  letter-spacing:.14em;text-transform:uppercase;
+  padding:14px 18px;
+  border:1px solid var(--ink);
+  background:var(--ink);color:#fff;
+  transition:background .2s,color .2s,border-color .2s;
+}
+.digital-actions a.ghost{
+  background:transparent;color:var(--ink);border-color:var(--rule);
+}
+.digital-actions a:hover{background:var(--gold);border-color:var(--gold);color:var(--ink)}
+.digital-actions a.ghost:hover{border-color:var(--gold);color:var(--gold);background:transparent}
+
 .legal{
   padding:0 0 40px;
   font-size:12px;color:var(--mute);
@@ -302,6 +392,9 @@ header.hd.is-solid{border-color:var(--rule);background:#fff}
 @media (max-width:820px){
   .about-grid{grid-template-columns:1fr}
   .hero-cap{padding-bottom:3.5rem}
+  .digital .head{flex-direction:column;align-items:flex-start}
+  .phone{width:min(68vw,240px)}
+  .phones{gap:12px;padding-bottom:12px}
 }
 @media (prefers-reduced-motion:reduce){
   .hero-media,.hero-roles,.hero h1,.hero-lead{animation:none;opacity:1;transform:none}
@@ -321,6 +414,7 @@ header.hd.is-solid{border-color:var(--rule);background:#fff}
 <nav class="nav-panel" id="nav-panel" hidden>
   <button class="nav-close" type="button" aria-label="Закрыть">Закрыть</button>
   <a href="#about">О Миле</a>
+  <a href="#digital">В телефоне</a>
   <a href="https://www.milaushakova.com/image">Система имиджа</a>
   <a href="https://www.milaushakova.com/color-guide">Система цвета</a>
   <a href="https://t.me/MilaUshakova_ClubBot?start=support" target="_blank" rel="noopener">Служба заботы</a>
@@ -352,11 +446,67 @@ header.hd.is-solid{border-color:var(--rule);background:#fff}
           <p class="lead">Практикующий стилист и fashion-журналист. Аккредитована на неделях моды в Милане, Париже и Копенгагене.</p>
           <p>Ведёт закрытый клуб и проводит личные консультации. Собирает системы, которыми можно пользоваться каждый день: цвет, имидж, образ под событие.</p>
           <div class="lines">
-            <a href="https://www.milaushakova.com/image"><b>Система имиджа</b><span>продукт</span></a>
-            <a href="https://www.milaushakova.com/color-guide"><b>Система цветовых сочетаний</b><span>приложение</span></a>
+            <a href="https://www.milaushakova.com/image"><b>Система имиджа</b><span>открыть</span></a>
+            <a href="https://www.milaushakova.com/color-guide"><b>Система цветовых сочетаний</b><span>открыть</span></a>
             <a href="https://www.milaushakova.com/booking"><b>Личная консультация</b><span>запись</span></a>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="digital g" id="digital">
+    <div class="in">
+      <div class="head">
+        <div>
+          <p class="kicker">Digital</p>
+          <h2>Системы<br><span class="gold">в телефоне</span></h2>
+        </div>
+        <p class="sub">Не курс. Рабочий формат: событие → образ, цвет → сочетание. Открывается в браузере и ставится на экран Домой.</p>
+      </div>
+
+      <div class="phones" aria-label="Экраны систем">
+        <a class="phone" href="https://www.milaushakova.com/image">
+          <div class="bezel"><div class="screen">
+            <picture>
+              <source srcset="digital/image-1.webp" type="image/webp">
+              <img src="digital/image-1.jpg" alt="Система имиджа — экран" width="443" height="960" loading="lazy">
+            </picture>
+          </div></div>
+          <p class="cap">Система имиджа<span>14 событий</span></p>
+        </a>
+        <a class="phone" href="https://www.milaushakova.com/image">
+          <div class="bezel"><div class="screen">
+            <picture>
+              <source srcset="digital/image-2.webp" type="image/webp">
+              <img src="digital/image-2.jpg" alt="Система имиджа — образ" width="443" height="960" loading="lazy">
+            </picture>
+          </div></div>
+          <p class="cap">Образ под цель<span>доверие · статус</span></p>
+        </a>
+        <a class="phone" href="https://www.milaushakova.com/image">
+          <div class="bezel"><div class="screen">
+            <picture>
+              <source srcset="digital/image-3.webp" type="image/webp">
+              <img src="digital/image-3.jpg" alt="Система имиджа — разбор" width="443" height="960" loading="lazy">
+            </picture>
+          </div></div>
+          <p class="cap">Разбор Милы<span>в приложении</span></p>
+        </a>
+        <a class="phone" href="https://www.milaushakova.com/color-guide">
+          <div class="bezel"><div class="screen">
+            <picture>
+              <source srcset="digital/color-1.webp" type="image/webp">
+              <img src="digital/color-1.jpg" alt="Система цвета" width="1200" height="780" loading="lazy" style="object-fit:cover;object-position:center">
+            </picture>
+          </div></div>
+          <p class="cap">Система цвета<span>палитры и образы</span></p>
+        </a>
+      </div>
+
+      <div class="digital-actions">
+        <a href="https://www.milaushakova.com/image">Открыть Систему имиджа</a>
+        <a class="ghost" href="https://www.milaushakova.com/color-guide">Открыть Систему цвета</a>
       </div>
     </div>
   </section>

@@ -91,6 +91,10 @@
     {
       "src": "team/**",
       "use": "@vercel/static"
+    },
+    {
+      "src": "digital/**",
+      "use": "@vercel/static"
     }
   ],
   "headers": [
