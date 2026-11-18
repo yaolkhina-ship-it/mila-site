@@ -10,6 +10,10 @@
       "use": "@vercel/static"
     },
     {
+      "src": "img/**",
+      "use": "@vercel/static"
+    },
+    {
       "src": "api/webhook.js",
       "use": "@vercel/node"
     },
