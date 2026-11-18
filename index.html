@@ -252,8 +252,8 @@ header.hd.is-solid{
   display:flex;flex-direction:column;
   justify-content:flex-start;
   align-items:stretch;
-  /* локоть фигуры, тёмная зона слева */
-  padding:clamp(12rem,42vh,20rem) 0 calc(4rem + env(safe-area-inset-bottom,0px));
+  /* ниже середины, слева у локтя */
+  padding:clamp(16rem,54vh,34rem) 0 calc(4rem + env(safe-area-inset-bottom,0px));
   text-align:left;
 }
 .hero-cap .in{
@@ -300,7 +300,7 @@ header.hd.is-solid{
 }
 @media (min-width:900px){
   .hero-media{object-position:62% 30%}
-  .hero-cap{padding:clamp(13rem,40vh,19rem) 0 7rem}
+  .hero-cap{padding:clamp(18rem,52vh,36rem) 0 7rem}
 }
 @keyframes rise{
   to{opacity:1;transform:none}
@@ -328,7 +328,7 @@ header.hd.is-solid{
       linear-gradient(180deg,rgba(12,8,4,.35) 0%,transparent 32%,rgba(12,8,4,.55) 78%,rgba(12,8,4,.7) 100%);
   }
   .hero-cap{
-    padding-top:clamp(9.5rem,34vh,15rem);
+    padding-top:clamp(14rem,48vh,28rem);
     padding-bottom:calc(3.5rem + env(safe-area-inset-bottom,0px));
   }
   .hero h1{
