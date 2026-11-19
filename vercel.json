@@ -297,6 +297,16 @@
       "dest": "/kniga/index.html"
     },
     {
+      "src": "/team(?:/(.*))?",
+      "has": [{ "type": "host", "value": "www.milaushakova.com" }],
+      "status": 404
+    },
+    {
+      "src": "/team(?:/(.*))?",
+      "has": [{ "type": "host", "value": "milaushakova.com" }],
+      "status": 404
+    },
+    {
       "src": "/team/?",
       "dest": "/team/index.html"
     },

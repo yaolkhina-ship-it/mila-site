@@ -6,21 +6,14 @@
 <meta name="theme-color" content="#0D1A1E">
 <title>Внутренняя система · Mila Ushakova</title>
 <style>
-/* Пульт команды: все продукты, продажи, клиенты, рассылки и работы в одном месте.
-   Данные лежат рядом в data.enc (зашифрованы), расшифровываются в браузере паролем. Цвета Системы: песок, глубокий, золото. */
+/* Внутренняя система команды: продажи, клиенты, рассылки и работы.
+   Данные рядом в data.json. Открывается только на project-u63bo.vercel.app/team (не на milaushakova.com). */
 :root{--bg:#F5F0EA;--card:#fff;--deep:#0D1A1E;--ink:#1d2427;--mute:#7b8285;--gold:#B8903A;--line:rgba(13,26,30,.12);--ok:#2f7a4f;--bad:#a33a2a}
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{background:var(--bg);color:var(--ink);font:15px/1.45 -apple-system,"Helvetica Neue",Arial,sans-serif}
 button,input,select{font:inherit;color:inherit}
 a{color:inherit}
-#lock{min-height:100svh;display:grid;place-items:center;background:var(--deep);color:#f5f0ea;padding:24px}
-#lock form{width:min(360px,100%);display:grid;gap:14px}
-#lock h1{font:400 34px/1.1 Georgia,serif}
-#lock small{color:#9aa3a5;letter-spacing:.2em;text-transform:uppercase;font-size:10px}
-#lock input{padding:14px 16px;border:1px solid rgba(245,240,234,.3);background:transparent;border-radius:10px}
-#lock button{padding:14px;border:0;border-radius:10px;background:var(--gold);color:var(--deep);font-weight:600;cursor:pointer}
-#err{color:#e9a08f;font-size:13px;min-height:18px}
-#app{display:none}
+#app{display:block}
 header{position:sticky;top:0;z-index:5;background:var(--deep);color:#f5f0ea;padding:calc(12px + env(safe-area-inset-top)) 16px 0}
 .hd{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
 .hd b{font:400 20px Georgia,serif}.hd span{font-size:11px;color:#9aa3a5}
@@ -84,37 +77,27 @@ details.dt summary{cursor:pointer;color:var(--mute);font-size:12px;padding:8px 0
 @media (max-width:640px){.hide-m{display:none}}
 </style>
 </head><body>
-<div id="lock"><form id="f">
-  <small>Mila Ushakova · команда</small>
-  <h1>Внутренняя система</h1>
-  <input id="pw" type="password" placeholder="Пароль" autocomplete="current-password" autofocus>
-  <button>Войти</button>
-  <div id="err"></div>
-</form></div>
 <div id="app">
   <header><div class="hd"><b>Внутренняя система</b><span id="built"></span></div><nav id="nav"></nav></header>
   <main id="main"></main>
 </div>
 <script>
 (function(){
+// На основном домене Милы внутреннюю систему не показываем — только vercel.app
+if (/(^|\.)milaushakova\.com$/i.test(location.hostname)) { location.replace('/'); return; }
+
 var D, TAB = 'home';
-var b64 = function(s){ return Uint8Array.from(atob(s), function(c){ return c.charCodeAt(0); }); };
-async function open(pw){
-  var e = await (await fetch('data.enc?v=' + Date.now())).json();
-  var base = await crypto.subtle.importKey('raw', new TextEncoder().encode(pw), 'PBKDF2', false, ['deriveKey']);
-  var key = await crypto.subtle.deriveKey({name:'PBKDF2', salt:b64(e.salt), iterations:e.iter, hash:'SHA-256'}, base, {name:'AES-GCM', length:256}, false, ['decrypt']);
-  var pt = await crypto.subtle.decrypt({name:'AES-GCM', iv:b64(e.iv)}, key, b64(e.ct));
-  return JSON.parse(new TextDecoder().decode(pt));
-}
-async function login(pw, remember){
-  try { D = await open(pw); } catch(x){ document.getElementById('err').textContent = 'Неверный пароль'; try { sessionStorage.removeItem('tp'); } catch(e){} return; }
-  try { if (remember) sessionStorage.setItem('tp', pw); } catch(e){}
-  document.getElementById('lock').style.display = 'none'; document.getElementById('app').style.display = 'block';
+async function boot(){
+  try {
+    D = await (await fetch('data.json?v=' + Date.now())).json();
+  } catch (x) {
+    document.getElementById('main').innerHTML = '<p class="muted">Не удалось загрузить данные.</p>';
+    return;
+  }
   document.getElementById('built').textContent = 'обновлено ' + D.built;
   render();
 }
-document.getElementById('f').onsubmit = function(e){ e.preventDefault(); login(document.getElementById('pw').value.trim().replace(/[\u2010-\u2015\u2212]/g, '-').toLowerCase(), true); };
-try { var saved = sessionStorage.getItem('tp'); if (saved) login(saved, false); } catch(e){}
+boot();
 
 var esc = function(s){ return String(s == null ? '' : s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); };
 var rub = function(n){ return Math.round(n).toLocaleString('ru-RU') + ' ₽'; };
