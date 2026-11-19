@@ -8,27 +8,70 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400&family=Montserrat:wght@300;400;500&display=swap">
-<link rel="stylesheet" href="/site-chrome.css?v=proj2">
+<link rel="stylesheet" href="/site-chrome.css?v=proj3">
 <style>
 :root{
-  --paper:#FFFFFF;--ink:#111111;--gold:#C9A96A;--rule:#E3E3E3;--mute:#7A7A7A;
+  --paper:#FAFAF8;--ink:#111111;--gold:#C9A96A;--rule:#E3E3E3;--mute:#7A7A7A;--soft:#F3F1EC;
   --f:'Montserrat','Helvetica Neue',Arial,sans-serif;
   --serif:'Bodoni Moda',Didot,'Times New Roman',serif;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--paper);color:var(--ink);font:300 15px/1.55 var(--f)}
+body{
+  background:
+    radial-gradient(ellipse 90% 55% at 8% -10%,rgba(201,169,106,.09) 0%,transparent 55%),
+    radial-gradient(ellipse 70% 45% at 92% 12%,rgba(17,17,17,.03) 0%,transparent 50%),
+    linear-gradient(180deg,var(--paper) 0%,#FFFFFF 42%,var(--soft) 100%);
+  color:var(--ink);
+  font:300 15px/1.55 var(--f);
+  min-height:100vh;
+}
 a{color:inherit;text-decoration:none}
 .g{padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
-.in{max-width:900px;margin:0 auto}
-.wrap{padding:clamp(1.5rem,4vh,3rem) 0 4rem}
+.in{max-width:1180px;margin:0 auto;min-width:0}
+.wrap{padding:clamp(1.35rem,3.5vh,2.75rem) 0 0}
+
+/* Hero: title + intro only */
+.page-head{max-width:46ch;margin:0 0 clamp(1.5rem,3vh,2.25rem)}
 h1{
   font-family:var(--serif);font-weight:400;
-  font-size:clamp(40px,6vw,64px);line-height:.95;letter-spacing:.06em;
-  text-transform:uppercase;margin:0 0 1rem;
+  font-size:clamp(36px,5.4vw,60px);line-height:.95;letter-spacing:.06em;
+  text-transform:uppercase;margin:0 0 .9rem;
 }
-.lead{font-weight:300;max-width:48ch;margin:0 0 2rem;letter-spacing:.03em;line-height:1.65}
-.block{margin-top:2.25rem}
-.block:first-of-type{margin-top:0}
+.lead{
+  font-weight:300;margin:0;
+  letter-spacing:.03em;line-height:1.65;
+  color:rgba(17,17,17,.82);
+}
+
+/* Основные: thin row under intro */
+.core{
+  display:flex;flex-wrap:wrap;align-items:baseline;gap:.55rem 1.35rem;
+  padding:1rem 0 1.35rem;
+  border-top:1px solid var(--rule);
+  border-bottom:1px solid var(--rule);
+  margin:0 0 clamp(1.75rem,3.5vh,2.75rem);
+}
+.core .lbl{
+  font-size:10px;font-weight:300;letter-spacing:.22em;text-transform:uppercase;color:var(--mute);
+  margin-right:.35rem;
+}
+.core a{
+  font-size:11px;font-weight:300;letter-spacing:.16em;text-transform:uppercase;
+  transition:color .2s;
+}
+.core a:hover{color:var(--gold)}
+
+/* Two columns */
+.cols{
+  display:grid;
+  grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);
+  gap:clamp(2rem,5vw,4.5rem);
+  align-items:start;
+  padding-bottom:clamp(2.5rem,5vh,4rem);
+}
+.col-right{display:flex;flex-direction:column;gap:clamp(2rem,4vh,3rem)}
+
+.block{min-width:0}
 .h2{
   font-family:var(--f);font-size:10px;font-weight:300;
   letter-spacing:.22em;text-transform:uppercase;color:var(--mute);
@@ -36,24 +79,68 @@ h1{
 }
 .list{list-style:none;display:flex;flex-direction:column;gap:0;border-top:1px solid var(--rule)}
 .list a,.list .item{
-  display:block;padding:1.15rem 0;border-bottom:1px solid var(--rule);
+  display:block;padding:1.05rem 0;border-bottom:1px solid var(--rule);
 }
 .list .t{
   display:block;
-  font-family:var(--f);font-size:12px;font-weight:300;letter-spacing:.18em;text-transform:uppercase;
+  font-family:var(--f);font-size:12px;font-weight:300;letter-spacing:.14em;text-transform:uppercase;
+  line-height:1.45;
 }
 .list .n{
-  display:block;margin-top:.45rem;max-width:54ch;
+  display:block;margin-top:.4rem;max-width:48ch;
   font-size:13px;font-weight:300;letter-spacing:.02em;line-height:1.55;
   text-transform:none;color:var(--mute);
 }
 .list a:hover .t{color:var(--gold)}
+
+/* Outings: full-width strip */
+.outings{
+  margin-top:0;
+  background:
+    linear-gradient(180deg,rgba(243,241,236,.55) 0%,rgba(255,255,255,.9) 100%);
+  border-top:1px solid var(--rule);
+}
+.outings .in{padding:clamp(2rem,4.5vh,3.25rem) 0 clamp(2.75rem,5vh,4rem)}
+.outings .h2{margin-bottom:1.15rem}
+.out-grid{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:0;
+  border-top:1px solid var(--rule);
+}
+.out-grid a{
+  display:flex;flex-direction:column;justify-content:flex-end;
+  min-height:9.5rem;
+  padding:1.25rem 1.1rem 1.2rem 0;
+  border-bottom:1px solid var(--rule);
+  border-right:1px solid var(--rule);
+  position:relative;
+  transition:color .2s;
+}
+.out-grid a:last-child{border-right:none}
+.out-grid a::before{
+  content:"";
+  position:absolute;inset:0 0 auto 0;height:2px;
+  background:transparent;transition:background .25s;
+}
+.out-grid a:hover{color:var(--gold)}
+.out-grid a:hover::before{background:var(--gold)}
+.out-k{
+  font-size:10px;font-weight:300;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--mute);margin-bottom:.55rem;
+}
+.out-t{
+  font-family:var(--serif);font-weight:400;
+  font-size:clamp(18px,1.6vw,22px);line-height:1.15;letter-spacing:.04em;
+  text-transform:uppercase;
+}
+
 .docs{
   background:#111;color:rgba(255,255,255,.55);
   padding:1.35rem 0 calc(1.35rem + env(safe-area-inset-bottom,0px));
   font-size:10px;font-weight:300;letter-spacing:.08em;
 }
-.docs .in{display:flex;flex-wrap:wrap;gap:.65rem 1.25rem;max-width:900px}
+.docs .in{display:flex;flex-wrap:wrap;gap:.65rem 1.25rem;max-width:1180px}
 .docs a{color:rgba(255,255,255,.7)}
 .docs a:hover{color:var(--gold)}
 .social-br{
@@ -61,111 +148,142 @@ h1{
   z-index:25;writing-mode:vertical-rl;transform:rotate(180deg);
   font-size:11px;font-weight:300;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);
 }
+
+@media (max-width:900px){
+  .cols{grid-template-columns:1fr;gap:2.25rem}
+  .out-grid{grid-template-columns:1fr 1fr}
+  .out-grid a:nth-child(2n){border-right:none;padding-right:0}
+  .out-grid a:nth-child(2n+1){padding-right:1rem}
+}
+@media (max-width:560px){
+  .core{gap:.45rem 1rem}
+  .core a{font-size:10px;letter-spacing:.12em}
+  .out-grid{grid-template-columns:1fr}
+  .out-grid a{border-right:none;min-height:0;padding:1.1rem 0}
+}
 </style>
 </head>
 <body>
-<main class="g">
+<main class="g" aria-label="Проекты и публикации">
   <div class="in wrap">
-    <h1>Проекты и публикации</h1>
-    <p class="lead">Системы, клуб, лекции, выездные мероприятия, пресса и коллаборации.</p>
+    <header class="page-head">
+      <h1>Проекты и публикации</h1>
+      <p class="lead">Системы, клуб, лекции, выездные мероприятия, пресса и коллаборации.</p>
+    </header>
 
-    <section class="block" aria-labelledby="proj-core">
-      <h2 class="h2" id="proj-core">Основные</h2>
-      <div class="list">
-        <a href="/color-guide"><span class="t">Система цвета</span></a>
-        <a href="/image"><span class="t">Система имиджа</span></a>
-        <a href="https://t.me/MilaUshakova_ClubBot?start=club" target="_blank" rel="noopener"><span class="t">Клуб «В моём стиле»</span></a>
-        <a href="/lekcii"><span class="t">Лекции и эфиры</span></a>
-        <a href="/lectures"><span class="t">Подкасты</span></a>
-      </div>
-    </section>
+    <nav class="core" aria-labelledby="proj-core">
+      <span class="lbl" id="proj-core">Основные</span>
+      <a href="/color-guide">Система цвета</a>
+      <a href="/image">Система имиджа</a>
+      <a href="https://t.me/MilaUshakova_ClubBot?start=club" target="_blank" rel="noopener">Клуб «В моём стиле»</a>
+      <a href="/lekcii">Лекции и эфиры</a>
+      <a href="/lectures">Подкасты</a>
+    </nav>
 
-    <section class="block" aria-labelledby="proj-offsite">
-      <h2 class="h2" id="proj-offsite">Выездные мероприятия</h2>
-      <div class="list">
-        <a href="/tours"><span class="t">Fashion туры по Европе</span></a>
-        <a href="/switzerland"><span class="t">Тур в Швейцарию</span></a>
-        <a href="/production"><span class="t">Fashion съёмки</span></a>
-        <a href="/media"><span class="t">Сотрудничество с media</span></a>
-      </div>
-    </section>
-
-    <section class="block" aria-labelledby="proj-press">
-      <h2 class="h2" id="proj-press">Публикации</h2>
-      <div class="list">
-        <a href="https://www.nochasermagazine.com/2024/07/02/master-perfumer-sileno/" target="_blank" rel="noopener">
-          <span class="t">Nocha Ser Magazine — Master Perfumer Sileno</span>
-        </a>
-        <a href="https://www.ok-magazine.ru/stars/interview/242701-irina-gorbachyova-eto-zavedomo-lozhnaya-istoriya-sravnivat-sebya-s-drugimi" target="_blank" rel="noopener">
-          <span class="t">Журнал OK — интервью с Ириной Горбачёвой</span>
-        </a>
-        <a href="https://www.ok-magazine.ru/node-amp/548671" target="_blank" rel="noopener">
-          <span class="t">Журнал OK</span>
-        </a>
-        <a href="https://www.behance.net/gallery/109881235/The-flavor-of-Baroque" target="_blank" rel="noopener">
-          <span class="t">Журнал L’Officiel — Behance: The flavor of Baroque</span>
-        </a>
-        <a href="https://7days.ru/style/star-style/bolshe-chem-sumka.htm" target="_blank" rel="noopener">
-          <span class="t">Журнал «7 дней» — комментарий Милы Ушаковой</span>
-          <span class="n">Выпуск № 29 за июль 2025 года. Материал о модных сумках, трендах и аксессуарах.</span>
-        </a>
-        <a href="https://lady.mail.ru/article/591680-nazvany-letnie-veshi-kotorye-ustareli/" target="_blank" rel="noopener">
-          <span class="t">Lady Mail.ru — «Названы летние вещи, которые устарели»</span>
-        </a>
-        <a href="https://supertourism.ru/novosti/kak-sobirat-chemodan-v-otpusk-po-sisteme-5-3-2-2-3-ot-mily-ushakovoj/" target="_blank" rel="noopener">
-          <span class="t">SuperTourism — система 5-3-2-2-3 от Милы Ушаковой</span>
-        </a>
-        <a href="https://www.instagram.com/p/DFLLNOyIow4/?img_index=3" target="_blank" rel="noopener">
-          <span class="t">Street style Elle — Instagram</span>
-        </a>
-        <a href="https://www.vogue.com/article/picturing-men-and-love-by-pete-muller" target="_blank" rel="noopener">
-          <span class="t">Vogue US работа</span>
-        </a>
-        <a href="https://style.rbc.ru/impressions/6abd29c1edfbadf081301a6c" target="_blank" rel="noopener">
-          <span class="t">Статья — RBC Style</span>
-        </a>
-      </div>
-    </section>
-
-    <section class="block" aria-labelledby="proj-collab">
-      <h2 class="h2" id="proj-collab">Проекты и коллаборации</h2>
-      <div class="list">
-        <a href="https://umagazine.ru/lifestyle/food/gastro-nedelya-mela-kh-mila-ushakova-argentinskiy-special-v-maya-i-obnovlennoe-menyu-nouge" target="_blank" rel="noopener">
-          <span class="t">О проекте с рестораном Mela — U Magazine</span>
-          <span class="n">Гастро-неделя Mela × Мила Ушакова.</span>
-        </a>
-        <a href="https://chef.ru/news/puteshestvie-v-toskanu-gastronomicheskij-uzhin-v-restorane-mela-v-chest-zapuska-kollaboraczii-s-miloj-ushakovoj/" target="_blank" rel="noopener">
-          <span class="t">О проекте — Chef.ru</span>
-          <span class="n">Гастрономический ужин Mela × Мила Ушакова, Тоскана.</span>
-        </a>
-        <a href="https://grazia.ru/lifestyle/gastronomicheskii-daidjest-gde-est-morskih-ejei-a-gde-blyuda-iz-belyh-gribov" target="_blank" rel="noopener">
-          <span class="t">О проекте — Grazia (гастрономический дайджест)</span>
-        </a>
-      </div>
-    </section>
-
-    <section class="block" aria-labelledby="proj-talks">
-      <h2 class="h2" id="proj-talks">Лекции и встречи</h2>
-      <div class="list">
-        <a href="https://britishdesign.ru/alumni-stories/201771/" target="_blank" rel="noopener">
-          <span class="t">Британская высшая школа дизайна — история успеха Милы Ушаковой</span>
-          <span class="n">Интервью о творческом проекте, сотрудничестве с ювелирным брендом Statements и карьере в стайлинге.</span>
-        </a>
-        <div class="item">
-          <span class="t">Fashion Factory School — «Винтаж как новый люкс»</span>
-          <span class="n">Страница лекции с профессиональной биографией: работа с Vogue, GQ, Hello!, L’Officiel, международные проекты и участие в неделях моды.</span>
+    <div class="cols">
+      <section class="block" aria-labelledby="proj-press">
+        <h2 class="h2" id="proj-press">Публикации</h2>
+        <div class="list">
+          <a href="https://www.nochasermagazine.com/2024/07/02/master-perfumer-sileno/" target="_blank" rel="noopener">
+            <span class="t">Nocha Ser Magazine — Master Perfumer Sileno</span>
+          </a>
+          <a href="https://www.ok-magazine.ru/stars/interview/242701-irina-gorbachyova-eto-zavedomo-lozhnaya-istoriya-sravnivat-sebya-s-drugimi" target="_blank" rel="noopener">
+            <span class="t">Журнал OK — интервью с Ириной Горбачёвой</span>
+          </a>
+          <a href="https://www.ok-magazine.ru/node-amp/548671" target="_blank" rel="noopener">
+            <span class="t">Журнал OK</span>
+          </a>
+          <a href="https://www.behance.net/gallery/109881235/The-flavor-of-Baroque" target="_blank" rel="noopener">
+            <span class="t">Журнал L’Officiel — Behance: The flavor of Baroque</span>
+          </a>
+          <a href="https://7days.ru/style/star-style/bolshe-chem-sumka.htm" target="_blank" rel="noopener">
+            <span class="t">Журнал «7 дней» — комментарий Милы Ушаковой</span>
+            <span class="n">Выпуск № 29 за июль 2025 года. Материал о модных сумках, трендах и аксессуарах.</span>
+          </a>
+          <a href="https://lady.mail.ru/article/591680-nazvany-letnie-veshi-kotorye-ustareli/" target="_blank" rel="noopener">
+            <span class="t">Lady Mail.ru — «Названы летние вещи, которые устарели»</span>
+          </a>
+          <a href="https://supertourism.ru/novosti/kak-sobirat-chemodan-v-otpusk-po-sisteme-5-3-2-2-3-ot-mily-ushakovoj/" target="_blank" rel="noopener">
+            <span class="t">SuperTourism — система 5-3-2-2-3 от Милы Ушаковой</span>
+          </a>
+          <a href="https://www.instagram.com/p/DFLLNOyIow4/?img_index=3" target="_blank" rel="noopener">
+            <span class="t">Street style Elle — Instagram</span>
+          </a>
+          <a href="https://www.vogue.com/article/picturing-men-and-love-by-pete-muller" target="_blank" rel="noopener">
+            <span class="t">Vogue US работа</span>
+          </a>
+          <a href="https://style.rbc.ru/impressions/6abd29c1edfbadf081301a6c" target="_blank" rel="noopener">
+            <span class="t">Статья — RBC Style</span>
+          </a>
         </div>
-        <a href="https://practicalmoscow.ru/sumki-bolshe-ne-vazhny-art-zavtrak-s-fashion-stilistom-miloj-ushakovoj-v-reina-bistro/" target="_blank" rel="noopener">
-          <span class="t">«Практичная Москва» — арт-завтрак с Милой Ушаковой</span>
-          <span class="n">Публикация от 16 июня 2026 года о её лекции «Сумки больше не важны?» в REINA Bistro.</span>
+      </section>
+
+      <div class="col-right">
+        <section class="block" aria-labelledby="proj-collab">
+          <h2 class="h2" id="proj-collab">Проекты и коллаборации</h2>
+          <div class="list">
+            <a href="https://umagazine.ru/lifestyle/food/gastro-nedelya-mela-kh-mila-ushakova-argentinskiy-special-v-maya-i-obnovlennoe-menyu-nouge" target="_blank" rel="noopener">
+              <span class="t">О проекте с рестораном Mela — U Magazine</span>
+              <span class="n">Гастро-неделя Mela × Мила Ушакова.</span>
+            </a>
+            <a href="https://chef.ru/news/puteshestvie-v-toskanu-gastronomicheskij-uzhin-v-restorane-mela-v-chest-zapuska-kollaboraczii-s-miloj-ushakovoj/" target="_blank" rel="noopener">
+              <span class="t">О проекте — Chef.ru</span>
+              <span class="n">Гастрономический ужин Mela × Мила Ушакова, Тоскана.</span>
+            </a>
+            <a href="https://grazia.ru/lifestyle/gastronomicheskii-daidjest-gde-est-morskih-ejei-a-gde-blyuda-iz-belyh-gribov" target="_blank" rel="noopener">
+              <span class="t">О проекте — Grazia (гастрономический дайджест)</span>
+            </a>
+          </div>
+        </section>
+
+        <section class="block" aria-labelledby="proj-talks">
+          <h2 class="h2" id="proj-talks">Лекции и встречи</h2>
+          <div class="list">
+            <a href="https://britishdesign.ru/alumni-stories/201771/" target="_blank" rel="noopener">
+              <span class="t">Британская высшая школа дизайна — история успеха Милы Ушаковой</span>
+              <span class="n">Интервью о творческом проекте, сотрудничестве с ювелирным брендом Statements и карьере в стайлинге.</span>
+            </a>
+            <div class="item">
+              <span class="t">Fashion Factory School — «Винтаж как новый люкс»</span>
+              <span class="n">Страница лекции с профессиональной биографией: работа с Vogue, GQ, Hello!, L’Officiel, международные проекты и участие в неделях моды.</span>
+            </div>
+            <a href="https://practicalmoscow.ru/sumki-bolshe-ne-vazhny-art-zavtrak-s-fashion-stilistom-miloj-ushakovoj-v-reina-bistro/" target="_blank" rel="noopener">
+              <span class="t">«Практичная Москва» — арт-завтрак с Милой Ушаковой</span>
+              <span class="n">Публикация от 16 июня 2026 года о её лекции «Сумки больше не важны?» в REINA Bistro.</span>
+            </a>
+            <a href="https://vintagedream.timepad.ru/event/3981183/" target="_blank" rel="noopener">
+              <span class="t">Vintage Dream — «Психология камней в винтажных украшениях»</span>
+              <span class="n">Анонс камерной встречи с Милой Ушаковой как fashion-стилистом и журналистом.</span>
+            </a>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <section class="outings g" aria-labelledby="proj-offsite">
+    <div class="in">
+      <h2 class="h2" id="proj-offsite">Выездные мероприятия</h2>
+      <div class="out-grid">
+        <a href="/tours">
+          <span class="out-k">Европа</span>
+          <span class="out-t">Fashion туры по Европе</span>
         </a>
-        <a href="https://vintagedream.timepad.ru/event/3981183/" target="_blank" rel="noopener">
-          <span class="t">Vintage Dream — «Психология камней в винтажных украшениях»</span>
-          <span class="n">Анонс камерной встречи с Милой Ушаковой как fashion-стилистом и журналистом.</span>
+        <a href="/switzerland">
+          <span class="out-k">Швейцария</span>
+          <span class="out-t">Тур в Швейцарию</span>
+        </a>
+        <a href="/production">
+          <span class="out-k">Съёмки</span>
+          <span class="out-t">Fashion съёмки</span>
+        </a>
+        <a href="/media">
+          <span class="out-k">Media</span>
+          <span class="out-t">Сотрудничество с media</span>
         </a>
       </div>
-    </section>
-  </div>
+    </div>
+  </section>
 </main>
 <footer class="docs g" aria-label="Документы">
   <div class="in">
@@ -176,6 +294,6 @@ h1{
   </div>
 </footer>
 <a class="social-br" href="https://t.me/MilaUshakova_ClubBot?start=support" target="_blank" rel="noopener">Служба заботы</a>
-<script src="/site-chrome.js?v=proj2" defer></script>
+<script src="/site-chrome.js?v=proj3" defer></script>
 </body>
 </html>
