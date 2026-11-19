@@ -44,20 +44,23 @@ html{background:#0D1A1E;}
 .site-footer a{color:var(--muted);text-decoration:underline;font-size:11px;letter-spacing:0.1em;transition:color 0.2s;}
 .site-footer a:hover{color:var(--ochre);}
 
-/* ══ PAGE 1 ══ фон: шляпа + синий веер (hi-res); текст справа в чёрном, без вуали на фото */
+/* ══ PAGE 1 ══ фон: шляпа + синий веер; пропорции 635×960, без растягивания */
 #page1{position:relative;overflow:hidden;background:#000;}
 .hero-bg{
   position:absolute;inset:0;z-index:0;
   background-color:#000;
-  background-image:url('/guide/color-bg-fan.webp');
-  background-image:image-set(
-    url('/guide/color-bg-fan.webp') type('image/webp'),
-    url('/guide/color-bg-fan.jpg') type('image/jpeg')
-  );
-  background-size:cover;
-  background-repeat:no-repeat;
-  /* шляпа сверху, веер слева снизу; справа чёрное поле под текст */
-  background-position:28% 35%;
+  pointer-events:none;
+  overflow:hidden;
+}
+.hero-bg picture,
+.hero-bg img{
+  position:absolute;inset:0;
+  display:block;
+  width:100%;
+  height:100%;
+  /* contain: не искажает; слева фото, справа чёрное под текст */
+  object-fit:contain;
+  object-position:left center;
 }
 /* без затемнения: атмосфера рефа, только чёрный фон страницы */
 .hero-bg::after{content:none;display:none;}
@@ -202,9 +205,9 @@ html{background:#0D1A1E;}
   #page2 .footer-legal{flex-wrap:wrap !important;gap:10px 20px !important;}
 }
 
-/* MOBILE: кадр без сжатия атмосферы, текст справа снизу */
+/* MOBILE: cover без искажения (обрезает края, не растягивает) */
 @media(max-width:640px){
-  .hero-bg{background-position:34% 30%;}
+  .hero-bg img{object-fit:cover;object-position:40% 28%;}
   .hero-content{padding:88px 20px calc(28px + env(safe-area-inset-bottom,0px));gap:14px;align-items:flex-end;text-align:right;}
   .hero-title{font-size:clamp(34px,11vw,48px);max-width:12ch;}
   .hero-features{max-width:100%;}
@@ -326,7 +329,21 @@ html{background:#0D1A1E;}
 
 <!-- ══ PAGE 1 ══ -->
 <div id="page1" class="page active">
-  <div class="hero-bg"></div>
+  <div class="hero-bg" aria-hidden="true">
+    <picture>
+      <source type="image/webp"
+        srcset="/guide/color-bg-fan.webp?v=4 635w, /guide/color-bg-fan-2x.webp?v=4 1270w"
+        sizes="100vw">
+      <img
+        src="/guide/color-bg-fan-2x.jpg?v=4"
+        srcset="/guide/color-bg-fan.jpg?v=4 635w, /guide/color-bg-fan-2x.jpg?v=4 1270w"
+        sizes="100vw"
+        width="635" height="960"
+        alt=""
+        decoding="async"
+        fetchpriority="high">
+    </picture>
+  </div>
   <div class="hero-content">
     <h1 class="hero-title">Система<br>цветовых<br>сочетаний</h1>
     <div class="hero-mid">
