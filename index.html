@@ -545,11 +545,13 @@ header.hd.is-solid{
   border-bottom:1px solid var(--rule);
 }
 .pub-cover{
+  overflow:hidden;
   aspect-ratio:3/4;
   background:
     linear-gradient(135deg,rgba(201,169,106,.18),rgba(17,17,17,.04));
   border:1px solid var(--rule);
 }
+.pub-cover img{display:block;width:100%;height:100%;object-fit:cover}
 .pub-t{
   font-size:12px;font-weight:300;
   letter-spacing:.12em;text-transform:uppercase;
@@ -674,15 +676,26 @@ a.cinfo-val:hover{color:var(--gold)}
     gap:.4rem .55rem;
     padding-block:14px 10px;
   }
-  .monogram{font-size:22px}
+  .monogram{font-size:18px;letter-spacing:.04em}
   .nav-desk{
     display:flex !important;
     gap:clamp(8px,2.4vw,14px);
-    justify-content:flex-end;
+    justify-content:flex-start;
     overflow-x:auto;
     -webkit-overflow-scrolling:touch;
   }
-  .nav-desk a{font-size:8px;letter-spacing:.08em}
+  /* свободное место уходит влево: при нехватке ширины первый пункт не обрезается */
+  .nav-desk a:first-child{margin-left:auto}
+  .nav-desk a{font-size:9px;letter-spacing:.08em}
+  /* на телефоне меню второй строкой на всю ширину: все 4 пункта видны */
+  .hd .row{grid-template-columns:auto 1fr auto}
+  .monogram{grid-column:1;grid-row:1}
+  .hd-tools{grid-column:3;grid-row:1}
+  .nav-desk{grid-column:1/-1;grid-row:2;justify-content:space-between;overflow:visible;gap:6px}
+  .nav-desk a:first-child{margin-left:0}
+  .hd-tools{gap:6px}
+  .lng{font-size:9px;letter-spacing:.06em;gap:2px}
+  .lng button{padding:0 1px}
   .menu-btn{width:22px;height:14px}
 }
 @media (prefers-reduced-motion:reduce){
@@ -835,31 +848,31 @@ a.cinfo-val:hover{color:var(--gold)}
       </header>
       <ul class="pub-list reveal">
         <li class="pub-item">
-          <div class="pub-cover" aria-hidden="true"></div>
+          <div class="pub-cover" aria-hidden="true"><picture><source srcset="/digital/pub-no-chaser.webp" type="image/webp"><img src="/digital/pub-no-chaser.jpg" alt="" width="480" height="640" loading="lazy" decoding="async"></picture></div>
           <a href="https://www.nochasermagazine.com/2024/07/02/master-perfumer-sileno/" target="_blank" rel="noopener">
-            <span class="pub-t">Nocha Ser Magazine — Master Perfumer Sileno</span>
+            <span class="pub-t">No Chaser Magazine — Master Perfumer Sileno</span>
           </a>
         </li>
         <li class="pub-item">
-          <div class="pub-cover" aria-hidden="true"></div>
+          <div class="pub-cover" aria-hidden="true"><picture><source srcset="/digital/pub-ok-gorbacheva.webp" type="image/webp"><img src="/digital/pub-ok-gorbacheva.jpg" alt="" width="480" height="640" loading="lazy" decoding="async"></picture></div>
           <a href="https://www.ok-magazine.ru/stars/interview/242701-irina-gorbachyova-eto-zavedomo-lozhnaya-istoriya-sravnivat-sebya-s-drugimi" target="_blank" rel="noopener">
             <span class="pub-t">Журнал OK — интервью с Ириной Горбачёвой</span>
           </a>
         </li>
         <li class="pub-item">
-          <div class="pub-cover" aria-hidden="true"></div>
+          <div class="pub-cover" aria-hidden="true"><picture><source srcset="/digital/pub-ok-vorobyov.webp" type="image/webp"><img src="/digital/pub-ok-vorobyov.jpg" alt="" width="480" height="640" loading="lazy" decoding="async"></picture></div>
           <a href="https://www.ok-magazine.ru/node-amp/548671" target="_blank" rel="noopener">
-            <span class="pub-t">Журнал OK</span>
+            <span class="pub-t">Журнал OK — интервью с Даниилом Воробьёвым</span>
           </a>
         </li>
         <li class="pub-item">
-          <div class="pub-cover" aria-hidden="true"></div>
+          <div class="pub-cover" aria-hidden="true"><picture><source srcset="/digital/pub-lofficiel.webp" type="image/webp"><img src="/digital/pub-lofficiel.jpg" alt="" width="480" height="640" loading="lazy" decoding="async"></picture></div>
           <a href="https://www.behance.net/gallery/109881235/The-flavor-of-Baroque" target="_blank" rel="noopener">
             <span class="pub-t">Журнал L’Officiel — Behance: The flavor of Baroque</span>
           </a>
         </li>
         <li class="pub-item">
-          <div class="pub-cover" aria-hidden="true"></div>
+          <div class="pub-cover" aria-hidden="true"><picture><source srcset="/digital/pub-7days.webp" type="image/webp"><img src="/digital/pub-7days.jpg" alt="" width="480" height="640" loading="lazy" decoding="async"></picture></div>
           <a href="https://7days.ru/style/star-style/bolshe-chem-sumka.htm" target="_blank" rel="noopener">
             <span class="pub-t">Журнал «7 дней» — комментарий Милы Ушаковой</span>
             <span class="pub-n">Выпуск № 29 за июль 2025. Модные сумки, тренды и аксессуары.</span>
@@ -878,13 +891,13 @@ a.cinfo-val:hover{color:var(--gold)}
           </a>
         </li>
         <li class="pub-item">
-          <div class="pub-cover" aria-hidden="true"></div>
+          <div class="pub-cover" aria-hidden="true"><picture><source srcset="/digital/pub-vogue-us.webp" type="image/webp"><img src="/digital/pub-vogue-us.jpg" alt="" width="480" height="640" loading="lazy" decoding="async"></picture></div>
           <a href="https://www.vogue.com/article/picturing-men-and-love-by-pete-muller" target="_blank" rel="noopener">
             <span class="pub-t">Vogue US</span>
           </a>
         </li>
         <li class="pub-item">
-          <div class="pub-cover" aria-hidden="true"></div>
+          <div class="pub-cover" aria-hidden="true"><picture><source srcset="/digital/pub-rbc-style.webp" type="image/webp"><img src="/digital/pub-rbc-style.jpg" alt="" width="480" height="640" loading="lazy" decoding="async"></picture></div>
           <a href="https://style.rbc.ru/impressions/6abd29c1edfbadf081301a6c" target="_blank" rel="noopener">
             <span class="pub-t">RBC Style</span>
           </a>

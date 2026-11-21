@@ -148,20 +148,27 @@ body.mu-dark.has-mu-chrome{padding-top:0}
   /* compact top: все пункты наверху, не только ☰ */
   .mu-hd .mu-row{
     grid-template-columns:auto minmax(0,1fr) auto;
-    gap:.4rem .55rem;
+    gap:.4rem .4rem;
     padding-block:14px 10px;
   }
-  .mu-monogram{font-size:22px}
+  .mu-monogram{font-size:18px;letter-spacing:.04em}
   .mu-nav{
     display:flex !important;
-    gap:clamp(8px,2.4vw,14px);
-    justify-content:flex-end;
+    gap:6px;
+    justify-content:flex-start;
     overflow-x:auto;
     -webkit-overflow-scrolling:touch;
   }
-  .mu-nav a{font-size:8px;letter-spacing:.08em}
+  /* свободное место уходит влево: при нехватке ширины первый пункт не обрезается */
+  .mu-nav a:first-child{margin-left:auto}
+  .mu-nav a{font-size:8px;letter-spacing:.03em}
   .mu-menu-btn{width:22px;height:14px}
   body.has-mu-chrome:not(.mu-dark){padding-top:64px}
+}
+@media (max-width:380px){
+  .mu-monogram{font-size:16px}
+  .mu-nav{gap:5px}
+  .mu-nav a{font-size:7.5px;letter-spacing:.02em}
 }
 
 
