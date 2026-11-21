@@ -12,6 +12,24 @@
     get: function (k, d) { try { var v = localStorage.getItem('sys_' + k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
     set: function (k, v) { try { localStorage.setItem('sys_' + k, JSON.stringify(v)); } catch (e) {} }
   };
+  var lang = 'ru';
+  try {
+    var qLang = /[?&]lang=(en|ru)/.exec(location.search);
+    var savedLang = localStorage.getItem('mu_lang') || localStorage.getItem('img_lang');
+    lang = (qLang && qLang[1]) || (savedLang === 'en' ? 'en' : 'ru');
+    localStorage.setItem('mu_lang', lang);
+    localStorage.setItem('img_lang', lang);
+  } catch (e) {}
+  window.ImgInstallLang = lang;
+  document.documentElement.lang = lang;
+  function t(ru, en) { return lang === 'en' ? en : ru; }
+  var CN = { 'Красный': 'Red', 'Розовый': 'Pink', 'Оранжевый': 'Orange', 'Жёлтый': 'Yellow', 'Зелёный': 'Green', 'Синий': 'Blue', 'Фиолетовый': 'Violet', 'Бежевый и коричневый': 'Beige and brown', 'Серый и чёрный': 'Grey and black' };
+  function cn(name) { return (lang === 'en' && CN[name]) || name; }
+  var PN = { 'Мила Ушакова': 'Mila Ushakova', 'О Системе': 'About the system', 'Как пользоваться': 'How to use it', 'Правило пропорций': 'The proportion rule', 'Контраст внешности': 'Contrast of appearance', 'Бонус: промокоды': 'Bonus: codes', 'Рекомендации на сезон': 'Notes for the season' };
+  function pn(name) { return (lang === 'en' && PN[name]) || name; }
+  function langUi() {
+    return '<span class="lng"><button type="button" data-lang="ru"' + (lang === 'ru' ? ' class="on"' : '') + '>RU</button><i>·</i><button type="button" data-lang="en"' + (lang === 'en' ? ' class="on"' : '') + '>EN</button></span>';
+  }
 
   /* у Системы <base href="/guide/">: ссылки вида "#/..." увели бы на /guide/, поэтому адрес страницы пишется целиком */
   var H = location.pathname + location.search;
@@ -79,45 +97,51 @@
     se: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg>',
     me: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.5-7 10-7 10z"/></svg>'
   };
-  var tab = document.createElement('nav'); tab.className = 'a-tab'; tab.setAttribute('aria-label', 'Разделы Системы');
-  tab.innerHTML = '<a href="' + H + '#/" data-t="home">' + I.home + 'Главная</a><a href="' + H + '#/pal/all" data-t="pal">' + I.col + 'Палитры</a><a href="' + H + '#/looks/all" data-t="looks">' + I.look + 'Образы</a>' +
-    '<a href="' + H + '#/trends" data-t="trends">' + I.tr + 'Тренды</a><a href="' + H + '#/search" data-t="search">' + I.se + 'Поиск</a>' +
-    '<a href="' + H + '#/mine" data-t="mine">' + I.me + 'Мои<span class="badge" hidden></span></a>';
+  var tab = document.createElement('nav'); tab.className = 'a-tab';
+  function paintTab() {
+    tab.setAttribute('aria-label', t('Разделы Системы', 'Sections'));
+    tab.innerHTML = '<a href="' + H + '#/" data-t="home">' + I.home + t('Главная', 'Home') + '</a><a href="' + H + '#/pal/all" data-t="pal">' + I.col + t('Палитры', 'Palettes') + '</a><a href="' + H + '#/looks/all" data-t="looks">' + I.look + t('Образы', 'Looks') + '</a>' +
+      '<a href="' + H + '#/trends" data-t="trends">' + I.tr + t('Тренды', 'Trends') + '</a><a href="' + H + '#/search" data-t="search">' + I.se + t('Поиск', 'Search') + '</a>' +
+      '<a href="' + H + '#/mine" data-t="mine">' + I.me + t('Мои', 'Mine') + '<span class="badge" hidden></span></a>';
+    badge();
+  }
+  paintTab();
   document.body.appendChild(tab);
   var sheet = document.createElement('div'); sheet.className = 'a-sheet'; sheet.setAttribute('role', 'dialog');
   document.body.appendChild(sheet);
 
   /* ── Кусочки разметки ── */
   var top = function (back, lbl) {
-    return '<div class="a-top">' + (back ? '<a class="a-back" href="' + (back.charAt(0) === '#' ? H + back : back) + '">‹ Назад</a>' : '<span class="a-lbl">Mila Ushakova</span>') +
-      '<span class="a-lbl">' + esc(lbl || 'Система') + '</span></div>';
+    return '<div class="a-top">' + (back ? '<a class="a-back" href="' + (back.charAt(0) === '#' ? H + back : back) + '">‹ ' + t('Назад', 'Back') + '</a>' : '<span class="a-lbl">Mila Ushakova</span>') +
+      langUi() +
+      '<span class="a-lbl">' + esc(lbl || t('Система', 'System')) + '</span></div>';
   };
   var cell = function (id, ctx) {
     var L = looks[id]; if (!L) return '';
     return '<a class="a-cell" href="' + H + '#' + ctx + '/look/' + id + '"><div class="im"><img loading="lazy" src="' + esc(L.img) + '" alt="">' +
       (L.pal ? '<img class="pal" loading="lazy" src="' + esc(L.pal) + '" alt="">' : '') + (favs().indexOf(id) >= 0 ? '<span class="fav">♥</span>' : '') +
-      '</div><span>' + esc(L.name) + (L.isNew ? ' <em>· новинка</em>' : '') + '</span></a>';
+      '</div><span>' + esc(L.name) + (L.isNew ? ' <em>· ' + t('новинка', 'new') + '</em>' : '') + '</span></a>';
   };
   var grid = function (ids, ctx) { return '<div class="a-grid">' + ids.map(function (id) { return cell(id, ctx); }).join('') + '</div>'; };
   var plural = function (n, a, b, c) { var m = n % 10, h = n % 100; return n + ' ' + (m === 1 && h !== 11 ? a : m >= 2 && m <= 4 && (h < 12 || h > 14) ? b : c); };
-  var obr = function (n) { return plural(n, 'образ', 'образа', 'образов'); };
+  var obr = function (n) { return lang === 'en' ? n + (n === 1 ? ' look' : ' looks') : plural(n, 'образ', 'образа', 'образов'); };
 
   /* ── Экраны ── */
   var V = {};
   function ctaBlock() {
-    return '<div class="a-cta"><div class="a-lbl" style="color:var(--gold)">Fashion-клуб «В моём стиле»</div>' +
-      '<div class="t">Новые образы, разборы и встречи с Милой каждую неделю</div>' +
-      '<a class="a-btn gold" href="' + CLUB + '" target="_blank" rel="noopener">Стать резидентом</a>' +
-      (CONTACT.indexOf('__') < 0 ? '<a class="a-btn line" href="' + CONTACT + '" target="_blank" rel="noopener">Сотрудничество</a>' : '') + '</div>';
+    return '<div class="a-cta"><div class="a-lbl" style="color:var(--gold)">' + t('Fashion-клуб «В моём стиле»', 'Fashion club In My Style') + '</div>' +
+      '<div class="t">' + t('Новые образы, разборы и встречи с Милой каждую неделю', 'New looks, reviews and meetings with Mila every week') + '</div>' +
+      '<a class="a-btn gold" href="' + CLUB + '" target="_blank" rel="noopener">' + t('Стать резидентом', 'Become a resident') + '</a>' +
+      (CONTACT.indexOf('__') < 0 ? '<a class="a-btn line" href="' + CONTACT + '" target="_blank" rel="noopener">' + t('Сотрудничество', 'Work together') + '</a>' : '') + '</div>';
   }
   /* «Система имиджа»: превью на главной, ведёт на страницу покупки */
   var IMG_WAIT = '/image';
   var IMG_IDEA = 'Цвет меняет образ.<br>Имидж меняет возможности.';
   function imgTeaser() {
-    return '<div class="a-imgblk"><div class="a-sec"><b>Система имиджа</b></div>' +
+    return '<div class="a-imgblk"><div class="a-sec"><b>' + t('Система имиджа', 'Image system') + '</b></div>' +
       '<a href="' + IMG_WAIT + '" target="_blank" rel="noopener" style="display:block;margin:0 20px"><img loading="lazy" src="business-img/cover-gallery.jpg" alt="" style="display:block;width:100%;aspect-ratio:16/10;object-fit:cover;object-position:60% 88%;border-radius:6px"></a>' +
-      '<div class="a-pv-t"><p>' + IMG_IDEA + '</p><p class="s">Что надеть на переговоры, собеседование или деловой ужин, чтобы впечатление работало на вашу цель. Можно оплатить в рассрочку.</p>' +
-      '<a class="a-wait" href="' + IMG_WAIT + '" target="_blank" rel="noopener">Открыть Систему имиджа</a></div></div>';
+      '<div class="a-pv-t"><p>' + (lang === 'en' ? 'Colour changes a look.<br>Image changes what is possible.' : IMG_IDEA) + '</p><p class="s">' + t('Что надеть на переговоры, собеседование или деловой ужин, чтобы впечатление работало на вашу цель. Можно оплатить в рассрочку.', 'What to wear to a negotiation, an interview or a business dinner, so the impression works for your aim. Instalments are available.') + '</p>' +
+      '<a class="a-wait" href="' + IMG_WAIT + '" target="_blank" rel="noopener">' + t('Открыть Систему имиджа', 'Open the Image System') + '</a></div></div>';
   }
   /* Библиотека: лекции Милы на продажу. Новая лекция = новая строка В НАЧАЛЕ списка (первой стоит на полке). */
   var LECTURES = [
@@ -130,20 +154,20 @@
   ];
   function lecCard(L, cls) {
     return '<div class="' + cls + '"><a href="' + L.page + '" target="_blank" rel="noopener"><img loading="lazy" src="' + esc(L.img) + '" alt=""></a><div class="b">' +
-      '<span class="k">Лекция · запись 48 ч</span><a class="h" href="' + L.page + '" target="_blank" rel="noopener">' + esc(L.t) + '</a><span class="s">' + esc(L.s) + '</span>' +
-      '<div class="buy"><span class="p">' + L.price + '</span><a class="a-buy" href="' + L.buy + '" target="_blank" rel="noopener">Купить</a></div></div></div>';
+      '<span class="k">' + t('Лекция · запись 48 ч', 'Lecture, 48-hour recording') + '</span><a class="h" href="' + L.page + '" target="_blank" rel="noopener">' + esc(L.t) + '</a><span class="s">' + esc(L.s) + '</span>' +
+      '<div class="buy"><span class="p">' + L.price + '</span><a class="a-buy" href="' + L.buy + '" target="_blank" rel="noopener">' + t('Купить', 'Buy') + '</a></div></div></div>';
   }
   function libShelf() {
-    return '<div class="a-sec"><b>Библиотека<em class="a-soon">пополняется</em></b><a href="' + H + '#/lectures">все</a></div>' +
+    return '<div class="a-sec"><b>' + t('Библиотека', 'Library') + '<em class="a-soon">' + t('пополняется', 'growing') + '</em></b><a href="' + H + '#/lectures">' + t('все', 'all') + '</a></div>' +
       '<div class="a-row a-lrow">' + LECTURES.map(function (L) { return lecCard(L, 'a-lec'); }).join('') + '</div>';
   }
   V.lectures = function () {
-    return top('#/', 'Библиотека') + '<h1 class="a-h">Лекции Милы</h1>' +
-      '<div class="a-pv-t"><p class="s">Библиотека пополняется после каждого эфира. Купленная запись приходит на почту.</p></div>' +
+    return top('#/', t('Библиотека', 'Library')) + '<h1 class="a-h">' + t('Лекции Милы', 'Lectures by Mila') + '</h1>' +
+      '<div class="a-pv-t"><p class="s">' + t('Библиотека пополняется после каждого эфира. Купленная запись приходит на почту.', 'The library grows after each live session. A purchased recording arrives by email.') + '</p></div>' +
       '<div class="a-llist">' + LECTURES.map(function (L) { return lecCard(L, 'a-lec wide'); }).join('') + '</div>' +
-      '<div class="a-cta"><div class="a-lbl" style="color:var(--gold)">Fashion-клуб «В моём стиле»</div>' +
-      '<div class="t">Резидентам клуба все лекции открыты без оплаты</div>' +
-      '<a class="a-btn gold" href="' + CLUB + '" target="_blank" rel="noopener">Стать резидентом</a></div>';
+      '<div class="a-cta"><div class="a-lbl" style="color:var(--gold)">' + t('Fashion-клуб «В моём стиле»', 'Fashion club In My Style') + '</div>' +
+      '<div class="t">' + t('Резидентам клуба все лекции открыты без оплаты', 'Club residents get every lecture without paying again') + '</div>' +
+      '<a class="a-btn gold" href="' + CLUB + '" target="_blank" rel="noopener">' + t('Стать резидентом', 'Become a resident') + '</a></div>';
   };
   // плашка «сегодня добавлены» на главной: дата выпуска и сколько новых образов с палитрами; показывается 2 дня
   var NEWS = { date: '2026-10-27', n: 5 };
@@ -154,30 +178,31 @@
       '<div class="t">Добавлены новые образы и палитры</div></div><span>›</span></a>';
   }
   V.tools = function () {
-    return top('#/', 'Инструменты') + '<h1 class="a-h">Инструменты</h1><div class="a-tiles">' +
-      '<a class="a-tile dk" href="' + H + '#/page/p_contrast"><span class="k" style="color:var(--gold)">Разбор по фото</span><span class="t">Контраст внешности</span></a>' +
-      '<a class="a-tile" href="' + H + '#/page/p_rule_proportions"><span class="k">Проверка образа</span><span class="t">Правило пропорций</span></a></div>';
+    return top('#/', t('Инструменты', 'Tools')) + '<h1 class="a-h">' + t('Инструменты', 'Tools') + '</h1><div class="a-tiles">' +
+      '<a class="a-tile dk" href="' + H + '#/page/p_contrast"><span class="k" style="color:var(--gold)">' + t('Разбор по фото', 'A reading from a photo') + '</span><span class="t">' + t('Контраст внешности', 'Contrast of appearance') + '</span></a>' +
+      '<a class="a-tile" href="' + H + '#/page/p_rule_proportions"><span class="k">' + t('Проверка образа', 'Check a look') + '</span><span class="t">' + t('Правило пропорций', 'The proportion rule') + '</span></a></div>';
   };
   // 16.11: «Установите веб-приложение на iPhone / Android» (кнопки и шаги из image-install.js, data-app="color")
   function instBlock() {
     if (!window.ImgInstall || ImgInstall.mode === 'app') return '';
-    return '<div class="a-sec"><b>Приложение на телефоне</b></div><div class="a-inst" data-ab-root>' + ImgInstall.badges() + '</div>';
+    window.ImgInstallLang = lang;
+    return '<div class="a-sec"><b>' + t('Приложение на телефоне', 'The app on your phone') + '</b></div><div class="a-inst" data-ab-root>' + ImgInstall.badges() + '</div>';
   }
   V.home = function () {
-    var h = top('', 'Система цветовых сочетаний');
-    h += '<a class="a-mila" style="margin-top:14px" href="' + H + '#/page/p1"><img src="about-photo.jpg" alt=""><div><div class="t" style="margin-top:0">Мила Ушакова</div><div class="s">Персональный стилист и аналитик моды</div></div><span>›</span></a>' +
-      '<div class="a-list a-chap">' + [['p2', 'О Системе'], ['p3', 'Как пользоваться'], ['p_bonus', 'Бонус: промокоды партнёров'], ['p6', 'Рекомендации на сезон']].map(function (r) {
+    var h = top('', t('Система цветовых сочетаний', 'Colour system'));
+    h += '<a class="a-mila" style="margin-top:14px" href="' + H + '#/page/p1"><img src="about-photo.jpg" alt=""><div><div class="t" style="margin-top:0">Мила Ушакова</div><div class="s">' + t('Персональный стилист и аналитик моды', 'Personal stylist and fashion analyst') + '</div></div><span>›</span></a>' +
+      '<div class="a-list a-chap">' + [['p2', t('О Системе', 'About the system')], ['p3', t('Как пользоваться', 'How to use it')], ['p_bonus', t('Бонус: промокоды партнёров', 'Bonus: partner codes')], ['p6', t('Рекомендации на сезон', 'Notes for the season')]].map(function (r) {
         return '<a href="' + H + '#/page/' + r[0] + '"><span class="t">' + r[1] + '</span><span class="n">›</span></a>'; }).join('') +
-      '<a href="' + H + '#/tools"><span class="t">Инструменты</span><span class="n">›</span></a></div>';
+      '<a href="' + H + '#/tools"><span class="t">' + t('Инструменты', 'Tools') + '</span><span class="n">›</span></a></div>';
     h += instBlock();
     h += newsBar();
     h += imgTeaser(); // «Система имиджа» первым блоком
-    h += '<div class="a-sec"><b>Тренды' + (trends.some(function (t) { return t.isNew; }) ? '<em class="a-new">новинка</em>' : '') + '</b><a href="' + H + '#/trends">все ' + trends.length + '</a></div><div class="a-row">' + trends.map(function (t) {
-      return '<a class="a-tc" href="' + H + '#/trend/' + t.slug + '"><div class="im"><img loading="lazy" src="' + esc(t.cover) + '" alt="">' + '</div><span>' + esc(t.name) + '</span></a>';
+    h += '<div class="a-sec"><b>' + t('Тренды', 'Trends') + (trends.some(function (tr) { return tr.isNew; }) ? '<em class="a-new">' + t('новинка', 'new') + '</em>' : '') + '</b><a href="' + H + '#/trends">' + t('все', 'all') + ' ' + trends.length + '</a></div><div class="a-row">' + trends.map(function (tr) {
+      return '<a class="a-tc" href="' + H + '#/trend/' + tr.slug + '"><div class="im"><img loading="lazy" src="' + esc(tr.cover) + '" alt="">' + '</div><span>' + esc(tr.name) + '</span></a>';
     }).join('') + '</div>';
     h += libShelf(); // Библиотека лекций сразу после трендов
     h += ctaBlock();
-    h += '<div class="a-empty" style="font-size:11px;line-height:1.8"><a href="' + H + '#/more" style="color:inherit">Все разделы</a> · <a href="/oferta" style="color:inherit">Договор оферты</a> · <a href="/privacy" style="color:inherit">Политика конфиденциальности</a> · <a href="https://t.me/MilaUshakova_ClubBot?start=support" target="_blank" rel="noopener" style="color:inherit">Поддержка</a><br>© 2026 · ИП Ольхина Я.Ф., ИНН 222411003828, ОГРНИП 326220200112474</div>';
+    h += '<div class="a-empty" style="font-size:11px;line-height:1.8"><a href="' + H + '#/more" style="color:inherit">' + t('Все разделы', 'All sections') + '</a> · <a href="/oferta" style="color:inherit">' + t('Договор оферты', 'Offer') + '</a> · <a href="/privacy" style="color:inherit">' + t('Политика конфиденциальности', 'Privacy') + '</a> · <a href="https://t.me/MilaUshakova_ClubBot?start=support" target="_blank" rel="noopener" style="color:inherit">' + t('Поддержка', 'Support') + '</a><br>© 2026 · ИП Ольхина Я.Ф., ИНН 222411003828, ОГРНИП 326220200112474</div>';
     return h;
   };
   /* лента вдохновения: сначала палитра на весь экран, из неё переход к образу */
@@ -189,12 +214,12 @@
   }
   V.pal = function (f) {
     f = f || 'all';
-    var chips = [['all', 'Все'], ['new', 'Новинки']].concat(colors.map(function (c, i) { return [String(i), c.name]; }));
-    return '<div class="a-feed-chips">' + chips.map(function (c) { return '<a href="' + H + '#/pal/' + c[0] + '"' + (c[0] === f ? ' class="on"' : '') + '>' + esc(c[1]) + '</a>'; }).join('') + '</div>' +
+    var chips = [['all', t('Все', 'All')], ['new', t('Новинки', 'New')]].concat(colors.map(function (c, i) { return [String(i), cn(c.name)]; }));
+    return '<div class="a-top a-top-pal">' + langUi() + '</div><div class="a-feed-chips">' + chips.map(function (c) { return '<a href="' + H + '#/pal/' + c[0] + '"' + (c[0] === f ? ' class="on"' : '') + '>' + esc(c[1]) + '</a>'; }).join('') + '</div>' +
       '<div class="a-feed">' + palList(f).map(function (id) { var L = looks[id];
-        return '<section class="a-slide"><img loading="lazy" src="' + esc(L.pal) + '" alt="Палитра ' + esc(L.name) + '">' +
-          '<div class="cap"><div><div class="a-lbl" style="color:var(--gold)">' + (L.isNew ? 'Новинка · октябрь' : (L.color != null ? esc(colors[L.color].name) : 'Дроп сентября')) + '</div><div class="t">' + esc(L.name) + '</div><div class="sws dots" data-src="' + esc(L.pal) + '"></div></div>' +
-          '<a class="a-btn gold go" href="' + H + '#/pal/' + f + '/look/' + id + '">Образ ›</a></div></section>'; }).join('') + '</div>';
+        return '<section class="a-slide"><img loading="lazy" src="' + esc(L.pal) + '" alt="' + t('Палитра', 'Palette') + ' ' + esc(L.name) + '">' +
+          '<div class="cap"><div><div class="a-lbl" style="color:var(--gold)">' + (L.isNew ? t('Новинка · октябрь', 'New · October') : (L.color != null ? esc(cn(colors[L.color].name)) : t('Дроп сентября', 'September drop'))) + '</div><div class="t">' + esc(L.name) + '</div><div class="sws dots" data-src="' + esc(L.pal) + '"></div></div>' +
+          '<a class="a-btn gold go" href="' + H + '#/pal/' + f + '/look/' + id + '">' + t('Образ', 'Look') + ' ›</a></div></section>'; }).join('') + '</div>';
   };
   /* все образы сеткой: фильтр «Все», «Новинки» и по цветам */
   function lookList(f) {
@@ -205,42 +230,43 @@
   V.looks = function (f) {
     f = f || 'all';
     var ids = lookList(f);
-    var chips = [['all', 'Все'], ['new', 'Новинки']].concat(colors.map(function (c, i) { return [String(i), c.name]; }));
-    return top('', 'Образы') + '<h1 class="a-h">Образы</h1><div class="a-sub">' + obr(ids.length) + '</div>' +
+    var chips = [['all', t('Все', 'All')], ['new', t('Новинки', 'New')]].concat(colors.map(function (c, i) { return [String(i), cn(c.name)]; }));
+    return top('', t('Образы', 'Looks')) + '<h1 class="a-h">' + t('Образы', 'Looks') + '</h1><div class="a-sub">' + obr(ids.length) + '</div>' +
       '<div class="a-chips">' + chips.map(function (c) { return '<a href="' + H + '#/looks/' + c[0] + '"' + (c[0] === f ? ' class="on"' : '') + '>' + esc(c[1]) + '</a>'; }).join('') + '</div>' +
       grid(ids, '/looks/' + f);
   };
   V.colors = function () {
-    return top('', 'Цвета') + '<h1 class="a-h">Цветовые сочетания</h1><div class="a-sub">9 цветов · ' + obr(colors.reduce(function (s, c) { return s + c.looks.length; }, 0)) + '</div>' +
-      '<div class="a-list">' + colors.map(function (c, i) { return '<a href="' + H + '#/color/' + i + '"><i style="background:' + (SW[c.name] || '#999') + '"></i><span class="t">' + esc(c.name) + '</span><span class="n">' + c.looks.length + ' ›</span></a>'; }).join('') + '</div>';
+    return top('', t('Цвета', 'Colours')) + '<h1 class="a-h">' + t('Цветовые сочетания', 'Colour combinations') + '</h1><div class="a-sub">' + t('9 цветов', '9 colours') + ' · ' + obr(colors.reduce(function (s, c) { return s + c.looks.length; }, 0)) + '</div>' +
+      '<div class="a-list">' + colors.map(function (c, i) { return '<a href="' + H + '#/color/' + i + '"><i style="background:' + (SW[c.name] || '#999') + '"></i><span class="t">' + esc(cn(c.name)) + '</span><span class="n">' + c.looks.length + ' ›</span></a>'; }).join('') + '</div>';
   };
   V.color = function (i) {
     var c = colors[+i]; if (!c) return V.colors();
-    return top('#/colors', 'Цвета') + '<h1 class="a-h">' + esc(c.name) + '</h1><div class="a-sub">' + obr(c.looks.length) + '</div>' + grid(c.looks, '/color/' + i);
+    return top('#/colors', t('Цвета', 'Colours')) + '<h1 class="a-h">' + esc(cn(c.name)) + '</h1><div class="a-sub">' + obr(c.looks.length) + '</div>' + grid(c.looks, '/color/' + i);
   };
   V.trends = function () {
-    return top('', 'Тренды') + '<h1 class="a-h">Тренды сезона</h1><div class="a-sub">' + plural(trends.length, 'тренд', 'тренда', 'трендов') + '</div>' +
+    return top('', t('Тренды', 'Trends')) + '<h1 class="a-h">' + t('Тренды сезона', 'Trends of the season') + '</h1><div class="a-sub">' + (lang === 'en' ? trends.length + (trends.length === 1 ? ' trend' : ' trends') : plural(trends.length, 'тренд', 'тренда', 'трендов')) + '</div>' +
       '<div class="a-trc">' + trends.map(function (t) {
         return '<a href="' + H + '#/trend/' + t.slug + '"><img loading="lazy" src="' + esc(t.cover) + '" alt=""><div class="ov"><span class="t">' + esc(t.name) + '</span>' + (t.looks.length ? '<span class="n">' + obr(t.looks.length) + ' ›</span>' : '') + '</div></a>'; }).join('') + '</div>';
   };
   V.trend = function (slug) {
-    var t = trends.filter(function (x) { return x.slug === slug; })[0]; if (!t) return V.trends();
-    return top('#/trends', 'Тренды') + (t.cover ? '<img class="a-trcov" src="' + esc(t.cover) + '" alt="">' : '') + '<h1 class="a-h">' + esc(t.name) + '</h1>' +
-      (t.looks.length ? '<div class="a-sub">' + obr(t.looks.length) + '</div>' + grid(t.looks, '/trend/' + slug) : '');
+    var tr = trends.filter(function (x) { return x.slug === slug; })[0]; if (!tr) return V.trends();
+    return top('#/trends', t('Тренды', 'Trends')) + (tr.cover ? '<img class="a-trcov" src="' + esc(tr.cover) + '" alt="">' : '') + '<h1 class="a-h">' + esc(tr.name) + '</h1>' +
+      (tr.looks.length ? '<div class="a-sub">' + obr(tr.looks.length) + '</div>' + grid(tr.looks, '/trend/' + slug) : '');
   };
   V.drop = function (k) {
     var d = DROPS[k]; if (!d) return V.home();
-    return top('#/', 'Дроп') + '<h1 class="a-h">' + esc(d.name) + '</h1><div class="a-sub">' + obr(d.ids.length) + '</div>' + grid(d.ids, '/drop/' + k);
+    var dn = d.name === 'Октябрьский дроп' ? t(d.name, 'October drop') : t(d.name, 'September drop');
+    return top('#/', t('Дроп', 'Drop')) + '<h1 class="a-h">' + esc(dn) + '</h1><div class="a-sub">' + obr(d.ids.length) + '</div>' + grid(d.ids, '/drop/' + k);
   };
   V.mine = function () {
     var f = favs();
-    return top('', 'Мои образы') + '<h1 class="a-h">Мои образы</h1>' + (f.length ? '<div class="a-sub">' + obr(f.length) + '</div>' + grid(f, '/mine')
-      : '<div class="a-empty">Нажмите ♡ на образе, и он появится здесь.</div>');
+    return top('', t('Мои образы', 'My looks')) + '<h1 class="a-h">' + t('Мои образы', 'My looks') + '</h1>' + (f.length ? '<div class="a-sub">' + obr(f.length) + '</div>' + grid(f, '/mine')
+      : '<div class="a-empty">' + t('Нажмите ♡ на образе, и он появится здесь.', 'Tap the heart on a look, and it will stay here.') + '</div>');
   };
   var lastQ = '';
   V.search = function () {
-    return top('', 'Поиск') + '<h1 class="a-h">Поиск</h1><label class="a-search">' + I.se.replace('<svg', '<svg width="18" height="18"') +
-      '<input type="text" inputmode="search" enterkeyhint="search" autocomplete="off" placeholder="Вещь, бренд или цвет" value="' + esc(lastQ) + '"></label>' +
+    return top('', t('Поиск', 'Search')) + '<h1 class="a-h">' + t('Поиск', 'Search') + '</h1><label class="a-search">' + I.se.replace('<svg', '<svg width="18" height="18"') +
+      '<input type="text" inputmode="search" enterkeyhint="search" autocomplete="off" placeholder="' + t('Вещь, бренд или цвет', 'A piece, a brand or a colour') + '" value="' + esc(lastQ) + '"></label>' +
       '<div class="a-hint">' + ['пальто', 'юбка', 'лоферы', 'замша', 'Zara', 'COS'].map(function (w) { return '<button type="button">' + w + '</button>'; }).join('') + '</div><div id="aRes"></div>';
   };
   var searchIds = [];
@@ -249,23 +275,23 @@
     var w = norm(q).split(' ').filter(function (x) { return x.length > 1; }).map(function (x) { return x.length > 4 ? x.slice(0, x.length - 1) : x; });
     if (!w.length) { box.innerHTML = ''; searchIds = []; return; }
     var hits = order.map(function (id) {
-      var L = looks[id], hay = [L.name].concat(L.items).concat(L.trends.map(function (t) { return t.name; })).concat(L.color != null ? [colors[L.color].name] : []);
+      var L = looks[id], hay = [L.name].concat(L.items).concat(L.trends.map(function (tr) { return tr.name; })).concat(L.color != null ? [colors[L.color].name, cn(colors[L.color].name)] : []);
       var ok = w.every(function (x) { return hay.some(function (s) { return norm(s).indexOf(x) >= 0; }); });
       return ok ? { id: id, why: L.items.filter(function (s) { return w.some(function (x) { return norm(s).indexOf(x) >= 0; }); }).slice(0, 2) } : null;
     }).filter(Boolean);
     searchIds = hits.map(function (h) { return h.id; });
-    box.innerHTML = '<div class="a-sub" style="padding-top:16px">' + (hits.length ? 'Нашлось ' + obr(hits.length) : 'Ничего не нашлось. Попробуйте «пальто», «замша», «Zara».') + '</div>' +
+    box.innerHTML = '<div class="a-sub" style="padding-top:16px">' + (hits.length ? t('Нашлось', 'Found') + ' ' + obr(hits.length) : t('Ничего не нашлось. Попробуйте «пальто», «замша», «Zara».', 'Nothing matched. Try coat, suede or Zara.')) + '</div>' +
       '<div class="a-list">' + hits.map(function (h) { var L = looks[h.id];
-        return '<a href="' + H + '#/search/look/' + h.id + '"><img loading="lazy" src="' + esc(L.img) + '" alt=""><span class="t">Образ «' + esc(L.name) + '»<div class="a-found">' + esc(h.why.join(' · ')) + '</div></span></a>'; }).join('') + '</div>';
+        return '<a href="' + H + '#/search/look/' + h.id + '"><img loading="lazy" src="' + esc(L.img) + '" alt=""><span class="t">' + t('Образ', 'Look') + ' «' + esc(L.name) + '»<div class="a-found">' + esc(h.why.join(' · ')) + '</div></span></a>'; }).join('') + '</div>';
   }
   V.more = function () {
     var row = function (href, t, n) { return '<a href="' + (href.charAt(0) === '#' ? H + href : href) + '"><span class="t">' + esc(t) + '</span><span class="n">' + (n || '') + ' ›</span></a>'; };
-    return top('#/', 'Ещё') + '<h1 class="a-h">Ещё</h1>' +
-      '<div class="a-list">' + PAGES.map(function (p) { return row('#/page/' + p[0], p[1]); }).join('') + '</div>' +
+    return top('#/', t('Ещё', 'More')) + '<h1 class="a-h">' + t('Ещё', 'More') + '</h1>' +
+      '<div class="a-list">' + PAGES.map(function (p) { return row('#/page/' + p[0], pn(p[1])); }).join('') + '</div>' +
       ctaBlock() + instBlock() +
-      '<div class="a-sec"><b>Промо от брендов</b></div><div class="a-list">' + promos.map(function (p) { return row('#/page/' + p.id, navText[p.id] || p.id); }).join('') + '</div>' +
-      '<div class="a-sec"><b>Категории</b></div><div class="a-list">' + cats.map(function (p) { return row('#/page/' + p.id, navText[p.id] || p.id); }).join('') + '</div>' +
-      '<div class="a-list" style="margin-top:20px">' + row('https://t.me/MilaUshakova_ClubBot?start=support', 'Поддержка в Telegram') + row('/oferta', 'Договор оферты') + row('/privacy', 'Политика конфиденциальности') + '</div>' +
+      '<div class="a-sec"><b>' + t('Промо от брендов', 'Brand offers') + '</b></div><div class="a-list">' + promos.map(function (p) { return row('#/page/' + p.id, navText[p.id] || p.id); }).join('') + '</div>' +
+      '<div class="a-sec"><b>' + t('Категории', 'Categories') + '</b></div><div class="a-list">' + cats.map(function (p) { return row('#/page/' + p.id, navText[p.id] || p.id); }).join('') + '</div>' +
+      '<div class="a-list" style="margin-top:20px">' + row('https://t.me/MilaUshakova_ClubBot?start=support', t('Поддержка в Telegram', 'Support on Telegram')) + row('/oferta', t('Договор оферты', 'Offer')) + row('/privacy', t('Политика конфиденциальности', 'Privacy')) + '</div>' +
       '<div class="a-empty" style="font-size:11px">© 2026 · ИП Ольхина Я.Ф., ИНН 222411003828, ОГРНИП 326220200112474</div>';
   };
   /* страница Системы как есть (контраст, бонус, правило пропорций...) переносится в экран и возвращается обратно */
@@ -273,7 +299,7 @@
   function restorePage() { if (moved) { moved.ph.parentNode.insertBefore(moved.pg, moved.ph); moved.ph.remove(); moved = null; } }
   V.page = function (id) {
     var pg = document.getElementById(id); if (!pg) return V.home();
-    return top(id.indexOf('p_promo_') === 0 || id.indexOf('p_cat_') === 0 ? '#/more' : 'back', PAGES.filter(function (p) { return p[0] === id; }).map(function (p) { return p[1]; })[0] || navText[id] || '') + '<div id="aPg"></div>';
+    return top(id.indexOf('p_promo_') === 0 || id.indexOf('p_cat_') === 0 ? '#/more' : 'back', pn(PAGES.filter(function (p) { return p[0] === id; }).map(function (p) { return p[1]; })[0] || navText[id] || '')) + '<div id="aPg"></div>';
   };
 
   /* ── Карточка образа ── */
@@ -319,7 +345,7 @@
     im.onerror = function () { cb([]); };
     im.src = src;
   }
-  var MODES = [['1', 'Полоса'], ['2', 'Две стороны'], ['3', 'Образ главный']];
+  var MODES = [['1', 'Полоса', 'Strip'], ['2', 'Две стороны', 'Two sides'], ['3', 'Образ главный', 'Look first']];
   var mode = '2', side = 'pal';
   function fitLook() {
     var st = $('.stage', sheet), w = st && $('.look-collage-wrap', st); if (!w) return;
@@ -334,18 +360,18 @@
     ctxIds = listFor(base); ctxBase = base; sheetId = id; LS.set('app_last', id);
     var ix = ctxIds.indexOf(id), n = ctxIds.length, fav = favs().indexOf(id) >= 0;
     var wrap = L.pg.querySelector('.look-collage-wrap').cloneNode(true), links = L.pg.querySelector('.look-links').cloneNode(true);
-    var tags = (L.color != null ? '<a href="' + H + '#/color/' + L.color + '">' + esc(colors[L.color].name) + '</a>' : '') +
-      L.trends.map(function (t) { return '<a href="' + H + '#/trend/' + t.slug + '">' + esc(t.name) + '</a>'; }).join('');
-    var bar = '<div class="bar"><button type="button" class="x" aria-label="Закрыть">✕</button><div class="ttl"><span>' +
-      (ix >= 0 ? (ix + 1) + ' из ' + n : 'образ') + '</span><b>' + esc(L.name) + '</b></div><button type="button" class="hrt' + (fav ? ' on' : '') + '" aria-label="В мои образы">' + (fav ? '♥' : '♡') + '</button></div>';
-    var modes = '<div class="modes">' + MODES.map(function (m) { return '<button type="button" data-mode="' + m[0] + '"' + (m[0] === mode ? ' class="on"' : '') + '>' + m[0] + ' · ' + m[1] + '</button>'; }).join('') + '</div>';
-    var nav = '<div class="nav3"><button type="button" class="p" aria-label="Предыдущий образ"' + (ix > 0 ? '' : ' disabled') + '>‹</button><div class="tags">' + tags + '</div><button type="button" class="n" aria-label="Следующий образ"' + (ix >= 0 && ix < n - 1 ? '' : ' disabled') + '>›</button></div>';
+    var tags = (L.color != null ? '<a href="' + H + '#/color/' + L.color + '">' + esc(cn(colors[L.color].name)) + '</a>' : '') +
+      L.trends.map(function (tr) { return '<a href="' + H + '#/trend/' + tr.slug + '">' + esc(tr.name) + '</a>'; }).join('');
+    var bar = '<div class="bar"><button type="button" class="x" aria-label="' + t('Закрыть', 'Close') + '">✕</button><div class="ttl"><span>' +
+      (ix >= 0 ? (ix + 1) + ' ' + t('из', 'of') + ' ' + n : t('образ', 'look')) + '</span><b>' + esc(L.name) + '</b></div><button type="button" class="hrt' + (fav ? ' on' : '') + '" aria-label="' + t('В мои образы', 'Save to my looks') + '">' + (fav ? '♥' : '♡') + '</button></div>';
+    var modes = '<div class="modes">' + MODES.map(function (m) { return '<button type="button" data-mode="' + m[0] + '"' + (m[0] === mode ? ' class="on"' : '') + '>' + m[0] + ' · ' + t(m[1], m[2]) + '</button>'; }).join('') + '</div>';
+    var nav = '<div class="nav3"><button type="button" class="p" aria-label="' + t('Предыдущий образ', 'Previous look') + '"' + (ix > 0 ? '' : ' disabled') + '>‹</button><div class="tags">' + tags + '</div><button type="button" class="n" aria-label="' + t('Следующий образ', 'Next look') + '"' + (ix >= 0 && ix < n - 1 ? '' : ' disabled') + '>›</button></div>';
     var body = '';
     if (mode === '1') body = '<div class="m1-pal">' + (L.pal ? '<img src="' + esc(L.pal) + '" alt="">' : '') + '<div class="sws"></div></div><div class="stage"></div><div class="items row"></div>';
-    if (mode === '2') body = '<div class="seg"><button type="button" data-side="pal"' + (side === 'pal' ? ' class="on"' : '') + '>Палитра</button><button type="button" data-side="look"' + (side === 'look' ? ' class="on"' : '') + '>Образ</button></div>' +
-      (side === 'pal' ? '<div class="stage pal-side">' + (L.pal ? '<img src="' + esc(L.pal) + '" alt="">' : '') + '<button type="button" class="flip" data-side="look">Смотреть образ ›</button></div>' : '<div class="stage"></div><div class="items row"></div>');
-    if (mode === '3') body = '<div class="stage"><button type="button" class="m3-pal" aria-label="Открыть палитру">' + (L.pal ? '<img src="' + esc(L.pal) + '" alt="">' : '') + '</button><div class="m3-full">' + (L.pal ? '<img src="' + esc(L.pal) + '" alt="">' : '') + '</div></div>' +
-      '<div class="m3-row"><div class="sws dots"></div><button type="button" class="m3-items">Вещи образа · ' + L.items.length + '</button></div><div class="drawer"><div class="dr-h"><b>Вещи образа</b><button type="button" class="dr-x" aria-label="Закрыть">✕</button></div><div class="items col"></div></div>';
+    if (mode === '2') body = '<div class="seg"><button type="button" data-side="pal"' + (side === 'pal' ? ' class="on"' : '') + '>' + t('Палитра', 'Palette') + '</button><button type="button" data-side="look"' + (side === 'look' ? ' class="on"' : '') + '>' + t('Образ', 'Look') + '</button></div>' +
+      (side === 'pal' ? '<div class="stage pal-side">' + (L.pal ? '<img src="' + esc(L.pal) + '" alt="">' : '') + '<button type="button" class="flip" data-side="look">' + t('Смотреть образ ›', 'See the look ›') + '</button></div>' : '<div class="stage"></div><div class="items row"></div>');
+    if (mode === '3') body = '<div class="stage"><button type="button" class="m3-pal" aria-label="' + t('Открыть палитру', 'Open the palette') + '">' + (L.pal ? '<img src="' + esc(L.pal) + '" alt="">' : '') + '</button><div class="m3-full">' + (L.pal ? '<img src="' + esc(L.pal) + '" alt="">' : '') + '</div></div>' +
+      '<div class="m3-row"><div class="sws dots"></div><button type="button" class="m3-items">' + t('Вещи образа', 'Pieces in the look') + ' · ' + L.items.length + '</button></div><div class="drawer"><div class="dr-h"><b>' + t('Вещи образа', 'Pieces in the look') + '</b><button type="button" class="dr-x" aria-label="' + t('Закрыть', 'Close') + '">✕</button></div><div class="items col"></div></div>';
     sheet.innerHTML = '<div class="wrap m' + mode + '">' + bar + '<div class="sw-in">' + body + '</div>' + nav + '</div>';
     var st = $('.stage', sheet);
     /* карточка вещи из ux.js ищет вокруг точки контейнер .in: даём его, иначе нажатие на точку ничего не открывает */
@@ -405,7 +431,7 @@
       if (v === 'page') {
         var pg = document.getElementById(p[2]);
         if (pg) { var ph = document.createComment('pg'); pg.parentNode.insertBefore(ph, pg); $('#aPg').appendChild(pg); moved = { pg: pg, ph: ph }; }
-        var bk = $('.a-back', av); if (bk && bk.getAttribute('href') === 'back') { if (!opened) { bk.textContent = 'На главную ›'; } bk.addEventListener('click', function (e) { e.preventDefault(); if (opened) history.back(); else location.hash = '#/'; }); }
+        var bk = $('.a-back', av); if (bk && bk.getAttribute('href') === 'back') { if (!opened) { bk.textContent = t('На главную ›', 'Home ›'); } bk.addEventListener('click', function (e) { e.preventDefault(); if (opened) history.back(); else location.hash = '#/'; }); }
       }
       document.documentElement.classList.toggle('feed', v === 'pal');
       if (v === 'pal') {
@@ -456,6 +482,22 @@
   if (legacy) { history.replaceState(null, '', H); LS.set('app_intro', true); }
   /* первое открытие: «Обо мне», «О Системе», «Как пользоваться» один раз, дальше сразу главная */
   if (!location.hash && !LS.get('app_intro', false)) { LS.set('app_intro', true); location.replace(H + '#/page/p2'); }
+  function setLang(next) {
+    if ((next !== 'ru' && next !== 'en') || next === lang) return;
+    lang = next;
+    try { localStorage.setItem('mu_lang', lang); localStorage.setItem('img_lang', lang); } catch (e) {}
+    window.ImgInstallLang = lang;
+    document.documentElement.lang = lang;
+    paintTab();
+    curBase = null;
+    route();
+  }
+  ap.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-lang]');
+    if (!b) return;
+    e.preventDefault();
+    setLang(b.getAttribute('data-lang'));
+  });
   route();
   if (legacy) { opened = false; scrollToEl(legacy); }
 })();

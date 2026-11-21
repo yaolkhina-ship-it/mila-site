@@ -15,6 +15,7 @@
   var android = /Android/i.test(ua);
   var LINK = C.link;
   var mode = app ? 'app' : ios ? 'ios' : android ? 'android' : 'desktop';
+  function tr(ru, en){ return window.ImgInstallLang === 'en' ? en : ru; }
 
   var I = {
     share: '<svg viewBox="0 0 24 24"><path d="M12 3v12M8 7l4-4 4 4"/><path d="M7 11H5.5v9.5h13V11H17"/></svg>',
@@ -33,45 +34,45 @@
     var own = m === mode;
     var steps = [], key = '', inapp = false;
     var appStep = C.login
-      ? ['app', 'Найдите на экране значок <b>«Имидж»</b>, откройте его и войдите по почте.', 'Код придёт на почту, как обычно.']
+      ? ['app', tr('Найдите на экране значок <b>«Имидж»</b>, откройте его и войдите по почте.', 'Find the <b>Image</b> icon on your screen, open it and sign in with your email.'), tr('Код придёт на почту, как обычно.', 'The code arrives by email, as usual.')]
       : ['app', 'Найдите на экране значок <b>«' + C.name + '»</b> и откройте его.', 'Система цвета откроется на весь экран, как приложение.'];
     if (m === 'ios') {
       var other = own && /CriOS|FxiOS|EdgiOS|YaBrowser|OPiOS|GSA\//.test(ua);
       inapp = own && !other && (!/Safari\//.test(ua) || /Instagram|FBAN|FBAV|Telegram|VKClient|Line\//.test(ua) || window.navigator.standalone === undefined);
-      if (inapp) steps.push(['compass', 'Откройте эту страницу в <b>Safari</b>: нажмите <b>⋯</b> или значок компаса в углу экрана и выберите <b>«Открыть в Safari»</b>.', 'Сейчас страница открыта внутри Telegram, Instagram или почты, оттуда поставить её на экран нельзя.<button type="button" class="ii-copy" data-ii-copy>Скопировать ссылку для Safari</button>']);
-      if (other) steps.push(['share', 'Нажмите значок <b>«Поделиться»</b> в адресной строке, вверху или внизу экрана.', 'Если такого пункта дальше нет, откройте страницу в Safari.<button type="button" class="ii-copy" data-ii-copy>Скопировать ссылку для Safari</button>']);
-      else steps.push(['share', 'Нажмите значок <b>«Поделиться»</b> внизу экрана: квадрат со стрелкой вверх.', 'В новых iPhone он спрятан за кнопкой <b>⋯</b> рядом с адресом.']);
-      steps.push(['plus', 'Пролистайте вниз и выберите <b>«На экран „Домой“»</b>.', 'Если строки не видно, нажмите <b>«Ещё»</b> в конце списка.']);
-      steps.push(['ok', 'Нажмите <b>«Добавить»</b> в правом верхнем углу.', 'Если есть переключатель «Открывать как веб-приложение», оставьте его включённым.']);
+      if (inapp) steps.push(['compass', tr('Откройте эту страницу в <b>Safari</b>: нажмите <b>⋯</b> или значок компаса в углу экрана и выберите <b>«Открыть в Safari»</b>.', 'Open this page in <b>Safari</b>: tap <b>⋯</b> or the compass icon in the corner and choose <b>Open in Safari</b>.'), tr('Сейчас страница открыта внутри Telegram, Instagram или почты, оттуда поставить её на экран нельзя.<button type="button" class="ii-copy" data-ii-copy>Скопировать ссылку для Safari</button>', 'The page is open inside Telegram, Instagram or mail. It cannot be added to the screen from there.<button type="button" class="ii-copy" data-ii-copy>Copy the link for Safari</button>')]);
+      if (other) steps.push(['share', tr('Нажмите значок <b>«Поделиться»</b> в адресной строке, вверху или внизу экрана.', 'Tap the <b>Share</b> icon in the address bar, at the top or the bottom of the screen.'), tr('Если такого пункта дальше нет, откройте страницу в Safari.<button type="button" class="ii-copy" data-ii-copy>Скопировать ссылку для Safari</button>', 'If the next step is missing, open the page in Safari.<button type="button" class="ii-copy" data-ii-copy>Copy the link for Safari</button>')]);
+      else steps.push(['share', tr('Нажмите значок <b>«Поделиться»</b> внизу экрана: квадрат со стрелкой вверх.', 'Tap the <b>Share</b> icon at the bottom of the screen: a square with an arrow pointing up.'), tr('В новых iPhone он спрятан за кнопкой <b>⋯</b> рядом с адресом.', 'On newer iPhones it sits behind the <b>⋯</b> button next to the address.')]);
+      steps.push(['plus', tr('Пролистайте вниз и выберите <b>«На экран „Домой“»</b>.', 'Scroll down and choose <b>Add to Home Screen</b>.'), tr('Если строки не видно, нажмите <b>«Ещё»</b> в конце списка.', 'If you do not see it, tap <b>More</b> at the end of the list.')]);
+      steps.push(['ok', tr('Нажмите <b>«Добавить»</b> в правом верхнем углу.', 'Tap <b>Add</b> in the top right corner.'), tr('Если есть переключатель «Открывать как веб-приложение», оставьте его включённым.', 'If there is a switch for Open as Web App, leave it on.')]);
       steps.push(appStep);
       key = !C.login ? 'Значок появится на экране «Домой» рядом с другими приложениями.' : signedIn
-        ? '<b>Важно:</b> в значке нужно войти ещё раз, по той же почте. iPhone не переносит вход из Safari в приложение. Дальше Система будет открываться сразу.'
-        : '<b>Важно:</b> входите уже из значка на экране. iPhone не переносит вход из Safari в приложение, и его пришлось бы повторить.';
+        ? tr('<b>Важно:</b> в значке нужно войти ещё раз, по той же почте. iPhone не переносит вход из Safari в приложение. Дальше Система будет открываться сразу.', '<b>Important:</b> sign in once more from the icon, with the same email. An iPhone does not carry the Safari sign-in into the app. After that the System opens directly.')
+        : tr('<b>Важно:</b> входите уже из значка на экране. iPhone не переносит вход из Safari в приложение, и его пришлось бы повторить.', '<b>Important:</b> sign in from the icon on your screen. An iPhone does not carry the Safari sign-in into the app, so you would have to do it again.');
     } else if (m === 'android') {
       inapp = own && /; wv\)|Instagram|FBAN|FBAV|FB_IAB|Telegram|VKAndroidApp|OKApp/.test(ua);
-      if (inapp) steps.push(['dots', 'Откройте эту страницу в <b>Chrome</b>: нажмите <b>⋮</b> в углу экрана и выберите <b>«Открыть в браузере»</b>.', 'Сейчас страница открыта внутри приложения, оттуда поставить её на экран нельзя.<button type="button" class="ii-copy" data-ii-copy>Скопировать ссылку</button>']);
+      if (inapp) steps.push(['dots', tr('Откройте эту страницу в <b>Chrome</b>: нажмите <b>⋮</b> в углу экрана и выберите <b>«Открыть в браузере»</b>.', 'Open this page in <b>Chrome</b>: tap <b>⋮</b> in the corner and choose <b>Open in browser</b>.'), tr('Сейчас страница открыта внутри приложения, оттуда поставить её на экран нельзя.<button type="button" class="ii-copy" data-ii-copy>Скопировать ссылку</button>', 'The page is open inside another app. It cannot be added to the screen from there.<button type="button" class="ii-copy" data-ii-copy>Copy the link</button>')]);
       if (own && /SamsungBrowser/.test(ua)) {
-        steps.push(['menu', 'Нажмите <b>≡</b> внизу экрана.', '']);
-        steps.push(['plus', 'Выберите <b>«Добавить страницу на»</b>, затем <b>«Главный экран»</b>.', '']);
+        steps.push(['menu', tr('Нажмите <b>≡</b> внизу экрана.', 'Tap <b>≡</b> at the bottom of the screen.'), '']);
+        steps.push(['plus', tr('Выберите <b>«Добавить страницу на»</b>, затем <b>«Главный экран»</b>.', 'Choose <b>Add page to</b>, then <b>Home screen</b>.'), '']);
       } else {
-        steps.push(['dots', 'Нажмите <b>⋮</b> в правом верхнем углу браузера.', 'В Яндекс Браузере это <b>⋮</b> или <b>≡</b> рядом с адресом.']);
-        steps.push(['plus', 'Выберите <b>«Установить приложение»</b> или <b>«Добавить на главный экран»</b>.', 'Название пункта зависит от браузера.']);
+        steps.push(['dots', tr('Нажмите <b>⋮</b> в правом верхнем углу браузера.', 'Tap <b>⋮</b> in the top right corner of the browser.'), tr('В Яндекс Браузере это <b>⋮</b> или <b>≡</b> рядом с адресом.', 'In Yandex Browser it is <b>⋮</b> or <b>≡</b> next to the address.')]);
+        steps.push(['plus', tr('Выберите <b>«Установить приложение»</b> или <b>«Добавить на главный экран»</b>.', 'Choose <b>Install app</b> or <b>Add to Home screen</b>.'), tr('Название пункта зависит от браузера.', 'The name of the item depends on the browser.')]);
       }
-      steps.push(['ok', 'Подтвердите: <b>«Установить»</b> или <b>«Добавить»</b>.', '']);
+      steps.push(['ok', tr('Подтвердите: <b>«Установить»</b> или <b>«Добавить»</b>.', 'Confirm: <b>Install</b> or <b>Add</b>.'), '']);
       steps.push(appStep);
-      key = 'Значок появится на экране телефона рядом с другими приложениями.' + (!C.login ? '' : signedIn ? ' Вход сохранится.' : ' Войти можно уже в нём.');
+      key = tr('Значок появится на экране телефона рядом с другими приложениями.', 'The icon will appear on your phone, next to the other apps.') + (!C.login ? '' : signedIn ? tr(' Вход сохранится.', ' Your sign-in stays.') : tr(' Войти можно уже в нём.', ' You can sign in from there.'));
     }
     return { steps: steps, key: key, inapp: inapp };
   }
 
   function html(signedIn, m) {
     var p = plan(signedIn, m);
-    return '<button type="button" class="ii-install" data-ii-install hidden>Установить на телефон</button>' +
+    return '<button type="button" class="ii-install" data-ii-install hidden>' + tr('Установить на телефон', 'Install on this phone') + '</button>' +
       '<ol class="ii-steps">' + p.steps.map(function (s, i) {
         return '<li><span class="ii-n">' + (i + 1) + '</span><span class="ii-t">' + s[1] + (s[2] ? '<small>' + s[2] + '</small>' : '') + '</span><span class="ii-ico' + (s[0] === 'app' ? ' ii-app' : '') + '">' + I[s[0]] + '</span></li>';
       }).join('') + '</ol>' +
       '<div class="ii-key">' + p.key + '</div>' +
-      '<div class="ii-done" data-ii-done hidden>Готово. Значок «' + C.name + '» уже на экране телефона.</div>';
+      '<div class="ii-done" data-ii-done hidden>' + tr('Готово. Значок «' + C.name + '» уже на экране телефона.', 'Done. The ' + C.name + ' icon is on your phone.') + '</div>';
   }
 
   // 16.11: две кнопки «Установите веб-приложение на iPhone / Android», шаги раскрываются под ними
@@ -88,7 +89,7 @@
     if (mode === 'app') return '';
     if (!document.getElementById('ab-css')) { var st = document.createElement('style'); st.id = 'ab-css'; st.textContent = BCSS; document.head.appendChild(st); }
     return '<div class="ab-row">' + ['ios', 'android'].map(function (k) {
-      return '<button type="button" class="ab" data-ab="' + k + '" aria-expanded="false">' + LOGO[k] + '<span>Установите<br>веб-приложение на<b>' + (k === 'ios' ? 'iPhone' : 'Android') + '</b></span></button>';
+      return '<button type="button" class="ab" data-ab="' + k + '" aria-expanded="false">' + LOGO[k] + '<span>' + tr('Установите<br>веб-приложение на', 'Add the<br>web app to') + '<b>' + (k === 'ios' ? 'iPhone' : 'Android') + '</b></span></button>';
     }).join('') + '</div><div class="ab-steps" data-ab-steps hidden></div>';
   }
   // open: раскрыть сразу шаги для своего телефона
@@ -100,7 +101,7 @@
       Array.prototype.forEach.call(btns, function (b) { b.setAttribute('aria-expanded', b.getAttribute('data-ab') === cur ? 'true' : 'false'); });
       box.hidden = !cur;
       if (!cur) return;
-      box.innerHTML = html(signedIn, cur) + (mode === 'desktop' ? '<p class="ab-note">Откройте <b>' + LINK.replace('https://www.', '') + '</b> на телефоне и сделайте эти шаги там.</p>' : '');
+      box.innerHTML = html(signedIn, cur) + (mode === 'desktop' ? '<p class="ab-note">' + tr('Откройте <b>' + LINK.replace('https://www.', '') + '</b> на телефоне и сделайте эти шаги там.', 'Open <b>' + LINK.replace('https://www.', '') + '</b> on your phone and follow these steps there.') + '</p>' : '');
       bind(box);
     }
     Array.prototype.forEach.call(btns, function (b) { b.onclick = function (e) { e.stopPropagation(); pick(b.getAttribute('data-ab')); }; });
@@ -121,9 +122,9 @@
     Array.prototype.forEach.call(root.querySelectorAll('[data-ii-copy]'), function (b) {
       b.onclick = function (e) {
         e.stopPropagation();
-        var done = function () { b.textContent = 'Ссылка скопирована'; };
-        if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(LINK).then(done, function () { prompt('Скопируйте ссылку', LINK); });
-        else prompt('Скопируйте ссылку', LINK);
+        var done = function () { b.textContent = tr('Ссылка скопирована', 'Link copied'); };
+        if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(LINK).then(done, function () { prompt(tr('Скопируйте ссылку', 'Copy the link'), LINK); });
+        else prompt(tr('Скопируйте ссылку', 'Copy the link'), LINK);
       };
     });
     Array.prototype.forEach.call(root.querySelectorAll('[data-ii-install]'), function (b) {

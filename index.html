@@ -98,8 +98,13 @@ header.hd.is-solid{
   white-space:nowrap;
 }
 .nav-desk a:hover{color:var(--gold);opacity:1}
+.hd-tools{justify-self:end;display:flex;align-items:center;gap:14px}
+.lng{display:inline-flex;align-items:center;gap:6px;font-family:var(--f);font-size:11px;font-weight:300;letter-spacing:.16em}
+.lng button{min-height:44px;padding:0 2px;color:inherit;opacity:.45}
+.lng button.on{opacity:1}
+.lng i{font-style:normal;opacity:.4}
 .menu-btn{
-  justify-self:end;
+  justify-self:auto;
   width:26px;height:16px;
   position:relative;
   display:inline-flex;
@@ -694,35 +699,38 @@ a.cinfo-val:hover{color:var(--gold)}
   <div class="g"><div class="in row">
     <a class="monogram" href="./" aria-label="Мила Ушакова">MU</a>
     <nav class="nav-desk" aria-label="Основное меню">
-      <a href="/about">Обо мне</a>
-      <a href="/color-guide">Система цвета</a>
-      <a href="/image">Система имиджа</a>
-      <a href="/contacts">Контакты</a>
+      <a data-i="about" href="/about">Обо мне</a>
+      <a data-i="color" href="/color-guide">Система цвета</a>
+      <a data-i="image" href="/image">Система имиджа</a>
+      <a data-i="contact" href="/contacts">Контакты</a>
     </nav>
-    <button class="menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="nav-panel"><span></span></button>
+    <div class="hd-tools">
+      <span class="lng" id="lng"><button type="button" data-lang="ru">RU</button><i>·</i><button type="button" data-lang="en">EN</button></span>
+      <button class="menu-btn" type="button" aria-label="Меню" aria-expanded="false" aria-controls="nav-panel"><span></span></button>
+    </div>
   </div></div>
 </header>
 
 <nav class="nav-panel" id="nav-panel" hidden>
-  <button class="nav-close" type="button" aria-label="Закрыть">Закрыть</button>
+  <button class="nav-close" type="button" data-i="close" aria-label="Закрыть">Закрыть</button>
   <div class="nav-links">
-    <a href="/about">Обо мне</a>
-    <a href="/projects">Проекты</a>
-    <a href="/lekcii">Лекции</a>
-    <a href="/color-guide">Система цвета</a>
-    <a href="/image">Система имиджа</a>
-    <a href="https://t.me/MilaUshakova_ClubBot?start=club" target="_blank" rel="noopener">Клуб</a>
-    <a href="/contacts">Контакты</a>
+    <a data-i="about" href="/about">Обо мне</a>
+    <a data-i="projects" href="/projects">Проекты</a>
+    <a data-i="lectures" href="/lekcii">Лекции</a>
+    <a data-i="color" href="/color-guide">Система цвета</a>
+    <a data-i="image" href="/image">Система имиджа</a>
+    <a data-i="club" href="https://t.me/MilaUshakova_ClubBot?start=club" target="_blank" rel="noopener">Клуб</a>
+    <a data-i="contact" href="/contacts">Контакты</a>
   </div>
   <div class="nav-install" id="nav-install">
     <div class="ab-row">
       <button type="button" class="ab" data-ab="ios" aria-expanded="false">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16.37 12.6c-.03-2.7 2.2-4 2.3-4.07-1.26-1.83-3.2-2.08-3.9-2.11-1.66-.17-3.24.98-4.08.98-.84 0-2.14-.96-3.52-.93-1.81.03-3.48 1.05-4.41 2.67-1.88 3.26-.48 8.09 1.35 10.74.9 1.29 1.96 2.75 3.36 2.7 1.35-.05 1.86-.87 3.49-.87s2.09.87 3.51.84c1.45-.03 2.37-1.32 3.26-2.62 1.03-1.5 1.45-2.95 1.47-3.03-.03-.01-2.82-1.08-2.85-4.3zM13.7 4.67c.74-.9 1.24-2.15 1.1-3.4-1.07.04-2.36.71-3.13 1.61-.69.79-1.29 2.07-1.13 3.29 1.19.09 2.41-.61 3.16-1.5z"/></svg>
-        <span>Установите<br>веб-приложение на<b>iPhone</b></span>
+        <span data-i="ios">Установите<br>веб-приложение на<b>iPhone</b></span>
       </button>
       <button type="button" class="ab" data-ab="android" aria-expanded="false">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6 18a1 1 0 0 0 1 1h1v3.5a1.5 1.5 0 0 0 3 0V19h2v3.5a1.5 1.5 0 0 0 3 0V19h1a1 1 0 0 0 1-1V8H6v10zM3.5 8A1.5 1.5 0 0 0 2 9.5v7a1.5 1.5 0 0 0 3 0v-7A1.5 1.5 0 0 0 3.5 8zm17 0A1.5 1.5 0 0 0 19 9.5v7a1.5 1.5 0 0 0 3 0v-7A1.5 1.5 0 0 0 20.5 8zM15.53 2.16l1.3-1.3a.5.5 0 0 0-.7-.71l-1.48 1.48A5.96 5.96 0 0 0 12 1c-.96 0-1.86.23-2.66.63L7.85.15a.5.5 0 1 0-.7.7l1.31 1.31A5.98 5.98 0 0 0 6 7h12a5.98 5.98 0 0 0-2.47-4.84zM10 5H9V4h1v1zm5 0h-1V4h1v1z"/></svg>
-        <span>Установите<br>веб-приложение на<b>Android</b></span>
+        <span data-i="and">Установите<br>веб-приложение на<b>Android</b></span>
       </button>
     </div>
     <div class="ab-hint" id="ab-hint" hidden></div>
@@ -741,9 +749,9 @@ a.cinfo-val:hover{color:var(--gold)}
     <div class="hero-cap g"><div class="in">
       <h1>Мила<br>Ушакова</h1>
       <p class="hero-roles">
-        <span>Международный стилист</span>
-        <span>Журналист | Аналитик</span>
-        <span>Эксперт по имиджу</span>
+        <span data-i="r1">Международный стилист</span>
+        <span data-i="r2">Журналист | Аналитик</span>
+        <span data-i="r3">Эксперт по имиджу</span>
       </p>
       <div class="hero-rule" aria-hidden="true"></div>
     </div></div>
@@ -758,12 +766,12 @@ a.cinfo-val:hover{color:var(--gold)}
         <div class="frame"><img src="/digital/image-3.webp" alt="" width="443" height="960" loading="lazy" decoding="async"></div>
       </div>
       <div class="reveal">
-        <p class="sec-kicker">Проект</p>
-        <h2 class="sec-title" id="img-title">Система<br><em>имиджа</em></h2>
-        <p class="sec-lead">Инструмент управления впечатлением в профессиональной и деловой среде. Четыре шага перед любой встречей: что предстоит, ваша цель, решение Милы и образы под задачу.</p>
+        <p class="sec-kicker" data-i="kProject">Проект</p>
+        <h2 class="sec-title" id="img-title" data-i="imgTitle">Система<br><em>имиджа</em></h2>
+        <p class="sec-lead" data-i="imgLead">Инструмент управления впечатлением в профессиональной и деловой среде. Четыре шага перед любой встречей: что предстоит, ваша цель, решение Милы и образы под задачу.</p>
         <div class="sec-actions">
-          <a class="btn" href="/image">Ознакомиться</a>
-          <span class="badge-pulse" role="status">ИДУТ ПРОДАЖИ</span>
+          <a class="btn" data-i="open" href="/image">Ознакомиться</a>
+          <span class="badge-pulse" data-i="sale" role="status">ИДУТ ПРОДАЖИ</span>
         </div>
       </div>
     </div></div>
@@ -773,12 +781,12 @@ a.cinfo-val:hover{color:var(--gold)}
   <section class="sec best" id="color-system" aria-labelledby="color-title">
     <div class="g"><div class="in best-grid">
       <div class="reveal">
-        <p class="sec-kicker">Бестселлер</p>
-        <h2 class="sec-title" id="color-title">Система цветовых<br>сочетаний</h2>
-        <p class="sec-lead">Персональный цветовой код: готовая система для выбора оттенков и сборки образов. Для тех, кто устал ошибаться в цвете и хочет ясности в гардеробе.</p>
-        <p class="best-note">Скоро закрытие продаж</p>
+        <p class="sec-kicker" data-i="best">Бестселлер</p>
+        <h2 class="sec-title" id="color-title" data-i="colorTitle">Система цветовых<br>сочетаний</h2>
+        <p class="sec-lead" data-i="colorLead">Персональный цветовой код: готовая система для выбора оттенков и сборки образов. Для тех, кто устал ошибаться в цвете и хочет ясности в гардеробе.</p>
+        <p class="best-note" data-i="soon">Скоро закрытие продаж</p>
         <div class="sec-actions">
-          <a class="btn" href="/color-guide">О системе цвета</a>
+          <a class="btn" data-i="colorCta" href="/color-guide">О системе цвета</a>
         </div>
       </div>
       <div class="best-visual reveal" aria-hidden="true">
@@ -796,22 +804,22 @@ a.cinfo-val:hover{color:var(--gold)}
       <article class="trio-cell">
         <img src="/guide/oplata2/l/cover.jpg" alt="" width="800" height="1200" loading="lazy" decoding="async" style="object-position:50% 35%">
         <div class="trio-body">
-          <h2 class="trio-name">Система имиджа</h2>
-          <a class="btn" href="/image">Присоединиться</a>
+          <h2 class="trio-name" data-i="image">Система имиджа</h2>
+          <a class="btn" data-i="join" href="/image">Присоединиться</a>
         </div>
       </article>
       <article class="trio-cell">
         <img src="/guide/color-bg-fan.jpg" alt="" width="635" height="960" loading="lazy" decoding="async" style="object-position:50% 18%">
         <div class="trio-body">
-          <h2 class="trio-name">Система цветовых сочетаний</h2>
-          <a class="btn" href="/color-guide">Присоединиться</a>
+          <h2 class="trio-name" data-i="colorFull">Система цветовых сочетаний</h2>
+          <a class="btn" data-i="join" href="/color-guide">Присоединиться</a>
         </div>
       </article>
       <article class="trio-cell">
         <img src="/club-guest-cover.jpg" alt="" width="1026" height="1280" loading="lazy" decoding="async" style="object-position:50% 22%">
         <div class="trio-body">
-          <h2 class="trio-name">Fashion club «В моём стиле»</h2>
-          <a class="btn" href="https://t.me/MilaUshakova_ClubBot?start=club" target="_blank" rel="noopener">Присоединиться</a>
+          <h2 class="trio-name" data-i="clubName">Fashion club «В моём стиле»</h2>
+          <a class="btn" data-i="join" href="https://t.me/MilaUshakova_ClubBot?start=club" target="_blank" rel="noopener">Присоединиться</a>
         </div>
       </article>
     </div>
@@ -821,9 +829,9 @@ a.cinfo-val:hover{color:var(--gold)}
   <section class="sec pubs" id="publications" aria-labelledby="pubs-title">
     <div class="g"><div class="in">
       <header class="pubs-head reveal">
-        <p class="sec-kicker">Пресса</p>
-        <h2 class="sec-title" id="pubs-title">Мои<br>публикации</h2>
-        <p class="sec-lead">Материалы и комментарии в изданиях. Обложки можно добавить позже.</p>
+        <p class="sec-kicker" data-i="press">Пресса</p>
+        <h2 class="sec-title" id="pubs-title" data-i="pubs">Мои<br>публикации</h2>
+        <p class="sec-lead" data-i="pubsLead">Материалы и комментарии в изданиях. Обложки можно добавить позже.</p>
       </header>
       <ul class="pub-list reveal">
         <li class="pub-item">
@@ -889,8 +897,8 @@ a.cinfo-val:hover{color:var(--gold)}
   <section class="sec socials" id="social" aria-labelledby="social-title">
     <div class="g"><div class="in">
       <div class="reveal">
-        <p class="sec-kicker">Связь</p>
-        <h2 class="sec-title" id="social-title">Социальные<br>сети</h2>
+        <p class="sec-kicker" data-i="socialK">Связь</p>
+        <h2 class="sec-title" id="social-title" data-i="socialT">Социальные<br>сети</h2>
         <div class="social-row">
           <a class="social-link" href="https://www.instagram.com/milaushakovva/" target="_blank" rel="noopener">Instagram<span aria-hidden="true">*</span></a>
           <a class="social-link" href="https://t.me/themorningsmothie" target="_blank" rel="noopener">Telegram</a>
@@ -952,17 +960,93 @@ a.cinfo-val:hover{color:var(--gold)}
 
 <footer class="docs" aria-label="Документы">
   <div class="g"><div class="in">
-    <a href="/oferta">Договор оферты</a>
-    <a href="/privacy">Политика конфиденциальности</a>
-    <a href="https://t.me/MilaUshakova_ClubBot?start=support" target="_blank" rel="noopener">Служба заботы</a>
+    <a data-i="offer" href="/oferta">Договор оферты</a>
+    <a data-i="privacy" href="/privacy">Политика конфиденциальности</a>
+    <a data-i="care" href="https://t.me/MilaUshakova_ClubBot?start=support" target="_blank" rel="noopener">Служба заботы</a>
     <span>ИП Ольхина Я.Ф.</span>
   </div></div>
 </footer>
 
-<a class="social-br" href="https://t.me/MilaUshakova_ClubBot?start=support" target="_blank" rel="noopener">Служба заботы</a>
+<a class="social-br" data-i="care" href="https://t.me/MilaUshakova_ClubBot?start=support" target="_blank" rel="noopener">Служба заботы</a>
 
 <script>
 (() => {
+  const COPY = {
+    about: ['Обо мне', 'About'],
+    projects: ['Проекты', 'Projects'],
+    lectures: ['Лекции', 'Lectures'],
+    color: ['Система цвета', 'Colour system'],
+    image: ['Система имиджа', 'Image system'],
+    club: ['Клуб', 'Club'],
+    contact: ['Контакты', 'Contact'],
+    offer: ['Договор оферты', 'Offer'],
+    privacy: ['Политика конфиденциальности', 'Privacy'],
+    kProject: ['Проект', 'Project'],
+    imgTitle: ['Система<br><em>имиджа</em>', 'Image<br><em>system</em>'],
+    imgLead: ['Инструмент управления впечатлением в профессиональной и деловой среде. Четыре шага перед любой встречей: что предстоит, ваша цель, решение Милы и образы под задачу.', 'A tool for the impression you make in professional life. Four steps before any meeting: the occasion, your aim, a decision from Mila and looks for the task.'],
+    open: ['Ознакомиться', 'Open'],
+    sale: ['ИДУТ ПРОДАЖИ', 'ON SALE'],
+    best: ['Бестселлер', 'Bestseller'],
+    colorTitle: ['Система цветовых<br>сочетаний', 'Colour<br>combinations'],
+    colorLead: ['Персональный цветовой код: готовая система для выбора оттенков и сборки образов. Для тех, кто устал ошибаться в цвете и хочет ясности в гардеробе.', 'A personal colour code: a ready system for choosing shades and building looks. For anyone tired of getting colour wrong and wanting a clear wardrobe.'],
+    soon: ['Скоро закрытие продаж', 'Sales close soon'],
+    colorCta: ['О системе цвета', 'About the colour system'],
+    colorFull: ['Система цветовых сочетаний', 'Colour combinations'],
+    join: ['Присоединиться', 'Join'],
+    clubName: ['Fashion club «В моём стиле»', 'Fashion club In My Style'],
+    press: ['Пресса', 'Press'],
+    pubs: ['Мои<br>публикации', 'My<br>publications'],
+    pubsLead: ['Материалы и комментарии в изданиях. Обложки можно добавить позже.', 'Pieces and comments in the press. Covers can be added later.'],
+    socialK: ['Связь', 'Contact'],
+    socialT: ['Социальные<br>сети', 'Social<br>networks'],
+    close: ['Закрыть', 'Close'],
+    menu: ['Меню', 'Menu'],
+    care: ['Служба заботы', 'Care'],
+    r1: ['Международный стилист', 'International stylist'],
+    r2: ['Журналист | Аналитик', 'Journalist | Analyst'],
+    r3: ['Эксперт по имиджу', 'Image expert'],
+    ios: ['Установите<br>веб-приложение на<b>iPhone</b>', 'Install the<br>web app on<b>iPhone</b>'],
+    and: ['Установите<br>веб-приложение на<b>Android</b>', 'Install the<br>web app on<b>Android</b>']
+  };
+  const HINT = {
+    ios: ['Поделиться → На экран «Домой». В Safari: квадрат со стрелкой вверх внизу экрана, затем «На экран „Домой“» и «Добавить».', 'Share, then Add to Home Screen. In Safari: the square with an upward arrow at the bottom, then Add to Home Screen, then Add.'],
+    android: ['В Chrome: ⋮ → «Установить приложение» или «Добавить на главный экран».', 'In Chrome: the menu, then Install app or Add to Home screen.'],
+    install: ['Установить на телефон', 'Install on your phone']
+  };
+  let lang = 'ru';
+  try {
+    const q = /[?&]lang=(en|ru)/.exec(location.search);
+    const saved = localStorage.getItem('mu_lang') || localStorage.getItem('img_lang');
+    lang = (q && q[1]) || (saved === 'en' ? 'en' : 'ru');
+    localStorage.setItem('mu_lang', lang);
+    localStorage.setItem('img_lang', lang);
+  } catch (e) {}
+  const applyLang = () => {
+    document.documentElement.lang = lang;
+    document.querySelectorAll('[data-i]').forEach((el) => {
+      const pair = COPY[el.getAttribute('data-i')];
+      if (!pair) return;
+      el.innerHTML = pair[lang === 'en' ? 1 : 0];
+    });
+    const menu = document.querySelector('.menu-btn');
+    if (menu) menu.setAttribute('aria-label', COPY.menu[lang === 'en' ? 1 : 0]);
+    const close = document.querySelector('.nav-close');
+    if (close) close.setAttribute('aria-label', COPY.close[lang === 'en' ? 1 : 0]);
+    document.querySelectorAll('#lng button').forEach((b) => b.classList.toggle('on', b.getAttribute('data-lang') === lang));
+  };
+  const setLang = (next) => {
+    if (next !== 'ru' && next !== 'en') return;
+    lang = next;
+    try { localStorage.setItem('mu_lang', lang); localStorage.setItem('img_lang', lang); } catch (e) {}
+    applyLang();
+    if (cur) { const open = cur; cur = ''; showHint(open); }
+  };
+  document.getElementById('lng').addEventListener('click', (e) => {
+    const b = e.target.closest('[data-lang]');
+    if (b) setLang(b.getAttribute('data-lang'));
+  });
+  applyLang();
+
   const btn = document.querySelector('.menu-btn');
   const panel = document.getElementById('nav-panel');
   const closeBtn = document.querySelector('.nav-close');
@@ -991,18 +1075,16 @@ a.cinfo-val:hover{color:var(--gold)}
   panel.querySelectorAll('.nav-links a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
 
-  const iosHint = 'Поделиться → На экран «Домой». В Safari: квадрат со стрелкой вверх внизу экрана, затем «На экран „Домой“» и «Добавить».';
-  const androidHint = 'В Chrome: ⋮ → «Установить приложение» или «Добавить на главный экран».';
-
   const showHint = (k) => {
     cur = cur === k ? '' : k;
     abBtns.forEach((b) => b.setAttribute('aria-expanded', b.getAttribute('data-ab') === cur ? 'true' : 'false'));
     if (!cur) { hint.hidden = true; hint.innerHTML = ''; return; }
+    const ix = lang === 'en' ? 1 : 0;
     if (k === 'ios') {
-      hint.innerHTML = iosHint;
+      hint.innerHTML = HINT.ios[ix];
     } else {
-      hint.innerHTML = androidHint + (deferred
-        ? '<button type="button" class="ii-install" data-ii-install>Установить на телефон</button>'
+      hint.innerHTML = HINT.android[ix] + (deferred
+        ? '<button type="button" class="ii-install" data-ii-install>' + HINT.install[ix] + '</button>'
         : '');
     }
     hint.hidden = false;

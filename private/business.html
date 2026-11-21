@@ -37,10 +37,19 @@ a{color:inherit}
   -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--rule)}
 .top .logo{font-family:var(--serif);font-size:16px;letter-spacing:.02em;white-space:nowrap}
 .top .logo i{color:var(--bronze)}
-.top .ed{font-size:9px;font-weight:400;letter-spacing:.28em;text-transform:uppercase;color:var(--mute)}
+.top .ed{font-size:9px;font-weight:400;letter-spacing:.28em;text-transform:uppercase;color:var(--mute);max-width:34vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .top a.sys{font-size:9px;font-weight:400;letter-spacing:.24em;text-transform:uppercase;color:var(--bronze);text-decoration:none}
+.top-r{display:flex;align-items:center;gap:14px;min-width:0}
+.lng{display:flex;align-items:center;gap:6px;flex:none;font-size:10px;letter-spacing:.2em}
+.lng button{color:var(--mute);padding:8px 0}
+.lng button.on{color:var(--ink)}
+.lng i{font-style:normal;color:var(--bronze)}
 body.dark-top .top{background:var(--ink);border-bottom-color:var(--rule-d);color:var(--paper)}
 body.dark-top .top .ed{color:rgba(244,242,238,.6)}
+body.dark-top .lng button,body.on-cover .lng button{color:rgba(244,242,238,.45)}
+body.dark-top .lng button.on,body.on-cover .lng button.on{color:var(--paper)}
+body.en .cov.sl .row3 button{font-size:14px;letter-spacing:.03em}
+body.en .goal b{font-size:18px}
 
 .view{animation:in .4s cubic-bezier(.2,.7,.2,1)}
 @keyframes in{from{opacity:0;transform:translateY(10px)}}
@@ -478,25 +487,286 @@ body.on-cover .view{padding-bottom:0}
 </head>
 <body>
 <div class="app">
-  <div class="top"><button class="logo" id="tLogo" type="button" aria-label="На обложку">Mila Ushakova</button><a class="sys" id="sys" href="/guide" style="display:none">← Система</a><span class="ed" id="ed">Система имиджа</span><button class="tmenu" id="tMenu" type="button">Меню</button></div>
+  <div class="top"><button class="logo" id="tLogo" type="button" aria-label="На обложку">Mila Ushakova</button><div class="top-r"><a class="sys" id="sys" href="/guide" style="display:none">← Система</a><span class="ed" id="ed">Система имиджа</span><span class="lng" id="lng" role="group" aria-label="Language"><button type="button" data-lang="ru">RU</button><i>·</i><button type="button" data-lang="en">EN</button></span><button class="tmenu" id="tMenu" type="button">Меню</button></div></div>
   <div id="v"></div>
   <nav class="dock" id="dock" aria-label="Навигация">
-    <button class="d-back off" id="dBack" type="button"><span class="ic">&larr;</span>Назад</button>
-    <button id="dMenu" type="button"><span class="ic">&#9776;</span>Меню</button>
+    <button class="d-back off" id="dBack" type="button"><span class="ic">&larr;</span><span id="lbBack">Назад</span></button>
+    <button id="dMenu" type="button"><span class="ic">&#9776;</span><span id="lbMenu">Меню</span></button>
     <button id="dDocs" type="button" class="d-docs" aria-label="Документы"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6v18h12V7z"/><path d="M14 3v4h4M9 12h6M9 16h6"/></svg></button>
     <a class="d-sup" href="https://t.me/YanaOlkhina" target="_blank" rel="noopener" aria-label="По всем вопросам: Telegram @YanaOlkhina"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 4L3 11.5l6 2.2M21 4l-3.4 16L9.5 15M21 4L9.5 15m0 0v5l3-3.4"/></svg></a>
   </nav>
   <div class="sheet-bg" id="sheetBg"></div>
   <div class="sheet" id="sheet"></div>
   <div id="legal">
-    <a href="/oferta" target="_blank">Договор оферты</a>
-    <a href="/privacy" target="_blank">Политика конфиденциальности</a>
-    <a href="https://t.me/YanaOlkhina" target="_blank">Поддержка</a>
+    <a id="lgOf" href="/oferta" target="_blank">Договор оферты</a>
+    <a id="lgPr" href="/privacy" target="_blank">Политика конфиденциальности</a>
+    <a id="lgSu" href="https://t.me/YanaOlkhina" target="_blank">Поддержка</a>
   </div>
 </div>
-<script src="/guide/image-install.js?v=2"></script>
+<script src="/guide/image-install.js?v=3"></script>
 <script>
 (function(){
+/*EN_DICT_START*/
+var EN = {
+  'Работа':'Work','Бизнес':'Business','Вне офиса':'Off-site','Вечер':'Evening',
+  'Офис':'Office','Zoom':'Zoom','Встреча с руководством':'Meeting your manager','Встреча с командой':'Meeting the team',
+  'Собеседование':'Interview','Новая должность, повышение':'New role, promotion','Casual Friday':'Casual Friday',
+  'Переговоры':'Negotiation','Встреча с клиентом или партнёром':'Client or partner','Публичное выступление, конференция, networking':'Speaking, a conference, networking',
+  'Деловые встречи в ресторане':'A business meal','Командировка':'A business trip','Корпоратив, Black Tie':'Company party, Black Tie','Cocktail':'Cocktail',
+  'Первый рабочий день':'First day','Культурное или светское событие':'A cultural event','Презентация, питч':'Presentation, pitch',
+  'Убедить':'Persuade','Вызвать доверие':'Earn trust','Показать компетентность':'Show competence','Показать статус':'Show status',
+  'Заявить о себе':'Make your presence felt','Запомниться':'Be remembered','Сократить дистанцию':'Shorten the distance','Установить границы':'Set a boundary',
+  'Объединить':'Bring people together','Вдохновить':'Inspire','Показать современность':'Look current','Привести к решению':'Reach a decision',
+  'Выстроить коммуникацию':'Shape the conversation','Впечатление':'The impression','Показать готовность работать в команде':'Ready for the team',
+  'Показать уверенность':'Show confidence','Показать открытость к общению':'Open to talk','Показать готовность быть частью команды':'Ready to belong',
+  'Обозначить свою роль':'Mark your role','Показать индивидуальность':'Show individuality','Обозначить новый статус':'Mark the new status',
+  'Усилить авторитет':'Strengthen authority','Сохранить связь с командой':'Stay close to the team','Выглядеть современно':'Look current',
+  'Выглядеть расслабленно, но уместно':'Relaxed, and still right','Показать стиль':'Show style','Обозначить амбицию':'Show ambition','Показать открытость новому':'Open to what is new',
+  'Деловой завтрак':'Business breakfast','Деловой обед':'Business lunch','Деловой ужин':'Business dinner'
+};
+var EN_COMMENTS = {
+  'Casual Friday':'Casual Friday is not a day off. It is the hardest test: the freest clothes must not get in the way of the work.\nTo me, Casual Friday is a chance to show ambition and a creative mind through bold colour and cuts that the place can hold.\nA bright detail is always character. If four days keep you within limits, on Friday choose looks that are in the current conversation.',
+  'Cocktail':'Cocktail joins the plain with a celebration. It differs from black tie in the depth of colour and in the luxury.',
+  'Презентация, питч':'What matters in the moment is to show your voice, your weight and your thought, and to pass them to the people in front of you.',
+  'Публичное выступление, конференция, networking':'What matters in the moment is to show your voice, your weight and your thought, and to pass them to the people in front of you.',
+  'Офис|Показать компетентность':'A competent specialist knows the work and keeps studying the industry. This person notices what is changing, understands new processes and updates what they know. Speed is the trend.',
+  'Бизнес':'An office runs on given rules: a title, a hierarchy, a culture, a dress code. Business gives more freedom. Here you set your own scale, your ambition, your boundaries and the level at which you are ready to talk.\nIn business a person is read whole: by clothes, details, the look, the voice, manners and behaviour.',
+  'Новая должность, повышение':'Take the new level as yours.\nA promotion changes more than the title. The scale of responsibility changes, and so does the attention on you, and what you require of yourself. Image helps you accept the new role sooner.'
+};
+var EN_BOOK_W = [
+  'To understand the rules of professional life: from an introduction and a negotiation to events, rank and appearance.',
+  'To know the rules of business communication: negotiations, interviews, introductions, visits, topics, gifts, the telephone and digital manners.',
+  'To understand contemporary American etiquette: from invitations and the table to professional communication and new social norms.',
+  'To understand contemporary British etiquette and use it in real life: invitations, dress codes, conversation, work and social situations.',
+  'To train the eye and learn to see the links between art, a person, time and culture.'
+];
+var EN_RULES = {
+"Casual Friday|*|w":[["Remember: style is how you feel. Image is your ambition for the level of your life.",""]],
+"Cocktail|*|w":[
+["Knowing how to build a cocktail look shows your appetite for risk.",""],
+["Looks like these test your confidence.",""],
+["On the hand that holds the glass, wear your brightest jewel.","That is why they are called cocktail jewels."],
+["Try to live an interesting evening in this look.","Watch your posture, and ask what you would think of yourself if you saw yourself from the side.",""]
+],
+"Zoom|Вызвать доверие|w":[
+["Always come on with the camera on.","When the other person sees your face and your reaction, it is easier to understand you and to trust what you say."],
+["Give particular attention to the portrait zone.","On Zoom this is the most visible part of the look. The frame of your glasses, jewellery, a collar, a neckline and everything near the face keep attention on you and show you from the angle you choose."],
+["Set the camera at eye level and check the background.","A camera opposite the face makes the talk feel equal. Take personal and domestic things out of the frame. Attention should stay on you and on the conversation."],
+["Work with the voice.","Speak a little slower than in an ordinary talk, finish your words and leave short pauses between thoughts. Calm, clear speech helps the other person follow you and strengthens trust."],
+["Say what matters to the camera.","When you look at the other face on the screen, your gaze moves slightly aside for them. At the key moments, look into the lens. On Zoom that replaces a direct look in the eye."],
+["Let the person feel that you hear them.","Do not switch to messages and other tasks. Hear the thought to the end, and only then answer. Trust grows when a person feels not only your attention, but your interest in what they say.",""]
+],
+"Zoom|Привести к решению|w":[
+["Attend to the portrait zone.","Even a simple jumper with a finished neckline is far better than a house t-shirt. A prepared appearance shows respect for yourself, for the format and for the people on the other side of the screen."],
+["Add one detail that draws the eye to your face.","A frame, earrings, a brooch, a jewel at the neck or a clear lipstick hold attention in the portrait zone. The task is to send the other person's gaze to the face and to the speech."],
+["Look at how you appear on the screen.","Judge yourself not only in the mirror, but in the frame itself. The light should show the eyes, the expression and the movement of the lips. On Zoom the face is the main source of what is not said."],
+["Take what is unnecessary out of the frame.","The background should not pull the other person into your private life. The less accidental information around you, the more attention stays on you and on the talk."],
+["Remember the timbre and the speed of speech.","Speak a little slower than you usually do, and do not raise the voice to strengthen a thought. A calm timbre and an even pace keep the sense of confidence without pressure."],
+["Show a reaction.","Do not stay still while the other person speaks. Answer with the face, a short nod, a pause before you reply. They see that you are listening and that you take in what was said.",""]
+],
+"Бизнес|*|w":[
+["Watch the people you are about to talk to.","Notice the watch, the frame, the jewels, the shoes, the bags, the cases, the vintage. Each choice tells you something: habits, taste, a relation to money, to detail and to their own status. These observations help you understand who you will be talking to."],
+["Study the details and the accessories.","In business the quality of things is recognised easily. If your wardrobe is still in another segment, choose neutral decisions. Instead of trying to impress with an expensive watch, leave the wrist free. Instead of a bag that imitates a higher segment, choose a good thing with no recognisable name. If this circle opened the door, you are already inside it."],
+["Show status precisely.","One status piece is enough. The rest is carried by neatness, the condition of clothes and shoes, etiquette and a correct scent. Another marker of status in business is the ability to listen. Let the person finish, and show by your attention that their words matter to you."],
+["Control the degree of formality.","A buttoned jacket, a closed shirt and strict shoes assemble the look. A jacket off, an open collar, turned sleeves and less formal shoes make it welcoming. Change the degree according to the task and the stage of the meeting."],
+["Take your own level of freedom as the measure.","A t-shirt, jeans and trainers on a successful founder can be a freedom that reputation has paid for. Watch those codes, and choose what matches your life, your position and the way you do business."],
+["Keep the etiquette of the bag.","During a business meeting the bag sits by your chair. The table stays the space for the talk and the work."],
+["Remember that the body states your position.","When you name a price, stay sure of it. Readiness for a larger scale begins with an inner readiness to accept that scale, including the financial one. Gesture, gaze, the position of the body and the way you speak should confirm your position."],
+["Use a calm voice.","A calm tone and an even pace become a strong instrument when you need to show competence, to persuade, or to bring the talk to the result you need."],
+["Keep a woman's position in talks with men.","Remember first that you are a woman. Use that as part of your own manner, and keep the professional position, the boundaries and the subject. Equality in business is set by the value each side brings to the table."],
+["Use details for the task.","Red adds energy and gathers attention. A strong frame sharpens the focus on the eyes. A current jewel shows that you know the visual language of now. Choose each instrument by the task and by whether it belongs."],
+["A high level in business is rarely read from the price of the wardrobe.","Confidence is the absence of unnecessary action.",""]
+],
+"Встреча с командой|Показать готовность работать в команде|w":[
+["Keep to the team's dress code.","Stay with the shared degree of formality and the visual language of your workplace. Belonging starts with understanding its codes."],
+["Create a sign of belonging.","A scarf, a brooch, a pin or a thing made for the purpose can become the team's mark. Things that only its members receive have a particular value."],
+["Leave room to interpret.","Do not turn a shared code into a uniform. Let each person wear the uniting element in their own way. Belonging stays, and so does the person. Do not take away the chance to appear."],
+["Mark your role.","If you lead, you do not have to dress differently from the team. Raise the shared dress code by one level through the fit, the construction, the quality of the cloth, the shoes, a watch or the accessories."],
+["Introduce a dress code for particular days.","A launch, an anniversary, a financial result, an important event or the end of a long stage can have its own visual code. Repeated details slowly become part of the team's story."],
+["Make your own rituals, and remember: respect for yourself is respect for how you look.","Regular rituals give a team the sense of a shared experience and of belonging.",""]
+],
+"Встреча с руководством|Вызвать доверие|w":[
+["Show that you belong to the professional setting.","Use a recognisable code of your company or industry, and interpret it at your own level. It shows that you understand the setting and can live inside its rules without losing yourself."],
+["Check the quality from the distance of a conversation.","At a meeting the cloth, the collar, the hardware, the shoes, the bag, the jewels and the condition of things are especially visible. Precision in the details supports the impression of a person who is careful not only with herself, but with what is trusted to her."],
+["Check the look while seated.","Before the meeting, sit down in the full look and see how the jacket, the skirt or the trousers behave. A woman's jacket does not have to be undone. Undo it if, once you sit, it pulls, gaps or limits movement."],
+["Choose a position of the legs that you do not have to control.","Both feet on the floor, or the legs together with a small shift to the side, is the most neutral seat for a formal meeting. Legs crossed are acceptable if the skirt keeps a correct length, the pose stays stable and you do not have to keep adjusting the clothes."],
+["Keep your own voice.","Do not start to speak more quietly, higher or more carefully because of the title across from you. An even voice and your usual manner show that you recognise the hierarchy and do not reduce your own professional weight."],
+["Do not rush to agree.","Hear the manager to the end, give yourself a short pause, and only then answer. Trust comes not from a display of compliance, but from the ability to take in information calmly, think it through and state your own position.",""]
+],
+"Встреча с руководством|Показать компетентность|w":[
+["Choose clothes for the task of the meeting.","Consider whether you will sit, speak, show materials or move. Clothes should not ask for attention while you work."],
+["Watch the precision of the fit.","Check the length of sleeves and trousers, the position of the shoulders, the collar and the waist. Precision in clothes supports the sense of the same precision in the work."],
+["Show that you understand the professional context of now.","Add one current element: a frame, shoes, a jewel or a contemporary cut. Do not build the look out of trends. It is enough to show that you know how to use them."],
+["Break an office code on purpose.","If the company allows it, replace the expected decision with your own: a jacket with architectural knit, a classic shirt with a more current construction. To step away from a rule professionally, you first have to understand the rule."],
+["Free your hands before the meeting.","Put the phone away, close the bag and take out what you need in advance. Start the talk without searching for things and without extra movement."],
+["Listen to how your manager phrases things.","Notice what is repeated, what is clarified and where the emphasis falls. The speech often already contains the result that is expected of you.",""]
+],
+"Деловые встречи в ресторане|*|w":[
+["The earlier the meeting, the simpler the clothes and the accessories.",""],
+["A restaurant does not cancel the business nature of the meeting.",""],
+["Remember: a business meal stays business, not personal.","",""]
+],
+"Командировка|*|w":[
+["First decide the format of the trip.","Choose pieces that have never let you down.\nStart the capsule from the lower half of the silhouette.\nOne pair of trousers, one skirt.\nThen add several tops. Each of them should work with the bottom you chose, so a few pieces give you several looks."],
+["Always plan one evening option.","It is enough to change the top, add jewels and a small bag."]
+],
+"Корпоратив, Black Tie|Показать стиль|w":[
+["Remember that a company party is not the office.",""],
+["At a company party you make an impression by keeping the dress code and using invention.","For example, add one detail whose meaning is clear only to you."],
+["A company party can open a new conversation.",""],
+["Remember: a woman does not wear a watch with an evening dress.",""],
+["Nothing is worse than a tired woman in sequins.","The factors that matter: the hands, the hair, the skin of the face and the smile. That is your instrument.\nTo show style is not the same as to show that you know the trends.\nA dress code is your delicate interpretation, and it depends on how much true information you read.",""]
+],
+"Новая должность, повышение|*|w":[
+["Do not change the whole wardrobe at once.","A wardrobe should change gradually, with you. Do not try to look, in one day, like a person in the new role. Give yourself time to get used to the new level."],
+["Choose one thing that is expensive for you.","Buy the best of the segment you can afford. That is how you introduce yourself to another quality of cloth, cut, fit and making. Slowly this level stops being an exception and becomes your norm."],
+["Mark the new stage with a new thing.","It can be a cashmere jumper, a bag, a watch, a jewel, shoes or a scent. Choose what a new level means to you personally. Such a thing fixes the change on the outside and on the inside."],
+["If you wear glasses, start with the frame.","The frame sits by the eyes, in the main zone of the other person's attention. Even a good suit can lose its currency next to an outdated frame. Check its shape, its scale and how far it matches you today."],
+["Do not turn a promotion into a jacket.","A new role does not automatically require you to become more formal. It requires more attention to yourself. Keep your own style, and make it more precise, of better quality and more grown relative to the new role."],
+["Raise what you require of your appearance.","A promotion does not cancel a dress code or neatness. The opposite: a new responsibility asks for more precision. Watch the condition of clothes, shoes, hair and details. Set yourself a more ambitious visual standard."],
+["Add red.","Use it in one place: shoes, a frame, a bag, lipstick, knit or a small detail. Red gathers attention and adds energy and force. If you were promoted, your opinion is already trusted. Allow yourself to mark it visually."],
+["Take the new role as yours.","Do not ask whether you deserve the new title. The decision is already made. You were promoted because someone saw that you can handle more. Do not wait until you feel completely ready. Change the wardrobe, the habits and what you require of yourself gradually, but treat yourself from the position of the new role now.",""]
+],
+"Офис|Вызвать доверие|w":[
+["Read the DNA of the place.","If the office has a dress code, find one element that is characteristic of it and interpret it in your own style. If there is no dress code, rely on your own visual identity. Authenticity makes a person easier to read and more convincing."],
+["Account for how closely the clothes sit.","Leave space between the body and the clothes. Freedom of fit gives freedom of movement, and the body's line becomes calmer and more natural."],
+["Attend to the portrait zone.","Look at yourself cropped at the chest. Hair, the frame, jewels and the line of the neck make the first impression before the other person has time to see the whole look."],
+["Set the order of perception.","Look at yourself for a few seconds and notice where the eye goes first. For trust, a strong sequence is the face, then the whole look, then the details. That visual clarity makes the first reading easier."],
+["Account for how the look feels to the touch.","Add a texture that the eye associates with a pleasant touch: cashmere, knit, suede, soft leather, a cloth that moves. Tactile associations can psychologically shorten the distance."],
+["Find your recognisable mark.","Choose one characteristic detail and repeat it from time to time: a frame, a watch, earrings, a ring, a brooch. Repetition builds recognition, and what is familiar sooner feels predictable."],
+["Hold eye contact.","During an introduction or a talk, hold the gaze a little longer than you usually do. A direct, calm look strengthens the sense of openness and attention. If the other person looks away first, shorten the contact. The other person's comfort also affects trust.",""]
+],
+"Офис|Убедить|w":[
+["Gather attention closer to the face.","A frame, earrings, a collar, lapels and the line of the neck work as a setting. During the talk the other person's gaze should return to your face."],
+["Choose one element that holds attention.","A frame, a jewel, a jacket, shoes, a print. The accent can be any of these. What matters is a clear visual hierarchy."],
+["Remove visual talkativeness.","Too many layers, details, decorations and crossing lines complicate the look. When the task is to persuade, visual clarity works for you."],
+["Do not confuse persuasion with formality.","A suit by itself does not make a position weightier. Choose the degree of formality relative to the place and the people you will talk to."],
+["Do not display power if you need agreement.","A look that is too hard can turn persuasion into opposition. Leave the other person room to agree with you.",""],
+["Leave freedom for gesture.","The hands take part in the argument. Clothes should not limit movement, force the body to stay still or make you control yourself the whole time."],
+["Consider exactly whom you are persuading.","An owner, a client, a team and a board are different audiences. The same look cannot work with the same precision in all four."],
+["Do not give up individuality.","A characteristic frame, a jewel, unusual shoes or your own way of combining things can strengthen persuasion, if they look like a natural part of you."],
+["If you think 'is this too much?', it probably is.","An important conversation is not the best place for a thing you yourself have to justify inwardly."],
+["Do not prove equality with men through a man's wardrobe.","A hard shoulder, a wide lapel and a suit are not required attributes of authority. A woman's persuasion can be built on the precision of the silhouette, the quality of the material, the scale of the details, the fit and a clear visual position, without imitating the male codes of power."]
+],
+"Офис|Показать компетентность|w":[
+["Show a trend in the clothes.","It can be a current device, for example a WHOOP, a frame of this moment, a jewel, shoes or a logo on a t-shirt or on jeans."],
+["Show that your knowledge of style is developing too.","Update silhouettes, proportions and the ways you combine things as time changes."],
+["Do not complicate the look.","Ease of reading is current. Do not try to show trends, status, creativity and individuality all at once."],
+["Interpret the trend for yourself.","Join a current piece to your usual wardrobe and to what the profession requires. The ability not only to see what is new, but to adapt it to the task, shows a creative mind."],
+["Keep a professional curiosity.","Competence and a creative mind are almost synonyms. Carry that into the clothes.",""]
+],
+"Офис|Показать статус|w":[
+["Choose one thing of a high level.","It can be a bag, a watch, a jewel, shoes or a frame. One object of obvious quality, or of a recognisable origin, can set the level of the whole look."],
+["Bet on quality that is visible from close up.","Look at the material, the hardware, the edge and the construction. In an office, status is often read from a short distance, through the quality of the making."],
+["Use recognisable codes where they will be read.","A logo, a cult model, vintage or a significant jewel work with particular precision in a circle that understands what they mean. The higher the visual literacy of the audience, the more information one object can carry."],
+["Allow yourself your own interpretation of the office code.","Knowing the rules gives the freedom to handle them in your own way. An unusual proportion, a designer piece, vintage or a rare accessory can be read as confidence in your own position."],
+["Check that status markers are genuine.","If a thing is meant to speak of status through a brand name, its authenticity is part of that message. In a circle that knows the original, the quality of the leather, the hardware, the proportions and the making are read very quickly. An original from a less famous house, or good vintage, gives a more convincing signal than a replica of a famous model."],
+["Watch the body.","A slightly more measured pace, a calm way of handling things and the absence of fuss create a sense of control. Status is often read from how naturally a person behaves.",""]
+],
+"Офис|Обозначить амбицию|w":[
+["Raise the visual standard.","Improve one category: shoes, outerwear, a frame, a watch or a bag. Do not keep what already looks merely fine."],
+["Learn the difficult pieces.","Add an unfamiliar cut, a new proportion or a more expressive accessory. It shows a readiness to step outside what is habitual."],
+["Allow yourself to stand out.","Leave one noticeable element: a frame, a jewel, shoes or an unusual construction. Ambition does not require you to dissolve among others."],
+["Show an interest in what is new.","Use a current form or a new way of styling. Your visual language should not stay unchanged for years."],
+["Do not hold on to the previous look.","The tasks and the scale change. Review the wardrobe. Appearance should change with you."],
+["Allow yourself to want more.","Do not shrink your aims so that they seem more convenient or more realistic to other people. Speak about what you want to reach, without irony at your own expense, without excuses and without reducing it. The strongest signal of ambition is that you yourself find your large wish normal.",""]
+],
+"Офис|Показать открытость новому|w":[
+["Choose the current version of familiar things.","A contemporary cut of a jacket, trousers, a shirt or a coat shows that your visual language changes with the time."],
+["Update the details, not the whole wardrobe.","The wardrobe can stay familiar, but the glasses, the jewels, the bag or the shoes should be current. This is a smaller expense, and details are often what the eye catches first. They show that you are in the present."],
+["Leave outdated rules of combination behind.","A suit today does not require classic shoes, and an evening piece does not require an evening reason. Contemporary styling shows a contemporary way of thinking."],
+["Make technology an ordinary part of the look.","Use new devices and technical accessories naturally, as a working instrument, not as a complicated novelty you have to learn on purpose."],
+["Try new materials and constructions.","A technical cloth, an unusual construction or a new functional detail shows an interest in how clothes and design are changing."],
+["Speak through action.","Do not discuss how difficult the new thing is. 'Let us try', 'let us do it', 'let us see how it works' show a readiness to take up what is new.",""]
+],
+"Переговоры|Вызвать доверие|w":[
+["Arrive on time.","Punctuality shows respect for what was agreed and builds trust before the talk begins."],
+["Choose neutral clothes.","A white or light blue shirt, a simple jacket, calm knit do not pull attention away. They let the talk, and you, stay in focus."],
+["Leave one personal detail.","A watch, a ring, a jewel or the frame of your glasses can speak of your taste and your interests. It keeps individuality and gives a natural point for the first contact."],
+["Look in the eye.","Keep direct eye contact, especially while you listen. It shows attention to the person and helps trust arrive sooner."],
+["Learn about the person before the meeting.","Find out in advance what interests them and what matters to them. Start with a subject close to them. It helps you settle the person and make a personal contact before you move to the subject of the negotiation.",""]
+],
+"Презентация, питч|*|w":[
+["The body and gesture.","When a person speaks at a conference, gives a presentation or holds a meeting, the body matters, and I do not hold to the rule that one must not gesture. Gesture is the emotional part. If a person makes no movement with the hands, it looks strange."],
+["Space and scale.","It matters to understand the space you are speaking in, so that you are the central figure and the attention is on you. It matters to understand the size of the room. So there is no need to wear anything complicated. This is communication with people of very different levels. Keep the dress code."],
+["Comfort.","You should not draw attention to the clothes."],
+["The lips and a detail near the face.","The most important thing is still the lips. Attention goes to the lips, and there should be a precise detail near the face, because people take photographs, most often of the speaker. Near the face there should be either a jewel or colour. Here it is better to use the contrast tool."],
+["Choose one person in the room with your eyes and imagine that you are telling it to them.","",""]
+],
+"Публичное выступление, конференция, networking|*|w":[
+["The body and gesture.","When a person speaks at a conference, gives a presentation or holds a meeting, the body matters, and I do not hold to the rule that one must not gesture. Gesture is the emotional part. If a person makes no movement with the hands, it looks strange."],
+["Space and scale.","It matters to understand the space you are speaking in, so that you are the central figure and the attention is on you. It matters to understand the size of the room. So there is no need to wear anything complicated. This is communication with people of very different levels. Keep the dress code."],
+["Comfort.","You should not draw attention to the clothes."],
+["The lips and a detail near the face.","The most important thing is still the lips. Attention goes to the lips, and there should be a precise detail near the face, because people take photographs, most often of the speaker. Near the face there should be either a jewel or colour. Here it is better to use the contrast tool."],
+["Choose one person in the room with your eyes and imagine that you are telling it to them.","",""]
+],
+"Собеседование|*|w":[
+["Do not dress by the old rules.","An obligatory suit, neutrality and a strict business formula are no longer universal. Stay yourself, and take into account the level of the role and the company's setting. Spend time on the preparation."],
+["Do not complicate the first impression.","A complex styling and a large number of details ask for extra attention. Limit yourself to three shades. Remember: where the accent sits, the other person's attention will sit."],
+["Study the company's cultural code.","Look at how employees and managers appear at meetings, conferences and events. Decide the real degree of formality and freedom. Even if everyone wears t-shirts and jeans, keep your individuality."],
+["Work with the portrait zone.","The face, the hair, the frame, the earrings, the neckline and the lapels are in the other person's field of vision for most of the meeting. Check the scale of the details against the face. Nothing should take attention away from you."],
+["Do not display status.","Neatness and the condition of shoes, hair, clothes and details matter more than the price of things. Do not try to surprise at the first contact. Professional level is better revealed by the voice, the content of the talk, humour and the way of thinking."],
+["Leave one memorable detail.","A frame, a jewel or a watch can become a visual anchor. Without a noticeable logo: they should remember you, not the brand."],
+["Notice how you enter.","The pace, the position of the body and its line immediately pass on the state of the body: calm, tension, anxiety. Do not perform confidence. Walk in, see the person and make contact."],
+["Use the gaze for the conversation.","Look at the person while you listen. While you think, the gaze may naturally leave. When you finish an important thought, bring it back."],
+["Notice repeated gestures of anxiety.","Constantly adjusting the hair, touching the face, the clothes or the jewels means showing nerves without meaning to. Gesture does not need to be controlled. Natural movement of the hands is normal."],
+["Do not hide nerves.","It is normal to be nervous at an interview. If it gets in the way, say calmly: 'I am a little nervous.' It removes the need to mask your state."],
+["Do not control the body.","Do not think about where to put your hands, how to place your feet and how straight to sit. Controlling the pose takes attention from the main thing: the talk and the emotional contact."],
+["Use a pause.","Do not answer a difficult question instantly. A few seconds to form a thought show the ability to think, rather than a need to fill the silence."],
+["Use humour.","If humour is yours, do not remove it from a professional conversation. It takes away extra formality. Do not prepare jokes in advance. React to the situation."],
+["Do not mask not knowing.","If you do not know the exact answer, say so and explain how you will get the information. 'I will check' is more professional than improvising where there is no knowledge."],
+["Remember the scale of your work.","Before the meeting, recover the numbers: the size of the team, the budget, the deadlines, the number of projects, the growth, the revenue and the other measures of your responsibility."],
+["Listen to how the other person speaks about others.","Notice how a potential manager speaks about colleagues, the team, the previous employee and the company. It is one way to understand the working culture."]
+]
+};
+/*EN_DICT_END*/
+var lang = 'ru';
+try {
+  var qLang = /[?&]lang=(en|ru)/.exec(location.search);
+  var savedLang = localStorage.getItem('mu_lang') || localStorage.getItem('img_lang');
+  lang = (qLang && qLang[1]) || (savedLang === 'en' ? 'en' : 'ru');
+  if (qLang) { localStorage.setItem('mu_lang', lang); localStorage.setItem('img_lang', lang); }
+} catch (e) {}
+window.ImgInstallLang = lang;
+function t(ru, en){ return lang === 'en' ? en : ru; }
+function L(s){ return (lang === 'en' && typeof EN !== 'undefined' && EN[s]) || s; }
+function rulesOf(key, R){
+  if (lang !== 'en' || typeof EN_RULES === 'undefined' || !EN_RULES[key]) return R;
+  var E = EN_RULES[key];
+  return R.map(function(r, i){ var e = E[i]; return e ? [e[0], e[1] == null ? '' : e[1], r[2]] : r; });
+}
+function commentOf(){
+  var keys = [st.sit + '|' + st.goal, st.sit, envOf(st.sit)];
+  for (var i = 0; i < keys.length; i++) if (COMMENTS[keys[i]]) return (lang === 'en' && EN_COMMENTS[keys[i]]) || COMMENTS[keys[i]];
+  return '';
+}
+function stepName(i){ return lang === 'en' ? ['The occasion', 'Your aim', 'Notes from Mila', 'The decision'][i] : STEPS[i]; }
+function psyLabel(){ return t('То, что не зависит от одежды', 'What does not depend on clothes'); }
+function applyChrome(){
+  document.documentElement.lang = lang === 'en' ? 'en' : 'ru';
+  document.body.classList.toggle('en', lang === 'en');
+  document.title = t('Система имиджа · Mila Ushakova', 'Image System · Mila Ushakova');
+  document.getElementById('lbBack').textContent = t('Назад', 'Back');
+  document.getElementById('lbMenu').textContent = t('Меню', 'Menu');
+  document.getElementById('tMenu').textContent = t('Меню', 'Menu');
+  document.getElementById('lgOf').textContent = t('Договор оферты', 'Offer');
+  document.getElementById('lgPr').textContent = t('Политика конфиденциальности', 'Privacy');
+  document.getElementById('lgSu').textContent = t('Поддержка', 'Support');
+  document.getElementById('sys').textContent = t('← Система', '← System');
+  document.getElementById('tLogo').setAttribute('aria-label', t('На обложку', 'To the cover'));
+  document.getElementById('dDocs').setAttribute('aria-label', t('Документы', 'Documents'));
+  document.querySelector('.d-sup').setAttribute('aria-label', t('По всем вопросам: Telegram @YanaOlkhina', 'Questions: Telegram @YanaOlkhina'));
+  [].forEach.call(document.querySelectorAll('.lng button'), function(b){ b.classList.toggle('on', b.dataset.lang === lang); });
+}
+function setLang(next){
+  if ((next !== 'ru' && next !== 'en') || next === lang) return;
+  lang = next;
+  try { localStorage.setItem('mu_lang', lang); localStorage.setItem('img_lang', lang); } catch (e) {}
+  window.ImgInstallLang = lang;
+  applyChrome();
+  if (document.body.classList.contains('menu-on')) { if (sheet.dataset.k === 'docs') fillDocs(); else openMenu(); }
+  draw();
+}
 // Шаг 1: среда и ситуация
 var ENV = [
   {n:'Работа', r:'I', s:['Офис','Zoom','Встреча с руководством','Встреча с командой','Собеседование','Новая должность, повышение','Casual Friday']},
@@ -592,7 +862,7 @@ var BAP = {
   }
 };
 function baImg(src){
-  return '<div class="ba-im"><img loading="lazy" src="' + esc(src) + '" alt=""><span class="l">До</span><span class="r">После</span></div>' + (VOICE[src] ? vcBd(src, 'Слушать') : '');
+  return '<div class="ba-im"><img loading="lazy" src="' + esc(src) + '" alt=""><span class="l">' + t('До','Before') + '</span><span class="r">' + t('После','After') + '</span></div>' + (VOICE[src] ? vcBd(src, t('Слушать','Listen')) : '');
 }
 
 // Просмотр «до / после» над пунктами: сначала кадр с голосом Милы, миниатюры остальных; пункты связаны с кадрами
@@ -603,7 +873,7 @@ function bavList(){
   return L;
 }
 function bav(R, L){
-  return '<div class="bav" id="bav"><div class="ba-im"><img id="bavI" src="' + esc(L[0].src) + '" alt=""><span class="l">До</span><span class="r">После</span></div>' +
+  return '<div class="bav" id="bav"><div class="ba-im"><img id="bavI" src="' + esc(L[0].src) + '" alt=""><span class="l">' + t('До','Before') + '</span><span class="r">' + t('После','After') + '</span></div>' +
     '<div id="bavV"></div><div class="bav-cap" id="bavC"></div>' +
     (L.length > 1 ? '<div class="bav-th" style="grid-template-columns:repeat(' + L.length + ',1fr)">' + L.map(function(x, k){
       return '<button data-bav="' + k + '"><img loading="lazy" src="' + esc(x.src) + '" alt=""><span>' + nn(x.n) + (VOICE[x.src] ? ' · <i class="hp"></i>' : '') + '</span></button>'; }).join('') + '</div>' : '') + '</div>';
@@ -612,15 +882,15 @@ function mss(t){ t = Math.round(t); return Math.floor(t / 60) + ':' + ('0' + t %
 // Голос Милы: простая волна, сыгранное золотом, у бегунка столбики следуют за громкостью речи
 function vcBd(src, label){
   var V = VOICE[src];
-  return '<button class="vc bd" data-voice="' + esc(src) + '"><span class="tp-top"><small>Пояснение Милы</small><b class="t">' + mss(V.d) + '</b></span>' +
+  return '<button class="vc bd" data-voice="' + esc(src) + '"><span class="tp-top"><small>' + t('Пояснение Милы','Note from Mila, in Russian') + '</small><b class="t">' + mss(V.d) + '</b></span>' +
     '<span class="tp-l"><i class="ic"></i>' + label + '</span><span class="wv">' + V.w.split('').map(function(h){ return '<i style="height:' + (h * 11) + '%"></i>'; }).join('') + '</span></button>';
 }
 function bavSet(k){
   var L = bavList(), x = L[k], R = st._bavR; if (!x) return;
   voiceStop(); auBtn = null;
   document.getElementById('bavI').src = x.src;
-  document.getElementById('bavV').innerHTML = VOICE[x.src] ? vcBd(x.src, 'Слушать') : ''; tapeAll();
-  document.getElementById('bavC').innerHTML = '<span class="n">' + nn(x.n) + '</span><b>' + esc(R[x.n - 1] ? R[x.n - 1][0] : '') + '</b><button data-bapt="' + x.n + '">К пункту ↓</button>';
+  document.getElementById('bavV').innerHTML = VOICE[x.src] ? vcBd(x.src, t('Слушать','Listen')) : ''; tapeAll();
+  document.getElementById('bavC').innerHTML = '<span class="n">' + nn(x.n) + '</span><b>' + esc(R[x.n - 1] ? R[x.n - 1][0] : '') + '</b><button data-bapt="' + x.n + '">' + t('К пункту ↓','To this point ↓') + '</button>';
   [].forEach.call(document.querySelectorAll('.bav-th button'), function(b, i){ b.classList.toggle('on', i === k); });
 }
 
@@ -733,85 +1003,85 @@ function voice(b, e){
 }
 function show(html, dark){ voiceStop(); auBtn = null; v.innerHTML = '<div class="view">' + html + '</div>'; requestAnimationFrame(tapeAll); document.body.classList.toggle('dark-top', !!dark); window.scrollTo(0, 0); }
 function prog(n){
-  var L = ['Событие','Цель','Образ'];
-  return '<div class="prog">' + L.map(function(t, i){ return (i ? '<i' + (i < n ? ' class="on"' : '') + '></i>' : '') + '<span' + (i < n ? ' class="on"' : '') + '>' + (i + 1) + '. ' + t + '</span>'; }).join('') + '</div>';
+  var labels = lang === 'en' ? ['Occasion','Aim','Look'] : ['Событие','Цель','Образ'];
+  return '<div class="prog">' + labels.map(function(name, i){ return (i ? '<i' + (i < n ? ' class="on"' : '') + '></i>' : '') + '<span' + (i < n ? ' class="on"' : '') + '>' + (i + 1) + '. ' + name + '</span>'; }).join('') + '</div>';
 }
 function crumbs(n){
   var ei = 0; ENV.forEach(function(e, i){ if (e.s.indexOf(st.sit) >= 0) ei = i; });  // 03.11: всегда видно раздел: Работа, Бизнес, Вне офиса, Вечер
-  return '<div class="crumbs"><button class="env" data-tab="' + ei + '">' + esc(ENV[ei].n) + '</button><i>·</i><button data-tab="' + ei + '">' + esc(st.sit) + '</button>' +
-    (n === 3 ? '<i>·</i><button data-go="2">' + esc(st.goal) + '</button>' : '') + '</div>';
+  return '<div class="crumbs"><button class="env" data-tab="' + ei + '">' + esc(L(ENV[ei].n)) + '</button><i>·</i><button data-tab="' + ei + '">' + esc(L(st.sit)) + '</button>' +
+    (n === 3 ? '<i>·</i><button data-go="2">' + esc(L(st.goal)) + '</button>' : '') + '</div>';
 }
 var STEPS = ['Что предстоит', 'Ваша цель', 'Рекомендации Милы', 'Решение'];
-function stepHead(n){ return '<div class="stp"><span class="sx"><button data-sex="w"' + (st.sex !== 'm' ? ' class="on"' : '') + ' aria-label="Для женщин">Ж</button><i>|</i><button class="soon" disabled aria-label="Для мужчин: скоро">М<small>скоро</small></button></span><span class="n">' + nn(n) + ' / ' + nn(STEPS.length) + '</span></div>'; }
+function stepHead(n){ return '<div class="stp"><span class="sx"><button data-sex="w"' + (st.sex !== 'm' ? ' class="on"' : '') + ' aria-label="' + t('Для женщин','For women') + '">' + t('Ж','W') + '</button><i>|</i><button class="soon" disabled aria-label="' + t('Для мужчин: скоро','For men, soon') + '">' + t('М','M') + '<small>' + t('скоро','soon') + '</small></button></span><span class="n">' + nn(n) + ' / ' + nn(STEPS.length) + '</span></div>'; }
 function pager(n, canNext){
-  return '<div class="pager"><button data-go="' + (n === 1 ? 'intro' : n - 1) + '" aria-label="Назад">‹</button><span>' + nn(n) + ' / ' + nn(STEPS.length) + '</span>' +
-    '<button data-go="' + (n + 1) + '" aria-label="Дальше"' + (canNext && n < STEPS.length ? '' : ' disabled') + '>›</button></div>';
+  return '<div class="pager"><button data-go="' + (n === 1 ? 'intro' : n - 1) + '" aria-label="' + t('Назад','Back') + '">‹</button><span>' + nn(n) + ' / ' + nn(STEPS.length) + '</span>' +
+    '<button data-go="' + (n + 1) + '" aria-label="' + t('Дальше','Next') + '"' + (canNext && n < STEPS.length ? '' : ' disabled') + '>›</button></div>';
 }
 function sexLabel(){ return st.sex === 'm' ? 'для мужчин' : 'для женщин'; }
 
 function cover(){
   show('<div class="cov sl"><img class="col" src="/guide/business-img/cover-gallery.jpg" alt="" fetchpriority="high"><div class="in">' +
-    '<div class="eb cap">Для бизнеса · <button data-go="about">Мила Ушакова</button></div>' +
-    '<h1>Система<br><i style="color:#C9A96A">имиджа</i></h1>' +
-    '<div class="row3"><button data-go="1">Что предстоит</button><button data-go="1">Ваша цель</button><button data-go="1">Решение</button></div></div></div>', true);
+    '<div class="eb cap">' + t('Для бизнеса','For business') + ' · <button data-go="about">Мила Ушакова</button></div>' +
+    '<h1>' + t('Система','Image') + '<br><i style="color:#C9A96A">' + t('имиджа','system') + '</i></h1>' +
+    '<div class="row3"><button data-go="1">' + (lang === 'en' ? 'Occasion' : 'Что предстоит') + '</button><button data-go="1">' + (lang === 'en' ? 'Aim' : 'Ваша цель') + '</button><button data-go="1">' + (lang === 'en' ? 'Decision' : 'Решение') + '</button></div></div></div>', true);
 }
 // О проекте: что это, как устроено, для кого и об авторе. Тексты из уже утверждённых фраз Милы.
 function about(){
   var nEv = ENV.reduce(function(n, e){ return n + e.s.length; }, 0);
-  show('<div class="pad au"><div class="cap br">О проекте</div>' +
-    '<div class="h2">Система <i>имиджа</i></div>' +
-    '<p class="pj-lead">Имидж это ваше решение, какое произвести впечатление. Имидж решает, как вас прочтут.</p>' +
-    '<p>Инструмент управления впечатлением в профессиональной и деловой среде. Четыре шага перед любой встречей.</p>' +
-    '<div class="pj-sec cap">Как это работает</div>' +
+  show('<div class="pad au"><div class="cap br">' + t('О проекте','About') + '</div>' +
+    '<div class="h2">' + t('Система <i>имиджа</i>','Image <i>system</i>') + '</div>' +
+    '<p class="pj-lead">' + t('Имидж это ваше решение, какое произвести впечатление. Имидж решает, как вас прочтут.','Image is your decision about the impression you make. Image decides how you are read.') + '</p>' +
+    '<p>' + t('Инструмент управления впечатлением в профессиональной и деловой среде. Четыре шага перед любой встречей.','A tool for the impression you make in professional life. Four steps before any meeting.') + '</p>' +
+    '<div class="pj-sec cap">' + t('Как это работает','How it works') + '</div>' +
     '<div class="pj-steps">' +
-      '<div><span>01</span><b>Что предстоит</b><p>Сначала определяется среда. От неё зависят рекомендации.</p></div>' +
-      '<div><span>02</span><b>Ваша цель</b><p>Одна встреча, одна цель, один образ.</p></div>' +
-      '<div><span>03</span><b>Рекомендации Милы</b><p>Для выбранного события и цели.</p></div>' +
-      '<div><span>04</span><b>Решение</b><p>Готовый образ под вашу задачу.</p></div>' +
+      '<div><span>01</span><b>' + stepName(0) + '</b><p>' + t('Сначала определяется среда. От неё зависят рекомендации.','The setting comes first. The recommendations depend on it.') + '</p></div>' +
+      '<div><span>02</span><b>' + stepName(1) + '</b><p>' + t('Одна встреча, одна цель, один образ.','One meeting, one aim, one look.') + '</p></div>' +
+      '<div><span>03</span><b>' + stepName(2) + '</b><p>' + t('Для выбранного события и цели.','For the occasion and the aim you chose.') + '</p></div>' +
+      '<div><span>04</span><b>' + stepName(3) + '</b><p>' + t('Готовый образ под вашу задачу.','A look ready for your task.') + '</p></div>' +
     '</div>' +
-    '<div class="pj-sec cap">Что внутри</div>' +
-    '<div class="pj-nums"><div><b>' + ENV.length + '</b><span>среды: ' + ENV.map(function(e){ return e.n.toLowerCase(); }).join(', ') + '</span></div>' +
-      '<div><b>' + nEv + '</b><span>событий, от офиса до Black Tie</span></div>' +
-      '<div><b>2</b><span>версии: для женщин, для мужчин скоро</span></div></div>' +
-    '<div class="pj-sec cap">Для кого</div>' +
-    '<p>Для тех, чья работа строится на встречах, переговорах и выступлениях. И для компаний: единый уровень впечатления для всей команды.</p>' +
-    '<div class="pj-sec cap">Автор</div>' +
+    '<div class="pj-sec cap">' + t('Что внутри','What is inside') + '</div>' +
+    '<div class="pj-nums"><div><b>' + ENV.length + '</b><span>' + t('среды','settings') + ': ' + ENV.map(function(e){ return L(e.n).toLowerCase(); }).join(', ') + '</span></div>' +
+      '<div><b>' + nEv + '</b><span>' + t('событий, от офиса до Black Tie','occasions, from the office to Black Tie') + '</span></div>' +
+      '<div><b>2</b><span>' + t('версии: для женщин, для мужчин скоро','editions: for women, for men soon') + '</span></div></div>' +
+    '<div class="pj-sec cap">' + t('Для кого','Who it is for') + '</div>' +
+    '<p>' + t('Для тех, чья работа строится на встречах, переговорах и выступлениях. И для компаний: единый уровень впечатления для всей команды.','For people whose work is meetings, negotiations and speaking. And for companies: one level of impression for the whole team.') + '</p>' +
+    '<div class="pj-sec cap">' + t('Автор','Author') + '</div>' +
     '<img class="au-ph" src="/guide/business-img/cover.jpg" alt="Мила Ушакова">' +
     '<div class="h2" style="font-size:38px">Мила <i>Ушакова</i></div>' +
     '<div class="cap mute au-role">Image Expert · Fashion Analyst</div>' +
-    '<p>Персональный стилист и аналитик моды. Более 7 лет работаю с клиентами по всему миру, помогая выстраивать стиль, который отражает личность, образ жизни и внутреннее состояние.</p>' +
-    '<p>Приглашённый редактор Vogue, L\'Officiel и No Chaser.</p>' +
-    '<p>Аккредитованный стилист недель моды: Paris, Milan, Copenhagen, Yerevan.</p>' +
-    '<p>Основатель fashion-клуба «В моём стиле» и автор Системы цветовых сочетаний.</p>' +
-    '<button class="cta dk" data-go="1">Начать</button>' +
-    '<button class="ghost lt" data-go="tariffs"><u>Тарифы для компаний</u></button></div>');
+    '<p>' + t('Персональный стилист и аналитик моды. Более 7 лет работаю с клиентами по всему миру, помогая выстраивать стиль, который отражает личность, образ жизни и внутреннее состояние.','Personal stylist and fashion analyst. For more than 7 years I have worked with clients around the world, building a style that reflects the person, the life and the inner state.') + '</p>' +
+    '<p>' + t('Приглашённый редактор Vogue, L\'Officiel и No Chaser.','Contributing editor at Vogue, L\'Officiel and No Chaser.') + '</p>' +
+    '<p>' + t('Аккредитованный стилист недель моды: Paris, Milan, Copenhagen, Yerevan.','Accredited stylist of the fashion weeks in Paris, Milan, Copenhagen and Yerevan.') + '</p>' +
+    '<p>' + t('Основатель fashion-клуба «В моём стиле» и автор Системы цветовых сочетаний.','Founder of the fashion club In My Style and author of the Colour System.') + '</p>' +
+    '<button class="cta dk" data-go="1">' + t('Начать','Begin') + '</button>' +
+    '<button class="ghost lt" data-go="tariffs"><u>' + t('Тарифы для компаний','For companies') + '</u></button></div>');
 }
 function intro(){
   show('<div class="cov plain"><div class="in">' +
-    '<div class="ed2 cap"><span>Система имиджа</span><span>Женщины · мужчины скоро</span></div>' +
-    '<div class="sub">Инструмент управления впечатлением в профессиональной и деловой среде. Четыре шага перед любой встречей.</div>' +
-    '<div class="toc">' + STEPS.map(function(t, i){ return '<div><span>' + nn(i + 1) + '</span><b>' + t + '</b></div>'; }).join('') + '</div>' +
-    '<button class="cta" data-go="1">Начать</button>' +
-    '<button class="ghost" data-go="tariffs"><u>Тарифы для компаний</u></button></div></div>', true);
+    '<div class="ed2 cap"><span>' + t('Система имиджа','Image system') + '</span><span>' + t('Женщины · мужчины скоро','Women, men soon') + '</span></div>' +
+    '<div class="sub">' + t('Инструмент управления впечатлением в профессиональной и деловой среде. Четыре шага перед любой встречей.','A tool for the impression you make in professional life. Four steps before any meeting.') + '</div>' +
+    '<div class="toc">' + STEPS.map(function(name, i){ return '<div><span>' + nn(i + 1) + '</span><b>' + stepName(i) + '</b></div>'; }).join('') + '</div>' +
+    '<button class="cta" data-go="1">' + t('Начать','Begin') + '</button>' +
+    '<button class="ghost" data-go="tariffs"><u>' + t('Тарифы для компаний','For companies') + '</u></button></div></div>', true);
 }
 function step0(){
   show('<div class="pad">' + '<div class="stp"><span></span><span class="n">00 / ' + nn(STEPS.length) + '</span></div>' +
-    '<div class="h2">Для кого <i class="br">образ</i></div>' +
-    '<div class="who2"><button data-sex="w" data-next="1"' + (st.sex === 'w' ? ' class="on"' : '') + '><img src="business-img/ev-boss-w.jpg" alt=""><b>Женщина</b></button>' +
-    '<button class="soon" disabled aria-label="Мужчина: скоро"><img src="business-img/ev-boss-m.jpg" alt=""><em>Скоро</em><b>Мужчина</b></button></div>' +
-    '<aside class="cov-note"><svg viewBox="0 0 16 16" fill="none" stroke="#111" aria-hidden="true"><circle cx="8" cy="8" r="7.2"/><path d="M8 7v4.4M8 4.4v.9"/></svg><p>Вся информация носит рекомендательный характер и создана как инструмент, который может повышать качество жизни, усиливать профессиональные возможности и поддерживать рост дохода.</p></aside></div>');
+    '<div class="h2">' + t('Для кого <i class="br">образ</i>','Who the <i class="br">look</i> is for') + '</div>' +
+    '<div class="who2"><button data-sex="w" data-next="1"' + (st.sex === 'w' ? ' class="on"' : '') + '><img src="business-img/ev-boss-w.jpg" alt=""><b>' + t('Женщина','A woman') + '</b></button>' +
+    '<button class="soon" disabled aria-label="' + t('Мужчина: скоро','A man, soon') + '"><img src="business-img/ev-boss-m.jpg" alt=""><em>' + t('Скоро','Soon') + '</em><b>' + t('Мужчина','A man') + '</b></button></div>' +
+    '<aside class="cov-note"><svg viewBox="0 0 16 16" fill="none" stroke="#111" aria-hidden="true"><circle cx="8" cy="8" r="7.2"/><path d="M8 7v4.4M8 4.4v.9"/></svg><p>' + t('Вся информация носит рекомендательный характер и создана как инструмент, который может повышать качество жизни, усиливать профессиональные возможности и поддерживать рост дохода.','Everything here is a recommendation. It is a tool that can raise the quality of life, strengthen professional possibilities and support the growth of income.') + '</p></aside></div>');
 }
 function step1(){
-  var t = st.env || 0;
-  show('<div class="pad">' + stepHead(1) + '<div class="h2">Что <i class="br">предстоит</i></div><div class="lede">Сначала определяется среда. От неё зависят рекомендации.</div>' +
-    '<div class="envs">' + ENV.map(function(e, i){ return '<button class="' + (i === t ? 'on' : '') + '" data-tab="' + i + '"><b>' + e.r + '</b><span>' + e.n + '</span></button>'; }).join('') + '</div>' +
-    '<div class="events">' + ENV[t].s.map(function(s, k){ var im = evImg(s);
-      return '<button class="ev im" data-sit="' + esc(s) + '" data-env="' + t + '">' + (im ? '<img class="th" loading="lazy" src="' + im + '" alt="">' : '<span class="th no">' + ENV[t].r + '</span>') + '<b>' + esc(s) + '</b></button>'; }).join('') + '</div>' +
+  var ei = st.env || 0;
+  show('<div class="pad">' + stepHead(1) + '<div class="h2">' + t('Что <i class="br">предстоит</i>','The <i class="br">occasion</i>') + '</div><div class="lede">' + t('Сначала определяется среда. От неё зависят рекомендации.','The setting comes first. The recommendations depend on it.') + '</div>' +
+    '<div class="envs">' + ENV.map(function(e, i){ return '<button class="' + (i === ei ? 'on' : '') + '" data-tab="' + i + '"><b>' + e.r + '</b><span>' + L(e.n) + '</span></button>'; }).join('') + '</div>' +
+    '<div class="events">' + ENV[ei].s.map(function(s, k){ var im = evImg(s);
+      return '<button class="ev im" data-sit="' + esc(s) + '" data-env="' + ei + '">' + (im ? '<img class="th" loading="lazy" src="' + im + '" alt="">' : '<span class="th no">' + ENV[ei].r + '</span>') + '<b>' + esc(L(s)) + '</b></button>'; }).join('') + '</div>' +
     pager(1, !!st.sit) + '</div>');
 }
 function step2(){
-  show('<div class="pad">' + stepHead(2) + crumbs(2) + '<div class="h2">Ваша <i class="br">цель</i></div>' +
-    '<div class="goals">' + goalsFor(st.sit).map(function(g){ return '<button class="goal' + (g === st.goal ? ' on' : '') + '" data-goal="' + esc(g) + '"><small></small><b>' + esc(g) + '</b><em>→</em></button>'; }).join('') + '</div>' +
+  show('<div class="pad">' + stepHead(2) + crumbs(2) + '<div class="h2">' + t('Ваша <i class="br">цель</i>','Your <i class="br">aim</i>') + '</div>' +
+    '<div class="goals">' + goalsFor(st.sit).map(function(g){ return '<button class="goal' + (g === st.goal ? ' on' : '') + '" data-goal="' + esc(g) + '"><small></small><b>' + esc(L(g)) + '</b><em>→</em></button>'; }).join('') + '</div>' +
     (PZ_SITS[st.sit] ? pzCta() : '') +
     pager(2, !!st.goal) + '</div>');
 }
@@ -850,7 +1120,7 @@ function razbor(R, Z, looks){
       '<div class="rz-prog" id="rzP" style="grid-template-columns:repeat(' + R.length + ',1fr)">' + R.map(function(r){ return '<i' + (r[2] ? ' class="psy"' : '') + '></i>'; }).join('') + '</div></div>' +
     '<ol class="rz-pts" id="rzL">' + R.map(function(r, i){ var last = i === R.length - 1;
       return '<li class="rz-pt' + (r[2] ? ' psy' : '') + '"><button data-rz="' + i + '">' +
-        (r[2] ? '<span class="mk">' + PSY_MARK + '<span>' + PSY_LABEL + '</span><em></em><span>' + nn(i + 1) + '</span></span>' : '<span class="n">' + nn(i + 1) + '</span>') +
+        (r[2] ? '<span class="mk">' + PSY_MARK + '<span>' + psyLabel() + '</span><em></em><span>' + nn(i + 1) + '</span></span>' : '<span class="n">' + nn(i + 1) + '</span>') +
         '<span class="t">' + esc(r[0]) + '</span><span class="pl">+</span></button>' +
         '<div class="body"><div>' + (r[1] ? '<p>' + esc(r[1]) + '</p>' : '') + (last ? '' : '<button class="nx" data-rznext="' + (i + 1) + '">Далее <span>→</span></button>') + '</div></div></li>'; }).join('') + '</ol>';
 }
@@ -874,9 +1144,9 @@ function rzSet(i){
 // Зал галереи: одна работа на стену, следующая видна краем, у работы музейная этикетка, голос идёт с той работой, к которой записан
 function wall(LK){
   var L = LK.filter(function(l){ return VOICE[l.img]; }).concat(LK.filter(function(l){ return !VOICE[l.img]; }));
-  return '<div class="wall' + (L.length < 2 ? ' one' : '') + '" id="wall">' + L.map(function(l){ return '<figure><img' + (l === L[0] ? '' : ' loading="lazy"') + ' src="' + esc(l.img) + '" alt="">' + (l.cap ? '<figcaption>' + esc(l.cap) + '</figcaption>' : '') + '</figure>'; }).join('') + '</div>' +
-    (L.length > 1 ? '<div class="wl-lb"><span>№ <b id="wlN">01</b> из ' + nn(L.length) + '</span><em id="wlH">листайте →</em></div>' : '') +
-    L.map(function(l, i){ return VOICE[l.img] ? '<div class="wl-v' + (i ? '' : ' cur') + '" data-k="' + i + '"><div>' + vcBd(l.img, 'Слушать') + '</div></div>' : ''; }).join('');
+  return '<div class="wall' + (L.length < 2 ? ' one' : '') + '" id="wall">' + L.map(function(l){ return '<figure><img' + (l === L[0] ? '' : ' loading="lazy"') + ' src="' + esc(l.img) + '" alt="">' + (l.cap ? '<figcaption>' + esc(L(l.cap)) + '</figcaption>' : '') + '</figure>'; }).join('') + '</div>' +
+    (L.length > 1 ? '<div class="wl-lb"><span>№ <b id="wlN">01</b> ' + t('из','of') + ' ' + nn(L.length) + '</span><em id="wlH">' + t('листайте →','swipe →') + '</em></div>' : '') +
+    L.map(function(l, i){ return VOICE[l.img] ? '<div class="wl-v' + (i ? '' : ' cur') + '" data-k="' + i + '"><div>' + vcBd(l.img, t('Слушать','Listen')) + '</div></div>' : ''; }).join('');
 }
 function wallInit(){
   var w = document.getElementById('wall'), n = document.getElementById('wlN'); if (!w || !n) return;
@@ -890,23 +1160,23 @@ function wallInit(){
   }, {passive: true});
 }
 function step3(){
-  var c = COMMENTS[st.sit + '|' + st.goal] || COMMENTS[st.sit] || COMMENTS[envOf(st.sit)] || '';
-  var sx = '|' + (st.sex || 'w'), rk = keyIn(RULES, sx), R = rk ? RULES[rk + sx] : null;
+  var c = commentOf();
+  var sx = '|' + (st.sex || 'w'), rk = keyIn(RULES, sx), R = rk ? rulesOf(rk + sx, RULES[rk + sx]) : null;
   var lk = lookKey(), LK = lk ? ((LOOKS[lk] || {})[st.sex || 'w'] || {}).looks : null;
   // 04.11 Яна: разбор с наведением на пункты убран, образы везде листаются одной лентой, как в Офис · Убедить. Данные RAZBOR сохранены.
   var BAV = R && (st.sex || 'w') === 'w' && BAP[st.sit] ? bavList() : null; st._bavR = R;
   show('<div class="pad">' + stepHead(3) + crumbs(3) +
         // образы без разбора: полоса превью над правилами (тап → шаг 4)
     (R && BAV ? bav(R, BAV) : '') +
-    (R && LK && LK.length && TO_SYSTEM[st.sit] ? '<div class="cap" style="margin:0 0 14px;color:#A88B5C">Образы из Системы по цвету</div>' : '') +
+    (R && LK && LK.length && TO_SYSTEM[st.sit] ? '<div class="cap" style="margin:0 0 14px;color:#A88B5C">' + t('Образы из Системы по цвету','Looks from the Colour System') + '</div>' : '') +
     (R && LK && LK.length && !BAV ? wall(LK) : '') +
     (R && c ? '<div class="xp-t">' + c.split('\n').map(function(p){ return '<p>' + esc(p) + '</p>'; }).join('') + '</div>' : '') +
-    (R ? '<ol class="rules">' + R.map(function(r, i){ return r[2] ? '<li class="psy"><div class="mk">' + PSY_MARK + '<span>' + PSY_LABEL + '</span><em></em><span>' + nn(i + 1) + '</span></div><b>' + esc(r[0]) + '</b>' + (r[1] ? '<p>' + esc(r[1]) + '</p>' : '') + '</li>' :
-      '<li id="rl' + (i + 1) + '" class="acc' + (i ? '' : ' open') + '"><span class="rn">' + nn(i + 1) + '</span><div><b>' + esc(r[0]) + (r[1] || BAV ? '<em class="pm"></em>' : '') + '</b><div class="rb"><div>' + (r[1] ? '<p>' + esc(r[1]) + '</p>' : '') + (BAV ? BAV.map(function(x, k){ return x.n === i + 1 ? '<button class="pt-ba" data-bav="' + k + '" data-up="1"><img src="' + esc(x.src) + '" alt=""><span>До и после' + (VOICE[x.src] ? ' · пояснение Милы' : '') + ' ↑</span></button>' : ''; }).join('') : '') + '</div></div></div></li>'; }).join('') + '</ol>' :
-    TO_SYSTEM[st.sit] && LK && LK.length ? '<div class="cap" style="margin:0 0 14px;color:#A88B5C">Образы из Системы по цвету</div><div class="lk-strip" style="grid-template-columns:repeat(' + Math.min(LK.length, 4) + ',1fr)">' + LK.slice(0, 4).map(function(l){ return '<button data-go="4"><img loading="lazy" src="' + esc(l.img) + '" alt=""></button>'; }).join('') + '</div><button class="rz-all" data-sys="1">Продолжить просмотр →</button>' :
+    (R ? '<ol class="rules">' + R.map(function(r, i){ return r[2] ? '<li class="psy"><div class="mk">' + PSY_MARK + '<span>' + psyLabel() + '</span><em></em><span>' + nn(i + 1) + '</span></div><b>' + esc(r[0]) + '</b>' + (r[1] ? '<p>' + esc(r[1]) + '</p>' : '') + '</li>' :
+      '<li id="rl' + (i + 1) + '" class="acc' + (i ? '' : ' open') + '"><span class="rn">' + nn(i + 1) + '</span><div><b>' + esc(r[0]) + (r[1] || BAV ? '<em class="pm"></em>' : '') + '</b><div class="rb"><div>' + (r[1] ? '<p>' + esc(r[1]) + '</p>' : '') + (BAV ? BAV.map(function(x, k){ return x.n === i + 1 ? '<button class="pt-ba" data-bav="' + k + '" data-up="1"><img src="' + esc(x.src) + '" alt=""><span>' + t('До и после','Before and after') + '' + (VOICE[x.src] ? t(' · пояснение Милы',' · note from Mila') : '') + ' ↑</span></button>' : ''; }).join('') : '') + '</div></div></div></li>'; }).join('') + '</ol>' :
+    TO_SYSTEM[st.sit] && LK && LK.length ? '<div class="cap" style="margin:0 0 14px;color:#A88B5C">' + t('Образы из Системы по цвету','Looks from the Colour System') + '</div><div class="lk-strip" style="grid-template-columns:repeat(' + Math.min(LK.length, 4) + ',1fr)">' + LK.slice(0, 4).map(function(l){ return '<button data-go="4"><img loading="lazy" src="' + esc(l.img) + '" alt=""></button>'; }).join('') + '</div><button class="rz-all" data-sys="1">' + t('Продолжить просмотр →','Continue in the Colour System →') + '</button>' :
     '<div class="qt">“</div><div class="xp-t">' + (c ? c.split('\n').map(function(p){ return '<p>' + esc(p) + '</p>'; }).join('') :
-      '<p><span class="ph">Комментарий Милы: «' + esc(st.sit) + '» и цель «' + esc(st.goal) + '». Почему такой образ работает.</span></p>') + '</div>') +
-    '<div class="sig"><i></i><span>Мила Ушакова</span></div>' + (R && !(LK && LK.length) && (BA[st.sit + '|' + st.goal] || {})[st.sex || 'w'] ? '<button class="rz-all" data-go="4">Смотреть до и после →</button>' : '') + (R && LK && LK.length ? '<button class="rz-all" data-go="4">Смотреть все образы →</button>' : '') + (R && TO_SYSTEM[st.sit] ? '<button class="rz-all" data-sys="1">Продолжить просмотр →</button>' : '') +
+      '<p><span class="ph">' + t('Комментарий Милы','A note from Mila') + ': «' + esc(L(st.sit)) + '» / «' + esc(L(st.goal)) + '». ' + t('Почему такой образ работает.','Why this look works.') + '</span></p>') + '</div>') +
+    '<div class="sig"><i></i><span>Мила Ушакова</span></div>' + (R && !(LK && LK.length) && (BA[st.sit + '|' + st.goal] || {})[st.sex || 'w'] ? '<button class="rz-all" data-go="4">' + t('Смотреть до и после →','See before and after →') + '</button>' : '') + (R && LK && LK.length ? '<button class="rz-all" data-go="4">' + t('Смотреть все образы →','See every look →') + '</button>' : '') + (R && TO_SYSTEM[st.sit] ? '<button class="rz-all" data-sys="1">' + t('Продолжить просмотр →','Continue in the Colour System →') + '</button>' : '') +
     (R && LK && LK.length ? '' : pager(3, true)) + '</div>');
   if (BAV) bavSet(0);
   wallInit();
@@ -916,46 +1186,47 @@ function step4(){
   var x = L[st.sex || 'w'] || {};
   var ba = (BA[st.sit + '|' + st.goal] || {})[st.sex || 'w'];
   var real = !!(x.looks && x.looks.length) || !!ba, looks = x.looks && x.looks.length ? x.looks : ba ? [] : [{}, {}, {}];
-  var TABS = [['Силуэт', 'sil'], ['Цвет', 'col'], ['Детали', 'det']], tb = TABS[st.tab || 0];
+  var TABS = [[t('Силуэт','Silhouette'), 'sil'], [t('Цвет','Colour'), 'col'], [t('Детали','Details'), 'det']], tb = TABS[st.tab || 0];
   show('<div class="pad sol">' + stepHead(4) + crumbs(3) +
-    '<h2>Ваше <span class="br">решение</span></h2>' +
-    '<dl><dt>Сценарий</dt><dd>' + esc(st.sit) + '</dd><dt>Цель</dt><dd class="gl">' + esc(st.goal) + '</dd><dt>Для кого</dt><dd>' + (st.sex === 'm' ? 'Мужчина' : 'Женщина') + '</dd></dl>' +
+    '<h2>' + t('Ваше <span class="br">решение</span>','Your <span class="br">decision</span>') + '</h2>' +
+    '<dl><dt>' + t('Сценарий','Occasion') + '</dt><dd>' + esc(L(st.sit)) + '</dd><dt>' + t('Цель','Aim') + '</dt><dd class="gl">' + esc(L(st.goal)) + '</dd><dt>' + t('Для кого','For') + '</dt><dd>' + (st.sex === 'm' ? t('Мужчина','A man') : t('Женщина','A woman')) + '</dd></dl>' +
     (x.note || !real ? '<div class="principle">' + (x.note ? esc(x.note) : '<span class="ph">Принцип образа. Например: вязаный кардиган, приглушённые оттенки, мягкая обувь</span>') + '</div>' : '') +
-    (ba ? '<div class="ba"><div class="cap">Как меняется восприятие от одной детали</div>' + ba.map(function(src){
+    (ba ? '<div class="ba"><div class="cap">' + t('Как меняется восприятие от одной детали','How one detail changes the reading') + '</div>' + ba.map(function(src){
       return baImg(src); }).join('') + '</div>' : '') +
     (looks.length ? '<div class="looks">' : '<div>') + looks.map(function(l, i){
-      return '<div class="lk"><div class="im' + (l.img ? ' fl' : '') + '">' + (l.img ? '<img loading="lazy" src="' + esc(l.img) + '" alt="">' : '<span class="ph">образ ' + (i + 1) + '</span>') + '<span class="n">' + nn(i + 1) + '</span></div>' + (l.cap ? '<div class="lk-cap">' + esc(l.cap) + '</div>' : '') + (l.img && VOICE[l.img] ? vcBd(l.img, 'Слушать') : '') +
+      return '<div class="lk"><div class="im' + (l.img ? ' fl' : '') + '">' + (l.img ? '<img loading="lazy" src="' + esc(l.img) + '" alt="">' : '<span class="ph">' + t('образ','look') + ' ' + (i + 1) + '</span>') + '<span class="n">' + nn(i + 1) + '</span></div>' + (l.cap ? '<div class="lk-cap">' + esc(L(l.cap)) + '</div>' : '') + (l.img && VOICE[l.img] ? vcBd(l.img, t('Слушать','Listen')) : '') +
         (l.items && l.items.length ? '<ul>' + l.items.map(function(it){ return '<li>' + (it.url ? '<a href="' + esc(it.url) + '" target="_blank" rel="noopener">' + esc(it.t) + '</a>' : esc(it.t)) + '<span class="br">↗</span></li>'; }).join('') + '</ul>' : '') + '</div>';
     }).join('') + '</div>' +
     (x.sil || x.col || x.det || !real ? '<div class="tabs3">' + TABS.map(function(t, i){ return '<button data-tabx="' + i + '"' + (i === (st.tab || 0) ? ' class="on"' : '') + '>' + t[0] + '</button>'; }).join('') + '</div>' +
-    '<div class="tab-t">' + (x[tb[1]] ? esc(x[tb[1]]) : '<span class="ph">' + tb[0] + ': рекомендация Милы</span>') + '</div>' : '') +
-    (TO_SYSTEM[st.sit] ? '<button class="rz-all" data-sys="1" style="margin-bottom:24px">Продолжить просмотр →</button>' : '') +
-    '<div class="pair">' + (goalsFor(st.sit).length > 1 ? '<button data-go="2">Другая цель</button>' : '') + '<button class="dk" data-go="1">Новое событие</button></div>' +
-    '<button class="ghost lt" data-go="books"><u>Книжная полка</u></button>' +
-    '<button class="ghost lt" data-go="tariffs"><u>Подключить для компании</u></button></div>');
+    '<div class="tab-t">' + (x[tb[1]] ? esc(x[tb[1]]) : '<span class="ph">' + tb[0] + ': ' + t('рекомендация Милы','a note from Mila') + '</span>') + '</div>' : '') +
+    (TO_SYSTEM[st.sit] ? '<button class="rz-all" data-sys="1" style="margin-bottom:24px">' + t('Продолжить просмотр →','Continue in the Colour System →') + '</button>' : '') +
+    '<div class="pair">' + (goalsFor(st.sit).length > 1 ? '<button data-go="2">' + t('Другая цель','Another aim') + '</button>' : '') + '<button class="dk" data-go="1">' + t('Новое событие','Another occasion') + '</button></div>' +
+    '<button class="ghost lt" data-go="books"><u>' + t('Книжная полка','The shelf') + '</u></button>' +
+    '<button class="ghost lt" data-go="tariffs"><u>' + t('Подключить для компании','For a company') + '</u></button></div>');
 }
+function tf(s){ var M = {'до 20 сотрудников':'up to 20 people','до 50 сотрудников':'up to 50 people','до 30 руководителей':'up to 30 executives','до 100 сотрудников':'up to 100 people','от 100 сотрудников':'from 100 people','6 месяцев':'6 months','Доступ к Системе имиджа':'Access to the Image System','Онлайн-лекция Милы':'An online lecture with Mila','Ответы на вопросы, Q&A':'Answers to your questions','Лекция Милы':'A lecture with Mila','Разбор корпоративных ситуаций':'A review of company situations','Система, адаптированная под компанию':'The System, adapted to the company','Корпоративные рекомендации':'Recommendations for the company','Международные компании':'International companies','Индивидуальная интеграция':'A private integration'}; if (lang !== 'en') return s; if (M[s]) return M[s]; return String(s).replace(/^от /, 'from '); }
 function tariffs(){
-  show('<div class="pad" style="padding-top:0"><div class="tf-head"><div class="cap" style="color:#C9A96A">Для компаний</div><div class="h2" style="color:var(--paper)">Единый уровень впечатления <i>для всей команды</i></div>' +
-    '<div class="lede">Доступ к Системе имиджа для сотрудников и руководителей. Формат подбираем под задачи компании.</div></div>' +
-    TARIFFS.map(function(t){ return '<div class="tf' + (t.hi ? ' hi' : '') + '">' + (t.hi ? '<span class="badge">Рекомендуем</span>' : '') +
-      '<div class="row"><span class="nm">' + t.n + '</span><span class="who">' + t.who + '</span></div>' +
-      '<div class="pr">' + t.p + (t.t ? '<small>· ' + t.t + '</small>' : '') + '</div>' +
-      '<ul>' + t.inc.map(function(x){ return '<li>' + esc(x) + '</li>'; }).join('') + '</ul>' +
-      '<a class="pick" href="' + CONTACT + '" target="_blank" rel="noopener">Выбрать ' + t.n + ' <span>→</span></a></div>'; }).join('') +
-    '<div class="note">Не уверены, какой формат подойдёт? Напишите, я подберу его под задачи вашей команды.</div>' +
-    '<a class="cta dk" href="' + CONTACT + '" target="_blank" rel="noopener">Обсудить подключение</a>' +
-    '<button class="ghost lt" data-go="1"><u>Как работает Система</u></button></div>');
+  show('<div class="pad" style="padding-top:0"><div class="tf-head"><div class="cap" style="color:#C9A96A">' + t('Для компаний','For companies') + '</div><div class="h2" style="color:var(--paper)">' + t('Единый уровень впечатления <i>для всей команды</i>','One level of impression <i>for the whole team</i>') + '</div>' +
+    '<div class="lede">' + t('Доступ к Системе имиджа для сотрудников и руководителей. Формат подбираем под задачи компании.','Access to the Image System for a team and its leaders. The format follows the company task.') + '</div></div>' +
+    TARIFFS.map(function(row){ return '<div class="tf' + (row.hi ? ' hi' : '') + '">' + (row.hi ? '<span class="badge">' + t('Рекомендуем','Recommended') + '</span>' : '') +
+      '<div class="row"><span class="nm">' + row.n + '</span><span class="who">' + tf(row.who) + '</span></div>' +
+      '<div class="pr">' + tf(row.p) + (row.t ? '<small>· ' + tf(row.t) + '</small>' : '') + '</div>' +
+      '<ul>' + row.inc.map(function(x){ return '<li>' + esc(tf(x)) + '</li>'; }).join('') + '</ul>' +
+      '<a class="pick" href="' + CONTACT + '" target="_blank" rel="noopener">' + t('Выбрать','Choose') + ' ' + row.n + ' <span>→</span></a></div>'; }).join('') +
+    '<div class="note">' + t('Не уверены, какой формат подойдёт? Напишите, я подберу его под задачи вашей команды.','Not sure which format fits? Write, and I will match it to your team.') + '</div>' +
+    '<a class="cta dk" href="' + CONTACT + '" target="_blank" rel="noopener">' + t('Обсудить подключение','Talk about access') + '</a>' +
+    '<button class="ghost lt" data-go="1"><u>' + t('Как работает Система','How the System works') + '</u></button></div>');
 }
 
 // История: «Назад» в доке, жест назад и кнопка браузера идут по шагам
 // Инструмент «Сила вашей портретной зоны» (Zoom): анализ фото в браузере, guide/portrait/*.mjs
 var PZ_SITS = {'Zoom': 1};
-function pzCta(){ return '<button class="pz-cta" data-go="portrait"><span><b>Сила вашей портретной зоны</b><small>Применить к себе</small></span><em>→</em></button>'; }
+function pzCta(){ return '<button class="pz-cta" data-go="portrait"><span><b>' + t('Сила вашей портретной зоны','The power of your portrait zone') + '</b><small>' + t('Применить к себе','Apply it to yourself') + '</small></span><em>→</em></button>'; }
 var PZ_ITEMS = [['Украшения', 'рекомендуемый масштаб серёг, толщина цепей, размер подвесок'], ['Очки', 'масштаб оправы относительно лица, толщина, геометрия'], ['Лацканы', 'ширина и форма, которые поддерживают архитектуру лица и плеч'], ['Вырез', 'глубина, открытость, геометрия линии'], ['Воротник', 'масштаб и форма'], ['Принт возле лица', 'размер раппорта и степень графичности'], ['Аксессуары', 'платок, брошь, украшения — насколько крупным может быть визуальный элемент рядом с лицом']];
 var PZ_RETAKE = {noface: 'Мы не нашли лицо. Сфотографируйтесь анфас при дневном свете.', many: 'В кадре несколько лиц. Нужно фото, где вы одна.', small: 'Лицо слишком далеко. Сделайте кадр по плечи.', turned: 'Голова повёрнута. Посмотрите прямо в камеру.'};
 function portrait(){
-  show('<div class="pad"><div class="crumbs"><button data-go="2">Zoom</button><i>/</i><span>Портретная зона</span></div>' +
-    '<div class="h2" style="font-size:40px;margin-top:0">Сила вашей <i class="br">портретной зоны</i></div>' +
+  show('<div class="pad"><div class="crumbs"><button data-go="2">Zoom</button><i>/</i><span>' + t('Портретная зона','Portrait zone') + '</span></div>' +
+    '<div class="h2" style="font-size:40px;margin-top:0">' + t('Сила вашей <i class="br">портретной зоны</i>','The power of your <i class="br">portrait zone</i>') + '</div>' +
     '<div class="xp-t"><p>Система видит масштаб и геометрию черт и работает с тем, что находится непосредственно рядом с лицом:</p></div>' +
     '<ul class="pz-list">' + PZ_ITEMS.map(function(x){ return '<li><b>' + esc(x[0]) + '</b>: ' + esc(x[1]) + '</li>'; }).join('') + '</ul>' +
     '<div class="pz-q"><span class="cap">Красная помада</span><p>Говорят, это энергия. Но мы не видим своих губ, значит, наносим её для другого и показываем энергию другому.</p></div>' +
@@ -975,12 +1246,13 @@ function portrait(){
 }
 function pzShow(r, R, img){
   var out = document.getElementById('pzOut');
-  if (r.status !== 'ok') { out.innerHTML = '<p class="pz-note" style="margin-top:24px;color:var(--ink)">' + esc(PZ_RETAKE[r.reason] || 'Попробуйте другое фото.') + '</p>'; return; }
+  var pack = (lang === 'en' && R.EN) ? R.EN : R;
+  if (r.status !== 'ok') { out.innerHTML = '<p class="pz-note" style="margin-top:24px;color:var(--ink)">' + esc(PZ_RETAKE[r.reason] || t('Попробуйте другое фото.', 'Try another photo.')) + '</p>'; return; }
   out.innerHTML = '<div class="pz-res"><canvas id="pzFace" width="192" height="240"></canvas><dl>' +
-      '<dt>Масштаб черт</dt><dd>' + R.LABELS.scale[r.scale] + '</dd><dt>Геометрия</dt><dd>' + R.LABELS.geom[r.geom] + '</dd><dt>Пропорция</dt><dd>' + R.LABELS.shape[r.shape] + '</dd></dl></div>' +
-    R.ZONE.map(function(z, i){ var a = z[r.scale] || z[r.shape] || ''; return '<div class="pz-card"><span class="n">' + nn(i + 1) + '</span><div><b>' + esc(z.t) + '</b><p>' + esc(a + (a ? ' ' : '') + (z[r.geom] || '')) + '</p></div></div>'; }).join('') +
-    '<p class="pz-draft">Черновик · правила уточняются</p>' +
-    '<button class="rz-all" data-go="2">К образам Zoom →</button>';
+      '<dt>' + t('Масштаб черт', 'Scale of features') + '</dt><dd>' + pack.LABELS.scale[r.scale] + '</dd><dt>' + t('Геометрия', 'Geometry') + '</dt><dd>' + pack.LABELS.geom[r.geom] + '</dd><dt>' + t('Пропорция', 'Proportion') + '</dt><dd>' + pack.LABELS.shape[r.shape] + '</dd></dl></div>' +
+    pack.ZONE.map(function(z, i){ var a = z[r.scale] || z[r.shape] || ''; return '<div class="pz-card"><span class="n">' + nn(i + 1) + '</span><div><b>' + esc(z.t) + '</b><p>' + esc(a + (a ? ' ' : '') + (z[r.geom] || '')) + '</p></div></div>'; }).join('') +
+    '<p class="pz-draft">' + t('Черновик · правила уточняются', 'Draft. The rules are still being set.') + '</p>' +
+    '<button class="rz-all" data-go="2">' + t('К образам Zoom →', 'To the Zoom looks →') + '</button>';
   // Превью: лицо из фото, кадр 4:5 с запасом вокруг
   var c = document.getElementById('pzFace'), x = c.getContext('2d'), W = img.naturalWidth, H = img.naturalHeight, b = r.box;
   var bh = b.h * H * 1.5, bw = bh * 0.8, cx = (b.x + b.w / 2) * W, cy = (b.y + b.h / 2) * H;
@@ -997,7 +1269,7 @@ var BOOKS = [
 ];
 // 04.11: четыре видео тарифа «Премиум». Идентификаторы плеера приходят с сервера только при действующем премиуме
 function videos(){
-  show('<div class="pad"><div class="h2" style="font-size:40px;margin-top:0">Видео <i class="br">Милы</i></div><div id="vidL" class="xp-t"><p>Загружаем…</p></div><div class="sig"><i></i><span>Мила Ушакова</span></div></div>');
+  show('<div class="pad"><div class="h2" style="font-size:40px;margin-top:0">' + t('Видео <i class="br">Милы</i>','Video <i class="br">from Mila</i>') + '</div><div id="vidL" class="xp-t"><p>' + t('Загружаем…','Loading…') + '</p></div><div class="sig"><i></i><span>Мила Ушакова</span></div></div>');
   fetch('/api/access?do=videos').then(function(r){ return r.json(); }).then(function(d){
     var el = document.getElementById('vidL'); if (!el) return;
     var premium = d.active && d.tier === 'premium';
@@ -1011,8 +1283,8 @@ function videos(){
   }).catch(function(){ var el = document.getElementById('vidL'); if (el) el.innerHTML = '<p>Сейчас не получилось загрузить видео. Обновите страницу или напишите в поддержку.</p>'; });
 }
 function books(){
-  show('<div class="pad"><div class="h2" style="font-size:40px;margin-top:0">Книжная <i class="br">полка</i></div><ol class="bk">' +
-    BOOKS.map(function(b, i){ return '<li><span class="rn">' + nn(i + 1) + '</span><div><small>' + esc(b.a) + '</small><h3>' + esc(b.t) + '</h3><div class="cap">Для чего читать</div><p>' + esc(b.w) + '</p>' +
+  show('<div class="pad"><div class="h2" style="font-size:40px;margin-top:0">' + t('Книжная <i class="br">полка</i>','The <i class="br">shelf</i>') + '</div><ol class="bk">' +
+    BOOKS.map(function(b, i){ return '<li><span class="rn">' + nn(i + 1) + '</span><div><small>' + esc(b.a) + '</small><h3>' + esc(b.t) + '</h3><div class="cap">' + t('Для чего читать','Why read it') + '</div><p>' + (lang === 'en' && EN_BOOK_W[i] ? EN_BOOK_W[i] : b.w) + '</p>' +
       (b.q ? '<blockquote>' + b.q.map(function(x){ return '<p>' + esc(x) + '</p>'; }).join('') + '</blockquote>' : '') + '</div></li>'; }).join('') +
     '</ol><div class="sig"><i></i><span>Мила Ушакова</span></div></div>');
 }
@@ -1022,13 +1294,13 @@ function install(){
   if (M === 'app') body = '<p>Система уже стоит на экране вашего телефона и открывается как приложение. Вы сейчас в ней.</p>';
   else if (M === 'desktop') body = '<p>Систему можно поставить на экран телефона, и она будет открываться как приложение: одним касанием, на весь экран.</p>' + ImgInstall.badges();
   else body = '<p>Она будет открываться как приложение: одним касанием, на весь экран, без поиска ссылки в почте.</p>' + ImgInstall.badges();
-  show('<div class="pad"><div class="h2" style="font-size:40px;margin-top:0">На экран <i class="br">телефона</i></div><div class="xp-t" id="iiBox">' + body + '</div>' +
+  show('<div class="pad"><div class="h2" style="font-size:40px;margin-top:0">' + t('На экран <i class="br">телефона</i>','On your <i class="br">phone</i>') + '</div><div class="xp-t" id="iiBox">' + body + '</div>' +
     '<p class="xp-t" style="margin-top:22px;font-size:14px;color:var(--mute)">Не получается? <a href="https://t.me/YanaOlkhina" target="_blank" rel="noopener" style="color:inherit">Напишите нам</a>, поможем.</p><div class="sig"><i></i><span>Мила Ушакова</span></div></div>');
   if (window.ImgInstall && M !== 'app') ImgInstall.bindBadges(document.getElementById('iiBox'), true, true);
 }
 var VIEWS = {install: install, videos: videos, books: books, portrait: portrait, cover: cover, about: about, intro: intro, s0: step0, s1: step1, s2: step2, s3: step3, s4: step4, tariffs: tariffs};
 // 03.11: раздел всегда виден в закреплённой верхней строке, в том числе при прокрутке
-function edLabel(){ var e = document.getElementById('ed'), n = st.view === 's1' ? ENV[st.env || 0].n : /^(s2|s3|s4|portrait)$/.test(st.view) ? envOf(st.sit) : ''; e.textContent = n || 'Система имиджа'; e.classList.toggle('in', !!n); }
+function edLabel(){ var e = document.getElementById('ed'), n = st.view === 's1' ? ENV[st.env || 0].n : /^(s2|s3|s4|portrait)$/.test(st.view) ? envOf(st.sit) : ''; e.textContent = n ? L(n) : t('Система имиджа','Image system'); e.classList.toggle('in', !!n); }
 function draw(){ (VIEWS[st.view] || cover)(); edLabel(); document.body.classList.toggle('on-cover', st.view === 'cover'); document.getElementById('dBack').classList.toggle('off', st.view === 'cover'); }
 function go(view, patch, replace){
   for (var k in patch) st[k] = patch[k];
@@ -1050,15 +1322,18 @@ document.getElementById('dBack').addEventListener('click', function(){
 var sheet = document.getElementById('sheet');
 function openMenu(){
   var n = 0; sheet.dataset.k = 'menu';
-  sheet.innerHTML = '<div class="grab"></div><div class="quick"><button data-go="cover">Обложка</button><button data-go="about">О проекте</button><button data-go="intro">О Системе</button><button data-go="tariffs">Тарифы</button><button data-go="videos">Видео</button><button data-go="books">Книжная полка</button>' +
-    (window.ImgInstall && ImgInstall.mode === 'app' ? '' : '<button data-go="install" style="grid-column:1/-1">На экран телефона</button>') +
-    '<button data-sex="w"' + (st.sex !== 'm' ? ' class="on"' : '') + '>Для женщин</button><button class="soon" disabled>Для мужчин · скоро</button>' +
-    '<a class="help" href="https://t.me/YanaOlkhina" target="_blank" rel="noopener">По всем вопросам · Telegram</a>' +
-    (fromSys ? '<button data-sys="1" style="grid-column:1/-1">← В Систему цветовых сочетаний</button>' : '') + '</div>' +
-    ENV.map(function(e, i){ return '<h3><span>' + e.n + '</span><i>' + e.r + '</i></h3>' + e.s.map(function(x){ n++;
-      return '<button class="ev' + (x === st.sit ? ' cur' : '') + '" data-sit="' + esc(x) + '" data-env="' + i + '"><small>' + nn(n) + '</small><b>' + esc(x) + '</b></button>'; }).join(''); }).join('');
+  sheet.innerHTML = '<div class="grab"></div><div class="quick"><button data-go="cover">' + t('Обложка','Cover') + '</button><button data-go="about">' + t('О проекте','About') + '</button><button data-go="intro">' + t('О Системе','The system') + '</button><button data-go="tariffs">' + t('Тарифы','For companies') + '</button><button data-go="videos">' + t('Видео','Video') + '</button><button data-go="books">' + t('Книжная полка','The shelf') + '</button>' +
+    (window.ImgInstall && ImgInstall.mode === 'app' ? '' : '<button data-go="install" style="grid-column:1/-1">' + t('На экран телефона','On your phone') + '</button>') +
+    '<button data-sex="w"' + (st.sex !== 'm' ? ' class="on"' : '') + '>' + t('Для женщин','For women') + '</button><button class="soon" disabled>' + t('Для мужчин · скоро','For men, soon') + '</button>' +
+    '<a class="help" href="https://t.me/YanaOlkhina" target="_blank" rel="noopener">' + t('По всем вопросам · Telegram','Questions · Telegram') + '</a>' +
+    (fromSys ? '<button data-sys="1" style="grid-column:1/-1">' + t('← В Систему цветовых сочетаний','← Colour system') + '</button>' : '') + '</div>' +
+    ENV.map(function(e, i){ return '<h3><span>' + L(e.n) + '</span><i>' + e.r + '</i></h3>' + e.s.map(function(x){ n++;
+      return '<button class="ev' + (x === st.sit ? ' cur' : '') + '" data-sit="' + esc(x) + '" data-env="' + i + '"><small>' + nn(n) + '</small><b>' + esc(L(x)) + '</b></button>'; }).join(''); }).join('');
   document.body.classList.add('menu-on');
 }
+function fillDocs(){ sheet.dataset.k = 'docs'; sheet.innerHTML = '<div class="grab"></div><h3><span>' + t('Документы','Documents') + '</span><i>ИП Ольхина Я.Ф.</i></h3><div class="docs">' +
+    '<a href="/oferta" target="_blank">' + t('Договор оферты','Offer') + '</a><a href="/privacy" target="_blank">' + t('Политика конфиденциальности','Privacy') + '</a>' +
+    '<a href="https://t.me/YanaOlkhina" target="_blank" rel="noopener">' + t('Поддержка','Support') + '</a></div>'; }
 function closeMenu(){ document.body.classList.remove('menu-on'); }
 document.getElementById('tMenu').addEventListener('click', function(){ openMenu(); });
 document.getElementById('tLogo').addEventListener('click', function(){ go('cover', {}); });
@@ -1066,15 +1341,13 @@ document.getElementById('dMenu').addEventListener('click', function(){ document.
 document.getElementById('sheetBg').addEventListener('click', closeMenu);
 document.getElementById('dDocs').addEventListener('click', function(){
   if (document.body.classList.contains('menu-on') && sheet.dataset.k === 'docs') return closeMenu();
-  sheet.dataset.k = 'docs';
-  sheet.innerHTML = '<div class="grab"></div><h3><span>Документы</span><i>ИП Ольхина Я.Ф.</i></h3><div class="docs">' +
-    '<a href="/oferta" target="_blank">Договор оферты</a><a href="/privacy" target="_blank">Политика конфиденциальности</a>' +
-    '<a href="https://t.me/YanaOlkhina" target="_blank" rel="noopener">Поддержка</a></div>';
+  fillDocs();
   document.body.classList.add('menu-on');
 });
 
 function onTap(e){
   var b = e.target.closest('button'); if (!b) return;
+  if (b.dataset.lang) { setLang(b.dataset.lang); return; }
   if (b.dataset.rznext) { var j = +b.dataset.rznext; rzSet(j); var li = document.getElementById('rzL').children[j]; setTimeout(function(){ li.scrollIntoView({behavior: 'smooth', block: 'center'}); }, 80); return; }
   if (b.dataset.rz) { rzSet(+b.dataset.rz); return; }
   if (b.dataset.voice) { voice(b, e); return; }
@@ -1115,6 +1388,8 @@ sheet.addEventListener('click', onTap);
 var lastY = 0, dock = document.getElementById('dock');
 window.addEventListener('scroll', function(){ var y = window.scrollY; var end = y + innerHeight > document.documentElement.scrollHeight - 80; dock.classList.toggle('hide', !end && y > lastY + 4 && y > 140); if (Math.abs(y - lastY) > 4) lastY = y; }, {passive: true});
 
+document.getElementById('lng').addEventListener('click', onTap);
+applyChrome();
 go(/tariff/.test(location.hash) ? 'tariffs' : 'cover', {}, true);
 })();
 </script>
