@@ -210,3 +210,97 @@ var EN_RULES = {
 ["Listen to how the other person speaks about others.","Notice how a potential manager speaks about colleagues, the team, the previous employee and the company. It is one way to understand the working culture."]
 ]
 };
+// 22.11: мужская версия, английский слой
+var EN_COMMENTS_M = {
+ "Офис|Вызвать доверие": "Trust comes from the Latin fiducia: confidence in another person.\nIn the office, trust helps you build relationships, find partners, win support and open new professional doors.\nHow do you earn trust?",
+ "Офис|Показать компетентность": "Competence is knowledge, curiosity, readiness to learn the new and the ability to find solutions.\nIt helps you win more complex projects and raise the value of your expertise.",
+ "Офис|Показать статус": "Status is not power and not the amount of money spent. Status is social recognition, respect and the position that others ascribe to you."
+};
+(function(){ var m = {
+ "Офис|Вызвать доверие|m": [
+  [
+   "Develop charisma.",
+   "Charisma can be developed. What matters is that your inner state matches how you look, speak and behave.\nDo not try to seem more confident than you are.\nTake the charisma test from the French institute of leaders: https://www.idrlabs.com/charisma/test.php"
+  ],
+  [
+   "Do not confuse subordination with distance.",
+   "Picture two waiters.\nOne recites the dishes flawlessly, by the script. The other sincerely recommends what he finds interesting and explains why.\nWhom would you trust sooner?\nThe office works on a similar principle. Keep the professional boundaries, but do not turn conversation into a set of memorised phrases."
+  ],
+  [
+   "Show a sincere interest in people.",
+   "Have an opinion of your own, but respect the views of others.\nPeople reach out more readily when they feel that their opinion matters."
+  ],
+  [
+   "Pay attention to how you look.",
+   "Trust does not need a strict suit or an expensive watch.\nWhat matters more is knowing what suits you, keeping the proportions and looking after the state of your clothes.\nThe right trouser length, a good fit in the shirt, cared-for shoes. Such details create the impression of someone composed and attentive to himself.\nLet your everyday look be simple but neat.\nIf you wear jeans, watch their fit, length and condition. Have several pairs.\nToo many creases on the shoes can make even a good look careless. In classic jeans there should be no more than one break.\nComfortable and careless are not the same thing.\nLook at yourself from the side. Do you like what you see? Wanting to like yourself is natural."
+  ],
+  [
+   "Notice your gaze, your movements and the pace of your speech.",
+   "Can you listen without interrupting? React calmly to objections? Admit that you do not know something?\nConfidence does not need constant proof that you are right.\nPicture two colleagues. One always tries to show that he knows more than the rest. The other argues his position calmly, asks questions and is ready to admit that someone else is right.\nWhom would you rather work with on an important project?\nPeople trust not the perfect. People trust those next to whom they can remain themselves."
+  ],
+  [
+   "Remember: trust is not only how people regard you.",
+   "These are your future opportunities."
+  ]
+ ],
+ "Офис|Показать компетентность|m": [
+  [
+   "Show that you understand the current context, in other words, the trends.",
+   "Following trends is not required. What matters is to understand the changes and choose what suits you.\nYour growth also shows in your clothes."
+  ],
+  [
+   "Choose clothes for the professional setting and the task, but add a little improvisation.",
+   "Lift the collar of the jacket, turn back the cuff, give up short-sleeved shirts."
+  ],
+  [
+   "A modern jacket with jeans, quality knitwear, an interesting frame for statement glasses, a vintage briefcase instead of a backpack.",
+   ""
+  ],
+  [
+   "Socks either match the shoes or are bright.",
+   ""
+  ],
+  [
+   "Professional experience is valuable only while you keep renewing it.",
+   "Take an interest in new technology, study how your colleagues work and be ready to revise your own opinion."
+  ],
+  [
+   "A competent person is known by the number of questions.",
+   "Usually a unique, competent decision is born in the ability to listen to the answers."
+  ],
+  [
+   "Allow yourself not to know.",
+   "An expert who says, “I do not have enough information right now. I will find out and propose a solution,” is often more convincing than a person who has an answer to everything.\nCompetence does not need constant proof that you are right."
+  ],
+  [
+   "Know how to listen and hold a pause.",
+   "The recommendations of the Image System are made to bring confidence to the point of habit.\nDo not try to control every gesture. A calm reaction helps others see in you a person able to solve complex tasks."
+  ],
+  [
+   "Remember: competence is not knowing everything, it is being able to work things out.",
+   "Clothes shape the first impression. Your knowledge, decisions and actions shape your professional reputation."
+  ]
+ ],
+ "Офис|Показать статус|m": [
+  [
+   "Status is the quality of a choice, not the price of a purchase.",
+   "By choosing quality things, even from little-known brands, you show respect for yourself and for your own standards."
+  ],
+  [
+   "Research shows that formal clothing raises the chance of a person being seen as a leader.",
+   "A suit can create the impression of:\n• competence;\n• authority;\n• professionalism;\n• discipline;\n• belonging to the business world.\nIn a conservative setting choose a classic suit. In a creative one allow individuality through silhouette, texture and accessories."
+  ],
+  [
+   "Choose the colour of the suit.",
+   "Navy: reliability, competence, authority. The universal colour of a business suit. Suits negotiations, senior roles and formal meetings.\nGraphite: seriousness, discipline, formality. Suits situations where you need to stress professional distance and authority.\nMid grey: competence, restraint, openness. Less formal than graphite. Suits an everyday business setting.\nDark brown: individuality, tradition, confidence. Shows an understanding of classic menswear. Suits less formal business meetings.\nOlive and dark green: independence, taste, individuality. Suited to a creative and less conservative professional setting.\nBlack: formality."
+  ],
+  [
+   "Socks are matched to the trousers.",
+   "This is the classic rule. Coloured socks are a tool of individuality.\nFor a business setting choose complex, muted shades: burgundy, dark green, plum."
+  ],
+  [
+   "Status does not require a show of superiority.",
+   "Respect is formed through competence and the quality of interaction.\nAlways remember etiquette: keep your agreements."
+  ]
+ ]
+}; for (var k in m) EN_RULES[k] = m[k]; })();
