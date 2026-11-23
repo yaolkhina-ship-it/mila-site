@@ -222,3 +222,26 @@ test('личная ссылка входа: верный секрет и акт�
   assert.equal((await linkLogin(store, 'wrong', 's', now)).ok, false);
   assert.equal((await linkLogin(store, '', 's', now)).ok, false);
 });
+
+test('версии: без пометки = женская, мужская и комбо по названию', () => {
+  assert.deepEqual(A.versionsFromName('Система Имиджа Базовый'), ['w']);
+  assert.deepEqual(A.versionsFromName('Система имиджа. Премиум · Женская'), ['w']);
+  assert.deepEqual(A.versionsFromName('Система Имиджа Базовый · Мужская'), ['m']);
+  assert.deepEqual(A.versionsFromName('Система Имиджа Премиум · Комбо'), ['w', 'm']);
+  assert.deepEqual(A.mergeVersions(['w'], ['m']), ['w', 'm']);
+  assert.deepEqual(A.normalizeVersions(undefined), ['w']);
+});
+test('версии: старая покупка читается как женская, мужская докупка складывается', async () => {
+  const s = memStore();
+  await A.applyPayment(s, pay({ order_id: 'v1' }), NOW);
+  assert.deepEqual((await A.getAccess(s, 'anna@mail.ru', NOW)).versions, ['w']);
+  await A.applyPayment(s, pay({ order_id: 'v2', order_num: 'Система Имиджа Базовый · Мужская', products: [{ name: 'Система Имиджа Базовый · Мужская', sum: '7000' }] }), NOW);
+  const a = await A.getAccess(s, 'anna@mail.ru', NOW);
+  assert.deepEqual(a.versions, ['w', 'm']);
+  assert.equal(a.tier, 'base');
+});
+test('версии: team открывает обе', async () => {
+  const s = memStore();
+  await s.setJson('acc:team@mail.ru', { tier: 'premium', until: '2099-01-01T00:00:00Z', versions: ['w'], team: true });
+  assert.deepEqual((await A.getAccess(s, 'team@mail.ru', NOW)).versions, ['w', 'm']);
+});

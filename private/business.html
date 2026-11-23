@@ -1141,6 +1141,22 @@ var TARIFFS = [
 
 var st = {sex: null, sit: null, env: 0, goal: null, view: 'cover', tab: 0};
 try { st.sex = localStorage.getItem('img_sex'); if (st.sex !== 'm' && st.sex !== 'w') st.sex = null; } catch(e){}  // 22.11: мужская версия открыта (пока блок «Офис»)
+// Версии по покупке: w / m / обе. Пока /api/access?do=me не ответил — обе (не мигаем замком). Старые покупки без поля = w.
+var ACC_VER = ['w', 'm'];
+function canSex(s){ return ACC_VER.indexOf(s) >= 0; }
+function applySexLock(){
+  if (ACC_VER.length === 1) st.sex = ACC_VER[0];
+  else if (st.sex && !canSex(st.sex)) st.sex = ACC_VER[0] || 'w';
+  try { if (st.sex) localStorage.setItem('img_sex', st.sex); } catch(e){}
+}
+fetch('/api/access?do=me').then(function(r){ return r.json(); }).then(function(d){
+  if (d && d.signedIn && d.active && Array.isArray(d.versions) && d.versions.length) {
+    ACC_VER = d.versions.filter(function(x){ return x === 'w' || x === 'm'; });
+    if (!ACC_VER.length) ACC_VER = ['w'];
+    applySexLock();
+    if (st.view === 's0' || st.view === 'letter' || document.body.classList.contains('menu-on')) draw();
+  }
+}).catch(function(){});
 var v = document.getElementById('v');
 var fromSys = /[?&]from=system/.test(location.search) || /\/guide\/?(gaidosen)?(\?|#|$)/.test(document.referrer);
 try { if (fromSys) sessionStorage.setItem('img_from_sys', '1'); else fromSys = sessionStorage.getItem('img_from_sys') === '1'; } catch(e){}
@@ -1208,7 +1224,13 @@ function crumbs(n){
     (n === 3 ? '<i>·</i><button data-go="2">' + esc(L(st.goal)) + '</button>' : '') + '</div>';
 }
 var STEPS = ['Что предстоит', 'Ваша цель', 'Рекомендации Милы', 'Решение'];
-function stepHead(n){ return '<div class="stp"><span class="sx"><button data-sex="w"' + (st.sex !== 'm' ? ' class="on"' : '') + ' aria-label="' + t('Для женщин','For women') + '">' + t('Ж','W') + '</button><i>|</i><button data-sex="m"' + (st.sex === 'm' ? ' class="on"' : '') + ' aria-label="' + t('Для мужчин','For men') + '">' + t('М','M') + '</button></span><span class="n">' + nn(n) + ' / ' + nn(STEPS.length) + '</span></div>'; }
+function stepHead(n){
+  var sx = '';
+  if (canSex('w') && canSex('m')) sx = '<span class="sx"><button data-sex="w"' + (st.sex !== 'm' ? ' class="on"' : '') + ' aria-label="' + t('Для женщин','For women') + '">' + t('Ж','W') + '</button><i>|</i><button data-sex="m"' + (st.sex === 'm' ? ' class="on"' : '') + ' aria-label="' + t('Для мужчин','For men') + '">' + t('М','M') + '</button></span>';
+  else if (canSex('m')) sx = '<span class="sx"><button data-sex="m" class="on" aria-label="' + t('Для мужчин','For men') + '">' + t('М','M') + '</button></span>';
+  else sx = '<span class="sx"><button data-sex="w" class="on" aria-label="' + t('Для женщин','For women') + '">' + t('Ж','W') + '</button></span>';
+  return '<div class="stp">' + sx + '<span class="n">' + nn(n) + ' / ' + nn(STEPS.length) + '</span></div>';
+}
 function pager(n, canNext){
   return '<div class="pager"><button data-go="' + (n === 1 ? 'intro' : n - 1) + '" aria-label="' + t('Назад','Back') + '">‹</button><span>' + nn(n) + ' / ' + nn(STEPS.length) + '</span>' +
     '<button data-go="' + (n + 1) + '" aria-label="' + t('Дальше','Next') + '"' + (canNext && n < STEPS.length ? '' : ' disabled') + '>›</button></div>';
@@ -1273,8 +1295,10 @@ function letter(){
 function step0(){
   show('<div class="pad">' + '<div class="stp"><span></span><span class="n">00 / ' + nn(STEPS.length) + '</span></div>' +
     '<div class="h2">' + t('Для кого <i class="br">образ</i>','Who the <i class="br">look</i> is for') + '</div>' +
-    '<div class="who2"><button data-sex="w" data-next="1"' + (st.sex === 'w' ? ' class="on"' : '') + '><img src="business-img/ev-boss-w.jpg" alt=""><b>' + t('Женщина','A woman') + '</b></button>' +
-    '<button data-sex="m" data-next="letter"' + (st.sex === 'm' ? ' class="on"' : '') + '><img src="business-img/ev-boss-m.jpg" alt=""><b>' + t('Мужчина','A man') + '</b></button></div>' +
+    '<div class="who2">' +
+    (canSex('w') ? '<button data-sex="w" data-next="1"' + (st.sex === 'w' ? ' class="on"' : '') + '><img src="business-img/ev-boss-w.jpg" alt=""><b>' + t('Женщина','A woman') + '</b></button>' : '') +
+    (canSex('m') ? '<button data-sex="m" data-next="letter"' + (st.sex === 'm' ? ' class="on"' : '') + '><img src="business-img/ev-boss-m.jpg" alt=""><b>' + t('Мужчина','A man') + '</b></button>' : '') +
+    '</div>' +
     '<aside class="cov-note"><svg viewBox="0 0 16 16" fill="none" stroke="#111" aria-hidden="true"><circle cx="8" cy="8" r="7.2"/><path d="M8 7v4.4M8 4.4v.9"/></svg><p>' + t('Вся информация носит рекомендательный характер и создана как инструмент, который может повышать качество жизни, усиливать профессиональные возможности и поддерживать рост дохода.','Everything here is a recommendation. It is a tool that can raise the quality of life, strengthen professional possibilities and support the growth of income.') + '</p></aside></div>');
 }
 function step1(){
@@ -1531,7 +1555,8 @@ function openMenu(){
   var n = 0; sheet.dataset.k = 'menu';
   sheet.innerHTML = '<div class="grab"></div><div class="quick"><button data-go="cover">' + t('Обложка','Cover') + '</button><button data-go="about">' + t('О проекте','About') + '</button><button data-go="intro">' + t('О Системе','The system') + '</button><button data-go="tariffs">' + t('Тарифы','For companies') + '</button><button data-go="videos">' + t('Видео','Video') + '</button><button data-go="books">' + t('Книжная полка','The shelf') + '</button>' +
     (window.ImgInstall && ImgInstall.mode === 'app' ? '' : '<button data-go="install" style="grid-column:1/-1">' + t('На экран телефона','On your phone') + '</button>') +
-    '<button data-sex="w"' + (st.sex !== 'm' ? ' class="on"' : '') + '>' + t('Для женщин','For women') + '</button><button data-sex="m"' + (st.sex === 'm' ? ' class="on"' : '') + '>' + t('Для мужчин','For men') + '</button>' +
+    (canSex('w') ? '<button data-sex="w"' + (st.sex !== 'm' ? ' class="on"' : '') + '>' + t('Для женщин','For women') + '</button>' : '') +
+    (canSex('m') ? '<button data-sex="m"' + (st.sex === 'm' ? ' class="on"' : '') + '>' + t('Для мужчин','For men') + '</button>' : '') +
     '<a class="help" href="https://t.me/YanaOlkhina" target="_blank" rel="noopener">' + t('По всем вопросам · Telegram','Questions · Telegram') + '</a>' +
     (fromSys ? '<button data-sys="1" style="grid-column:1/-1">' + t('← В Систему цветовых сочетаний','← Colour system') + '</button>' : '') + '</div>' +
     ENV.map(function(e, i){ return '<h3><span>' + L(e.n) + '</span><i>' + e.r + '</i></h3>' + e.s.map(function(x){ n++;
@@ -1562,7 +1587,9 @@ function onTap(e){
   if (b.dataset.bav) { bavSet(+b.dataset.bav); if (b.dataset.up) document.getElementById('bav').scrollIntoView({behavior: 'smooth', block: 'start'}); return; }
   if (b.dataset.bapt) { var li = document.getElementById('rl' + b.dataset.bapt); li.scrollIntoView({behavior: 'smooth', block: 'center'}); li.classList.add('open'); li.classList.remove('flash'); void li.offsetWidth; li.classList.add('flash'); return; }
   if (b.dataset.sys) { location.href = '/guide'; return; }
-  if (b.dataset.sex) { st.sex = b.dataset.sex; try { localStorage.setItem('img_sex', st.sex); } catch(e){}
+  if (b.dataset.sex) {
+    if (!canSex(b.dataset.sex)) return;
+    st.sex = b.dataset.sex; try { localStorage.setItem('img_sex', st.sex); } catch(e){}
     if (b.dataset.next === 'letter') return go('letter', {});
     if (b.dataset.next) return go('s1', {});
     // у мужчин пока готов не каждый сценарий: возвращаемся к выбору события

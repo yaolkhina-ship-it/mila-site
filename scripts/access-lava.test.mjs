@@ -55,3 +55,14 @@ test('Премиум поверх действующей Базы повышае
 test('настоящие ссылки заведены: одна База, одна Премиум', () => {
   assert.deepEqual(Object.values(A.LAVA_CLAIMS).sort(), ['base', 'premium']);
 });
+test('Lava claim с versions: мужская и комбо', async () => {
+  const claims = { [h('men-base')]: { tier: 'base', versions: ['m'] }, [h('combo-prem')]: { tier: 'premium', versions: ['w', 'm'] } };
+  const s = memStore();
+  const r = await A.claimLava(s, 'men-base', 'ivan@mail.ru', NOW, claims);
+  assert.equal(r.ok, true);
+  assert.deepEqual(r.versions, ['m']);
+  assert.deepEqual((await A.getAccess(s, 'ivan@mail.ru', NOW)).versions, ['m']);
+  const c = await A.claimLava(s, 'combo-prem', 'ivan@mail.ru', NOW, claims);
+  assert.equal(c.tier, 'premium');
+  assert.deepEqual((await A.getAccess(s, 'ivan@mail.ru', NOW)).versions, ['w', 'm']);
+});

@@ -82,7 +82,8 @@ export default async function handler(req, res) {
         const mail = (to, subject, html) => fetch('https://api.resend.com/emails', { method: 'POST', headers: { Authorization: 'Bearer ' + process.env.RESEND_API_KEY, 'Content-Type': 'application/json' }, body: JSON.stringify({ from: 'Мила Ушакова <mila@milaushakova.com>', to, reply_to: 'yaolkhina@gmail.com', subject, html }) }).catch(() => {});
         const w = welcomeMail(r.email, r.access);
         await mail(r.email, w.subject, w.html);
-        await mail('yaolkhina@gmail.com', `Lava: открыт доступ ${r.tier === 'premium' ? 'Премиум' : 'База'}`, `<p>Покупатель Lava открыл доступ по ссылке из продукта.</p><p>Почта: <b>${String(r.email).replace(/[<>&"]/g, '')}</b><br>Тариф: ${r.tier === 'premium' ? 'Премиум' : 'База'}<br>До: ${String(r.until).slice(0, 10)}</p><p>Сверьте с продажами в Lava.</p>`);
+        const verLabel = (r.versions || []).includes('w') && (r.versions || []).includes('m') ? 'Комбо' : (r.versions || []).includes('m') ? 'Мужская' : 'Женская';
+        await mail('yaolkhina@gmail.com', `Lava: открыт доступ ${r.tier === 'premium' ? 'Премиум' : 'База'} · ${verLabel}`, `<p>Покупатель Lava открыл доступ по ссылке из продукта.</p><p>Почта: <b>${String(r.email).replace(/[<>&"]/g, '')}</b><br>Тариф: ${r.tier === 'premium' ? 'Премиум' : 'База'}<br>Версия: ${verLabel}<br>До: ${String(r.until).slice(0, 10)}</p><p>Сверьте с продажами в Lava.</p>`);
       }
       return res.status(200).json({ ok: true, email: r.email, tier: r.tier, until: r.until, again: !!r.again });
     }
