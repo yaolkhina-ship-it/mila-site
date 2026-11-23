@@ -228,6 +228,7 @@ test('версии: без пометки = женская, мужская и к
   assert.deepEqual(A.versionsFromName('Система имиджа. Премиум · Женская'), ['w']);
   assert.deepEqual(A.versionsFromName('Система Имиджа Базовый · Мужская'), ['m']);
   assert.deepEqual(A.versionsFromName('Система Имиджа Премиум · Комбо'), ['w', 'm']);
+  assert.deepEqual(A.versionsFromName('Система Имиджа Базовый · Женская и мужская'), ['w', 'm']);
   assert.deepEqual(A.mergeVersions(['w'], ['m']), ['w', 'm']);
   assert.deepEqual(A.normalizeVersions(undefined), ['w']);
 });
