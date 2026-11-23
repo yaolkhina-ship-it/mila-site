@@ -214,7 +214,10 @@ var EN_RULES = {
 var EN_COMMENTS_M = {
  "Офис|Вызвать доверие": "Trust comes from the Latin fiducia: confidence in another person.\nIn the office, trust helps you build relationships, find partners, win support and open new professional doors.\nHow do you earn trust?",
  "Офис|Показать компетентность": "Competence is knowledge, curiosity, readiness to learn the new and the ability to find solutions.\nIt helps you win more complex projects and raise the value of your expertise.",
- "Офис|Показать статус": "Status is not power and not the amount of money spent. Status is social recognition, respect and the position that others ascribe to you."
+ "Офис|Показать статус": "Status is not power and not the amount of money spent. Status is social recognition, respect and the position that others ascribe to you.",
+ "Zoom|Вызвать доверие": "On Zoom the portrait zone is the main space of visual communication. Height, gait and a handshake barely work. What remains is the face, the voice, the upper part of the clothes, the background and the light.",
+ "Zoom|Привести к решению": "On Zoom the portrait zone is the main space of visual communication. Height, gait and a handshake barely work. What remains is the face, the voice, the upper part of the clothes, the background and the light.",
+ "Встреча с руководством|Показать компетентность": "The aim: to show competence, independent thinking and readiness for greater responsibility."
 };
 (function(){ var m = {
  "Офис|Вызвать доверие|m": [
@@ -301,6 +304,82 @@ var EN_COMMENTS_M = {
   [
    "Status does not require a show of superiority.",
    "Respect is formed through competence and the quality of interaction.\nAlways remember etiquette: keep your agreements."
+  ]
+ ],
+ "Zoom|*|m": [
+  [
+   "In a face-to-face meeting the impression is built by height, gait, posture, handshake, distance, clothes, gestures, voice and how you behave in space.",
+   "On Zoom a large part of these signals either disappears or is limited to a small rectangle on the screen."
+  ],
+  [
+   "On Zoom the portrait zone is the main space of visual communication.",
+   "It includes the face, the hair, the glasses, the collar, the shoulder line, the upper part of the clothes, and sometimes the watch and the hands. The background, the light and the quality of the image affect how well these elements are read."
+  ],
+  [
+   "Frame your face in the colours that suit you.",
+   "Use the tool in the Image System app. Upload your photo to understand your contrast, and follow the recommendations."
+  ],
+  [
+   "Even if you work from home, come prepared.",
+   "Your counterparts should not feel a dissonance when you meet in person."
+  ],
+  [
+   "The background affects how people rate trust and competence.",
+   "Keep the background off the kitchen."
+  ],
+  [
+   "Turn the camera on when visual contact helps the aim of the meeting.",
+   "Do not turn the camera into a test of discipline."
+  ],
+  [
+   "First try to understand, then to be understood.",
+   ""
+  ],
+  [
+   "What stops development is doubt.",
+   "Train the skill of staying steady through change, and you will know how to lead the conversation."
+  ],
+  [
+   "Remember: your opportunities are within the reach of your voice.",
+   ""
+  ]
+ ],
+ "Встреча с руководством|Показать компетентность|m": [
+  [
+   "Etiquette and respect for yourself.",
+   "Etiquette existed, exists and will exist. Dress codes change, but respect for yourself and for the other person stays the same.\nA suit at a meeting with management first of all shows your regard for yourself and for the weight of the conversation.\nToday a suit is no longer required in many companies. But integrity always stays in style. It is confirmed by your actions, your agreements and your regard for people."
+  ],
+  [
+   "Individuality and your own opinion.",
+   "Rules can be broken if you understand what they are for.\nA classic suit with unusual shoes, including sneakers, can speak of independence and flexible thinking.\nSuch a detail works when it fits the professional setting and looks like a conscious choice.\nIndividuality shows in the ability to choose, not in the wish to stand out."
+  ],
+  [
+   "Speak the language of your circle.",
+   "Before the meeting, put yourself in the other person’s place.\nWhom would you yourself want to keep talking to?\nPeople more readily trust those in whom they recognise close values and cultural codes.\nFor some, a suit is a mark of professionalism. For others a T-shirt and sport trousers make up the usual business wardrobe.\nTake into account the setting in which you want to grow, and the people with whom you plan to work.\nYour look should help communication, not require explanations."
+  ],
+  [
+   "Do not become an averaged version of yourself.",
+   "Artificial intelligence has made ready answers available to everyone. Using AI only as a search engine can lead to the same recommendations, looks and phrases.\nYour value lies in your own experience, thinking and ability to make decisions.\nDo not give up individuality for the sake of averaged standards.\nAmbition requires not imitation, but independence."
+  ],
+  [
+   "Do not surprise management with a watch.",
+   "If you have been invited to a meeting, the other person already has a reason to give you time.\nDo not try to confirm your importance with expensive watches, logos and showy accessories.\nIf you have no watch, do not buy one specially for the meeting.\nToday it is hard to impress with expensive things. Your professional value matters far more.\nA person’s energy shapes style. Things only help to express it."
+  ],
+  [
+   "Ask questions.",
+   "Do not turn a meeting with management into an exam where you only answer.\nAsk substantial questions. This shows involvement, interest in the tasks and the ability to analyse information.\nClarify aims, priorities, limits and the expected result.\nOften the manager’s answer holds the decision you need for the next step of your work.\nThe ability to ask questions helps you shape the conversation and make more precise decisions."
+  ],
+  [
+   "Do not put yourself down.",
+   "The other person’s title does not reduce your professional value.\nDo not undervalue your results, do not apologise for ambition and do not give up your own opinion out of fear of objection.\nModesty can be a virtue, but it should not stop you from showing competence.\nFear and timidity have never been good advisers in professional growth.\nRespect the manager’s authority without giving up your own."
+  ],
+  [
+   "Show readiness for the next level.",
+   "Do not try to look like a person you have not yet become.\nSpeak about results, propose solutions, argue your position and show readiness to take responsibility.\nAppearance sets the tone of the meeting. The voice helps carry the position. Questions show involvement. Behaviour confirms competence."
+  ],
+  [
+   "Do not ask for recognition.",
+   "Give reasons to entrust you with more."
   ]
  ]
 }; for (var k in m) EN_RULES[k] = m[k]; })();
