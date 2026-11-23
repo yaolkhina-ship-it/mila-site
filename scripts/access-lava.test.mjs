@@ -52,8 +52,11 @@ test('Премиум поверх действующей Базы повышае
   const r = await A.claimLava(s, 'prem-token', 'a@b.ru', NOW, CLAIMS);
   assert.equal(r.tier, 'premium');
 });
-test('настоящие ссылки заведены: одна База, одна Премиум', () => {
-  assert.deepEqual(Object.values(A.LAVA_CLAIMS).sort(), ['base', 'premium']);
+test('настоящие ссылки заведены: Ж ×2 + М ×2 + Комбо ×2', () => {
+  const vals = Object.values(A.LAVA_CLAIMS);
+  assert.equal(vals.filter((v) => v === 'base' || v === 'premium').length, 2);
+  assert.equal(vals.filter((v) => v && v.versions && v.versions.join('') === 'm').length, 2);
+  assert.equal(vals.filter((v) => v && v.versions && v.versions.join('') === 'wm').length, 2);
 });
 test('Lava claim с versions: мужская и комбо', async () => {
   const claims = { [h('men-base')]: { tier: 'base', versions: ['m'] }, [h('combo-prem')]: { tier: 'premium', versions: ['w', 'm'] } };
