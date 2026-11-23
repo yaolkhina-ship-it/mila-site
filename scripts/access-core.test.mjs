@@ -245,3 +245,8 @@ test('версии: team открывает обе', async () => {
   await s.setJson('acc:team@mail.ru', { tier: 'premium', until: '2099-01-01T00:00:00Z', versions: ['w'], team: true });
   assert.deepEqual((await A.getAccess(s, 'team@mail.ru', NOW)).versions, ['w', 'm']);
 });
+test('версии: штаб по почте всегда Ж и М', async () => {
+  const s = memStore();
+  await s.setJson('acc:yaolkhina@gmail.com', { tier: 'premium', until: '2099-01-01T00:00:00Z', versions: ['w'] });
+  assert.deepEqual((await A.getAccess(s, 'yaolkhina@gmail.com', NOW)).versions, ['w', 'm']);
+});
