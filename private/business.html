@@ -984,8 +984,14 @@ function menReady(sit){ return !!(REL.m && REL.m[sit]); }
 function envOf(sit){ for (var i = 0; i < ENV.length; i++) if (ENV[i].s.indexOf(sit) >= 0) return ENV[i].n; return ''; }
 // Ключ с самым точным совпадением: «событие|цель», затем «событие|*», затем «среда|*»
 function keyIn(o, sfx){ var k = [st.sit + '|' + st.goal, st.sit + '|*', envOf(st.sit) + '|*']; for (var i = 0; i < k.length; i++) if (o[k[i] + (sfx || '')]) return k[i]; return ''; }
-// Образы присланы на конкретную цель: показываем только их, без подстановки образов всей среды
-function lookKey(){ var k = [st.sit + '|' + st.goal, st.sit + '|*']; return LOOKS[k[0]] ? k[0] : LOOKS[k[1]] ? k[1] : ''; }
+// Образы присланы на конкретную цель: показываем только их, без подстановки образов всей среды.
+// Ключ берём только если в нём есть данные текущего пола (иначе Zoom|* · m перекрывался бы Zoom|цель · w).
+function lookKey(){
+  var sex = st.sex || 'w', k = [st.sit + '|' + st.goal, st.sit + '|*'], i;
+  for (i = 0; i < k.length; i++) if (LOOKS[k[i]] && LOOKS[k[i]][sex]) return k[i];
+  for (i = 0; i < k.length; i++) if (LOOKS[k[i]]) return k[i];
+  return '';
+}
 function goalsFor(sit){ var r = REL[st.sex || 'w']; if (st.sex === 'm') return (r && r[sit]) || []; return (r && r[sit]) || GOALS; }
 
 // Шаг 3: образы. Ключ «ситуация|цель» или только «цель».
