@@ -89,3 +89,8 @@ test('devices: 2 — одна ссылка открывается на двух 
   assert.equal((await giftStatus(s, 'tok2d', '', S, g, now)).state, 'used');
   assert.deepEqual(await redeemGift(s, 'tok2d', '', S, g, now), { ok: false, error: 'used' });
 });
+test('рабочая ссылка g4: versions из GIFTS = Ж и М, даже если в Redis только w', async () => {
+  const s = mem();
+  await s.setJson('acc:g4@gift.milaushakova.com', { tier: 'premium', until: '2099-01-01T00:00:00Z', gift: true, versions: ['w'] });
+  assert.deepEqual((await getAccess(s, 'g4@gift.milaushakova.com', now)).versions, ['w', 'm']);
+});
