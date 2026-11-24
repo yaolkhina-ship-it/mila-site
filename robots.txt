@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+Allow: /image
+Disallow: /sistem-image
+Disallow: /vhod
+Disallow: /dostup
+Disallow: /private/
+Disallow: /api/
+Disallow: /guide/business
+Disallow: /guide/gaidosen
+
+Sitemap: https://www.milaushakova.com/sitemap.xml
