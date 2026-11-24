@@ -237,6 +237,10 @@
       "dest": "/api/image-gate.js"
     },
     {
+      "src": "/image/googlea669a0e0ae713047.html",
+      "dest": "/googlea669a0e0ae713047.html"
+    },
+    {
       "src": "/image/?",
       "dest": "/guide/oplata2/index.html"
     },
