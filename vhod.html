@@ -72,6 +72,8 @@ footer{padding:18px 16px calc(24px + env(safe-area-inset-bottom));text-align:cen
 <script>
 if(/tariff/.test(location.hash))location.replace('/tariffs');
 var $=function(i){return document.getElementById(i)},NEXT='/sistem-image';
+/* Apex milaushakova.com → www: иначе POST /api ломается на 307 и вход даёт «не получилось». */
+if(location.hostname==='milaushakova.com'){location.replace('https://www.milaushakova.com'+location.pathname+location.search+location.hash)}
 if(/other=1/.test(location.search))document.addEventListener('DOMContentLoaded',function(){$('msg').textContent='Вы вошли на другом устройстве. Доступ работает на трёх устройствах одновременно: чтобы продолжить здесь, войдите снова.'});
 if(/expired=1/.test(location.search))document.addEventListener('DOMContentLoaded',function(){$('msg').textContent='Срок доступа закончился. Продлить можно на странице оплаты.'});
 fetch('/api/access?do=me').then(function(r){return r.json()}).then(function(m){if(m.signedIn&&m.active)location.replace(NEXT)}).catch(function(){});
