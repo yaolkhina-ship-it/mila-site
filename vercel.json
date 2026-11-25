@@ -1,5 +1,13 @@
 {
   "version": 2,
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "milaushakova.com" }],
+      "destination": "https://www.milaushakova.com/:path*",
+      "permanent": true
+    }
+  ],
   "builds": [
     {
       "src": "*.html",

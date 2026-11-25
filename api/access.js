@@ -21,6 +21,16 @@ const setCookie = (res, val, age) => res.setHeader('Set-Cookie', `ms_s=${val}; P
 
 export default async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store');
+  // Apex без www иногда остаётся Origin: milaushakova.com после 307: разрешаем читать JSON, cookie всё равно на www.
+  const origin = String(req.headers.origin || '');
+  if (origin === 'https://milaushakova.com' || origin === 'https://www.milaushakova.com') {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
+    res.setHeader('Vary', 'Origin');
+  }
+  if (req.method === 'OPTIONS') return res.status(204).end();
   const { requestCode, verifyCode, directLogin, linkLogin, getAccess, currentSession, renewSession, upstashStore, giftStatus, redeemGift, SESSION_DAYS } = await import('../lib/access-core.mjs');
   const secret = process.env.SESSION_SECRET, url = process.env.KV_REST_API_URL, token = process.env.KV_REST_API_TOKEN;
   if (!secret || !url || !token || !process.env.RESEND_API_KEY) return res.status(503).json({ ok: false, error: 'not-configured' });

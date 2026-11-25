@@ -71,13 +71,17 @@ footer{padding:18px 16px calc(24px + env(safe-area-inset-bottom));text-align:cen
 <script src="/guide/image-install.js?v=2"></script>
 <script>
 if(/tariff/.test(location.hash))location.replace('/tariffs');
+(function(){
 var $=function(i){return document.getElementById(i)},NEXT='/sistem-image';
-/* Apex milaushakova.com → www: иначе POST /api ломается на 307 и вход даёт «не получилось». */
-if(location.hostname==='milaushakova.com'){location.replace('https://www.milaushakova.com'+location.pathname+location.search+location.hash)}
+/* Без www Safari ломает POST /api (307 на другой хост → «не получилось»). */
+if(location.hostname!=='www.milaushakova.com'){
+  location.replace('https://www.milaushakova.com'+location.pathname+location.search+location.hash);
+  return;
+}
 if(/other=1/.test(location.search))document.addEventListener('DOMContentLoaded',function(){$('msg').textContent='Вы вошли на другом устройстве. Доступ работает на трёх устройствах одновременно: чтобы продолжить здесь, войдите снова.'});
 if(/expired=1/.test(location.search))document.addEventListener('DOMContentLoaded',function(){$('msg').textContent='Срок доступа закончился. Продлить можно на странице оплаты.'});
-fetch('/api/access?do=me').then(function(r){return r.json()}).then(function(m){if(m.signedIn&&m.active)location.replace(NEXT)}).catch(function(){});
-function post(a,b){return fetch('/api/access?do='+a,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)}).then(function(r){return r.json().then(function(j){j.status=r.status;return j})})}
+fetch('/api/access?do=me',{credentials:'same-origin'}).then(function(r){return r.json()}).then(function(m){if(m.signedIn&&m.active)location.replace(NEXT)}).catch(function(){});
+function post(a,b){return fetch('/api/access?do='+a,{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)}).then(function(r){return r.text().then(function(t){var j;try{j=JSON.parse(t||'{}')}catch(e){throw new Error('bad-json')}j.status=r.status;return j})})}
 function say(t){$('msg').textContent=t||''}
 function fail(){say('Сейчас не получилось. Попробуйте ещё раз или напишите в поддержку.')}
 $('f1').onsubmit=function(e){e.preventDefault();say('');var b=this.querySelector('button');b.disabled=true;post('code',{email:$('email').value}).then(function(r){b.disabled=false;if(r.ok&&r.direct)return location.replace(NEXT);if(!r.ok)return say(r.error==='bad-email'?'Проверьте почту.':'Сейчас не получилось. Попробуйте ещё раз.');$('sent').textContent='Если на '+$('email').value.trim()+' есть оплата, мы отправили код. Проверьте и папку «Спам».';$('f1').hidden=true;$('f2').hidden=false;$('code').focus()}).catch(function(){b.disabled=false;fail()})};
@@ -95,5 +99,6 @@ $('back').onclick=function(){say('');$('f2').hidden=true;$('f1').hidden=false};
   show(!(skipped||/other=1|expired=1/.test(location.search)));
   $('skip').onclick=function(){try{localStorage.setItem('img_install_skip','1')}catch(e){}show(false);$('email').focus()};
   $('showInstA').onclick=function(e){e.preventDefault();show(true)};
+})();
 })();
 </script></body></html>
