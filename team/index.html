@@ -109,10 +109,12 @@ var TABS = [['home','Главная'],['bot','Бот · заявки'],['fin','�
 function nav(){ document.getElementById('nav').innerHTML = TABS.map(function(t){ return '<button data-t="'+t[0]+'"'+(t[0]===TAB?' class="on"':'')+'>'+t[1]+'</button>'; }).join(''); }
 document.getElementById('nav').onclick = function(e){ var b = e.target.closest('[data-t]'); if (b){ TAB = b.dataset.t; render(); scrollTo(0,0); } };
 
-// rub = после комиссии Lava/Продамус; gross = до комиссии (если комиссию платит Creator)
+// rub = после комиссии Lava/Продамус (все валюты → ₽ по курсу fin.rate); gross = до комиссии
+function fxRub(s, v){ if (s.cur === 'RUB') return v; var r = (D.fin && D.fin.rate && D.fin.rate[s.cur]) || 0; return v * r; }
 function byProduct(list){ var m = {}; list.forEach(function(s){ var k = s.p; m[k] = m[k] || {n:0, rub:0, gross:0, fee:0, fx:0}; m[k].n++;
-  if (s.cur === 'RUB'){ var fee = s.fee || 0; m[k].rub += s.sum; m[k].fee += fee; m[k].gross += s.sum + (s.fp === 'Customer' ? 0 : fee); }
-  else m[k].fx++; }); return m; }
+  var fee = s.fee || 0, gross = s.sum + (s.fp === 'Customer' ? 0 : fee);
+  m[k].rub += fxRub(s, s.sum); m[k].fee += fxRub(s, fee); m[k].gross += fxRub(s, gross);
+  if (s.cur !== 'RUB') m[k].fx++; }); return m; }
 function byMonth(list){ var m = {}; list.forEach(function(s){ var k = s.d.slice(0,7); m[k] = m[k] || {n:0, rub:0}; m[k].n++; if (s.cur === 'RUB') m[k].rub += s.sum; }); return m; }
 
 // Динамика: выручка (рубли после комиссии) по неделям (пн–вс) или месяцам, столбцы + подсказка с продуктами
@@ -249,16 +251,16 @@ function home(){
     (function(){
       var ym = lastDay.slice(0,7), tr = (D.fin && D.fin.tax && D.fin.tax[ym] != null) ? D.fin.tax[ym] : 0.08;
       var after = function(x){ return x.rub * (1 - tr); };
-      return '<h3>Этот месяц по продуктам</h3><div class="card"><table><tr><th>Продукт</th><th class="n">Оплат</th><th class="n">До вычета</th><th class="n">После вычета</th><th class="n hide-m">В валюте</th></tr>' +
+      return '<h3>Этот месяц по продуктам</h3><div class="card"><table><tr><th>Продукт</th><th class="n">Оплат</th><th class="n">До вычета</th><th class="n">После вычета</th><th class="n hide-m">Из них валюта</th></tr>' +
       Object.keys(bp).sort(function(a,b){ return bp[b].n - bp[a].n; }).map(function(k){ return '<tr><td>'+esc(k)+'</td><td class="n">'+bp[k].n+'</td><td class="n">'+rub(bp[k].gross)+'</td><td class="n">'+rub(after(bp[k]))+'</td><td class="n hide-m">'+bp[k].fx+'</td></tr>'; }).join('') +
       (function(){ var t = {n:0, rub:0, gross:0, fx:0}; Object.keys(bp).forEach(function(k){ t.n += bp[k].n; t.rub += bp[k].rub; t.gross += bp[k].gross; t.fx += bp[k].fx; });
         var st = ' style="font-weight:600;border-top:1px solid rgba(13,26,30,.3);background:rgba(184,144,58,.10)"';
         return '<tr><td'+st+'>Итого</td><td class="n"'+st+'>'+t.n+'</td><td class="n"'+st+'>'+rub(t.gross)+'</td><td class="n"'+st+'>'+rub(after(t))+'</td><td class="n hide-m"'+st+'>'+t.fx+'</td></tr>'; })() + '</table></div>' +
-      '<p class="muted" style="margin-top:6px">До вычета: сумма для покупателя (до комиссии Lava/Продамус и налога). После вычета: после комиссии и налога '+(tr*100)+'%.</p>';
+      '<p class="muted" style="margin-top:6px">До вычета: всё в ₽ (валюта по курсу € '+(D.fin.rate.EUR||'')+' / $ '+(D.fin.rate.USD||'')+'), до комиссии Lava/Продамус и налога. После вычета: после комиссии и налога '+(tr*100)+'%.</p>';
     })() +
     '<div class="dyn-h"><h3>Выручка по продуктам, ₽</h3><div class="seg" id="dynSeg"><button data-g="w"'+(DYN==='w'?' class="on"':'')+'>Недели</button><button data-g="m"'+(DYN==='m'?' class="on"':'')+'>Месяцы</button></div></div>' +
     '<div class="card"><div class="dyn" id="dyn"></div><details class="dt"><summary>Цифрами</summary><div id="dynT"></div></details></div>' +
-    '<p class="foot">Данные Lava до '+esc(last)+' · файл «'+esc(D.source)+'». Валюта считается штуками.</p>';
+    '<p class="foot">Данные Lava до '+esc(last)+' · файл «'+esc(D.source)+'».</p>';
 }
 
 function sales(){
