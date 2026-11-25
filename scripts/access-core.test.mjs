@@ -251,3 +251,8 @@ test('версии: штаб по почте всегда Ж и М', async () =>
   await s.setJson('acc:yaolkhina@gmail.com', { tier: 'premium', until: '2099-01-01T00:00:00Z', versions: ['w'] });
   assert.deepEqual((await A.getAccess(s, 'yaolkhina@gmail.com', NOW)).versions, ['w', 'm']);
 });
+test('версии: FORCE_VERSIONS перекрывает Redis', async () => {
+  const s = memStore();
+  await s.setJson('acc:aen-ekosfera@mail.ru', { tier: 'premium', until: '2099-01-01T00:00:00Z', versions: ['w'] });
+  assert.deepEqual((await A.getAccess(s, 'aen-ekosfera@mail.ru', NOW)).versions, ['m']);
+});
