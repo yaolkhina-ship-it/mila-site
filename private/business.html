@@ -507,6 +507,7 @@ body.on-cover .view{padding-bottom:0}
   <nav class="dock" id="dock" aria-label="Навигация">
     <button class="d-back off" id="dBack" type="button"><span class="ic">&larr;</span><span id="lbBack">Назад</span></button>
     <button id="dMenu" type="button"><span class="ic">&#9776;</span><span id="lbMenu">Меню</span></button>
+    <button id="dMaster" type="button"><span class="ic">&#9654;</span><span id="lbMaster">Первая встреча</span></button>
     <button id="dDocs" type="button" class="d-docs" aria-label="Документы"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6v18h12V7z"/><path d="M14 3v4h4M9 12h6M9 16h6"/></svg></button>
     <a class="d-sup" href="https://t.me/YanaOlkhina" target="_blank" rel="noopener" aria-label="По всем вопросам: Telegram @YanaOlkhina"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 4L3 11.5l6 2.2M21 4l-3.4 16L9.5 15M21 4L9.5 15m0 0v5l3-3.4"/></svg></a>
   </nav>
@@ -937,6 +938,7 @@ function applyChrome(){
   document.title = t('Система имиджа · Mila Ushakova', 'Image System · Mila Ushakova');
   document.getElementById('lbBack').textContent = t('Назад', 'Back');
   document.getElementById('lbMenu').textContent = t('Меню', 'Menu');
+  document.getElementById('lbMaster').textContent = t('Первая встреча', 'First meeting');
   document.getElementById('tMenu').textContent = t('Меню', 'Menu');
   document.getElementById('lgOf').textContent = t('Договор оферты', 'Offer');
   document.getElementById('lgPr').textContent = t('Политика конфиденциальности', 'Privacy');
@@ -1568,6 +1570,16 @@ function videos(){
     }).join('');
   }).catch(function(){ var el = document.getElementById('vidL'); if (el) el.innerHTML = '<p>Сейчас не получилось загрузить видео. Обновите страницу или напишите в поддержку.</p>'; });
 }
+// 27.11: запись первой закрытой встречи (мастер-класс). Для всех с активным доступом, любого тарифа и пола.
+function master(){
+  show('<div class="pad"><div class="h2" style="font-size:40px;margin-top:0">' + t('Первая <i class="br">встреча</i>','The first <i class="br">meeting</i>') + '</div><div id="mstL" class="xp-t"><p>' + t('Загружаем…','Loading…') + '</p></div><div class="sig"><i></i><span>Мила Ушакова</span></div></div>');
+  fetch('/api/access?do=master').then(function(r){ return r.json(); }).then(function(d){
+    var el = document.getElementById('mstL'); if (!el) return;
+    if (d.active && d.id) el.innerHTML = '<p>' + t('Запись закрытой встречи мастер-класса для участников Системы имиджа.','Recording of the closed master class for Image System members.') + '</p><div style="position:relative;aspect-ratio:16/9;background:#111;margin-top:18px"><iframe src="https://drive.google.com/file/d/' + encodeURIComponent(d.id) + '/preview" allow="autoplay; fullscreen" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;border:0"></iframe></div>';
+    else if (d.signedIn) el.innerHTML = '<p>' + t('Запись доступна участникам Системы имиджа с действующим доступом.','The recording is for Image System members with active access.') + '</p><a class="rz-all" style="display:block;text-decoration:none;text-align:center" href="/image#pay">' + t('Подключить Систему имиджа →','Join the Image System →') + '</a>';
+    else el.innerHTML = '<p>' + t('Запись доступна участникам Системы имиджа. Войдите с почтой, которую указали при оплате.','The recording is for Image System members. Sign in with the email you used to pay.') + '</p><a class="rz-all" style="display:block;text-decoration:none;text-align:center" href="/vhod">' + t('Войти →','Sign in →') + '</a>';
+  }).catch(function(){ var el = document.getElementById('mstL'); if (el) el.innerHTML = '<p>' + t('Сейчас не получилось загрузить запись. Обновите страницу или напишите в поддержку.','Could not load the recording. Refresh the page or write to support.') + '</p>'; });
+}
 function books(){
   show('<div class="pad"><div class="h2" style="font-size:40px;margin-top:0">' + t('Книжная <i class="br">полка</i>','The <i class="br">shelf</i>') + '</div><ol class="bk">' +
     BOOKS.map(function(b, i){ return '<li><span class="rn">' + nn(i + 1) + '</span><div><small>' + esc(b.a) + '</small><h3>' + esc(b.t) + '</h3><div class="cap">' + t('Для чего читать','Why read it') + '</div><p>' + (lang === 'en' && EN_BOOK_W[i] ? EN_BOOK_W[i] : b.w) + '</p>' +
@@ -1584,7 +1596,7 @@ function install(){
     '<p class="xp-t" style="margin-top:22px;font-size:14px;color:var(--mute)">Не получается? <a href="https://t.me/YanaOlkhina" target="_blank" rel="noopener" style="color:inherit">Напишите нам</a>, поможем.</p><div class="sig"><i></i><span>Мила Ушакова</span></div></div>');
   if (window.ImgInstall && M !== 'app') ImgInstall.bindBadges(document.getElementById('iiBox'), true, true);
 }
-var VIEWS = {letter: letter, install: install, videos: videos, books: books, portrait: portrait, cover: cover, about: about, intro: intro, s0: step0, s1: step1, s2: step2, s3: step3, s4: step4, tariffs: tariffs};
+var VIEWS = {letter: letter, install: install, videos: videos, master: master, books: books, portrait: portrait, cover: cover, about: about, intro: intro, s0: step0, s1: step1, s2: step2, s3: step3, s4: step4, tariffs: tariffs};
 // 03.11: раздел всегда виден в закреплённой верхней строке, в том числе при прокрутке
 function edLabel(){ var e = document.getElementById('ed'), n = st.view === 's1' ? ENV[st.env || 0].n : /^(s2|s3|s4|portrait)$/.test(st.view) ? envOf(st.sit) : ''; e.textContent = n ? L(n) : t('Система имиджа','Image system'); e.classList.toggle('in', !!n); }
 function draw(){ (VIEWS[st.view] || cover)(); edLabel(); document.body.classList.toggle('on-cover', st.view === 'cover'); document.getElementById('dBack').classList.toggle('off', st.view === 'cover'); }
@@ -1627,6 +1639,7 @@ function closeMenu(){ document.body.classList.remove('menu-on'); }
 document.getElementById('tMenu').addEventListener('click', function(){ openMenu(); });
 document.getElementById('tLogo').addEventListener('click', function(){ go('cover', {}); });
 document.getElementById('dMenu').addEventListener('click', function(){ document.body.classList.contains('menu-on') && sheet.dataset.k === 'menu' ? closeMenu() : openMenu(); });
+document.getElementById('dMaster').addEventListener('click', function(){ go('master', {}); });
 document.getElementById('sheetBg').addEventListener('click', closeMenu);
 document.getElementById('dDocs').addEventListener('click', function(){
   if (document.body.classList.contains('menu-on') && sheet.dataset.k === 'docs') return closeMenu();

@@ -16,6 +16,7 @@ async function sendCode(email, code) {
 
 const VIDEOS = [{ key: 'watch', title: 'Часовой этикет' }, { key: 'accessories', title: 'Этикет аксессуаров' }, { key: 'perfume', title: 'Парфюмерный этикет' }, { key: 'dresscode', title: 'Дресс-код' }];
 const READY = ['watch', 'perfume', 'dresscode'];
+const MASTER_DRIVE_ID = '1cNwjv18TXONE8FQpTyfnf9aUW8rJUNdS'; // Google Drive: «Первая закрытая встреча. Мастер-класс»
 const cookieOf = (req) => (String(req.headers.cookie || '').match(/(?:^|;\s*)ms_s=([^;]+)/) || [])[1];
 const setCookie = (res, val, age) => res.setHeader('Set-Cookie', `ms_s=${val}; Path=/; Max-Age=${age}; HttpOnly; Secure; SameSite=Lax`);
 
@@ -58,6 +59,13 @@ export default async function handler(req, res) {
       const ids = premium ? (await store.getJson('videos')) || {} : {};
       const items = VIDEOS.map((v) => ({ key: v.key, title: v.title, id: ids[v.key] || null, ready: READY.includes(v.key) }));
       return res.status(200).json({ signedIn: !!email, active: !!a.active, tier: a.tier || null, items });
+    }
+    // 27.11: запись первой закрытой встречи. Отдаём ID только при активном доступе любого тарифа и пола.
+    if (action === 'master' && req.method === 'GET') {
+      const { email } = await currentSession(store, cookieOf(req), secret);
+      const a = email ? await getAccess(store, email) : { active: false };
+      if (!a.active) return res.status(200).json({ signedIn: !!email, active: false });
+      return res.status(200).json({ signedIn: true, active: true, id: MASTER_DRIVE_ID });
     }
     if (req.method !== 'POST') return res.status(405).json({ ok: false });
     if (action === 'code') {
