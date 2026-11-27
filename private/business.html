@@ -1297,7 +1297,7 @@ function cover(){
   show('<div class="cov sl"><img class="col" src="/guide/business-img/cover-gallery.jpg" alt="" fetchpriority="high"><div class="in">' +
     '<div class="eb cap">' + t('Для бизнеса','For business') + ' · <button data-go="about">Мила Ушакова</button></div>' +
     '<h1>' + t('Система','Image') + '<br><i style="color:#C9A96A">' + t('имиджа','system') + '</i></h1>' +
-    '<div class="row3"><button data-go="1">' + (lang === 'en' ? 'Occasion' : 'Что предстоит') + '</button><button data-go="1">' + (lang === 'en' ? 'Aim' : 'Ваша цель') + '</button><button data-go="1">' + (lang === 'en' ? 'Decision' : 'Решение') + '</button></div></div></div>', true);
+    '<div class="row3"><button data-go="1">' + (lang === 'en' ? 'Occasion' : 'Что предстоит') + '</button><button data-go="1">' + (lang === 'en' ? 'Aim' : 'Ваша цель') + '</button><button data-go="1">' + (lang === 'en' ? 'Decision' : 'Решение') + '</button><button data-go="master">' + (lang === 'en' ? 'First meeting' : 'Первая встреча') + '</button></div></div></div>', true);
 }
 // О проекте: что это, как устроено, для кого и об авторе. Тексты из уже утверждённых фраз Милы.
 function about(){
@@ -1682,6 +1682,7 @@ function onTap(e){
   if (b.dataset.go === 'portrait') return go('portrait', {});
   if (b.dataset.go === 'books') return go('books', {});
   if (b.dataset.go === 'videos') return go('videos', {});
+  if (b.dataset.go === 'master') return go('master', {});
   if (b.dataset.go === 'install') return go('install', {});
 }
 v.addEventListener('click', onTap);
