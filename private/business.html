@@ -1202,6 +1202,7 @@ function openAddon(){
     '<p>К вашему тарифу добавится мужская версия Системы имиджа: образы, комментарии и правила для мужчин.</p>' +
     '<div class="pr">' + String(price).replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' ₽</div>' +
     '<p>Это доплата к вашему доступу. Срок не меняется' + (until ? ': до ' + until : '') + '. Вход с той же почты, на этом устройстве и ещё на одном.</p>' +
+    '<p>Платите с той почтой, с которой входите в Систему. После оплаты мужская версия откроется сама, ничего дополнительно делать не нужно.</p>' +
     (url ? '<a class="pay" href="' + url + '" data-pay="1">Оплатить доплату</a>' : '<a class="pay" href="https://t.me/MilaUshakova_ClubBot?start=support" target="_blank" rel="noopener">Написать в поддержку</a>') +
     '<button class="x" data-closeaddm="1">Закрыть</button></div>';
   o.addEventListener('click', function(e){

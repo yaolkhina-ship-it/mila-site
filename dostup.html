@@ -45,7 +45,7 @@ document.getElementById('f').addEventListener('submit',function(e){e.preventDefa
  .then(function(r){return r.json().then(function(d){return [r.status,d]})})
  .then(function(x){var s=x[0],d=x[1];
   if(d.ok){var until=d.until?new Date(d.until).toLocaleDateString('ru-RU',{day:'numeric',month:'long',year:'numeric'}):'';
-   document.getElementById('doneText').textContent='Тариф: '+(d.tier==='premium'?'Премиум':'База')+(until?', до '+until:'')+'. Войдите с почтой '+d.email+': на неё придёт код.';
+   document.getElementById('doneText').textContent=d.addon?'Мужская версия открыта на почте '+d.email+'. Войдите в Систему имиджа с этой почтой и выберите «Мужчина». Срок доступа не меняется.':'Тариф: '+(d.tier==='premium'?'Премиум':'База')+(until?', до '+until:'')+'. Войдите с почтой '+d.email+': на неё придёт код.';
    document.getElementById('form').hidden=true;document.getElementById('done').hidden=false;return;}
   b.disabled=false;
   m.textContent=s===404?'Ссылка недействительна. Напишите нам в Telegram.':s===429?'Слишком много попыток. Попробуйте через час.':d.error==='email'?'Проверьте почту: в ней ошибка.':'Не получилось. Попробуйте ещё раз или напишите нам.';})

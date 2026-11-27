@@ -99,7 +99,7 @@ export default async function handler(req, res) {
         const verLabel = (r.versions || []).includes('w') && (r.versions || []).includes('m') ? 'Женская и мужская' : (r.versions || []).includes('m') ? 'Мужская' : 'Женская';
         await mail('yaolkhina@gmail.com', `Lava: открыт доступ ${r.tier === 'premium' ? 'Премиум' : 'База'} · ${verLabel}`, `<p>Покупатель Lava открыл доступ по ссылке из продукта.</p><p>Почта: <b>${String(r.email).replace(/[<>&"]/g, '')}</b><br>Тариф: ${r.tier === 'premium' ? 'Премиум' : 'База'}<br>Версия: ${verLabel}<br>До: ${String(r.until).slice(0, 10)}</p><p>Сверьте с продажами в Lava.</p>`);
       }
-      return res.status(200).json({ ok: true, email: r.email, tier: r.tier, until: r.until, again: !!r.again });
+      return res.status(200).json({ ok: true, email: r.email, tier: r.tier, until: r.until, again: !!r.again, addon: !!r.addon });
     }
     if (action === 'logout') { setCookie(res, '', 0); return res.status(200).json({ ok: true }); }
     return res.status(404).json({ ok: false });
