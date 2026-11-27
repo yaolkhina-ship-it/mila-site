@@ -396,7 +396,15 @@ body.has-mu-chrome .social-br{bottom:max(72px,env(safe-area-inset-bottom,0px))}
     <p class="form" style="margin-top:8px">* Дальнейшее расширение лекций, подкастов, ссылок на изделия входит в стоимость.</p>
   </div>
 
-  <p class="form">Каждая цена: полный доступ на 6 месяцев.<br><br>«Карты России и СНГ»: оплата картой банка России или стран СНГ, через СБП, частями. «Карты всех стран»: оплата картой любой страны в долларах или евро.<br><br>Укажите почту, на неё придёт доступ.<br><br>Женская или мужская отдельно: База 7 000 ₽, Премиум 9 900 ₽. Для двоих: База 11 900 ₽ (вместо 14 000 ₽), Премиум 15 900 ₽ (вместо 19 800 ₽).<br><br>* Дальнейшее расширение лекций, подкастов, ссылок на изделия входит в стоимость.<br><br>Сейчас все три версии открыты: женская, мужская и «Для двоих», карты России и СНГ и карты всех стран.<br><br>Для обладателей Системы по цвету и резидентов клуба цена женской и мужской по отдельности 7 000 ₽ и 9 900 ₽ сохраняется и после 1 декабря.</p>
+  <div class="addon" id="addon">
+    <p style="margin:44px 0 8px;font:400 13px/1.4 Oswald,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#C9A96A">Уже есть женская версия? Доплатить за мужскую</p>
+    <p class="d" style="margin:0 0 6px">Мужская версия добавится на ту же почту, срок доступа не изменится. Выберите тариф, который у вас сейчас.</p>
+    <div class="tier"><div class="r"><h3>База</h3><div class="pr">4 900 <i>₽</i><small class="term">срок доступа прежний</small></div></div><p class="d">Доплата за мужскую версию для тех, у кого женская версия на тарифе База.</p><a class="btn" data-pay="a-base-ru" href="https://payform.ru/8rd7KcX/" rel="noopener">Карты России и СНГ</a><a class="btn alt" data-pay="a-base-world" href="https://app.lava.top/products/845dafbd-579a-4344-9e23-b600a55d61c1" rel="noopener">Карты всех стран</a></div>
+    <div class="tier"><div class="r"><h3>Премиум</h3><div class="pr">6 000 <i>₽</i><small class="term">срок доступа прежний</small></div></div><p class="d">Доплата за мужскую версию для тех, у кого женская версия на тарифе Премиум.</p><a class="btn" data-pay="a-premium-ru" href="https://payform.ru/b8d7Kef/" rel="noopener">Карты России и СНГ</a><a class="btn alt" data-pay="a-premium-world" href="https://app.lava.top/products/f6cd752b-53fa-41a7-ad96-6a40b2159511" rel="noopener">Карты всех стран</a></div>
+    <p class="form" style="margin-top:8px">Укажите ту же почту, с которой входите в Систему.<br><br>«Карты России и СНГ»: мужская версия откроется сама после оплаты.<br><br>«Карты всех стран»: после оплаты откройте ссылку из Lava, введите ту же почту, и мужская версия откроется.</p>
+  </div>
+
+  <p class="form">Каждая цена: полный доступ на 6 месяцев.<br><br>«Карты России и СНГ»: оплата картой банка России или стран СНГ, через СБП, частями. «Карты всех стран»: оплата картой любой страны в долларах или евро.<br><br>Укажите почту, на неё придёт доступ.<br><br>«Карты России и СНГ»: доступ откроется сам после оплаты, письмо придёт на эту почту. «Карты всех стран»: после оплаты откройте ссылку из Lava, введите ту же почту, и доступ откроется.<br><br>Женская или мужская отдельно: База 7 000 ₽, Премиум 9 900 ₽. Для двоих: База 11 900 ₽ (вместо 14 000 ₽), Премиум 15 900 ₽ (вместо 19 800 ₽).<br><br>* Дальнейшее расширение лекций, подкастов, ссылок на изделия входит в стоимость.<br><br>Сейчас все три версии открыты: женская, мужская и «Для двоих», карты России и СНГ и карты всех стран.<br><br>Для обладателей Системы по цвету и резидентов клуба цена женской и мужской по отдельности 7 000 ₽ и 9 900 ₽ сохраняется и после 1 декабря.</p>
 </section>
 
 <section class="w" id="author">
@@ -446,7 +454,12 @@ var PAY={
   'c-base-ru':'https://payform.ru/hpd5WGm/',
   'c-base-world':'https://app.lava.top/products/8be68173-83fc-41e2-b817-892f516a3796',
   'c-premium-ru':'https://payform.ru/k5d5WHD/',
-  'c-premium-world':'https://app.lava.top/products/81ce4efa-3c48-4df5-b73d-62111c8bbd13'
+  'c-premium-world':'https://app.lava.top/products/81ce4efa-3c48-4df5-b73d-62111c8bbd13',
+  /* Доплата за мужскую версию (для тех, у кого уже есть женская) */
+  'a-base-ru':'https://payform.ru/8rd7KcX/',
+  'a-base-world':'https://app.lava.top/products/845dafbd-579a-4344-9e23-b600a55d61c1',
+  'a-premium-ru':'https://payform.ru/b8d7Kef/',
+  'a-premium-world':'https://app.lava.top/products/f6cd752b-53fa-41a7-ad96-6a40b2159511'
 };
 function wirePay(){
   document.querySelectorAll('[data-pay]').forEach(function(a){

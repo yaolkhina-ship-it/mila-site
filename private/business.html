@@ -1162,7 +1162,7 @@ var ACC_VER = ['w', 'm'];
 var ACC_BUY_M = false, ACC_TIER = '', ACC_EMAIL = '', ACC_UNTIL = '';
 // 27.11: доплата за мужскую версию. Ссылки Продамуса «Система Имиджа Базовый · Мужская доплата» (4 900) и «Система Имиджа Премиум · Мужская доплата» (6 000) создаёт Яна в кабинете; пока пусто, окно ведёт в поддержку.
 // Успешная оплата в Продамусе возвращает на /sistem-image?addon=m: страница ждёт вебхук и открывает мужской блок.
-var ADDON_M = {price: {base: 4900, premium: 6000}, link: {base: 'https://payform.ru/8rd7KcX/', premium: 'https://payform.ru/b8d7Kef/'}};
+var ADDON_M = {price: {base: 4900, premium: 6000}, link: {base: 'https://payform.ru/8rd7KcX/', premium: 'https://payform.ru/b8d7Kef/'}, world: {base: 'https://app.lava.top/products/845dafbd-579a-4344-9e23-b600a55d61c1', premium: 'https://app.lava.top/products/f6cd752b-53fa-41a7-ad96-6a40b2159511'}};
 var ADDON_RET = /[?&]addon=m/.test(location.search);
 function canSex(s){ return ACC_VER.indexOf(s) >= 0; }
 function applySexLock(){
@@ -1196,14 +1196,14 @@ loadAcc(12);
 function openAddon(){
   var tier = ACC_TIER === 'premium' ? 'premium' : 'base', price = ADDON_M.price[tier], link = ADDON_M.link[tier];
   var until = ''; try { if (ACC_UNTIL) until = new Date(ACC_UNTIL).toLocaleDateString('ru-RU', {day: 'numeric', month: 'long', year: 'numeric'}); } catch(e){}
-  var url = link ? link + (link.indexOf('?') < 0 ? '?' : '&') + 'customer_email=' + encodeURIComponent(ACC_EMAIL || '') : '';
+  var url = link ? link + (link.indexOf('?') < 0 ? '?' : '&') + 'customer_email=' + encodeURIComponent(ACC_EMAIL || '') : '', world = ADDON_M.world[tier];
   var o = document.createElement('div'); o.className = 'addm';
   o.innerHTML = '<div class="bx"><h3>Мужская версия</h3>' +
     '<p>К вашему тарифу добавится мужская версия Системы имиджа: образы, комментарии и правила для мужчин.</p>' +
     '<div class="pr">' + String(price).replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' ₽</div>' +
     '<p>Это доплата к вашему доступу. Срок не меняется' + (until ? ': до ' + until : '') + '. Вход с той же почты, на этом устройстве и ещё на одном.</p>' +
-    '<p>Платите с той почтой, с которой входите в Систему. После оплаты мужская версия откроется сама, ничего дополнительно делать не нужно.</p>' +
-    (url ? '<a class="pay" href="' + url + '" data-pay="1">Оплатить доплату</a>' : '<a class="pay" href="https://t.me/MilaUshakova_ClubBot?start=support" target="_blank" rel="noopener">Написать в поддержку</a>') +
+    '<p>Платите с той почтой, с которой входите в Систему.</p><p><b>Карты России и СНГ:</b> после оплаты мужская версия откроется сама.<br><b>Карты всех стран:</b> после оплаты откройте ссылку из Lava, введите ту же почту, и мужская версия откроется.</p>' +
+    (url ? '<a class="pay" href="' + url + '" data-pay="1">Карты России и СНГ</a>' + (world ? '<a class="pay" href="' + world + '" data-pay="1" style="margin-top:10px;background:transparent;color:var(--ink);border:1px solid var(--ink)">Карты всех стран</a>' : '') : '<a class="pay" href="https://t.me/MilaUshakova_ClubBot?start=support" target="_blank" rel="noopener">Написать в поддержку</a>') +
     '<button class="x" data-closeaddm="1">Закрыть</button></div>';
   o.addEventListener('click', function(e){
     if (e.target === o || (e.target.dataset && e.target.dataset.closeaddm)) { o.remove(); return; }
