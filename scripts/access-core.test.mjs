@@ -256,3 +256,40 @@ test('версии: FORCE_VERSIONS перекрывает Redis', async () => {
   await s.setJson('acc:aen-ekosfera@mail.ru', { tier: 'premium', until: '2099-01-01T00:00:00Z', versions: ['w'] });
   assert.deepEqual((await A.getAccess(s, 'aen-ekosfera@mail.ru', NOW)).versions, ['m']);
 });
+
+test('мужская доплата добавляет версию m, тариф и срок остаются', async () => {
+  const s = memStore(); await A.applyPayment(s, pay(), NOW);
+  const r = await A.applyPayment(s, pay({ order_id: '77', products: [{ name: 'Система Имиджа Базовый · Мужская доплата', sum: '4900' }] }), NOW);
+  assert.equal(r.addon, true);
+  const a = await A.getAccess(s, 'anna@mail.ru', NOW);
+  assert.deepEqual(a.versions, ['w', 'm']); assert.equal(a.tier, 'base'); assert.equal(a.until.slice(0, 10), '2027-05-16');
+});
+test('мужская доплата без действующего доступа ничего не открывает', async () => {
+  const s = memStore();
+  const r = await A.applyPayment(s, pay({ order_id: '78', products: [{ name: 'Система Имиджа Премиум · Мужская доплата', sum: '6000' }] }), NOW);
+  assert.equal(r.skipped, 'addon-without-access'); assert.equal((await A.getAccess(s, 'anna@mail.ru', NOW)).active, false); assert.ok(s.m.has('review:78'));
+});
+test('мужская доплата по общему названию определяется суммой, повтор не дублирует', async () => {
+  assert.equal(A.tierFromItem({ name: 'Доступ к обучающим материалам', sum: '4900' }), 'addon_m');
+  assert.equal(A.tierFromItem({ name: 'Доступ к обучающим материалам', sum: '6000' }), 'addon_m');
+  const s = memStore(); await A.applyPayment(s, pay(), NOW);
+  const o = { order_id: '79', products: [{ name: 'Система Имиджа Базовый · Мужская доплата' }] };
+  await A.applyPayment(s, pay(o), NOW); const again = await A.applyPayment(s, pay(o), NOW);
+  assert.equal(again.skipped, 'duplicate');
+});
+
+test('Prodamus: доплата по сумме 4900 при названии заказа «Базовый» только добавляет версию m', async () => {
+  const s = memStore(); await A.applyPayment(s, pay(), NOW);
+  const r = await A.applyPayment(s, pay({ order_id: '90', order_num: 'Система Имиджа Базовый', products: [{ name: 'Доступ к обучающим материалам', sum: '4900' }] }), NOW);
+  assert.equal(r.addon, true);
+  const a = await A.getAccess(s, 'anna@mail.ru', NOW);
+  assert.deepEqual(a.versions, ['w', 'm']); assert.equal(a.until.slice(0, 10), '2027-05-16');
+});
+test('Lava: ссылка доплаты открывает версию m без продления срока', async () => {
+  const s = memStore(); await A.applyPayment(s, pay(), NOW);
+  const claims = { [crypto.createHash('sha256').update('addon-test').digest('hex')]: { tier: 'base', addon: true } };
+  const r = await A.claimLava(s, 'addon-test', 'Anna@mail.ru', NOW, claims);
+  assert.equal(r.ok, true); assert.equal(r.addon, true);
+  const a = await A.getAccess(s, 'anna@mail.ru', NOW);
+  assert.deepEqual(a.versions, ['w', 'm']); assert.equal(a.until.slice(0, 10), '2027-05-16');
+});

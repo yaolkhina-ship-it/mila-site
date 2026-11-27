@@ -488,6 +488,16 @@ body.on-cover .view{padding-bottom:0}
 .app:has(.vc.bd.on) .wl-lb{color:rgba(244,242,238,.7);border-top-color:rgba(244,242,238,.2)}.app:has(.vc.bd.on) .wl-lb b{color:var(--paper)}
 .app:has(.vc.bd.on) .wall{background:#F7F3EA}.app:has(.vc.bd.on) .wall figure{background:#F7F3EA}
 @media (prefers-reduced-motion:reduce){.wall figure{animation:none}.app::after{transition:none}}
+.who2 button.lk img{opacity:.38;filter:grayscale(1)}.who2 button.lk em{position:absolute;top:16px;left:16px;font-style:normal;font-size:10px;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:#C9A96A}
+.stp .sx button.lk{opacity:.6}
+.addm{position:fixed;inset:0;z-index:90;display:flex;align-items:flex-end;justify-content:center;background:rgba(17,17,17,.62)}
+.addm .bx{width:100%;max-width:520px;background:var(--paper);color:var(--ink);padding:32px 24px 28px;max-height:90svh;overflow:auto}
+.addm h3{font-family:var(--serif);font-weight:400;font-size:26px;letter-spacing:.02em;margin:0 0 14px}
+.addm p{font-size:15px;line-height:1.5;margin:0 0 12px;color:#333}
+.addm .pr{font-family:var(--serif);font-size:30px;margin:18px 0 6px}
+.addm a.pay{display:block;text-align:center;background:var(--ink);color:var(--paper);padding:16px 12px;margin-top:18px;letter-spacing:.12em;text-transform:uppercase;font-size:12px}
+.addm button.x{display:block;margin:16px auto 0;font-size:13px;color:var(--mute);text-decoration:underline}
+.addw{position:fixed;left:16px;right:16px;bottom:16px;z-index:91;background:var(--ink);color:var(--paper);padding:14px 16px;font-size:14px;text-align:center}
 </style>
 </head>
 <body>
@@ -1149,20 +1159,57 @@ var st = {sex: null, sit: null, env: 0, goal: null, view: 'cover', tab: 0};
 try { st.sex = localStorage.getItem('img_sex'); if (st.sex !== 'm' && st.sex !== 'w') st.sex = null; } catch(e){}  // 22.11: мужская версия открыта (пока блок «Офис»)
 // Версии по покупке: w / m / обе. Пока /api/access?do=me не ответил — обе (не мигаем замком). Старые покупки без поля = w.
 var ACC_VER = ['w', 'm'];
+var ACC_BUY_M = false, ACC_TIER = '', ACC_EMAIL = '', ACC_UNTIL = '';
+// 27.11: доплата за мужскую версию. Ссылки Продамуса «Система Имиджа Базовый · Мужская доплата» (4 900) и «Система Имиджа Премиум · Мужская доплата» (6 000) создаёт Яна в кабинете; пока пусто, окно ведёт в поддержку.
+// Успешная оплата в Продамусе возвращает на /sistem-image?addon=m: страница ждёт вебхук и открывает мужской блок.
+var ADDON_M = {price: {base: 4900, premium: 6000}, link: {base: 'https://payform.ru/8rd7KcX/', premium: 'https://payform.ru/b8d7Kef/'}};
+var ADDON_RET = /[?&]addon=m/.test(location.search);
 function canSex(s){ return ACC_VER.indexOf(s) >= 0; }
 function applySexLock(){
   if (ACC_VER.length === 1) st.sex = ACC_VER[0];
   else if (st.sex && !canSex(st.sex)) st.sex = ACC_VER[0] || 'w';
   try { if (st.sex) localStorage.setItem('img_sex', st.sex); } catch(e){}
 }
-fetch('/api/access?do=me').then(function(r){ return r.json(); }).then(function(d){
-  if (d && d.signedIn && d.active && Array.isArray(d.versions) && d.versions.length) {
-    ACC_VER = d.versions.filter(function(x){ return x === 'w' || x === 'm'; });
-    if (!ACC_VER.length) ACC_VER = ['w'];
-    applySexLock();
-    if (st.view === 's0' || st.view === 'letter' || document.body.classList.contains('menu-on')) draw();
-  }
-}).catch(function(){});
+function loadAcc(left){
+  fetch('/api/access?do=me').then(function(r){ return r.json(); }).then(function(d){
+    if (d && d.signedIn && d.active && Array.isArray(d.versions) && d.versions.length) {
+      ACC_VER = d.versions.filter(function(x){ return x === 'w' || x === 'm'; });
+      if (!ACC_VER.length) ACC_VER = ['w'];
+      ACC_TIER = d.tier || ''; ACC_EMAIL = d.email || ''; ACC_UNTIL = d.until || '';
+      ACC_BUY_M = ACC_VER.indexOf('m') < 0;
+      var wantM = false; try { wantM = ADDON_RET || localStorage.getItem('img_want_m') === '1'; } catch(e){}
+      if (wantM && canSex('m')) {  // доплата прошла: открываем мужской блок на этом устройстве
+        st.sex = 'm'; try { localStorage.setItem('img_sex', 'm'); localStorage.removeItem('img_want_m'); } catch(e){}
+        var w0 = document.getElementById('addw'); if (w0) w0.remove();
+        if (ADDON_RET && history.replaceState) history.replaceState(null, '', location.pathname);
+        ADDON_RET = false;
+      } else applySexLock();
+      if (st.view === 's0' || st.view === 'letter' || document.body.classList.contains('menu-on')) draw();
+      if (ADDON_RET && ACC_BUY_M && left > 0) {  // вебхук Продамуса мог прийти чуть позже возврата на сайт
+        if (!document.getElementById('addw')) { var w = document.createElement('div'); w.id = 'addw'; w.className = 'addw'; w.textContent = 'Проверяем оплату. Мужская версия откроется через несколько секунд.'; document.body.appendChild(w); }
+        setTimeout(function(){ loadAcc(left - 1); }, 3000);
+      }
+    }
+  }).catch(function(){});
+}
+loadAcc(12);
+function openAddon(){
+  var tier = ACC_TIER === 'premium' ? 'premium' : 'base', price = ADDON_M.price[tier], link = ADDON_M.link[tier];
+  var until = ''; try { if (ACC_UNTIL) until = new Date(ACC_UNTIL).toLocaleDateString('ru-RU', {day: 'numeric', month: 'long', year: 'numeric'}); } catch(e){}
+  var url = link ? link + (link.indexOf('?') < 0 ? '?' : '&') + 'customer_email=' + encodeURIComponent(ACC_EMAIL || '') : '';
+  var o = document.createElement('div'); o.className = 'addm';
+  o.innerHTML = '<div class="bx"><h3>Мужская версия</h3>' +
+    '<p>К вашему тарифу добавится мужская версия Системы имиджа: образы, комментарии и правила для мужчин.</p>' +
+    '<div class="pr">' + String(price).replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' ₽</div>' +
+    '<p>Это доплата к вашему доступу. Срок не меняется' + (until ? ': до ' + until : '') + '. Вход с той же почты, на этом устройстве и ещё на одном.</p>' +
+    (url ? '<a class="pay" href="' + url + '" data-pay="1">Оплатить доплату</a>' : '<a class="pay" href="https://t.me/MilaUshakova_ClubBot?start=support" target="_blank" rel="noopener">Написать в поддержку</a>') +
+    '<button class="x" data-closeaddm="1">Закрыть</button></div>';
+  o.addEventListener('click', function(e){
+    if (e.target === o || (e.target.dataset && e.target.dataset.closeaddm)) { o.remove(); return; }
+    if (e.target.dataset && e.target.dataset.pay) { try { localStorage.setItem('img_want_m', '1'); } catch(x){} }
+  });
+  document.body.appendChild(o);
+}
 var v = document.getElementById('v');
 var fromSys = /[?&]from=system/.test(location.search) || /\/guide\/?(gaidosen)?(\?|#|$)/.test(document.referrer);
 try { if (fromSys) sessionStorage.setItem('img_from_sys', '1'); else fromSys = sessionStorage.getItem('img_from_sys') === '1'; } catch(e){}
@@ -1234,7 +1281,7 @@ function stepHead(n){
   var sx = '';
   if (canSex('w') && canSex('m')) sx = '<span class="sx"><button data-sex="w"' + (st.sex !== 'm' ? ' class="on"' : '') + ' aria-label="' + t('Для женщин','For women') + '">' + t('Ж','W') + '</button><i>|</i><button data-sex="m"' + (st.sex === 'm' ? ' class="on"' : '') + ' aria-label="' + t('Для мужчин','For men') + '">' + t('М','M') + '</button></span>';
   else if (canSex('m')) sx = '<span class="sx"><button data-sex="m" class="on" aria-label="' + t('Для мужчин','For men') + '">' + t('М','M') + '</button></span>';
-  else sx = '<span class="sx"><button data-sex="w" class="on" aria-label="' + t('Для женщин','For women') + '">' + t('Ж','W') + '</button></span>';
+  else sx = '<span class="sx"><button data-sex="w" class="on" aria-label="' + t('Для женщин','For women') + '">' + t('Ж','W') + '</button>' + (ACC_BUY_M ? '<i>|</i><button data-addm="1" class="lk" aria-label="' + t('Для мужчин, доплата','For men, add-on') + '">' + t('М','M') + '</button>' : '') + '</span>';
   return '<div class="stp">' + sx + '<span class="n">' + nn(n) + ' / ' + nn(STEPS.length) + '</span></div>';
 }
 function pager(n, canNext){
@@ -1304,6 +1351,7 @@ function step0(){
     '<div class="who2">' +
     (canSex('w') ? '<button data-sex="w" data-next="1"' + (st.sex === 'w' ? ' class="on"' : '') + '><img src="business-img/ev-boss-w.jpg" alt=""><b>' + t('Женщина','A woman') + '</b></button>' : '') +
     (canSex('m') ? '<button data-sex="m" data-next="letter"' + (st.sex === 'm' ? ' class="on"' : '') + '><img src="business-img/ev-boss-m.jpg" alt=""><b>' + t('Мужчина','A man') + '</b></button>' : '') +
+    (!canSex('m') && ACC_BUY_M ? '<button data-addm="1" class="lk"><img src="business-img/ev-boss-m.jpg" alt=""><em>' + t('доплата','add-on') + '</em><b>' + t('Мужчина','A man') + '</b></button>' : '') +
     '</div>' +
     '<aside class="cov-note"><svg viewBox="0 0 16 16" fill="none" stroke="#111" aria-hidden="true"><circle cx="8" cy="8" r="7.2"/><path d="M8 7v4.4M8 4.4v.9"/></svg><p>' + t('Вся информация носит рекомендательный характер и создана как инструмент, который может повышать качество жизни, усиливать профессиональные возможности и поддерживать рост дохода.','Everything here is a recommendation. It is a tool that can raise the quality of life, strengthen professional possibilities and support the growth of income.') + '</p></aside></div>');
 }
@@ -1563,6 +1611,7 @@ function openMenu(){
     (window.ImgInstall && ImgInstall.mode === 'app' ? '' : '<button data-go="install" style="grid-column:1/-1">' + t('На экран телефона','On your phone') + '</button>') +
     (canSex('w') ? '<button data-sex="w"' + (st.sex !== 'm' ? ' class="on"' : '') + '>' + t('Для женщин','For women') + '</button>' : '') +
     (canSex('m') ? '<button data-sex="m"' + (st.sex === 'm' ? ' class="on"' : '') + '>' + t('Для мужчин','For men') + '</button>' : '') +
+    (!canSex('m') && ACC_BUY_M ? '<button data-addm="1">' + t('Для мужчин · доплата','For men · add-on') + '</button>' : '') +
     '<a class="help" href="https://t.me/YanaOlkhina" target="_blank" rel="noopener">' + t('По всем вопросам · Telegram','Questions · Telegram') + '</a>' +
     (fromSys ? '<button data-sys="1" style="grid-column:1/-1">' + t('← В Систему цветовых сочетаний','← Colour system') + '</button>' : '') + '</div>' +
     ENV.map(function(e, i){ return '<h3><span>' + L(e.n) + '</span><i>' + e.r + '</i></h3>' + e.s.map(function(x){ n++;
@@ -1593,6 +1642,7 @@ function onTap(e){
   if (b.dataset.bav) { bavSet(+b.dataset.bav); if (b.dataset.up) document.getElementById('bav').scrollIntoView({behavior: 'smooth', block: 'start'}); return; }
   if (b.dataset.bapt) { var li = document.getElementById('rl' + b.dataset.bapt); li.scrollIntoView({behavior: 'smooth', block: 'center'}); li.classList.add('open'); li.classList.remove('flash'); void li.offsetWidth; li.classList.add('flash'); return; }
   if (b.dataset.sys) { location.href = '/guide'; return; }
+  if (b.dataset.addm) { openAddon(); return; }
   if (b.dataset.sex) {
     if (!canSex(b.dataset.sex)) return;
     st.sex = b.dataset.sex; try { localStorage.setItem('img_sex', st.sex); } catch(e){}

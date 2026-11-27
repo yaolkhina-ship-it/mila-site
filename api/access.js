@@ -88,7 +88,11 @@ export default async function handler(req, res) {
       const r = await claimLava(store, body.t, body.email);
       console.log('access: lava ' + (r.ok ? (r.again ? 'again' : 'granted ' + r.tier) : r.error));
       if (!r.ok) return res.status(r.error === 'link' ? 404 : 400).json({ ok: false, error: r.error });
-      if (!r.again) {
+      if (!r.again && r.addon) {
+        // Доплата: письмо «Добро пожаловать» не шлём, покупателю сразу открывается мужской блок
+        const mailAddon = (to, subject, html) => fetch('https://api.resend.com/emails', { method: 'POST', headers: { Authorization: 'Bearer ' + process.env.RESEND_API_KEY, 'Content-Type': 'application/json' }, body: JSON.stringify({ from: 'Мила Ушакова <mila@milaushakova.com>', to, reply_to: 'yaolkhina@gmail.com', subject, html }) }).catch(() => {});
+        await mailAddon('yaolkhina@gmail.com', 'Lava: доплата за мужскую версию · ' + (r.tier === 'premium' ? 'Премиум' : 'База'), `<p>Покупатель Lava открыл мужскую версию.</p><p>Почта: <b>${String(r.email).replace(/[<>&"]/g, '')}</b></p>`);
+      } else if (!r.again) {
         const mail = (to, subject, html) => fetch('https://api.resend.com/emails', { method: 'POST', headers: { Authorization: 'Bearer ' + process.env.RESEND_API_KEY, 'Content-Type': 'application/json' }, body: JSON.stringify({ from: 'Мила Ушакова <mila@milaushakova.com>', to, reply_to: 'yaolkhina@gmail.com', subject, html }) }).catch(() => {});
         const w = welcomeMail(r.email, r.access);
         await mail(r.email, w.subject, w.html);

@@ -63,7 +63,7 @@ export default async function handler(req, res) {
   try {
     const r = await applyPayment(upstashStore(url, token), data);
     console.log('prodamus: result=' + (r.skipped || r.error || 'granted'));
-    if (r.access && r.email) await sendWelcome(r.email, r.access, welcomeMail).catch((e) => console.error('prodamus: mail failed'));
+    if (r.access && r.email && !r.addon) await sendWelcome(r.email, r.access, welcomeMail).catch((e) => console.error('prodamus: mail failed'));
     return res.status(200).send('success');
   } catch (e) {
     console.error('prodamus: store failed'); // 500: Prodamus повторит уведомление
